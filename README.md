@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# trinexta-website
 
-## Getting Started
+Refonte du site Trinexta — Next.js 16 + Sanity + PostgreSQL + Prisma 7.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router, TypeScript, Tailwind v4)
+- Sanity (CMS headless)
+- PostgreSQL 17 + Prisma 7
+- PM2 + Nginx (VPS OVH)
+
+## Prerequis
+
+- Node.js >= 22 ([nvm](https://github.com/nvm-sh/nvm) recommande)
+- PostgreSQL >= 17
+- Git
+
+Windows : utiliser [WSL2](https://learn.microsoft.com/fr-fr/windows/wsl/install) (Ubuntu), les commandes ci-dessous s'appliquent dans WSL.
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/trinexta-org/trinexta-website.git
+cd trinexta-website
+git checkout dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variables d'environnement
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Remplir `.env.local` :
 
-## Learn More
+```env
+DATABASE_URL=postgresql://trinexta:dev_password@localhost:5432/trinexta
+NEXT_PUBLIC_SANITY_PROJECT_ID=93ztl6y7
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_TOKEN=          # optionnel en dev, requis pour les drafts
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Base de donnees
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Mac
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+brew install postgresql@17
+brew services start postgresql@17
+psql postgres
+```
 
-## Deploy on Vercel
+### Linux
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+sudo apt install postgresql postgresql-contrib -y
+sudo systemctl start postgresql
+sudo -u postgres psql
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Creer le user et la base (Mac et Linux)
+
+```sql
+CREATE USER trinexta WITH PASSWORD 'dev_password';
+CREATE DATABASE trinexta OWNER trinexta;
+GRANT ALL PRIVILEGES ON DATABASE trinexta TO trinexta;
+\q
+```
+
+### Appliquer les migrations
+
+```bash
+npx prisma migrate deploy
+npx prisma generate
+```
+
+## Lancer le projet
+
+Deux terminaux :
+
+```bash
+# Terminal 1 - Next.js (http://localhost:3000)
+npm run dev
+
+# Terminal 2 - Sanity Studio (http://localhost:3333)
+cd studio && npm run dev
+```
+
+Se connecter au Studio avec son compte Google ou GitHub sur [sanity.io](https://sanity.io). Demander un acces au tech lead si besoin.
+
+## Branches
+
+| Branche | Environnement |
+|---|---|
+| `dev` | local uniquement |
+| `staging` | staging.trinexta.com |
+| `main` | trinexta.com |
+
+Workflow : `dev` -> `staging` -> `main` via pull requests.
