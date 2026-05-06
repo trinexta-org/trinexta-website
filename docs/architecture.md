@@ -25,13 +25,15 @@ flowchart TD
     B -->|requetes GROQ| C
     G(["Redacteur"]) --> F
 
-    style VPS fill:#0a233e,color:#fff,stroke:#5c92b8
-    style Cloud fill:#1a1a2e,color:#fff,stroke:#5c92b8
-    style B fill:#5c92b8,color:#fff,stroke:none
-    style C fill:#5c92b8,color:#fff,stroke:none
-    style D fill:#336699,color:#fff,stroke:none
-    style E fill:#336699,color:#fff,stroke:none
-    style F fill:#336699,color:#fff,stroke:none
+    style VPS fill:#dce8f5,color:#0a233e,stroke:#0a233e,stroke-width:2px
+    style Cloud fill:#eaf1f8,color:#0a233e,stroke:#5c92b8,stroke-width:2px
+    style A fill:#f0f4f8,color:#0a233e,stroke:#0a233e
+    style G fill:#f0f4f8,color:#0a233e,stroke:#0a233e
+    style B fill:#0a233e,color:#fff,stroke:none
+    style C fill:#0a233e,color:#fff,stroke:none
+    style D fill:#5c92b8,color:#fff,stroke:none
+    style E fill:#5c92b8,color:#fff,stroke:none
+    style F fill:#5c92b8,color:#fff,stroke:none
 ```
 
 - **Next.js** construit et affiche le site.
