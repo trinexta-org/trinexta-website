@@ -38,7 +38,28 @@ Remplir `.env.local` :
 DATABASE_URL=postgresql://trinexta:dev_password@localhost:5432/trinexta
 NEXT_PUBLIC_SANITY_PROJECT_ID=93ztl6y7
 NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_STUDIO_DATASET=     # vide par defaut, le Studio utilisera alors production
 SANITY_API_TOKEN=          # optionnel en dev, requis pour les drafts
+```
+
+Par defaut :
+
+- le site utilise `production`
+- le Studio utilise `production`
+- `staging` reste disponible mais n'est pas active
+
+Pour utiliser le dataset de preproduction plus tard :
+
+```env
+NEXT_PUBLIC_SANITY_DATASET=staging
+SANITY_STUDIO_DATASET=staging
+```
+
+Si vous voulez garder le frontend sur `production` mais lancer uniquement le Studio sur `staging`, laissez `NEXT_PUBLIC_SANITY_DATASET=production` dans `.env.local`, ne renseignez pas `SANITY_STUDIO_DATASET`, et demarrez le Studio avec :
+
+```bash
+cd studio
+npm run dev:staging
 ```
 
 ## Base de donnees
