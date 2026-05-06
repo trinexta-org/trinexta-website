@@ -2,6 +2,8 @@
 
 Refonte du site Trinexta — Next.js 16 + Sanity + PostgreSQL + Prisma 7.
 
+> Pour contribuer : lire [CONTRIBUTING.md](./CONTRIBUTING.md)
+
 ## Stack
 
 - Next.js 16 (App Router, TypeScript, Tailwind v4)
