@@ -92,12 +92,17 @@ GRANT ALL PRIVILEGES ON DATABASE trinexta TO trinexta;
 \q
 ```
 
-### Appliquer les migrations
+### Initialiser la base (premiere fois)
 
 ```bash
-npx prisma migrate deploy
-npx prisma generate
+npx prisma migrate dev --name init
 ```
+
+Cette commande cree le dossier `prisma/migrations/`, applique le schema, et genere le client Prisma.
+
+> **Runs suivants** (schema inchange) : la commande est idempotente, vous pouvez la relancer sans risque.  
+> Si vous modifiez `prisma/schema.prisma`, creez une nouvelle migration :  
+> `npx prisma migrate dev --name nom-de-la-migration`
 
 ## Lancer le projet
 
