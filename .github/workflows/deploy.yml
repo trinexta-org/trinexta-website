@@ -21,5 +21,7 @@ jobs:
             cd /var/www/trinexta-website
             git pull origin ${{ github.ref_name }}
             npm ci
+            npx prisma migrate deploy
+            npx prisma generate
             npm run build
             pm2 reload trinexta --update-env
