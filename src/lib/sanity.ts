@@ -19,6 +19,7 @@ export type ResumeArticle = {
     datePublication: string;
     auteur?: string;
     extrait?: string;
+    imageUne?: ImageArticle;
 }
 
 export type ArticleComplet = ResumeArticle & {
@@ -62,7 +63,8 @@ export async function getArticles(): Promise<ResumeArticle[]> {
             categorie,
             datePublication,
             auteur,
-            extrait
+            extrait,
+            imageUne
         }`
     );
 }

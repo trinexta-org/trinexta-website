@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
         hostname: "cdn.sanity.io",
         port: "",
         pathname: "/images/93ztl6y7/production/**",
-        search: "",
       },
     ],
   },

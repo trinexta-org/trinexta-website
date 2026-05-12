@@ -1,5 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
-import { getArticles, type CategorieArticle } from "@/lib/sanity";
+import {
+  getArticles,
+  type CategorieArticle,
+  urlForImage,
+} from "@/lib/sanity";
 
 const LIBELLES_CATEGORIES: Record<CategorieArticle, string> = {
   cybersecurite: "Cybersécurité",
@@ -38,31 +43,52 @@ export default async function BlogPage() {
             {articles.map((article) => (
               <li
                 key={article.slug.current}
-                className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm"
+                className="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm"
               >
-                <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
-                  <span className="rounded-full bg-zinc-100 px-3 py-1 font-medium text-zinc-700">
-                    {LIBELLES_CATEGORIES[article.categorie]}
-                  </span>
-                  <span>{article.datePublication}</span>
-                  {article.auteur ? <span>Par {article.auteur}</span> : null}
-                </div>
-
-                <div className="space-y-3">
-                  <h2 className="text-2xl font-semibold tracking-tight text-zinc-950">
-                    {article.titre}
-                  </h2>
-                  {article.extrait ? (
-                    <p className="max-w-3xl text-base leading-7 text-zinc-600">
-                      {article.extrait}
-                    </p>
+                <div className="grid md:grid-cols-[280px_minmax(0,1fr)]">
+                  {article.imageUne?.asset?._ref ? (
+                    <div className="relative min-h-56 bg-zinc-100">
+                      <Image
+                        src={urlForImage(article.imageUne)
+                          .width(800)
+                          .height(600)
+                          .fit("crop")
+                          .auto("format")
+                          .url()}
+                        alt={article.imageUne.alt ?? article.titre}
+                        fill
+                        sizes="(min-width: 768px) 280px, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
                   ) : null}
-                  <Link
-                    href={`/blog/${article.slug.current}`}
-                    className="inline-flex text-sm font-medium text-zinc-950 underline underline-offset-4"
-                  >
-                    Lire l&apos;article
-                  </Link>
+
+                  <div className="p-6">
+                    <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
+                      <span className="rounded-full bg-zinc-100 px-3 py-1 font-medium text-zinc-700">
+                        {LIBELLES_CATEGORIES[article.categorie]}
+                      </span>
+                      <span>{article.datePublication}</span>
+                      {article.auteur ? <span>Par {article.auteur}</span> : null}
+                    </div>
+
+                    <div className="space-y-3">
+                      <h2 className="text-2xl font-semibold tracking-tight text-zinc-950">
+                        {article.titre}
+                      </h2>
+                      {article.extrait ? (
+                        <p className="max-w-3xl text-base leading-7 text-zinc-600">
+                          {article.extrait}
+                        </p>
+                      ) : null}
+                      <Link
+                        href={`/blog/${article.slug.current}`}
+                        className="inline-flex text-sm font-medium text-zinc-950 underline underline-offset-4"
+                      >
+                        Lire l&apos;article
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </li>
             ))}
