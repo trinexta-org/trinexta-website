@@ -1,4 +1,5 @@
-import { createClient } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import { createClient, type PortableTextBlock } from "next-sanity";
 
 type SlugSanity = {
     current: string;
@@ -21,8 +22,24 @@ export type ResumeArticle = {
 }
 
 export type ArticleComplet = ResumeArticle & {
-    contenu: unknown[]; // Le contenu est un tableau de blocs Sanity, mais on peut le typer plus précisément si besoin
+    imageUne?: ImageArticle;
+    seoTitre?: string;
+    seoDescription?: string;
+    contenu: CorpsArticle[];
 }
+
+export type ImageArticle = {
+    _type: "image";
+    _key: string;
+    alt?: string;
+    legende?: string;
+    asset?: {
+        _ref: string;
+        _type: "reference";
+    };
+};
+
+export type CorpsArticle = PortableTextBlock | ImageArticle;
 
 export const sanityClient = createClient({
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -30,6 +47,12 @@ export const sanityClient = createClient({
     apiVersion: "2026-05-12",
     useCdn: true,
 });
+
+const imageBuilder = imageUrlBuilder(sanityClient);
+
+export function urlForImage(source: ImageArticle) {
+    return imageBuilder.image(source);
+}
 
 export async function getArticles(): Promise<ResumeArticle[]> {
     return sanityClient.fetch<ResumeArticle[]>(`
@@ -53,6 +76,9 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
             datePublication,
             auteur,
             extrait,
+            imageUne,
+            seoTitre,
+            seoDescription,
             contenu
         }`, 
         { slug }
