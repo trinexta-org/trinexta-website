@@ -46,6 +46,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Generate Prisma client
+        run: npm run prisma:generate
+
       - name: Typecheck
         run: npm run typecheck
 

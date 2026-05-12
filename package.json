@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src next.config.ts eslint.config.mjs",
+    "prisma:generate": "prisma generate",
     "typecheck": "tsc --noEmit",
-    "ci": "npm run lint && npm run typecheck && npm run build"
+    "ci": "npm run lint && npm run prisma:generate && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
