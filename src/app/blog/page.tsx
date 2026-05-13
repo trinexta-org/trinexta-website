@@ -2,17 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   getArticles,
-  type CategorieArticle,
   urlForImage,
+  LIBELLES_CATEGORIES,
+  formatDatePublication,
 } from "@/lib/sanity";
-
-const LIBELLES_CATEGORIES: Record<CategorieArticle, string> = {
-  cybersecurite: "Cybersécurité",
-  infogerance: "Infogérance",
-  cloud: "Cloud",
-  productivite: "Productivité",
-  actualites: "Actualités Trinexta",
-};
 
 export default async function BlogPage() {
   const articles = await getArticles();
@@ -36,7 +29,7 @@ export default async function BlogPage() {
       <section className="space-y-4">
         {articles.length === 0 ? (
           <p className="rounded-2xl border border-dashed border-zinc-300 p-6 text-sm text-zinc-600">
-            Aucun article publie n&apos;a ete trouve dans Sanity pour le moment.
+            Aucun article publié n&apos;a été trouvé dans Sanity pour le moment.
           </p>
         ) : (
           <ul className="space-y-4">
@@ -68,7 +61,7 @@ export default async function BlogPage() {
                       <span className="rounded-full bg-zinc-100 px-3 py-1 font-medium text-zinc-700">
                         {LIBELLES_CATEGORIES[article.categorie]}
                       </span>
-                      <span>{article.datePublication}</span>
+                      <span>{formatDatePublication(article.datePublication)}</span>
                       {article.auteur ? <span>Par {article.auteur}</span> : null}
                     </div>
 
@@ -83,6 +76,7 @@ export default async function BlogPage() {
                       ) : null}
                       <Link
                         href={`/blog/${article.slug.current}`}
+                        aria-label={`Lire l'article : ${article.titre}`}
                         className="inline-flex text-sm font-medium text-zinc-950 underline underline-offset-4"
                       >
                         Lire l&apos;article

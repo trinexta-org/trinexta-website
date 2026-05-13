@@ -63,15 +63,15 @@ const portableTextComponents: PortableTextComponents = {
         return null;
       }
 
-        return (
-          <figure className="space-y-3">
-            <Image
-              src={urlForImage(imageValue).width(1200).fit("max").auto("format").url()}
-              alt={imageValue.alt ?? ""}
-              width={1200}
-              height={675}
-              className="w-full rounded-3xl object-cover"
-            />
+      return (
+        <figure className="space-y-3">
+          <Image
+            src={urlForImage(imageValue).width(1200).fit("max").auto("format").url()}
+            alt={imageValue.alt ?? ""}
+            width={1200}
+            height={675}
+            className="w-full rounded-3xl object-cover"
+          />
           {imageValue.legende ? (
             <figcaption className="text-sm leading-6 text-zinc-500">
               {imageValue.legende}
@@ -84,13 +84,11 @@ const portableTextComponents: PortableTextComponents = {
 };
 
 type PortableTextArticleProps = {
-  value: CorpsArticle[];
+  value: CorpsArticle[] | null;
 };
 
-export function PortableTextArticle({
-  value,
-}: PortableTextArticleProps) {
-  if (value.length === 0) {
+export function PortableTextArticle({ value }: PortableTextArticleProps) {
+  if (!value || value.length === 0) {
     return null;
   }
 

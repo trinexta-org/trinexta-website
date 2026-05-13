@@ -5,17 +5,10 @@ import { cache } from "react";
 import { PortableTextArticle } from "@/components/portable-text-article";
 import {
   getArticleBySlug,
-  type CategorieArticle,
   urlForImage,
+  LIBELLES_CATEGORIES,
+  formatDatePublication,
 } from "@/lib/sanity";
-
-const LIBELLES_CATEGORIES: Record<CategorieArticle, string> = {
-  cybersecurite: "Cybersécurité",
-  infogerance: "Infogérance",
-  cloud: "Cloud",
-  productivite: "Productivité",
-  actualites: "Actualités Trinexta",
-};
 
 type ArticlePageProps = {
   params: Promise<{
@@ -96,7 +89,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <span className="rounded-full bg-zinc-100 px-3 py-1 font-medium text-zinc-700">
               {LIBELLES_CATEGORIES[article.categorie]}
             </span>
-            <span>{article.datePublication}</span>
+            <span>{formatDatePublication(article.datePublication)}</span>
             {article.auteur ? <span>Par {article.auteur}</span> : null}
           </div>
 
