@@ -37,6 +37,17 @@ Pour chaque URL P1 et P2, noter :
 - `H1` exact
 - Volume de contenu approximatif (nb de mots)
 
+### 1.4 Anomalies on-page identifiées sur le WordPress actuel
+
+Audit réalisé via Screaming Frog (mai 2026) — points à ne pas reproduire sur la nouvelle stack :
+
+1. **H1 manquants** — pages stratégiques sans titre principal détectable (ex : `/cybersecurite/`). Google ne peut pas identifier le sujet de la page.
+2. **Multiples H1** — présence de plusieurs balises H1 sur la home et les pages légales, ce qui dilue l'autorité sémantique.
+3. **Méta-descriptions "poubelles"** — descriptions générées automatiquement par WordPress (ex : début de FAQ aspiré sur `/contact/`), nuisant au taux de clic.
+4. **Contenu dupliqué technique** — pages accessibles avec et sans slash final (`/infogerance` et `/infogerance/`), créant des doublons d'indexation.
+5. **Erreurs 404 internes** — liens morts présents dans le maillage interne (ex : `/privacy-policy`).
+6. **Lien cassé historique** — `/contac/` (faute de frappe) génère une redirection parasite à corriger dans le futur maillage.
+
 ---
 
 ## Phase 2 — Mapping des redirections (Semaine 1-2)
