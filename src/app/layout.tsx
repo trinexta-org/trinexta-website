@@ -4,6 +4,9 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,8 +18,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TRINEXTA | Infogérance et Cybersécurité",
-  description: "Votre informatique simplifiée, en toute sérénité.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "TRINEXTA",
+    template: "%s | TRINEXTA",
+  },
+  description:
+    "TRINEXTA accompagne les entreprises sur l'infogérance, le cloud, la cybersécurité et la productivité.",
 };
 
 export default function RootLayout({

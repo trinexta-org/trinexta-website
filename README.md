@@ -39,6 +39,7 @@ Remplir `.env.local` :
 
 ```env
 DATABASE_URL=postgresql://trinexta:dev_password@localhost:5432/trinexta
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SANITY_PROJECT_ID=93ztl6y7
 NEXT_PUBLIC_SANITY_DATASET=production
 SANITY_STUDIO_DATASET=     # vide par defaut, le Studio utilisera alors production
@@ -92,12 +93,17 @@ GRANT ALL PRIVILEGES ON DATABASE trinexta TO trinexta;
 \q
 ```
 
-### Appliquer les migrations
+### Initialiser la base (premiere fois)
 
 ```bash
-npx prisma migrate deploy
-npx prisma generate
+npx prisma migrate dev --name init
 ```
+
+Cette commande cree le dossier `prisma/migrations/`, applique le schema, et genere le client Prisma.
+
+> **Runs suivants** (schema inchange) : la commande est idempotente, vous pouvez la relancer sans risque.  
+> Si vous modifiez `prisma/schema.prisma`, creez une nouvelle migration :  
+> `npx prisma migrate dev --name nom-de-la-migration`
 
 ## Lancer le projet
 

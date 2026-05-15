@@ -13,6 +13,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - PostgreSQL 17 + Prisma 7 (adapter pg, client généré dans `src/generated/prisma/`)
 - PM2 + Nginx sur VPS OVH
 
+## Specs et documentation projet
+
+Les specs sont dans NotebookLM — utiliser le MCP `notebooklm` (outil `notebook_query`) au lieu de lire les fichiers `docs/`. Notebook ID : `f330bebc-87d4-46ab-a49b-26b484e0f448`.
+
 ## Avant d'écrire du code
 
 1. Lire `node_modules/next/dist/docs/` pour toute question Next.js
@@ -45,6 +49,12 @@ prisma/
 ## Variables d'environnement
 
 Toujours vérifier `.env.example` pour la liste complète. Ne jamais committer `.env.local`.
+
+## Style de réponse
+
+- Être extrêmement concis — sacrifier la grammaire si nécessaire
+- Pas de résumés en fin de réponse
+- Pas de longs blocs introductifs ou explicatifs inutiles
 
 ## Interdictions
 
