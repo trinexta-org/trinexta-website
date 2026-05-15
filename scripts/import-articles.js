@@ -55,10 +55,30 @@ const uploadImage = async (imageUrl) => {
   }
 };
 
-const processHtmlImages = async (html) => {
+const processHtmlContent = async (html, articleTitle) => {
   const dom = new JSDOM(html);
   const document = dom.window.document;
+
+  // 1. Supprimer le titre s'il est répété au tout début
+  const firstTag = document.body.firstElementChild;
+  if (firstTag && (firstTag.tagName === 'H1' || firstTag.tagName === 'H2')) {
+    if (decodeText(firstTag.innerHTML).includes(articleTitle.substring(0, 20))) {
+      firstTag.remove();
+    }
+  }
+
+  // 2. Nettoyer les paragraphes vides (fantômes)
+  const paragraphs = Array.from(document.querySelectorAll('p'));
+  for (const p of paragraphs) {
+    // Si le paragraphe n'a pas de texte et ne contient pas d'image
+    if (!p.textContent.trim() && !p.querySelector('img')) {
+      p.remove();
+    }
+  }
+
+  // 3. Traiter les images et récupérer la première image trouvée
   const images = Array.from(document.querySelectorAll('img'));
+  let firstInlineImage = null;
   
   for (const img of images) {
     const src = img.getAttribute('src');
@@ -66,10 +86,12 @@ const processHtmlImages = async (html) => {
       const uploaded = await uploadImage(src);
       if (uploaded && uploaded.asset) {
         img.setAttribute('data-sanity-ref', uploaded.asset._ref);
+        if (!firstInlineImage) firstInlineImage = uploaded;
       }
     }
   }
-  return document.body.innerHTML;
+  
+  return { cleanHtml: document.body.innerHTML, firstInlineImage };
 };
 
 const mapCategory = (title, content) => {
@@ -103,8 +125,19 @@ const runImport = async () => {
       const title = decodeText(rawTitle);
       console.log(`Traitement : ${title}`);
 
-      const imageUrl = wpPost.yoast_head_json?.og_image?.[0]?.url || null;
-      const mainImage = await uploadImage(imageUrl);
+      const rawHtml = wpPost.content?.rendered || '';
+      // On passe le titre pour vérifier les répétitions
+      const { cleanHtml, firstInlineImage } = await processHtmlContent(rawHtml, title);
+
+      // Logique pour l'image à la une
+      let imageUrl = wpPost.yoast_head_json?.og_image?.[0]?.url || null;
+      let mainImage = null;
+      
+      if (imageUrl && !imageUrl.toLowerCase().includes('logo') && !imageUrl.toLowerCase().includes('trinextra-1')) {
+        mainImage = await uploadImage(imageUrl);
+      } else {
+        mainImage = firstInlineImage; // Fallback sur l'image du contenu
+      }
 
       const authorName = wpPost.yoast_head_json?.author || 'Equipe Trinexta';
 
@@ -122,11 +155,8 @@ const runImport = async () => {
       const readingTime = parseInt(readingTimeStr.split(' ')[0]) || 0;
       
       const datePub = wpPost.date ? wpPost.date.split('T')[0] : new Date().toISOString().split('T')[0];
-      
-      const rawHtml = wpPost.content?.rendered || '';
-      const processedHtml = await processHtmlImages(rawHtml);
 
-      const portableTextBody = htmlToBlocks(processedHtml, blockContentType, {
+      const portableTextBody = htmlToBlocks(cleanHtml, blockContentType, {
         parseHtml: html => new JSDOM(html).window.document,
         rules: [
           {
@@ -154,7 +184,7 @@ const runImport = async () => {
         _type: 'article',
         titre: title,
         slug: { _type: 'slug', current: wpPost.slug },
-        categorie: mapCategory(title, rawHtml),
+        categorie: mapCategory(title, cleanHtml),
         datePublication: datePub,
         auteur: authorName,
         extrait: cleanExcerpt,
