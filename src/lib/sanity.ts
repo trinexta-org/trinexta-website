@@ -37,11 +37,11 @@ export type ArticleComplet = ResumeArticle & {
   contenu: CorpsArticle[] | null;
 };
 
-export interface OptionsRecherchesArticles {
-  debut? : number;
-  limite? : number;
-  categorie? : CategorieArticle;
-}
+export type OptionsRecherchesArticles = {
+  debut?: number;
+  limite?: number;
+  categorie?: CategorieArticle;
+};
 
 export type ImageArticle = {
   _type: "image";
