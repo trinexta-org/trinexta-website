@@ -50,6 +50,12 @@ prisma/
 
 Toujours vérifier `.env.example` pour la liste complète. Ne jamais committer `.env.local`.
 
+## Style de réponse
+
+- Être extrêmement concis — sacrifier la grammaire si nécessaire
+- Pas de résumés en fin de réponse
+- Pas de longs blocs introductifs ou explicatifs inutiles
+
 ## Interdictions
 
 - Ne pas modifier `src/generated/prisma/` manuellement
