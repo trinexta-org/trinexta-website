@@ -1,25 +1,145 @@
-# Design System Trinexta (v4)
+# Design System TRINEXTA (v4)
 
-Ce document répertorie les outils et composants mis en place pour assurer la cohérence visuelle du site.
+> Copie-colle ce fichier au debut de ta session LLM avant de coder une page ou section.
 
-## Design Tokens (Tailwind v4)
-Les variables sont centralisées dans `src/app/globals.css`.
-- **Primary** : `#0a233e` (Bleu foncé Trinexta)
-- **Secondary** : `#5c92b8` (Bleu clair Trinexta)
-- **Accent** : `#f0f5f9` (Fond léger pour cartes/hover)
+---
 
-## Layout Patterns
-Utilisez ces composants pour structurer les pages :
-- `<Container>` : Gère la largeur maximale (7xl) et les marges latérales.
-- `<Section>` : Gère les espacements verticaux (py-16 à py-32).
+## Regles absolues
 
-## Primitives UI (`src/components/ui/`)
-- `<Button>` : Supporte les variantes `primary`, `secondary`, `outline`, `ghost`.
-- `<Heading>` : Niveaux `h1` à `h4` avec typographie Trinexta (Black/Bold).
-- `<Text>` : Variantes `body`, `lead`, `small`.
-- `<Card>` : Conteneur blanc avec ombre légère et arrondi 2xl.
+- Couleurs : toujours via les classes token (`text-primary`, `bg-secondary`) - jamais de HEX directs
+- Mise en page : toujours `<Section>` comme bloc racine - jamais de `<div className="px-4 max-w-7xl mx-auto">`
+- `"use client"` seulement si le composant utilise un hook React (useState, useEffect...)
+- Textes UI en francais, pas d'emojis
 
-## Règles d'usage technique
-- **Structure** : Une `<Section>` est toujours le parent direct d'un `<Container>`.
-- **Sémantique** : Utilisez les balises de titres (`h1` > `h2` > `h3`) dans l'ordre logique.
-- **Tokens** : Utilisez les classes thématiques (`text-primary`, `bg-secondary`) au lieu des codes HEX.
+---
+
+## Tokens de couleur (`src/app/globals.css`)
+
+| Classe Tailwind             | Usage                                      |
+|-----------------------------|--------------------------------------------|
+| `text-primary` `bg-primary` | Bleu fonce - titres, header, footer        |
+| `text-secondary` `bg-secondary` | Bleu clair - liens actifs, accents     |
+| `text-muted-foreground`     | Gris - descriptions, texte secondaire      |
+| `bg-accent`                 | Fond tres clair - cartes, hover            |
+| `bg-background`             | Blanc - fond de page                       |
+| `border-border`             | Bordures                                   |
+| `text-primary-foreground` `text-secondary-foreground` | Blanc - texte sur fond colore |
+
+---
+
+## Layout
+
+### Structure type d'une page
+
+```tsx
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
+
+// Section standard (Container inclus automatiquement)
+<Section id="services">
+  <Heading as="h2">Nos services</Heading>
+</Section>
+
+// Section pleine largeur avec fond colore
+<Section container={false} className="bg-primary">
+  <Container>
+    <Heading as="h2" className="text-white">...</Heading>
+  </Container>
+</Section>
+```
+
+`<Section>` accepte : `id`, `className`, `container` (bool, defaut `true`).
+`<Container>` accepte : `className`, `as` (balise HTML, defaut `div`).
+
+---
+
+## Composants UI
+
+Tous dans `src/components/ui/`.
+
+### Typographie
+
+```tsx
+import { Heading, Text } from "@/components/ui/Typography"
+
+<Heading as="h1">Titre hero</Heading>          // h1 — font-black, tres grand
+<Heading as="h2">Titre de section</Heading>    // h2 — font-black, grand (defaut)
+<Heading as="h3">Sous-titre</Heading>          // h3 — font-bold, moyen
+<Heading as="h4">Petit titre</Heading>         // h4 — font-bold, petit
+
+<Text>Paragraphe standard</Text>               // variant="body" — defaut
+<Text variant="lead">Accroche</Text>           // plus grand, mis en avant
+<Text variant="small">Note</Text>              // petit, discret
+```
+
+### Button
+
+```tsx
+import { Button } from "@/components/ui/Button"
+
+// variant : "primary" (defaut) | "secondary" | "outline" | "ghost"
+// size    : "sm" | "md" (defaut) | "lg"
+
+<Button variant="primary" size="lg">Demander un devis</Button>
+<Button variant="outline">En savoir plus</Button>
+```
+
+### Card, Badge
+
+```tsx
+import { Card } from "@/components/ui/Card"
+import { Badge } from "@/components/ui/Badge"
+
+<Card>                           // fond blanc, ombre legere, arrondi 2xl
+  <Badge>Nouveau</Badge>         // label discret fond accent / texte secondary
+  <Heading as="h3">...</Heading>
+  <Text>...</Text>
+</Card>
+```
+
+### Input, Textarea
+
+```tsx
+import { Input } from "@/components/ui/Input"
+import { Textarea } from "@/components/ui/Textarea"
+
+<Input type="email" placeholder="votre@email.fr" required />
+<Textarea placeholder="Votre message..." rows={5} />
+```
+
+### FadeIn (animation au scroll)
+
+```tsx
+import { FadeIn } from "@/components/ui/FadeIn"
+
+// direction : "up" (defaut) | "down" | "left" | "right" | "none"
+// delay     : secondes (utile pour staggers en grille)
+
+<FadeIn delay={0.1} direction="up">
+  <Card>...</Card>
+</FadeIn>
+```
+
+---
+
+## A ne pas faire
+
+```tsx
+<p className="text-[#0a233e]">...</p>               // HEX en dur - utiliser text-primary
+<div className="px-4 max-w-7xl">...</div>           // layout manuel - utiliser <Section>
+<Heading as="h3">Titre</Heading>                    // h3 sans h1/h2 parent - respecter l'ordre
+import Image from "next/legacy/image"               // deprecated - utiliser next/image
+```
+
+---
+
+## Modifier les tokens
+
+Un seul fichier : `src/app/globals.css`, bloc `:root`.
+
+```css
+:root {
+  --primary: #0a233e;
+  --secondary: #5c92b8;
+}
+```
