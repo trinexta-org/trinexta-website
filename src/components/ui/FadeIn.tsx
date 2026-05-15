@@ -1,36 +1,37 @@
-"use client"
-
-import { motion, HTMLMotionProps } from "framer-motion"
 import { ReactNode } from "react"
-import { transitions } from "@/lib/motion"
+import { cn } from "@/lib/utils"
 
-interface FadeInProps extends HTMLMotionProps<"div"> {
+interface FadeInProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode
   delay?: number
-  direction?: "up" | "down" | "left" | "right"
+  direction?: "up" | "down" | "left" | "right" | "none"
 }
 
 export function FadeIn({ children, delay = 0, direction = "up", className, ...props }: FadeInProps) {
-  const directions = {
-    up: { y: 20 },
-    down: { y: -20 },
-    left: { x: 20 },
-    right: { x: -20 },
+  // On utilise des classes Tailwind personnalisées qu'on va définir dans globals.css
+  const directionClasses = {
+    up: "translate-y-8",
+    down: "-translate-y-8",
+    left: "translate-x-8",
+    right: "-translate-x-8",
+    none: "translate-x-0 translate-y-0",
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, ...directions[direction] }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        ...transitions.smooth,
-        delay: delay 
+    <div
+      className={cn(
+        "opacity-0 motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out animate-fade-in-scroll",
+        "motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:translate-x-0", // Gestion native de prefers-reduced-motion
+        directionClasses[direction],
+        className
+      )}
+      style={{
+        transitionDelay: `${delay}s`,
+        ...props.style,
       }}
-      className={className}
       {...props}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }

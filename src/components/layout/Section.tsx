@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { Container } from "./Container"
 
 interface SectionProps {
   children: React.ReactNode
@@ -13,7 +14,7 @@ export function Section({ children, className, id, container = true }: SectionPr
       id={id} 
       className={cn("py-16 md:py-24 lg:py-32", className)}
     >
-      {children}
+      {container ? <Container>{children}</Container> : children}
     </section>
   )
 }

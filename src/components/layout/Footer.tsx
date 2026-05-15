@@ -1,20 +1,22 @@
-import { Send } from "lucide-react"
-import { FaLinkedin, FaFacebook, FaTwitter, FaGithub } from "react-icons/fa"
 import Link from "next/link"
 import { Container } from "./Container" 
+import { FacebookIcon } from "@/components/ui/icons/FacebookIcon"
+import { LinkedinIcon } from "@/components/ui/icons/LinkedinIcon"
+import { TwitterIcon } from "@/components/ui/icons/TwitterIcon"
+import { GithubIcon } from "@/components/ui/icons/GithubIcon"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
-  const desktopHover = "text-white/70 hover:text-[#5c92b8] text-[13px] transition-colors duration-300"
+  const desktopHover = "text-white/70 hover:text-secondary text-[13px] transition-colors duration-300"
   const desktopTitle = "text-white font-black uppercase tracking-[0.2em] text-[11px] mb-8 block"
 
   const mobileHover = "text-white/70 text-[9px] block transition-colors"
   const mobileTitle = "text-white font-bold uppercase text-[8px] mb-2 block"
 
   return (
-    <footer className="bg-[#0a233e] border-t border-white/5 relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#5c92b8]/5 blur-[120px] rounded-full pointer-events-none" />
+    <footer className="bg-primary border-t border-white/5 relative overflow-hidden">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
 
       <Container className="relative z-10">
         
@@ -24,16 +26,10 @@ export function Footer() {
             <div className="space-y-8">
               <Link href="/" className="group block">
                 <span className="text-white font-black uppercase tracking-tighter text-3xl block leading-none">Trinexta</span>
-                <span className="text-[#5c92b8] text-[9px] font-bold uppercase tracking-[0.4em] block mt-1">By Trustech IT Support</span>
+                <span className="text-secondary text-[9px] font-bold uppercase tracking-[0.4em] block mt-1">By Trustech IT Support</span>
               </Link>
               <div className="space-y-5">
                 <p className="text-white/70 text-[13px] leading-relaxed">Votre informatique simplifiée, en toute sérénité. <br />Expertise, Proximité, Réactivité.</p>
-                <form className="relative max-w-[240px]">
-                  <input type="email" placeholder="Newsletter" className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#5c92b8]/50" />
-                  <button type="submit" className="absolute right-1 top-1 bottom-1 bg-[#5c92b8] text-[#0a233e] px-3 rounded-md transition-colors">
-                    <Send className="w-3 h-3" />
-                  </button>
-                </form>
               </div>
             </div>
 
@@ -44,8 +40,6 @@ export function Footer() {
                 <li><Link href="/tarifs" className={desktopHover}>Tarifs</Link></li>
                 <li><Link href="/cas-clients" className={desktopHover}>Cas clients</Link></li>
                 <li><Link href="/blog" className={desktopHover}>Blog Expertise</Link></li>
-                <li><span aria-disabled="true" className="text-white/30 text-[13px] cursor-not-allowed">Recrutement</span></li>
-                <li><span aria-disabled="true" className="text-white/30 text-[13px] cursor-not-allowed">Espace client</span></li>
               </ul>
             </div>
 
@@ -70,9 +64,9 @@ export function Footer() {
             <div>
               <span className={desktopTitle}>Contact</span>
               <div className="space-y-6">
-                <div className="group"><span className="block text-[9px] text-[#5c92b8] font-bold uppercase mb-1.5">Siège social</span><span className="text-white/70 text-[13px]">505 Place des Champs Elysées, 91080 EVRY</span></div>
-                <div className="group"><span className="block text-[9px] text-[#5c92b8] font-bold uppercase mb-1.5">Assistance</span><a href="tel:0978250746" className="text-white/70 text-[13px] block">09 78 25 07 46</a></div>
-                <div className="group"><span className="block text-[9px] text-[#5c92b8] font-bold uppercase mb-1.5">Email</span><a href="mailto:contact@trinexta.fr" className="text-white/70 text-[13px] block">contact@trinexta.fr</a></div>
+                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Siège social</span><span className="text-white/70 text-[13px]">505 Place des Champs Elysées, 91080 EVRY</span></div>
+                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Assistance</span><a href="tel:0978250746" className="text-white/70 text-[13px] block">09 78 25 07 46</a></div>
+                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Email</span><a href="mailto:contact@trinexta.fr" className="text-white/70 text-[13px] block">contact@trinexta.fr</a></div>
               </div>
             </div>
           </div>
@@ -86,16 +80,18 @@ export function Footer() {
               ))}
             </div>
             <div className="flex items-center gap-6">
-              {[
-                { icon: <FaLinkedin className="w-5 h-5" />, href: "#" },
-                { icon: <FaFacebook className="w-5 h-5" />, href: "#" },
-                { icon: <FaTwitter className="w-5 h-5" />, href: "#" },
-                { icon: <FaGithub className="w-5 h-5" />, href: "#" }
-              ].map((social, i) => (
-                <Link key={i} href={social.href} className="text-white/20 hover:text-[#5c92b8] transition-all transform hover:-translate-y-1">
-                  {social.icon}
-                </Link>
-              ))}
+              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <LinkedinIcon className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <FacebookIcon className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <TwitterIcon className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <GithubIcon className="w-5 h-5" />
+              </Link>
             </div>
           </div>
         </div>
@@ -105,12 +101,8 @@ export function Footer() {
           <div className="flex items-center justify-between gap-4">
             <div className="shrink-0">
               <span className="text-white font-black uppercase text-lg leading-none block">Trinexta</span>
-              <span className="text-[#5c92b8] text-[7px] font-bold uppercase block tracking-widest">By Trustech IT</span>
+              <span className="text-secondary text-[7px] font-bold uppercase block tracking-widest">By Trustech IT</span>
             </div>
-            <form className="relative flex-1 max-w-[130px]">
-              <input type="email" placeholder="News" className="w-full bg-white/[0.05] border border-white/10 rounded-md px-2 py-1.5 text-[10px] text-white focus:outline-none" />
-              <button type="submit" className="absolute right-1 top-1 bottom-1 bg-[#5c92b8] px-1.5 rounded-sm"><Send className="w-2.5 h-2.5 text-[#0a233e]" /></button>
-            </form>
           </div>
 
           <div className="grid grid-cols-4 gap-2 border-y border-white/5 py-4">
@@ -129,7 +121,7 @@ export function Footer() {
             <div>
               <span className={mobileTitle}>Contact</span>
               <div className="space-y-1">
-                <span className={mobileHover}>0978250746</span>
+                <span className={mobileHover}>09 78 25 07 46</span>
                 <span className={mobileHover}>Evry (91)</span>
               </div>
             </div>
@@ -142,9 +134,9 @@ export function Footer() {
               ))}
             </div>
             <div className="flex gap-4 shrink-0">
-              <FaLinkedin className="w-4 h-4 text-white/20" />
-              <FaFacebook className="w-4 h-4 text-white/20" />
-              <FaTwitter className="w-4 h-4 text-white/20" />
+              <LinkedinIcon className="w-4 h-4 text-white/20" />
+              <FacebookIcon className="w-4 h-4 text-white/20" />
+              <TwitterIcon className="w-4 h-4 text-white/20" />
             </div>
           </div>
         </div>

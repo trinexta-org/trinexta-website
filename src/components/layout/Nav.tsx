@@ -62,13 +62,13 @@ export function Nav() {
             {/* Sous-menu au survol */}
             {link.subMenu && (
               <div className="absolute top-[80%] left-0 w-56 pt-4 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                <div className="bg-white border border-gray-100 rounded-xl shadow-xl p-2 flex flex-col gap-1">
+                <div className="bg-background border border-border rounded-xl shadow-xl p-2 flex flex-col gap-1">
                   {link.subMenu.map((sub) => (
                     sub.disabled ? (
                       <span 
                         key={sub.label} 
                         aria-disabled="true" 
-                        className="block px-4 py-2.5 text-sm text-slate-400 cursor-not-allowed bg-slate-50/50 rounded-lg"
+                        className="block px-4 py-2.5 text-sm text-muted-foreground cursor-not-allowed bg-muted/50 rounded-lg"
                       >
                         {sub.label}
                       </span>
