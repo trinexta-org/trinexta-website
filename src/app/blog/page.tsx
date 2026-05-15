@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   getArticles,
+  getArticlesConnexes,
   urlForImage,
   LIBELLES_CATEGORIES,
   formatDatePublication,
 } from "@/lib/sanity";
 
 export default async function BlogPage() {
-  const articles = await getArticles();
+  const { articles, total } = await getArticles();  
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-10 px-6 py-16">
@@ -20,9 +21,12 @@ export default async function BlogPage() {
           Articles publiés depuis Sanity
         </h1>
         <p className="max-w-2xl text-base leading-7 text-zinc-600">
-          Cette page est une Server Component Next.js. Elle appelle{" "}
+          Cette page est un Server Component Next.js. Elle appelle{" "}
           <code>getArticles()</code> dans <code>src/lib/sanity.ts</code>, puis
           affiche la liste sans embarquer la logique GROQ dans l&apos;UI.
+        </p>
+        <p className="text-sm text-zinc-500 font-medium">
+          {total} articles disponibles au total.
         </p>
       </header>
 
@@ -63,6 +67,13 @@ export default async function BlogPage() {
                       </span>
                       <span>{formatDatePublication(article.datePublication)}</span>
                       {article.auteur ? <span>Par {article.auteur}</span> : null}
+                      
+                      {article.tempsLecture ? (
+                        <>
+                          <span>•</span>
+                          <span>{article.tempsLecture} min</span>
+                        </>
+                      ) : null}
                     </div>
 
                     <div className="space-y-3">

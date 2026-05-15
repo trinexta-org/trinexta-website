@@ -28,14 +28,20 @@ export type ResumeArticle = {
   auteur?: string;
   extrait?: string;
   imageUne?: ImageArticle;
+  tempsLecture?: number;
 };
 
 export type ArticleComplet = ResumeArticle & {
-  imageUne?: ImageArticle;
   seoTitre?: string;
   seoDescription?: string;
   contenu: CorpsArticle[] | null;
 };
+
+export interface OptionsRecherchesArticles {
+  debut? : number;
+  limite? : number;
+  categorie? : CategorieArticle;
+}
 
 export type ImageArticle = {
   _type: "image";
@@ -72,19 +78,38 @@ export function formatDatePublication(date: string): string {
   }).format(new Date(date));
 }
 
-export async function getArticles(): Promise<ResumeArticle[]> {
-  return sanityClient.fetch<ResumeArticle[]>(`
-    *[_type == "article"] | order(datePublication desc) {
+export async function getArticles(options?: OptionsRecherchesArticles): Promise<{articles: ResumeArticle[]; total: number}> {
+  const { debut = 0, limite, categorie } = options || {};
+
+  const filtre = categorie 
+    ? `_type == "article" && categorie == $categorie` 
+    : `_type == "article"`;
+
+  const possedeLimite = limite !== undefined;
+  const fin = possedeLimite ? debut + limite : null;
+  const tranche = possedeLimite ? `[$debut...$fin]` : `[$debut...10000]`; 
+
+  const query = `{
+    "articles": *[${filtre}] | order(datePublication desc) ${tranche} {
       titre,
       slug,
       categorie,
       datePublication,
       auteur,
       extrait,
-      imageUne
-    }`
-  );
+      imageUne,
+      tempsLecture
+    },
+    "total": count(*[${filtre}])
+  }`;
+
+  const params: Record<string, string | number> = { debut };
+  if (possedeLimite && fin !== null) params.fin = fin;
+  if (categorie) params.categorie = categorie;
+
+  return sanityClient.fetch<{ articles: ResumeArticle[]; total: number }>(query, params);
 }
+
 
 export async function getArticleBySlug(slug: string): Promise<ArticleComplet | null> {
   return sanityClient.fetch<ArticleComplet | null>(`
@@ -95,6 +120,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
       datePublication,
       auteur,
       extrait,
+      tempsLecture, 
       imageUne,
       seoTitre,
       seoDescription,
@@ -102,4 +128,38 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
     }`,
     { slug }
   );
+}
+
+
+/**
+ * Récupère des articles de la même catégorie pour la section "Articles connexes",
+ * en excluant l'article actuellement consulté.
+ */
+export async function getArticlesConnexes(
+  slug: string,
+  categorie: CategorieArticle,
+  limite: number = 3
+): Promise<ResumeArticle[]> {
+  const query = `*[
+    _type == "article" && 
+    categorie == $categorie && 
+    slug.current != $slug
+  ] | order(datePublication desc)[0...$limite] {
+    titre,
+    slug,
+    categorie,
+    datePublication,
+    auteur,
+    extrait,
+    imageUne,
+    tempsLecture
+  }`;
+
+  const params: Record<string, string | number> = { 
+    slug, 
+    categorie, 
+    limite 
+  };
+
+  return sanityClient.fetch<ResumeArticle[]>(query, params);
 }

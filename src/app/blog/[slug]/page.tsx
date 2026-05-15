@@ -91,17 +91,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </span>
             <span>{formatDatePublication(article.datePublication)}</span>
             {article.auteur ? <span>Par {article.auteur}</span> : null}
+
+            {article.tempsLecture ? (
+              <>
+                <span>•</span>
+                <span>{article.tempsLecture} min de lecture</span>
+              </>
+            ) : null}
           </div>
 
           <div className="space-y-3">
-            <h1 className="text-4xl font-semibold tracking-tight text-zinc-950">
+            <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white">
               {article.titre}
             </h1>
-            {article.extrait ? (
-              <p className="text-lg leading-8 text-zinc-600">
-                {article.extrait}
-              </p>
-            ) : null}
           </div>
         </header>
 
