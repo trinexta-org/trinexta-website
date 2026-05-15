@@ -1,0 +1,20 @@
+name: "Sync Mensuel Blog"
+on:
+  schedule:
+    - cron: '0 0 1 * *' # Le 1er de chaque mois à minuit
+  workflow_dispatch: # Bouton pour le lancer manuellement
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx ts-node scripts/import-articles.js
+        env:
+          SANITY_API_TOKEN: ${{ 'skI90aZ5gfN4jHJIIuah6tctfSGV1lamcNzcC9sdSzzg2ONET2gDNejSjNHJemSs4zTQeLAXba01qsQbGKZSNq1Bocu3Wnik0rHJJIibHf5x5iB0C77gtgpS74w0UlUOCUH0grIqGAs7QNFWLIWjBR5GF0XIhXP6XiHcyW4MU072F20cCFEQ' }}
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ '93ztl6y7' }}
+          NEXT_PUBLIC_SANITY_DATASET: "production"
