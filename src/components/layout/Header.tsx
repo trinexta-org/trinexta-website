@@ -1,16 +1,15 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import { Phone, Mail } from "lucide-react"
 import { Nav } from "./Nav"
 import { MobileMenu } from "./MobileMenu"
+import { Container } from "./Container" 
 
 export function Header() {
   return (
     <header className="sticky top-0 z-40">
       <div className="hidden lg:block bg-[#0a233e] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="flex items-center justify-end h-10 gap-6">
             <a href="tel:0978250746" className="flex items-center gap-2 text-xs font-medium hover:text-[#5c92b8] transition-colors">
               <Phone className="h-3.5 w-3.5 stroke-[1.5]" />
@@ -30,11 +29,11 @@ export function Header() {
               Rejoignez-nous
             </span>
           </div>
-        </div>
+        </Container>
       </div>
 
       <nav className="bg-white border-b border-gray-100 shadow-sm relative z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container> 
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link href="/" className="flex items-center">
               <Image 
@@ -50,7 +49,7 @@ export function Header() {
             <Nav />
             <MobileMenu />
           </div>
-        </div>
+        </Container>
       </nav>
     </header>
   )

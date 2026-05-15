@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { menuItems } from "./Nav"
+import { cn } from "@/lib/utils" 
 
 export function MobileMenu() {
   const pathname = usePathname()
@@ -30,7 +31,7 @@ export function MobileMenu() {
     <div className="lg:hidden flex items-center">
       <button 
         onClick={() => setIsOpen(true)} 
-        className="p-2 -mr-2 text-[#0a233e] hover:text-[#5c92b8] transition-colors"
+        className="p-2 -mr-2 text-primary hover:text-secondary transition-colors"
         aria-label="Ouvrir le menu"
       >
         <Menu className="h-6 w-6" />
@@ -44,7 +45,7 @@ export function MobileMenu() {
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-[#0a233e]/40 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-primary/40 backdrop-blur-sm z-50"
             />
             
             <motion.aside
@@ -62,7 +63,10 @@ export function MobileMenu() {
                   height={35} 
                   className="h-8 w-auto object-contain"
                 />
-                <button onClick={() => setIsOpen(false)} className="p-2 -mr-2 text-gray-400 hover:text-[#5c92b8]">
+                <button 
+                  onClick={() => setIsOpen(false)} 
+                  className="p-2 -mr-2 text-gray-400 hover:text-secondary transition-colors"
+                >
                   <X className="h-6 w-6" />
                 </button>
               </div>
@@ -76,12 +80,25 @@ export function MobileMenu() {
                     <div key={link.label} className="flex flex-col">
                       <div className="flex items-center justify-between py-3">
                         {link.subMenu ? (
-                          <button onClick={() => toggleSubMenu(link.label)} className={`text-base font-bold flex items-center gap-2 w-full text-left ${isSubOpen ? "text-[#5c92b8]" : "text-[#0a233e]"}`}>
+                          <button 
+                            onClick={() => toggleSubMenu(link.label)} 
+                            className={cn(
+                              "text-base font-bold flex items-center gap-2 w-full text-left transition-colors",
+                              isSubOpen ? "text-secondary" : "text-primary"
+                            )}
+                          >
                             {link.label}
-                            <ChevronDown className={`w-4 h-4 transition-transform ${isSubOpen ? "rotate-180" : ""}`} />
+                            <ChevronDown className={cn("w-4 h-4 transition-transform", isSubOpen && "rotate-180")} />
                           </button>
                         ) : (
-                          <Link href={link.href} onClick={() => setIsOpen(false)} className={`text-base font-bold w-fit ${isActive ? "text-[#5c92b8] border-b-2 border-[#5c92b8]" : "text-[#0a233e]"}`}>
+                          <Link 
+                            href={link.href} 
+                            onClick={() => setIsOpen(false)} 
+                            className={cn(
+                              "text-base font-bold w-fit transition-all",
+                              isActive ? "text-secondary border-b-2 border-secondary" : "text-primary"
+                            )}
+                          >
                             {link.label}
                           </Link>
                         )}
@@ -100,7 +117,12 @@ export function MobileMenu() {
                                 sub.disabled ? (
                                   <span key={sub.label} className="text-sm font-medium text-gray-400">{sub.label}</span>
                                 ) : (
-                                  <Link key={sub.label} href={sub.href} onClick={() => setIsOpen(false)} className="text-sm font-semibold text-gray-600 hover:text-[#5c92b8]">
+                                  <Link 
+                                    key={sub.label} 
+                                    href={sub.href} 
+                                    onClick={() => setIsOpen(false)} 
+                                    className="text-sm font-semibold text-gray-600 hover:text-secondary transition-colors"
+                                  >
                                     {sub.label}
                                   </Link>
                                 )

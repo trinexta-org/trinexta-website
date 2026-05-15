@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils" 
 
 export const menuItems = [
   { label: "Accueil", href: "/" },
@@ -36,7 +37,7 @@ export function Nav() {
   const pathname = usePathname()
 
   return (
-    <div className="hidden lg:flex items-center gap-8">
+    <nav className="hidden lg:flex items-center gap-8">
       {menuItems.map((link) => {
         const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href))
 
@@ -44,12 +45,18 @@ export function Nav() {
           <div key={link.label} className="relative group">
             <Link
               href={link.href}
-              className={`text-sm font-bold transition-colors relative py-6 flex items-center ${
-                isActive ? "text-[#5c92b8]" : "text-[#0a233e] hover:text-[#5c92b8]"
-              }`}
+              className={cn(
+                "text-sm font-bold transition-colors relative py-6 flex items-center",
+                isActive ? "text-secondary" : "text-primary hover:text-secondary"
+              )}
             >
               {link.label}
-              <span className={`absolute bottom-4 left-0 h-0.5 bg-[#5c92b8] transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"}`} />
+              <span 
+                className={cn(
+                  "absolute bottom-4 left-0 h-0.5 bg-secondary transition-all duration-300",
+                  isActive ? "w-full" : "w-0 group-hover:w-full"
+                )} 
+              />
             </Link>
 
             {/* Sous-menu au survol */}
@@ -58,11 +65,19 @@ export function Nav() {
                 <div className="bg-white border border-gray-100 rounded-xl shadow-xl p-2 flex flex-col gap-1">
                   {link.subMenu.map((sub) => (
                     sub.disabled ? (
-                      <span key={sub.label} aria-disabled="true" className="block px-4 py-2.5 text-sm text-slate-400 cursor-not-allowed bg-slate-50/50 rounded-lg">
+                      <span 
+                        key={sub.label} 
+                        aria-disabled="true" 
+                        className="block px-4 py-2.5 text-sm text-slate-400 cursor-not-allowed bg-slate-50/50 rounded-lg"
+                      >
                         {sub.label}
                       </span>
                     ) : (
-                      <Link key={sub.label} href={sub.href} className="block px-4 py-2.5 text-sm text-[#0a233e] font-semibold hover:bg-[#f0f5f9] hover:text-[#5c92b8] rounded-lg transition-colors">
+                      <Link 
+                        key={sub.label} 
+                        href={sub.href} 
+                        className="block px-4 py-2.5 text-sm text-primary font-semibold hover:bg-accent hover:text-secondary rounded-lg transition-colors"
+                      >
                         {sub.label}
                       </Link>
                     )
@@ -73,6 +88,6 @@ export function Nav() {
           </div>
         )
       })}
-    </div>
+    </nav>
   )
 }

@@ -1,8 +1,7 @@
-"use client"
-
 import { Send } from "lucide-react"
 import { FaLinkedin, FaFacebook, FaTwitter, FaGithub } from "react-icons/fa"
 import Link from "next/link"
+import { Container } from "./Container" 
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -17,7 +16,7 @@ export function Footer() {
     <footer className="bg-[#0a233e] border-t border-white/5 relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#5c92b8]/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
+      <Container className="relative z-10">
         
         {/* --- VERSION GRAND ÉCRAN --- */}
         <div className="hidden lg:block pt-20 pb-10">
@@ -45,9 +44,8 @@ export function Footer() {
                 <li><Link href="/tarifs" className={desktopHover}>Tarifs</Link></li>
                 <li><Link href="/cas-clients" className={desktopHover}>Cas clients</Link></li>
                 <li><Link href="/blog" className={desktopHover}>Blog Expertise</Link></li>
-                {/* Liens désactivés */}
-                <li><span aria-disabled="true" className="text-white/30 text-[13px] cursor-not-allowed transition-colors duration-300">Recrutement</span></li>
-                <li><span aria-disabled="true" className="text-white/30 text-[13px] cursor-not-allowed transition-colors duration-300">Espace client</span></li>
+                <li><span aria-disabled="true" className="text-white/30 text-[13px] cursor-not-allowed">Recrutement</span></li>
+                <li><span aria-disabled="true" className="text-white/30 text-[13px] cursor-not-allowed">Espace client</span></li>
               </ul>
             </div>
 
@@ -111,7 +109,7 @@ export function Footer() {
             </div>
             <form className="relative flex-1 max-w-[130px]">
               <input type="email" placeholder="News" className="w-full bg-white/[0.05] border border-white/10 rounded-md px-2 py-1.5 text-[10px] text-white focus:outline-none" />
-              <button className="absolute right-1 top-1 bottom-1 bg-[#5c92b8] px-1.5 rounded-sm"><Send className="w-2.5 h-2.5 text-[#0a233e]" /></button>
+              <button type="submit" className="absolute right-1 top-1 bottom-1 bg-[#5c92b8] px-1.5 rounded-sm"><Send className="w-2.5 h-2.5 text-[#0a233e]" /></button>
             </form>
           </div>
 
@@ -157,7 +155,7 @@ export function Footer() {
           </p>
         </div>
 
-      </div>
+      </Container>
     </footer>
   )
 }
