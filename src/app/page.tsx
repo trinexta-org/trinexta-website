@@ -1,9 +1,17 @@
+import { Metadata } from "next"
+import { HeroSection } from "@/components/HeroSection"
+import { TransitionTitle } from "@/components/TransitionTitle"
+
+export const metadata: Metadata = {
+  title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
+  description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
+}
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center flex-1 py-32 px-4 text-center">
-      <h1 className="text-4xl md:text-5xl font-black text-[#0a233e] mb-6 tracking-tighter">
-        Bienvenue sur TRINEXTA<span className="text-[#5c92b8]">.</span>
-      </h1>
-    </div>
-  );
+    <main className="min-h-screen bg-background relative">
+      <HeroSection />
+      <TransitionTitle line1="Une expertise reconnue" line2="et certifiée" />
+    </main>
+  )
 }
