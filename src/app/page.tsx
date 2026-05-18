@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { HeroSection } from "@/components/HeroSection"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { ReassuranceSection } from "@/components/ReassuranceSection"
+import { ForWhoSection } from "@/components/ForWhoSection"
 
 export const metadata: Metadata = {
   title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
@@ -12,8 +13,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background relative">
       <HeroSection />
-      <TransitionTitle line1="Une expertise reconnue" line2="et certifiée" />
       <ReassuranceSection />
+      <TransitionTitle line1="Des solutions pour" line2="chaque activité" />
+      <ForWhoSection />
     </main>
   )
 }

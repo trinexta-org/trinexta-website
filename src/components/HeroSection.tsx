@@ -113,7 +113,7 @@ export function HeroSection() {
                             Votre informatique, simplifiée.
                         </motion.span>
                         <motion.span
-                            animate={{ color: isStateA ? "white" : "var(--secondary)" }}
+                            animate={{ color: isStateA ? "#ffffff" : "var(--secondary)" }}
                             transition={{ duration: 0.8, ease: "easeInOut" }}
                             className="block mt-2 md:mt-0"
                         >
