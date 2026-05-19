@@ -15,7 +15,7 @@ export function Footer() {
   const mobileTitle = "text-white font-bold uppercase text-[8px] mb-2 block"
 
   return (
-    <footer className="bg-primary border-t border-white/5 relative overflow-hidden">
+    <footer className="bg-primary relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
 
       <Container className="relative z-10">
