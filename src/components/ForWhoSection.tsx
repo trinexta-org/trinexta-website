@@ -17,7 +17,7 @@ const targets = [
         buttonText: "En savoir plus",
         backgroundImage: "/images/for-who/freelance.avif",
         icon: User,
-    },
+    },  
     {
         id: 2,
         tags: ["SÉCURITÉ", "CONFIDENTIALITÉ"],

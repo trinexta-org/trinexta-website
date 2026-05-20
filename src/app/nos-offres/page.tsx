@@ -1,0 +1,87 @@
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
+import { PricingSection } from "@/components/nos-offres/PricingSection"
+import { NosOffresHero } from "@/components/nos-offres/NosOffresHero"
+import { DifferentiatorSection } from "@/components/nos-offres/DifferentiatorSection"
+import { FaqSection } from "@/components/nos-offres/FaqSection"
+import { TransitionTitle } from "@/components/TransitionTitle"
+import { officialFaqs } from "@/components/nos-offres/faqData" 
+import { NosOffresCTA } from "@/components/nos-offres/NosOffresCTA" 
+import { OffersTabs } from "@/components/nos-offres/OffersTabs"
+
+export const metadata = {
+  title: "Nos offres | Trinexta - Tarifs et abonnements",
+  description: "Découvrez nos offres d'infogérance pour TPE et PME. Tarifs clairs, support illimité et cybersécurité incluse.",
+}
+
+export default function NosOffresPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": officialFaqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  }
+
+  return (
+    <main className="bg-primary min-h-screen relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <NosOffresHero />
+
+      <TransitionTitle
+        surtitle="Tarification transparente"
+        line1="Nos formules"
+        line2="claires & adaptées"
+      />
+      <Section id="details" className="bg-primary pb-24 pt-12">
+        <Container>
+          <PricingSection />
+        </Container>
+      </Section>
+
+      <TransitionTitle
+        surtitle="Zoom sur nos métiers"
+        line1="Le catalogue"
+        line2="en détail"
+      />
+      <Section className="bg-primary pb-24 pt-12">
+        <Container>
+          <OffersTabs />
+        </Container>
+      </Section>
+
+      <TransitionTitle
+        surtitle="Pourquoi nous choisir ?"
+        line1="Trinexta"
+        line2="vs Le Marché"
+      />
+      <Section className="bg-primary pb-24 pt-12">
+        <Container>
+          <DifferentiatorSection />
+        </Container>
+      </Section>
+
+      <TransitionTitle
+        surtitle="Des réponses à vos questions"
+        line1="Questions"
+        line2="Fréquentes"
+      />
+      <Section className="bg-primary pb-32 pt-12">
+        <Container>
+          <FaqSection />
+        </Container>
+      </Section>
+
+      <NosOffresCTA />
+    </main>
+  )
+}
