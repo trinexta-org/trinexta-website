@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { PricingSection } from "@/components/nos-offres/PricingSection"
@@ -55,7 +56,13 @@ export default function NosOffresPage() {
       />
       <Section className="bg-primary pb-24 pt-12">
         <Container>
-          <OffersTabs />
+          <Suspense fallback={
+            <div className="w-full text-center py-12 text-white/50 font-mono text-sm animate-pulse">
+              Chargement du catalogue Trinexta...
+            </div>
+          }>
+            <OffersTabs />
+          </Suspense>
         </Container>
       </Section>
 
