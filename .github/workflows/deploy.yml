@@ -1,0 +1,28 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /var/www/trinexta-website
+            git pull origin staging
+            npm ci
+            npx prisma migrate deploy
+            npx prisma generate
+            npm run build
+            pm2 startOrReload ecosystem.config.js --only trinexta-staging --update-env
+            pm2 save
