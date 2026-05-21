@@ -3,7 +3,10 @@
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, useInView } from "framer-motion"
+
+const MotionLink = motion(Link);
 
 const services = [
   {
@@ -100,6 +103,18 @@ function AnimatedArrow({ direction }: { direction: string }) {
   )
 }
 
+const getServiceUrl = (title: string) => {
+  const map: Record<string, string> = {
+    "Infogérance": "/infogerance",
+    "Support": "/support-informatique",
+    "Cybersécurité": "/cybersecurite",
+    "Cloud": "/cloud-sauvegarde",
+    "Microsoft 365": "/microsoft-365",
+    "Solutions Métier": "/solutions-metier"
+  };
+  return map[title] || "/nos-offres";
+};
+
 export function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
@@ -117,7 +132,7 @@ export function ServicesSection() {
   useEffect(() => {
     if (!isInView) return
     const startCarouselTimer = setTimeout(() => {
-        if (!isMobile) setIsCarouselActive(true)
+      if (!isMobile) setIsCarouselActive(true)
     }, 3000)
     return () => clearTimeout(startCarouselTimer)
   }, [isInView, isMobile])
@@ -125,7 +140,7 @@ export function ServicesSection() {
   useEffect(() => {
     if (!isCarouselActive || isMobile) return
     const interval = setInterval(() => {
-        setOrder(prev => prev.map(pos => (pos + 1) % 6))
+      setOrder(prev => prev.map(pos => (pos + 1) % 6))
     }, 6000)
     return () => clearInterval(interval)
   }, [isCarouselActive, isMobile])
@@ -140,34 +155,35 @@ export function ServicesSection() {
             const currentSlot = activePositions[isMobile ? index : order[index]]
 
             return (
-              <motion.div
+              <MotionLink
                 key={service.id}
+                href={getServiceUrl(service.title)}
                 animate={isInView ? {
-                    opacity: 1,
-                    scale: currentSlot.scale,
-                    rotateY: currentSlot.rotateY,
-                    top: currentSlot.top,
-                    left: currentSlot.left,
-                    zIndex: currentSlot.zIndex
+                  opacity: 1,
+                  scale: currentSlot.scale,
+                  rotateY: currentSlot.rotateY,
+                  top: currentSlot.top,
+                  left: currentSlot.left,
+                  zIndex: currentSlot.zIndex
                 } : {
-                    opacity: 0,
-                    scale: 0.1,
-                    rotateY: 180,
-                    top: "20%",
-                    left: "50%",
-                    zIndex: 0
+                  opacity: 0,
+                  scale: 0.1,
+                  rotateY: 180,
+                  top: "20%",
+                  left: "50%",
+                  zIndex: 0
                 }}
                 transition={{
-                    duration: 1.2,
-                    ease: "easeInOut",
-                    delay: isCarouselActive ? 0 : index * 0.1
+                  duration: 1.2,
+                  ease: "easeInOut",
+                  delay: isCarouselActive ? 0 : index * 0.1
                 }}
                 style={{
-                    position: "absolute",
-                    width: isMobile ? "90%" : "31%",
-                    transformStyle: "preserve-3d"
+                  position: "absolute",
+                  width: isMobile ? "90%" : "31%",
+                  transformStyle: "preserve-3d"
                 }}
-                className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-white/10 cursor-pointer bg-primary"
+                className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-white/10 cursor-pointer bg-primary block"
               >
                 <div className="absolute inset-0">
                   <Image src={service.image} alt={service.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
@@ -177,18 +193,18 @@ export function ServicesSection() {
                 <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-10">
                   <div className="mt-auto">
                     <h3 className="text-xl md:text-3xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-tighter uppercase">
-                        {service.title}
+                      {service.title}
                     </h3>
 
                     <CharteFormattedText>{service.description}</CharteFormattedText>
 
                     <motion.div whileHover={{ x: 5 }} className="flex items-center">
-                        <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">Découvrir</span>
-                        <AnimatedArrow direction={service.fillDir} />
+                      <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">Découvrir</span>
+                      <AnimatedArrow direction={service.fillDir} />
                     </motion.div>
                   </div>
                 </div>
-              </motion.div>
+              </MotionLink>
             )
           })}
         </div>
