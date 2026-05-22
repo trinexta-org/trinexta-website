@@ -11,13 +11,22 @@ import { KpiSection } from "@/components/KpiSection"
 import { WhyChooseUs } from "@/components/WhyChooseUs"
 import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
+import { sanityClient } from "@/lib/sanity"
 
 export const metadata: Metadata = {
   title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
   description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
 }
 
-export default function Home() {
+export default async function Home() {
+  const partnersQuery = `*[_type == "partenaire" && type == "editeur"] | order(ordre asc) {
+    "name": nom,
+    "logoSrc": logo.asset->url,
+    "isCircle": coalesce(isCircle, false),
+    "url": urlOfficiel
+  }`;
+  const partnersData = await sanityClient.fetch(partnersQuery);
+
   return (
     <main className="min-h-screen bg-background relative">
       <JsonLd data={trinextaLocalBusiness} />
@@ -53,7 +62,7 @@ export default function Home() {
         line1="Nos Partenaires"
         line2="Technologiques"
       />
-      <PartnersSection />
+      <PartnersSection partners={partnersData} />
 
       <InterventionMap />
 

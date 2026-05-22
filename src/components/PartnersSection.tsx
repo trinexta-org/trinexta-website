@@ -2,18 +2,54 @@
 
 import { motion } from "framer-motion"
 
-const partners = [
-  { name: "Apple", logoSrc: "https://cdn.simpleicons.org/apple/white", isCircle: false },
-  { name: "Microsoft", logoSrc: "/images/partners/microsoft.png", isCircle: false },
-  { name: "Google Workspace", logoSrc: "/images/partners/google.jpg", isCircle: false },
-  { name: "OVHcloud", logoSrc: "/images/partners/ovh.png", isCircle: true },
-  { name: "Bitdefender", logoSrc: "/images/partners/bitdefender.png", isCircle: true },
-  { name: "Sophos", logoSrc: "/images/partners/sophos.png", isCircle: true },
-]
+export interface Partner {
+  name: string;
+  logoSrc: string;
+  isCircle: boolean;
+  url?: string;
+}
 
-const carouselPartners = [...partners, ...partners, ...partners, ...partners, ...partners]
+export function PartnersSection({ partners }: { partners: Partner[] }) {
+  const carouselPartners = [...partners, ...partners, ...partners, ...partners, ...partners]
+  const itemsCount = partners.length || 11; 
 
-function PartnerCard({ partner }: { partner: any }) {
+  return (
+    <section className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
+      <style>{`
+        @keyframes scroll-partners {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-184px * ${itemsCount})); }
+        }
+        @media (min-width: 768px) {
+          @keyframes scroll-partners {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-240px * ${itemsCount})); }
+          }
+        }
+        .animate-scroll {
+          animation: scroll-partners 40s linear infinite;
+          width: max-content;
+        }
+        .pause-on-hover:hover .animate-scroll {
+          animation-play-state: paused;
+        }
+      `}</style>
+
+      <div className="relative w-full flex overflow-hidden pause-on-hover mt-4">
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-primary to-transparent z-20 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-primary to-transparent z-20 pointer-events-none" />
+
+        <div className="flex animate-scroll gap-6 md:gap-8 px-4">
+          {carouselPartners.map((partner, index) => (
+            <PartnerCard key={`${partner.name}-${index}`} partner={partner} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function PartnerCard({ partner }: { partner: Partner }) {
   return (
     <motion.div
       whileHover={{ y: -5 }}
@@ -36,42 +72,5 @@ function PartnerCard({ partner }: { partner: any }) {
         {partner.name}
       </span>
     </motion.div>
-  )
-}
-
-export function PartnersSection() {
-  return (
-    <section className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <style>{`
-        @keyframes scroll-partners {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-184px * 6)); }
-        }
-        @media (min-width: 768px) {
-          @keyframes scroll-partners {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-240px * 6)); }
-          }
-        }
-        .animate-scroll {
-          animation: scroll-partners 30s linear infinite;
-          width: max-content;
-        }
-        .pause-on-hover:hover .animate-scroll {
-          animation-play-state: paused;
-        }
-      `}</style>
-
-      <div className="relative w-full flex overflow-hidden pause-on-hover mt-4">
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-primary to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-primary to-transparent z-20 pointer-events-none" />
-
-        <div className="flex animate-scroll gap-6 md:gap-8 px-4">
-          {carouselPartners.map((partner, index) => (
-            <PartnerCard key={`${partner.name}-${index}`} partner={partner} />
-          ))}
-        </div>
-      </div>
-    </section>
   )
 }
