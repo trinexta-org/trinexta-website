@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
+import { GridCards } from "@/components/layout/GridCards"
 
 const kpis = [
   {
@@ -73,7 +74,7 @@ export function KpiSection() {
           <div className="h-[1px] w-full bg-white/10" />
         </div>
 
-        <div className="grid grid-cols-4 gap-2 md:gap-12">
+        <GridCards columns={4} mobileColumns={4} gap="gap-2 md:gap-12">
           {kpis.map((kpi, index) => (
             <motion.div
               key={kpi.id}
@@ -104,7 +105,7 @@ export function KpiSection() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </GridCards>
       </div>
     </section>
   )

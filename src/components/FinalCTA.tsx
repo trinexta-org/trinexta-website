@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading, Text } from "@/components/ui/Typography"
+import { BannerCTA } from "@/components/layout/BannerCTA"
 
 function EnhancedRibbonBackground() {
   return (

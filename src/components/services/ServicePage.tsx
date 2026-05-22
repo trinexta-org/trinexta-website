@@ -11,6 +11,7 @@ import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { FadeIn } from "@/components/ui/FadeIn"
 import { TransitionTitle } from "@/components/TransitionTitle"
+import { GridCards } from "@/components/layout/GridCards"
 
 export interface ServicePageProps {
     serviceSlug: string
@@ -107,7 +108,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                             <Text className="text-white/80 text-base md:text-lg leading-relaxed">{problem.description}</Text>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-2 md:gap-5">
+                        <GridCards columns={2} gap="gap-2 md:gap-5">
                             {problem.painPoints.map((point, index) => (
                                 <FadeIn key={index} delay={index * 0.1}>
                                     <div className="group relative p-3 md:p-6 rounded-xl md:rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all duration-300 h-full flex flex-col justify-center items-center text-center overflow-hidden">
@@ -118,7 +119,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                                     </div>
                                 </FadeIn>
                             ))}
-                        </div>
+                        </GridCards>
                     </div>
 
                     <div className="relative w-full h-[300px] sm:h-[400px] lg:h-auto lg:aspect-square max-w-[500px] mx-auto lg:max-w-none mt-4 lg:mt-0">
