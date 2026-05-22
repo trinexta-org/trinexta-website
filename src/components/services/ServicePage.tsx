@@ -1,5 +1,6 @@
 "use client"
 
+import { JsonLd } from "@/components/seo/JsonLd";
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -49,7 +50,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
 
     return (
         <div className="bg-primary min-h-screen text-white">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <JsonLd data={jsonLd} />
 
             {/* 1. HERO */}
             <section className="relative z-10 min-h-[70dvh] flex items-center justify-center overflow-hidden">

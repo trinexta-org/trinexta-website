@@ -1,3 +1,4 @@
+import { JsonLd, trinextaLocalBusiness } from "@/components/seo/JsonLd"
 import { Metadata } from "next"
 import { HeroSection } from "@/components/HeroSection"
 import { TransitionTitle } from "@/components/TransitionTitle"
@@ -19,33 +20,34 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="min-h-screen bg-background relative">
+      <JsonLd data={trinextaLocalBusiness} />
       <HeroSection />
       <ReassuranceSection />
-      
+
       <TransitionTitle
         line1="Des solutions pour"
         line2="chaque activité"
       />
       <ForWhoSection />
-      
+
       <TransitionTitle
         surtitle="Notre cœur de métier"
         line1="Nos Services"
         line2="Infogérance"
       />
       <ServicesSection />
-      
+
       <ApproachSection />
-      
+
       <KpiSection />
-      
+
       <TransitionTitle
         surtitle="Ce que nous offrons"
         line1="Pourquoi"
         line2="Trinexta ?"
       />
       <WhyChooseUs />
-      
+
       <TransitionTitle
         surtitle="Écosystème"
         line1="Nos Partenaires"

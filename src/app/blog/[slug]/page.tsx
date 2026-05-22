@@ -9,6 +9,7 @@ import {
   LIBELLES_CATEGORIES,
   formatDatePublication,
 } from "@/lib/sanity";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 type ArticlePageProps = {
   params: Promise<{
@@ -34,18 +35,18 @@ export async function generateMetadata({
   const description = article.seoDescription ?? article.extrait;
   const ogImage = article.imageUne?.asset?._ref
     ? [
-        {
-          url: urlForImage(article.imageUne)
-            .width(1200)
-            .height(630)
-            .fit("crop")
-            .auto("format")
-            .url(),
-          width: 1200,
-          height: 630,
-          alt: article.imageUne.alt ?? article.titre,
-        },
-      ]
+      {
+        url: urlForImage(article.imageUne)
+          .width(1200)
+          .height(630)
+          .fit("crop")
+          .auto("format")
+          .url(),
+        width: 1200,
+        height: 630,
+        alt: article.imageUne.alt ?? article.titre,
+      },
+    ]
     : undefined;
 
   return {
@@ -71,9 +72,39 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!article) {
     notFound();
   }
+  const title = article.seoTitre ?? article.titre;
+  const description = article.seoDescription ?? article.extrait;
+  const imageUrl = article.imageUne?.asset?._ref
+    ? urlForImage(article.imageUne).url()
+    : "https://trinexta.fr/images/trinexta-logo.png";
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "image": [imageUrl],
+    "datePublished": article.datePublication ? new Date(article.datePublication).toISOString() : undefined,
+    "author": {
+      "@type": "Person",
+      "name": article.auteur || "Équipe Trinexta",
+      "url": "https://trinexta.fr/blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TRINEXTA",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://trinexta.fr/images/trinexta-logo.png" 
+      }
+    }
+  };
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-16">
+
+      <JsonLd data={articleJsonLd} />
+
       <div>
         <Link
           href="/blog"

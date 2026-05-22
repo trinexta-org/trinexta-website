@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/seo/JsonLd"
 import { Suspense } from "react"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
@@ -31,10 +32,7 @@ export default function NosOffresPage() {
 
   return (
     <main className="bg-primary min-h-screen relative">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       <NosOffresHero />
 
