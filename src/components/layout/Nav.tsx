@@ -16,7 +16,18 @@ export const menuItems = [
       { label: "Trinexta Studio", href: "/nos-offres?tab=studio" },
     ]
   },
-  { label: "Nos services", href: "/services" },
+  {
+    label: "Nos services",
+    href: "/infogerance",
+    subMenu: [
+      { label: "Infogérance", href: "/infogerance" },
+      { label: "Cybersécurité", href: "/cybersecurite" },
+      { label: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" },
+      { label: "Microsoft 365", href: "/microsoft-365" },
+      { label: "Support Informatique", href: "/support-informatique" },
+      { label: "Solutions Métier", href: "/solutions-metier" },
+    ]
+  },
   { label: "Cas clients", href: "/cas-clients" },
   { label: "À propos", href: "/a-propos" },
   {
