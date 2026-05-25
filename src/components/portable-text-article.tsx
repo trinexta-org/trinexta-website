@@ -8,32 +8,34 @@ import { type CorpsArticle, type ImageArticle, urlForImage } from "@/lib/sanity"
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="text-base leading-8 text-zinc-700">{children}</p>
+      <p className="text-lg leading-9 text-white/80">{children}</p>
     ),
     h2: ({ children }) => (
-      <h2 className="pt-6 text-2xl font-semibold tracking-tight text-zinc-950">
+      <h2 id={children?.toString().toLowerCase().replace(/\s+/g, '-')} 
+          className="pt-12 pb-4 text-3xl font-black uppercase tracking-tighter text-white">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="pt-4 text-xl font-semibold tracking-tight text-zinc-950">
+      <h3 id={children?.toString().toLowerCase().replace(/\s+/g, '-')}
+          className="pt-8 pb-2 text-2xl font-bold tracking-tight text-white/90">
         {children}
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-zinc-300 pl-4 text-zinc-600 italic">
+      <blockquote className="border-l-4 border-zinc-300 pl-4 text-white/70">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="ml-6 list-disc space-y-2 text-base leading-8 text-zinc-700">
+      <ul className="ml-6 list-disc space-y-2 text-base leading-8 text-white/70">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="ml-6 list-decimal space-y-2 text-base leading-8 text-zinc-700">
+      <ol className="ml-6 list-decimal space-y-2 text-base leading-8 text-white/70">
         {children}
       </ol>
     ),
@@ -48,7 +50,7 @@ const portableTextComponents: PortableTextComponents = {
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noreferrer noopener" : undefined}
-          className="font-medium text-zinc-950 underline underline-offset-4"
+          className="font-medium text-secondary underline underline-offset-4 hover:text-white"
         >
           {children}
         </a>
@@ -56,18 +58,15 @@ const portableTextComponents: PortableTextComponents = {
     },
   },
   types: {
-    image: ({ value }) => {
-      const imageValue = value as ImageArticle;
-
-      if (!imageValue.asset?._ref) {
-        return null;
-      }
+    image: ({ value }: { value: any }) => {
+  const imageValue = value as ImageArticle;
+  if (!imageValue.asset?._ref) return null;
 
       return (
         <figure className="space-y-3">
           <Image
             src={urlForImage(imageValue).width(1200).fit("max").auto("format").url()}
-            alt={imageValue.alt ?? ""}
+            alt={imageValue.alt ?? "Illustration"}
             width={1200}
             height={675}
             className="w-full rounded-3xl object-cover"

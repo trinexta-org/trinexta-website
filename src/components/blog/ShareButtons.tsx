@@ -1,0 +1,43 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+export function ShareButtons({ title, url }: { title: string; url: string }) {
+  const [fullUrl, setFullUrl] = useState(`https://trinexta.com${url}`);
+  useEffect(() => {
+    setFullUrl(window.location.href);
+  }, [url]);
+
+  return (
+    <div className="mt-16 pt-10 border-t border-white/10">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-4 md:p-6 bg-white/5 border border-white/10 rounded-2xl">
+        <span className="text-lg text-white/80 font-bold">Partager cet article</span>
+        
+        <div className="flex items-center gap-3 w-full md:w-auto justify-center">
+          
+          <a 
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(fullUrl)}`}
+            target="_blank" rel="noopener noreferrer"
+            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-[#0077B5]/10 hover:bg-[#0077B5] border border-[#0077B5]/20 hover:border-[#0077B5] transition-all duration-300"
+          >
+            <svg className="w-5 h-5 fill-current text-[#0077B5] group-hover:text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/>
+            </svg>
+            <span className="text-sm font-semibold text-[#0077B5] group-hover:text-white">LinkedIn</span>
+          </a>
+
+          <a 
+            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(fullUrl)}&text=${encodeURIComponent(title)}`}
+            target="_blank" rel="noopener noreferrer"
+            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-white/5 hover:bg-black border border-white/10 hover:border-black transition-all duration-300"
+          >
+            <svg className="w-5 h-5 fill-current text-white/80 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span className="text-sm font-semibold text-white/80 group-hover:text-white">X</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
