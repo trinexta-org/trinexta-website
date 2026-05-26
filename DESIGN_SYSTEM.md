@@ -51,6 +51,42 @@ import { Container } from "@/components/layout/Container"
 `<Section>` accepte : `id`, `className`, `container` (bool, defaut `true`).
 `<Container>` accepte : `className`, `as` (balise HTML, defaut `div`).
 
+### Sections reutilisables 
+
+```tsx
+import { GridCards } from "@/components/layout/GridCards"
+import { SplitContent } from "@/components/layout/SplitContent"
+import { BannerCTA } from "@/components/layout/BannerCTA"
+
+// Grille responsive (s'adapte auto ou via props)
+// columns: 1 | 2 | 3 | 4 (defaut 3)
+// mobileColumns: 1 | 2 | 3 | 4 (defaut 1)
+<GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">
+  <Card>1</Card>
+  <Card>2</Card>
+</GridCards>
+
+// Image + Texte cote a cote
+// imagePosition: "left" | "right" (defaut "left")
+<SplitContent
+  imageSrc="/images/photo.jpg"
+  imageAlt="Description SEO"
+  imagePosition="right"
+>
+  <Heading as="h2">Notre expertise</Heading>
+  <Text>Description...</Text>
+</SplitContent>
+
+// Bandeau d'appel a l'action
+// variant: "primary" (defaut) | "secondary" | "accent"
+<BannerCTA
+  variant="primary"
+  title="Pret a commencer ?"
+  description="Contactez-nous pour un audit gratuit."
+  action={<Button variant="secondary">Contact</Button>}
+/>
+```
+
 ---
 
 ## Composants UI
