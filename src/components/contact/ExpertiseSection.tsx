@@ -9,7 +9,7 @@ export default function ExpertiseSection() {
   return (
     <Section 
       container={false}
-      className="relative py-28 overflow-hidden border-t border-white/10 bg-[#0a233e] min-h-[85vh] flex items-center"
+      className="relative py-28 overflow-hidden border-t border-white/10 bg-primary min-h-[85vh] flex items-center"
     >
       {/* 1. L'IMAGE BUREAU BLEU EN BACKGROUND GLOBAL */}
       <div 
@@ -19,10 +19,10 @@ export default function ExpertiseSection() {
 
       {/* 2. OVERLAYS DE COULEUR POUR ASSURER LA LISIBILITÉ (STYLE PRO & INCORPORÉ) */}
       {/* Voile bleu nuit global pour calmer les contrastes de l'image */}
-      <div className="absolute inset-0 bg-[#0a233e]/30 z-[1]" />
+      <div className="absolute inset-0 bg-primary/30 z-[1]" />
       
       {/* Dégradé progressif plus sombre vers la droite pour faire ressortir les textes */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0a233e]/50 to-[#0a233e]/90 z-[2]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/50 to-primary/90 z-[2]" />
 
       {/* 3. CONTENU DE LA PAGE */}
       <Container className="relative z-10 w-full">
