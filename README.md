@@ -39,6 +39,7 @@ Remplir `.env.local` :
 
 ```env
 DATABASE_URL=postgresql://trinexta:dev_password@localhost:5432/trinexta
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SANITY_PROJECT_ID=93ztl6y7
 NEXT_PUBLIC_SANITY_DATASET=production
 SANITY_STUDIO_DATASET=     # vide par defaut, le Studio utilisera alors production
