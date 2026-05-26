@@ -3,6 +3,8 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
 
 const steps = [
   {
@@ -38,10 +40,11 @@ export function ApproachSection() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   return (
-    <section ref={containerRef} className="relative bg-primary py-20 md:py-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+    <Section container={false} className="relative bg-primary py-20 md:py-40">
+      <div ref={containerRef}>
+        <Container>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           
           <div className="lg:col-span-5 relative">
             <div className="lg:sticky lg:top-1/3">
@@ -122,7 +125,8 @@ export function ApproachSection() {
 
           </div>
         </div>
+        </Container>
       </div>
-    </section>
+    </Section>
   )
 }

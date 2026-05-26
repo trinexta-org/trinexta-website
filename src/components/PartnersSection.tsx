@@ -1,6 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
 
 export interface Partner {
   name: string;
@@ -11,11 +14,12 @@ export interface Partner {
 
 export function PartnersSection({ partners }: { partners: Partner[] }) {
   const carouselPartners = [...partners, ...partners, ...partners, ...partners, ...partners]
-  const itemsCount = partners.length || 11; 
+  const itemsCount = partners.length || 11;
 
   return (
-    <section className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <style>{`
+    <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
+      <Container>
+        <style>{`
         @keyframes scroll-partners {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(-184px * ${itemsCount})); }
@@ -35,17 +39,18 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
         }
       `}</style>
 
-      <div className="relative w-full flex overflow-hidden pause-on-hover mt-4">
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-primary to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-primary to-transparent z-20 pointer-events-none" />
+        <div className="relative w-full flex overflow-hidden pause-on-hover mt-4">
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-primary to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-primary to-transparent z-20 pointer-events-none" />
 
-        <div className="flex animate-scroll gap-6 md:gap-8 px-4">
-          {carouselPartners.map((partner, index) => (
-            <PartnerCard key={`${partner.name}-${index}`} partner={partner} />
-          ))}
+          <div className="flex animate-scroll gap-6 md:gap-8 px-4">
+            {carouselPartners.map((partner, index) => (
+              <PartnerCard key={`${partner.name}-${index}`} partner={partner} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }
 
@@ -59,15 +64,16 @@ function PartnerCard({ partner }: { partner: Partner }) {
       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
 
       <div className={`relative z-10 flex items-center justify-center ${partner.isCircle ? 'h-10 w-10 md:h-14 md:w-14' : 'h-8 w-8 md:h-12 md:w-12'}`}>
-        <img 
-          src={partner.logoSrc} 
+        <Image
+          src={partner.logoSrc}
           alt={`Logo ${partner.name}`}
-          className={`w-full h-full object-contain opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ${
-            partner.isCircle ? 'rounded-full bg-white/5 shadow-inner' : 'rounded-md'
-          }`}
+          fill
+          sizes="(max-width: 768px) 40px, 56px"
+          className={`object-contain opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ${partner.isCircle ? 'rounded-full bg-white/5 shadow-inner' : 'rounded-md'
+            }`}
         />
       </div>
-      
+
       <span className="text-white/30 group-hover:text-white text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase transition-colors duration-500 z-10">
         {partner.name}
       </span>

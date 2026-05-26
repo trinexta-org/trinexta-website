@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react"
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
-import { GridCards } from "@/components/layout/GridCards"
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
 
 const kpis = [
   {
@@ -63,10 +64,10 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export function KpiSection() {
   return (
-    <section className="relative bg-primary py-12 md:py-40 overflow-hidden">
+    <Section container={false} className="relative bg-primary py-12 md:py-40 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--secondary-rgb),0.05)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Container>
         <div className="mb-10 md:mb-24 flex items-center gap-4 md:gap-8">
           <Heading as="h2" className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter shrink-0">
             Impact <span className="text-secondary">Réel</span>
@@ -74,7 +75,7 @@ export function KpiSection() {
           <div className="h-[1px] w-full bg-white/10" />
         </div>
 
-        <GridCards columns={4} mobileColumns={4} gap="gap-2 md:gap-12">
+        <div className="grid grid-cols-4 gap-2 md:gap-12">
           {kpis.map((kpi, index) => (
             <motion.div
               key={kpi.id}
@@ -89,11 +90,11 @@ export function KpiSection() {
               </div>
 
               <div className="space-y-1 md:space-y-4 w-full flex flex-col items-center md:items-start">
-                <motion.div 
-                  initial={{ width: 12 }} 
-                  whileInView={{ width: 48 }} 
-                  transition={{ duration: 1, delay: 0.5 }} 
-                  className="h-0.5 md:h-1 bg-secondary" 
+                <motion.div
+                  initial={{ width: 12 }}
+                  whileInView={{ width: 48 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className="h-0.5 md:h-1 bg-secondary"
                 />
                 <h3 className="text-[10px] md:text-lg font-bold text-secondary uppercase tracking-[0.1em] md:tracking-[0.2em] leading-tight">
                   <span className="md:hidden">{kpi.title}</span>
@@ -105,8 +106,8 @@ export function KpiSection() {
               </div>
             </motion.div>
           ))}
-        </GridCards>
-      </div>
-    </section>
+        </div>
+      </Container>
+    </Section>
   )
 }

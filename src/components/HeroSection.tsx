@@ -9,18 +9,18 @@ import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 
 const slides = [
-  {
-    title: "Simplifiez votre informatique au quotidien",
-    subtitle: "Support illimité, maintenance proactive et cybersécurité incluse pour travailler avec plus de sérénité."
-  },
-  {
-    title: "Renforcez votre support avec souplesse",
-    subtitle: "Un technicien support adapté à vos besoins, pour accompagner votre activité sans contrainte inutile."
-  },
-  {
-    title: "Gardez une informatique fiable et bien suivie",
-    subtitle: "Surveillance, maintenance et suivi proactif pour limiter les pannes et gagner en tranquillité."
-  }
+    {
+        title: "Simplifiez votre informatique au quotidien",
+        subtitle: "Support illimité, maintenance proactive et cybersécurité incluse pour travailler avec plus de sérénité."
+    },
+    {
+        title: "Renforcez votre support avec souplesse",
+        subtitle: "Un technicien support adapté à vos besoins, pour accompagner votre activité sans contrainte inutile."
+    },
+    {
+        title: "Gardez une informatique fiable et bien suivie",
+        subtitle: "Surveillance, maintenance et suivi proactif pour limiter les pannes et gagner en tranquillité."
+    }
 ]
 
 export function HeroSection() {
@@ -51,7 +51,7 @@ export function HeroSection() {
 
             <Container className="relative z-10 w-full py-20 md:py-32 flex flex-col justify-center">
                 <div className="max-w-4xl">
-                    
+
                     <div className="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px] flex flex-col justify-center">
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -70,10 +70,10 @@ export function HeroSection() {
                                         const targetKeywords = ["informatique", "support", "fiable", "quotidien", "souplesse", "suivie"]
                                         const cleanWord = word.toLowerCase().replace(/[,.]/g, "")
                                         const isHighlighted = targetKeywords.includes(cleanWord)
-                                        
+
                                         return (
-                                            <span 
-                                                key={i} 
+                                            <span
+                                                key={i}
                                                 className={isHighlighted ? "text-secondary inline-block mr-2 sm:mr-3" : "text-white inline-block mr-2 sm:mr-3"}
                                             >
                                                 {word}
@@ -92,8 +92,8 @@ export function HeroSection() {
                     <div className="mt-6 md:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                         <Link href="/tarifs" className="w-full sm:w-auto">
                             <Button variant="secondary" size="lg" className="w-full text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all">
-                                Découvrir l'offre Sérénité
-                            </Button>
+                                Découvrir l&apos;offre Sérénité
+                            </Button>   
                         </Link>
 
                         <Link href="/contact" className="w-full sm:w-auto">
@@ -102,12 +102,12 @@ export function HeroSection() {
                             </Button>
                         </Link>
                     </div>
-                        
+
                     <div className="mt-10 md:mt-12 pt-6">
                         <Text className="text-sm md:text-base text-white/80 font-medium leading-relaxed max-w-3xl drop-shadow-md text-balance">
                             Arrêtez de perdre du temps et de l'argent avec une informatique mal suivie. Découvrez Trinexta et avancez avec des solutions simples, fiables et adaptées à votre entreprise.
                         </Text>
-                        
+
                         <div className="flex items-center gap-2 mt-4 opacity-90">
                             <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
                             <Text variant="small" className="font-bold tracking-wider uppercase text-white">

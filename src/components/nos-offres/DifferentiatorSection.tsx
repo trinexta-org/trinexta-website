@@ -32,12 +32,12 @@ export function DifferentiatorSection() {
         <div className="hidden md:grid grid-cols-3 bg-white/[0.03] border-b border-white/10 p-6 text-sm font-bold tracking-wider uppercase text-white/50">
           <div>Critère</div>
           <div>Une ESN classique</div>
-          <div className="text-secondary">L'approche Trinexta</div>
+          <div className="text-secondary">L&apos;approche Trinexta</div>
         </div>
 
         <div className="divide-y divide-white/10">
           {comparisonPoints.map((point, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}

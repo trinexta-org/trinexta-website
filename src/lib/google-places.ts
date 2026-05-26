@@ -23,7 +23,7 @@ export async function getGoogleRating() {
                     "X-Goog-FieldMask": "rating,userRatingCount,googleMapsLinks.reviewsUri",
                 },
                 next: {
-                    revalidate: false
+                    revalidate: 86400 
                 },
             }
         );

@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
 
 const MotionLink = motion(Link);
 
@@ -148,9 +150,9 @@ export function ServicesSection() {
   const activePositions = isMobile ? mobilePositions : positions
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative w-full h-[2400px] md:h-[1100px]">
+    <Section container={false} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
+      <Container>
+        <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {
             const currentSlot = activePositions[isMobile ? index : order[index]]
 
@@ -208,7 +210,7 @@ export function ServicesSection() {
             )
           })}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }

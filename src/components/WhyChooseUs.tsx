@@ -4,6 +4,8 @@ import { useState, useRef } from "react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import Image from "next/image"
 import { Heading, Text } from "@/components/ui/Typography"
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
 
 const reasons = [
   {
@@ -38,31 +40,29 @@ export function WhyChooseUs() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   return (
-    <section ref={containerRef} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="flex flex-col md:flex-row h-[600px] md:h-[600px] w-full gap-3 md:gap-4">
+    <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
+      <Container>
+        <div ref={containerRef} className="flex flex-col md:flex-row h-[600px] md:h-[600px] w-full gap-3 md:gap-4">
           {reasons.map((reason, index) => {
             const isActive = active === index;
 
             return (
               <motion.div
                 key={reason.id}
-                layout 
+                layout
                 onClick={() => setActive(index)}
                 initial={false}
                 animate={{
                   flex: isActive ? 12 : 1,
                 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 150, 
-                  damping: 20, 
-                  mass: 0.8 
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 20,
+                  mass: 0.8
                 }}
-                className={`relative overflow-hidden cursor-pointer rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 ${
-                  isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"
-                }`}
+                className={`relative overflow-hidden cursor-pointer rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"
+                  }`}
               >
                 <div className="absolute inset-0 w-full h-full">
                   <Image
@@ -72,7 +72,7 @@ export function WhyChooseUs() {
                     className="object-cover"
                     priority={index === 0}
                   />
-                  <motion.div 
+                  <motion.div
                     animate={{ opacity: isActive ? 0.7 : 0.3 }}
                     className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"
                   />
@@ -123,8 +123,7 @@ export function WhyChooseUs() {
             )
           })}
         </div>
-
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }

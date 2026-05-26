@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
 
 const operationalZones = [
     { id: "75", name: "Paris", x: 45, y: -15 },
@@ -50,7 +52,7 @@ export function InterventionMap() {
     const multiplier = isMobile ? 1.5 : 3.2
 
     return (
-        <section className="relative bg-primary py-12 md:py-32 px-4 overflow-hidden">
+        <Section container={false} className="relative bg-primary py-12 md:py-32 overflow-hidden">
             <div className="absolute inset-0 opacity-[0.05]"
                 style={{
                     backgroundImage: `linear-gradient(30deg, var(--secondary) 1px, transparent 1px), linear-gradient(-30deg, var(--secondary) 1px, transparent 1px)`,
@@ -59,8 +61,9 @@ export function InterventionMap() {
                 }}
             />
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                <div className="flex flex-col lg:grid lg:grid-cols-5 gap-4 md:gap-20 items-center">
+            <Container>
+                <div className="relative z-10">
+                    <div className="flex flex-col lg:grid lg:grid-cols-5 gap-4 md:gap-20 items-center">
 
                     <div className="w-full lg:col-span-2 space-y-4 md:space-y-8 order-1">
                         <div className="relative h-16 md:h-32 overflow-hidden">
@@ -86,7 +89,7 @@ export function InterventionMap() {
                                         {narrative[step].title}
                                     </h3>
                                     <p className="text-white/60 text-sm md:text-xl leading-relaxed font-light italic">
-                                        "{narrative[step].text}"
+                                        &ldquo;{narrative[step].text}&rdquo;
                                     </p>
                                 </motion.div>
                             </AnimatePresence>
@@ -187,7 +190,8 @@ export function InterventionMap() {
                         </motion.div>
                     </div>
                 </div>
-            </div>
-        </section>
+                </div>
+            </Container>
+        </Section>
     )
 }
