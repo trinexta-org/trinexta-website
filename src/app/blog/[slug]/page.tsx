@@ -82,9 +82,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": title,
-    "description": description,
+    "description": description ?? null,
     "image": [imageUrl],
-    "datePublished": article.datePublication ? new Date(article.datePublication).toISOString() : undefined,
+    "datePublished": article.datePublication ? new Date(article.datePublication).toISOString() : null,
     "author": {
       "@type": "Person",
       "name": article.auteur || "Équipe Trinexta",
@@ -95,7 +95,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       "name": "TRINEXTA",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://trinexta.fr/images/trinexta-logo.png" 
+        "url": "https://trinexta.fr/images/trinexta-logo.png"
       }
     }
   };
