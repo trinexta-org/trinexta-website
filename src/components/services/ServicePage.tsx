@@ -128,7 +128,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                             className="absolute top-0 right-0 w-[75%] h-[75%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-10"
                         >
-                            <Image src={`/images/services/${serviceSlug}/problem-1.jpg`} alt="Problème IT" fill className="object-cover" />
+                            <Image src={`/images/services/${serviceSlug}/problem-1.jpg`} alt="Problème IT" fill sizes="(min-width: 1024px) 38vw, (min-width: 640px) 56vw, 75vw" className="object-cover" />
                             <div className="absolute inset-0 bg-primary/20" />
                         </motion.div>
 
@@ -137,7 +137,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                             className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-20"
                         >
-                            <Image src={`/images/services/${serviceSlug}/problem-2.jpg`} alt="Frustration IT" fill className="object-cover" />
+                            <Image src={`/images/services/${serviceSlug}/problem-2.jpg`} alt="Frustration IT" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 60vw" className="object-cover" />
                             <div className="absolute inset-0 bg-secondary/20" />
                         </motion.div>
                     </div>
@@ -182,7 +182,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                                     >
                                         {isLargeWithImage && (
                                             <>
-                                                <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                                                <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
                                             </>
                                         )}
@@ -228,7 +228,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                                 className={`relative overflow-hidden cursor-pointer rounded-xl md:rounded-3xl shadow-2xl transition-all duration-500 ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"}`}
                             >
                                 <div className="absolute inset-0 w-full h-full">
-                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill className="object-cover" priority={index === 0} />
+                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill sizes="(min-width: 768px) 20vw, 100vw" className="object-cover" priority={index === 0} />
                                     <motion.div animate={{ opacity: isActive ? 0.7 : 0.3 }} className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
                                 </div>
 
@@ -290,7 +290,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
             {/* 6. CTA FINAL */}
             <Section className="relative overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <Image src={`/images/services/${serviceSlug}/cta-footer.jpg`} alt="Contact Trinexta" fill className="object-cover object-center" />
+                    <Image src={`/images/services/${serviceSlug}/cta-footer.jpg`} alt="Contact Trinexta" fill sizes="100vw" className="object-cover object-center" />
                     <div className="absolute inset-0 bg-primary/90 backdrop-blur-sm" />
                 </div>
                 <Container className="relative z-10 text-center max-w-3xl px-4">

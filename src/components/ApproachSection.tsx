@@ -41,7 +41,7 @@ export function ApproachSection() {
 
   return (
     <Section container={false} className="relative bg-primary py-20 md:py-40">
-      <div ref={containerRef}>
+      <div ref={containerRef} className="relative">
         <Container>
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">

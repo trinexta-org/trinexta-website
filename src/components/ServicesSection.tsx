@@ -8,7 +8,7 @@ import { motion, useInView } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link)
 
 const services = [
   {
@@ -188,7 +188,13 @@ export function ServicesSection() {
                 className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-white/10 cursor-pointer bg-primary block"
               >
                 <div className="absolute inset-0">
-                  <Image src={service.image} alt={service.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    sizes="(min-width: 768px) 31vw, 90vw"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
                 </div>
 
