@@ -22,10 +22,10 @@ export function OffersTabs() {
 
   useEffect(() => {
     const tabParam = searchParams.get("tab")
-    if (tabParam && tabs.some(tab => tab.id === tabParam) && activeTab !== tabParam) {
+    if (tabParam && tabs.some(tab => tab.id === tabParam)) {
       setActiveTab(tabParam)
     }
-  }, [searchParams, activeTab, tabs]) 
+  }, [searchParams, setActiveTab])
 
   return (
     <div id="offers-explorer" className="scroll-mt-[160px] w-full space-y-8">
@@ -41,8 +41,8 @@ export function OffersTabs() {
                   router.push(`/nos-offres?tab=${tab.id}`, { scroll: false })
                 }}
                 className={`relative p-3 rounded-lg text-left border transition-all duration-300 flex flex-col justify-center overflow-hidden group h-16 md:h-20 ${isSelected
-                    ? "bg-secondary/10 border-secondary shadow-md shadow-secondary/5"
-                    : "bg-white/[0.01] border-white/5 hover:border-white/20 hover:bg-white/[0.02]"
+                  ? "bg-secondary/10 border-secondary shadow-md shadow-secondary/5"
+                  : "bg-white/[0.01] border-white/5 hover:border-white/20 hover:bg-white/[0.02]"
                   }`}
               >
                 {isSelected && (

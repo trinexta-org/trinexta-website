@@ -37,7 +37,6 @@ const reasons = [
 export function WhyChooseUs() {
   const [active, setActive] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   return (
     <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
