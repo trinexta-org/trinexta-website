@@ -50,7 +50,14 @@ export function Nav() {
   return (
     <nav className="hidden lg:flex items-center gap-8">
       {menuItems.map((link) => {
-        const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href))
+        const matchesHref = (href: string) => {
+          const [path] = href.split("?")
+          return pathname === path || (path !== "/" && pathname?.startsWith(path))
+        }
+
+        const isActive = link.subMenu
+          ? [link.href, ...link.subMenu.map((sub) => sub.href)].some(matchesHref)
+          : matchesHref(link.href)
 
         return (
           <div key={link.label} className="relative group">
