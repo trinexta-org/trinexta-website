@@ -51,6 +51,12 @@ prisma/
 
 Toujours vérifier `.env.example` pour la liste complète. Ne jamais committer `.env.local`.
 
+## Statut projet
+
+- Le site n'est pas encore live publiquement.
+- En revue PR ou en arbitrage qualité, ne pas classer en bloquant les précautions uniquement liées au trafic réel ou à l'exploitation production future si elles n'impactent pas le fonctionnement actuel.
+- Restent bloquants : bug fonctionnel avéré, build/typecheck cassé, schéma/migration cassante dans le contexte connu, fuite de secret, vulnérabilité évidente, régression UX/API déjà présente dans le périmètre livré.
+
 ## Style de réponse
 
 - Être extrêmement concis — sacrifier la grammaire si nécessaire
