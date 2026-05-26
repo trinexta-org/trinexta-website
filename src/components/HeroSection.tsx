@@ -105,7 +105,7 @@ export function HeroSection() {
 
                     <div className="mt-10 md:mt-12 pt-6">
                         <Text className="text-sm md:text-base text-white/80 font-medium leading-relaxed max-w-3xl drop-shadow-md text-balance">
-                            Arrêtez de perdre du temps et de l'argent avec une informatique mal suivie. Découvrez Trinexta et avancez avec des solutions simples, fiables et adaptées à votre entreprise.
+                            Arrêtez de perdre du temps et de l&apos;argent avec une informatique mal suivie. Découvrez Trinexta et avancez avec des solutions simples, fiables et adaptées à votre entreprise.
                         </Text>
 
                         <div className="flex items-center gap-2 mt-4 opacity-90">

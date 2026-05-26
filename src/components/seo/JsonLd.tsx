@@ -1,10 +1,12 @@
-export function JsonLd({ data }: { data: Record<string, any> }) {
+type JsonLdValue = string | number | boolean | null | JsonLdValue[] | { [key: string]: JsonLdValue }
+
+export function JsonLd({ data }: { data: { [key: string]: JsonLdValue } }) {
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
-  );
+  )
 }
 
 export const trinextaOrganization = {
@@ -12,7 +14,7 @@ export const trinextaOrganization = {
   "@type": "Organization",
   "name": "TRINEXTA",
   "url": "https://trinexta.fr",
-  "logo": "https://trinexta.fr/images/trinexta-logo.png", 
+  "logo": "https://trinexta.fr/images/trinexta-logo.png",
   "image": "https://trinexta.fr/images/trinexta-logo.png",
   "telephone": "+33978250746",
   "email": "contact@trinexta.fr",
