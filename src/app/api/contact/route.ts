@@ -35,7 +35,18 @@ export async function POST(request: Request) {
       },
     });
 
-    await sendNotificationEmail(data);
+    try {
+      await sendNotificationEmail(data);
+    } catch {
+      await prisma.contactForm.delete({
+        where: { id: savedContact.id },
+      });
+
+      return NextResponse.json(
+        { error: "Une erreur interne est survenue lors du traitement." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {
@@ -45,7 +56,7 @@ export async function POST(request: Request) {
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Une erreur interne est survenue lors du traitement." },
       { status: 500 }
