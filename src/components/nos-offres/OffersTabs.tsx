@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { ImpulsionDetails } from "./ImpulsionDetails"
@@ -18,14 +17,9 @@ const tabs = [
 export function OffersTabs() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState("impulsion")
 
-  useEffect(() => {
-    const tabParam = searchParams.get("tab")
-    if (tabParam && tabs.some(tab => tab.id === tabParam)) {
-      setActiveTab(tabParam)
-    }
-  }, [searchParams, setActiveTab])
+  const tabParam = searchParams.get("tab")
+  const activeTab = tabParam && tabs.some(tab => tab.id === tabParam) ? tabParam : "impulsion"
 
   return (
     <div id="offers-explorer" className="scroll-mt-[160px] w-full space-y-8">
@@ -36,10 +30,7 @@ export function OffersTabs() {
             return (
               <button
                 key={tab.id}
-                onClick={() => {
-                  setActiveTab(tab.id)
-                  router.push(`/nos-offres?tab=${tab.id}`, { scroll: false })
-                }}
+                onClick={() => router.push(`/nos-offres?tab=${tab.id}`, { scroll: false })}
                 className={`relative p-3 rounded-lg text-left border transition-all duration-300 flex flex-col justify-center overflow-hidden group h-16 md:h-20 ${isSelected
                   ? "bg-secondary/10 border-secondary shadow-md shadow-secondary/5"
                   : "bg-white/[0.01] border-white/5 hover:border-white/20 hover:bg-white/[0.02]"
@@ -82,7 +73,6 @@ export function OffersTabs() {
           </motion.div>
         </AnimatePresence>
       </div>
-
     </div>
   )
 }
