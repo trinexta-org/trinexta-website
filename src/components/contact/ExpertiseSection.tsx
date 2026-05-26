@@ -1,4 +1,4 @@
-"use client";
+
 
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";

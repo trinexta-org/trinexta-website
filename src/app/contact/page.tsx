@@ -93,7 +93,7 @@ function HeroSection() {
         style={{ backgroundImage: "url('/images/image-contact.jpg')" }}
       />
       <div className="absolute inset-0 bg-primary/70 z-0" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent z-0" />
+      <div className="absolute inset-0 bg-linear-to-r from-primary/90 via-primary/50 to-transparent z-0" />
 
       <Container className="relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -130,26 +130,28 @@ function HeroSection() {
 
 function ContactCards() {
   return (
-    <section className="bg-primary py-20 border-t border-white/10 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        {CONTACT_ITEMS.map(({ delay, icon, title, content }) => (
-          <FadeIn key={title} delay={delay}>
-            <div className="h-full p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-              <div className="text-secondary mb-6">{icon}</div>
-              <Heading as="h4" className="mb-2 text-white">{title}</Heading>
-              {content}
-            </div>
-          </FadeIn>
-        ))}
-      </div>
-    </section>
+    <Section className="bg-primary py-20 border-t border-white/10">
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {CONTACT_ITEMS.map(({ delay, icon, title, content }) => (
+            <FadeIn key={title} delay={delay}>
+              <div className="h-full p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <div className="text-secondary mb-6">{icon}</div>
+                <Heading as="h4" className="mb-2 text-white">{title}</Heading>
+                {content}
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </Container>
+    </Section>
   );
 }
 
 function MapSection() {
   return (
-    <section className="bg-primary pb-24 pt-12 border-t border-white/10 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
+    <Section className="bg-primary pb-24 pt-12 border-t border-white/10">
+      <Container>
         <FadeIn direction="up">
           <div className="space-y-6 text-center max-w-2xl mx-auto mb-12">
             <Heading as="h2" className="text-white text-3xl font-black tracking-tight">
@@ -161,7 +163,7 @@ function MapSection() {
             </Text>
           </div>
 
-          <div className="relative w-full h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-lg group">
+          <div className="relative w-full h-125 rounded-2xl overflow-hidden border border-white/10 shadow-lg group">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2634.612711094056!2d2.4248883768840244!3d48.62687151694605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5e197d620579b%3A0xb1a9d1bb82ad3ad7!2sAll.%20de%20l'Agora%2C%2091000%20%C3%89vry-Courcouronnes!5e0!3m2!1sfr!2sfr!4v1716132000000!5m2!1sfr!2sfr"
               width="100%"
@@ -170,13 +172,13 @@ function MapSection() {
               allowFullScreen
               loading="lazy"
               title="Localisation des bureaux de Trinexta à Évry-Courcouronnes"
-              className="transition-all duration-700 grayscale-[60%] group-hover:grayscale-0"
+              className="transition-all duration-700 grayscale-60 group-hover:grayscale-0"
             />
             <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.3)] rounded-2xl" />
           </div>
         </FadeIn>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
 // ─── Page ─────────────────────────────────────────────────────────────────────
