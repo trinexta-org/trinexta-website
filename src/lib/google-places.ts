@@ -1,14 +1,14 @@
-const FALLBACK_DATA = {
+export const FALLBACK_DATA = {
     rating: 5.0,
     userRatingCount: 10,
-    reviewsUri: "https://www.google.com/search?q=Trinexta+Evry#lrd=0x47e5e33055555555:0x5555555555555555,1"
+    reviewsUri: "https://www.google.com/maps/place/Trinexta",
 };
 
 export async function getGoogleRating() {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
     const placeId = process.env.GOOGLE_PLACE_ID;
 
-    if (!apiKey || !placeId || apiKey === "ton_code_ici") {
+    if (!apiKey || !placeId) {
         console.warn("Google Places API : Utilisation des données de secours (Clé manquante).");
         return FALLBACK_DATA;
     }

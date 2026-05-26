@@ -90,7 +90,7 @@ export function HeroSection() {
                     </div>
 
                     <div className="mt-6 md:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                        <Link href="/tarifs" className="w-full sm:w-auto">
+                        <Link href="/nos-offres" className="w-full sm:w-auto">
                             <Button variant="secondary" size="lg" className="w-full text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all">
                                 Découvrir l&apos;offre Sérénité
                             </Button>   

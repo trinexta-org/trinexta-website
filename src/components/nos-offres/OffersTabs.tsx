@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
+import { Container } from "@/components/layout/Container"
 import { ImpulsionDetails } from "./ImpulsionDetails"
 import { SereniteDetails } from "./SereniteDetails"
 import { ServicesDetails } from "./ServicesDetails"
@@ -24,7 +25,7 @@ export function OffersTabs() {
   return (
     <div id="offers-explorer" className="scroll-mt-[160px] w-full space-y-8">
       <div className="sticky top-[60px] md:top-[114px] z-30 bg-primary/95 backdrop-blur-md py-3 border-b border-white/10 w-full shadow-lg">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 px-2 max-w-7xl mx-auto">
+        <Container className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {tabs.map((tab) => {
             const isSelected = activeTab === tab.id
             return (
@@ -54,7 +55,7 @@ export function OffersTabs() {
               </button>
             )
           })}
-        </div>
+        </Container>
       </div>
       <div className="w-full min-h-[500px] pt-4 px-2 md:px-0">
         <AnimatePresence mode="wait">

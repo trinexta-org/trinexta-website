@@ -135,19 +135,11 @@ export function ForWhoSection() {
                             style={{
                                 zIndex: index + 1,
                                 paddingTop: `calc(70px + ${stackOffsetMobile}px)`,
+                                ['--pt-desktop' as string]: `calc(120px + ${stackOffsetDesktop}px)`,
                             }}
                         >
-                            <style dangerouslySetInnerHTML={{
-                                __html: `
-                @media (min-width: 768px) {
-                  .card-for-who-${index} {
-                    padding-top: calc(120px + ${stackOffsetDesktop}px) !important;
-                  }
-                }
-              `}} />
-
                             <div
-                                className={`card-for-who-${index} relative w-full h-full overflow-hidden rounded-[24px] md:rounded-[40px] shadow-[0_30px_70px_rgba(0,0,0,0.4)] border border-border/10`}
+                                className="relative w-full h-full overflow-hidden rounded-[24px] md:rounded-[40px] shadow-[0_30px_70px_rgba(0,0,0,0.4)] border border-border/10 md:[padding-top:var(--pt-desktop)]"
                             >
                                 <div className="absolute inset-0">
                                     <Image

@@ -50,7 +50,7 @@ export function DifferentiatorSection() {
               </div>
 
               <div className="space-y-1 md:space-y-0">
-                <span className="inline-block md:hidden text-xs font-bold uppercase text-red-400/80 mr-2">Marché :</span>
+                <span className="inline-block md:hidden text-xs font-bold uppercase text-secondary/80 mr-2">Marché :</span>
                 <span className="text-sm text-white/50 leading-relaxed">{point.market}</span>
               </div>
 

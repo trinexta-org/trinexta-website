@@ -1,5 +1,3 @@
-"use client"
-
 import Image from "next/image"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"

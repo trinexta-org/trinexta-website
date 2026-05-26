@@ -1,3 +1,5 @@
+import { FALLBACK_DATA } from "@/lib/google-places"
+
 type JsonLdValue = string | number | boolean | null | JsonLdValue[] | { [key: string]: JsonLdValue }
 
 export function JsonLd({ data }: { data: { [key: string]: JsonLdValue } }) {
@@ -52,8 +54,8 @@ export const trinextaLocalBusiness = {
   "areaServed": ["Île-de-France", "Essonne", "Évry-Courcouronnes", "Corbeil-Essonnes"],
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "10"
+    "ratingValue": String(FALLBACK_DATA.rating),
+    "reviewCount": String(FALLBACK_DATA.userRatingCount)
   },
   "openingHoursSpecification": [
     {

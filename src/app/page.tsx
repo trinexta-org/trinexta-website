@@ -25,7 +25,12 @@ export default async function Home() {
     "isCircle": coalesce(isCircle, false),
     "url": urlOfficiel
   }`;
-  const partnersData = await sanityClient.fetch(partnersQuery);
+  let partnersData: { name: string; logoSrc: string; isCircle: boolean; url: string }[] = [];
+  try {
+    partnersData = await sanityClient.fetch(partnersQuery);
+  } catch {
+    // Sanity inaccessible - section partenaires masquée
+  }
 
   return (
     <main className="min-h-screen bg-background relative">

@@ -6,6 +6,7 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
+import { Container } from "@/components/layout/Container"
 
 const slides = [
   {
@@ -54,7 +55,7 @@ export function NosOffresHero() {
                 <div className="absolute inset-0 bg-primary/90" />
             </div>
 
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col justify-center">
+            <Container className="relative z-10 py-20 flex flex-col justify-center">
                 <div className="max-w-4xl">
                     <div className="min-h-[250px] flex flex-col justify-center">
                         <AnimatePresence mode="wait">
@@ -94,7 +95,7 @@ export function NosOffresHero() {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </Container>
         </section>
     )
 }

@@ -288,7 +288,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
             </Section>
 
             {/* 6. CTA FINAL */}
-            <section className="relative py-16 md:py-32 overflow-hidden">
+            <Section className="relative overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image src={`/images/services/${serviceSlug}/cta-footer.jpg`} alt="Contact Trinexta" fill className="object-cover object-center" />
                     <div className="absolute inset-0 bg-primary/90 backdrop-blur-sm" />
@@ -306,7 +306,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                         </Button>
                     </Link>
                 </Container>
-            </section>
+            </Section>
         </div>
     )
 }
