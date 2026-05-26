@@ -34,7 +34,7 @@ export function HeroSection() {
     }, [])
 
     return (
-        <Section container={false} className="relative z-10 min-h-[100dvh] flex items-center justify-center overflow-hidden p-0 m-0">
+        <Section container={false} className="relative z-10 h-[100dvh] -mt-16 lg:-mt-[7.5rem] flex flex-col overflow-hidden p-0 md:p-0 lg:p-0 pt-16 md:pt-16 lg:pt-[7.5rem]">
 
             <div className="absolute inset-0 z-0">
                 <video
@@ -49,7 +49,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />
             </div>
 
-            <Container className="relative z-10 w-full py-20 md:py-32 flex flex-col justify-center">
+            <Container className="relative z-10 w-full flex-1 flex flex-col justify-center py-8 md:py-12">
                 <div className="max-w-4xl">
 
                     <div className="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px] flex flex-col justify-center">
