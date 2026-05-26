@@ -33,7 +33,6 @@ export function AnimatedReassurance() {
 
   // Progress bar + cycle
   useEffect(() => {
-    setProgress(0);
     const start = performance.now();
     let raf: number;
 

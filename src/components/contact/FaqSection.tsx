@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
-import { FadeIn } from "@/components/ui/FadeIn";
 
 const faqData = [
   {

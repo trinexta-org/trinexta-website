@@ -92,7 +92,7 @@ export default function ExpertiseSection() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     </div>
-                    <h4 className="font-black mb-1.5 text-white text-lg">Cas d'urgence</h4>
+                    <h4 className="font-black mb-1.5 text-white text-lg">Cas d&apos;urgence</h4>
                     <p className="text-white/80 text-xs leading-relaxed">
                       Incident bloquant : prise en charge sous <strong className="text-white font-black">30 minutes</strong>.
                     </p>

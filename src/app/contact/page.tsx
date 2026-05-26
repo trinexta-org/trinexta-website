@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
-import { Card } from "@/components/ui/Card";
 import { FadeIn } from "@/components/ui/FadeIn";
 import ContactForm from "@/components/contact/ContactForm";
 import { FaqSection } from "@/components/contact/FaqSection";
@@ -107,7 +106,7 @@ function HeroSection() {
                 Propulsez votre IT avec Trinexta
               </Heading>
               <Text variant="lead" className="text-white/80 mb-8 leading-relaxed">
-                Besoin d'un devis sur-mesure, d'une assistance technique ou d'une expertise ponctuelle ?
+                Besoin d&apos;un devis sur-mesure, d&apos;une assistance technique ou d&apos;une expertise ponctuelle ?
                 Nos experts vous répondent sous 24 heures ouvrées.
               </Text>
               <AnimatedReassurance />
@@ -158,7 +157,7 @@ function MapSection() {
               Où nous trouver ?
             </Heading>
             <Text className="text-white/60">
-              Nos bureaux sont situés au cœur de l'écosystème numérique d'Évry.
+              Nos bureaux sont situés au cœur de l&apos;écosystème numérique d&apos;Évry.
               Venez nous rencontrer ou planifiez une intervention sur site.
             </Text>
           </div>
