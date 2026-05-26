@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 
-type Segment = "devis" | "support" | "candidature" | "autre";
+type Motif = "" | "devis" | "support" | "candidature" | "autre";
 
 export default function ContactForm() {
-  const [activeSegment, setActiveSegment] = useState<Segment>("devis");
+  const [motif, setMotif] = useState<Motif>("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,26 +19,8 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5 text-left">
-      
-      {/* 1. Onglets de Navigation Internes - Version Subtile Haut de Gamme */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1 bg-black/30 rounded-xl border border-white/10 mb-6">
-        {(["devis", "support", "candidature", "autre"] as Segment[]).map((seg) => (
-          <button
-            key={seg}
-            type="button"
-            onClick={() => setActiveSegment(seg)}
-            className={`py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-lg transition-all duration-200 ${
-              activeSegment === seg 
-                ? "bg-secondary text-white shadow-lg" // Onglet Actif (Bleu d'accent)
-                : "text-white/70 hover:text-white hover:bg-white/5" // Onglets Inactifs (Texte blanc transparent et discret)
-            }`}
-          >
-            {seg}
-          </button>
-        ))}
-      </div>
 
-      {/* 2. Champs Prénom / Nom */}
+      {/* Prénom / Nom */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <label htmlFor="prenom" className="text-[11px] font-bold uppercase tracking-widest text-white block">
@@ -64,7 +46,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* 3. Email Professionnel */}
+      {/* Email */}
       <div className="space-y-2">
         <label htmlFor="email" className="text-[11px] font-bold uppercase tracking-widest text-white block">
           Email professionnel
@@ -78,8 +60,59 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* 4. Conditionnel : Entreprise */}
-      {activeSegment === "devis" && (
+      {/* Téléphone */}
+      <div className="space-y-2">
+        <label htmlFor="telephone" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+          Téléphone
+        </label>
+        <Input
+          id="telephone"
+          type="tel"
+          placeholder="06 00 00 00 00"
+          className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg"
+        />
+      </div>
+
+      {/* Motif */}
+      <div className="space-y-2">
+        <label htmlFor="motif" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+          Motif de contact
+        </label>
+        <div className="relative">
+          <select
+            id="motif"
+            name="motif"
+            value={motif}
+            onChange={(e) => setMotif(e.target.value as Motif)}
+            required
+            className="w-full h-12 px-4 pr-10 rounded-lg bg-black/20 border border-white/20 text-white appearance-none cursor-pointer focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
+          >
+            <option value="" disabled className="bg-primary text-white/50">
+              Sélectionnez...
+            </option>
+            <option value="devis" className="bg-primary text-white">
+              Demande de devis
+            </option>
+            <option value="support" className="bg-primary text-white">
+              Support technique
+            </option>
+            <option value="candidature" className="bg-primary text-white">
+              Candidature
+            </option>
+            <option value="autre" className="bg-primary text-white">
+              Autre
+            </option>
+          </select>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Entreprise (conditionnel devis) */}
+      {motif === "devis" && (
         <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
           <label htmlFor="entreprise" className="text-[11px] font-bold uppercase tracking-widest text-white block">
             Entreprise
@@ -92,30 +125,29 @@ export default function ContactForm() {
         </div>
       )}
 
-      {/* 5. Message */}
+      {/* Message */}
       <div className="space-y-2">
         <label htmlFor="message" className="text-[11px] font-bold uppercase tracking-widest text-white block">
           Votre message
         </label>
         <Textarea
           id="message"
-          placeholder={activeSegment === "support" ? "Décrivez votre incident technique..." : "Comment pouvons-nous vous aider ?"}
+          placeholder={motif === "support" ? "Décrivez votre incident technique..." : "Comment pouvons-nous vous aider ?"}
           rows={4}
           required
           className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary w-full rounded-lg"
         />
       </div>
 
-      {/* 6. Bouton d'action Bleu Nuit Uni avec bordure fine */}
-      <Button 
-        type="submit" 
+      <Button
+        variant="secondary"
+        type="submit"
         disabled={status === "loading"}
-        className="w-full border border-white/10 py-4 text-sm font-bold uppercase tracking-wider rounded-xl shadow-xl transition-all mt-4"
+        className="w-full py-4 text-sm font-bold uppercase tracking-wider rounded-xl shadow-xl transition-all mt-4"
       >
         {status === "loading" ? "Envoi en cours..." : "Envoyer ma demande"}
       </Button>
 
-      {/* 7. Mentions de confidentialité révisées pour la lisibilité */}
       <p className="text-center text-white/60 text-xs mt-4 block">
         En soumettant ce formulaire, vous acceptez notre{" "}
         <a href="#" className="text-secondary underline hover:text-white transition-colors">
