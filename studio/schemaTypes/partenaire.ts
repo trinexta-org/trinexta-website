@@ -35,13 +35,6 @@ export const partenaire = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: 'isCircle',
-      title: 'Affichage en cercle',
-      type: 'boolean',
-      description: 'Cochez si le logo doit avoir un fond circulaire (ex: OVH, Bitdefender, Sophos).',
-      initialValue: false,
-    }),
-    defineField({
       name: 'description',
       title: 'Description courte',
       type: 'text',
