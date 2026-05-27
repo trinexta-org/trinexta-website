@@ -125,14 +125,16 @@ export function InterventionMap() {
     const [flashKeys, setFlashKeys] = useState<Record<string, number>>({})
     const onCrossRef = useRef<((ids: string[]) => void) | null>(null)
 
-    onCrossRef.current = (ids: string[]) => {
-        if (step < 1) return
-        setFlashKeys(prev => {
-            const next = { ...prev }
-            for (const id of ids) next[id] = (prev[id] ?? 0) + 1
-            return next
-        })
-    }
+    useEffect(() => {
+        onCrossRef.current = (ids: string[]) => {
+            if (step < 1) return
+            setFlashKeys(prev => {
+                const next = { ...prev }
+                for (const id of ids) next[id] = (prev[id] ?? 0) + 1
+                return next
+            })
+        }
+    }, [step])
 
     useEffect(() => {
         const t = setInterval(() => setStep(s => (s + 1) % 3), 6000)
