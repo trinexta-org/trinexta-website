@@ -3,6 +3,7 @@ name: Project automation
 on:
   pull_request:
     types: [opened, ready_for_review]
+  workflow_dispatch:
 
 jobs:
   move-linked-issues-to-review:
