@@ -51,6 +51,17 @@ export function InterventionMap() {
 
     const multiplier = isMobile ? 1.5 : 3.2
 
+    const createOperationalPath = (x: number, y: number) => {
+        const startX = 50
+        const startY = 50
+        const controlX = 50 + (x * multiplier) / 4
+        const controlY = 30 + (y * multiplier) / 4
+        const endX = 50 + (x * multiplier) / 2
+        const endY = 50 + (y * multiplier) / 2
+
+        return `M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`
+    }
+
     return (
         <Section container={false} className="relative bg-primary py-12 md:py-32 overflow-hidden">
             <div className="absolute inset-0 opacity-[0.05]"
@@ -148,7 +159,11 @@ export function InterventionMap() {
                                 />
                             </motion.div>
 
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
+                            <svg
+                                viewBox="0 0 100 100"
+                                preserveAspectRatio="none"
+                                className="absolute inset-0 w-full h-full pointer-events-none z-20"
+                            >
                                 <defs>
                                     <marker id="arrow-tip" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
                                         <polygon points="0 0, 10 3.5, 0 7" fill="var(--secondary)" />
@@ -158,7 +173,7 @@ export function InterventionMap() {
                                     <AnimatePresence key={`path-${d.id}`}>
                                         {step >= 1 && (
                                             <motion.path
-                                                d={`M 50% 50% Q ${50 + (d.x * multiplier) / 4}% ${50 + (d.y * multiplier) / 4 - 20}% ${50 + (d.x * multiplier) / 2}% ${50 + (d.y * multiplier) / 2}%`}
+                                                d={createOperationalPath(d.x, d.y)}
                                                 initial={{ pathLength: 0, opacity: 0 }}
                                                 animate={{ pathLength: 1, opacity: 1 }}
                                                 exit={{ pathLength: 0, opacity: 0 }}

@@ -89,7 +89,7 @@ function HeroSection() {
       {/* Arrière-plan */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/image-contact.jpg')" }}
+        style={{ backgroundImage: "url('/images/services/support-informatique/hero.jpg')" }}
       />
       <div className="absolute inset-0 bg-primary/70 z-0" />
       <div className="absolute inset-0 bg-linear-to-r from-primary/90 via-primary/50 to-transparent z-0" />
