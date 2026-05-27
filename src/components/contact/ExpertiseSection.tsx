@@ -14,7 +14,7 @@ export default function ExpertiseSection() {
       {/* 1. L'IMAGE BUREAU BLEU EN BACKGROUND GLOBAL */}
       <div 
         className="absolute inset-0 bg-cover bg-center z-0 scale-105" 
-        style={{ backgroundImage: `url('/images/image-clavier-bleu.jpg')` }} 
+        style={{ backgroundImage: `url('/images/services/microsoft-365/hero.jpg')` }} 
       />
 
       {/* 2. OVERLAYS DE COULEUR POUR ASSURER LA LISIBILITÉ (STYLE PRO & INCORPORÉ) */}

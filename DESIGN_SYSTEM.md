@@ -24,6 +24,7 @@
 | `bg-background`             | Blanc - fond de page                       |
 | `border-border`             | Bordures                                   |
 | `text-primary-foreground` `text-secondary-foreground` | Blanc - texte sur fond colore |
+| `text-white/70`             | Texte secondaire sur fond sombre (footer, dark sections) |
 
 ---
 

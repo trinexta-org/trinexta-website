@@ -1162,7 +1162,7 @@ CDN : Cloudflare gratuit (cache global, protection DDoS, certificats SSL automat
 
 Domaine : trinexta.com (existant)  pas de migration de domaine 
 
-Sous-domaine staging : staging.trinexta.com ou new.trinexta.com pendant la refonte 
+Sous-domaine staging : staging.trinexta.fr pendant la refonte 
 
 Email transactionnel : Resend (tier gratuit 3 000 emails/mois) ou Brevo (tier gratuit 300/jour) 
 
@@ -1672,7 +1672,7 @@ Livrables techniques
 
 Site complet en production sur trinexta.com (Astro ou Next.js, hébergé OVH) 
 
-Site staging accessible pendant la durée du projet (staging.trinexta.com) 
+Site staging accessible pendant la durée du projet (staging.trinexta.fr) 
 
 Repository GitHub privé sous organisation TRINEXTA (code source complet) 
 
