@@ -63,6 +63,7 @@ export async function sendNotificationEmail(data: ContactFormData) {
               <p><strong>Email :</strong> ${escapeHtml(data.email)}</p>
               <p><strong>Téléphone :</strong> ${formatField(data.telephone)}</p>
               <p><strong>Entreprise :</strong> ${formatField(data.entreprise)}</p>
+              <p><strong>SIRET :</strong> ${formatField(data.siret)}</p>
               <p><strong>Secteur :</strong> ${formatField(data.secteur)}</p>
               <p><strong>Taille :</strong> ${formatField(data.taille)}</p>
               <p><strong>Urgence :</strong> ${formatField(data.urgence)}</p>
