@@ -11,7 +11,7 @@ const solutionsData = {
   hero: {
     titlePart1: "Solutions",
     titlePart2: "Métier", 
-    description: "Votre informatique est le système nerveux de votre entreprise : elle doit irriguer chaque département avec précision et fluidité. Chez Trinexta, nous rejetons les solutions 'prêt-à-porter' qui contraignent votre organisation à se plier à des standards rigides. Nous concevons une architecture technique qui épouse la réalité de votre activité. Qu'il s'agisse de déployer une téléphonie VoIP professionnelle de nouvelle génération, d'interconnecter vos différents sites géographiques via des réseaux privés sécurisés, ou d'intégrer vos logiciels métiers pour supprimer les ressaisies manuelles, nous sommes là pour transformer la complexité technique en simplicité opérationnelle. Nous ne nous contentons pas d'installer du matériel : nous orchestrons votre performance numérique. Notre objectif est de transformer votre IT pour que celle-ci ne soit plus un centre de coûts ou une source de friction, mais un véritable multiplicateur de performance. Ensemble, faisons en sorte que vos outils technologiques ne soient plus une limite, mais le socle sur lequel vous bâtissez votre ambition.",
+    description: "Votre informatique ne doit plus être une contrainte. Chez Trinexta, nous concevons des architectures sur mesure qui épousent votre réalité : téléphonie VoIP, interconnexion de sites et intégration logicielle. Nous transformons la complexité technique en simplicité opérationnelle pour faire de vos outils le socle de votre croissance.",
     ctaText: "Déployer mes solutions métier",
     ctaHref: "/contact"
   },

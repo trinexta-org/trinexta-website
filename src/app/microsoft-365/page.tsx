@@ -11,7 +11,7 @@ const ms365Data = {
   hero: {
     titlePart1: "Microsoft",
     titlePart2: "365", 
-    description: "La suite bureautique traditionnelle n'est plus suffisante pour répondre aux défis de l'entreprise moderne. Microsoft 365 est devenu l'écosystème central, le moteur de votre collaboration et le coffre-fort de vos données. Mais sans une configuration experte, cet outil puissant peut devenir complexe, sous-exploité ou, plus grave, une porte d'entrée pour les cybermenaces. Trinexta vous accompagne pour déployer, sécuriser et optimiser chaque brique de votre environnement Microsoft 365 : messagerie professionnelle, partage documentaire intelligent, visioconférence unifiée et mobilité totale. Nous transformons votre suite logicielle en un avantage concurrentiel majeur, tout en vous garantissant une gestion simplifiée et une parfaite maîtrise de vos coûts de licences.",
+    description: "Microsoft 365 est le moteur de votre entreprise, mais sans configuration experte, il reste sous-exploité et vulnérable. Trinexta déploie, sécurise et optimise votre environnement pour transformer cet outil en un véritable avantage concurrentiel. Libérez votre productivité tout en maîtrisant parfaitement vos coûts et votre sécurité.",
     ctaText: "Optimiser mon environnement Microsoft 365",
     ctaHref: "/contact"
   },
