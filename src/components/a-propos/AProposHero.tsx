@@ -87,24 +87,25 @@ export function AProposHero() {
                             </motion.div>
                         </AnimatePresence>
                     </div>
+                    <div className="mt-6 md:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                        <Button
+                            variant="secondary"
+                            size="lg"
+                            onClick={() => document.getElementById("signification")?.scrollIntoView({ behavior: "smooth" })}
+                            className="w-full sm:w-auto text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all"
+                        >
+                            Découvrir notre ADN
+                        </Button>
 
-                    <Button
-                        variant="secondary"
-                        size="lg"
-                        onClick={() => document.getElementById("signification")?.scrollIntoView({ behavior: "smooth" })}
-                        className="w-full sm:w-auto text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all"
-                    >
-                        Découvrir notre ADN
-                    </Button>
-
-                    <Button
-                        asChild
-                        variant="outline"
-                        size="lg"
-                        className="w-full sm:w-auto text-center text-white border-white hover:bg-white/10 backdrop-blur-sm cursor-pointer"
-                    >
-                        <Link href="/contact">Échanger avec nos experts</Link>
-                    </Button>
+                        <Button
+                            asChild
+                            variant="outline"
+                            size="lg"
+                            className="w-full sm:w-auto text-center text-white border-white hover:bg-white/10 backdrop-blur-sm cursor-pointer"
+                        >
+                            <Link href="/contact">Échanger avec nos experts</Link>
+                        </Button>
+                    </div>
 
                     <div className="mt-10 md:mt-12 pt-6">
                         <Text className="text-sm md:text-base text-white/80 font-medium leading-relaxed max-w-3xl drop-shadow-md text-balance">
