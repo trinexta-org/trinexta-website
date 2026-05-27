@@ -64,7 +64,7 @@ export function Footer() {
             <div>
               <span className={desktopTitle}>Contact</span>
               <div className="space-y-6">
-                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Siège social</span><span className="text-white/70 text-[13px]">505 Place des Champs Elysées, 91080 EVRY</span></div>
+                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Bureau d&apos;activité</span><span className="text-white/70 text-[13px]">7 Rue Montespan, 91000 EVRY COURCOURONNES</span></div>
                 <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Assistance</span><a href="tel:0978250746" className="text-white/70 text-[13px] block">09 78 25 07 46</a></div>
                 <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Email</span><a href="mailto:contact@trinexta.fr" className="text-white/70 text-[13px] block">contact@trinexta.fr</a></div>
               </div>
@@ -122,7 +122,7 @@ export function Footer() {
               <span className={mobileTitle}>Contact</span>
               <div className="space-y-1">
                 <span className={mobileHover}>09 78 25 07 46</span>
-                <span className={mobileHover}>Evry (91)</span>
+                <span className={mobileHover}>7 Rue Montespan, 91000 Evry-Courcouronnes</span>
               </div>
             </div>
           </div>
