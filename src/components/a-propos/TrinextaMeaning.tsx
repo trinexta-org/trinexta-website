@@ -29,7 +29,7 @@ const meanings = [
 ]
 
 const cardVariants: Variants = {
-  hidden: (i: number) => ({ opacity: 0, scale: 0.9, y: 30 }),
+  hidden: (_i: number) => ({ opacity: 0, scale: 0.9, y: 30 }),
   visible: (i: number) => ({
     opacity: 1,
     scale: 1,
@@ -69,7 +69,7 @@ const syllableVariants: Variants = {
 }
 
 const contentVariants: Variants = {
-  hidden: (i: number) => ({ opacity: 0, y: 20 }),
+   hidden: (_i: number) => ({ opacity: 0, y: 20 }),
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
@@ -78,7 +78,7 @@ const contentVariants: Variants = {
 }
 
 const imageVariants: Variants = {
-  hidden: (i: number) => ({ opacity: 0 }),
+  hidden: (_i: number) => ({ opacity: 0 }),
   visible: (i: number) => ({
     opacity: 0.4, 
     transition: { delay: (i * 2.2) + 1.5, duration: 1, ease: "easeInOut" }
