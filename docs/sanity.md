@@ -89,15 +89,59 @@ const article = await client.fetch(
 
 ## Client Sanity dans Next.js
 
-Le client Sanity (la connexion entre Next.js et l'API) sera dans `src/lib/sanity.ts`. Ce fichier sera créé lors du développement des premières pages.
+Le client Sanity (la connexion entre Next.js et l'API) est dans `src/lib/sanity.ts`.
 
 Il utilise les variables d'environnement :
 
 ```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=93ztl6y7
 NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 SANITY_API_TOKEN=...   # requis pour lire les drafts
 ```
+
+Ce fichier contient aujourd'hui :
+
+- le client Sanity partagé
+- les types métier du blog
+- les helpers `getArticles()` et `getArticleBySlug()`
+- le helper `urlForImage()` pour générer les URLs d'images Sanity
+
+---
+
+## Intégration du blog
+
+Le blog du site est alimenté par Sanity côté frontend Next.js.
+
+Fichiers principaux :
+
+- `src/lib/sanity.ts` contient le client, les types et les helpers de lecture
+- `src/app/blog/page.tsx` affiche la liste des articles
+- `src/app/blog/[slug]/page.tsx` affiche un article détaillé et ses métadonnées SEO
+- `src/components/portable-text-article.tsx` rend le champ `contenu` en Portable Text
+
+Points importants :
+
+- seuls les documents publiés apparaissent sur le site
+- `imageUne` sert de thumbnail dans la liste des articles
+- `imageUne` sert aussi d'image Open Graph sur la page détail
+- les images Sanity sont autorisées via `next.config.ts`
+- le champ `contenu` accepte du texte riche et des images
+
+---
+
+## Tester le flux blog
+
+1. Lancer le frontend : `npm run dev`
+2. Lancer le Studio : `cd studio && npm run dev`
+3. Créer un document `Article`
+4. Renseigner au minimum `titre`, `slug`, `categorie`, `datePublication`
+5. Ajouter idéalement `extrait`, `contenu` et `imageUne`
+6. Publier l'article
+7. Vérifier `/blog`
+8. Vérifier `/blog/<slug>`
+
+Si l'article reste en brouillon, il n'apparaîtra pas sur le site.
 
 ---
 

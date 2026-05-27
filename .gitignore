@@ -44,3 +44,10 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# notebooklm
+notebooklm-config.json
+chrome_profile_notebooklm/
+
+# claude code — paramètres locaux uniquement
+.claude/settings.local.json
