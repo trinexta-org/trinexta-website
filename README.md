@@ -124,7 +124,7 @@ Se connecter au Studio avec son compte Google ou GitHub sur [sanity.io](https://
 | Branche | Environnement |
 |---|---|
 | `dev` | local uniquement |
-| `staging` | staging.trinexta.com |
+| `staging` | staging.trinexta.fr |
 | `main` | trinexta.com |
 
 Workflow : `dev` -> `staging` -> `main` via pull requests.
