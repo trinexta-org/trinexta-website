@@ -3,7 +3,6 @@ import { Metadata } from "next"
 import { HeroSection } from "@/components/HeroSection"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { ReassuranceSection } from "@/components/ReassuranceSection"
-import { ForWhoSection } from "@/components/ForWhoSection"
 import { ServicesSection } from "@/components/ServicesSection"
 import { ApproachSection } from "@/components/ApproachSection"
 import { InterventionMap } from "@/components/InterventionMap"
@@ -37,12 +36,6 @@ export default async function Home() {
       <JsonLd data={trinextaLocalBusiness} />
       <HeroSection />
       <ReassuranceSection />
-
-      <TransitionTitle
-        line1="Des solutions pour"
-        line2="chaque activité"
-      />
-      <ForWhoSection />
 
       <TransitionTitle
         surtitle="Notre cœur de métier"
