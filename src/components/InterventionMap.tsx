@@ -7,12 +7,12 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 
 const DEPARTMENTS = [
-    { id: "75", name: "Paris",             angle: 75,  radius: 0.32 },
-    { id: "92", name: "Hauts-de-Seine",    angle: 210, radius: 0.28 },
-    { id: "93", name: "Seine-Saint-Denis", angle: 25,  radius: 0.38 },
-    { id: "94", name: "Val-de-Marne",      angle: 145, radius: 0.36 },
-    { id: "95", name: "Val-d'Oise",        angle: 310, radius: 0.44 },
-    { id: "77", name: "Seine-et-Marne",    angle: 110, radius: 0.55 },
+    { id: "75", name: "Paris",             angle: 75,  radius: 0.40 },
+    { id: "92", name: "Hauts-de-Seine",    angle: 210, radius: 0.36 },
+    { id: "93", name: "Seine-Saint-Denis", angle: 25,  radius: 0.47 },
+    { id: "94", name: "Val-de-Marne",      angle: 145, radius: 0.44 },
+    { id: "95", name: "Val-d'Oise",        angle: 310, radius: 0.52 },
+    { id: "77", name: "Seine-et-Marne",    angle: 110, radius: 0.62 },
 ]
 
 const STEPS = [
@@ -204,14 +204,14 @@ export function InterventionMap() {
                                             {STEPS[step].label}
                                         </span>
                                         <div className="h-px w-6 bg-secondary/20" />
-                                        <span className="text-[10px] font-mono text-secondary/35 uppercase tracking-wider">
+                                        <span className="text-[10px] font-mono text-secondary/60 uppercase tracking-wider">
                                             {STEPS[step].subtitle}
                                         </span>
                                     </div>
                                     <h2 className="text-white font-black text-2xl md:text-[1.75rem] leading-tight tracking-tight">
                                         {STEPS[step].title}
                                     </h2>
-                                    <p className="text-white/40 text-sm md:text-[0.925rem] leading-relaxed font-light">
+                                    <p className="text-white/70 text-sm md:text-[0.925rem] leading-relaxed font-light">
                                         {STEPS[step].text}
                                     </p>
                                 </motion.div>
@@ -282,7 +282,7 @@ export function InterventionMap() {
                                                 <span className="w-1.5 h-1.5 rounded-full shrink-0"
                                                     style={{ background: "color-mix(in srgb, var(--secondary) 55%, transparent)" }} />
                                                 <span className="text-secondary font-mono text-[11px] font-bold">{d.id}</span>
-                                                <span className="text-white/28 text-[9px] truncate">{d.name}</span>
+                                                <span className="text-white/55 text-[9px] truncate">{d.name}</span>
                                             </motion.div>
                                         ))}
                                     </div>
@@ -350,7 +350,7 @@ export function InterventionMap() {
                                     repeatCount="indefinite"
                                 />
                                 <path
-                                    d={gearRingPath(cx, cy, 40, maxR + 9, maxR - 1)}
+                                    d={gearRingPath(cx, cy, 16, maxR + 9, maxR - 1)}
                                     fill="none"
                                     stroke="var(--secondary)"
                                     strokeOpacity="0.30"
@@ -439,13 +439,26 @@ export function InterventionMap() {
                                     repeatCount="indefinite"
                                 />
                                 <path
-                                    d={gearRingPath(cx, cy, 24, maxR * 0.73, maxR * 0.64)}
+                                    d={gearRingPath(cx, cy, 10, maxR * 0.73, maxR * 0.64)}
                                     fill="none"
                                     stroke="var(--secondary)"
-                                    strokeOpacity="0.17"
-                                    strokeWidth="0.7"
+                                    strokeOpacity="0.25"
+                                    strokeWidth="0.9"
                                     strokeLinejoin="miter"
                                 />
+                                {Array.from({ length: 8 }).map((_, i) => {
+                                    const a = (i * 45 * Math.PI) / 180
+                                    const r = maxR * 0.64
+                                    return (
+                                        <line key={i}
+                                            x1={cx + Math.cos(a) * (r - 10)} y1={cy + Math.sin(a) * (r - 10)}
+                                            x2={cx + Math.cos(a) * r}        y2={cy + Math.sin(a) * r}
+                                            stroke="var(--secondary)"
+                                            strokeOpacity="0.22"
+                                            strokeWidth="0.8"
+                                        />
+                                    )
+                                })}
                             </g>
 
                             <g>
@@ -458,13 +471,26 @@ export function InterventionMap() {
                                     repeatCount="indefinite"
                                 />
                                 <path
-                                    d={gearRingPath(cx, cy, 16, maxR * 0.49, maxR * 0.41)}
+                                    d={gearRingPath(cx, cy, 7, maxR * 0.49, maxR * 0.41)}
                                     fill="none"
                                     stroke="var(--secondary)"
-                                    strokeOpacity="0.13"
-                                    strokeWidth="0.6"
+                                    strokeOpacity="0.20"
+                                    strokeWidth="0.7"
                                     strokeLinejoin="miter"
                                 />
+                                {Array.from({ length: 6 }).map((_, i) => {
+                                    const a = (i * 60 * Math.PI) / 180
+                                    const r = maxR * 0.41
+                                    return (
+                                        <line key={i}
+                                            x1={cx + Math.cos(a) * (r - 8)} y1={cy + Math.sin(a) * (r - 8)}
+                                            x2={cx + Math.cos(a) * r}       y2={cy + Math.sin(a) * r}
+                                            stroke="var(--secondary)"
+                                            strokeOpacity="0.18"
+                                            strokeWidth="0.6"
+                                        />
+                                    )
+                                })}
                             </g>
 
                             <g clipPath="url(#radar-clip)">
@@ -547,21 +573,6 @@ export function InterventionMap() {
                                 TRINEXTA
                             </text>
 
-                            {[0, 90, 180, 270].map((deg, i) => {
-                                const rad = ((deg - 90) * Math.PI) / 180
-                                const r   = maxR - 22
-                                return (
-                                    <text key={deg}
-                                        x={cx + Math.cos(rad) * r}
-                                        y={cy + Math.sin(rad) * r}
-                                        textAnchor="middle" dominantBaseline="middle"
-                                        fill="var(--secondary)" fillOpacity="0.55"
-                                        fontSize="14" fontFamily="monospace" fontWeight="700" letterSpacing="2"
-                                    >
-                                        {["N", "E", "S", "O"][i]}
-                                    </text>
-                                )
-                            })}
                         </svg>
                     </div>
 
