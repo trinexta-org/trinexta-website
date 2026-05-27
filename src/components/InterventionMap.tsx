@@ -49,6 +49,24 @@ function polarToXY(angleDeg: number, r: number, cx: number, cy: number, maxR: nu
     return { x: cx + Math.cos(rad) * r * maxR, y: cy + Math.sin(rad) * r * maxR }
 }
 
+function gearRingPath(cx: number, cy: number, numTeeth: number, tipR: number, rootR: number): string {
+    const step   = (2 * Math.PI) / numTeeth
+    const rootTw = step * 0.60
+    const tipTw  = step * 0.38
+    const pts: string[] = []
+    for (let i = 0; i < numTeeth; i++) {
+        const mid = i * step
+        pts.push(
+            `${(cx + Math.cos(mid - rootTw / 2) * rootR).toFixed(1)},${(cy + Math.sin(mid - rootTw / 2) * rootR).toFixed(1)}`,
+            `${(cx + Math.cos(mid - tipTw  / 2) * tipR).toFixed(1)},${(cy + Math.sin(mid - tipTw  / 2) * tipR).toFixed(1)}`,
+            `${(cx + Math.cos(mid + tipTw  / 2) * tipR).toFixed(1)},${(cy + Math.sin(mid + tipTw  / 2) * tipR).toFixed(1)}`,
+            `${(cx + Math.cos(mid + rootTw / 2) * rootR).toFixed(1)},${(cy + Math.sin(mid + rootTw / 2) * rootR).toFixed(1)}`,
+        )
+    }
+    return `M ${pts.join(" L ")} Z`
+}
+
+
 function SweepArm({
     cx, cy, maxR,
     onCrossRef,
@@ -320,32 +338,62 @@ export function InterventionMap() {
                             </defs>
 
                             <circle cx={cx} cy={cy} r={maxR} fill="url(#bg-grad)" />
-                            <circle cx={cx} cy={cy} r={maxR} fill="none"
-                                stroke="var(--secondary)" strokeOpacity="0.22" strokeWidth="1.5" />
+                            <g>
+                                <animateTransform
+                                    attributeName="transform"
+                                    type="rotate"
+                                    from={`0 ${cx} ${cy}`}
+                                    to={`-360 ${cx} ${cy}`}
+                                    dur="88s"
+                                    repeatCount="indefinite"
+                                />
+                                <path
+                                    d={gearRingPath(cx, cy, 40, maxR + 9, maxR - 1)}
+                                    fill="none"
+                                    stroke="var(--secondary)"
+                                    strokeOpacity="0.30"
+                                    strokeWidth="1.1"
+                                    strokeLinejoin="miter"
+                                />
+                                {Array.from({ length: 12 }).map((_, i) => {
+                                    const a = (i * 30 * Math.PI) / 180
+                                    return (
+                                        <line key={i}
+                                            x1={cx + Math.cos(a) * (maxR - 14)} y1={cy + Math.sin(a) * (maxR - 14)}
+                                            x2={cx + Math.cos(a) * (maxR - 2)}  y2={cy + Math.sin(a) * (maxR - 2)}
+                                            stroke="var(--secondary)"
+                                            strokeOpacity="0.28"
+                                            strokeWidth="1.0"
+                                        />
+                                    )
+                                })}
+                            </g>
 
-                            {Array.from({ length: 72 }).map((_, i) => {
-                                const major = i % 6 === 0
-                                const a     = (i * 5 * Math.PI) / 180
-                                const inner = maxR - (major ? 11 : 5)
+                            {RING_RADII.map((r, i) => {
+                                const rr = r * maxR
                                 return (
-                                    <line key={i}
-                                        x1={cx + Math.cos(a) * inner} y1={cy + Math.sin(a) * inner}
-                                        x2={cx + Math.cos(a) * maxR}  y2={cy + Math.sin(a) * maxR}
-                                        stroke="var(--secondary)"
-                                        strokeOpacity={major ? 0.28 : 0.1}
-                                        strokeWidth={major ? 1 : 0.5}
-                                    />
+                                    <g key={i}>
+                                        <circle cx={cx} cy={cy} r={rr}
+                                            fill="none" stroke="var(--secondary)"
+                                            strokeOpacity={0.05 + i * 0.011}
+                                            strokeWidth="0.5"
+                                            strokeDasharray={`${(rr * 0.10).toFixed(1)} ${(rr * 0.055).toFixed(1)}`}
+                                        />
+                                        {Array.from({ length: 8 }).map((_, j) => {
+                                            const a = (j * 45 * Math.PI) / 180
+                                            return (
+                                                <line key={j}
+                                                    x1={cx + Math.cos(a) * (rr - 3.5)} y1={cy + Math.sin(a) * (rr - 3.5)}
+                                                    x2={cx + Math.cos(a) * (rr + 3.5)} y2={cy + Math.sin(a) * (rr + 3.5)}
+                                                    stroke="var(--secondary)"
+                                                    strokeOpacity={0.09 + i * 0.018}
+                                                    strokeWidth="0.5"
+                                                />
+                                            )
+                                        })}
+                                    </g>
                                 )
                             })}
-
-                            {RING_RADII.map((r, i) => (
-                                <circle key={i} cx={cx} cy={cy} r={r * maxR}
-                                    fill="none" stroke="var(--secondary)"
-                                    strokeOpacity={0.055 + i * 0.013}
-                                    strokeWidth="0.75"
-                                    strokeDasharray={i % 2 === 0 ? "4 9" : "1 8"}
-                                />
-                            ))}
 
                             {RING_KM.map((km, i) => (
                                 <text key={i}
@@ -379,6 +427,44 @@ export function InterventionMap() {
                                 )
                             })}
 
+                            <g>
+                                <animateTransform
+                                    attributeName="transform"
+                                    type="rotate"
+                                    from={`0 ${cx} ${cy}`}
+                                    to={`360 ${cx} ${cy}`}
+                                    dur="32s"
+                                    repeatCount="indefinite"
+                                />
+                                <path
+                                    d={gearRingPath(cx, cy, 24, maxR * 0.73, maxR * 0.64)}
+                                    fill="none"
+                                    stroke="var(--secondary)"
+                                    strokeOpacity="0.17"
+                                    strokeWidth="0.7"
+                                    strokeLinejoin="miter"
+                                />
+                            </g>
+
+                            <g>
+                                <animateTransform
+                                    attributeName="transform"
+                                    type="rotate"
+                                    from={`0 ${cx} ${cy}`}
+                                    to={`-360 ${cx} ${cy}`}
+                                    dur="14s"
+                                    repeatCount="indefinite"
+                                />
+                                <path
+                                    d={gearRingPath(cx, cy, 16, maxR * 0.49, maxR * 0.41)}
+                                    fill="none"
+                                    stroke="var(--secondary)"
+                                    strokeOpacity="0.13"
+                                    strokeWidth="0.6"
+                                    strokeLinejoin="miter"
+                                />
+                            </g>
+
                             <g clipPath="url(#radar-clip)">
                                 <SweepArm cx={cx} cy={cy} maxR={maxR} onCrossRef={onCrossRef} />
                             </g>
@@ -395,22 +481,27 @@ export function InterventionMap() {
                                     >
                                         {fk > 0 && (
                                             <motion.circle
-                                                key={`ring-${fk}`}
+                                                key={`lock-${fk}`}
                                                 cx={pos.x} cy={pos.y}
-                                                fill="none" stroke="var(--secondary)" strokeWidth="1.5"
-                                                initial={{ r: 8, strokeOpacity: 0.95 }}
-                                                animate={{ r: 44, strokeOpacity: 0 }}
-                                                transition={{ duration: 1.1, ease: "easeOut" }}
+                                                r={21}
+                                                fill="none"
+                                                stroke="var(--secondary)"
+                                                strokeWidth="2"
+                                                initial={{ pathLength: 0, strokeOpacity: 0.95 }}
+                                                animate={{ pathLength: 1, strokeOpacity: 0.30 }}
+                                                transition={{ duration: 0.40, ease: "easeOut" }}
                                             />
                                         )}
                                         {fk > 0 && (
-                                            <motion.circle
-                                                key={`glow-${fk}`}
-                                                cx={pos.x} cy={pos.y}
+                                            <motion.rect
+                                                key={`flash-${fk}`}
+                                                x={pos.x - 4} y={pos.y - 4}
+                                                width={8} height={8}
                                                 fill="var(--secondary)"
-                                                initial={{ r: 9, fillOpacity: 0.45 }}
-                                                animate={{ r: 22, fillOpacity: 0 }}
-                                                transition={{ duration: 0.65, ease: "easeOut" }}
+                                                initial={{ opacity: 1, scale: 2.8, rotate: 45 }}
+                                                animate={{ opacity: 0, scale: 0.4 }}
+                                                transition={{ duration: 0.30, ease: "easeOut" }}
+                                                style={{ transformOrigin: `${pos.x}px ${pos.y}px` }}
                                             />
                                         )}
                                         <line x1={cx} y1={cy} x2={pos.x} y2={pos.y}
@@ -441,26 +532,17 @@ export function InterventionMap() {
                                 )
                             })}
 
-                            {step >= 2 && [0, 1, 2].map(i => (
-                                <motion.circle key={`pulse-${i}`}
-                                    cx={cx} cy={cy}
-                                    fill="none" stroke="var(--secondary)" strokeWidth="0.75"
-                                    initial={{ r: maxR * 0.14, strokeOpacity: 0.55 }}
-                                    animate={{ r: maxR * 1.1, strokeOpacity: 0 }}
-                                    transition={{ duration: 2.8, repeat: Infinity, delay: i * 0.9, ease: "easeOut" }}
-                                />
-                            ))}
 
-                            <circle cx={cx} cy={cy} r={36} fill="none"
-                                stroke="var(--secondary)" strokeOpacity="0.08" strokeWidth="1" />
-                            <circle cx={cx} cy={cy} r={22} fill="none"
-                                stroke="var(--secondary)" strokeOpacity="0.14" strokeWidth="0.5" />
+                            <circle cx={cx} cy={cy} r={9}
+                                fill="none" stroke="var(--secondary)" strokeOpacity="0.16" strokeWidth="0.6" />
+                            <circle cx={cx} cy={cy} r={3.5}
+                                fill="var(--secondary)" fillOpacity="0.50" filter="url(#glow-soft)" />
 
-                            <text x={cx} y={cy + 52} textAnchor="middle"
-                                fill="var(--secondary)" fillOpacity="0.32"
-                                fontSize="7" fontFamily="monospace" letterSpacing="2.5"
+                            <text x={cx} y={cy + 56} textAnchor="middle"
+                                fill="var(--secondary)" fillOpacity="0.72"
+                                fontSize="10" fontFamily="monospace" fontWeight="700" letterSpacing="4"
                             >
-                                SRV-91 • ONLINE
+                                TRINEXTA
                             </text>
 
                             {[0, 90, 180, 270].map((deg, i) => {
