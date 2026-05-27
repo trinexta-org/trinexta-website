@@ -58,7 +58,7 @@ jobs:
                   }
                 }
               }' -f projectId="$PROJECT_ID" \
-              --jq --arg issueId "$ISSUE_NODE_ID" \
+              | jq -r --arg issueId "$ISSUE_NODE_ID" \
               '.data.node.items.nodes[] | select(.content.id == $issueId) | .id')
 
             if [ -z "$ITEM_ID" ]; then
