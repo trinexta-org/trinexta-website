@@ -5,6 +5,7 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Heading, Text } from "@/components/ui/Typography"
+import { Container } from "@/components/layout/Container"
 
 const AUTOPLAY_DELAY = 4000
 const PAUSE_AFTER_CLICK = 10000
@@ -100,7 +101,7 @@ export function OurValues() {
 
     return (
         <Section id="valeurs-approfondies" className="py-16 md:py-24 bg-primary">
-            <div className="max-w-6xl mx-auto px-4 md:px-6">
+            <Container>
 
                 <div className="bg-white/[0.02] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
 
@@ -127,7 +128,7 @@ export function OurValues() {
                                 <button
                                     key={idx}
                                     onClick={() => handleClick(idx)}
-                                    className={`relative shrink-0 w-[160px] md:w-[200px] h-[90px] md:h-[110px] rounded-xl overflow-hidden transition-all duration-300 ${safeActive === idx
+                                    className={`group relative shrink-0 w-[160px] md:w-[200px] h-[90px] md:h-[110px] rounded-xl overflow-hidden transition-all duration-300 ${safeActive === idx
                                         ? "ring-2 ring-secondary opacity-100 scale-95"
                                         : "border border-white/10 opacity-60 hover:opacity-100 hover:border-white/30"
                                         }`}
@@ -139,7 +140,7 @@ export function OurValues() {
                                         sizes="200px"
                                         className="object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-primary/60 flex items-center justify-center p-3 text-center transition-colors group-hover:bg-primary/40">
+                                    <div className="absolute inset-0 bg-primary/60 flex items-center justify-center p-3 text-center transition-colors group-hover:bg-primary/40 group">
                                         <span className="text-white font-bold text-sm drop-shadow-md">
                                             {val.title}
                                         </span>
@@ -183,7 +184,7 @@ export function OurValues() {
                     </AnimatePresence>
 
                 </div>
-            </div>
+            </Container>
         </Section>
     )
 }
