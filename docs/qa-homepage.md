@@ -58,7 +58,7 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 | ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#16** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+| **#16** | Découvrez nos engagements | Tous breakpoints / Desktop | L'image mise en avant associée au bloc de contenu *"L'humain au centre"* subit un défaut de cadrage vertical important. La tête de l'homme est totalement tronquée et hors de l'écran, ce qui ne laisse visible que le bas de son corps. L'image doit être recentrée verticalement pour afficher correctement le visage. | UI / Cadrage Image | 🔴 À corriger |
 
 ---
 
