@@ -44,29 +44,21 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 ## 4. Pages Blog
 
-*(Concerne la liste /blog et les articles individuels /blog/[slug])*
-
-| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| **#16** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+*⚠️ Section gelée — Pages en cours de développement.*
 
 ---
 
 ## 5. Pages Cas Clients
 
-*(Concerne la liste et l'étude de cas individuelle)*
-
-| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| **#17** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+*⚠️ Section gelée — Pages en cours de développement.*
 
 ---
 
-## 6. Pages À Propos et Contact
+## 6. Page À Propos
 
 | ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#18** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+| **#16** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
 
 ---
 
@@ -76,4 +68,4 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 | ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#19** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+| **#17** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
