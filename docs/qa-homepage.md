@@ -34,7 +34,7 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 ## 3. Pages Services
 
-*(Concerne /infogerance, /cybersecurite, /support-informatique, /services-annexes + 2 nouvelles pages)*
+*(Concerne /infogerance, /cybersecurite, /support-informatique, /services-annexes)*
 
 | ID | Page Spécifique | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
@@ -62,10 +62,21 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 ---
 
-## 7. Éléments Globaux
+## 7. Page Contact
+
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#17** | Formulaire de Contact | Desktop (1440px / 1920px) | Le formulaire est trop long verticalement, occupe l'intégralité de la hauteur de la page sur desktop et déborde de manière excessive. Nécessité de restructurer le layout global (par exemple, passer sur une disposition sur deux colonnes : les coordonnées à gauche et le formulaire à droite). | UI / Layout & Encombrement | 🔴 À corriger |
+| **#18** | Informations de Contact | Tous breakpoints | L'intitulé *"Siège"* doit être remplacé par *"Bureau d'activité"*, et l'adresse physique associée doit être mise à jour avec la valeur exacte : `7 Rue Montespan, 91000 EVRY COURCOURONNES`. | Contenu / Texte Officiel | 🔴 À corriger |
+| **#19** | Section FAQ | Tous breakpoints | Le bloc FAQ actuel est fait sur mesure et manque d'harmonisation. Il faut le supprimer et réimporter à la place le composant FAQ standardisé déjà utilisé sur les pages offres et services. | UI / Harmonisation Composants | 🔴 À corriger |
+| **#20** | Section Équipement (Fond Windows) | Tous breakpoints / Desktop | La section avec l'image Windows n'est pas du tout responsive. Les blocs de texte explicatifs (*"Dois-je acheter mon matériel..."*), les encadrés d'urgence et l'image de fond se chevauchent et entrent en collision graphique directe. Un réusinage complet de la structure est requis. | Bug Structurel Majeur / Responsivité | 🔴 À corriger |
+
+---
+
+## 8. Éléments Globaux
 
 *(Concerne le Menu burger mobile et le Footer)*
 
 | ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#17** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+| **#21** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
