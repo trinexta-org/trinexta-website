@@ -3,6 +3,7 @@ import { BlogList } from "@/components/blog/BlogList";
 import { CATEGORIES } from "@/components/blog/BlogList";
 import { SearchBar } from "@/components/blog/SearchBar";
 import { Suspense } from "react";
+import { ScrollToTop } from "@/components/blog/ScrollToTop";
 
 
 type BlogPageProps = {
@@ -22,6 +23,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       </div>
 
       <BlogList initialArticles={articles} categories={CATEGORIES} searchQuery={q} />
+      <ScrollToTop/>
     </main>
   );
 }

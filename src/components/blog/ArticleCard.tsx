@@ -7,11 +7,11 @@ import {
   urlForImage, 
   LIBELLES_CATEGORIES, 
   formatDatePublication, 
-  getArticles
+  ResumeArticle
 } from "@/lib/sanity";
 
 interface ArticleCardProps {
-  article: any; 
+  article: ResumeArticle; 
 }
 
 export function ArticleCard({ article }: ArticleCardProps) {
@@ -40,7 +40,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
         <div className="flex flex-col justify-center p-8">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <Badge>{LIBELLES_CATEGORIES[article.categorie as keyof typeof LIBELLES_CATEGORIES] ?? "Non classé"}</Badge>
+            <Badge>{LIBELLES_CATEGORIES[article.categorie] ?? "Non classé"}</Badge>
             <Text variant="small" className="text-muted-foreground">
               {formatDatePublication(article.datePublication)}
             </Text>
@@ -58,7 +58,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
             href={`/blog/${article.slug.current}`}
             className="inline-flex items-center text-sm font-bold text-secondary underline underline-offset-4 hover:text-primary"
           >
-            Lire l'article
+            Lire l&apos;article
           </Link>
         </div>
       </div>

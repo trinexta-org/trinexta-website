@@ -43,6 +43,14 @@ export interface OptionsRecherchesArticles {
   limite? : number;
   categorie? : CategorieArticle;
   query? : string;
+  inclureFuturs?: boolean;
+}
+
+export interface HeadingTOC {
+  _key: string;
+  level: "h2" | "h3";
+  text: string;
+  id: string;
 }
 
 export type ImageArticle = {
@@ -81,12 +89,13 @@ export function formatDatePublication(date: string): string {
 }
 
 export async function getArticles(options?: OptionsRecherchesArticles): Promise<{articles: ResumeArticle[]; total: number}> {
-  const { debut = 0, limite, categorie, query: searchString } = options || {};
+  const { debut = 0, limite, categorie, query: searchString, inclureFuturs = false } = options || {};
 
   const filtre = [
     `_type == "article"`,
     categorie ? `categorie == $categorie` : null,
-    searchString ? `(titre match $searchString || extrait match $searchString)` : null
+    searchString ? `(titre match $searchString || extrait match $searchString)` : null,
+    !inclureFuturs ? `datePublication <= now()` : null
   ].filter(Boolean).join(" && ");
 
   const possedeLimite = limite !== undefined;
@@ -131,7 +140,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
       seoTitre,
       seoDescription,
       contenu,
-      "related": *[_type == "article" && categorie == ^.categorie && slug.current != $slug] | order(datePublication desc)[0...3] {
+      "related": *[_type == "article" && categorie == ^.categorie && slug.current != $slug && datePublication <= now()] | order(datePublication desc)[0...3] {
         _id,
         titre,
         slug,
@@ -160,7 +169,8 @@ export async function getArticlesConnexes(
   const query = `*[
     _type == "article" && 
     categorie == $categorie && 
-    slug.current != $slug
+    slug.current != $slug &&
+    datePublication <= now()
   ] | order(datePublication desc)[0...$limite] {
     titre,
     slug,
@@ -182,7 +192,7 @@ export async function getArticlesConnexes(
 }
 
 export async function getArticlesPopulaires(limite: number = 3): Promise<ResumeArticle[]> {
-  const query = `*[_type == "article"] | order(datePublication desc)[0...$limite] {
+  const query = `*[_type == "article" && datePublication <= now()] | order(datePublication desc)[0...$limite] {
     _id,
     titre,
     slug,

@@ -16,13 +16,13 @@ export default function NotFound() {
             Page introuvable
           </Heading>
           <Text className="max-w-md mx-auto text-muted-foreground">
-            Désolé, la page que vous recherchez semble avoir été déplacée ou n'existe pas.
+            Désolé, la page que vous recherchez semble avoir été déplacée ou n&apos;existe pas.
           </Text>
         </div>
 
         <div className="pt-4" text-white>
           <Link href="/">
-            <Button size="lg" variant="primary">Retour à l'accueil</Button>
+            <Button size="lg" variant="primary">Retour à l&apos;accueil</Button>
         </Link>
         </div>
       </div>

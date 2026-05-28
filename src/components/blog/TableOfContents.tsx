@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useActiveSection } from "@/components/blog/useActiveSection";
 import { useEffect, useRef } from "react";
+import { HeadingTOC } from "@/lib/sanity";
 
-export function TableOfContents({ headings }: { headings: any[] }) {
+export function TableOfContents({ headings }: { headings: HeadingTOC[] }) {
   const activeId = useActiveSection(headings.map((h) => h.id));
   const isClicking = useRef(false);
 
@@ -28,15 +30,16 @@ export function TableOfContents({ headings }: { headings: any[] }) {
         Sommaire
       </h4>
       
-      {headings.map((h, i) => {
+      {headings.map((h) => {
         const isActive = activeId === h.id;
         const isSub = h.level === "h3";
 
         return (
-          <a
-            key={i}
-            id={`toc-link-${h.id}`} // L'ID nécessaire pour le scroll fluide
+          <Link
+            key={h._key}
+            id={`toc-link-${h.id}`}
             href={`#${h.id}`}
+            replace
             onClick={() => {
               isClicking.current = true;
               setTimeout(() => { isClicking.current = false; }, 1000);
@@ -57,7 +60,7 @@ export function TableOfContents({ headings }: { headings: any[] }) {
               ${isActive ? "text-white" : "text-white/70"}`}>
               {h.text}
             </span>
-          </a>
+          </Link>
         );
       })}
     </nav>

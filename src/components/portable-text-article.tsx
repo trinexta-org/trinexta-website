@@ -4,24 +4,29 @@ import {
   type PortableTextComponents,
 } from "next-sanity";
 import { type CorpsArticle, type ImageArticle, urlForImage } from "@/lib/sanity";
+import { generateSlug } from "@/lib/utils";
 
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
       <p className="text-lg leading-9 text-white/80">{children}</p>
     ),
-    h2: ({ children }) => (
-      <h2 id={children?.toString().toLowerCase().replace(/\s+/g, '-')} 
-          className="pt-12 pb-4 text-3xl font-black uppercase tracking-tighter text-white">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 id={children?.toString().toLowerCase().replace(/\s+/g, '-')}
-          className="pt-8 pb-2 text-2xl font-bold tracking-tight text-white/90">
-        {children}
-      </h3>
-    ),
+    h2: ({ children }) => {
+      const text = children?.toString() || "";
+      return (
+        <h2 id={generateSlug(text)} className="pt-12 pb-4 text-3xl font-black uppercase tracking-tighter text-white">
+          {children}
+        </h2>
+      );
+    },
+    h3: ({ children }) => {
+      const text = children?.toString() || "";
+      return (
+        <h3 id={generateSlug(text)} className="pt-8 pb-2 text-2xl font-bold tracking-tight text-white/90">
+          {children}
+        </h3>
+      );
+    },
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-zinc-300 pl-4 text-white/70">
         {children}
@@ -58,22 +63,21 @@ const portableTextComponents: PortableTextComponents = {
     },
   },
   types: {
-    image: ({ value }: { value: any }) => {
-  const imageValue = value as ImageArticle;
-  if (!imageValue.asset?._ref) return null;
+    image: ({ value }: { value: ImageArticle }) => {
+  if (!value.asset?._ref) return null;
 
       return (
         <figure className="space-y-3">
           <Image
-            src={urlForImage(imageValue).width(1200).fit("max").auto("format").url()}
-            alt={imageValue.alt ?? "Illustration"}
+            src={urlForImage(value).width(1200).fit("max").auto("format").url()}
+            alt={value.alt ?? "Illustration"}
             width={1200}
             height={675}
             className="w-full rounded-3xl object-cover"
           />
-          {imageValue.legende ? (
+          {value.legende ? (
             <figcaption className="text-sm leading-6 text-zinc-500">
-              {imageValue.legende}
+              {value.legende}
             </figcaption>
           ) : null}
         </figure>

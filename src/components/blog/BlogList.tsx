@@ -3,8 +3,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BlogSection } from "./BlogSection";
+import { ResumeArticle, CategorieArticle } from "@/lib/sanity";
 
-export const CATEGORIES = [
+
+interface CategorieOption {
+  id: "tous" | CategorieArticle;
+  label: string;
+}
+
+export const CATEGORIES : CategorieOption[] = [
   { id: "tous", label: "Tous les articles" },
   { id: "cybersecurite", label: "Cybersécurité" }, 
   { id: "infogerance", label: "Infogérance" },
@@ -13,7 +20,7 @@ export const CATEGORIES = [
   { id: "actualites", label: "Actualités" },
 ];
 
-export function BlogList({ initialArticles, categories, searchQuery }: { initialArticles: any[], categories: any[], searchQuery?: string }) {
+export function BlogList({ initialArticles, categories }: { initialArticles: ResumeArticle[], categories: CategorieOption[], searchQuery?: string }) {
   const [activeCategory, setActiveCategory] = useState("tous");
   const [visibleCount, setVisibleCount] = useState(4); 
 
@@ -49,7 +56,7 @@ export function BlogList({ initialArticles, categories, searchQuery }: { initial
               className="group relative px-10 py-4 bg-transparent border border-white/10 rounded-full overflow-hidden transition-all hover:border-secondary"
             >
               <span className="relative z-10 text-white/60 font-bold uppercase tracking-widest text-sm group-hover:text-white transition-colors">
-                Voir plus d'articles
+                Voir plus d&apos;articles
               </span>
               <div className="absolute inset-0 bg-secondary/10 translate-y-full transition-transform group-hover:translate-y-0" />
             </button>

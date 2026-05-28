@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { urlForImage } from "@/lib/sanity";
+import { ResumeArticle, urlForImage } from "@/lib/sanity";
 
-export function RelatedPostCard({ article }: { article: any }) {
+export function RelatedPostCard({ article }: { article: ResumeArticle }) {
   return (
     <Link href={`/blog/${article.slug.current}`} className="group block">
       <div className="relative h-60 w-full rounded-3xl overflow-hidden mb-6 bg-white/5">
