@@ -38,7 +38,7 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 | ID | Page Spécifique | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#15** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+| **#15** | Grille des Blocs (Contenu) | Tablettes (iPad Mini 768px / iPad Air 820px / iPad Pro 1024px / Surface Pro 912x1368) | Manque d'indicateur de cliquabilité. L'icône/bouton d'agrandissement présent sur écran mobile (iPhone SE) disparaît sur format tablette. Comme le `hover` est absent sur écran tactile, rien n'indique que les blocs sont cliquables. Il faut forcer l'affichage de l'icône d'agrandissement sur les breakpoints tablettes tout en conservant la structure actuelle. | UX / Affichage Conditionnel | 🔴 À corriger |
 
 ---
 
