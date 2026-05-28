@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { motion, useInView, Variants } from "framer-motion"
 import { Section } from "@/components/layout/Section"
@@ -119,16 +119,14 @@ export function ContactCards() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
   
-  const [isMounted, setIsMounted] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    setIsMounted(true)
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
+  const isMobile = useSyncExternalStore(
+    (callback) => {
+      window.addEventListener("resize", callback)
+      return () => window.removeEventListener("resize", callback)
+    },
+    () => window.innerWidth < 768,
+    () => false
+  )
 
   return (
     <Section id="coordonnees" className="py-16 md:py-24 bg-primary overflow-hidden">
@@ -143,7 +141,7 @@ export function ContactCards() {
                 key={card.id}
                 custom={index}
                 initial="hidden"
-                animate={isInView && isMounted ? "visible" : "hidden"}
+                animate={isInView ? "visible" : "hidden"}
                 variants={cardAnim}
                 className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02] min-h-[350px] shadow-2xl"
               >
