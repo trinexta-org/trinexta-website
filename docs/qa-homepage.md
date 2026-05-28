@@ -75,8 +75,6 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 ## 8. Éléments Globaux
 
-*(Concerne le Menu burger mobile et le Footer)*
-
 | ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#21** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+| **#21** | Footer (Liens de navigation) | Tablettes / Mobiles | Manque flagrant de cohérence et de complétude des liens en réduction d'écran. En mode desktop, les colonnes affichent l'intégralité des redirections (6 services, 4 liens légaux, etc.). En version mobile/tablette (iPad Mini), de nombreux liens sautent ou sont abrégés de manière arbitraire (ex: la colonne "SERVICES" passe de 6 à 3 éléments réduits). Il faut synchroniser les tableaux de liens pour avoir exactement les mêmes redirections sur toutes les résolutions. | UI & UX / Cohérence des Liens | 🔴 À corriger |
