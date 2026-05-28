@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Metadata } from "next"
 import { BannerCTA } from "@/components/layout/BannerCTA"
 import { Section } from "@/components/layout/Section"
-import { CasClientsFilters } from "@/components/cas-clients/CasClientsFilters"
+import { CasClientCard } from "@/components/cas-clients/CasClientCard"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
 import { caseClients } from "@/data/cas-clients"
@@ -26,19 +26,23 @@ export default function CaseClientsPage() {
             Cas clients
           </Text>
           <Heading as="h1" className="text-white">
-            Ils nous font confiance pour leur informatique
+            Des dirigeants qui ont décidé de ne plus subir leur informatique
           </Heading>
           <Text variant="lead" className="max-w-3xl text-white/80">
-            Trois cas concrets pour montrer comment TRINEXTA sécurise les postes,
-            modernise les environnements de travail et remet de l'ordre dans des
-            situations IT devenues trop fragiles ou trop coûteuses à subir.
+            Derrière chaque cas, une vraie entreprise avec ses contraintes.
+            On vous montre ce qu'on a fait, concrètement, pour sécuriser leur
+            informatique et leur rendre la sérénité.
           </Text>
         </div>
         </div>
       </Section>
 
       <Section className="pt-0 md:pt-0">
-        <CasClientsFilters items={caseClients} />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {caseClients.map((item) => (
+            <CasClientCard key={item.slug} item={item} />
+          ))}
+        </div>
       </Section>
 
       <Section>

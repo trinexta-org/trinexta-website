@@ -54,11 +54,11 @@ export const caseClients: CaseClient[] = [
     metaDescription:
       "Découvrez comment TRINEXTA a sécurisé les données d'une TPE de conseil : migration Windows 11 Pro, chiffrement BitLocker et support IT illimité.",
     cardChallenge:
-      "Des postes sous Windows Famille, sans fonctionnalités professionnelles ni cadre de sécurité suffisant.",
+      "Windows Famille, sans chiffrement, sans support. Chaque incident tombait directement sur les épaules des dirigeants.",
     cardResult:
-      "Des données chiffrées, un parc mieux piloté et moins de stress opérationnel pour la direction.",
+      "Postes chiffrés, parc suivi, support disponible. L'informatique est devenue quelque chose qu'on gère, pas qu'on subit.",
     title:
-      "Comment une TPE de conseil a sécurisé 100% de ses données et gagné en productivité",
+      "Une TPE de conseil qui tournait sur des postes grand public : on a posé les bases d'un vrai environnement pro",
     context: [
       "Une TPE spécialisée dans le conseil gérait son activité sur des postes sous Windows Famille. Cette configuration limitait l'accès aux fonctionnalités professionnelles et exposait l'entreprise à des risques de sécurité accrus.",
       "Sans service informatique interne, chaque mise à jour devenait une source de stress pour les dirigeants. L'informatique était subie au lieu d'être encadrée.",
@@ -113,11 +113,11 @@ export const caseClients: CaseClient[] = [
     metaDescription:
       "Modernisation IT d'une société de services : passage d'Office 2007 à Microsoft 365, upgrade RAM 16Go et déploiement de stations de travail Dell 27\".",
     cardChallenge:
-      "Un parc obsolète, saturé au repos, avec Office 2007 et des sauvegardes encore faites sur supports externes.",
+      "Office 2007, 8 Go de RAM saturés au repos, sauvegardes sur clé USB. La machine tournait, mais à quel prix.",
     cardResult:
-      "Un environnement plus fluide, plus propre et plus sûr, sans renouveler tout le parc.",
+      "16 Go, Microsoft 365, écrans Dell 27\". Même budget, autre confort, et moins de risques sur les données.",
     title:
-      "Modernisation IT : Comment cette société de services a transformé son parc obsolète",
+      "5 postes qui souffraient en silence, modernisés sans tout remplacer",
     context: [
       "Cette société de services disposait de 5 PC sous Windows Famille avec seulement 8 Go de RAM, saturant à 80% au repos. Le quotidien était freiné par les ralentissements et les blocages logiciels.",
       "Le travail sur Office 2007 et les sauvegardes sur clés USB ou disques durs externes créaient aussi un risque critique de perte de données.",
@@ -172,11 +172,11 @@ export const caseClients: CaseClient[] = [
     metaDescription:
       "Étude de cas : migration réussie d'OVH vers Microsoft 365 pour une TPE. Optimisation des processus collaboratifs et sécurisation des postes de travail.",
     cardChallenge:
-      "Une messagerie OVH et des postes Windows Famille limitaient la robustesse et les usages collaboratifs.",
+      "Messagerie OVH, postes Windows Famille, pas de MFA. Ça fonctionnait, mais sans filet de sécurité.",
     cardResult:
-      "Une base Microsoft 365 plus cohérente, des accès renforcés et une informatique moins subie.",
+      "Migration Microsoft 365, MFA activé, postes mis à niveau. Une transition propre, sans interruption d'activité.",
     title:
-      "Migration Microsoft 365 : La transformation numérique réussie d'une TPE",
+      "Une TPE qui voulait passer à la vitesse supérieure, sans tout casser",
     context: [
       "Une TPE utilisait une messagerie hébergée chez OVH et des postes Windows Famille. L'ensemble fonctionnait, mais sans la robustesse ni les fonctionnalités collaboratives nécessaires pour accompagner la croissance de l'entreprise.",
       "Les postes restaient limités sur les aspects de sécurité et d'administration. Les usages collaboratifs manquaient de fluidité.",
