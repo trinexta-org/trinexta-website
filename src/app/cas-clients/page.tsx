@@ -30,7 +30,7 @@ export default function CaseClientsPage() {
           </Heading>
           <Text variant="lead" className="max-w-3xl text-white/80">
             Derrière chaque cas, une vraie entreprise avec ses contraintes.
-            On vous montre ce qu'on a fait, concrètement, pour sécuriser leur
+            On vous montre ce qu&apos;on a fait, concrètement, pour sécuriser leur
             informatique et leur rendre la sérénité.
           </Text>
         </div>

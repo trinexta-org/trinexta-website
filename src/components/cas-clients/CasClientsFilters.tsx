@@ -46,7 +46,7 @@ export function CasClientsFilters({ items }: { items: CaseClient[] }) {
         <div className="rounded-3xl border border-dashed border-white/15 bg-white/[0.03] p-8 text-center">
           <Heading as="h3" className="text-white">Aucun cas dans ce secteur</Heading>
           <Text className="mt-3 text-white/70">
-            Aucun cas n'est encore affiché pour ce filtre.
+            Aucun cas n&apos;est encore affiché pour ce filtre.
           </Text>
         </div>
       ) : null}
