@@ -1,117 +1,108 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { type CaseClient } from "@/data/cas-clients"
 import { Button } from "@/components/ui/Button"
-import { Text } from "@/components/ui/Typography"
 import { TrinextaGear } from "@/components/ui/TrinextaGear"
 
+const METRIC_DURATION = 2600
+
 export function CasClientCard({ item }: { item: CaseClient }) {
-  const [hovered, setHovered] = useState(false)
+  const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    const t = setTimeout(
+      () => setActive((a) => (a + 1) % item.metrics.length),
+      METRIC_DURATION
+    )
+    return () => clearTimeout(t)
+  }, [active, item.metrics.length])
 
   return (
-    <motion.article
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="relative flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] overflow-hidden backdrop-blur-sm"
-      animate={{
-        borderColor: hovered ? "rgba(92,146,184,0.32)" : "rgba(255,255,255,0.1)",
-      }}
-      transition={{ duration: 0.4 }}
-    >
-      {/* Labels */}
-      <div className="flex items-center justify-between px-6 pt-5">
-        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/55">
+    <article className="flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-shadow duration-300 hover:shadow-xl">
+      {/* Header */}
+      <div className="flex items-center gap-2.5 border-b border-white/[0.07] px-6 py-4">
+        <TrinextaGear size={18} />
+        <span className="text-sm font-semibold text-white/80">{item.clientName}</span>
+        <span className="text-white/20">·</span>
+        <span className="text-sm text-white/40">{item.sectorLabel}</span>
+        <span className="text-white/20">·</span>
+        <span className="text-sm text-white/40">{item.size}</span>
+        <span className="ml-auto rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-white/35">
           {item.label}
         </span>
-        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/55">
-          {item.sectorLabel}
-        </span>
       </div>
 
-      {/* Défi — fond neutre légèrement surélevé, s'atténue au hover */}
-      <motion.div
-        className="relative px-6 pt-5 pb-6 bg-white/[0.04]"
-        animate={{ opacity: hovered ? 0.6 : 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Text className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
-          Défi
-        </Text>
-        <Text className="text-white/80 leading-relaxed">{item.cardChallenge}</Text>
-      </motion.div>
+      {/* Content */}
+      <div className="flex flex-1 flex-col px-6 py-5">
+        <h3 className="mb-3 text-base font-bold leading-snug text-white md:text-[17px]">
+          {item.title}
+        </h3>
+        <p className="mb-5 line-clamp-2 text-sm leading-relaxed text-white/50">
+          {item.cardChallenge}
+        </p>
 
-      {/* Pivot — la roue génératrice */}
-      <div className="relative flex items-center gap-4 border-y border-white/[0.07] px-6 py-4">
-        {/* Faisceau montant vers Défi — grandit depuis la roue */}
-        <motion.div
-          className="pointer-events-none absolute bottom-full w-[2px] bg-gradient-to-t from-secondary/75 to-transparent"
-          style={{ left: 46, height: 64, originY: 1 }}
-          animate={{ scaleY: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-        />
-
-        {/* Faisceau descendant vers Résultat — part après le faisceau montant */}
-        <motion.div
-          className="pointer-events-none absolute top-full w-[2px] bg-gradient-to-b from-secondary/75 to-transparent"
-          style={{ left: 46, height: 64, originY: 0 }}
-          animate={{ scaleY: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.35, ease: "easeOut", delay: 0.1 }}
-        />
-
-        {/* Halo radial — s'expand au hover */}
-        <motion.div
-          className="pointer-events-none absolute top-1/2 rounded-full bg-secondary/30 blur-xl"
-          style={{ left: 46 }}
-          animate={{
-            width: hovered ? 110 : 50,
-            height: hovered ? 110 : 50,
-            x: "-50%",
-            y: "-50%",
-            opacity: hovered ? 0.75 : 0.2,
-          }}
-          transition={{ duration: 0.5 }}
-        />
-
-        {/* Roue — impulsion CSS +20° au hover, en plus de l'animation SVG interne */}
-        <motion.div
-          className="relative z-10 flex-shrink-0"
-          animate={{ rotate: hovered ? 20 : 0 }}
-          transition={{ type: "spring", stiffness: 220, damping: 14 }}
-        >
-          <TrinextaGear size={44} />
-        </motion.div>
-
-        {/* Client + taille — corrigé */}
-        <Text className="relative z-10 text-sm font-medium text-white/60 md:text-base">
-          {item.clientName} · {item.size}
-        </Text>
-      </div>
-
-      {/* Résultat — teinte froide, s'illumine (le résultat est "produit") */}
-      <div className="relative px-6 pt-5 pb-4">
-        <motion.div
-          className="pointer-events-none absolute inset-0 bg-secondary/[0.1]"
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-        />
-        <div className="relative z-10">
-          <Text className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary/80">
-            Résultat
-          </Text>
-          <Text className="text-white/80 leading-relaxed">{item.cardResult}</Text>
+        {/* Metrics */}
+        <div className="space-y-2">
+          {item.metrics.map((metric, i) => {
+            const isActive = active === i
+            return (
+              <motion.div
+                key={metric.indicator}
+                className="rounded-xl border px-4 py-3"
+                animate={{
+                  borderColor: isActive
+                    ? "rgba(92,146,184,0.35)"
+                    : "rgba(255,255,255,0.05)",
+                  backgroundColor: isActive
+                    ? "rgba(92,146,184,0.07)"
+                    : "rgba(255,255,255,0.01)",
+                }}
+                transition={{ duration: 0.4 }}
+              >
+                <div className="mb-1 text-[11px] font-medium uppercase tracking-wider text-white/35">
+                  {metric.indicator}
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-white/30 line-through decoration-white/20">
+                    {metric.before}
+                  </span>
+                  <span className="text-white/25">→</span>
+                  <motion.span
+                    className="font-semibold"
+                    animate={{
+                      color: isActive
+                        ? "rgba(255,255,255,0.95)"
+                        : "rgba(255,255,255,0.6)",
+                    }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    {metric.after}
+                  </motion.span>
+                  {isActive && (
+                    <motion.span
+                      className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-secondary"
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  )}
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
 
       {/* Footer */}
-      <div className="mt-auto px-6 pb-6 pt-3">
-        <Text className="mb-4 text-sm text-white/35 line-clamp-1">{item.title}</Text>
+      <div className="border-t border-white/[0.07] px-6 py-4">
+        <p className="mb-4 line-clamp-1 text-xs text-white/35">{item.cardResult}</p>
         <Button asChild variant="secondary" className="w-full">
           <Link href={`/cas-clients/${item.slug}`}>Voir le parcours</Link>
         </Button>
       </div>
-    </motion.article>
+    </article>
   )
 }
