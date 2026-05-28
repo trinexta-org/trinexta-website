@@ -20,6 +20,7 @@ model ContactForm {
   email      String
   telephone  String?
   entreprise String?
+  siret      String? 
   secteur    String?
   taille     String?
   urgence    String?

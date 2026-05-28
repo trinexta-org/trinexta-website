@@ -28,6 +28,7 @@ export async function POST(request: Request) {
         email: data.email,
         telephone: data.telephone,
         entreprise: data.entreprise,
+        siret: data.siret, 
         secteur: data.secteur,
         taille: data.taille,
         urgence: data.urgence,

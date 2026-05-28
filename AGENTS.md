@@ -24,6 +24,7 @@ Les specs sont dans NotebookLM — utiliser le MCP `notebooklm` (outil `notebook
 3. Lire `studio/schemaTypes/` avant tout accès Sanity
 4. Vérifier `src/lib/db/index.ts` pour l'instance Prisma (ne pas en créer une autre)
 5. Lire `DESIGN_SYSTEM.md` avant tout travail sur une page ou un composant front
+6. Lire `TONE.md` avant d'écrire ou réécrire du contenu textuel (copies, titres, descriptions)
 
 ## Conventions
 
