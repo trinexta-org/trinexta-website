@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/Section"
 import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
+import { TrinextaGear } from "@/components/ui/TrinextaGear"
 import { caseClients, getCaseClientBySlug } from "@/data/cas-clients"
 
 export function generateStaticParams() {
@@ -21,15 +22,26 @@ export async function generateMetadata({
   const item = getCaseClientBySlug(slug)
 
   if (!item) {
-    return {
-      title: "Cas client introuvable | TRINEXTA",
-    }
+    return { title: "Cas client introuvable | TRINEXTA" }
   }
 
   return {
     title: `${item.title} | TRINEXTA`,
     description: item.metaDescription,
   }
+}
+
+function PhaseLabel({ number, label }: { number: string; label: string }) {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="font-mono text-xs font-semibold text-secondary/70 tracking-widest">
+        {number}
+      </span>
+      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-white/40">
+        {label}
+      </span>
+    </div>
+  )
 }
 
 export default async function CaseClientDetailPage({
@@ -44,17 +56,25 @@ export default async function CaseClientDetailPage({
 
   return (
     <main className="min-h-screen bg-primary text-white">
-      <Section className="overflow-hidden pb-12 pt-20 md:pb-16 md:pt-28">
+      {/* Hero */}
+      <Section container={false} className="relative overflow-hidden pb-12 pt-20 md:pb-16 md:pt-28">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.heroImage}')` }} />
+        <div className="absolute inset-0 bg-primary/75" />
+        <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/65 to-transparent" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl space-y-6">
-          <Link href="/cas-clients" className="inline-flex text-sm font-semibold text-secondary hover:text-white">
+          <Link
+            href="/cas-clients"
+            className="inline-flex text-sm font-semibold text-secondary hover:text-white"
+          >
             Retour aux cas clients
           </Link>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Badge className="bg-white/10 text-white border-white/10">{item.label}</Badge>
-            <Badge className="bg-white/10 text-white border-white/10">{item.sectorLabel}</Badge>
-            <Badge className="bg-white/10 text-white border-white/10">{item.clientName}</Badge>
-            <Badge className="bg-white/10 text-white border-white/10">{item.size}</Badge>
+            <Badge className="border-white/10 bg-white/10 text-white">{item.label}</Badge>
+            <Badge className="border-white/10 bg-white/10 text-white">{item.sectorLabel}</Badge>
+            <Badge className="border-white/10 bg-white/10 text-white">{item.clientName}</Badge>
+            <Badge className="border-white/10 bg-white/10 text-white">{item.size}</Badge>
           </div>
 
           <Heading as="h1" className="text-white">
@@ -64,101 +84,161 @@ export default async function CaseClientDetailPage({
             {item.metaDescription}
           </Text>
         </div>
-      </Section>
-
-      <Section className="py-10 md:py-14">
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-2 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <Text className="text-white/50 text-sm uppercase tracking-[0.14em] font-semibold">Contexte</Text>
-            <div className="mt-4 space-y-4">
-              {item.context.map((paragraph) => (
-                <Text key={paragraph} className="text-white/80">{paragraph}</Text>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <Text className="text-white/50 text-sm uppercase tracking-[0.14em] font-semibold">Défi</Text>
-            <ul className="mt-4 space-y-3 text-sm md:text-base text-white/80 leading-relaxed">
-              {item.challenges.map((challenge) => (
-                <li key={challenge} className="flex gap-3">
-                  <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-secondary" />
-                  <span>{challenge}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </Section>
 
-      <Section className="py-10 md:py-14">
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <Text className="text-white/50 text-sm uppercase tracking-[0.14em] font-semibold">Solution TRINEXTA</Text>
-            <div className="mt-5 space-y-6">
-              {item.solutions.map((solution) => (
-                <div key={solution.label} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <Link href={solution.href} className="inline-flex">
-                    <Badge className="bg-secondary/15 text-white border-secondary/30 hover:bg-secondary/25">
-                      {solution.label}
-                    </Badge>
-                  </Link>
-                  <Text className="mt-4 text-white/80">{solution.content}</Text>
-                </div>
-              ))}
+      {/* Timeline */}
+      <Section className="pb-16 pt-4 md:pt-6">
+        <div className="space-y-0">
+
+          {/* Phase 01 — Situation initiale */}
+          <div className="grid grid-cols-[52px_1fr] gap-x-6 md:gap-x-10">
+            {/* Spine left */}
+            <div className="flex flex-col items-center">
+              <TrinextaGear size={52} />
+              <div className="mt-3 w-px flex-1 bg-secondary/20" />
             </div>
-          </div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <Text className="text-white/50 text-sm uppercase tracking-[0.14em] font-semibold">Bénéfices concrets</Text>
-            <ul className="mt-5 space-y-3 text-sm md:text-base text-white/80 leading-relaxed">
-              {item.benefits.map((benefit) => (
-                <li key={benefit} className="flex gap-3">
-                  <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-secondary" />
-                  <span>{benefit}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
+            {/* Content right */}
+            <div className="pb-16 pt-1">
+              <PhaseLabel number="01" label="Situation initiale" />
 
-      <Section className="py-10 md:py-14">
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <Text className="text-white/50 text-sm uppercase tracking-[0.14em] font-semibold">Résultats structurés</Text>
-            <div className="mt-5 overflow-hidden rounded-2xl border border-white/10">
-              <table className="w-full text-left text-sm md:text-base">
-                <thead className="bg-white/8 text-white/65">
-                  <tr>
-                    <th className="px-4 py-3 font-semibold">Indicateur</th>
-                    <th className="px-4 py-3 font-semibold">Avant</th>
-                    <th className="px-4 py-3 font-semibold">Après</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {item.metrics.map((metric) => (
-                    <tr key={metric.indicator} className="border-t border-white/10 text-white/82">
-                      <td className="px-4 py-3">{metric.indicator}</td>
-                      <td className="px-4 py-3">{metric.before}</td>
-                      <td className="px-4 py-3">{metric.after}</td>
-                    </tr>
+              <div className="mt-6 space-y-4">
+                {item.context.map((paragraph) => (
+                  <Text key={paragraph} className="text-white/75 leading-relaxed">
+                    {paragraph}
+                  </Text>
+                ))}
+              </div>
+
+              <div className="mt-8">
+                <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                  Points de friction
+                </Text>
+                <ul className="space-y-3">
+                  {item.challenges.map((challenge) => (
+                    <li key={challenge} className="flex gap-3 text-sm text-white/75 leading-relaxed md:text-base">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary/60" />
+                      <span>{challenge}</span>
+                    </li>
                   ))}
-                </tbody>
-              </table>
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <Text className="text-white/50 text-sm uppercase tracking-[0.14em] font-semibold">Services utilisés</Text>
-            <div className="mt-5 flex flex-wrap gap-3">
-              {item.solutions.map((solution) => (
-                <Link key={solution.label} href={solution.href}>
-                  <Badge className="bg-white/10 text-white border-white/10 hover:bg-white/15">
-                    {solution.label}
-                  </Badge>
-                </Link>
-              ))}
+          {/* Phase 02 — L'intervention */}
+          <div className="grid grid-cols-[52px_1fr] gap-x-6 md:gap-x-10">
+            {/* Spine left */}
+            <div className="flex flex-col items-center">
+              <TrinextaGear size={52} />
+              <div className="mt-3 w-px flex-1 bg-secondary/20" />
+            </div>
+
+            {/* Content right */}
+            <div className="pb-16 pt-1">
+              <PhaseLabel number="02" label="L'intervention" />
+
+              <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+                {/* Solutions */}
+                <div className="space-y-4">
+                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                    Solutions déployées
+                  </Text>
+                  {item.solutions.map((solution) => (
+                    <div
+                      key={solution.label}
+                      className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+                    >
+                      <Link href={solution.href} className="inline-flex">
+                        <Badge className="border-secondary/30 bg-secondary/15 text-white hover:bg-secondary/25">
+                          {solution.label}
+                        </Badge>
+                      </Link>
+                      <Text className="mt-3 text-sm text-white/75 leading-relaxed md:text-base">
+                        {solution.content}
+                      </Text>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Benefits */}
+                <div>
+                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                    Bénéfices concrets
+                  </Text>
+                  <ul className="mt-4 space-y-4">
+                    {item.benefits.map((benefit) => (
+                      <li key={benefit} className="flex gap-3 text-sm text-white/75 leading-relaxed md:text-base">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Phase 03 — Les résultats */}
+          <div className="grid grid-cols-[52px_1fr] gap-x-6 md:gap-x-10">
+            {/* Spine left — no connector after last phase */}
+            <div className="flex flex-col items-center">
+              <TrinextaGear size={52} />
+            </div>
+
+            {/* Content right */}
+            <div className="pt-1">
+              <PhaseLabel number="03" label="Les résultats" />
+
+              <div className="mt-6">
+                <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                  Avant / Après
+                </Text>
+
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {item.metrics.map((metric) => (
+                    <div
+                      key={metric.indicator}
+                      className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden"
+                    >
+                      {/* Before */}
+                      <div className="border-b border-white/[0.07] px-4 py-3">
+                        <Text className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-white/30">
+                          Avant
+                        </Text>
+                        <Text className="text-sm font-medium text-white/45 line-through decoration-white/20">
+                          {metric.before}
+                        </Text>
+                      </div>
+                      {/* After */}
+                      <div className="px-4 py-3">
+                        <Text className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-secondary/60">
+                          Après
+                        </Text>
+                        <Text className="text-sm font-semibold text-white">
+                          {metric.after}
+                        </Text>
+                      </div>
+                      {/* Indicator label */}
+                      <div className="border-t border-white/[0.05] bg-white/[0.02] px-4 py-2">
+                        <Text className="text-[11px] text-white/35">{metric.indicator}</Text>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Services used */}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {item.solutions.map((solution) => (
+                    <Link key={solution.label} href={solution.href}>
+                      <Badge className="border-white/10 bg-white/10 text-white hover:bg-white/15">
+                        {solution.label}
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -167,7 +247,7 @@ export default async function CaseClientDetailPage({
       <Section>
         <BannerCTA
           title="Discutons de votre projet"
-          description="Si votre situation ressemble à ce cas, on peut vous aider à poser un cadre plus propre, plus sûr et plus simple à piloter."
+          description="Si votre situation ressemble a ce cas, on peut vous aider a poser un cadre plus propre, plus sur et plus simple a piloter."
           action={
             <Button asChild variant="secondary" size="lg">
               <Link href="/contact">Contacter TRINEXTA</Link>

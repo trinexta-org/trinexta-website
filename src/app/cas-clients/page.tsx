@@ -16,8 +16,11 @@ export const metadata: Metadata = {
 export default function CaseClientsPage() {
   return (
     <main className="min-h-screen bg-primary text-white">
-      <Section className="relative overflow-hidden pb-12 pt-20 md:pb-20 md:pt-28">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[28rem] bg-[radial-gradient(circle_at_top_left,rgba(92,146,184,0.28),transparent_45%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_30%)]" />
+      <Section container={false} className="relative overflow-hidden pb-12 pt-20 md:pb-20 md:pt-28">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/services/infogerance/hero.jpg')" }} />
+        <div className="absolute inset-0 bg-primary/75" />
+        <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/60 to-transparent" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl space-y-6">
           <Text className="font-semibold uppercase tracking-[0.22em] text-secondary">
             Cas clients
@@ -30,6 +33,7 @@ export default function CaseClientsPage() {
             modernise les environnements de travail et remet de l'ordre dans des
             situations IT devenues trop fragiles ou trop coûteuses à subir.
           </Text>
+        </div>
         </div>
       </Section>
 
