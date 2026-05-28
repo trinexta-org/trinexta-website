@@ -20,6 +20,7 @@ export interface CaseClient {
   sectorLabel: string
   size: string
   heroImage: string
+  cardImage: string
   metaDescription: string
   cardChallenge: string
   cardResult: string
@@ -49,6 +50,7 @@ export const caseClients: CaseClient[] = [
     sectorLabel: "Cabinet",
     size: "TPE",
     heroImage: "/images/for-who/cabinets.avif",
+    cardImage: "/images/cas-clients/cas-1.jpg",
     metaDescription:
       "Découvrez comment TRINEXTA a sécurisé les données d'une TPE de conseil : migration Windows 11 Pro, chiffrement BitLocker et support IT illimité.",
     cardChallenge:
@@ -107,6 +109,7 @@ export const caseClients: CaseClient[] = [
     sectorLabel: "Service",
     size: "5 postes",
     heroImage: "/images/for-who/pme.avif",
+    cardImage: "/images/cas-clients/cas2-modernisation.avif",
     metaDescription:
       "Modernisation IT d'une société de services : passage d'Office 2007 à Microsoft 365, upgrade RAM 16Go et déploiement de stations de travail Dell 27\".",
     cardChallenge:
@@ -165,6 +168,7 @@ export const caseClients: CaseClient[] = [
     sectorLabel: "Service",
     size: "TPE",
     heroImage: "/images/for-who/freelance.avif",
+    cardImage: "/images/cas-clients/cas-3.jpg",
     metaDescription:
       "Étude de cas : migration réussie d'OVH vers Microsoft 365 pour une TPE. Optimisation des processus collaboratifs et sécurisation des postes de travail.",
     cardChallenge:

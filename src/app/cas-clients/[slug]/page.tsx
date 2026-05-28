@@ -33,11 +33,11 @@ export async function generateMetadata({
 
 function PhaseLabel({ number, label }: { number: string; label: string }) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="font-mono text-xs font-semibold text-secondary/70 tracking-widest">
+    <div className="flex items-center gap-3">
+      <span className="font-mono text-xl font-bold text-secondary tracking-widest md:text-2xl">
         {number}
       </span>
-      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-white/40">
+      <span className="text-xl font-bold uppercase tracking-[0.12em] text-white/80 md:text-2xl">
         {label}
       </span>
     </div>
@@ -105,19 +105,19 @@ export default async function CaseClientDetailPage({
 
               <div className="mt-6 space-y-4">
                 {item.context.map((paragraph) => (
-                  <Text key={paragraph} className="text-white/75 leading-relaxed">
+                  <Text key={paragraph} className="text-white/80 leading-relaxed">
                     {paragraph}
                   </Text>
                 ))}
               </div>
 
               <div className="mt-8">
-                <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
                   Points de friction
                 </Text>
                 <ul className="space-y-3">
                   {item.challenges.map((challenge) => (
-                    <li key={challenge} className="flex gap-3 text-sm text-white/75 leading-relaxed md:text-base">
+                    <li key={challenge} className="flex gap-3 text-sm text-white/80 leading-relaxed md:text-base">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary/60" />
                       <span>{challenge}</span>
                     </li>
@@ -142,7 +142,7 @@ export default async function CaseClientDetailPage({
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                 {/* Solutions */}
                 <div className="space-y-4">
-                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
                     Solutions déployées
                   </Text>
                   {item.solutions.map((solution) => (
@@ -155,7 +155,7 @@ export default async function CaseClientDetailPage({
                           {solution.label}
                         </Badge>
                       </Link>
-                      <Text className="mt-3 text-sm text-white/75 leading-relaxed md:text-base">
+                      <Text className="mt-3 text-sm text-white/80 leading-relaxed md:text-base">
                         {solution.content}
                       </Text>
                     </div>
@@ -164,12 +164,12 @@ export default async function CaseClientDetailPage({
 
                 {/* Benefits */}
                 <div>
-                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
                     Bénéfices concrets
                   </Text>
                   <ul className="mt-4 space-y-4">
                     {item.benefits.map((benefit) => (
-                      <li key={benefit} className="flex gap-3 text-sm text-white/75 leading-relaxed md:text-base">
+                      <li key={benefit} className="flex gap-3 text-sm text-white/80 leading-relaxed md:text-base">
                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" />
                         <span>{benefit}</span>
                       </li>
@@ -192,37 +192,32 @@ export default async function CaseClientDetailPage({
               <PhaseLabel number="03" label="Les résultats" />
 
               <div className="mt-6">
-                <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
-                  Avant / Après
-                </Text>
-
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {item.metrics.map((metric) => (
                     <div
                       key={metric.indicator}
-                      className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden"
+                      className="overflow-hidden rounded-2xl border border-white/10"
                     >
-                      {/* Before */}
-                      <div className="border-b border-white/[0.07] px-4 py-3">
-                        <Text className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-white/30">
-                          Avant
-                        </Text>
-                        <Text className="text-sm font-medium text-white/45 line-through decoration-white/20">
-                          {metric.before}
-                        </Text>
+                      <div className="border-b border-white/[0.07] bg-white/[0.03] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/55">
+                        {metric.indicator}
                       </div>
-                      {/* After */}
-                      <div className="px-4 py-3">
-                        <Text className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-secondary/60">
-                          Après
-                        </Text>
-                        <Text className="text-sm font-semibold text-white">
-                          {metric.after}
-                        </Text>
-                      </div>
-                      {/* Indicator label */}
-                      <div className="border-t border-white/[0.05] bg-white/[0.02] px-4 py-2">
-                        <Text className="text-[11px] text-white/35">{metric.indicator}</Text>
+                      <div className="grid grid-cols-2">
+                        <div className="border-r border-white/[0.07] px-4 py-4">
+                          <div className="mb-2 text-[9px] font-bold uppercase tracking-widest text-white/50">
+                            Avant
+                          </div>
+                          <div className="text-sm font-medium leading-tight text-white/65">
+                            {metric.before}
+                          </div>
+                        </div>
+                        <div className="bg-secondary/[0.08] px-4 py-4">
+                          <div className="mb-2 text-[9px] font-bold uppercase tracking-widest text-secondary">
+                            Après
+                          </div>
+                          <div className="text-base font-bold leading-tight text-white">
+                            {metric.after}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
