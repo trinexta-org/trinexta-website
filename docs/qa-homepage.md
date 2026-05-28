@@ -1,13 +1,79 @@
-# Registre des Anomalies Responsives — Page d'Accueil (`/`)
+# Registre Global des Anomalies Responsives (Issue #35)
+
+Ce registre centralise toutes les anomalies détectées sur l'environnement de staging sur les 5 breakpoints cibles (320px, 768px, 1024px, 1440px, 1920px).
+
+---
+
+## 1. Page d'Accueil
 
 | ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | **#01** | Déploiement Régional | Desktop (1440px / 1920px) | L'effet de grillage en arrière-plan nuit au design global. Grand espace vide indésirable sur la droite. Contraste de couleur du texte insuffisant. | Esthétique & Lisibilité | 🔴 À corriger |
-| **#02** | Hero (Boutons CTA) | Mobile (375px) | Les boutons font 343x60px et 343x64px. L'étirement pleine largeur nuit à l'harmonie mobile. À rationaliser. | UI / Ajustement Mobile | 🔴 À corriger |
-| **#03** | Hero (Accroche) | Mobile (375px) | Le texte *"SANS ENGAGEMENT - RÉPONSE SOUS 24H"* est trop collé contre la bordure inférieure du bloc Hero. | UI / Espacement | 🔴 À corriger |
-| **#04** | Badges de Confiance | Mobile & Desktop | Les logos de réassurance (Cybermalveillance, CLUSIF...) ne sont pas les versions officielles. Le style global de la ligne est à réusiner. | Image de marque / Assets | 🔴 À corriger |
-| **#05** | Grille des Services | iPad Mini (768px) / iPad Air (820px) | Le titre de la carte *"INFOGÉRANCE"* subit un overflow/tronquage : les lettres "GÉ" sont coupées ou masquées. | Bug UI / Débordement | 🔴 À corriger |
-| **#06** | Impact Réel (Colonnes) | iPad Mini (768px) / iPad Air (820px) | Les différentes colonnes de statistiques se chevauchent et s'entrecroisent de manière désordonnée. | Bug Structurel / Grid-Flex | 🔴 À corriger |
-| **#07** | Impact Réel (Titres) | iPad Mini (768px) / iPad Air (820px) | Le point d'interrogation *"?"* est isolé tout seul à la ligne. Les lignes décoratives de fibres en arrière-plan ne sont pas centrées par rapport au grand titre. | UI / Typographie & Alignement | 🔴 À corriger |
-| **#08** | Impact Réel | iPad Pro (1024px) / Surface Pro (912x1368) | Le bloc *"100%"* et le bloc *"7j/7"* se percutent par manque d'espacement horizontal. | UI / Espacement | 🔴 À corriger |
-| **#09** | Global Tablettes | iPad Pro & Surface Pro (912x1368) | Des lignes de séparation parasites (traits sombres) apparaissent horizontalement entre certaines sections majeures. | Bug UI / Éléments parasites | 🔴 À corriger |
+| **#02** | Badges de Confiance | Mobile & Desktop | Les logos de réassurance (Cybermalveillance, CLUSIF...) ne sont pas les versions officielles. Le style global de la ligne est à réusiner. | Image de marque / Assets | 🔴 À corriger |
+| **#03** | Grille des Services | Tablettes (iPad Mini 768px / iPad Air 820px) | Le titre de la carte *"INFOGÉRANCE"* subit un overflow/tronquage : les lettres "GÉ" sont coupées ou masquées. | Bug UI / Débordement | 🔴 À corriger |
+| **#04** | Impact Réel (Colonnes) | Tablettes (iPad Mini 768px / iPad Air 820px) | Les différentes colonnes de statistiques se chevauchent et s'entrecroisent de manière désordonnée. | Bug Structurel / Grid-Flex | 🔴 À corriger |
+| **#05** | Impact Réel (Titres) | Tablettes (iPad Mini 768px / iPad Air 820px) | Le point d'interrogation *"?"* est isolé tout seul à la ligne. Les lignes décoratives de fibres en arrière-plan ne sont pas centrées par rapport au grand titre. | UI / Typographie & Alignement | 🔴 À corriger |
+| **#06** | Impact Réel | Tablettes (iPad Pro 1024px / Surface Pro 912x1368) | Le bloc *"100%"* et le bloc *"7j/7"* se percutent par manque d'espacement horizontal. | UI / Espacement | 🔴 À corriger |
+| **#07** | Global Tablettes | Tablettes (iPad Pro 1024px & Surface Pro 912x1368) | Des lignes de séparation parasites (traits sombres) apparaissent horizontalement entre certaines sections majeures. | Bug UI / Éléments parasites | 🔴 À corriger |
+
+---
+
+## 2. Page Nos Offres
+
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#08** | Structure Générale | Desktop (1440px / 1920px) | Les sections d'offres manquent d'aération. Les phrases d'accroche comme *"Comment ça se passe, du premier appel au premier jour ?"* et *"Des experts du support à votre service"* sont trop collées au contenu supérieur. Nécessite l'ajout d'un espace vertical pour descendre chaque bloc. | UI / Marges & Espacements | 🔴 À corriger |
+| **#09** | Offre Sérénité | Desktop (1440px / 1920px) | Le sous-bloc contenant *"100% illimité"* percute visuellement la section inférieure *"Ce qu'on fait que les autres ne font pas"*. Les paragraphes de texte qui suivent immédiatement sont également trop resserrés entre eux. | UI / Hauteur de ligne & Marges | 🔴 À corriger |
+| **#10** | Contenu & Textes | Mobile (320px / 375px) | Les compressions de blocs et les textes trop collés observés sur grand écran se répercutent à l'identique sur tous les terminaux mobiles. | UI / Consistance Mobile | 🔴 À corriger |
+| **#11** | Hero (Boutons CTA) | Mobile (320px / 375px) | Les boutons font 343x60px et 343x64px. L'étirement pleine largeur est trop massif et nuit à l'harmonie mobile. À rationaliser. | UI / Ajustement Mobile | 🔴 À corriger |
+| **#12** | Hero (Accroche) | Mobile (320px / 375px) | Le texte de réassurance *"SANS ENGAGEMENT - RÉPONSE SOUS 24H"* est trop collé contre la bordure inférieure du bloc Hero. | UI / Espacement | 🔴 À corriger |
+| **#13** | Onglets de Navigation | Tablettes (iPad Mini 768px / iPad Air 820px / iPad Pro 1024px / Surface Pro 912x1368) | La barre de navigation interne des différentes offres n'est pas correctement calée sous le header principal (logo/menu). Le texte des offres traverse et déborde graphiquement de la barre sur Chrome. | Bug Structurel / Alignement | 🔴 À corriger |
+| **#14** | Alignement Inter-sections | Tablettes (iPad Mini 768px / iPad Air 820px / iPad Pro 1024px / Surface Pro 912x1368) | Sur l'intégralité des formats tablettes testés via Chrome, les blocs d'offres s'empilent sans marge suffisante et se collent excessivement. | UI / Marges Tablettes | 🔴 À corriger |
+
+---
+
+## 3. Pages Services
+
+*(Concerne /infogerance, /cybersecurite, /support-informatique, /services-annexes + 2 nouvelles pages)*
+
+| ID | Page Spécifique | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#15** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+
+---
+
+## 4. Pages Blog
+
+*(Concerne la liste /blog et les articles individuels /blog/[slug])*
+
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#16** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+
+---
+
+## 5. Pages Cas Clients
+
+*(Concerne la liste et l'étude de cas individuelle)*
+
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#17** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+
+---
+
+## 6. Pages À Propos et Contact
+
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#18** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
+
+---
+
+## 7. Éléments Globaux
+
+*(Concerne le Menu burger mobile et le Footer)*
+
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#19** | *À remplir* | *À remplir* | *À remplir* | *À remplir* | ⚪ À auditer |
