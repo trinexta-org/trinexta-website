@@ -2,13 +2,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { BannerCTA } from "@/components/layout/BannerCTA"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Badge } from "@/components/ui/Badge"
-import { Button } from "@/components/ui/Button"
 import { Entrance } from "@/components/ui/Entrance"
+import { FinalCTA } from "@/components/FinalCTA"
 import { FadeIn } from "@/components/ui/FadeIn"
 import { Heading, Text } from "@/components/ui/Typography"
 import { TrinextaGear } from "@/components/ui/TrinextaGear"
@@ -273,18 +272,14 @@ export default async function CaseClientDetailPage({
         </div>
       </Section>
 
-      <Section>
-        <BannerCTA
-          title="Discutons de votre projet"
-          description="Si votre situation ressemble a ce cas, on peut vous aider a poser un cadre plus propre, plus sur et plus simple a piloter."
-          action={
-            <Button asChild variant="secondary" size="lg">
-              <Link href="/contact">Contacter TRINEXTA</Link>
-            </Button>
-          }
-          variant="primary"
-        />
-      </Section>
+      <FinalCTA
+        line1="Votre situation"
+        line2="ressemble à"
+        line3="ce cas ?"
+        description="Si votre situation ressemble à ce cas, on peut vous aider à poser un cadre plus propre, plus sûr et plus simple à piloter."
+        ctaLabel="Contacter TRINEXTA"
+        ctaHref="/contact"
+      />
     </main>
   )
 }
