@@ -20,7 +20,7 @@ export default function NotFound() {
           </Text>
         </div>
 
-        <div className="pt-4" text-white>
+        <div className="pt-4 text-white">
           <Link href="/">
             <Button size="lg" variant="primary">Retour à l&apos;accueil</Button>
         </Link>

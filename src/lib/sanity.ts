@@ -192,7 +192,7 @@ export async function getArticlesConnexes(
 }
 
 export async function getArticlesPopulaires(limite: number = 3): Promise<ResumeArticle[]> {
-  const query = `*[_type == "article" && datePublication <= now()] | order(datePublication desc)[0...$limite] {
+  const query = `*[_type == "article" && datePublication <= now()] | order(datePublication desc)[0...($limite)] {
     _id,
     titre,
     slug,
