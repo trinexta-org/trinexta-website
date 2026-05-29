@@ -113,7 +113,7 @@ export async function getArticles(options?: OptionsRecherchesArticles): Promise<
       imageUne,
       tempsLecture
     },
-    // Si pas de recherche, on compte via Sanity. Sinon on comptera côté JS.
+    
     "total": count(*[${filtre}])
   }`;
 
