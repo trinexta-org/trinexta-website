@@ -16,9 +16,6 @@ function MetricRow({
       className="relative overflow-hidden rounded-xl border border-white/[0.08]"
       style={{ "--metric-delay": `${rowIndex * 1.3}s` } as React.CSSProperties}
     >
-      {/* Sweep flash */}
-      <div className="metric-sweep pointer-events-none absolute inset-0 z-10 bg-secondary/20" />
-
       {/* Indicator label */}
       <div className="relative z-20 border-b border-white/[0.06] bg-white/[0.03] px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.20em] text-secondary">
         {metric.indicator}
@@ -26,6 +23,8 @@ function MetricRow({
 
       {/* Animated content */}
       <div className="relative min-h-[52px]">
+        {/* Sweep flash */}
+        <div className="metric-sweep pointer-events-none absolute inset-0 z-10 bg-secondary/20" />
         {/* Avant */}
         <div className="metric-avant absolute inset-0 flex flex-col justify-center px-3 py-2.5">
           <div className="mb-1 text-[8.5px] font-bold uppercase tracking-widest text-red-500/85">
