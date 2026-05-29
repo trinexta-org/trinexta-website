@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Badge } from "@/components/ui/Badge"
 import { Heading, Text } from "@/components/ui/Typography"
