@@ -7,8 +7,9 @@ import { GridCards } from "@/components/layout/GridCards";
 import { ViewportHero } from "@/components/layout/ViewportHero";
 import { CasClientCard } from "@/components/cas-clients/CasClientCard";
 import { Heading, Text } from "@/components/ui/Typography";
-import { FadeIn } from "@/components/ui/FadeIn";
 import { Entrance } from "@/components/ui/Entrance";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { Reveal } from "@/components/ui/Reveal";
 import { caseClients } from "@/data/cas-clients";
 
 export const metadata: Metadata = {
@@ -57,10 +58,10 @@ export default function CaseClientsPage() {
 
       <Section className="pt-0 md:pt-0 lg:pt-0">
         <GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">
-          {caseClients.map((item, index) => (
-            <FadeIn key={item.slug} delay={index * 0.15}>
+          {caseClients.map((item, i) => (
+            <Reveal key={item.slug} delay={i * 0.1}>
               <CasClientCard item={item} />
-            </FadeIn>
+            </Reveal>
           ))}
         </GridCards>
       </Section>
