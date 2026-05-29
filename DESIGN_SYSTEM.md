@@ -181,6 +181,20 @@ import { FadeIn } from "@/components/ui/FadeIn"
 </FadeIn>
 ```
 
+### Entrance (animation d'apparition immediate au chargement)
+
+```tsx
+import { Entrance } from "@/components/ui/Entrance"
+
+// direction : "up" (defaut) | "down" | "left" | "right" | "none"
+// delay     : secondes (defaut 0)
+// duration  : secondes (defaut 0.8)
+
+<Entrance delay={0.2} direction="up">
+  <Heading as="h1">...</Heading>
+</Entrance>
+```
+
 ---
 
 ## A ne pas faire
