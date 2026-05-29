@@ -15,7 +15,7 @@ export function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="w-full max-w-2xl mx-auto px-6 mb-16">
+    <form onSubmit={handleSearch} className="w-full max-w-2xl mx-auto px-6 -mb-25 relative z-10">
       <div className="relative group">
         
         <div className="absolute inset-0 bg-secondary/20 rounded-2xl blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />

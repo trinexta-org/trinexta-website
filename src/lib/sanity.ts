@@ -90,17 +90,17 @@ export function formatDatePublication(date: string): string {
 
 export async function getArticles(options?: OptionsRecherchesArticles): Promise<{articles: ResumeArticle[]; total: number}> {
   const { debut = 0, limite, categorie, query: searchString, inclureFuturs = false } = options || {};
-
   const filtre = [
     `_type == "article"`,
     categorie ? `categorie == $categorie` : null,
-    searchString ? `(titre match $searchString || extrait match $searchString)` : null,
     !inclureFuturs ? `datePublication <= now()` : null
   ].filter(Boolean).join(" && ");
 
   const possedeLimite = limite !== undefined;
   const fin = possedeLimite ? debut + limite : null;
-  const tranche = possedeLimite ? `[$debut...$fin]` : `[$debut...10000]`; 
+  
+  
+  const tranche = (!searchString && possedeLimite) ? `[$debut...$fin]` : `[0...10000]`; 
 
   const query = `{
     "articles": *[${filtre}] | order(datePublication desc) ${tranche} {
@@ -113,15 +113,43 @@ export async function getArticles(options?: OptionsRecherchesArticles): Promise<
       imageUne,
       tempsLecture
     },
+    
     "total": count(*[${filtre}])
   }`;
 
-  const params: Record<string, string | number> = { debut };
-  if (possedeLimite && fin !== null) params.fin = fin;
-  if (categorie) params.categorie = categorie;
-  if (searchString) params.searchString = `*${searchString}*`;
+  
+  const data = await sanityClient.fetch(query, { 
+    categorie, 
+    debut: !searchString ? debut : 0, 
+    fin: !searchString ? fin : 10000 
+  });
 
-  return sanityClient.fetch<{ articles: ResumeArticle[]; total: number }>(query, params);
+  
+  if (searchString) {
+    
+    const normalize = (str: string) => 
+      str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+    const normalizedSearch = normalize(searchString);
+
+    
+    const filteredArticles = data.articles.filter((article: ResumeArticle) => {
+      const titreMatch = normalize(article.titre).includes(normalizedSearch);
+      const extraitMatch = article.extrait ? normalize(article.extrait).includes(normalizedSearch) : false;
+      return titreMatch || extraitMatch;
+    });
+
+    const paginatedArticles = possedeLimite 
+      ? filteredArticles.slice(debut, debut + limite) 
+      : filteredArticles.slice(debut);
+
+    return {
+      articles: paginatedArticles,
+      total: filteredArticles.length 
+    };
+  }
+
+  return data;
 }
 
 

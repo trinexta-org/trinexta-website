@@ -131,7 +131,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 md:gap-16">
             <aside className="hidden lg:block w-[240px]">
-              <div className="sticky top-32 h-[calc(100vh-160px)] overflow-y-auto no-scrollbar space-y-12">
+              <div className="sticky top-32 h-[calc(100vh-160px)] overflow-y-auto no-scrollbar space-y-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <TableOfContents headings={headings} />
                 <SearchInput />
 

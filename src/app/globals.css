@@ -83,15 +83,6 @@
   }
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none; 
-  scrollbar-width: none;
-}
-
 .prose h2 {
   transition: all 0.5s ease;
   padding-left: 0;
