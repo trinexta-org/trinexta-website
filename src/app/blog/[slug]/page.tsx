@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import { ProgressBar } from "@/components/blog/ProgressBar";
+import { TableOfContents } from "@/components/blog/TableOfContents";
+import { RelatedPostCard } from "@/components/blog/RelatedPostCard";
+import { CtaAudit } from "@/components/blog/CtaAudit";
+import { ShareButtons } from "@/components/blog/ShareButtons";
+import { SearchInput } from "@/components/blog/SearchInput";
 import { PortableTextArticle } from "@/components/portable-text-article";
+import { PortableTextBlock } from "@portabletext/types";
+import { Section } from "@/components/layout/Section";
+import { Container } from "@/components/layout/Container";
+import { generateSlug } from "@/lib/utils";
+import { ScrollToTop } from "@/components/blog/ScrollToTop";
 import {
   getArticleBySlug,
+  getArticlesPopulaires,
   urlForImage,
   LIBELLES_CATEGORIES,
   formatDatePublication,
+  ResumeArticle,
+  HeadingTOC
 } from "@/lib/sanity";
 import { JsonLd } from "@/components/seo/JsonLd";
 
@@ -67,81 +82,137 @@ export async function generateMetadata({
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
-  const article = await loadArticleBySlug(slug);
+  const [article, populaires] = await Promise.all([
+    getArticleBySlug(slug),
+    getArticlesPopulaires(3)
+  ]);
+  
+  if (!article) notFound();
 
-  if (!article) {
-    notFound();
-  }
-  const title = article.seoTitre ?? article.titre;
-  const description = article.seoDescription ?? article.extrait;
-  const imageUrl = article.imageUne?.asset?._ref
-    ? urlForImage(article.imageUne).url()
-    : "https://trinexta.fr/images/trinexta-logo.png";
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": title,
-    "description": description ?? null,
-    "image": [imageUrl],
-    "datePublished": article.datePublication ? new Date(article.datePublication).toISOString() : null,
-    "author": {
-      "@type": "Person",
-      "name": article.auteur || "Équipe Trinexta",
-      "url": "https://trinexta.fr/blog"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "TRINEXTA",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://trinexta.fr/images/trinexta-logo.png"
-      }
-    }
-  };
+  const headings = extractHeadings(article.contenu || []);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-16">
+    <main className="bg-primary min-h-screen text-white">
+      <ProgressBar />
+      
 
-      <JsonLd data={articleJsonLd} />
-
-      <div>
-        <Link
-          href="/blog"
-          className="text-sm font-medium text-zinc-600 underline underline-offset-4"
-        >
-          Retour au blog
-        </Link>
-      </div>
-
-      <article className="space-y-8">
-        <header className="space-y-4">
-          <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-500">
-            <span className="rounded-full bg-zinc-100 px-3 py-1 font-medium text-zinc-700">
+      <header className="relative w-full min-h-[40vh] md:min-h-[60vh] flex flex-col justify-center pt-24 pb-8 overflow-hidden">
+        {article.imageUne && (
+          <Image 
+            src={urlForImage(article.imageUne).width(1200).url()} 
+            alt={article.titre}
+            fill 
+            className="object-cover scale-105 blur-sm" 
+            sizes="100vw"
+            priority 
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
+        
+        <Container className=" relative max-w-4xl">
+          <div className="flex gap-3 mb-6">
+            <span className="bg-secondary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
               {LIBELLES_CATEGORIES[article.categorie]}
             </span>
+          </div>
+          
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[1.1] mb-8">
+            {article.titre}
+          </h1>
+          
+          <div className="flex items-center gap-6 text-white/60 font-medium uppercase tracking-widest text-sm border-t border-white/10 pt-8">
             <span>{formatDatePublication(article.datePublication)}</span>
-            {article.auteur ? <span>Par {article.auteur}</span> : null}
-
-            {article.tempsLecture ? (
-              <>
-                <span>•</span>
-                <span>{article.tempsLecture} min de lecture</span>
-              </>
-            ) : null}
+            <span>{article.tempsLecture} min de lecture</span>
           </div>
+        </Container>
+      </header>
 
-          <div className="space-y-3">
-            <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white">
-              {article.titre}
-            </h1>
+      <Section className="py-10 md:py-20">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 md:gap-16">
+            <aside className="hidden lg:block w-[240px]">
+              <div className="sticky top-32 h-[calc(100vh-160px)] overflow-y-auto no-scrollbar space-y-12">
+                <TableOfContents headings={headings} />
+                <SearchInput />
+
+                <div className="px-4">
+                  <h4 className="text-[10px] font-bold uppercase text-white/40 tracking-widest mb-4">
+                    Articles populaires
+                  </h4>
+                  <div className="space-y-4">
+                    {populaires.map((post) => (
+                      <Link 
+                        key={post.slug.current} 
+                        href={`/blog/${post.slug.current}`} 
+                        className="block group"
+                      >
+                        <p className="text-sm font-medium text-white/70 group-hover:text-secondary transition-colors leading-snug">
+                          {post.titre}
+                        </p>
+                        <span className="text-[10px] text-white/30 uppercase mt-1 block">
+                          {formatDatePublication(post.datePublication)}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <article className="w-full min-w-0">
+              <div className="prose prose-invert prose-lg max-w-full">
+                <PortableTextArticle value={article.contenu} />
+              </div>
+              <ShareButtons title={article.titre} url={`/blog/${article.slug.current}`} />
+              <CtaAudit />
+            </article>
           </div>
-        </header>
+        </Container>
+      </Section>
 
-        <section>
-          <PortableTextArticle value={article.contenu} />
-        </section>
-      </article>
+      {article.related && article.related.length > 0 && (
+        <Section className="border-t border-white/5 py-20">
+          <Container>
+            <div className="flex justify-between items-end mb-12">
+              <h2 className="text-3xl font-bold uppercase tracking-tight">Articles similaires</h2>
+              <Link href="/blog" className="text-secondary font-bold hover:underline">Voir tout le blog</Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {article.related.map((relatedPost: ResumeArticle) => (
+                <RelatedPostCard key={relatedPost.slug.current} article={relatedPost} />
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+      <ScrollToTop/>
     </main>
   );
+}
+
+function extractHeadings(value: unknown[]): HeadingTOC[] {
+  if (!Array.isArray(value)) return [];
+  
+  return value
+    .filter((item): item is PortableTextBlock & { _key: string; style: "h2" | "h3"; children: { text: string }[] } => {
+      const block = item as Record<string, unknown>;
+      
+      return (
+        typeof block === "object" &&
+        block !== null &&
+        block._type === "block" &&
+        (block.style === "h2" || block.style === "h3") &&
+        Array.isArray(block.children) &&
+        block.children.length > 0 &&
+        typeof block.children[0] === "object" &&
+        block.children[0] !== null &&
+        typeof (block.children[0] as Record<string, unknown>).text === "string"
+      );
+    })
+    .map((item) => ({
+      _key: item._key || "", 
+      level: item.style,
+      text: item.children[0].text,
+      id: generateSlug(item.children[0].text),
+    }));
 }
