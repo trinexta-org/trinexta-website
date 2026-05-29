@@ -2,13 +2,14 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Badge } from "@/components/ui/Badge"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { caseClients } from "@/data/cas-clients"
 
-const highlightedWords = ["bases", "pro", "silence", "modernisés", "vitesse", "supérieure"]
+const highlightedWords = ["bases", "pro", "transformés", "silence", "modernisés", "vitesse", "supérieure"]
 
 export function CasClientsHero() {
   return (
@@ -34,15 +35,19 @@ export function CasClientsHero() {
       renderSlide={(slide) => (
         <div className="space-y-4 md:space-y-5">
           <div className="flex flex-wrap items-center gap-3">
-            <Badge className="border-secondary/30 bg-secondary/15 text-white">
-              {slide.label}
-            </Badge>
-            <Badge className="border-white/10 bg-white/10 text-white">
-              {slide.sectorLabel}
-            </Badge>
-            <Badge className="border-white/10 bg-white/10 text-white">
-              {slide.size}
-            </Badge>
+            {[
+              { label: slide.label, className: "border-secondary/30 bg-secondary/15 text-white" },
+              { label: slide.sectorLabel, className: "border-white/10 bg-white/10 text-white" },
+              { label: slide.size, className: "border-white/10 bg-white/10 text-white" },
+            ].map(({ label, className }, i) => (
+              <span
+                key={label}
+                className="animate-badge-pop"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                <Badge className={className}>{label}</Badge>
+              </span>
+            ))}
           </div>
 
           <Heading

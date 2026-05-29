@@ -58,7 +58,7 @@ export const caseClients: CaseClient[] = [
     cardResult:
       "Postes chiffrés, parc suivi, support disponible. L'informatique est devenue quelque chose qu'on gère, pas qu'on subit.",
     title:
-      "Une TPE de conseil qui tournait sur des postes grand public : nous avons posé les bases d'un vrai environnement pro",
+      "Des postes grand public transformés en environnement pro",
     context: [
       "Une TPE spécialisée dans le conseil gérait son activité sur des postes sous Windows Famille. Cette configuration limitait l'accès aux fonctionnalités professionnelles et exposait l'entreprise à des risques de sécurité accrus.",
       "Sans service informatique interne, chaque mise à jour devenait une source de stress pour les dirigeants. L'informatique était subie au lieu d'être encadrée.",
