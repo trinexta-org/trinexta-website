@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 
@@ -34,7 +34,7 @@ export function HeroSection() {
     }, [])
 
     return (
-        <Section container={false} className="relative z-10 h-[100dvh] -mt-16 lg:-mt-[7.5rem] flex flex-col overflow-hidden p-0 md:p-0 lg:p-0 pt-16 md:pt-16 lg:pt-[7.5rem]">
+        <ViewportHero>
 
             <div className="absolute inset-0 z-0">
                 <video
@@ -49,7 +49,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />
             </div>
 
-            <Container className="relative z-10 w-full flex-1 flex flex-col justify-center py-8 md:py-12">
+            <Container className="relative z-10 w-full py-8 md:py-12">
                 <div className="max-w-4xl">
 
                     <div className="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px] flex flex-col justify-center">
@@ -118,6 +118,6 @@ export function HeroSection() {
 
                 </div>
             </Container>
-        </Section>
+        </ViewportHero>
     )
 }

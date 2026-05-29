@@ -72,7 +72,23 @@ function EnhancedRibbonBackground() {
   )
 }
 
-export function FinalCTA() {
+interface FinalCTAProps {
+  line1?: string
+  line2?: string
+  line3?: string
+  description?: string
+  ctaLabel?: string
+  ctaHref?: string
+}
+
+export function FinalCTA({
+  line1 = "Prêt à ne plus",
+  line2 = "subir votre",
+  line3 = "informatique ?",
+  description = "Reprenez le contrôle avec un partenaire qui transforme vos défis en opportunités stratégiques.",
+  ctaLabel = "Prendre RDV gratuit",
+  ctaHref = "/contact",
+}: FinalCTAProps) {
   const sec = "var(--secondary)";
   const white = "var(--primary-foreground)";
 
@@ -103,30 +119,29 @@ export function FinalCTA() {
           
           <Heading as="h2" className="text-3xl sm:text-5xl md:text-8xl text-white uppercase tracking-tighter leading-[0.9] flex flex-col items-center">
             <motion.span animate={part1Animation}>
-              Prêt à ne plus
+              {line1}
             </motion.span>
             <motion.span animate={part2Animation}>
-              subir votre
+              {line2}
             </motion.span>
             <motion.span animate={part3Animation}>
-              informatique ?
+              {line3}
             </motion.span>
           </Heading>
 
           <Text className="text-white/70 text-base md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
-            Reprenez le contrôle avec un partenaire qui <br className="hidden md:block" />
-            <span className="text-white font-medium italic">transforme vos défis en opportunités stratégiques.</span>
+            {description}
           </Text>
 
           <div className="pt-4 md:pt-6">
             <Link
-              href="/contact"
+              href={ctaHref}
               className="group relative inline-flex items-center gap-4 md:gap-6 bg-transparent border border-white/20 px-8 py-4 md:px-12 md:py-6 rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 hover:border-secondary"
             >
               <div className="absolute inset-0 bg-white translate-y-[102%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-              
+
               <span className="relative z-10 text-white group-hover:text-primary font-black text-xs md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] transition-colors duration-500">
-                Prendre RDV gratuit
+                {ctaLabel}
               </span>
               
               <div className="relative z-10 text-secondary group-hover:text-primary transition-colors duration-500">

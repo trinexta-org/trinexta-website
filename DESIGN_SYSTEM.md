@@ -35,6 +35,7 @@
 ```tsx
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 
 // Section standard (Container inclus automatiquement)
 <Section id="services">
@@ -47,17 +48,41 @@ import { Container } from "@/components/layout/Container"
     <Heading as="h2" className="text-white">...</Heading>
   </Container>
 </Section>
+
+// Hero plein viewport disponible sous le header sticky
+<ViewportHero>
+  <div className="absolute inset-0 bg-primary" />
+  <Container className="relative z-10 py-12 md:py-16 lg:py-20">
+    <Heading as="h1" className="text-white">...</Heading>
+  </Container>
+</ViewportHero>
 ```
 
 `<Section>` accepte : `id`, `className`, `container` (bool, defaut `true`).
 `<Container>` accepte : `className`, `as` (balise HTML, defaut `div`).
+`<ViewportHero>` accepte les props natives d'une `section`, dont `className`, `id`, `aria-*`.
+
+### Regle hero
+
+Utiliser `<ViewportHero>` pour les heros de haut de page qui doivent occuper exactement l'espace visible restant sous le menu.
+
+Le header est `sticky` et reste dans le flux du document. Ne pas utiliser `h-[100dvh]`, `min-h-[100dvh]`, `min-h-[80dvh]` ou `min-h-[70dvh]` directement pour un hero de page : `100dvh` ajoute la hauteur du header et force un scroll, tandis que `70/80dvh` cree des heros trop courts selon les pages.
+
+`<ViewportHero>` applique la hauteur standard :
+
+```tsx
+min-h-[calc(100dvh-4rem)] lg:min-h-[calc(100dvh-7.5rem)]
+```
+
+Ces valeurs correspondent aux hauteurs du header mobile (`4rem`) et desktop (`7.5rem`). Garder les paddings internes sur le `Container`, typiquement `py-12 md:py-16 lg:py-20`, pour respirer sans casser la hauteur globale.
 
 ### Sections reutilisables 
 
 ```tsx
 import { GridCards } from "@/components/layout/GridCards"
 import { SplitContent } from "@/components/layout/SplitContent"
-import { BannerCTA } from "@/components/layout/BannerCTA"
+import { FinalCTA } from "@/components/FinalCTA"
+import { TransitionTitle } from "@/components/TransitionTitle"
 
 // Grille responsive (s'adapte auto ou via props)
 // columns: 1 | 2 | 3 | 4 (defaut 3)
@@ -78,13 +103,22 @@ import { BannerCTA } from "@/components/layout/BannerCTA"
   <Text>Description...</Text>
 </SplitContent>
 
-// Bandeau d'appel a l'action
-// variant: "primary" (defaut) | "secondary" | "accent"
-<BannerCTA
-  variant="primary"
-  title="Pret a commencer ?"
-  description="Contactez-nous pour un audit gratuit."
-  action={<Button variant="secondary">Contact</Button>}
+// Section d'appel a l'action finale (premium, avec fibres animees au scroll/fond)
+// Toutes les props sont optionnelles
+<FinalCTA
+  line1="Prêt à ne plus"
+  line2="subir votre"
+  line3="informatique ?"
+  description="Reprenez le contrôle avec un partenaire qui transforme vos défis en opportunités stratégiques."
+  ctaLabel="Prendre RDV gratuit"
+  ctaHref="/contact"
+/>
+
+// Section de transition textuelle premium (avec vagues de fibres de fond)
+<TransitionTitle
+  surtitle="Nos resultats"
+  line1="Des chiffres clairs"
+  line2="sans blabla"
 />
 ```
 
@@ -155,6 +189,45 @@ import { FadeIn } from "@/components/ui/FadeIn"
 <FadeIn delay={0.1} direction="up">
   <Card>...</Card>
 </FadeIn>
+```
+
+### Entrance (animation d'apparition immediate au chargement)
+
+```tsx
+import { Entrance } from "@/components/ui/Entrance"
+
+// direction : "up" (defaut) | "down" | "left" | "right" | "none"
+// delay     : secondes (defaut 0)
+// duration  : secondes (defaut 0.8)
+
+<Entrance delay={0.2} direction="up">
+  <Heading as="h1">...</Heading>
+</Entrance>
+```
+
+### Reveal (animation fluide au scroll ultra-performante sans framer-motion)
+
+```tsx
+import { Reveal } from "@/components/ui/Reveal"
+
+// delay : secondes (defaut 0)
+
+<Reveal delay={0.15}>
+  <Card>...</Card>
+</Reveal>
+```
+
+### HeroCarousel (carousel hero generique avec transitions fluides)
+
+```tsx
+import { HeroCarousel } from "@/components/ui/HeroCarousel"
+
+<HeroCarousel
+  slides={data}
+  interval={6000}
+  renderBackground={(slide, idx) => <div className="absolute inset-0 bg-primary" />}
+  renderSlide={(slide, idx) => <Heading as="h1">{slide.title}</Heading>}
+/>
 ```
 
 ---

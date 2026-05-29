@@ -11,28 +11,23 @@ import { ViewportHero } from "@/components/layout/ViewportHero"
 
 const slides = [
   {
-    part1: "Offre",
-    part2: "Sérénité",
-    subtitle: "L'informatique PME clé en main. Support illimité, maintenance proactive et cybersécurité avancée pour piloter votre activité en toute tranquillité."
+    part1: "Contactez",
+    part2: "Trinexta",
+    subtitle: "Besoin d'un devis sur-mesure, d'une assistance technique ou d'une expertise ponctuelle ? Nos experts vous répondent sous 24h ouvrées."
   },
   {
-    part1: "Offre",
-    part2: "Impulsion",
-    subtitle: "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité informatique."
+    part1: "Support",
+    part2: "Proactif",
+    subtitle: "Une urgence technique ? Nos techniciens qualifiés interviennent rapidement à distance ou directement dans vos locaux pour garantir la continuité de votre activité."
   },
   {
-    part1: "Services",
-    part2: "Annexes",
-    subtitle: "Prestations IT sur mesure et à la demande. Conseils, achat de matériel, réseaux, sauvegardes professionnelles et migrations Microsoft 365."
-  },
-  {
-    part1: "Trinexta",
-    part2: "Studio",
-    subtitle: "Création et développement de sites internet sur mesure. Découvrez les plateformes et solutions web performantes conçues par notre entreprise."
+    part1: "Échangeons",
+    part2: "Ensemble",
+    subtitle: "Arrêtez de perdre du temps avec une informatique mal suivie. Discutons de vos besoins et trouvons la solution simple et fiable adaptée à votre entreprise."
   }
 ]
 
-export function NosOffresHero() {
+export function ContactHero() {
     const [currentSlide, setCurrentSlide] = useState(0)
 
     useEffect(() => {
@@ -46,8 +41,8 @@ export function NosOffresHero() {
         <ViewportHero>
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/images/pricing/hero-offres.avif"
-                    alt="Offres Trinexta"
+                    src="/images/services/support-informatique/hero.jpg"
+                    alt="Contact Trinexta"
                     fill
                     priority
                     className="object-cover object-center"
@@ -83,15 +78,15 @@ export function NosOffresHero() {
                         </AnimatePresence>
                     </div>
 
-                    <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                        <Link href="#details">
-                            <Button variant="secondary" size="lg" className="w-full sm:w-auto text-white">
-                                Voir les détails
+                    <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+                        <Link href="#formulaire" className="w-full sm:w-auto">
+                            <Button variant="secondary" size="lg" className="w-full text-white shadow-lg hover:shadow-xl transition-all">
+                                Remplir le formulaire
                             </Button>
                         </Link>
-                        <Link href="/contact">
-                            <Button variant="outline" size="lg" className="w-full sm:w-auto text-white border-white hover:bg-white/10">
-                                Demander un devis
+                        <Link href="tel:+33978250746" className="w-full sm:w-auto">
+                            <Button variant="outline" size="lg" className="w-full text-white border-white hover:bg-white/10 backdrop-blur-sm transition-all">
+                                Appeler le 09 78 25 07 46
                             </Button>
                         </Link>
                     </div>

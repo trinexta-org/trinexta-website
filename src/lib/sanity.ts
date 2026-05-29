@@ -35,12 +35,22 @@ export type ArticleComplet = ResumeArticle & {
   seoTitre?: string;
   seoDescription?: string;
   contenu: CorpsArticle[] | null;
+  related?: ResumeArticle[];
 };
 
 export interface OptionsRecherchesArticles {
   debut? : number;
   limite? : number;
   categorie? : CategorieArticle;
+  query? : string;
+  inclureFuturs?: boolean;
+}
+
+export interface HeadingTOC {
+  _key: string;
+  level: "h2" | "h3";
+  text: string;
+  id: string;
 }
 
 export type ImageArticle = {
@@ -79,15 +89,18 @@ export function formatDatePublication(date: string): string {
 }
 
 export async function getArticles(options?: OptionsRecherchesArticles): Promise<{articles: ResumeArticle[]; total: number}> {
-  const { debut = 0, limite, categorie } = options || {};
-
-  const filtre = categorie 
-    ? `_type == "article" && categorie == $categorie` 
-    : `_type == "article"`;
+  const { debut = 0, limite, categorie, query: searchString, inclureFuturs = false } = options || {};
+  const filtre = [
+    `_type == "article"`,
+    categorie ? `categorie == $categorie` : null,
+    !inclureFuturs ? `datePublication <= now()` : null
+  ].filter(Boolean).join(" && ");
 
   const possedeLimite = limite !== undefined;
   const fin = possedeLimite ? debut + limite : null;
-  const tranche = possedeLimite ? `[$debut...$fin]` : `[$debut...10000]`; 
+  
+  
+  const tranche = (!searchString && possedeLimite) ? `[$debut...$fin]` : `[0...10000]`; 
 
   const query = `{
     "articles": *[${filtre}] | order(datePublication desc) ${tranche} {
@@ -100,20 +113,50 @@ export async function getArticles(options?: OptionsRecherchesArticles): Promise<
       imageUne,
       tempsLecture
     },
+    
     "total": count(*[${filtre}])
   }`;
 
-  const params: Record<string, string | number> = { debut };
-  if (possedeLimite && fin !== null) params.fin = fin;
-  if (categorie) params.categorie = categorie;
+  
+  const data = await sanityClient.fetch(query, { 
+    categorie, 
+    debut: !searchString ? debut : 0, 
+    fin: !searchString ? fin : 10000 
+  });
 
-  return sanityClient.fetch<{ articles: ResumeArticle[]; total: number }>(query, params);
+  
+  if (searchString) {
+    
+    const normalize = (str: string) => 
+      str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+    const normalizedSearch = normalize(searchString);
+
+    
+    const filteredArticles = data.articles.filter((article: ResumeArticle) => {
+      const titreMatch = normalize(article.titre).includes(normalizedSearch);
+      const extraitMatch = article.extrait ? normalize(article.extrait).includes(normalizedSearch) : false;
+      return titreMatch || extraitMatch;
+    });
+
+    const paginatedArticles = possedeLimite 
+      ? filteredArticles.slice(debut, debut + limite) 
+      : filteredArticles.slice(debut);
+
+    return {
+      articles: paginatedArticles,
+      total: filteredArticles.length 
+    };
+  }
+
+  return data;
 }
 
 
 export async function getArticleBySlug(slug: string): Promise<ArticleComplet | null> {
   return sanityClient.fetch<ArticleComplet | null>(`
     *[_type == "article" && slug.current == $slug][0] {
+      _id,
       titre,
       slug,
       categorie,
@@ -124,7 +167,18 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
       imageUne,
       seoTitre,
       seoDescription,
-      contenu
+      contenu,
+      "related": *[_type == "article" && categorie == ^.categorie && slug.current != $slug && datePublication <= now()] | order(datePublication desc)[0...3] {
+        _id,
+        titre,
+        slug,
+        categorie,
+        datePublication,
+        auteur,
+        extrait,
+        imageUne,
+        tempsLecture
+      }
     }`,
     { slug }
   );
@@ -143,7 +197,8 @@ export async function getArticlesConnexes(
   const query = `*[
     _type == "article" && 
     categorie == $categorie && 
-    slug.current != $slug
+    slug.current != $slug &&
+    datePublication <= now()
   ] | order(datePublication desc)[0...$limite] {
     titre,
     slug,
@@ -162,4 +217,20 @@ export async function getArticlesConnexes(
   };
 
   return sanityClient.fetch<ResumeArticle[]>(query, params);
+}
+
+export async function getArticlesPopulaires(limite: number = 3): Promise<ResumeArticle[]> {
+  const query = `*[_type == "article" && datePublication <= now()] | order(datePublication desc)[0...($limite)] {
+    _id,
+    titre,
+    slug,
+    categorie,
+    datePublication,
+    auteur,
+    extrait,
+    imageUne,
+    tempsLecture
+  }`;
+
+  return sanityClient.fetch<ResumeArticle[]>(query, { limite });
 }

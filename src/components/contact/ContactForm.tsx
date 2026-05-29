@@ -95,78 +95,82 @@ export default function ContactForm() {
         {errors.email && <p className="text-red-400 text-xs">{errors.email.message}</p>}
       </div>
 
-      {/* Téléphone */}
-      <div className="space-y-2">
-        <label htmlFor="telephone" className="text-[11px] font-bold uppercase tracking-widest text-white block">
-          Téléphone
-        </label>
-        <Input
-          id="telephone"
-          type="tel"
-          {...register("telephone")}
-          placeholder="06 00 00 00 00"
-          className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg"
-        />
-      </div>
-
-      {/* Motif */}
-      <div className="space-y-2">
-        <label htmlFor="type" className="text-[11px] font-bold uppercase tracking-widest text-white block">
-          Motif de contact
-        </label>
-        <div className="relative">
-          <select
-            id="type"
-            {...register("type")}
-            className="w-full h-12 px-4 pr-10 rounded-lg bg-black/20 border border-white/20 text-white appearance-none cursor-pointer focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
-          >
-            <option value="" disabled className="bg-primary text-white/50">Sélectionnez...</option>
-            {CONTACT_TYPES.map((t) => (
-              <option key={t} value={t} className="bg-primary text-white">
-                {{ devis: "Demande de devis", support: "Support technique", candidature: "Candidature", autre: "Autre" }[t]}
-              </option>
-            ))}
-          </select>
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <label htmlFor="telephone" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+            Téléphone
+          </label>
+          <Input
+            id="telephone"
+            type="tel"
+            {...register("telephone")}
+            placeholder="06 00 00 00 00"
+            className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg"
+          />
         </div>
-        {errors.type && <p className="text-red-400 text-xs">{errors.type.message}</p>}
+
+        <div className="space-y-2">
+          <label htmlFor="type" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+            Motif de contact
+          </label>
+          <div className="relative">
+            <select
+              id="type"
+              {...register("type")}
+              className="w-full h-12 px-4 pr-10 rounded-lg bg-black/20 border border-white/20 text-white appearance-none cursor-pointer focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
+            >
+              <option value="" disabled className="bg-primary text-white/50">Sélectionnez...</option>
+              {CONTACT_TYPES.map((t) => (
+                <option key={t} value={t} className="bg-primary text-white">
+                  {{ devis: "Demande de devis", support: "Support technique", candidature: "Candidature", autre: "Autre" }[t]}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+          </div>
+          {errors.type && <p className="text-red-400 text-xs">{errors.type.message}</p>}
+        </div>
       </div>
 
       {/* Champs conditionnels — devis */}
       {type === "devis" && (
         <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="space-y-2">
-            <label htmlFor="entreprise" className="text-[11px] font-bold uppercase tracking-widest text-white block">Entreprise</label>
-            <Input id="entreprise" {...register("entreprise")} placeholder="Nom de votre société" className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg" />
-            {errors.entreprise && <p className="text-red-400 text-xs">{errors.entreprise.message}</p>}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="entreprise" className="text-[11px] font-bold uppercase tracking-widest text-white block">Entreprise</label>
+              <Input id="entreprise" {...register("entreprise")} placeholder="Nom de votre société" className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg" />
+              {errors.entreprise && <p className="text-red-400 text-xs">{errors.entreprise.message}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="siret" className="text-[11px] font-bold uppercase tracking-widest text-white block">Numéro SIRET</label>
+              <Input id="siret" {...register("siret")} placeholder="12345678901234" className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg" />
+              {errors.siret && <p className="text-red-400 text-xs">{errors.siret.message}</p>}
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <label htmlFor="siret" className="text-[11px] font-bold uppercase tracking-widest text-white block">Numéro SIRET</label>
-            <Input id="siret" {...register("siret")} placeholder="12345678901234" className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg" />
-            {errors.siret && <p className="text-red-400 text-xs">{errors.siret.message}</p>}
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="secteur" className="text-[11px] font-bold uppercase tracking-widest text-white block">Secteur d&apos;activité</label>
+              <select id="secteur" {...register("secteur")} className="w-full h-12 px-4 rounded-lg bg-black/20 border border-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
+                <option value="" className="bg-primary text-white/50">Sélectionnez...</option>
+                {SECTEURS.map((s) => <option key={s} value={s} className="bg-primary text-white">{s}</option>)}
+              </select>
+              {errors.secteur && <p className="text-red-400 text-xs">{errors.secteur.message}</p>}
+            </div>
 
-          <div className="space-y-2">
-            <label htmlFor="secteur" className="text-[11px] font-bold uppercase tracking-widest text-white block">Secteur d&apos;activité</label>
-            <select id="secteur" {...register("secteur")} className="w-full h-12 px-4 rounded-lg bg-black/20 border border-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-              <option value="" className="bg-primary text-white/50">Sélectionnez...</option>
-              {SECTEURS.map((s) => <option key={s} value={s} className="bg-primary text-white">{s}</option>)}
-            </select>
-            {errors.secteur && <p className="text-red-400 text-xs">{errors.secteur.message}</p>}
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="taille" className="text-[11px] font-bold uppercase tracking-widest text-white block">Taille de l&apos;entreprise</label>
-            <select id="taille" {...register("taille")} className="w-full h-12 px-4 rounded-lg bg-black/20 border border-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-              <option value="" className="bg-primary text-white/50">Sélectionnez...</option>
-              {TAILLES.map((t) => <option key={t} value={t} className="bg-primary text-white">{t} salariés</option>)}
-            </select>
-            {errors.taille && <p className="text-red-400 text-xs">{errors.taille.message}</p>}
+            <div className="space-y-2">
+              <label htmlFor="taille" className="text-[11px] font-bold uppercase tracking-widest text-white block">Taille de l&apos;entreprise</label>
+              <select id="taille" {...register("taille")} className="w-full h-12 px-4 rounded-lg bg-black/20 border border-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
+                <option value="" className="bg-primary text-white/50">Sélectionnez...</option>
+                {TAILLES.map((t) => <option key={t} value={t} className="bg-primary text-white">{t} salariés</option>)}
+              </select>
+              {errors.taille && <p className="text-red-400 text-xs">{errors.taille.message}</p>}
+            </div>
           </div>
         </div>
       )}
