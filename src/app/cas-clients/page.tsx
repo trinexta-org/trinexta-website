@@ -29,8 +29,8 @@ export default function CaseClientsPage() {
         <div className="absolute inset-0 bg-primary/75" />
         <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/60 to-transparent" />
         
-        <Container className="relative z-10 py-12 md:py-16 lg:py-20 w-full">
-          <div className="max-w-4xl space-y-6">
+        <Container className="relative z-10 py-10 md:py-14 lg:py-16 w-full">
+          <div className="max-w-5xl space-y-5 md:space-y-6">
             <FadeIn delay={0.1} direction="down">
               <Text className="font-semibold uppercase tracking-[0.22em] text-secondary">
                 Cas clients
@@ -38,7 +38,7 @@ export default function CaseClientsPage() {
             </FadeIn>
             
             <FadeIn delay={0.2}>
-              <Heading as="h1" className="text-4xl sm:text-6xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl text-white">
+              <Heading as="h1" className="text-4xl sm:text-6xl lg:text-7xl 2xl:text-8xl font-extrabold leading-tight drop-shadow-xl text-white">
                 Des dirigeants qui ont décidé de <span className="text-secondary">ne plus subir</span> leur informatique
               </Heading>
             </FadeIn>
@@ -54,7 +54,7 @@ export default function CaseClientsPage() {
         </Container>
       </ViewportHero>
 
-      <Section className="pt-0 md:pt-0">
+      <Section className="pt-0 md:pt-0 lg:pt-0">
         <GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">
           {caseClients.map((item, index) => (
             <FadeIn key={item.slug} delay={index * 0.15}>
