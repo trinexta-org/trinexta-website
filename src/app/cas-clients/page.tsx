@@ -29,7 +29,7 @@ export default function CaseClientsPage() {
         <div className="absolute inset-0 bg-primary/75" />
         <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/60 to-transparent" />
         
-        <Container className="relative z-10 py-12 md:py-16 lg:py-20">
+        <Container className="relative z-10 py-12 md:py-16 lg:py-20 w-full">
           <div className="max-w-4xl space-y-6">
             <FadeIn delay={0.1} direction="down">
               <Text className="font-semibold uppercase tracking-[0.22em] text-secondary">
