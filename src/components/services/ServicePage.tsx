@@ -11,6 +11,7 @@ import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { FadeIn } from "@/components/ui/FadeIn"
+import { Entrance } from "@/components/ui/Entrance"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { GridCards } from "@/components/layout/GridCards"
 
@@ -84,7 +85,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                 </div>
                 <Container className="relative z-10 py-12 md:py-16 lg:py-20">
                     <div className="max-w-4xl">
-                        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+                        <Entrance delay={0} duration={0.5} direction="up">
                             <Heading as="h1" className="text-4xl sm:text-6xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl">
                                 <span className="text-white">{hero.titlePart1}</span> <span className="text-secondary">{hero.titlePart2}</span>
                             </Heading>
@@ -92,7 +93,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                             <div className="mt-4 md:mt-6 max-w-2xl">
                                 <Text className="text-base md:text-xl text-white/90 drop-shadow-md leading-relaxed">{hero.description}</Text>
                             </div>
-                        </motion.div>
+                        </Entrance>
                         <div className="mt-8 flex flex-col sm:flex-row gap-4">
                             <Link href={hero.ctaHref} className="w-full sm:w-auto">
                                 <Button variant="secondary" className="w-full sm:w-auto text-white h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center">
