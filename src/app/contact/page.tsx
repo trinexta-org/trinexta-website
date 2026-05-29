@@ -7,7 +7,7 @@ import { ContactCards } from "@/components/contact/ContactCards";
 import { ContactFormSection } from "@/components/contact/ContactFormSection";
 import { ContactFaq } from "@/components/contact/ContactFaq";
 import { ContactMap } from "@/components/contact/ContactMap";
-import { ContactFinalCTA } from "@/components/contact/ContactFinalCTA";
+import { FinalCTA } from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
   title: "Contact — Trinexta · Infogérance & Support informatique",
@@ -44,7 +44,14 @@ export default function ContactPage() {
 
       <ContactMap />
 
-      <ContactFinalCTA />
+      <FinalCTA
+        line1="Vous aider à"
+        line2="surmonter vos"
+        line3="défis technologiques"
+        description="Trinexta by Trustech IT Support simplifie et sécurise votre informatique. Un accompagnement fiable, souple et adapté à votre performance."
+        ctaLabel="En savoir plus"
+        ctaHref="/nos-offres"
+      />
     </main>
   );
 }

@@ -81,6 +81,117 @@
       animation: fade-in-scroll 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(-24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-down {
+    opacity: 0;
+    animation: fade-in-down 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-left {
+    opacity: 0;
+    animation: fade-in-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-right {
+    opacity: 0;
+    animation: fade-in-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes badge-pop {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .animate-badge-pop {
+    opacity: 0;
+    animation: badge-pop 0.25s ease-out both;
+  }
+}
+
+/* ── MetricRow animations (CasClientCard) ──────────────────────────────
+   Total cycle ≈ 6.8s | Stagger 1.3s per row via --metric-delay CSS var
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes metric-show-avant {
+  0%   { opacity: 0; transform: translateY(-8px);  }
+  6%   { opacity: 1; transform: translateY(0);     }
+  38%  { opacity: 1; transform: translateY(0);     }
+  43%  { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 0; transform: translateY(-8px);  }
+}
+@keyframes metric-show-apres {
+  0%   { opacity: 0; transform: translateY(10px); }
+  49%  { opacity: 0; transform: translateY(10px); }
+  55%  { opacity: 1; transform: translateY(0);    }
+  96%  { opacity: 1; transform: translateY(0);    }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+@keyframes metric-sweep {
+  0%   { clip-path: inset(0 100% 0 0%);   }
+  42%  { clip-path: inset(0 100% 0 0%);   }
+  45%  { clip-path: inset(0 0%   0 0%);   }
+  49%  { clip-path: inset(0 0%   0 100%); }
+  100% { clip-path: inset(0 100% 0 0%);   }
+}
+.metric-avant {
+  animation: metric-show-avant 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+  animation-delay: var(--metric-delay, 0s);
+}
+.metric-apres {
+  animation: metric-show-apres 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+  animation-delay: var(--metric-delay, 0s);
+}
+.metric-sweep {
+  animation: metric-sweep 6.8s linear infinite;
+  animation-delay: var(--metric-delay, 0s);
 }
 
 .prose h2 {

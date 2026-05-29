@@ -8,7 +8,7 @@ import { DifferentiatorSection } from "@/components/nos-offres/DifferentiatorSec
 import { FaqSection } from "@/components/nos-offres/FaqSection"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { officialFaqs } from "@/components/nos-offres/faqData" 
-import { NosOffresCTA } from "@/components/nos-offres/NosOffresCTA" 
+import { FinalCTA } from "@/components/FinalCTA"
 import { OffersTabs } from "@/components/nos-offres/OffersTabs"
 
 export const metadata = {
@@ -86,7 +86,13 @@ export default function NosOffresPage() {
         </Container>
       </Section>
 
-      <NosOffresCTA />
+      <FinalCTA
+        line1="Prêt à trouver"
+        line2="le technicien qui"
+        line3="fera la différence ?"
+        description="Donnez une nouvelle impulsion à votre support IT. Nous vous aidons à surmonter vos défis technologiques."
+        ctaLabel="Contactez-nous dès maintenant"
+      />
     </main>
   )
 }

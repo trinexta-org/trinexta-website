@@ -7,9 +7,11 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { FadeIn } from "@/components/ui/FadeIn"
+import { Entrance } from "@/components/ui/Entrance"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { GridCards } from "@/components/layout/GridCards"
 
@@ -76,14 +78,14 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
             <JsonLd data={jsonLd} />
 
             {/* 1. HERO */}
-            <section className="relative z-10 min-h-[70dvh] flex items-center justify-center overflow-hidden">
+            <ViewportHero>
                 <div className="absolute inset-0 z-0">
                     <Image src={`/images/services/${serviceSlug}/hero.jpg`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill priority className="object-cover object-center" sizes="100vw" />
                     <div className="absolute inset-0 bg-primary/90" />
                 </div>
-                <Container className="relative z-10 py-16 md:py-20">
+                <Container className="relative z-10 py-12 md:py-16 lg:py-20">
                     <div className="max-w-4xl">
-                        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+                        <Entrance delay={0} duration={0.5} direction="up">
                             <Heading as="h1" className="text-4xl sm:text-6xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl">
                                 <span className="text-white">{hero.titlePart1}</span> <span className="text-secondary">{hero.titlePart2}</span>
                             </Heading>
@@ -91,7 +93,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                             <div className="mt-4 md:mt-6 max-w-2xl">
                                 <Text className="text-base md:text-xl text-white/90 drop-shadow-md leading-relaxed">{hero.description}</Text>
                             </div>
-                        </motion.div>
+                        </Entrance>
                         <div className="mt-8 flex flex-col sm:flex-row gap-4">
                             <Link href={hero.ctaHref} className="w-full sm:w-auto">
                                 <Button variant="secondary" className="w-full sm:w-auto text-white h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center">
@@ -101,7 +103,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                         </div>
                     </div>
                 </Container>
-            </section>
+            </ViewportHero>
 
             {/* TRANSITION */}
             <TransitionTitle surtitle={problem.subtitle} line1="Ce qui freine" line2="votre activité" />
