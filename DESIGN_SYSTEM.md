@@ -81,7 +81,8 @@ Ces valeurs correspondent aux hauteurs du header mobile (`4rem`) et desktop (`7.
 ```tsx
 import { GridCards } from "@/components/layout/GridCards"
 import { SplitContent } from "@/components/layout/SplitContent"
-import { BannerCTA } from "@/components/layout/BannerCTA"
+import { FinalCTA } from "@/components/FinalCTA"
+import { TransitionTitle } from "@/components/TransitionTitle"
 
 // Grille responsive (s'adapte auto ou via props)
 // columns: 1 | 2 | 3 | 4 (defaut 3)
@@ -102,13 +103,22 @@ import { BannerCTA } from "@/components/layout/BannerCTA"
   <Text>Description...</Text>
 </SplitContent>
 
-// Bandeau d'appel a l'action
-// variant: "primary" (defaut) | "secondary" | "accent"
-<BannerCTA
-  variant="primary"
-  title="Pret a commencer ?"
-  description="Contactez-nous pour un audit gratuit."
-  action={<Button variant="secondary">Contact</Button>}
+// Section d'appel a l'action finale (premium, avec fibres animees au scroll/fond)
+// Toutes les props sont optionnelles
+<FinalCTA
+  line1="Prêt à ne plus"
+  line2="subir votre"
+  line3="informatique ?"
+  description="Reprenez le contrôle avec un partenaire qui transforme vos défis en opportunités stratégiques."
+  ctaLabel="Prendre RDV gratuit"
+  ctaHref="/contact"
+/>
+
+// Section de transition textuelle premium (avec vagues de fibres de fond)
+<TransitionTitle
+  surtitle="Nos resultats"
+  line1="Des chiffres clairs"
+  line2="sans blabla"
 />
 ```
 
@@ -193,6 +203,31 @@ import { Entrance } from "@/components/ui/Entrance"
 <Entrance delay={0.2} direction="up">
   <Heading as="h1">...</Heading>
 </Entrance>
+```
+
+### Reveal (animation fluide au scroll ultra-performante sans framer-motion)
+
+```tsx
+import { Reveal } from "@/components/ui/Reveal"
+
+// delay : secondes (defaut 0)
+
+<Reveal delay={0.15}>
+  <Card>...</Card>
+</Reveal>
+```
+
+### HeroCarousel (carousel hero generique avec transitions fluides)
+
+```tsx
+import { HeroCarousel } from "@/components/ui/HeroCarousel"
+
+<HeroCarousel
+  slides={data}
+  interval={6000}
+  renderBackground={(slide, idx) => <div className="absolute inset-0 bg-primary" />}
+  renderSlide={(slide, idx) => <Heading as="h1">{slide.title}</Heading>}
+/>
 ```
 
 ---
