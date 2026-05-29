@@ -186,13 +186,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 ## Phase 6 — Tests avant bascule (Semaine 13)
 
-Script à exécuter sur `staging.trinexta.com` avant tout changement DNS :
+Script à exécuter sur `staging.trinexta.fr` avant tout changement DNS :
 
 ```bash
 #!/bin/bash
 # test-redirections.sh
 
-BASE="https://staging.trinexta.com"
+BASE="https://staging.trinexta.fr/"
 
 URLS=(
   "/infogerance-informatique/"
@@ -225,7 +225,7 @@ Résultat attendu :
 Vérifications complémentaires avant bascule :
 - [ ] Aucun lien cassé (Screaming Frog sur staging)
 - [ ] Toutes les balises title/meta présentes (Screaming Frog → Page Titles)
-- [ ] Sitemap XML accessible sur staging.trinexta.com/sitemap.xml
+- [ ] Sitemap XML accessible sur staging.trinexta.fr/sitemap.xml
 - [ ] robots.txt correct (pas de `Disallow: /` oublié)
 
 ---

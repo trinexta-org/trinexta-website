@@ -24,6 +24,7 @@ import {
   ResumeArticle,
   HeadingTOC
 } from "@/lib/sanity";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 type ArticlePageProps = {
   params: Promise<{
@@ -49,18 +50,18 @@ export async function generateMetadata({
   const description = article.seoDescription ?? article.extrait;
   const ogImage = article.imageUne?.asset?._ref
     ? [
-        {
-          url: urlForImage(article.imageUne)
-            .width(1200)
-            .height(630)
-            .fit("crop")
-            .auto("format")
-            .url(),
-          width: 1200,
-          height: 630,
-          alt: article.imageUne.alt ?? article.titre,
-        },
-      ]
+      {
+        url: urlForImage(article.imageUne)
+          .width(1200)
+          .height(630)
+          .fit("crop")
+          .auto("format")
+          .url(),
+        width: 1200,
+        height: 630,
+        alt: article.imageUne.alt ?? article.titre,
+      },
+    ]
     : undefined;
 
   return {

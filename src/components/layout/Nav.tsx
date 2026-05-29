@@ -2,25 +2,36 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils" 
+import { cn } from "@/lib/utils"
 
 export const menuItems = [
   { label: "Accueil", href: "/" },
-  { 
-    label: "Nos offres", 
-    href: "#",
+  {
+    label: "Nos offres",
+    href: "/nos-offres",
     subMenu: [
-      { label: "Offre Sérénité", href: "/offre-serenite" },
-      { label: "Offre Impulsion", href: "/offre-impulsion" },
-      { label: "Comparateur d'offres", href: "/comparateur" },
-      { label: "Tarifs", href: "/tarifs" },
+      { label: "Offre Impulsion", href: "/nos-offres?tab=impulsion" },
+      { label: "Offre Sérénité", href: "/nos-offres?tab=serenite" },
+      { label: "Services Annexes", href: "/nos-offres?tab=services-annexes" },
+      { label: "Trinexta Studio", href: "/nos-offres?tab=studio" },
     ]
   },
-  { label: "Nos services", href: "/services" },
+  {
+    label: "Nos services",
+    href: "/infogerance",
+    subMenu: [
+      { label: "Infogérance", href: "/infogerance" },
+      { label: "Cybersécurité", href: "/cybersecurite" },
+      { label: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" },
+      { label: "Microsoft 365", href: "/microsoft-365" },
+      { label: "Support Informatique", href: "/support-informatique" },
+      { label: "Solutions Métier", href: "/solutions-metier" },
+    ]
+  },
   { label: "Cas clients", href: "/cas-clients" },
   { label: "À propos", href: "/a-propos" },
-  { 
-    label: "Ressources", 
+  {
+    label: "Ressources",
     href: "#",
     subMenu: [
       { label: "Blog", href: "/blog" },
@@ -39,7 +50,14 @@ export function Nav() {
   return (
     <nav className="hidden lg:flex items-center gap-8">
       {menuItems.map((link) => {
-        const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href))
+        const matchesHref = (href: string) => {
+          const [path] = href.split("?")
+          return pathname === path || (path !== "/" && pathname?.startsWith(path))
+        }
+
+        const isActive = link.subMenu
+          ? [link.href, ...link.subMenu.map((sub) => sub.href)].some(matchesHref)
+          : matchesHref(link.href)
 
         return (
           <div key={link.label} className="relative group">
@@ -51,11 +69,11 @@ export function Nav() {
               )}
             >
               {link.label}
-              <span 
+              <span
                 className={cn(
                   "absolute bottom-4 left-0 h-0.5 bg-secondary transition-all duration-300",
                   isActive ? "w-full" : "w-0 group-hover:w-full"
-                )} 
+                )}
               />
             </Link>
 
@@ -65,17 +83,17 @@ export function Nav() {
                 <div className="bg-background border border-border rounded-xl shadow-xl p-2 flex flex-col gap-1">
                   {link.subMenu.map((sub) => (
                     sub.disabled ? (
-                      <span 
-                        key={sub.label} 
-                        aria-disabled="true" 
+                      <span
+                        key={sub.label}
+                        aria-disabled="true"
                         className="block px-4 py-2.5 text-sm text-muted-foreground cursor-not-allowed bg-muted/50 rounded-lg"
                       >
                         {sub.label}
                       </span>
                     ) : (
-                      <Link 
-                        key={sub.label} 
-                        href={sub.href} 
+                      <Link
+                        key={sub.label}
+                        href={sub.href}
                         className="block px-4 py-2.5 text-sm text-primary font-semibold hover:bg-accent hover:text-secondary rounded-lg transition-colors"
                       >
                         {sub.label}
