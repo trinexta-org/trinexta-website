@@ -8,7 +8,6 @@ import { ViewportHero } from "@/components/layout/ViewportHero";
 import { CasClientCard } from "@/components/cas-clients/CasClientCard";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Entrance } from "@/components/ui/Entrance";
-import { FadeIn } from "@/components/ui/FadeIn";
 import { Reveal } from "@/components/ui/Reveal";
 import { caseClients } from "@/data/cas-clients";
 
@@ -70,16 +69,20 @@ export default function CaseClientsPage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[800px] h-full md:h-[800px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none z-0" />
         
         <Container className="relative z-10 text-center">
-          <FadeIn>
-            <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <Reveal>
               <Heading as="h2" className="text-3xl sm:text-5xl md:text-7xl text-white uppercase tracking-tighter leading-[0.9] font-black">
                 Devenir notre <span className="text-secondary">prochain</span> cas client ?
               </Heading>
-              
+            </Reveal>
+
+            <Reveal delay={0.15}>
               <Text className="text-white/70 text-base md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
                 Vous voulez sécuriser votre parc, moderniser vos outils ou déléguer enfin le suivi de votre informatique à un interlocuteur fiable ?
               </Text>
-              
+            </Reveal>
+
+            <Reveal delay={0.3}>
               <div className="pt-4">
                 <Link
                   href="/contact"
@@ -96,8 +99,8 @@ export default function CaseClientsPage() {
                   </div>
                 </Link>
               </div>
-            </div>
-          </FadeIn>
+            </Reveal>
+          </div>
         </Container>
       </Section>
     </div>
