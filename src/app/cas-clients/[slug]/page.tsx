@@ -3,6 +3,8 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { BannerCTA } from "@/components/layout/BannerCTA"
 import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
@@ -57,35 +59,35 @@ export default async function CaseClientDetailPage({
   return (
     <main className="min-h-screen bg-primary text-white">
       {/* Hero */}
-      <Section container={false} className="relative overflow-hidden pb-12 pt-20 md:pb-16 md:pt-28">
+      <ViewportHero>
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.heroImage}')` }} />
         <div className="absolute inset-0 bg-primary/75" />
         <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/65 to-transparent" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl space-y-6">
-          <Link
-            href="/cas-clients"
-            className="inline-flex text-sm font-semibold text-secondary hover:text-white"
-          >
-            Retour aux cas clients
-          </Link>
+        <Container className="relative z-10 py-12 md:py-16 lg:py-20">
+          <div className="max-w-5xl space-y-6">
+            <Link
+              href="/cas-clients"
+              className="inline-flex text-sm font-semibold text-secondary hover:text-white"
+            >
+              Retour aux cas clients
+            </Link>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Badge className="border-white/10 bg-white/10 text-white">{item.label}</Badge>
-            <Badge className="border-white/10 bg-white/10 text-white">{item.sectorLabel}</Badge>
-            <Badge className="border-white/10 bg-white/10 text-white">{item.clientName}</Badge>
-            <Badge className="border-white/10 bg-white/10 text-white">{item.size}</Badge>
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge className="border-white/10 bg-white/10 text-white">{item.label}</Badge>
+              <Badge className="border-white/10 bg-white/10 text-white">{item.sectorLabel}</Badge>
+              <Badge className="border-white/10 bg-white/10 text-white">{item.clientName}</Badge>
+              <Badge className="border-white/10 bg-white/10 text-white">{item.size}</Badge>
+            </div>
+
+            <Heading as="h1" className="text-white">
+              {item.title}
+            </Heading>
+            <Text variant="lead" className="max-w-4xl text-white/80">
+              {item.metaDescription}
+            </Text>
           </div>
-
-          <Heading as="h1" className="text-white">
-            {item.title}
-          </Heading>
-          <Text variant="lead" className="max-w-4xl text-white/80">
-            {item.metaDescription}
-          </Text>
-        </div>
-        </div>
-      </Section>
+        </Container>
+      </ViewportHero>
 
       {/* Timeline */}
       <Section className="pb-16 pt-4 md:pt-6">

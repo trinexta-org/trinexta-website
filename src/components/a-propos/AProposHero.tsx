@@ -4,8 +4,8 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 
@@ -35,7 +35,7 @@ export function AProposHero() {
     }, [])
 
     return (
-        <Section container={false} className="relative z-10 min-h-[100dvh] flex items-center justify-center overflow-hidden p-0 m-0">
+        <ViewportHero>
 
             <div className="absolute inset-0 z-0">
                 <Image
@@ -49,7 +49,7 @@ export function AProposHero() {
                 <div className="absolute inset-0 bg-primary/70 lg:bg-primary/80" />
             </div>
 
-            <Container className="relative z-10 w-full py-20 md:py-32 flex flex-col justify-center">
+            <Container className="relative z-10 w-full py-12 md:py-16 lg:py-20">
                 <div className="max-w-4xl">
 
                     <div className="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px] flex flex-col justify-center">
@@ -122,6 +122,6 @@ export function AProposHero() {
 
                 </div>
             </Container>
-        </Section>
+        </ViewportHero>
     )
 }

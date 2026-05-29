@@ -35,6 +35,7 @@
 ```tsx
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 
 // Section standard (Container inclus automatiquement)
 <Section id="services">
@@ -47,10 +48,33 @@ import { Container } from "@/components/layout/Container"
     <Heading as="h2" className="text-white">...</Heading>
   </Container>
 </Section>
+
+// Hero plein viewport disponible sous le header sticky
+<ViewportHero>
+  <div className="absolute inset-0 bg-primary" />
+  <Container className="relative z-10 py-12 md:py-16 lg:py-20">
+    <Heading as="h1" className="text-white">...</Heading>
+  </Container>
+</ViewportHero>
 ```
 
 `<Section>` accepte : `id`, `className`, `container` (bool, defaut `true`).
 `<Container>` accepte : `className`, `as` (balise HTML, defaut `div`).
+`<ViewportHero>` accepte les props natives d'une `section`, dont `className`, `id`, `aria-*`.
+
+### Regle hero
+
+Utiliser `<ViewportHero>` pour les heros de haut de page qui doivent occuper exactement l'espace visible restant sous le menu.
+
+Le header est `sticky` et reste dans le flux du document. Ne pas utiliser `h-[100dvh]`, `min-h-[100dvh]`, `min-h-[80dvh]` ou `min-h-[70dvh]` directement pour un hero de page : `100dvh` ajoute la hauteur du header et force un scroll, tandis que `70/80dvh` cree des heros trop courts selon les pages.
+
+`<ViewportHero>` applique la hauteur standard :
+
+```tsx
+min-h-[calc(100dvh-4rem)] lg:min-h-[calc(100dvh-7.5rem)]
+```
+
+Ces valeurs correspondent aux hauteurs du header mobile (`4rem`) et desktop (`7.5rem`). Garder les paddings internes sur le `Container`, typiquement `py-12 md:py-16 lg:py-20`, pour respirer sans casser la hauteur globale.
 
 ### Sections reutilisables 
 

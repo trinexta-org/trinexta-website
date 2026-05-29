@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 
 const slides = [
   {
@@ -42,7 +43,7 @@ export function NosOffresHero() {
     }, [])
 
     return (
-        <section className="relative z-10 min-h-[80dvh] flex items-center justify-center overflow-hidden">
+        <ViewportHero>
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/images/pricing/hero-offres.avif"
@@ -55,7 +56,7 @@ export function NosOffresHero() {
                 <div className="absolute inset-0 bg-primary/90" />
             </div>
 
-            <Container className="relative z-10 py-20 flex flex-col justify-center">
+            <Container className="relative z-10 py-12 md:py-16 lg:py-20">
                 <div className="max-w-4xl">
                     <div className="min-h-[250px] flex flex-col justify-center">
                         <AnimatePresence mode="wait">
@@ -96,6 +97,6 @@ export function NosOffresHero() {
                     </div>
                 </div>
             </Container>
-        </section>
+        </ViewportHero>
     )
 }
