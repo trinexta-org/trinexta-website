@@ -1,12 +1,7 @@
 import { defineField, defineType } from 'sanity'
+import { CATEGORIES_BLOG } from '../../src/data/categories'
 
-const CATEGORIES = [
-  { title: 'Cybersécurité', value: 'cybersecurite' },
-  { title: 'Infogérance', value: 'infogerance' },
-  { title: 'Cloud', value: 'cloud' },
-  { title: 'Productivité', value: 'productivite' },
-  { title: 'Actualités Trinexta', value: 'actualites' },
-]
+const CATEGORIES = CATEGORIES_BLOG.map((c) => ({ title: c.label, value: c.id }))
 
 export const article = defineType({
   name: 'article',

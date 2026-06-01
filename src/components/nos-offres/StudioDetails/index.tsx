@@ -3,60 +3,7 @@ import { Heading, Text } from "@/components/ui/Typography"
 import { Card } from "@/components/ui/Card"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-
-const expertises = [
-  {
-    title: "Sites internet sur mesure",
-    desc: "Conception de sites vitrines, institutionnels ou e-commerce modernes, performants et entièrement administrables. Nous mettons l&apos;accent sur un design UI/UX unique qui reflète fidèlement l&apos;identité de votre entreprise.",
-    tech: "Next.js / Sanity CMS / Tailwind CSS",
-    points: [
-      "Création de sites vitrines & corporate sur mesure",
-      "Design UI/UX moderne, fluide et responsive",
-      "Optimisation avancée pour le référencement naturel (SEO)",
-      "Interfaces de gestion de contenu simples et intuitives",
-      "Performances d&apos;affichage et de vitesse optimales"
-    ]
-  },
-  {
-    title: "Applications Web complexes",
-    desc: "Développement d&apos;outils métiers et d&apos;applications web spécifiques pour automatiser vos processus internes, gérer vos bases de données ou interconnecter vos outils existants via des API sécurisées.",
-    tech: "React / Node.js / PostgreSQL",
-    points: [
-      "Développement d&apos;outils métiers spécifiques",
-      "Architecture et gestion de bases de données sécurisées",
-      "Conception et interconnexion d&apos;API robustes",
-      "Automatisation des flux et des processus internes",
-      "Console d&apos;administration et pilotage de données"
-    ]
-  },
-  {
-    title: "Plateformes SaaS",
-    desc: "Accompagnement de l&apos;idée au déploiement pour la création de vos solutions logicielles en mode SaaS. Architecture scalable, gestion des abonnements, sécurité des données et interfaces utilisateurs intuitives.",
-    tech: "Next.js / Prisma / Cloud Souverain",
-    points: [
-      "Accompagnement complet de l&apos;idée au déploiement",
-      "Architecture cloud évolutive et hautement disponible",
-      "Intégration des abonnements et paiements sécurisés",
-      "Isolation stricte et protection des données utilisateurs",
-      "Suivi technique continu et maintenance évolutive"
-    ]
-  }
-]
-
-const advantages = [
-  {
-    title: "Développement 100% Interne",
-    desc: "Aucune sous-traitance opaque. Vos outils, plateformes et sites internet sont intégralement pensés, designés et codés par nos équipes de développeurs en interne."
-  },
-  {
-    title: "Hébergement Souverain en France",
-    desc: "Pour vous garantir une sécurité absolue et une conformité RGPD totale, l&apos;ensemble de nos réalisations est hébergé exclusivement sur nos serveurs sécurisés situés en France."
-  },
-  {
-    title: "Cohérence IT & Web",
-    desc: "Votre site et votre infrastructure informatique sont gérés sous le même toit. Une synergie parfaite pour éviter les conflits techniques entre prestataires."
-  }
-]
+import { expertises, advantages } from "./data"
 
 export function StudioDetails() {
   return (
@@ -122,7 +69,7 @@ export function StudioDetails() {
           <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-center text-white">
             Pourquoi nous confier vos projets web et SaaS ?
           </Heading>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {advantages.map((adv, idx) => (
               <div key={idx} className="p-5 rounded-xl bg-white/[0.01] border border-white/5 space-y-2">
