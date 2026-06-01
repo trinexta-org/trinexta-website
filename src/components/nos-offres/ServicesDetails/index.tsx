@@ -17,7 +17,7 @@ export function ServicesDetails() {
             Changement de messagerie, ajout de nouveaux postes, évolution de votre environnement Microsoft 365, amélioration de votre réseau ou sécurisation de vos données... Nous intervenons sur les projets informatiques du quotidien comme sur les sujets plus structurants.
           </Text>
           <p className="border-t border-b border-white/10 py-4 italic text-white/90 text-sm md:text-base leading-relaxed">
-            Chaque entreprise a ses contraintes, son niveau d'équipement et ses priorités. C'est pour cela que ces services sont proposés sur devis : nous analysons votre besoin, nous vous recommandons une solution adaptée et nous vous annonçons un prix fixe avant toute intervention. Vous avancez avec un cadre clair, sans mauvaise surprise.
+            Chaque entreprise a ses contraintes, son niveau d&apos;équipement et ses priorités. C&apos;est pour cela que ces services sont proposés sur devis : nous analysons votre besoin, nous vous recommandons une solution adaptée et nous vous annonçons un prix fixe avant toute intervention. Vous avancez avec un cadre clair, sans mauvaise surprise.
           </p>
         </div>
 
@@ -42,10 +42,10 @@ export function ServicesDetails() {
         </div>
         <div className="xl:col-span-7 space-y-4 text-white/80 text-sm md:text-base leading-relaxed">
           <p>
-            Chez TRINEXTA, nous cherchons d'abord la solution la plus utile et économique pour votre entreprise. Avant de recommander un achat de matériel, nous commençons par évaluer ce que vous avez déjà. Si un poste peut encore répondre à vos besoins grâce à une optimisation, une mise à niveau ou un ajustement technique, c'est cette option budgétaire et responsable que nous privilégions.
+            Chez TRINEXTA, nous cherchons d&apos;abord la solution la plus utile et économique pour votre entreprise. Avant de recommander un achat de matériel, nous commençons par évaluer ce que vous avez déjà. Si un poste peut encore répondre à vos besoins grâce à une optimisation, une mise à niveau ou un ajustement technique, c&apos;est cette option budgétaire et responsable que nous privilégions.
           </p>
           <p className="font-semibold text-white">
-            Notre objectif n'est pas de pousser à la dépense. Nous vous aidons à faire les bons choix, au bon moment, en tenant compte à la fois de votre activité, de votre budget et de la durée de vie réelle de vos équipements. C'est une approche plus responsable, à la fois pour votre entreprise et pour l'environnement.
+            Notre objectif n&apos;est pas de pousser à la dépense. Nous vous aidons à faire les bons choix, au bon moment, en tenant compte à la fois de votre activité, de votre budget et de la durée de vie réelle de vos équipements. C&apos;est une approche plus responsable, à la fois pour votre entreprise et pour l&apos;environnement.
           </p>
         </div>
       </div>
@@ -53,7 +53,7 @@ export function ServicesDetails() {
       <div className="space-y-8">
         <div className="space-y-2">
           <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Nos services sur devis</Heading>
-          <Text className="text-white/60 text-sm md:text-base">Voici les prestations les plus demandées par nos clients. Chaque intervention fait l'objet d'un échange préalable et d'un devis personnalisé.</Text>
+          <Text className="text-white/60 text-sm md:text-base">Voici les prestations les plus demandées par nos clients. Chaque intervention fait l&apos;objet d&apos;un échange préalable et d&apos;un devis personnalisé.</Text>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -124,7 +124,7 @@ export function ServicesDetails() {
         </div>
 
         <p className="text-xs text-white/40 text-center italic pt-3 border-t border-white/5">
-          Nous négocions les meilleurs tarifs possibles pour vous et nous préparons le matériel avant livraison afin qu'il soit prêt à l'emploi dès son arrivée.
+          Nous négocions les meilleurs tarifs possibles pour vous et nous préparons le matériel avant livraison afin qu&apos;il soit prêt à l&apos;emploi dès son arrivée.
         </p>
       </div>
 
