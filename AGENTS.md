@@ -25,6 +25,7 @@ Les specs sont dans NotebookLM — utiliser le MCP `notebooklm` (outil `notebook
 4. Vérifier `src/lib/db/index.ts` pour l'instance Prisma (ne pas en créer une autre)
 5. Lire `DESIGN_SYSTEM.md` avant tout travail sur une page ou un composant front
 6. Lire `TONE.md` avant d'écrire ou réécrire du contenu textuel (copies, titres, descriptions)
+7. Consulter `src/data/` avant de définir des données statiques dans un composant ou une route
 
 ## Conventions
 
@@ -38,6 +39,7 @@ Les specs sont dans NotebookLM — utiliser le MCP `notebooklm` (outil `notebook
 ```
 src/
   app/          # routes Next.js App Router
+  data/         # données statiques — source de vérité (voir ci-dessous)
   lib/
     db/         # client Prisma (index.ts) — ne pas dupliquer
 generated/
@@ -47,6 +49,17 @@ studio/
 prisma/
   schema.prisma # source de vérité DB
 ```
+
+### Couche `src/data/`
+
+Les données statiques (listes, configs, contenus de pages) vivent dans `src/data/`, jamais inline dans les composants ou les routes.
+
+| Fichier/dossier | Contenu |
+|---|---|
+| `categories.ts` | Catégories blog — importé par `sanity.ts`, `BlogList`, et le schéma Sanity |
+| `services/{slug}.ts` | Données de chaque page service — importé via `services/index.ts` (`getServiceData`) |
+
+**Règle** : si une donnée est référencée à plus d'un endroit, elle appartient à `src/data/`. Un composant ne doit jamais être la source de vérité d'une donnée partagée.
 
 ## Variables d'environnement
 
@@ -72,3 +85,4 @@ Toujours vérifier `.env.example` pour la liste complète. Ne jamais committer `
 - Ne pas écrire `"use client"` par défaut — préférer les Server Components
 - Ne pas hardcoder de couleurs HEX dans les classes Tailwind — utiliser les tokens (`text-primary`, `bg-secondary`...)
 - Ne pas créer de layout manuel (`px-4 max-w-7xl mx-auto`) — utiliser `<Section>` et `<Container>`
+- Ne pas définir de données statiques partagées dans un composant — les mettre dans `src/data/`
