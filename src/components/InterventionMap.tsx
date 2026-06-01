@@ -76,14 +76,45 @@ function SweepArm({
     maxR: number
     onCrossRef: React.MutableRefObject<((ids: string[]) => void) | null>
 }) {
-    const [angle, setAngle] = useState(0)
     const angleRef = useRef(0)
     const prevRef = useRef(0)
+    const trailRef = useRef<SVGPathElement>(null)
+    const coreTrailRef = useRef<SVGPathElement>(null)
+    const lineRef = useRef<SVGLineElement>(null)
+    const dotRef = useRef<SVGCircleElement>(null)
+
+    const toRad = (deg: number) => ((deg - 90) * Math.PI) / 180
+    const getGeometry = (angle: number) => {
+        const r = maxR * 0.93
+        const tipX = cx + Math.cos(toRad(angle)) * r
+        const tipY = cy + Math.sin(toRad(angle)) * r
+        const trailPath = (span: number) => {
+            const ex = cx + Math.cos(toRad(angle)) * r
+            const ey = cy + Math.sin(toRad(angle)) * r
+            const sx = cx + Math.cos(toRad(angle - span)) * r
+            const sy = cy + Math.sin(toRad(angle - span)) * r
+            return `M ${cx} ${cy} L ${ex} ${ey} A ${r} ${r} 0 0 0 ${sx} ${sy} Z`
+        }
+
+        return {
+            tipX,
+            tipY,
+            trail: trailPath(SWEEP_SPAN),
+            coreTrail: trailPath(18),
+        }
+    }
 
     useAnimationFrame((_, delta) => {
         prevRef.current = angleRef.current
         angleRef.current = (angleRef.current + delta * 0.035) % 360
-        setAngle(angleRef.current)
+
+        const geometry = getGeometry(angleRef.current)
+        trailRef.current?.setAttribute("d", geometry.trail)
+        coreTrailRef.current?.setAttribute("d", geometry.coreTrail)
+        lineRef.current?.setAttribute("x2", String(geometry.tipX))
+        lineRef.current?.setAttribute("y2", String(geometry.tipY))
+        dotRef.current?.setAttribute("cx", String(geometry.tipX))
+        dotRef.current?.setAttribute("cy", String(geometry.tipY))
 
         const pa = prevRef.current
         const na = angleRef.current
@@ -95,27 +126,17 @@ function SweepArm({
         if (crossed.length > 0) onCrossRef.current?.(crossed)
     })
 
-    const toRad = (deg: number) => ((deg - 90) * Math.PI) / 180
-    const tipX = cx + Math.cos(toRad(angle)) * maxR * 0.93
-    const tipY = cy + Math.sin(toRad(angle)) * maxR * 0.93
-    const trailPath = (span: number) => {
-        const R = maxR * 0.93
-        const ex = cx + Math.cos(toRad(angle)) * R
-        const ey = cy + Math.sin(toRad(angle)) * R
-        const sx = cx + Math.cos(toRad(angle - span)) * R
-        const sy = cy + Math.sin(toRad(angle - span)) * R
-        return `M ${cx} ${cy} L ${ex} ${ey} A ${R} ${R} 0 0 0 ${sx} ${sy} Z`
-    }
+    const initialGeometry = getGeometry(0)
 
     return (
         <g>
-            <path d={trailPath(SWEEP_SPAN)} fill="var(--secondary)" fillOpacity="0.07" />
-            <path d={trailPath(18)} fill="var(--secondary)" fillOpacity="0.17" />
-            <line x1={cx} y1={cy} x2={tipX} y2={tipY}
+            <path ref={trailRef} d={initialGeometry.trail} fill="var(--secondary)" fillOpacity="0.07" />
+            <path ref={coreTrailRef} d={initialGeometry.coreTrail} fill="var(--secondary)" fillOpacity="0.17" />
+            <line ref={lineRef} x1={cx} y1={cy} x2={initialGeometry.tipX} y2={initialGeometry.tipY}
                 stroke="var(--secondary)" strokeOpacity="0.75" strokeWidth="1.2"
-                filter="url(#glow-soft)" />
-            <circle cx={tipX} cy={tipY} r="3"
-                fill="var(--secondary)" fillOpacity="0.95" filter="url(#glow-soft)" />
+            />
+            <circle ref={dotRef} cx={initialGeometry.tipX} cy={initialGeometry.tipY} r="3"
+                fill="var(--secondary)" fillOpacity="0.95" />
         </g>
     )
 }
