@@ -2,23 +2,23 @@ import Link from "next/link"
 import { Container } from "./Container" 
 import { FacebookIcon } from "@/components/ui/icons/FacebookIcon"
 import { LinkedinIcon } from "@/components/ui/icons/LinkedinIcon"
-import { TwitterIcon } from "@/components/ui/icons/TwitterIcon"
-import { GithubIcon } from "@/components/ui/icons/GithubIcon"
+import { InstagramIcon } from "@/components/ui/icons/InstagramIcon" 
+import { TiktokIcon } from "@/components/ui/icons/TiktokIcon"
 
 const NAVIGATION = [
   { name: "Accueil", href: "/" },
-  { name: "Tarifs", href: "/tarifs" },
+  { name: "Tarifs", href: "/nos-offres" }, 
   { name: "Cas clients", href: "/cas-clients" },
   { name: "Blog Expertise", href: "/blog" }
 ]
 
 const SERVICES = [
-  "Infogérance PME", 
-  "Support informatique", 
-  "Cybersécurité 360°", 
-  "Cloud & Sauvegarde", 
-  "Microsoft 365", 
-  "Solutions métier"
+  { name: "Infogérance PME", href: "/infogerance" }, 
+  { name: "Support informatique", href: "/support-informatique" }, 
+  { name: "Cybersécurité 360°", href: "/cybersecurite" }, 
+  { name: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" }, 
+  { name: "Microsoft 365", href: "/microsoft-365" }, 
+  { name: "Solutions métier", href: "/solutions-metier" }
 ]
 
 const LEGAL = [
@@ -70,8 +70,8 @@ export function Footer() {
             <div>
               <span className={desktopTitle}>Nos Services</span>
               <ul className="flex flex-col gap-3.5">
-                {SERVICES.map((service) => (
-                  <li key={service}><Link href="#" className={desktopHover}>{service}</Link></li>
+                {SERVICES.map((item) => (
+                  <li key={item.name}><Link href={item.href} className={desktopHover}>{item.name}</Link></li>
                 ))}
               </ul>
             </div>
@@ -104,18 +104,18 @@ export function Footer() {
               ))}
             </div>
             <div className="flex items-center gap-6">
-              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+              <a href="https://www.linkedin.com/company/trinexta/" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
                 <LinkedinIcon className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+              </a>
+              <a href="https://www.instagram.com/trinexta/" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <InstagramIcon className="w-5 h-5" />
+              </a>
+              <a href="https://www.tiktok.com/@trinexta" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <TiktokIcon className="w-5 h-5" />
+              </a>
+              <a href="https://www.facebook.com/trinexta/" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
                 <FacebookIcon className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                <TwitterIcon className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                <GithubIcon className="w-5 h-5" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -142,8 +142,8 @@ export function Footer() {
             <div>
               <span className={mobileTitle}>Services</span>
               <ul className="space-y-2">
-                {SERVICES.map((service) => (
-                  <li key={`mob-${service}`}><Link href="#" className={mobileHover}>{service}</Link></li>
+                {SERVICES.map((item) => (
+                  <li key={`mob-${item.name}`}><Link href={item.href} className={mobileHover}>{item.name}</Link></li>
                 ))}
               </ul>
             </div>
@@ -176,7 +176,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* EXACTEMENT COMME SUR TA CAPTURE D'ÉCRAN */}
           <div className="flex justify-between items-center gap-4">
             <div className="flex flex-wrap gap-x-3 gap-y-1">
               {["Microsoft", "Google", "OVH"].map(p => (
@@ -184,9 +183,10 @@ export function Footer() {
               ))}
             </div>
             <div className="flex gap-4 shrink-0">
-              <LinkedinIcon className="w-4 h-4 text-white/20" />
-              <FacebookIcon className="w-4 h-4 text-white/20" />
-              <TwitterIcon className="w-4 h-4 text-white/20" />
+              <a href="https://www.linkedin.com/company/trinexta/" target="_blank" rel="noopener noreferrer"><LinkedinIcon className="w-4 h-4 text-white/20" /></a>
+              <a href="https://www.instagram.com/trinexta/" target="_blank" rel="noopener noreferrer"><InstagramIcon className="w-4 h-4 text-white/20" /></a>
+              <a href="https://www.tiktok.com/@trinexta" target="_blank" rel="noopener noreferrer"><TiktokIcon className="w-4 h-4 text-white/20" /></a>
+              <a href="https://www.facebook.com/trinexta/" target="_blank" rel="noopener noreferrer"><FacebookIcon className="w-4 h-4 text-white/20" /></a>
             </div>
           </div>
         </div>
