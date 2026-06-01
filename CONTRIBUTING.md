@@ -76,6 +76,18 @@ Ne jamais committer `.env.local`. Contacter le tech lead pour obtenir les valeur
 
 Les secrets de déploiement (SSH, DATABASE_URL en prod) sont gérés dans GitHub Secrets — accès tech lead uniquement.
 
+## Données statiques
+
+Les données statiques (listes de catégories, contenus de pages, configurations UI) vivent dans `src/data/`, pas dans les composants ou les routes.
+
+**Règle** : si une donnée est utilisée à plus d'un endroit, elle appartient à `src/data/`. Un composant ne doit jamais être la source de vérité d'une donnée partagée.
+
+Exemples actuels :
+- `src/data/categories.ts` — catégories blog, importé par sanity.ts, BlogList et le schéma Sanity Studio
+- `src/data/services/{slug}.ts` — contenus des pages service, chargé via `getServiceData(slug)`
+
+Si tu ajoutes un service, une catégorie ou toute donnée réutilisable : commence par `src/data/`.
+
 ## Base de données
 
 Toujours créer une migration Prisma pour tout changement de schéma :
