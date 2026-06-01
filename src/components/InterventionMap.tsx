@@ -66,75 +66,8 @@ function gearRingPath(cx: number, cy: number, numTeeth: number, tipR: number, ro
     return `M ${pts.join(" L ")} Z`
 }
 
-function getSweepGeometry(cx: number, cy: number, maxR: number, angle: number) {
-    const toRad = (deg: number) => ((deg - 90) * Math.PI) / 180
-    const r = maxR * 0.93
-    const tipX = cx + Math.cos(toRad(angle)) * r
-    const tipY = cy + Math.sin(toRad(angle)) * r
-    const trailPath = (span: number) => {
-        const ex = cx + Math.cos(toRad(angle)) * r
-        const ey = cy + Math.sin(toRad(angle)) * r
-        const sx = cx + Math.cos(toRad(angle - span)) * r
-        const sy = cy + Math.sin(toRad(angle - span)) * r
-        return `M ${cx} ${cy} L ${ex} ${ey} A ${r} ${r} 0 0 0 ${sx} ${sy} Z`
-    }
 
-    return {
-        tipX,
-        tipY,
-        trail: trailPath(SWEEP_SPAN),
-        coreTrail: trailPath(18),
-    }
-}
-
-function useMapMotionPreferences() {
-    const [preferences, setPreferences] = useState({
-        reduceMapMotion: true,
-        prefersReducedMotion: true,
-    })
-
-    useEffect(() => {
-        const mobileQuery = window.matchMedia("(max-width: 767px)")
-        const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-        const update = () => {
-            const prefersReducedMotion = reducedMotionQuery.matches
-
-            setPreferences({
-                reduceMapMotion: mobileQuery.matches || prefersReducedMotion,
-                prefersReducedMotion,
-            })
-        }
-
-        update()
-        mobileQuery.addEventListener("change", update)
-        reducedMotionQuery.addEventListener("change", update)
-
-        return () => {
-            mobileQuery.removeEventListener("change", update)
-            reducedMotionQuery.removeEventListener("change", update)
-        }
-    }, [])
-
-    return preferences
-}
-
-function StaticSweepArm({ cx, cy, maxR }: { cx: number; cy: number; maxR: number }) {
-    const geometry = getSweepGeometry(cx, cy, maxR, 32)
-
-    return (
-        <g>
-            <path d={geometry.trail} fill="var(--secondary)" fillOpacity="0.07" />
-            <path d={geometry.coreTrail} fill="var(--secondary)" fillOpacity="0.17" />
-            <line x1={cx} y1={cy} x2={geometry.tipX} y2={geometry.tipY}
-                stroke="var(--secondary)" strokeOpacity="0.55" strokeWidth="1.2"
-            />
-            <circle cx={geometry.tipX} cy={geometry.tipY} r="3"
-                fill="var(--secondary)" fillOpacity="0.85" />
-        </g>
-    )
-}
-
-function AnimatedSweepArm({
+function SweepArm({
     cx, cy, maxR,
     onCrossRef,
 }: {
@@ -143,24 +76,14 @@ function AnimatedSweepArm({
     maxR: number
     onCrossRef: React.MutableRefObject<((ids: string[]) => void) | null>
 }) {
+    const [angle, setAngle] = useState(0)
     const angleRef = useRef(0)
     const prevRef = useRef(0)
-    const trailRef = useRef<SVGPathElement>(null)
-    const coreTrailRef = useRef<SVGPathElement>(null)
-    const lineRef = useRef<SVGLineElement>(null)
-    const dotRef = useRef<SVGCircleElement>(null)
 
     useAnimationFrame((_, delta) => {
         prevRef.current = angleRef.current
         angleRef.current = (angleRef.current + delta * 0.035) % 360
-
-        const geometry = getSweepGeometry(cx, cy, maxR, angleRef.current)
-        trailRef.current?.setAttribute("d", geometry.trail)
-        coreTrailRef.current?.setAttribute("d", geometry.coreTrail)
-        lineRef.current?.setAttribute("x2", String(geometry.tipX))
-        lineRef.current?.setAttribute("y2", String(geometry.tipY))
-        dotRef.current?.setAttribute("cx", String(geometry.tipX))
-        dotRef.current?.setAttribute("cy", String(geometry.tipY))
+        setAngle(angleRef.current)
 
         const pa = prevRef.current
         const na = angleRef.current
@@ -172,41 +95,35 @@ function AnimatedSweepArm({
         if (crossed.length > 0) onCrossRef.current?.(crossed)
     })
 
-    const initialGeometry = getSweepGeometry(cx, cy, maxR, 0)
+    const toRad = (deg: number) => ((deg - 90) * Math.PI) / 180
+    const tipX = cx + Math.cos(toRad(angle)) * maxR * 0.93
+    const tipY = cy + Math.sin(toRad(angle)) * maxR * 0.93
+    const trailPath = (span: number) => {
+        const R = maxR * 0.93
+        const ex = cx + Math.cos(toRad(angle)) * R
+        const ey = cy + Math.sin(toRad(angle)) * R
+        const sx = cx + Math.cos(toRad(angle - span)) * R
+        const sy = cy + Math.sin(toRad(angle - span)) * R
+        return `M ${cx} ${cy} L ${ex} ${ey} A ${R} ${R} 0 0 0 ${sx} ${sy} Z`
+    }
 
     return (
         <g>
-            <path ref={trailRef} d={initialGeometry.trail} fill="var(--secondary)" fillOpacity="0.07" />
-            <path ref={coreTrailRef} d={initialGeometry.coreTrail} fill="var(--secondary)" fillOpacity="0.17" />
-            <line ref={lineRef} x1={cx} y1={cy} x2={initialGeometry.tipX} y2={initialGeometry.tipY}
+            <path d={trailPath(SWEEP_SPAN)} fill="var(--secondary)" fillOpacity="0.07" />
+            <path d={trailPath(18)} fill="var(--secondary)" fillOpacity="0.17" />
+            <line x1={cx} y1={cy} x2={tipX} y2={tipY}
                 stroke="var(--secondary)" strokeOpacity="0.75" strokeWidth="1.2"
-            />
-            <circle ref={dotRef} cx={initialGeometry.tipX} cy={initialGeometry.tipY} r="3"
-                fill="var(--secondary)" fillOpacity="0.95" />
+                filter="url(#glow-soft)" />
+            <circle cx={tipX} cy={tipY} r="3"
+                fill="var(--secondary)" fillOpacity="0.95" filter="url(#glow-soft)" />
         </g>
     )
-}
-
-function SweepArm({
-    cx, cy, maxR,
-    onCrossRef,
-    reduceMotion,
-}: {
-    cx: number
-    cy: number
-    maxR: number
-    onCrossRef: React.MutableRefObject<((ids: string[]) => void) | null>
-    reduceMotion: boolean
-}) {
-    if (reduceMotion) return <StaticSweepArm cx={cx} cy={cy} maxR={maxR} />
-    return <AnimatedSweepArm cx={cx} cy={cy} maxR={maxR} onCrossRef={onCrossRef} />
 }
 
 export function InterventionMap() {
     const [step, setStep] = useState(0)
     const [flashKeys, setFlashKeys] = useState<Record<string, number>>({})
     const onCrossRef = useRef<((ids: string[]) => void) | null>(null)
-    const { reduceMapMotion, prefersReducedMotion } = useMapMotionPreferences()
 
     useEffect(() => {
         onCrossRef.current = (ids: string[]) => {
@@ -220,11 +137,9 @@ export function InterventionMap() {
     }, [step])
 
     useEffect(() => {
-        if (prefersReducedMotion) return
-
         const t = setInterval(() => setStep(s => (s + 1) % 3), 6000)
         return () => clearInterval(t)
-    }, [prefersReducedMotion])
+    }, [])
 
     const cx = SIZE / 2
     const cy = SIZE / 2
@@ -243,7 +158,7 @@ export function InterventionMap() {
             <Container>
                 <div className="flex items-center gap-3 mb-10 md:mb-14">
                     <span className="relative flex h-2 w-2 shrink-0">
-                        <span className={`${reduceMapMotion ? "" : "animate-ping"} absolute inline-flex h-full w-full rounded-full bg-secondary opacity-50`} />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-50" />
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary opacity-80" />
                     </span>
                     <span className="text-[10px] font-mono text-secondary/90 font-bold uppercase tracking-[0.28em]">
@@ -273,10 +188,10 @@ export function InterventionMap() {
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={step}
-                                    initial={reduceMapMotion ? false : { opacity: 0, y: 14 }}
+                                    initial={{ opacity: 0, y: 14 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: reduceMapMotion ? 0 : 0.32, ease: "easeOut" }}
+                                    transition={{ duration: 0.32, ease: "easeOut" }}
                                     className="relative space-y-3 pl-4"
                                     style={{ borderLeft: "2px solid color-mix(in srgb, var(--secondary) 40%, transparent)" }}
                                 >
@@ -311,9 +226,9 @@ export function InterventionMap() {
                                         {step === i && (
                                             <motion.div
                                                 key={`bar-${step}`}
-                                                initial={reduceMapMotion ? false : { scaleX: 0 }}
+                                                initial={{ scaleX: 0 }}
                                                 animate={{ scaleX: 1 }}
-                                                transition={{ duration: reduceMapMotion ? 0 : 6, ease: "linear" }}
+                                                transition={{ duration: 6, ease: "linear" }}
                                                 className="h-full bg-secondary origin-left"
                                                 style={{ width: "100%" }}
                                             />
@@ -330,10 +245,10 @@ export function InterventionMap() {
                         <AnimatePresence>
                             {step >= 1 && (
                                 <motion.div
-                                    initial={reduceMapMotion ? false : { opacity: 0, y: 8 }}
+                                    initial={{ opacity: 0, y: 8 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 4 }}
-                                    transition={{ duration: reduceMapMotion ? 0 : 0.4, ease: "easeOut" }}
+                                    transition={{ duration: 0.4, ease: "easeOut" }}
                                     className="rounded-xl overflow-hidden"
                                     style={{
                                         border: "1px solid color-mix(in srgb, var(--secondary) 20%, transparent)",
@@ -354,9 +269,9 @@ export function InterventionMap() {
                                         {DEPARTMENTS.map((d, i) => (
                                             <motion.div
                                                 key={d.id}
-                                                initial={reduceMapMotion ? false : { opacity: 0 }}
+                                                initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
-                                                transition={{ delay: reduceMapMotion ? 0 : 0.07 * i }}
+                                                transition={{ delay: 0.07 * i }}
                                                 className="flex items-center gap-2.5 px-3 py-2"
                                                 style={{ background: "color-mix(in srgb, var(--primary) 95%, transparent)" }}
                                             >
@@ -387,8 +302,8 @@ export function InterventionMap() {
                                 width: "26%", aspectRatio: "1/1",
                             }}>
                                 <motion.div
-                                    animate={reduceMapMotion ? undefined : { y: [0, -8, 0] }}
-                                    transition={reduceMapMotion ? undefined : { duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                    animate={{ y: [0, -8, 0] }}
+                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                     className="relative w-full h-full drop-shadow-2xl"
                                 >
                                     <Image
@@ -424,16 +339,14 @@ export function InterventionMap() {
 
                                 <circle cx={cx} cy={cy} r={maxR} fill="url(#bg-grad)" />
                                 <g>
-                                    {!reduceMapMotion && (
-                                        <animateTransform
-                                            attributeName="transform"
-                                            type="rotate"
-                                            from={`0 ${cx} ${cy}`}
-                                            to={`-360 ${cx} ${cy}`}
-                                            dur="88s"
-                                            repeatCount="indefinite"
-                                        />
-                                    )}
+                                    <animateTransform
+                                        attributeName="transform"
+                                        type="rotate"
+                                        from={`0 ${cx} ${cy}`}
+                                        to={`-360 ${cx} ${cy}`}
+                                        dur="88s"
+                                        repeatCount="indefinite"
+                                    />
                                     <path
                                         d={gearRingPath(cx, cy, 16, maxR + 9, maxR - 1)}
                                         fill="none"
@@ -515,16 +428,14 @@ export function InterventionMap() {
                                 })}
 
                                 <g>
-                                    {!reduceMapMotion && (
-                                        <animateTransform
-                                            attributeName="transform"
-                                            type="rotate"
-                                            from={`0 ${cx} ${cy}`}
-                                            to={`360 ${cx} ${cy}`}
-                                            dur="32s"
-                                            repeatCount="indefinite"
-                                        />
-                                    )}
+                                    <animateTransform
+                                        attributeName="transform"
+                                        type="rotate"
+                                        from={`0 ${cx} ${cy}`}
+                                        to={`360 ${cx} ${cy}`}
+                                        dur="32s"
+                                        repeatCount="indefinite"
+                                    />
                                     <path
                                         d={gearRingPath(cx, cy, 10, maxR * 0.73, maxR * 0.64)}
                                         fill="none"
@@ -549,16 +460,14 @@ export function InterventionMap() {
                                 </g>
 
                                 <g>
-                                    {!reduceMapMotion && (
-                                        <animateTransform
-                                            attributeName="transform"
-                                            type="rotate"
-                                            from={`0 ${cx} ${cy}`}
-                                            to={`-360 ${cx} ${cy}`}
-                                            dur="14s"
-                                            repeatCount="indefinite"
-                                        />
-                                    )}
+                                    <animateTransform
+                                        attributeName="transform"
+                                        type="rotate"
+                                        from={`0 ${cx} ${cy}`}
+                                        to={`-360 ${cx} ${cy}`}
+                                        dur="14s"
+                                        repeatCount="indefinite"
+                                    />
                                     <path
                                         d={gearRingPath(cx, cy, 7, maxR * 0.49, maxR * 0.41)}
                                         fill="none"
@@ -583,7 +492,7 @@ export function InterventionMap() {
                                 </g>
 
                                 <g clipPath="url(#radar-clip)">
-                                    <SweepArm cx={cx} cy={cy} maxR={maxR} onCrossRef={onCrossRef} reduceMotion={reduceMapMotion} />
+                                    <SweepArm cx={cx} cy={cy} maxR={maxR} onCrossRef={onCrossRef} />
                                 </g>
 
                                 {step >= 1 && DEPARTMENTS.map((d, i) => {
@@ -591,9 +500,9 @@ export function InterventionMap() {
                                     const fk = flashKeys[d.id] ?? 0
                                     return (
                                         <motion.g key={d.id}
-                                            initial={reduceMapMotion ? false : { opacity: 0, scale: 0 }}
+                                            initial={{ opacity: 0, scale: 0 }}
                                             animate={{ opacity: 1, scale: 1 }}
-                                            transition={reduceMapMotion ? { duration: 0 } : { delay: i * 0.09, type: "spring", stiffness: 280, damping: 22 }}
+                                            transition={{ delay: i * 0.09, type: "spring", stiffness: 280, damping: 22 }}
                                             style={{ transformOrigin: `${pos.x}px ${pos.y}px` }}
                                         >
                                             {fk > 0 && (
@@ -637,7 +546,7 @@ export function InterventionMap() {
                                             <line x1={pos.x} y1={pos.y + 17} x2={pos.x} y2={pos.y + 26}
                                                 stroke="var(--secondary)" strokeOpacity="0.5" strokeWidth="0.75" />
                                             <circle cx={pos.x} cy={pos.y} r={4.5}
-                                                fill="var(--secondary)" fillOpacity="1" filter={reduceMapMotion ? undefined : "url(#glow-soft)"} />
+                                                fill="var(--secondary)" fillOpacity="1" filter="url(#glow-soft)" />
                                             <circle cx={pos.x} cy={pos.y} r={1.8} fill="var(--secondary)" />
                                             <text x={pos.x} y={pos.y - 30} textAnchor="middle"
                                                 fill="var(--secondary)" fillOpacity="1"
@@ -653,7 +562,7 @@ export function InterventionMap() {
                                 <circle cx={cx} cy={cy} r={9}
                                     fill="none" stroke="var(--secondary)" strokeOpacity="0.3" strokeWidth="0.6" />
                                 <circle cx={cx} cy={cy} r={3.5}
-                                    fill="var(--secondary)" fillOpacity="0.8" filter={reduceMapMotion ? undefined : "url(#glow-soft)"} />
+                                    fill="var(--secondary)" fillOpacity="0.8" filter="url(#glow-soft)" />
 
                                 <text x={cx} y={cy + 56} textAnchor="middle"
                                     fill="var(--secondary)" fillOpacity="0.9"

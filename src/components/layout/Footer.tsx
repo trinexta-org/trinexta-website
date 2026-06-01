@@ -102,7 +102,7 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-6">
               {SOCIAL_LINKS.map(({ name, href, Icon }) => (
-                <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
                   <Icon className="w-5 h-5" />
                 </a>
               ))}
@@ -174,7 +174,7 @@ export function Footer() {
             </div>
             <div className="flex gap-4 shrink-0">
               {SOCIAL_LINKS.map(({ name, href, Icon }) => (
-                <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
