@@ -49,7 +49,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />
             </div>
 
-            <Container className="relative z-10 w-full py-8 md:py-12">
+            <Container className="relative z-10 w-full flex-1 flex flex-col justify-center py-8 pb-16 md:py-12">
                 <div className="max-w-4xl">
 
                     <div className="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px] flex flex-col justify-center">
@@ -66,7 +66,6 @@ export function HeroSection() {
                                     className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight drop-shadow-xl text-white text-balance"
                                 >
                                     {slides[currentSlide].title.split(" ").map((word, i) => {
-                                        // Colorisation automatique des mots techniques clés
                                         const targetKeywords = ["informatique", "support", "fiable", "quotidien", "souplesse", "suivie"]
                                         const cleanWord = word.toLowerCase().replace(/[,.]/g, "")
                                         const isHighlighted = targetKeywords.includes(cleanWord)

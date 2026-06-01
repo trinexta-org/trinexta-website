@@ -64,18 +64,18 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export function KpiSection() {
   return (
-    <Section container={false} className="relative bg-primary py-12 md:py-40 overflow-hidden">
+    <Section container={false} className="relative bg-primary py-12 md:py-32 lg:py-40 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--secondary-rgb),0.05)_0%,transparent_70%)] pointer-events-none" />
 
       <Container>
-        <div className="mb-10 md:mb-24 flex items-center gap-4 md:gap-8">
-          <Heading as="h2" className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter shrink-0">
+        <div className="mb-10 md:mb-16 lg:mb-24 flex items-center gap-4 md:gap-8 overflow-hidden">
+          <Heading as="h2" className="text-3xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter shrink-0 whitespace-nowrap">
             Impact <span className="text-secondary">Réel</span>
           </Heading>
-          <div className="h-[1px] w-full bg-white/10" />
+          <div className="h-[1px] w-full bg-white/10 hidden sm:block" />
         </div>
 
-        <div className="grid grid-cols-4 gap-2 md:gap-12">
+        <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 md:gap-10 lg:gap-12">
           {kpis.map((kpi, index) => (
             <motion.div
               key={kpi.id}
@@ -85,7 +85,7 @@ export function KpiSection() {
               transition={{ duration: 0.8, delay: index * 0.1 }}
               className="group flex flex-col items-center md:items-start text-center md:text-left"
             >
-              <div className="text-2xl sm:text-4xl md:text-8xl font-black text-white tracking-tighter mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
+              <div className="text-[1.35rem] sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tighter mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
                 <Counter value={kpi.value} suffix={kpi.suffix} />
               </div>
 
@@ -94,13 +94,13 @@ export function KpiSection() {
                   initial={{ width: 12 }}
                   whileInView={{ width: 48 }}
                   transition={{ duration: 1, delay: 0.5 }}
-                  className="h-0.5 md:h-1 bg-secondary"
+                  className="h-[1px] md:h-1 bg-secondary"
                 />
-                <h3 className="text-[10px] md:text-lg font-bold text-secondary uppercase tracking-[0.1em] md:tracking-[0.2em] leading-tight">
+                <h3 className="text-[9px] sm:text-xs md:text-base lg:text-lg font-bold text-secondary uppercase tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] leading-tight">
                   <span className="md:hidden">{kpi.title}</span>
                   <span className="hidden md:inline">{kpi.fullTitle}</span>
                 </h3>
-                <Text className="hidden md:block text-white/50 text-base leading-relaxed font-medium">
+                <Text className="hidden md:block text-white/60 text-sm xl:text-base leading-relaxed font-medium">
                   {kpi.description}
                 </Text>
               </div>

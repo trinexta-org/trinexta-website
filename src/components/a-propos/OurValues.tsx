@@ -164,7 +164,7 @@ export function OurValues() {
                                     src={values[safeActive].image}
                                     alt={values[safeActive].title}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover object-[center_25%]"
                                     priority
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
