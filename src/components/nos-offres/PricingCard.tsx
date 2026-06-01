@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Card } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
@@ -48,16 +49,18 @@ export function PricingCard({ name, price, target, description, features, isFeat
         ))}
       </ul>
       
-      <Button 
-        variant={isFeatured ? "primary" : "outline"} 
-        className={`w-full font-bold transition-all py-3 ${
-          isFeatured 
-            ? "bg-secondary text-white hover:bg-secondary/90 border-none shadow-lg shadow-secondary/20" 
-            : "border-white/30 text-white hover:bg-white/10 hover:border-white"
-        }`}
-      >
-        {price === "Sur devis" || price.includes("TJM") ? "Demander un devis" : "Recevoir un devis"}
-      </Button>
+      <Link href="/contact" className="w-full mt-auto block">
+        <Button 
+          variant={isFeatured ? "primary" : "outline"} 
+          className={`w-full font-bold transition-all py-3 ${
+            isFeatured 
+              ? "bg-secondary text-white hover:bg-secondary/90 border-none shadow-lg shadow-secondary/20" 
+              : "border-white/30 text-white hover:bg-white/10 hover:border-white"
+          }`}
+        >
+          {price === "Sur devis" || price.includes("TJM") ? "Demander un devis" : "Recevoir un devis"}
+        </Button>
+      </Link>
     </Card>
   )
 }
