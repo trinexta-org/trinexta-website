@@ -76,20 +76,14 @@ function SweepArm({
     maxR: number
     onCrossRef: React.MutableRefObject<((ids: string[]) => void) | null>
 }) {
+    const [angle, setAngle] = useState(0)
     const angleRef = useRef(0)
     const prevRef = useRef(0)
 
     useAnimationFrame((_, delta) => {
         prevRef.current = angleRef.current
         angleRef.current = (angleRef.current + delta * 0.035) % 360
-
-        const geometry = getGeometry(angleRef.current)
-        trailRef.current?.setAttribute("d", geometry.trail)
-        coreTrailRef.current?.setAttribute("d", geometry.coreTrail)
-        lineRef.current?.setAttribute("x2", String(geometry.tipX))
-        lineRef.current?.setAttribute("y2", String(geometry.tipY))
-        dotRef.current?.setAttribute("cx", String(geometry.tipX))
-        dotRef.current?.setAttribute("cy", String(geometry.tipY))
+        setAngle(angleRef.current)
 
         const pa = prevRef.current
         const na = angleRef.current
@@ -119,9 +113,9 @@ function SweepArm({
             <path d={trailPath(18)} fill="var(--secondary)" fillOpacity="0.17" />
             <line x1={cx} y1={cy} x2={tipX} y2={tipY}
                 stroke="var(--secondary)" strokeOpacity="0.75" strokeWidth="1.2"
-            />
-            <circle ref={dotRef} cx={initialGeometry.tipX} cy={initialGeometry.tipY} r="3"
-                fill="var(--secondary)" fillOpacity="0.95" />
+                filter="url(#glow-soft)" />
+            <circle cx={tipX} cy={tipY} r="3"
+                fill="var(--secondary)" fillOpacity="0.95" filter="url(#glow-soft)" />
         </g>
     )
 }
