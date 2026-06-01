@@ -32,7 +32,7 @@ export const menuItems = [
   { label: "À propos", href: "/a-propos" },
   {
     label: "Ressources",
-    href: "#",
+    href: "/blog",
     subMenu: [
       { label: "Blog", href: "/blog" },
       { label: "Guides PDF", href: "#", disabled: true },
