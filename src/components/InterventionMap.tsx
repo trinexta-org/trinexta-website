@@ -87,19 +87,35 @@ function getSweepGeometry(cx: number, cy: number, maxR: number, angle: number) {
     }
 }
 
-function useReducedMapMotion() {
-    const [reduced, setReduced] = useState(true)
+function useMapMotionPreferences() {
+    const [preferences, setPreferences] = useState({
+        reduceMapMotion: true,
+        prefersReducedMotion: true,
+    })
 
     useEffect(() => {
-        const query = window.matchMedia("(max-width: 767px), (prefers-reduced-motion: reduce)")
-        const update = () => setReduced(query.matches)
+        const mobileQuery = window.matchMedia("(max-width: 767px)")
+        const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+        const update = () => {
+            const prefersReducedMotion = reducedMotionQuery.matches
+
+            setPreferences({
+                reduceMapMotion: mobileQuery.matches || prefersReducedMotion,
+                prefersReducedMotion,
+            })
+        }
 
         update()
-        query.addEventListener("change", update)
-        return () => query.removeEventListener("change", update)
+        mobileQuery.addEventListener("change", update)
+        reducedMotionQuery.addEventListener("change", update)
+
+        return () => {
+            mobileQuery.removeEventListener("change", update)
+            reducedMotionQuery.removeEventListener("change", update)
+        }
     }, [])
 
-    return reduced
+    return preferences
 }
 
 function StaticSweepArm({ cx, cy, maxR }: { cx: number; cy: number; maxR: number }) {
@@ -190,7 +206,7 @@ export function InterventionMap() {
     const [step, setStep] = useState(0)
     const [flashKeys, setFlashKeys] = useState<Record<string, number>>({})
     const onCrossRef = useRef<((ids: string[]) => void) | null>(null)
-    const reduceMapMotion = useReducedMapMotion()
+    const { reduceMapMotion, prefersReducedMotion } = useMapMotionPreferences()
 
     useEffect(() => {
         onCrossRef.current = (ids: string[]) => {
@@ -204,9 +220,11 @@ export function InterventionMap() {
     }, [step])
 
     useEffect(() => {
+        if (prefersReducedMotion) return
+
         const t = setInterval(() => setStep(s => (s + 1) % 3), 6000)
         return () => clearInterval(t)
-    }, [])
+    }, [prefersReducedMotion])
 
     const cx = SIZE / 2
     const cy = SIZE / 2
