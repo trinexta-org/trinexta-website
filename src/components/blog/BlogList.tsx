@@ -3,22 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BlogSection } from "./BlogSection";
-import { ResumeArticle, CategorieArticle } from "@/lib/sanity";
+import { ResumeArticle } from "@/lib/sanity";
+import { CategorieOption, CATEGORIES_FILTRE } from "@/data/categories";
 
-
-interface CategorieOption {
-  id: "tous" | CategorieArticle;
-  label: string;
-}
-
-export const CATEGORIES : CategorieOption[] = [
-  { id: "tous", label: "Tous les articles" },
-  { id: "cybersecurite", label: "Cybersécurité" }, 
-  { id: "infogerance", label: "Infogérance" },
-  { id: "cloud", label: "Cloud" },
-  { id: "productivite", label: "Productivité" },
-  { id: "actualites", label: "Actualités" },
-];
+export { CATEGORIES_FILTRE as CATEGORIES };
 
 export function BlogList({ initialArticles, categories }: { initialArticles: ResumeArticle[], categories: CategorieOption[], searchQuery?: string }) {
   const [activeCategory, setActiveCategory] = useState("tous");

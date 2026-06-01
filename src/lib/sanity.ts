@@ -1,23 +1,11 @@
 import imageUrlBuilder from "@sanity/image-url";
 import { createClient, type PortableTextBlock } from "next-sanity";
+import { type CategorieArticle, LIBELLES_CATEGORIES } from "@/data/categories";
+export type { CategorieArticle };
+export { LIBELLES_CATEGORIES };
 
 type SlugSanity = {
   current: string;
-};
-
-export type CategorieArticle =
-  | "cybersecurite"
-  | "infogerance"
-  | "cloud"
-  | "productivite"
-  | "actualites";
-
-export const LIBELLES_CATEGORIES: Record<CategorieArticle, string> = {
-  cybersecurite: "Cybersécurité",
-  infogerance: "Infogérance",
-  cloud: "Cloud",
-  productivite: "Productivité",
-  actualites: "Actualités Trinexta",
 };
 
 export type ResumeArticle = {

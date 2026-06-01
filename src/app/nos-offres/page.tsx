@@ -31,7 +31,7 @@ export default function NosOffresPage() {
   }
 
   return (
-    <main className="bg-primary min-h-screen relative">
+    <main className="bg-primary min-h-screen relative space-y-12"> 
       <JsonLd data={jsonLd} />
 
       <NosOffresHero />
@@ -41,7 +41,7 @@ export default function NosOffresPage() {
         line1="Nos formules"
         line2="claires & adaptées"
       />
-      <Section id="details" className="bg-primary pb-24 pt-12">
+      <Section id="details" className="bg-primary py-24">
         <Container>
           <PricingSection />
         </Container>
