@@ -1,9 +1,6 @@
 import Link from "next/link"
-import { Container } from "./Container" 
-import { FacebookIcon } from "@/components/ui/icons/FacebookIcon"
-import { LinkedinIcon } from "@/components/ui/icons/LinkedinIcon"
-import { InstagramIcon } from "@/components/ui/icons/InstagramIcon" 
-import { TiktokIcon } from "@/components/ui/icons/TiktokIcon"
+import { Container } from "./Container"
+import { SOCIAL_LINKS } from "@/data/social-links"
 
 const NAVIGATION = [
   { name: "Accueil", href: "/" },
@@ -104,18 +101,11 @@ export function Footer() {
               ))}
             </div>
             <div className="flex items-center gap-6">
-              <a href="https://www.linkedin.com/company/trinexta/" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                <LinkedinIcon className="w-5 h-5" />
-              </a>
-              <a href="https://www.instagram.com/trinexta/" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                <InstagramIcon className="w-5 h-5" />
-              </a>
-              <a href="https://www.tiktok.com/@trinexta" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                <TiktokIcon className="w-5 h-5" />
-              </a>
-              <a href="https://www.facebook.com/trinexta/" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                <FacebookIcon className="w-5 h-5" />
-              </a>
+              {SOCIAL_LINKS.map(({ name, href, Icon }) => (
+                <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -183,10 +173,11 @@ export function Footer() {
               ))}
             </div>
             <div className="flex gap-4 shrink-0">
-              <a href="https://www.linkedin.com/company/trinexta/" target="_blank" rel="noopener noreferrer"><LinkedinIcon className="w-4 h-4 text-white/20" /></a>
-              <a href="https://www.instagram.com/trinexta/" target="_blank" rel="noopener noreferrer"><InstagramIcon className="w-4 h-4 text-white/20" /></a>
-              <a href="https://www.tiktok.com/@trinexta" target="_blank" rel="noopener noreferrer"><TiktokIcon className="w-4 h-4 text-white/20" /></a>
-              <a href="https://www.facebook.com/trinexta/" target="_blank" rel="noopener noreferrer"><FacebookIcon className="w-4 h-4 text-white/20" /></a>
+              {SOCIAL_LINKS.map(({ name, href, Icon }) => (
+                <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
