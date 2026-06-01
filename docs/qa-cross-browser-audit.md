@@ -29,7 +29,7 @@
 | Images WebP affichées correctement | 🟢 | 🟢 | 🟢 | 🟢 |
 | Animations CSS fluides et fonctionnelles | 🟢 | 🟢 | 🟢 | 🟢 |
 | Menu burger mobile fonctionnel | 🟢 | N/A | 🟢 | N/A |
-| Liens et boutons (CTA) cliquables | 🔴 | 🔴 | 🔴 | 🔴 |
+| Liens et boutons (CTA) cliquables | 🟢 | 🟢 | 🟢 | 🟢 |
 | Soumission réussie du formulaire de Contact | 🟢 | 🟢 | 🟢 | 🟢 |
 
 *(Légende : ⏳ À tester / 🟢 Validé / 🔴 Anomalie détectée)*
@@ -42,11 +42,13 @@ Ce tableau répertorie les bugs spécifiques à certains moteurs de rendu (Blink
 
 | ID | Navigateur | Version / OS | Page concernée | Description de l'anomalie | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#CB-01** | *Tous* | *Tous* | *Footer* | Le lien "Tarifs" doit rediriger vers `/offres`. Les listes "Nos Services" et "Légal" ne possèdent pas de href valides. | 🔴 À corriger |
-| **#CB-02** | *Tous* | *Tous* | *Footer* | Icônes de réseaux sociaux obsolètes (Twitter/Github à supprimer) et manquants (Instagram/TikTok à ajouter). Lier vers Linkedin, Insta, TikTok, Facebook. | 🔴 À corriger |
-| **#CB-03** | *Tous* | *Tous* | *Nos Offres* | Les boutons des cartes de tarification n'ont aucune redirection. Ils doivent pointer vers `/contact`. | 🔴 À corriger |
+| **#CB-01** | *Tous* | *Tous* | *Footer* | Le lien "Tarifs" doit rediriger vers `/offres`. Les listes "Nos Services" et "Légal" ne possèdent pas de href valides. | 🟢 Corrigé |
+| **#CB-02** | *Tous* | *Tous* | *Footer* | Icônes de réseaux sociaux obsolètes (Twitter/Github à supprimer) et manquants (Instagram/TikTok à ajouter). Lier vers Linkedin, Insta, TikTok, Facebook. | 🟢 Corrigé |
+| **#CB-03** | *Tous* | *Tous* | *Nos Offres* | Les boutons des cartes de tarification n'ont aucune redirection. Ils doivent pointer vers `/contact`. | 🟢 Corrigé |
 
 ---
 
 ## 4. Notes et Résolutions
-*(Espace réservé pour détailler les correctifs CSS appliqués, comme l'ajout de préfixes webkit spécifiques ou de fallbacks).*
+* **#CB-01 :** Mise à jour des `href` dans les tableaux de données du composant `Footer.tsx` (redirection vers `/nos-offres`, `/infogerance`, etc.).
+* **#CB-02 :** Suppression du code mort (`TwitterIcon.tsx` et `GithubIcon.tsx`). Création de `InstagramIcon.tsx` et `TiktokIcon.tsx` suivant le standard `React.SVGProps`. Ajout de balises `<a>` avec `target="_blank"` pointant vers les réseaux de l'entreprise.
+* **#CB-03 :** Ajout du composant `<Link href="/contact">` natif de Next.js autour du composant `<Button>` dans le fichier `PricingCard.tsx` pour assurer le routage client.
