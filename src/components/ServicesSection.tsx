@@ -198,9 +198,9 @@ export function ServicesSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
                 </div>
 
-                <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-10">
+                <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-8 xl:p-10">
                   <div className="mt-auto">
-                    <h3 className="text-xl md:text-3xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-tighter uppercase">
+                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-tighter uppercase break-words">
                       {service.title}
                     </h3>
 

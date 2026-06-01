@@ -66,49 +66,45 @@ export function TransitionTitle({
   line2: string 
 }) {
   return (
-    // On retire le padding d'ici, on le mettra dans la div interne
-    <Section container={false} className="bg-primary z-20 p-0">
-      
-      {/* 🛑 VOICI LE SECRET : Cette div enferme strictement les fibres 🛑 */}
-      <div className="relative w-full h-full overflow-hidden py-16 md:py-32 flex flex-col items-center justify-center">
-        
-        <RibbonBackground />
+    <Section 
+      container={false} 
+      className="bg-primary relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32"
+    >
+      <RibbonBackground />
 
-        <Container className="relative z-10 text-center px-4">
-          {surtitle && (
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-secondary text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-4 md:mb-6 block"
-            >
-              {surtitle}
-            </motion.span>
-          )}
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+      <Container className="relative z-10 text-center px-4">
+        {surtitle && (
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="text-secondary text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-4 md:mb-6 block"
           >
-            <Heading as="h2" className="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none">
-              {line1} <br /> <span className="text-secondary">{line2}</span>
-            </Heading>
-          </motion.div>
+            {surtitle}
+          </motion.span>
+        )}
 
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="origin-center"
-          >
-            <div className="h-1.5 md:h-2 w-20 md:w-32 bg-secondary mx-auto mt-6 md:mt-10 rounded-full shadow-[0_0_20px_var(--secondary)]" />
-          </motion.div>
-        </Container>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+        >
+          <Heading as="h2" className="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none">
+            {line1} <br /> <span className="text-secondary">{line2}</span>
+          </Heading>
+        </motion.div>
 
-      </div>
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          className="origin-center"
+        >
+          <div className="h-1.5 md:h-2 w-20 md:w-32 bg-secondary mx-auto mt-6 md:mt-10 rounded-full shadow-[0_0_20px_var(--secondary)]" />
+        </motion.div>
+      </Container>
     </Section>
   )
 }
