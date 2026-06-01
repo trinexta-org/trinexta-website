@@ -27,6 +27,31 @@ const LEGAL = [
 
 const PARTNERS = ["Microsoft", "Google", "Sophos", "Bitdefender", "OVH"]
 
+const NAVIGATION = [
+  { name: "Accueil", href: "/" },
+  { name: "Tarifs", href: "/tarifs" },
+  { name: "Cas clients", href: "/cas-clients" },
+  { name: "Blog Expertise", href: "/blog" }
+]
+
+const SERVICES = [
+  "Infogérance PME", 
+  "Support informatique", 
+  "Cybersécurité 360°", 
+  "Cloud & Sauvegarde", 
+  "Microsoft 365", 
+  "Solutions métier"
+]
+
+const LEGAL = [
+  { name: "Mentions légales", href: "/mentions-legales" },
+  { name: "CGV / CGS", href: "/cgv" },
+  { name: "Données personnelles", href: "/confidentialite" },
+  { name: "Gestion des cookies", href: "/cookies" }
+]
+
+const PARTNERS = ["Microsoft", "Google", "Sophos", "Bitdefender", "OVH"]
+
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -166,6 +191,7 @@ export function Footer() {
             </div>
           </div>
 
+          {/* EXACTEMENT COMME SUR TA CAPTURE D'ÉCRAN */}
           <div className="flex justify-between items-center gap-4">
             <div className="flex flex-wrap gap-x-3 gap-y-1">
               {["Microsoft", "Google", "OVH"].map(p => (
