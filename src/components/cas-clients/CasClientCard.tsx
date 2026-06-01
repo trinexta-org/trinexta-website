@@ -7,7 +7,7 @@ import { MetricRow } from "@/components/cas-clients/MetricRow";
 
 export function CasClientCard({ item }: { item: CaseClient }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:border-secondary/35 hover:shadow-xl hover:shadow-secondary/5">
+    <article className="group flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.09] bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:border-secondary/35 hover:shadow-xl hover:shadow-secondary/5">
       {/* Image hero with client info overlay */}
       <div className="relative h-40 overflow-hidden">
         <Image
@@ -68,7 +68,7 @@ export function CasClientCard({ item }: { item: CaseClient }) {
           </div>
         </div>
 
-        <Button asChild variant="secondary" className="w-full">
+        <Button asChild variant="secondary" className="w-full mt-auto">
           <Link href={`/cas-clients/${item.slug}`}>Voir le parcours</Link>
         </Button>
       </div>

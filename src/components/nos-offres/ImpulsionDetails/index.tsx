@@ -15,10 +15,10 @@ export function ImpulsionDetails() {
               Votre technicien support sur mesure
             </Heading>
             <Text className="text-white/80 text-base md:text-lg leading-relaxed">
-              Renforcez votre support informatique avec la bonne personne, au bon moment, sans les contraintes d'un recrutement classique. Nous vous aidons à intégrer un technicien support adapté à votre besoin, pour la durée qui correspond réellement à votre activité.
+              Renforcez votre support informatique avec la bonne personne, au bon moment, sans les contraintes d&apos;un recrutement classique. Nous vous aidons à intégrer un technicien support adapté à votre besoin, pour la durée qui correspond réellement à votre activité.
             </Text>
             <p className="py-8 px-8 italic text-white/90 text-sm md:text-base leading-relaxed bg-white/[0.02] rounded-2xl">
-              L'offre Impulsion, C'est une solution souple et ciblée pour renforcer vos équipes, absorber une hausse de charge, accompagner un projet ou sécuriser votre organisation au quotidien. Vous gardez la maîtrise, tout en vous appuyant sur un professionnel opérationnel et orienté terrain.
+              L&apos;offre Impulsion, C&apos;est une solution souple et ciblée pour renforcer vos équipes, absorber une hausse de charge, accompagner un projet ou sécuriser votre organisation au quotidien. Vous gardez la maîtrise, tout en vous appuyant sur un professionnel opérationnel et orienté terrain.
             </p>
           </div>
           <div className="relative w-full aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl mt-8 xl:mt-0">
@@ -36,7 +36,7 @@ export function ImpulsionDetails() {
 
         <div className="space-y-16 mb-24">
           <Heading as="h3" className="text-2xl md:text-3xl font-black tracking-tight text-white">
-            Ce que l'on fait concrètement
+            Ce que l&apos;on fait concrètement
           </Heading>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 items-start">
@@ -53,10 +53,10 @@ export function ImpulsionDetails() {
 
             <div className="xl:col-span-7 space-y-6 text-white/80 text-base md:text-lg leading-relaxed">
               <p>
-                L'offre Impulsion est notre service de mise à disposition de personnel dédié exclusivement au support informatique. Ici, pas de dispositif complexe ni de formule figée : notre mission est simple. Vous apporter un renfort humain qualifié pour soutenir vos équipes, fluidifier le quotidien de vos utilisateurs et sécuriser le bon fonctionnement de votre environnement informatique.
+                L&apos;offre Impulsion est notre service de mise à disposition de personnel dédié exclusivement au support informatique. Ici, pas de dispositif complexe ni de formule figée : notre mission est simple. Vous apporter un renfort humain qualifié pour soutenir vos équipes, fluidifier le quotidien de vos utilisateurs et sécuriser le bon fonctionnement de votre environnement informatique.
               </p>
               <p className="font-semibold text-white">
-                C'est une solution pertinente si vous faites face à un pic d'activité, à un besoin ponctuel, à une absence à compenser, à un projet de déploiement ou à un besoin plus durable en support IT.
+                C&apos;est une solution pertinente si vous faites face à un pic d&apos;activité, à un besoin ponctuel, à une absence à compenser, à un projet de déploiement ou à un besoin plus durable en support IT.
               </p>
             </div>
           </div>
@@ -87,7 +87,7 @@ export function ImpulsionDetails() {
               Des experts du support à votre service
             </Heading>
             <Text className="text-white/60 text-sm md:text-base">
-              L'offre Impulsion n'est pas un catalogue générique. C'est du sur-mesure pour les situations concrètes que vous vivez au quotidien.
+              L&apos;offre Impulsion n&apos;est pas un catalogue générique. C&apos;est du sur-mesure pour les situations concrètes que vous vivez au quotidien.
             </Text>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -101,7 +101,7 @@ export function ImpulsionDetails() {
         </div>
 
         <div className="space-y-8 mb-24">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Les profils qu'on mobilise</Heading>
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Les profils qu&apos;on mobilise</Heading>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {profiles.map((profile, i) => (
               <div key={i} className="flex items-center gap-4 bg-white/[0.02] px-6 py-5 rounded-xl">
@@ -117,7 +117,7 @@ export function ImpulsionDetails() {
           <div className="xl:col-span-5 space-y-3">
             <Heading as="h3" className="text-xl md:text-2xl font-bold text-white tracking-tight">Notre modèle : la transparence absolue</Heading>
             <Text className="text-white/50 text-sm md:text-base">
-              Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d'intégration.
+              Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d&apos;intégration.
             </Text>
           </div>
           <div className="xl:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">

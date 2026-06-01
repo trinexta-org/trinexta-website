@@ -44,13 +44,17 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 ## 4. Pages Blog
 
-*⚠️ Section gelée — Pages en cours de développement.*
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#22** | Barre de recherche | Mobile (320px / 375px) | La barre de recherche ne fonctionne pas sur mobile (bouton/input inactif), alors qu'elle est parfaitement fonctionnelle sur les résolutions desktop et tablettes. | Fonctionnalité / UX Mobile | 🟢 Corrigé |
 
 ---
 
 ## 5. Pages Cas Clients
 
-*⚠️ Section gelée — Pages en cours de développement.*
+| ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **#23** | Grille des Cartes | Tablettes (iPad 768px) | Les cartes de réussites clients n'ont pas une hauteur uniforme. Le premier bloc tout à gauche (Cas N°1) est légèrement plus long que les deux de droite, rompant l'alignement de la grille. | UI / Égalisation des hauteurs | 🟢 Corrigé |
 
 ---
 
@@ -68,8 +72,8 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | **#17** | Formulaire de Contact | Desktop (1440px / 1920px) | Le formulaire est trop long verticalement, occupe l'intégralité de la hauteur de la page sur desktop et déborde de manière excessive. Nécessité de restructurer le layout global (par exemple, passer sur une disposition sur deux colonnes : les coordonnées à gauche et le formulaire à droite). | UI / Layout & Encombrement | 🟢 Corrigé |
 | **#18** | Informations de Contact | Tous breakpoints | L'intitulé *"Siège"* doit être remplacé par *"Bureau d'activité"*, et l'adresse physique associée doit être mise à jour avec la valeur exacte : `7 Rue Montespan, 91000 EVRY COURCOURONNES`. | Contenu / Texte Officiel | 🟢 Corrigé |
-| **#19** | Section FAQ | Tous breakpoints | Le bloc FAQ actuel est fait sur mesure et manque d'harmonisation. Il faut le supprimer et réimporter à la place le composant FAQ standardisé déjà utilisé sur les pages offres et services. | UI / Harmonisation Composants | 🟢 Corrigé |
-| **#20** | Section Équipement (Fond Windows) | Tous breakpoints / Desktop | La section avec l'image Windows n'est pas du tout responsive. Les blocs de texte explicatifs (*"Dois-je acheter mon matériel..."*), les encadrés d'urgence et l'image de fond se chevauchent et entrent en collision graphique directe. Un réusinage complet de la structure est requis. | Bug Structurel Majeur / Responsivité | 🟢 Corrigé |
+| **#19** | Section FAQ | Tous breakpoints | Il faut supprimer le bloc FAQ sur mesure actuel et réimporter le composant FAQ standardisé utilisé sur les pages offres et services. | UI / Harmonisation Composants | 🟢 Corrigé |
+| **#20** | Section Équipement (Fond Windows) | Tous breakpoints / Desktop | La section avec l'image Windows n'est pas du tout responsive. Les blocs de texte explicatifs, les encadrés d'urgence et l'image de fond se chevauchent. Un réusinage complet est requis. | Bug Structurel Majeur / Responsivité | 🟢 Corrigé |
 
 ---
 
@@ -77,4 +81,4 @@ Ce registre centralise toutes les anomalies détectées sur l'environnement de s
 
 | ID | Section | Breakpoint / Appareil | Description de l'anomalie | Impact / Critère d'acceptance | Statut |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **#21** | Footer (Liens de navigation) | Tablettes / Mobiles | Manque flagrant de cohérence et de complétude des liens en réduction d'écran. En mode desktop, les colonnes affichent l'intégralité des redirections (6 services, 4 liens légaux, etc.). En version mobile/tablette (iPad Mini), de nombreux liens sautent ou sont abrégés de manière arbitraire (ex: la colonne "SERVICES" passe de 6 à 3 éléments réduits). Il faut synchroniser les tableaux de liens pour avoir exactement les mêmes redirections sur toutes les résolutions. | UI & UX / Cohérence des Liens | 🔴 À corriger |
+| **#21** | Footer (Liens de navigation) | Tablettes / Mobiles | Manque flagrant de cohérence des liens en réduction d'écran. En mode desktop, les colonnes affichent l'intégralité des redirections. En version mobile/tablette, de nombreux liens sautent ou sont abrégés de manière arbitraire (ex: la colonne "SERVICES" passe de 6 à 3). Il faut synchroniser les tableaux de liens sur toutes les résolutions. | UI & UX / Cohérence des Liens | 🟢 Corrigé |

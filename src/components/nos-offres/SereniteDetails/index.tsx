@@ -16,10 +16,10 @@ export function SereniteDetails() {
               Votre informatique doit soutenir votre activité. Pas la freiner.
             </Heading>
             <Text className="text-white/80 text-base md:text-lg leading-relaxed">
-              Un logiciel de caisse qui bloque en plein service. Une messagerie inaccessible pendant plusieurs heures. Un poste lent qui fait perdre du temps chaque jour à vos équipes. Ce ne sont pas de simples soucis informatiques. Ce sont des blocages concrets qui ralentissent votre entreprise, créent du stress et coûtent de l'argent.
+              Un logiciel de caisse qui bloque en plein service. Une messagerie inaccessible pendant plusieurs heures. Un poste lent qui fait perdre du temps chaque jour à vos équipes. Ce ne sont pas de simples soucis informatiques. Ce sont des blocages concrets qui ralentissent votre entreprise, créent du stress et coûtent de l&apos;argent.
             </Text>
             <p className="py-8 px-8 italic text-white/90 text-sm md:text-base leading-relaxed bg-white/[0.02] rounded-2xl">
-              Avec l'offre Sérénité, vous bénéficiez d'un accompagnement informatique simple, complet et rassurant : 79€ HT par poste et par mois, avec support informatique illimité, maintenance proactive et cybersécurité incluse. Et surtout, nous ne nous arrêtons pas à vos ordinateurs : nous vous accompagnons aussi sur vos logiciels métier, avec un seul interlocuteur pour centraliser le suivi.
+              Avec l&apos;offre Sérénité, vous bénéficiez d&apos;un accompagnement informatique simple, complet et rassurant : 79€ HT par poste et par mois, avec support informatique illimité, maintenance proactive et cybersécurité incluse. Et surtout, nous ne nous arrêtons pas à vos ordinateurs : nous vous accompagnons aussi sur vos logiciels métier, avec un seul interlocuteur pour centraliser le suivi.
             </p>
           </div>
           <div className="relative w-full aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl mt-8 xl:mt-0">
@@ -47,7 +47,7 @@ export function SereniteDetails() {
         <div className="p-10 rounded-3xl bg-secondary/[0.05] grid grid-cols-1 xl:grid-cols-3 gap-10 items-center mb-24">
           <div className="xl:col-span-1">
             <Heading as="h3" className="text-xl md:text-2xl font-black text-white leading-tight">
-              Ce qu'on fait que les autres ne font pas
+              Ce qu&apos;on fait que les autres ne font pas
             </Heading>
           </div>
           <div className="xl:col-span-2 text-sm md:text-base text-white/80 space-y-4 leading-relaxed">
@@ -55,13 +55,13 @@ export function SereniteDetails() {
               Beaucoup de prestataires informatiques interviennent uniquement sur le matériel ou les problèmes les plus classiques. Chez TRINEXTA, notre approche est plus globale.
             </p>
             <p className="font-semibold text-white">
-              Votre logiciel de comptabilité rencontre un bug ? Nous prenons le sujet en main. Votre outil de planning ne fonctionne plus correctement ? Nous contactons l'éditeur pour vous. Nous suivons le dossier, nous faisons le lien avec les bons interlocuteurs et nous vous tenons informé à chaque étape. Résultat : vous ne perdez plus de temps.
+              Votre logiciel de comptabilité rencontre un bug ? Nous prenons le sujet en main. Votre outil de planning ne fonctionne plus correctement ? Nous contactons l&apos;éditeur pour vous. Nous suivons le dossier, nous faisons le lien avec les bons interlocuteurs et nous vous tenons informé à chaque étape. Résultat : vous ne perdez plus de temps.
             </p>
           </div>
         </div>
 
         <div className="space-y-16 mb-24">
-          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold text-center tracking-tight text-white">Les 3 piliers de l'offre Sérénité</Heading>
+          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold text-center tracking-tight text-white">Les 3 piliers de l&apos;offre Sérénité</Heading>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {pillars.map((p, i) => (
               <Card key={i} className="p-6 bg-white/[0.02] border-white/10 flex flex-col justify-between space-y-6">
@@ -84,7 +84,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-10 mb-24">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Support informatique PME : pour qui est l'offre Sérénité ?</Heading>
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Support informatique PME : pour qui est l&apos;offre Sérénité ?</Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {targets.map((target, i) => (
               <div key={i} className="flex items-start gap-4 bg-white/[0.02] p-6 rounded-2xl">
@@ -131,7 +131,7 @@ export function SereniteDetails() {
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
-                  <span>Budget lisible sur l'année</span>
+                  <span>Budget lisible sur l&apos;année</span>
                 </li>
               </ul>
             </div>
