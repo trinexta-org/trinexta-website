@@ -8,6 +8,9 @@ interface LegalContentProps {
 export function LegalContent({ data }: LegalContentProps) {
   return (
     <div className="max-w-4xl mx-auto">
+      <Heading as="h1" className="text-4xl md:text-5xl font-extrabold text-white mb-12">
+        {data.hero.title}
+      </Heading>
       <div className="space-y-10">
         {data.sections.map((section, idx) => (
           <div key={idx} className="space-y-4 border-b border-white/5 pb-8 last:border-none last:pb-0">

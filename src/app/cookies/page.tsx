@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Section } from "@/components/layout/Section"
-import { PageHero } from "@/components/layout/PageHero"
 import { LegalContent } from "@/components/legal/LegalContent"
 import { FinalCTA } from "@/components/FinalCTA"
 import { cookiesData } from "@/data/cookies"
@@ -13,9 +12,7 @@ export const metadata: Metadata = {
 export default function CookiesPage() {
   return (
     <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      <PageHero title={cookiesData.hero.title} imageSrc={cookiesData.hero.imageSrc} />
-
-      <Section className="bg-primary pb-24">
+      <Section className="bg-primary pt-24 pb-24">
         <LegalContent data={cookiesData} />
       </Section>
 
