@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading, Text } from "@/components/ui/Typography"
+import { pushGtmEvent } from "@/lib/gtm"
 
 function EnhancedRibbonBackground() {
   return (
@@ -136,6 +137,12 @@ export function FinalCTA({
           <div className="pt-4 md:pt-6">
             <Link
               href={ctaHref}
+              onClick={() => {
+                pushGtmEvent('cta_click', {
+                  cta_name: ctaLabel,
+                  cta_url: ctaHref
+                });
+              }}
               className="group relative inline-flex items-center gap-4 md:gap-6 bg-transparent border border-white/20 px-8 py-4 md:px-12 md:py-6 rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 hover:border-secondary"
             >
               <div className="absolute inset-0 bg-white translate-y-[102%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
