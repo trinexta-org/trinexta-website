@@ -43,7 +43,7 @@ export const caseClientSectors = [
 
 export const caseClients: CaseClient[] = [
   {
-    slug: "tpe-conseil-securisation-performance",
+    slug: "cybersecurite-tpe-essonne",
     label: "Cas n°1",
     clientName: "TPE de conseil",
     sector: "cabinet",
@@ -102,7 +102,7 @@ export const caseClients: CaseClient[] = [
     ],
   },
   {
-    slug: "societe-services-modernisation-poste-travail",
+    slug: "modernisation-it-pme-essonne",
     label: "Cas n°2",
     clientName: "Société de services",
     sector: "service",
@@ -161,7 +161,7 @@ export const caseClients: CaseClient[] = [
     ],
   },
   {
-    slug: "transformation-digitale-migration-cloud-pro",
+    slug: "migration-cloud-tpe-essonne",
     label: "Cas n°3",
     clientName: "TPE en transformation digitale",
     sector: "service",

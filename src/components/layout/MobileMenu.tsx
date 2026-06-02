@@ -76,7 +76,7 @@ export function MobileMenu() {
 
                 <div className="flex flex-col px-6 py-6 gap-2 overflow-y-auto">
                   {menuItems.map((link) => {
-                    const isActive = pathname === link.href
+                    const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href))
                     const isSubOpen = openSubMenu === link.label
 
                     return (
