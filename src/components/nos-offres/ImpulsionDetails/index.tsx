@@ -27,7 +27,6 @@ export function ImpulsionDetails() {
               alt="Trinexta Support IT Technicien"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              priority
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
@@ -34,22 +33,28 @@ const slides = [
 
 export function NosOffresHero() {
     const [currentSlide, setCurrentSlide] = useState(0)
+    const [isTransitioning, setIsTransitioning] = useState(false)
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length)
+            setIsTransitioning(true)
+            setTimeout(() => {
+                setCurrentSlide((prev) => (prev + 1) % slides.length)
+                setIsTransitioning(false)
+            }, 500)
         }, 5000)
         return () => clearInterval(interval)
     }, [])
 
     return (
-        <ViewportHero>
+        <ViewportHero className="min-h-[500px]">
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/images/pricing/hero-offres.avif"
                     alt="Offres Trinexta"
                     fill
                     priority
+                    fetchPriority="high"
                     className="object-cover object-center"
                     sizes="100vw"
                 />
@@ -59,28 +64,25 @@ export function NosOffresHero() {
             <Container className="relative z-10 py-12 md:py-16 lg:py-20">
                 <div className="max-w-4xl">
                     <div className="min-h-[250px] flex flex-col justify-center">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentSlide}
-                                initial={{ opacity: 0, y: 15 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -15 }}
-                                transition={{ duration: 0.5 }}
+                        <div className={`transition-all duration-500 ease-in-out transform ${
+                                isTransitioning 
+                                    ? "opacity-0 -translate-y-4" 
+                                    : "opacity-100 translate-y-0"
+                            }`}
+                        >
+                            <Heading
+                                as="h1"
+                                className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl"
                             >
-                                <Heading
-                                    as="h1"
-                                    className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl"
-                                >
-                                    <span className="text-white">{slides[currentSlide].part1}</span>
-                                    {" "}
-                                    <span className="text-secondary">{slides[currentSlide].part2}</span>
-                                </Heading>
+                                <span className="text-white">{slides[currentSlide].part1}</span>
+                                {" "}
+                                <span className="text-secondary">{slides[currentSlide].part2}</span>
+                            </Heading>
 
-                                <Text className="mt-6 text-xl md:text-2xl text-white/90 max-w-2xl drop-shadow-md">
-                                    {slides[currentSlide].subtitle}
-                                </Text>
-                            </motion.div>
-                        </AnimatePresence>
+                            <Text className="mt-6 text-xl md:text-2xl text-white/90 max-w-2xl drop-shadow-md">
+                                {slides[currentSlide].subtitle}
+                            </Text>
+                        </div>
                     </div>
 
                     <div className="mt-10 flex flex-col sm:flex-row gap-4">
