@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "src/components/mentions/LegalContent"  ],
+  ],
   "exclude": ["node_modules", "studio"]
 }

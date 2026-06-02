@@ -1,4 +1,3 @@
-import React from "react"
 import type { LegalData } from "./mentions-legales"
 
 export const cookiesData: LegalData = {

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Container } from "@/components/layout/Container"
+import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading } from "@/components/ui/Typography"
 
 interface PageHeroProps {
@@ -9,23 +10,29 @@ interface PageHeroProps {
 
 export function PageHero({ title, imageSrc }: PageHeroProps) {
   return (
-    <section className="relative h-[40vh] min-h-[350px] md:min-h-[450px] flex items-center justify-center overflow-hidden">
-      <Image
-        src={imageSrc}
-        alt={`Fond de la page ${title}`}
-        fill
-        className="object-cover object-center"
-        priority
-      />
-      <div className="absolute inset-0 bg-primary/70" />
-      <Container className="relative z-10 text-center mt-12">
-        <Heading 
-          as="h1" 
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tighter"
-        >
-          {title}
-        </Heading>
+    <ViewportHero>
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={imageSrc}
+          alt={`Fond de la page ${title}`}
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-primary/90" />
+      </div>
+
+      <Container className="relative z-10 py-12 md:py-16 lg:py-20">
+        <div className="max-w-4xl">
+          <Heading
+            as="h1"
+            className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight text-white drop-shadow-xl"
+          >
+            {title}
+          </Heading>
+        </div>
       </Container>
-    </section>
+    </ViewportHero>
   )
 }

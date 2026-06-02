@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Section } from "@/components/layout/Section"
-import { Container } from "@/components/layout/Container"
 import { PageHero } from "@/components/layout/PageHero"
 import { LegalContent } from "@/components/legal/LegalContent"
 import { FinalCTA } from "@/components/FinalCTA"
@@ -16,16 +15,14 @@ export const metadata: Metadata = {
 export default function MentionsLegalesPage() {
   return (
     <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      
-      <PageHero 
-        title={mentionsLegalesData.hero.title} 
-        imageSrc={mentionsLegalesData.hero.imageSrc} 
+
+      <PageHero
+        title={mentionsLegalesData.hero.title}
+        imageSrc={mentionsLegalesData.hero.imageSrc}
       />
 
       <Section className="bg-primary pb-24">
-        <Container>
-          <LegalContent data={mentionsLegalesData} />
-        </Container>
+        <LegalContent data={mentionsLegalesData} />
       </Section>
 
       <FinalCTA
