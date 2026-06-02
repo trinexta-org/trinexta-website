@@ -4,7 +4,19 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
-export const menuItems = [
+export interface SubMenuItem {
+  label: string
+  href: string
+  disabled?: boolean
+}
+
+export interface MenuItem {
+  label: string
+  href: string
+  subMenu?: SubMenuItem[]
+}
+
+export const menuItems: MenuItem[] = [
   { label: "Accueil", href: "/" },
   {
     label: "Nos offres",
@@ -30,17 +42,7 @@ export const menuItems = [
   },
   { label: "Cas clients", href: "/cas-clients" },
   { label: "À propos", href: "/a-propos" },
-  {
-    label: "Ressources",
-    href: "/blog",
-    subMenu: [
-      { label: "Blog", href: "/blog" },
-      { label: "Guides PDF", href: "#", disabled: true },
-      { label: "Webinaires", href: "#", disabled: true },
-      { label: "FAQ", href: "#", disabled: true },
-      { label: "Glossaire", href: "#", disabled: true },
-    ]
-  },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ]
 
