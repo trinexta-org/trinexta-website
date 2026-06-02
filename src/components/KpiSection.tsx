@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion"
+import { motion, useInView, animate } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
@@ -44,22 +44,24 @@ const kpis = [
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-50px" })
-  const motionValue = useMotionValue(0)
-  const springValue = useSpring(motionValue, { damping: 50, stiffness: 60 })
 
   useEffect(() => {
-    if (isInView) motionValue.set(value)
-  }, [isInView, value, motionValue])
+    if (isInView && ref.current) {
+      const controls = animate(0, value, {
+        duration: 2.3, 
+        ease: "easeOut",
+        onUpdate(latest) {
+          if (ref.current) {
+            ref.current.textContent = Intl.NumberFormat("fr-FR").format(Math.floor(latest)) + suffix
+          }
+        }
+      })
+      
+      return controls.stop
+    }
+  }, [isInView, value, suffix])
 
-  useEffect(() => {
-    springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Intl.NumberFormat("fr-FR").format(Math.floor(latest)) + suffix
-      }
-    })
-  }, [springValue, suffix])
-
-  return <span ref={ref}>0</span>
+  return <span ref={ref}>0{suffix}</span>
 }
 
 export function KpiSection() {
