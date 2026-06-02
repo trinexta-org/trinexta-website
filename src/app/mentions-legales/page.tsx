@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { PageHero } from "@/components/layout/PageHero"
-import { MentionsContent } from "@/components/mentions/MentionsContent"
+import { LegalContent } from "@/components/legal/LegalContent"
 import { FinalCTA } from "@/components/FinalCTA"
 
 import { mentionsLegalesData } from "@/data/mentions-legales"
@@ -24,7 +24,7 @@ export default function MentionsLegalesPage() {
 
       <Section className="bg-primary pb-24">
         <Container>
-          <MentionsContent />
+          <LegalContent data={mentionsLegalesData} />
         </Container>
       </Section>
 

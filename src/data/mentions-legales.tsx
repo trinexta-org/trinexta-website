@@ -18,7 +18,7 @@ export interface LegalData {
 export const mentionsLegalesData: LegalData = {
   hero: {
     title: "Mentions Légales",
-    imageSrc: "/images/mentions-legales/hero-mentions.jpg",
+    imageSrc: "/images/legal/hero-mentions.jpg",
   },
   sections: [
     {
