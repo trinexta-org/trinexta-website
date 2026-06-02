@@ -48,7 +48,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   useEffect(() => {
     if (isInView && ref.current) {
       const controls = animate(0, value, {
-        duration: 2.3, 
+        duration: 2.3,
         ease: "easeOut",
         onUpdate(latest) {
           if (ref.current) {
@@ -56,7 +56,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
           }
         }
       })
-      
+
       return controls.stop
     }
   }, [isInView, value, suffix])
