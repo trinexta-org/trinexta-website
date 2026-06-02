@@ -24,7 +24,7 @@ export const steps = [
 export const pillars = [
   {
     title: "Support utilisateur (Helpdesk)",
-    desc: "Prise en charge des demandes et incidents du quotidien rencontrés par vos collaborateurs : problèmes logiciels, difficultés de connexion, comptes utilisateurs, mots de passe, matériel ou lenteurs de poste. L&apos;objectif : apporter des réponses rapides, claires et efficaces pour éviter que l'activité ne ralentisse.",
+    desc: "Prise en charge des demandes et incidents du quotidien rencontrés par vos collaborateurs : problèmes logiciels, difficultés de connexion, comptes utilisateurs, mots de passe, matériel ou lenteurs de poste. L'objectif : apporter des réponses rapides, claires et efficaces pour éviter que l'activité ne ralentisse.",
   },
   {
     title: "Gestion de parc de proximité",

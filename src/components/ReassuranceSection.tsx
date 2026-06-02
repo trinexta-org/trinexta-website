@@ -1,8 +1,6 @@
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { ShieldCheck, Award, Lock, CheckCircle } from "lucide-react"
-
-// Import de ton composant issu de la branche 70
 import { GoogleRatingSection } from "@/components/sections/GoogleRatingSection"
 
 export function ReassuranceSection() {
@@ -18,20 +16,18 @@ export function ReassuranceSection() {
       <Container>
         <div className="flex flex-col items-center justify-center gap-10 text-center">
           
-          {/* 1. Ta note Google (Seule la capsule blanche du composant s'affiche ici) */}
           <div className="w-full flex items-center justify-center">
             <GoogleRatingSection />
           </div>
 
-          {/* 2. Les 4 labels officiels positionnés en bas sur le fond bleu foncé global */}
-          <div className="w-full flex flex-wrap items-center justify-center gap-6 sm:gap-12">
+          <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mt-2">
             {labels.map((label, index) => (
               <div 
                 key={index} 
-                className="flex items-center gap-2.5 text-white/70 hover:text-white transition-colors duration-300"
+                className="group flex items-center justify-center gap-3 py-4 px-4 sm:px-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
               >
-                <label.icon className="w-4 h-4 text-secondary flex-shrink-0" />
-                <span className="text-xs md:text-sm font-semibold tracking-wider uppercase">
+                <label.icon className="w-5 h-5 text-secondary flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-[10px] sm:text-[11px] lg:text-xs font-bold tracking-widest uppercase text-white/70 group-hover:text-white transition-colors duration-300 text-center">
                   {label.name}
                 </span>
               </div>

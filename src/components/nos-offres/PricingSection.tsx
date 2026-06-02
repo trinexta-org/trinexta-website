@@ -58,7 +58,7 @@ const offers = [
 
 export function PricingSection() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
       {offers.map((offer) => (
         <PricingCard key={offer.name} {...offer} />
       ))}

@@ -30,13 +30,13 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
     const [activeBenefit, setActiveBenefit] = useState(0)
 
     const [bentoOrder, setBentoOrder] = useState([0, 1, 2, 3, 4])
-    const [userInteracted, setUserInteracted] = useState(false) 
-    
+    const [userInteracted, setUserInteracted] = useState(false)
+
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalDataIndex, setModalDataIndex] = useState(0)
 
     useEffect(() => {
-        if (userInteracted) return; 
+        if (userInteracted) return;
 
         const interval = setInterval(() => {
             setBentoOrder((prev) => {
@@ -50,10 +50,10 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
     }, [userInteracted])
 
     const handleDesktopClick = (gridIndex: number) => {
-        if (gridIndex === 0) return; 
-        
-        setUserInteracted(true); 
-        
+        if (gridIndex === 0) return;
+
+        setUserInteracted(true);
+
         setBentoOrder((prev) => {
             const newOrder = [...prev];
             const temp = newOrder[0];
@@ -161,7 +161,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                         const isMainFocus = gridPositionIndex === 0;
                         const isSecondaryWithImage = gridPositionIndex === 4;
                         const hasImage = isMainFocus || isSecondaryWithImage;
-                        
+
                         const bentoClass = isMainFocus ? "md:col-span-2 md:row-span-2" : isSecondaryWithImage ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1";
                         const imageIndex = isMainFocus ? 1 : 2;
 
@@ -184,6 +184,14 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                                                 <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
                                             </>
+                                        )}
+
+                                        {!isMainFocus && (
+                                            <div className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-20 group-hover:bg-secondary/40 transition-colors">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                                                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                                </svg>
+                                            </div>
                                         )}
 
                                         <div className={`relative z-10 h-full flex flex-col p-5 md:p-8 ${hasImage ? 'justify-end' : 'justify-start'}`}>
@@ -244,7 +252,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
 
                                 <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-10 group-hover:bg-secondary/20 transition-colors">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                                     </svg>
                                 </div>
                             </button>
@@ -256,7 +264,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                     {isModalOpen && (
                         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:hidden">
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsModalOpen(false)} className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
-                            
+
                             <motion.div
                                 initial={{ opacity: 0, y: 50, scale: 0.95 }}
                                 animate={{ opacity: 1, y: 0, scale: 1 }}

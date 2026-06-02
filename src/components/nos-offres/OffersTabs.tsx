@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react"
 import { Container } from "@/components/layout/Container"
 import { ImpulsionDetails } from "./ImpulsionDetails"
 import { SereniteDetails } from "./SereniteDetails"
@@ -18,23 +19,39 @@ const tabs = [
 export function OffersTabs() {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const [headerHeight, setHeaderHeight] = useState(60)
+
+  useEffect(() => {
+    const header = document.querySelector('header')
+    if (!header) return
+
+    const observer = new ResizeObserver((entries) => {
+      setHeaderHeight(entries[0].target.getBoundingClientRect().height)
+    })
+
+    observer.observe(header)
+    return () => observer.disconnect()
+  }, [])
 
   const tabParam = searchParams.get("tab")
   const activeTab = tabParam && tabs.some(tab => tab.id === tabParam) ? tabParam : "impulsion"
 
   return (
     <div id="offers-explorer" className="scroll-mt-[160px] w-full space-y-8">
-      <div className="sticky top-[60px] md:top-[114px] z-30 bg-primary/95 backdrop-blur-md py-3 border-b border-white/10 w-full shadow-lg">
-        <Container className="grid grid-cols-2 md:grid-cols-4 gap-2">
+      <div
+        className="sticky z-30 bg-primary/95 backdrop-blur-md py-3 w-full"
+        style={{ top: `${headerHeight}px` }}
+      >
+        <Container className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {tabs.map((tab) => {
             const isSelected = activeTab === tab.id
             return (
               <button
                 key={tab.id}
                 onClick={() => router.push(`/nos-offres?tab=${tab.id}`, { scroll: false })}
-                className={`relative p-3 rounded-lg text-left border transition-all duration-300 flex flex-col justify-center overflow-hidden group h-16 md:h-20 ${isSelected
-                  ? "bg-secondary/10 border-secondary shadow-md shadow-secondary/5"
-                  : "bg-white/[0.01] border-white/5 hover:border-white/20 hover:bg-white/[0.02]"
+                className={`relative p-3 rounded-lg text-left transition-all duration-300 flex flex-col justify-center overflow-hidden group h-16 md:h-20 min-w-0 ${isSelected
+                  ? "bg-secondary/10"
+                  : "bg-white/[0.02] hover:bg-white/[0.05]"
                   }`}
               >
                 {isSelected && (
@@ -44,7 +61,7 @@ export function OffersTabs() {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
-                <div className="relative z-10 truncate">
+                <div className="relative z-10 truncate min-w-0">
                   <span className={`text-[8px] md:text-[9px] font-mono font-bold uppercase tracking-widest block ${isSelected ? "text-secondary" : "text-white/40"}`}>
                     {tab.sub}
                   </span>

@@ -32,7 +32,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-background relative">
+    <main className="min-h-screen bg-primary relative">
       <JsonLd data={trinextaLocalBusiness} />
       <HeroSection />
       <ReassuranceSection />
