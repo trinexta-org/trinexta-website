@@ -96,6 +96,20 @@
       transform: translateY(0);
     }
   }
+  @keyframes service-hero-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-service-hero {
+    opacity: 0;
+    animation: service-hero-fade-in 0.5s ease-in-out both;
+  }
   @keyframes fade-in-down {
     from {
       opacity: 0;
