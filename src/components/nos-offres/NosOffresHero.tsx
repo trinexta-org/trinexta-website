@@ -87,7 +87,7 @@ export function NosOffresHero() {
 
                     <div className="mt-10 flex flex-col sm:flex-row gap-4">
                         <Link href="#details">
-                            <Button variant="secondary" size="lg" className="w-full sm:w-auto text-white">
+                            <Button variant="secondary" size="lg" className="w-full sm:w-auto text-primary font-bold">
                                 Voir les détails
                             </Button>
                         </Link>
