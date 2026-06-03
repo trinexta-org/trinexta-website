@@ -27,7 +27,20 @@ function formatHeadingText(children: ReactNode): ReactNode {
   if (!children) return children;
 
   if (typeof children === "string") {
-    return parseEmphasis(children);
+    if (children.includes("*")) return parseEmphasis(children);
+    const words = children.trim().split(/\s+/).filter(w => w.length > 0);
+    if (words.length <= 2) return children;
+    const lastIdx = words.length - 1;
+    return (
+      <>
+        {words.map((word, idx) => (
+          <span key={idx}>
+            {idx === lastIdx ? <em className="italic">{word}</em> : word}
+            {idx < lastIdx ? " " : ""}
+          </span>
+        ))}
+      </>
+    );
   }
 
   if (Array.isArray(children)) {
