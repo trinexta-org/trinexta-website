@@ -143,6 +143,23 @@ import { Heading, Text } from "@/components/ui/Typography"
 <Text variant="small">Note</Text>              // petit, discret
 ```
 
+#### Emphase italique dans les titres
+
+Entourer le mot a mettre en italique avec des asterisques `*mot*` directement dans la string. Choisir le mot porteur de sens : nom, benefice, differenciateur.
+
+```tsx
+<Heading as="h2">Infogérance sans *surprise*</Heading>
+// rendu : "Infogérance sans <em>surprise</em>"
+
+<Heading as="h2">Votre *partenaire* informatique</Heading>
+// le mot fort n'est pas forcement en fin de titre
+
+<Heading as="h2" emphasis={false}>Titre sans emphase</Heading>
+// desactiver l'emphase entierement
+```
+
+Eviter les mots faibles en emphase : articles, prepositions, adjectifs generiques. Si aucun `*...*` n'est present dans la string, aucune emphase n'est appliquee.
+
 ### Button
 
 ```tsx
