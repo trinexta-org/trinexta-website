@@ -165,7 +165,7 @@ export default function FontPreviewPage() {
                   INFOGÉRANCE & SÉCURITÉ
                 </h1>
                 <p className="text-sm text-muted-foreground">
-                  L'infogérance moderne par TRINEXTA assure la continuité de votre activité et la protection de vos données.
+                  L&apos;infogérance moderne par TRINEXTA assure la continuité de votre activité et la protection de vos données.
                 </p>
               </div>
             </Card>
@@ -180,7 +180,7 @@ export default function FontPreviewPage() {
                   INFOGÉRANCE & SÉCURITÉ
                 </h1>
                 <p className="text-sm text-muted-foreground">
-                  L'infogérance moderne par TRINEXTA assure la continuité de votre activité et la protection de vos données.
+                  L&apos;infogérance moderne par TRINEXTA assure la continuité de votre activité et la protection de vos données.
                 </p>
               </div>
             </Card>

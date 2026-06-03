@@ -36,7 +36,7 @@ function formatHeadingText(children: ReactNode): ReactNode {
     const textLength = children.reduce((acc: number, child: ReactNode) => {
       if (typeof child === "string") return acc + child.trim().split(/\s+/).length;
       if (React.isValidElement(child)) {
-        const element = child as React.ReactElement<{ children?: any }>;
+        const element = child as React.ReactElement<{ children?: ReactNode }>;
         if (typeof element.props.children === "string") {
           return acc + element.props.children.trim().split(/\s+/).length;
         }
@@ -76,7 +76,7 @@ function formatHeadingText(children: ReactNode): ReactNode {
       }
 
       if (React.isValidElement(child)) {
-        const element = child as React.ReactElement<{ children?: any }>;
+        const element = child as React.ReactElement<{ children?: ReactNode }>;
         if (typeof element.props.children === "string" && element.props.children.trim() !== "") {
           formatted = true;
           const words = element.props.children.trim().split(/\s+/);
@@ -108,7 +108,7 @@ function formatHeadingText(children: ReactNode): ReactNode {
 
   // Si c'est un seul élément React
   if (React.isValidElement(children)) {
-    const element = children as React.ReactElement<{ children?: any }>;
+    const element = children as React.ReactElement<{ children?: ReactNode }>;
     if (typeof element.props.children === "string") {
       const formattedInner = formatHeadingText(element.props.children);
       return React.cloneElement(element, {}, formattedInner);
