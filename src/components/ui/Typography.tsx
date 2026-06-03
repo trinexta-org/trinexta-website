@@ -120,10 +120,10 @@ function formatHeadingText(children: ReactNode): ReactNode {
 
 export function Heading({ children, className, as: Component = "h2" }: HeadingProps) {
   const styles: Record<HeadingLevel, string> = {
-    h1: "text-4xl md:text-5xl lg:text-6xl font-semibold text-primary tracking-normal leading-[1.1]",
-    h2: "text-3xl md:text-4xl font-semibold text-primary tracking-normal",
-    h3: "text-xl md:text-2xl font-semibold text-primary tracking-normal",
-    h4: "text-lg font-semibold text-primary tracking-normal",
+    h1: "text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-normal leading-[1.1]",
+    h2: "text-3xl md:text-4xl font-bold text-primary tracking-normal",
+    h3: "text-xl md:text-2xl font-bold text-primary tracking-normal",
+    h4: "text-lg font-bold text-primary tracking-normal",
   }
   
   const Tag = Component as ElementType
