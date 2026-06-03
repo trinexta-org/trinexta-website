@@ -13,7 +13,7 @@ export function StudioDetails() {
           <div className="space-y-8">
             <span className="text-secondary font-mono text-xs tracking-widest uppercase">TRINEXTA STUDIO</span>
             <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-tighter text-white">
-              Une présence digitale alignée avec votre informatique
+              Une présence digitale alignée avec votre *informatique*
             </Heading>
             <Text className="text-white/80 text-base md:text-lg leading-relaxed">
               Multiplier les interlocuteurs techniques est souvent source de lenteurs et d&apos;incompréhensions : l&apos;hébergeur rejette la faute sur le webmaster, qui rejette la faute sur votre informaticien. Chez TRINEXTA, nous supprimons cette complexité.
@@ -37,7 +37,7 @@ export function StudioDetails() {
 
         <div className="space-y-16 mb-24">
           <div className="space-y-4 text-center max-w-2xl mx-auto">
-            <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Pour répondre à vos besoins de création</Heading>
+            <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Pour répondre à vos besoins de *création*</Heading>
             <Text className="text-white/60 text-sm md:text-base">Des technologies modernes choisies pour leur rapidité, leur sécurité et leur excellent référencement naturel (SEO).</Text>
           </div>
 
@@ -67,7 +67,7 @@ export function StudioDetails() {
 
         <div className="space-y-16 mb-24">
           <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-center text-white">
-            Pourquoi nous confier vos projets web et SaaS ?
+            Pourquoi nous *confier* vos projets web et SaaS ?
           </Heading>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -84,7 +84,7 @@ export function StudioDetails() {
         </div>
 
         <div className="p-10 rounded-3xl bg-secondary/[0.05] text-center max-w-4xl mx-auto space-y-4">
-          <Heading as="h3" className="text-lg md:text-xl font-bold text-white">Un seul interlocuteur, de la maquette à la maintenance</Heading>
+          <Heading as="h3" className="text-lg md:text-xl font-bold text-white">Un *seul* interlocuteur, de la maquette à la maintenance</Heading>
           <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto leading-relaxed">
             Nous ne livrons pas des projets &quot;clés en main&quot; pour ensuite disparaître. Nous assurons le suivi, les mises à jour de sécurité et l&apos;évolution technique continue de vos plateformes pour qu&apos;elles restent performantes au fil des années.
           </p>

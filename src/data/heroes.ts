@@ -1,31 +1,31 @@
 export const homeHeroSlides = [
   {
-    title: "Simplifiez votre informatique au quotidien",
+    title: "*Simplifiez* votre informatique au quotidien",
     subtitle: "Support illimité, maintenance proactive et cybersécurité incluse pour travailler avec plus de sérénité."
   },
   {
-    title: "Renforcez votre support avec souplesse",
+    title: "*Renforcez* votre support avec souplesse",
     subtitle: "Un technicien support adapté à vos besoins, pour accompagner votre activité sans contrainte inutile."
   },
   {
-    title: "Gardez une informatique fiable et bien suivie",
+    title: "*Gardez* une informatique fiable et bien suivie",
     subtitle: "Surveillance, maintenance et suivi proactif pour limiter les pannes et gagner en tranquillité."
   }
 ]
 
 export const aproposHeroSlides = [
   {
-    title: "Une informatique plus simple, humaine et utile",
+    title: "Une *informatique* plus simple, humaine et utile",
     subtitle:
       "Nous considérons que l'informatique ne doit pas être une contrainte de plus dans votre quotidien. Elle doit être un appui fiable, clair et efficace, au service de votre activité."
   },
   {
-    title: "L'humain au centre de notre métier",
+    title: "L'humain au centre de notre *métier*",
     subtitle:
       "Derrière chaque demande, il y a un dirigeant, un collaborateur, une équipe. C'est pour cela que nous plaçons l'écoute et la confiance au centre de notre accompagnement."
   },
   {
-    title: "Simplifier l'informatique pour soutenir votre activité",
+    title: "Simplifier l'informatique pour soutenir votre *activité*",
     subtitle:
       "Bénéficiez d'un support dédié, d'un accès direct à nos experts qualifiés et d'une approche sur mesure pour vous aider à surmonter vos défis technologiques."
   }

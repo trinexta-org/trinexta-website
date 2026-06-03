@@ -33,9 +33,11 @@ export function AProposHero() {
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight drop-shadow-xl text-white text-balance"
           >
             {slide.title.split(" ").map((word, i) => {
-              const cleanWord = word.toLowerCase().replace(/[,.]/g, "")
+              const isItalic = word.startsWith("*") && word.endsWith("*") && word.length > 2
+              const rawWord = isItalic ? word.slice(1, -1) : word
+              const cleanWord = rawWord.toLowerCase().replace(/[,.]/g, "")
               const isHighlighted =
-                targetKeywords.includes(cleanWord) || word === "simple,"
+                targetKeywords.includes(cleanWord) || rawWord === "simple,"
               return (
                 <span
                   key={i}
@@ -45,7 +47,7 @@ export function AProposHero() {
                       : "text-white inline-block mr-2 sm:mr-3"
                   }
                 >
-                  {word}
+                  {isItalic ? <em>{rawWord}</em> : rawWord}
                 </span>
               )
             })}

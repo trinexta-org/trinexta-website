@@ -13,7 +13,7 @@ export function SereniteDetails() {
           <div className="space-y-8">
             <span className="text-secondary font-mono text-xs tracking-widest uppercase">OFFRE SÉRÉNITÉ</span>
             <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-tighter text-white">
-              Votre informatique doit soutenir votre activité. Pas la freiner.
+              Votre informatique doit *soutenir* votre activité. Pas la *freiner*.
             </Heading>
             <Text className="text-white/80 text-base md:text-lg leading-relaxed">
               Un logiciel de caisse qui bloque en plein service. Une messagerie inaccessible pendant plusieurs heures. Un poste lent qui fait perdre du temps chaque jour à vos équipes. Ce ne sont pas de simples soucis informatiques. Ce sont des blocages concrets qui ralentissent votre entreprise, créent du stress et coûtent de l&apos;argent.
@@ -47,7 +47,7 @@ export function SereniteDetails() {
         <div className="p-10 rounded-3xl bg-secondary/[0.05] grid grid-cols-1 xl:grid-cols-3 gap-10 items-center mb-24">
           <div className="xl:col-span-1">
             <Heading as="h3" className="text-xl md:text-2xl font-black text-white leading-tight">
-              Ce qu&apos;on fait que les autres ne font pas
+              Ce qu&apos;on fait que les *autres* ne font pas
             </Heading>
           </div>
           <div className="xl:col-span-2 text-sm md:text-base text-white/80 space-y-4 leading-relaxed">
@@ -61,7 +61,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-16 mb-24">
-          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold text-center tracking-tight text-white">Les 3 piliers de l&apos;offre Sérénité</Heading>
+          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold text-center tracking-tight text-white">Les 3 piliers de l&apos;offre *Sérénité*</Heading>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {pillars.map((p, i) => (
               <Card key={i} className="p-6 bg-white/[0.02] border-white/10 flex flex-col justify-between space-y-6">
@@ -84,7 +84,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-10 mb-24">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Support informatique PME : pour qui est l&apos;offre Sérénité ?</Heading>
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Support informatique PME : *pour qui* est l&apos;offre Sérénité ?</Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {targets.map((target, i) => (
               <div key={i} className="flex items-start gap-4 bg-white/[0.02] p-6 rounded-2xl">
@@ -96,7 +96,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-10 mb-24">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Une tarification claire et sans surprise</Heading>
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Une tarification claire et sans *surprise*</Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-8 rounded-2xl bg-white/[0.02] space-y-6">
               <div className="flex justify-between items-baseline">

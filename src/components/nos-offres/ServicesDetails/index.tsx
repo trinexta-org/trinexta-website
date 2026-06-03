@@ -11,7 +11,7 @@ export function ServicesDetails() {
         <div className="space-y-6">
           <span className="text-secondary font-mono text-xs tracking-widest uppercase">SERVICES ANNEXES</span>
           <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-tighter text-white">
-            Un accompagnement IT sur mesure, au-delà du support
+            Un accompagnement IT sur mesure, au-delà du *support*
           </Heading>
           <Text className="text-white/80 text-base md:text-lg leading-relaxed">
             Changement de messagerie, ajout de nouveaux postes, évolution de votre environnement Microsoft 365, amélioration de votre réseau ou sécurisation de vos données... Nous intervenons sur les projets informatiques du quotidien comme sur les sujets plus structurants.
@@ -37,7 +37,7 @@ export function ServicesDetails() {
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 items-start mb-24">
         <div className="xl:col-span-5 space-y-4">
           <Heading as="h3" className="text-2xl md:text-3xl font-black tracking-tight text-white">
-            Notre approche : conseiller avant de vendre
+            Notre approche : conseiller avant de *vendre*
           </Heading>
         </div>
         <div className="xl:col-span-7 space-y-4 text-white/80 text-sm md:text-base leading-relaxed">
@@ -52,7 +52,7 @@ export function ServicesDetails() {
 
       <div className="space-y-12 mb-24">
         <div className="space-y-2">
-          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Nos services sur devis</Heading>
+          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Nos services sur *devis*</Heading>
           <Text className="text-white/60 text-sm md:text-base">Voici les prestations les plus demandées par nos clients. Chaque intervention fait l&apos;objet d&apos;un échange préalable et d&apos;un devis personnalisé.</Text>
         </div>
 
@@ -81,7 +81,7 @@ export function ServicesDetails() {
 
       <div className="space-y-8">
         <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-center text-white">
-          Comment ça se passe ?
+          *Comment* ça se passe ?
         </Heading>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {executionSteps.map((item, idx) => (
