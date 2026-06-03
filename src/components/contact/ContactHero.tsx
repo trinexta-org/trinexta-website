@@ -13,7 +13,7 @@ export function ContactHero() {
       slides={contactHeroSlides}
       containerPadding="py-12 md:py-16 lg:py-20"
       slideMinHeight="min-h-[250px]"
-      renderBackground={() => (
+      staticBackground={
         <Image
           src="/images/services/support-informatique/hero.jpg"
           alt="Contact Trinexta"
@@ -22,7 +22,7 @@ export function ContactHero() {
           className="object-cover object-center"
           sizes="100vw"
         />
-      )}
+      }
       overlays={<div className="absolute inset-0 bg-primary/90" />}
       renderSlide={(slide) => (
         <div>

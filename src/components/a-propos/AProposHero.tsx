@@ -15,7 +15,7 @@ export function AProposHero() {
       slides={aproposHeroSlides}
       containerPadding="py-12 md:py-16 lg:py-20"
       slideMinHeight="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px]"
-      renderBackground={() => (
+      staticBackground={
         <Image
           src="/images/a-propos/hero-apropos.jpg"
           alt="L'équipe Trinexta by Trustech IT Support"
@@ -24,7 +24,7 @@ export function AProposHero() {
           className="object-cover grayscale opacity-60"
           sizes="100vw"
         />
-      )}
+      }
       overlays={<div className="absolute inset-0 bg-primary/70 lg:bg-primary/80" />}
       renderSlide={(slide) => (
         <div>

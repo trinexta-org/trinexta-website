@@ -12,19 +12,17 @@ export function HeroSection() {
       slides={homeHeroSlides}
       containerPadding="py-8 pb-16 md:py-12"
       slideMinHeight="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px]"
-      renderBackground={() => (
-        <>
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/video_Hero.mp4" type="video/mp4" />
-          </video>
-        </>
-      )}
+      staticBackground={
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/video_Hero.mp4" type="video/mp4" />
+        </video>
+      }
       overlays={<div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />}
       renderSlide={(slide) => (
         <div>
