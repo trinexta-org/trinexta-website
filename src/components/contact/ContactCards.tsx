@@ -11,7 +11,7 @@ const CONTACT_CARDS = [
   {
     id: "bureau",
     title: "Bureau d'activité",
-    image: "/images/contact/bureau.png",
+    image: "/images/contact/bureau.webp",
     content: (
       <Text variant="small" className="text-white/80 leading-relaxed mt-4 drop-shadow-md font-medium">
         7 Rue Montespan<br />
@@ -28,9 +28,6 @@ const CONTACT_CARDS = [
         <a href="tel:+33978250746" className="text-secondary font-black hover:underline block text-2xl drop-shadow-lg">
           09 78 25 07 46
         </a>
-        <Text variant="small" className="text-white/80 font-bold mt-2 drop-shadow-md">
-          Urgence : 07 56 82 10 47
-        </Text>
       </div>
     )
   },
