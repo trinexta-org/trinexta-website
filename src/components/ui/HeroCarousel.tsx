@@ -8,7 +8,8 @@ import { Container } from "@/components/layout/Container"
 interface HeroCarouselProps<T> {
   slides: T[]
   interval?: number
-  renderBackground: (slide: T, index: number) => ReactNode
+  renderBackground?: (slide: T, index: number) => ReactNode
+  staticBackground?: ReactNode
   overlays?: ReactNode
   renderSlide: (slide: T, index: number) => ReactNode
   footer?: ReactNode
@@ -20,6 +21,7 @@ export function HeroCarousel<T>({
   slides,
   interval = 5000,
   renderBackground,
+  staticBackground,
   overlays,
   renderSlide,
   footer,
@@ -38,7 +40,13 @@ export function HeroCarousel<T>({
 
   return (
     <ViewportHero>
-      {slides.map((slide, i) => (
+      {staticBackground && (
+        <div className="absolute inset-0">
+          {staticBackground}
+        </div>
+      )}
+
+      {!staticBackground && renderBackground && slides.map((slide, i) => (
         <div
           key={i}
           className="absolute inset-0 transition-opacity duration-700"
