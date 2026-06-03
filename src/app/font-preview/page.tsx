@@ -24,8 +24,8 @@ const trackings = [
 ];
 
 export default function FontPreviewPage() {
-  const [selectedWeight, setSelectedWeight] = useState("font-black");
-  const [selectedTracking, setSelectedTracking] = useState("tracking-wide");
+  const [selectedWeight, setSelectedWeight] = useState("font-semibold");
+  const [selectedTracking, setSelectedTracking] = useState("tracking-normal");
   const [isItalic, setIsItalic] = useState(false);
   const [customText, setCustomText] = useState("TRINEXTA : L'avenir de votre informatique");
 
