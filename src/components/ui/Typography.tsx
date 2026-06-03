@@ -17,7 +17,7 @@ function parseEmphasis(text: string): ReactNode {
   return (
     <>
       {parts.map((part, idx) =>
-        idx % 2 === 1 ? <em key={idx} className="italic">{part}</em> : part
+        idx % 2 === 1 ? <em key={idx}>{part}</em> : part
       )}
     </>
   );
@@ -35,7 +35,7 @@ function formatHeadingText(children: ReactNode): ReactNode {
       <>
         {words.map((word, idx) => (
           <span key={idx}>
-            {idx === lastIdx ? <em className="italic">{word}</em> : word}
+            {idx === lastIdx ? <em>{word}</em> : word}
             {idx < lastIdx ? " " : ""}
           </span>
         ))}
@@ -49,11 +49,13 @@ function formatHeadingText(children: ReactNode): ReactNode {
         return <React.Fragment key={idx}>{parseEmphasis(child)}</React.Fragment>;
       }
       if (React.isValidElement(child)) {
-        const element = child as React.ReactElement<{ children?: ReactNode }>;
-        return React.cloneElement(
-          element,
-          { key: element.key ?? idx },
-          formatHeadingText(element.props.children)
+        const el = child as React.ReactElement<{ children?: ReactNode }>;
+        const Tag = el.type as React.ElementType;
+        const { children: elChildren, ...restProps } = el.props;
+        return (
+          <Tag key={el.key ?? idx} {...restProps}>
+            {formatHeadingText(elChildren)}
+          </Tag>
         );
       }
       return child;
@@ -61,8 +63,10 @@ function formatHeadingText(children: ReactNode): ReactNode {
   }
 
   if (React.isValidElement(children)) {
-    const element = children as React.ReactElement<{ children?: ReactNode }>;
-    return React.cloneElement(element, {}, formatHeadingText(element.props.children));
+    const el = children as React.ReactElement<{ children?: ReactNode }>;
+    const Tag = el.type as React.ElementType;
+    const { children: elChildren, ...restProps } = el.props;
+    return <Tag {...restProps}>{formatHeadingText(elChildren)}</Tag>;
   }
 
   return children;

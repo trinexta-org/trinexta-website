@@ -58,7 +58,7 @@ export const caseClients: CaseClient[] = [
     cardResult:
       "Postes chiffrés, parc suivi, support disponible. L'informatique est devenue quelque chose qu'on gère, pas qu'on subit.",
     title:
-      "Des postes grand public transformés en environnement pro",
+      "Des postes grand *public* transformés en environnement pro",
     context: [
       "Une TPE spécialisée dans le conseil gérait son activité sur des postes sous Windows Famille. Cette configuration limitait l'accès aux fonctionnalités professionnelles et exposait l'entreprise à des risques de sécurité accrus.",
       "Sans service informatique interne, chaque mise à jour devenait une source de stress pour les dirigeants. L'informatique était subie au lieu d'être encadrée.",
@@ -117,7 +117,7 @@ export const caseClients: CaseClient[] = [
     cardResult:
       "16 Go, Microsoft 365, écrans Dell 27\". Même budget, autre confort, et moins de risques sur les données.",
     title:
-      "5 postes qui souffraient en silence, modernisés sans tout remplacer",
+      "5 postes qui souffraient en silence, modernisés sans tout *remplacer*",
     context: [
       "Cette société de services disposait de 5 PC sous Windows Famille avec seulement 8 Go de RAM, saturant à 80% au repos. Le quotidien était freiné par les ralentissements et les blocages logiciels.",
       "Le travail sur Office 2007 et les sauvegardes sur clés USB ou disques durs externes créaient aussi un risque critique de perte de données.",
@@ -176,7 +176,7 @@ export const caseClients: CaseClient[] = [
     cardResult:
       "Migration Microsoft 365, MFA activé, postes mis à niveau. Une transition propre, sans interruption d'activité.",
     title:
-      "Une TPE qui voulait passer à la vitesse supérieure, sans tout casser",
+      "Une TPE qui voulait passer à la vitesse supérieure, sans tout *casser*",
     context: [
       "Une TPE utilisait une messagerie hébergée chez OVH et des postes Windows Famille. L'ensemble fonctionnait, mais sans la robustesse ni les fonctionnalités collaboratives nécessaires pour accompagner la croissance de l'entreprise.",
       "Les postes restaient limités sur les aspects de sécurité et d'administration. Les usages collaboratifs manquaient de fluidité.",

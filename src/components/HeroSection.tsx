@@ -20,7 +20,7 @@ export function HeroSection() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/great_video_but_the_content_in.mp4" type="video/mp4" />
+          <source src="/hero.mp4" type="video/mp4" />
         </video>
       }
       overlays={<div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />}
@@ -32,7 +32,9 @@ export function HeroSection() {
           >
             {slide.title.split(" ").map((word, i) => {
               const targetKeywords = ["informatique", "support", "fiable", "quotidien", "souplesse", "suivie"]
-              const cleanWord = word.toLowerCase().replace(/[,.]/g, "")
+              const isItalic = word.startsWith("*") && word.endsWith("*") && word.length > 2
+              const rawWord = isItalic ? word.slice(1, -1) : word
+              const cleanWord = rawWord.toLowerCase().replace(/[,.]/g, "")
               const isHighlighted = targetKeywords.includes(cleanWord)
 
               return (
@@ -44,7 +46,7 @@ export function HeroSection() {
                       : "text-white inline-block mr-2 sm:mr-3"
                   }
                 >
-                  {word}
+                  {isItalic ? <em>{rawWord}</em> : rawWord}
                 </span>
               )
             })}
