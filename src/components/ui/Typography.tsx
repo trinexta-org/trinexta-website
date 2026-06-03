@@ -7,6 +7,7 @@ interface HeadingProps {
   children: ReactNode
   className?: string
   as?: HeadingLevel
+  emphasis?: boolean
 }
 
 function formatHeadingText(children: ReactNode): ReactNode {
@@ -118,7 +119,7 @@ function formatHeadingText(children: ReactNode): ReactNode {
   return children;
 }
 
-export function Heading({ children, className, as: Component = "h2" }: HeadingProps) {
+export function Heading({ children, className, as: Component = "h2", emphasis = true }: HeadingProps) {
   const styles: Record<HeadingLevel, string> = {
     h1: "text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-normal leading-[1.1]",
     h2: "text-3xl md:text-4xl font-bold text-primary tracking-normal",
@@ -127,7 +128,7 @@ export function Heading({ children, className, as: Component = "h2" }: HeadingPr
   }
   
   const Tag = Component as ElementType
-  return <Tag className={cn(styles[Component], className)}>{formatHeadingText(children)}</Tag>
+  return <Tag className={cn(styles[Component], className)}>{emphasis ? formatHeadingText(children) : children}</Tag>
 }
 
 type TextVariant = "body" | "lead" | "small"
