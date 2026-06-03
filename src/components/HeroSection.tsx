@@ -20,7 +20,7 @@ export function HeroSection() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/video_Hero.mp4" type="video/mp4" />
+          <source src="/great_video_but_the_content_in.mp4" type="video/mp4" />
         </video>
       }
       overlays={<div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />}
