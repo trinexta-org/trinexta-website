@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { contactFormSchema, ContactFormData, CONTACT_TYPES, SECTEURS, TAILLES, URGENCES } from "@/lib/validations/contact";
+import { pushGtmEvent } from "@/lib/gtm"; 
 
 export default function ContactForm() {
   const {
@@ -29,7 +30,12 @@ export default function ContactForm() {
       body: JSON.stringify(data),
     });
     const json = await res.json();
+    
     if (res.ok) {
+      pushGtmEvent('form_submit', {
+        form_id: 'contact_principal'
+      });
+      
       setServerMessage(json.message);
     } else {
       setServerError(json.error ?? "Une erreur est survenue.");
@@ -215,7 +221,7 @@ export default function ContactForm() {
 
       <p className="text-center text-white/60 text-xs mt-4 block">
         En soumettant ce formulaire, vous acceptez notre{" "}
-        <a href="#" className="text-secondary underline hover:text-white transition-colors">
+        <a href="/confidentialite" className="text-secondary underline hover:text-white transition-colors">
           politique de confidentialité
         </a>.
       </p>
