@@ -16,8 +16,16 @@ const weights = [
   { label: "Black (900)", value: "font-black", num: 900 },
 ];
 
+const trackings = [
+  { label: "Normal", value: "tracking-normal" },
+  { label: "Wide", value: "tracking-wide" },
+  { label: "Wider", value: "tracking-wider" },
+  { label: "Widest", value: "tracking-widest" },
+];
+
 export default function FontPreviewPage() {
   const [selectedWeight, setSelectedWeight] = useState("font-black");
+  const [selectedTracking, setSelectedTracking] = useState("tracking-wide");
   const [isItalic, setIsItalic] = useState(false);
   const [customText, setCustomText] = useState("TRINEXTA : L'avenir de votre informatique");
 
@@ -76,6 +84,23 @@ export default function FontPreviewPage() {
             </div>
 
             <div>
+              <label className="block text-sm font-bold text-primary mb-3">Espacement (Tracking)</label>
+              <div className="grid grid-cols-2 gap-2">
+                {trackings.map((t) => (
+                  <Button
+                    key={t.value}
+                    variant={selectedTracking === t.value ? "primary" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedTracking(t.value)}
+                    className="w-full text-xs justify-center"
+                  >
+                    {t.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            <div>
               <label className="block text-sm font-bold text-primary mb-2">Texte personnalisé</label>
               <input
                 type="text"
@@ -90,34 +115,34 @@ export default function FontPreviewPage() {
           <div className="md:col-span-2 space-y-8">
             <Card className="p-8 border border-border space-y-6">
               <span className="text-[10px] font-bold uppercase tracking-widest text-secondary-foreground bg-secondary px-2.5 py-1 rounded-full">
-                Rendu dynamique : Playfair Display ({selectedWeight.replace("font-", "")} {isItalic ? "Italic" : "Normal"})
+                Rendu dynamique : Playfair Display ({selectedWeight.replace("font-", "")} {isItalic ? "Italic" : "Normal"} {selectedTracking})
               </span>
 
               <div className="space-y-6 border-l-4 border-secondary pl-6">
                 <div>
                   <span className="text-xs text-muted-foreground block mb-1">Niveau H1 (Titre Hero)</span>
-                  <div className={`text-4xl md:text-5xl lg:text-6xl text-primary tracking-tighter leading-[1.1] font-serif ${selectedWeight} ${italicClass}`}>
+                  <div className={`text-4xl md:text-5xl lg:text-6xl text-primary leading-[1.1] font-serif ${selectedWeight} ${italicClass} ${selectedTracking}`}>
                     {customText}
                   </div>
                 </div>
 
                 <div>
                   <span className="text-xs text-muted-foreground block mb-1">Niveau H2 (Section)</span>
-                  <div className={`text-3xl md:text-4xl text-primary tracking-tight font-serif ${selectedWeight} ${italicClass}`}>
+                  <div className={`text-3xl md:text-4xl text-primary font-serif ${selectedWeight} ${italicClass} ${selectedTracking}`}>
                     {customText}
                   </div>
                 </div>
 
                 <div>
                   <span className="text-xs text-muted-foreground block mb-1">Niveau H3 (Sous-titre)</span>
-                  <div className={`text-xl md:text-2xl text-primary font-serif ${selectedWeight} ${italicClass}`}>
+                  <div className={`text-xl md:text-2xl text-primary font-serif ${selectedWeight} ${italicClass} ${selectedTracking}`}>
                     {customText}
                   </div>
                 </div>
 
                 <div>
                   <span className="text-xs text-muted-foreground block mb-1">Niveau H4 (Petit titre)</span>
-                  <div className={`text-lg text-primary font-serif ${selectedWeight} ${italicClass}`}>
+                  <div className={`text-lg text-primary font-serif ${selectedWeight} ${italicClass} ${selectedTracking}`}>
                     {customText}
                   </div>
                 </div>

@@ -11,10 +11,10 @@ interface HeadingProps {
 
 export function Heading({ children, className, as: Component = "h2" }: HeadingProps) {
   const styles: Record<HeadingLevel, string> = {
-    h1: "text-4xl md:text-5xl lg:text-6xl font-black text-primary tracking-tighter leading-[1.1]",
-    h2: "text-3xl md:text-4xl font-black text-primary tracking-tight",
-    h3: "text-xl md:text-2xl font-bold text-primary",
-    h4: "text-lg font-bold text-primary",
+    h1: "text-4xl md:text-5xl lg:text-6xl font-black text-primary tracking-wide leading-[1.1]",
+    h2: "text-3xl md:text-4xl font-black text-primary tracking-wide",
+    h3: "text-xl md:text-2xl font-bold text-primary tracking-wide",
+    h4: "text-lg font-bold text-primary tracking-wide",
   }
   
   const Tag = Component as ElementType
