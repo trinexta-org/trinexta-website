@@ -19,6 +19,8 @@ export function NosOffresHero() {
           alt="Offres Trinexta"
           fill
           priority
+          fetchPriority="high"
+          quality={50}
           className="object-cover object-center"
           sizes="100vw"
         />
