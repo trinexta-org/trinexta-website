@@ -22,10 +22,10 @@ export const menuItems: MenuItem[] = [
     label: "Nos offres",
     href: "/nos-offres",
     subMenu: [
-      { label: "Offre Impulsion", href: "/nos-offres?tab=impulsion" },
-      { label: "Offre Sérénité", href: "/nos-offres?tab=serenite" },
-      { label: "Services Annexes", href: "/nos-offres?tab=services-annexes" },
-      { label: "Trinexta Studio", href: "/nos-offres?tab=studio" },
+      { label: "Offre Impulsion", href: "/nos-offres?tab=impulsion#offers-explorer" },
+      { label: "Offre Sérénité", href: "/nos-offres?tab=serenite#offers-explorer" },
+      { label: "Services Annexes", href: "/nos-offres?tab=services-annexes#offers-explorer" },
+      { label: "Trinexta Studio", href: "/nos-offres?tab=studio#offers-explorer" },
     ]
   },
   {
@@ -53,7 +53,7 @@ export function Nav() {
     <nav className="hidden lg:flex items-center gap-8">
       {menuItems.map((link) => {
         const matchesHref = (href: string) => {
-          const [path] = href.split("?")
+          const path = href.split(/[?#]/)[0]
           return pathname === path || (path !== "/" && pathname?.startsWith(path))
         }
 
