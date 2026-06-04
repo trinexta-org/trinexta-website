@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence, useAnimationFrame } from "framer-motion"
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
-import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 import { SectionFade } from "@/components/ui/SectionFade"
 import { Container } from "@/components/layout/Container"
 
@@ -150,7 +150,7 @@ export function InterventionMap() {
     return (
         <Section container={false} className="relative bg-primary overflow-hidden py-16 md:py-28">
 
-            <CircuitBackground intensity="low" />
+            <HaloBackground intensity="low" />
 
             <div className="absolute inset-0 pointer-events-none" style={{
                 background: "radial-gradient(ellipse 65% 75% at 72% 52%, color-mix(in srgb, var(--secondary) 10%, transparent), transparent)",

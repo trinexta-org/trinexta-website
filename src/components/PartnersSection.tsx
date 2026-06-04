@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
-import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 import { Container } from "@/components/layout/Container"
 
 export interface Partner {
@@ -19,7 +19,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
 
   return (
     <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <CircuitBackground intensity="low" />
+      <HaloBackground intensity="low" />
       <Container className="relative z-10">
         <style>{`
         @keyframes scroll-partners {

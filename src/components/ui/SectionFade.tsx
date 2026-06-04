@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
  * fond décoratives et AVANT le contenu (que l'on garde en `relative z-10`) :
  *
  *   <Section className="relative bg-primary overflow-hidden">
- *     <CircuitBackground />
+ *     <HaloBackground />
  *     <SectionFade edge="bottom" />
  *     <Container className="relative z-10">…</Container>
  *   </Section>

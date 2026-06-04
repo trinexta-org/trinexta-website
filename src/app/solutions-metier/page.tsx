@@ -116,7 +116,9 @@ const solutionsData = {
   ],
 
   cta: {
-    title: "Prêt à aligner vos outils avec votre ambition ?",
+    line1: "Prêt à aligner",
+    line2: "vos outils avec",
+    line3: "votre ambition ?",
     description: "Ne laissez plus vos outils techniques limiter votre potentiel de croissance. Trinexta conçoit les solutions métier qui soutiennent réellement vos objectifs de développement. Discutons de vos besoins, de vos processus et de vos objectifs lors d'un premier audit complet. Il est temps de passer à une informatique qui travaille pour vous.",
     buttonText: "Échanger sur mon projet",
     buttonHref: "/contact"

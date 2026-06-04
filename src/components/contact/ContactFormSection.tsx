@@ -2,7 +2,7 @@
 
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
-import { CircuitBackground } from "@/components/ui/CircuitBackground";
+import { HaloBackground } from "@/components/ui/HaloBackground";
 import { SectionFade } from "@/components/ui/SectionFade";
 import { FadeIn } from "@/components/ui/FadeIn";
 import ContactForm from "@/components/contact/ContactForm";
@@ -10,7 +10,7 @@ import ContactForm from "@/components/contact/ContactForm";
 export function ContactFormSection() {
   return (
     <Section container={false} id="formulaire" className="relative bg-primary py-24 md:py-32 overflow-hidden">
-      <CircuitBackground intensity="low" />
+      <HaloBackground intensity="low" />
       <SectionFade edge="both" />
 
       <Container className="relative z-10">

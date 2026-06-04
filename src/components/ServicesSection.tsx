@@ -6,7 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { Section } from "@/components/layout/Section"
-import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 import { Container } from "@/components/layout/Container"
 
 const MotionLink = motion.create(Link)
@@ -152,7 +152,7 @@ export function ServicesSection() {
 
   return (
     <Section container={false} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
-      <CircuitBackground intensity="low" />
+      <HaloBackground intensity="low" />
       <Container className="relative z-10">
         <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {

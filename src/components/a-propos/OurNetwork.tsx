@@ -6,7 +6,7 @@ import { Section } from "@/components/layout/Section"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
 import { SectionFade } from "@/components/ui/SectionFade"
-import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 
 const networkFeatures = [
     {
@@ -30,7 +30,7 @@ const networkFeatures = [
 export function OurNetwork() {
     return (
         <Section id="equipe" container={false} className="relative py-12 md:py-24 bg-primary overflow-hidden">
-            <CircuitBackground intensity="low" />
+            <HaloBackground intensity="low" />
             <SectionFade edge="top" />
             <Container className="relative z-10">
 

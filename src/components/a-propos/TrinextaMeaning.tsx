@@ -4,7 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { motion, useInView, Variants } from "framer-motion"
 import { Section } from "@/components/layout/Section"
-import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 import { GridCards } from "@/components/layout/GridCards"
 import { Heading, Text } from "@/components/ui/Typography"
 
@@ -92,7 +92,7 @@ export function TrinextaMeaning() {
 
   return (
     <Section id="signification" className="py-16 md:py-32 bg-primary overflow-hidden relative">
-      <CircuitBackground intensity="low" />
+      <HaloBackground intensity="low" />
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Text variant="lead" className="text-white/90 text-lg md:text-xl leading-relaxed drop-shadow-md">
           Le nom Trinexta n&apos;a pas été choisi au hasard. Il traduit notre vision profonde : 

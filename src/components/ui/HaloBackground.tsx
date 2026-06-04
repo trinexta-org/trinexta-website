@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 
 /**
- * CircuitBackground — couche graphique de fond, abstraite et premium : des
+ * HaloBackground — couche graphique de fond, abstraite et premium : des
  * halos lumineux flous (dégradés radiaux) qui respirent doucement, sans aucune
  * ligne. Bleu `secondary` dominant + quelques touches de lumière blanche pour
  * la profondeur.
@@ -44,15 +44,15 @@ const BLOBS: Blob[] = [
   { cx: 1260, cy: 610, r: 250, tint: "blue", dur: 21, delay: 2.5 },
 ]
 
-interface CircuitBackgroundProps {
+interface HaloBackgroundProps {
   intensity?: Intensity
   className?: string
 }
 
-export function CircuitBackground({
+export function HaloBackground({
   intensity = "low",
   className,
-}: CircuitBackgroundProps) {
+}: HaloBackgroundProps) {
   return (
     <div
       aria-hidden="true"
@@ -73,12 +73,12 @@ export function CircuitBackground({
         style={{ opacity: MESH_OPACITY[intensity] }}
       >
         <defs>
-          <radialGradient id="mesh-blue" cx="50%" cy="50%" r="50%">
+          <radialGradient id="halo-blue" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="var(--secondary)" stopOpacity={0.55} />
             <stop offset="45%" stopColor="var(--secondary)" stopOpacity={0.22} />
             <stop offset="100%" stopColor="var(--secondary)" stopOpacity={0} />
           </radialGradient>
-          <radialGradient id="mesh-glow" cx="50%" cy="50%" r="50%">
+          <radialGradient id="halo-glow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="var(--primary-foreground)" stopOpacity={0.22} />
             <stop offset="55%" stopColor="var(--primary-foreground)" stopOpacity={0.07} />
             <stop offset="100%" stopColor="var(--primary-foreground)" stopOpacity={0} />
@@ -91,8 +91,8 @@ export function CircuitBackground({
             cx={b.cx}
             cy={b.cy}
             r={b.r}
-            fill={b.tint === "blue" ? "url(#mesh-blue)" : "url(#mesh-glow)"}
-            className={cn("mesh-blob", i % 2 === 1 && "mesh-blob--alt")}
+            fill={b.tint === "blue" ? "url(#halo-blue)" : "url(#halo-glow)"}
+            className={cn("halo-blob", i % 2 === 1 && "halo-blob--alt")}
             style={{ animationDuration: `${b.dur}s`, animationDelay: `${b.delay}s` }}
           />
         ))}

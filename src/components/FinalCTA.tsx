@@ -4,7 +4,7 @@ import { motion, TargetAndTransition } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
-import { CircuitBackground } from "@/components/ui/CircuitBackground";
+import { HaloBackground } from "@/components/ui/HaloBackground";
 import { SectionFade } from "@/components/ui/SectionFade";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
@@ -166,7 +166,7 @@ export function FinalCTA({
       container={false}
       className="relative bg-primary overflow-hidden py-24 md:py-48"
     >
-      <CircuitBackground intensity="low" />
+      <HaloBackground intensity="low" />
 
       <EnhancedRibbonBackground />
 
