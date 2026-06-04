@@ -100,6 +100,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         .url()
     : undefined;
 
+  const { "@context": unusedContext, ...publisherNode } = trinextaOrganization;
   const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -107,15 +108,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     description: article.extrait ?? article.titre,
     ...(imageUrl ? { image: [imageUrl] } : {}),
     datePublished: new Date(article.datePublication).toISOString(),
-    dateModified: new Date(article.datePublication).toISOString(),
+    dateModified: new Date(article._updatedAt || article.datePublication).toISOString(),
     author: {
       "@type": article.auteur ? "Person" : "Organization",
       name: article.auteur || "TRINEXTA",
       url: "https://www.trinexta.fr",
     },
-    publisher: Object.fromEntries(
-      Object.entries(trinextaOrganization).filter(([key]) => key !== "@context")
-    ),
+    publisher: publisherNode,
   };
 
   return (
