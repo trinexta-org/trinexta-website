@@ -130,6 +130,7 @@ export function ContactCards() {
     <Section id="coordonnees" className="py-16 md:py-24 bg-primary overflow-hidden relative">
       <HaloBackground intensity="low" />
       <div ref={containerRef}>
+        <h2 className="sr-only">Nos coordonnées de contact</h2>
         <GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">
           {CONTACT_CARDS.map((card, index) => {
             const cardAnim = getCardAnimation(index, isMobile)

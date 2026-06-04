@@ -19,7 +19,7 @@ const meanings = [
     syllable: "Next",
     title: "Une informatique pensée pour évoluer",
     desc: "Nous ne nous contentons pas de gérer l'existant. « Next », c'est préparer l'avenir : faire les bons choix, anticiper les besoins et sécuriser l'environnement de travail. Votre informatique suit votre développement.",
-    image: "/images/a-propos/next.jpg"
+    image: "/images/a-propos/next.avif"
   },
   {
     syllable: "A",

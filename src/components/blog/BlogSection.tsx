@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Calendar, User, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,8 +17,7 @@ interface BlogSectionProps {
 }
 
 export function BlogSection({ articles, categories, activeCategory, onCategoryChange }: BlogSectionProps) {
-  const [activeId, setActiveId] = useState(articles[0]?.slug.current);
-
+  
   return (
     <Section className="bg-primary py-8 md:py-32 relative overflow-hidden">
       <HaloBackground intensity="low" />
@@ -65,76 +62,61 @@ export function BlogSection({ articles, categories, activeCategory, onCategoryCh
               </div>
             )}
 
-            <AnimatePresence mode="popLayout">
-              {articles.map((post) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -20 }}  
-                  transition={{ 
-                    type: "spring", 
-                    stiffness: 200, 
-                    damping: 25,
-                    duration: 0.5 
-                  }}
-                  key={post.slug.current}
-                  id={`post-${post.slug.current}`}
-                  onViewportEnter={() => setActiveId(post.slug.current)}
-                  viewport={{ amount: 0.3 }}
-                  className={`relative aspect-video rounded-[40px] overflow-hidden group shadow-2xl border border-white/5 transition-opacity duration-500 ${
-                    activeId === post.slug.current ? "opacity-100" : "opacity-40 hover:opacity-70"
-                  }`}
-                >
-                  {post.imageUne ? (
-                    <Image
-                      src={urlForImage(post.imageUne).width(1200).url()}
-                      alt={post.titre}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 66vw"
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                    />
-                  ) : ( 
-                    <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                      <span className="text-gray-400 text-sm">Image indisponible</span>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent" />
-                  
-                  <div className="absolute inset-0 p-4 md:p-10 flex flex-col justify-end">
-                    <div className="bg-primary/80 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8 max-w-xl">
-                      
-                      <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-3 md:mb-4 text-[9px] md:text-xs font-bold uppercase tracking-widest text-secondary">
-                        <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
-                          <Calendar className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> {formatDatePublication(post.datePublication)}
-                        </span>
-                        {post.auteur && (
-                          <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
-                            <User className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> TRINEXTA
-                          </span>
-                        )}
-                        {post.tempsLecture && (
-                          <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
-                            <Clock className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> {post.tempsLecture} min
-                          </span>
-                        )}
-                      </div>
-                      
-                      <h3 className="text-xl sm:text-2xl md:text-4xl font-black tracking-normal mb-3 md:mb-4 text-white leading-tight line-clamp-3">
-                        {post.titre}
-                      </h3>
-                      
-                      <Link
-                        href={`/blog/${post.slug.current}`}
-                        className="inline-flex items-center gap-2 md:gap-3 bg-white text-primary px-4 py-2 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-secondary hover:text-white transition-all text-xs md:text-base w-fit"
-                      >
-                        Lire l&apos;article <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                      </Link>
-                    </div>
+            {articles.map((post, index) => (
+              <div
+                key={post.slug.current}
+                id={`post-${post.slug.current}`}
+                className="relative aspect-video rounded-[40px] overflow-hidden group shadow-2xl border border-white/5 transition-all duration-500 hover:shadow-secondary/20 hover:border-white/20"
+              >
+                {post.imageUne ? (
+                  <Image
+                    src={urlForImage(post.imageUne).width(1200).url()}
+                    alt={post.titre}
+                    fill
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    sizes="(max-width: 768px) 100vw, 66vw"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">Image indisponible</span>
                   </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                )}
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent" />
+                <div className="absolute inset-0 p-4 md:p-10 flex flex-col justify-end transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="bg-primary/80 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8 max-w-xl transition-colors duration-500 group-hover:bg-primary/95">
+                    
+                    <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-3 md:mb-4 text-[9px] md:text-xs font-bold uppercase tracking-widest text-secondary">
+                      <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
+                        <Calendar className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> {formatDatePublication(post.datePublication)}
+                      </span>
+                      {post.auteur && (
+                        <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
+                          <User className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> TRINEXTA
+                        </span>
+                      )}
+                      {post.tempsLecture && (
+                        <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
+                          <Clock className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> {post.tempsLecture} min
+                        </span>
+                      )}
+                    </div>
+                    
+                    <h3 className="text-xl sm:text-2xl md:text-4xl font-black tracking-normal mb-3 md:mb-4 text-white leading-tight line-clamp-3">
+                      {post.titre}
+                    </h3>
+                    
+                    <Link
+                      href={`/blog/${post.slug.current}`}
+                      className="inline-flex items-center gap-2 md:gap-3 bg-white text-primary px-4 py-2 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-secondary hover:text-white transition-all text-xs md:text-base w-fit"
+                    >
+                      Lire l&apos;article <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </Container>  

@@ -18,7 +18,8 @@ export function NosOffresHero() {
           src="/images/pricing/hero-offres.avif"
           alt="Offres Trinexta"
           fill
-          priority
+          fetchPriority="high"
+          quality={50}
           className="object-cover object-center"
           sizes="100vw"
         />

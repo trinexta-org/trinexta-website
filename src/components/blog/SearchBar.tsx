@@ -51,8 +51,10 @@ export function SearchBar() {
         />
         
         <button 
-          type="submit" 
-          className="absolute right-5 top-1/2 -translate-y-1/2 text-white/40 transition-all duration-300 
+          type="submit"
+          aria-label="Lancer la recherche" 
+          title="Rechercher"
+          className="absolute right-3 top-2.5 w-11 h-11 flex items-center justify-center text-white/40 transition-all duration-300 
                      group-hover:text-white/70 hover:!text-secondary z-10"
         >
           <Search className="w-5 h-5" />
