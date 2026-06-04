@@ -18,7 +18,7 @@ export function PricingCard({ name, price, target, description, features, isFeat
     <Card className={`flex flex-col h-full p-6 bg-white/[0.03] backdrop-blur-sm border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-white/10'}`}>
       
       <div className="min-h-[32px] flex items-center">
-        {isFeatured && <Badge className="bg-secondary text-white border-none w-fit text-[11px] font-bold">Recommandé</Badge>}
+        {isFeatured && <Badge className="bg-secondary text-primary border-none w-fit text-[11px] font-bold">Recommandé</Badge>}
       </div>
       
       <div className="min-h-[64px] flex items-center mb-2">
@@ -26,8 +26,8 @@ export function PricingCard({ name, price, target, description, features, isFeat
       </div>
       
       <div className="min-h-[44px] flex items-baseline gap-1 mb-4">
-        <span className="text-3xl font-black text-white tracking-tight">{price}</span>
-        {price === "79€" && <span className="text-white/50 text-sm font-medium"> / mois</span>}
+        <span className="text-3xl font-black text-white tracking-normal">{price}</span>
+        {price === "79€" && <span className="text-white/70 text-sm font-medium"> / mois</span>}
       </div>
       
       <div className="min-h-[36px] flex items-center mb-3">
@@ -35,7 +35,7 @@ export function PricingCard({ name, price, target, description, features, isFeat
       </div>
 
       <div className="min-h-[76px] flex items-start mb-6">
-        <p className="text-sm text-white/60 leading-relaxed text-balance">{description}</p>
+        <p className="text-sm text-white/80 leading-relaxed text-balance">{description}</p>
       </div>
       
       <div className="w-full h-px bg-white/10 mb-6" />
@@ -54,7 +54,7 @@ export function PricingCard({ name, price, target, description, features, isFeat
           variant={isFeatured ? "primary" : "outline"} 
           className={`w-full font-bold transition-all py-3 ${
             isFeatured 
-              ? "bg-secondary text-white hover:bg-secondary/90 border-none shadow-lg shadow-secondary/20" 
+              ? "bg-secondary text-primary hover:bg-secondary/90 border-none shadow-lg shadow-secondary/20" 
               : "border-white/30 text-white hover:bg-white/10 hover:border-white"
           }`}
         >

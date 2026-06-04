@@ -1,37 +1,52 @@
+import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { ShieldCheck, Award, Lock, CheckCircle } from "lucide-react"
+import { HaloBackground } from "@/components/ui/HaloBackground"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { GoogleRatingSection } from "@/components/sections/GoogleRatingSection"
 
-export function ReassuranceSection() {
-  const labels = [
-    { name: "Cybermalveillance.gouv.fr", icon: ShieldCheck },
-    { name: "Adhérent Clusif", icon: Lock },
-    { name: "Label ExpertCyber", icon: Award },
-    { name: "France Cybersecurity", icon: CheckCircle },
-  ]
+const certifications = [
+  { name: "CompTIA", src: "/images/certifications/compteia.webp", width: 602, height: 501 },
+  { name: "CompTIA Security+", src: "/images/certifications/comptia-security.webp", width: 600, height: 600 },
+  { name: "ISO 27001", src: "/images/certifications/iso-27001.webp", width: 413, height: 401 },
+  { name: "ITIL", src: "/images/certifications/itil.webp", width: 600, height: 400 },
+  { name: "Microsoft 365", src: "/images/certifications/microsoft365.webp", width: 600, height: 600 },
+]
 
+export function ReassuranceSection() {
   return (
     <Section container={false} className="py-10 md:py-14 bg-primary relative overflow-hidden">
-      <Container>
+      <HaloBackground intensity="low" />
+      <SectionFade edge="bottom" />
+      <Container className="relative z-10">
         <div className="flex flex-col items-center justify-center gap-10 text-center">
-          
+
           <div className="w-full flex items-center justify-center">
             <GoogleRatingSection />
           </div>
 
-          <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mt-2">
-            {labels.map((label, index) => (
-              <div 
-                key={index} 
-                className="group flex items-center justify-center gap-3 py-4 px-4 sm:px-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-              >
-                <label.icon className="w-5 h-5 text-secondary flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                <span className="text-[10px] sm:text-[11px] lg:text-xs font-bold tracking-widest uppercase text-white/70 group-hover:text-white transition-colors duration-300 text-center">
-                  {label.name}
-                </span>
-              </div>
-            ))}
+          <div className="w-full border-t border-white/10 pt-8 mt-2">
+            <p className="text-[10px] font-bold tracking-widest uppercase text-white/30 mb-8">
+              Certifications &amp; accréditations
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+              {certifications.map((cert) => (
+                <div key={cert.name} className="flex flex-col items-center gap-3">
+                  <div className="w-36 h-36 md:w-48 md:h-48 rounded-2xl bg-white flex items-center justify-center overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_8px_32px_rgba(0,0,0,0.4)]">
+                    <Image
+                      src={cert.src}
+                      alt={cert.name}
+                      width={cert.width}
+                      height={cert.height}
+                      className="w-[80%] h-[80%] object-contain"
+                    />
+                  </div>
+                  <span className="text-[10px] font-semibold tracking-wider uppercase text-white/40">
+                    {cert.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>

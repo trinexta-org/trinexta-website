@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, type ReactNode } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Container } from "@/components/layout/Container"
 
@@ -49,7 +48,7 @@ export function HeroCarousel<T>({
       {!staticBackground && renderBackground && slides.map((slide, i) => (
         <div
           key={i}
-          className="absolute inset-0 transition-opacity duration-700"
+          className="absolute inset-0 transition-opacity duration-700 ease-in-out"
           style={{ opacity: i === current ? 1 : 0 }}
         >
           {renderBackground(slide, i)}
@@ -60,18 +59,19 @@ export function HeroCarousel<T>({
 
       <Container className={`relative z-10 w-full ${containerPadding}`}>
         <div className="max-w-5xl">
-          <div className={`${slideMinHeight} flex flex-col justify-center`}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+          <div className={`${slideMinHeight} relative w-full`}>
+            {slides.map((slide, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${
+                  i === current
+                    ? "opacity-100 translate-y-0 z-10 pointer-events-auto"
+                    : "opacity-0 translate-y-4 z-0 pointer-events-none"
+                }`}
               >
-                {renderSlide(slides[current], current)}
-              </motion.div>
-            </AnimatePresence>
+                {renderSlide(slide, i)}
+              </div>
+            ))}
           </div>
 
           <div className="mt-6 flex items-center gap-3">

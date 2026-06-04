@@ -1,4 +1,4 @@
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from '@sanity/image-url';
 import { createClient, type PortableTextBlock } from "next-sanity";
 import { type CategorieArticle, LIBELLES_CATEGORIES } from "@/data/categories";
 export type { CategorieArticle };
@@ -61,7 +61,7 @@ export const sanityClient = createClient({
   useCdn: process.env.NODE_ENV === "production",
 });
 
-const imageBuilder = imageUrlBuilder(sanityClient);
+const imageBuilder = createImageUrlBuilder(sanityClient);
 
 export function urlForImage(source: ImageArticle) {
   return imageBuilder.image(source);

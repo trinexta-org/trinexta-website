@@ -1,12 +1,14 @@
 import Link from "next/link"
 import { Container } from "./Container"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { SOCIAL_LINKS } from "@/data/social-links"
 
 const NAVIGATION = [
   { name: "Accueil", href: "/" },
   { name: "Tarifs", href: "/nos-offres" }, 
   { name: "Cas clients", href: "/cas-clients" },
-  { name: "Blog Expertise", href: "/blog" }
+  { name: "Blog Expertise", href: "/blog" },
+  { name: "Nous rejoindre", href: "/nous-rejoindre" }
 ]
 
 const SERVICES = [
@@ -20,9 +22,9 @@ const SERVICES = [
 
 const LEGAL = [
   { name: "Mentions légales", href: "/mentions-legales" },
-  { name: "CGV / CGS", href: "/cgv" },
-  { name: "Données personnelles", href: "/confidentialite" },
-  { name: "Gestion des cookies", href: "/cookies" }
+  { name: "Confidentialité", href: "/confidentialite" },
+  { name: "Cookies", href: "/cookies" },
+  { name: "Tous les documents", href: "/informations-juridiques" },
 ]
 
 const PARTNERS = ["Microsoft", "Google", "Sophos", "Bitdefender", "OVH"]
@@ -30,15 +32,17 @@ const PARTNERS = ["Microsoft", "Google", "Sophos", "Bitdefender", "OVH"]
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
-  const desktopHover = "text-white/70 hover:text-secondary text-[13px] transition-colors duration-300"
-  const desktopTitle = "text-white font-black uppercase tracking-[0.2em] text-[11px] mb-8 block"
+  const desktopHover = "inline-block py-2 text-white/70 hover:text-secondary text-[13px] transition-colors duration-300"
+  const desktopTitle = "text-white font-black uppercase tracking-[0.2em] text-[11px] mb-6 block"
 
-  const mobileHover = "text-white/70 hover:text-secondary text-[8.5px] sm:text-[10px] block transition-colors leading-snug break-words"
-  const mobileTitle = "text-white font-bold uppercase text-[8px] sm:text-[9px] mb-3 block"
+  const mobileHover = "inline-block py-2 text-white/80 hover:text-secondary text-[10px] sm:text-[11px] block transition-colors leading-snug break-words"
+  const mobileTitle = "text-white font-bold uppercase text-[10px] sm:text-[11px] mb-2 block"
 
   return (
     <footer className="bg-primary relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <SectionFade edge="top" />
 
       <Container className="relative z-10">
         
@@ -47,7 +51,7 @@ export function Footer() {
           <div className="grid grid-cols-5 gap-12 mb-8">
             <div className="space-y-8">
               <Link href="/" className="group block">
-                <span className="text-white font-black uppercase tracking-tighter text-3xl block leading-none">Trinexta</span>
+                <span className="text-white font-black uppercase tracking-normal text-3xl block leading-none">Trinexta</span>
                 <span className="text-secondary text-[9px] font-bold uppercase tracking-[0.4em] block mt-1">By Trustech IT Support</span>
               </Link>
               <div className="space-y-5">

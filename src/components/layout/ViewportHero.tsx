@@ -1,9 +1,13 @@
 import { type ComponentPropsWithoutRef } from "react"
 import { cn } from "@/lib/utils"
+import { SectionFade } from "@/components/ui/SectionFade"
 
-type ViewportHeroProps = ComponentPropsWithoutRef<"section">
+type ViewportHeroProps = ComponentPropsWithoutRef<"section"> & {
+  /** Fondu bas vers la section suivante (primary). Défaut : true. */
+  fade?: boolean
+}
 
-export function ViewportHero({ children, className, ...props }: ViewportHeroProps) {
+export function ViewportHero({ children, className, fade = true, ...props }: ViewportHeroProps) {
   return (
     <section
       className={cn(
@@ -13,6 +17,9 @@ export function ViewportHero({ children, className, ...props }: ViewportHeroProp
       {...props}
     >
       {children}
+      {/* Raccord vers la section suivante : le fond du hero s'éteint en primary,
+          pas de ligne de démarcation. Contenu en z-10 -> reste au-dessus. */}
+      {fade && <SectionFade edge="bottom" className="h-32 md:h-48" />}
     </section>
   )
 }

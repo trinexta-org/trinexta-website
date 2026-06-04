@@ -21,6 +21,7 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
         <div className="flex items-center gap-3 w-full md:w-auto justify-center">
           <a 
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(fullUrl)}`}
+            aria-label="Partager sur Linkedin"
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-secondary/30 hover:bg-secondary hover:border-secondary transition-all duration-300"
@@ -30,6 +31,7 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
 
           <a 
             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(fullUrl)}&text=${encodeURIComponent(title)}`}
+            aria-label="Partager cet article sur Twitter"
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-white/20 hover:bg-white hover:border-white transition-all duration-300"

@@ -5,6 +5,8 @@ import { motion } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
+import { SectionFade } from "@/components/ui/SectionFade"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 
 const networkFeatures = [
     {
@@ -27,8 +29,10 @@ const networkFeatures = [
 
 export function OurNetwork() {
     return (
-        <Section id="equipe" className="py-12 md:py-24 bg-primary border-t border-white/10 overflow-hidden">
-            <Container>
+        <Section id="equipe" container={false} className="relative py-12 md:py-24 bg-primary overflow-hidden">
+            <HaloBackground intensity="low" />
+            <SectionFade edge="top" />
+            <Container className="relative z-10">
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center mb-12 md:mb-24">
                     <motion.div
@@ -86,7 +90,7 @@ export function OurNetwork() {
                                 0{idx + 1}
                             </span>
 
-                            <Heading as="h4" className="text-white text-lg md:text-2xl font-bold tracking-tight relative z-10 flex items-center gap-3">
+                            <Heading as="h4" className="text-white text-lg md:text-2xl font-bold tracking-normal relative z-10 flex items-center gap-3">
                                 <span className="w-4 md:w-6 h-1 bg-secondary rounded-full transition-all duration-300 group-hover:w-8 md:group-hover:w-10"></span>
                                 {feature.title}
                             </Heading>

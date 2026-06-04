@@ -5,6 +5,7 @@ import { motion, AnimatePresence} from "framer-motion"
 import Image from "next/image"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 import { Container } from "@/components/layout/Container"
 
 const reasons = [
@@ -40,7 +41,8 @@ export function WhyChooseUs() {
 
   return (
     <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <Container>
+      <HaloBackground intensity="low" />
+      <Container className="relative z-10">
         <div ref={containerRef} className="flex flex-col md:flex-row h-[600px] md:h-[600px] w-full gap-3 md:gap-4">
           {reasons.map((reason, index) => {
             const isActive = active === index;
@@ -106,7 +108,7 @@ export function WhyChooseUs() {
                           <span className="flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-sm md:text-xl shrink-0">
                             0{index + 1}
                           </span>
-                          <Heading as="h3" className="text-xl md:text-3xl font-black text-white uppercase tracking-tight">
+                          <Heading as="h3" className="text-xl md:text-3xl font-black text-white tracking-normal">
                             {reason.title}
                           </Heading>
                         </div>

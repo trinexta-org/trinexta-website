@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd, trinextaOrganization } from "@/components/seo/JsonLd";
 import { CookieBanner } from "@/components/seo/CookieBanner";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -50,6 +51,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieBanner />
+        <ScrollToTop />
       </body>
     </html>
   );

@@ -1,10 +1,12 @@
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
+import { HaloBackground } from "@/components/ui/HaloBackground";
 import { FadeIn } from "@/components/ui/FadeIn";
 
 export function ContactMap() {
   return (
-    <Section className="bg-primary pb-24 pt-12">
+    <Section className="bg-primary pb-24 pt-12 relative overflow-hidden">
+      <HaloBackground intensity="low" />
       <Container>
         <FadeIn direction="up">
           <div className="relative w-full h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-lg group">

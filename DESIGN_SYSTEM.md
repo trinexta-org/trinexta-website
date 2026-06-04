@@ -143,6 +143,10 @@ import { Heading, Text } from "@/components/ui/Typography"
 <Text variant="small">Note</Text>              // petit, discret
 ```
 
+#### Regles typo sur les headings
+
+`tracking-normal` par defaut sur tous les titres — ne pas utiliser `tracking-tighter` ni `tracking-tight`.
+
 #### Emphase italique dans les titres
 
 Par defaut, le dernier mot d'un titre de plus de 2 mots est mis en italique automatiquement.
@@ -235,6 +239,16 @@ import { Reveal } from "@/components/ui/Reveal"
   <Card>...</Card>
 </Reveal>
 ```
+
+### HaloBackground + SectionFade
+
+`HaloBackground` : halos lumineux de fond (Server Component, zero JS). A poser en premier enfant de toute section `bg-primary`. `intensity` : `"low"` (defaut) | `"mid"` | `"high"`.
+
+`SectionFade` : fondu `bg-primary` sur le bord d'une section pour raccorder deux sections sombres sans ligne de demarcation. `edge` : `"bottom"` (defaut) | `"top"` | `"both"`.
+
+**Prerequis** : la Section doit avoir `relative overflow-hidden`. Ordre dans la Section : `HaloBackground` → `SectionFade` → contenu en `relative z-10`.
+
+---
 
 ### HeroCarousel (carousel hero generique avec transitions fluides)
 

@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { Section } from "@/components/layout/Section"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 import { Container } from "@/components/layout/Container"
 
 const MotionLink = motion.create(Link)
@@ -151,7 +152,8 @@ export function ServicesSection() {
 
   return (
     <Section container={false} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
-      <Container>
+      <HaloBackground intensity="low" />
+      <Container className="relative z-10">
         <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {
             const currentSlot = activePositions[isMobile ? index : order[index]]
@@ -200,7 +202,7 @@ export function ServicesSection() {
 
                 <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-8 xl:p-10">
                   <div className="mt-auto">
-                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-tighter uppercase break-words">
+                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-normal break-words">
                       {service.title}
                     </h3>
 

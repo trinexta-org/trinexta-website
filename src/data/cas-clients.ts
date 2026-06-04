@@ -49,8 +49,8 @@ export const caseClients: CaseClient[] = [
     sector: "cabinet",
     sectorLabel: "Cabinet",
     size: "TPE",
-    heroImage: "/images/cas-clients/cas-1.jpg",
-    cardImage: "/images/cas-clients/cas-1.jpg",
+    heroImage: "/images/cas-clients/cas-1.avif",
+    cardImage: "/images/cas-clients/cas-1.avif",
     metaDescription:
       "Découvrez comment TRINEXTA a sécurisé les données d'une TPE de conseil : migration Windows 11 Pro, chiffrement BitLocker et support IT illimité.",
     cardChallenge:
@@ -167,8 +167,8 @@ export const caseClients: CaseClient[] = [
     sector: "service",
     sectorLabel: "Service",
     size: "TPE",
-    heroImage: "/images/cas-clients/cas-3.jpg",
-    cardImage: "/images/cas-clients/cas-3.jpg",
+    heroImage: "/images/cas-clients/cas-3.avif",
+    cardImage: "/images/cas-clients/cas-3.avif",
     metaDescription:
       "Étude de cas : migration réussie d'OVH vers Microsoft 365 pour une TPE. Optimisation des processus collaboratifs et sécurisation des postes de travail.",
     cardChallenge:

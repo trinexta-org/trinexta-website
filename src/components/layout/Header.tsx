@@ -28,12 +28,12 @@ export function Header() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link href="/" className="flex items-center">
               <Image 
-                src="/images/trinexta-logo.png" 
+                src="/images/trinexta-logo.avif" 
                 alt="Logo TRINEXTA"
                 width={200} 
-                height={60} 
+                height={60}
+                unoptimized
                 className="h-10 lg:h-12 w-auto object-contain"
-                priority 
               />
             </Link>
 

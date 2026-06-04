@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BlogSection } from "./BlogSection";
 import { ResumeArticle } from "@/lib/sanity";
 import { CategorieOption, CATEGORIES_FILTRE } from "@/data/categories";
+import { ArrowRight } from "lucide-react";
 
 export { CATEGORIES_FILTRE as CATEGORIES };
 
@@ -41,12 +42,17 @@ export function BlogList({ initialArticles, categories }: { initialArticles: Res
           >
             <button 
               onClick={() => setVisibleCount(p => p + 4)}
-              className="group relative px-10 py-4 bg-transparent border border-white/10 rounded-full overflow-hidden transition-all hover:border-secondary"
+              className="group relative inline-flex items-center gap-4 md:gap-6 bg-transparent border border-white/20 px-8 py-4 md:px-12 md:py-6 rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 hover:border-secondary"
             >
-              <span className="relative z-10 text-white/60 font-bold uppercase tracking-widest text-sm group-hover:text-white transition-colors">
+              <div className="absolute inset-0 bg-white translate-y-[102%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+
+              <span className="relative z-10 text-white group-hover:text-primary font-black text-xs md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] transition-colors duration-500">
                 Voir plus d&apos;articles
               </span>
-              <div className="absolute inset-0 bg-secondary/10 translate-y-full transition-transform group-hover:translate-y-0" />
+              
+              <div className="relative z-10 text-secondary group-hover:text-primary transition-colors duration-500">
+                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+              </div>
             </button>
           </motion.div>
         )}
