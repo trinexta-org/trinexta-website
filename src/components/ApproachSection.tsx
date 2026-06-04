@@ -42,7 +42,7 @@ export function ApproachSection() {
 
   return (
     <Section container={false} className="relative bg-primary py-20 md:py-40 overflow-hidden">
-      <CircuitBackground variant="traces" intensity="mid" />
+      <CircuitBackground intensity="mid" />
       <div ref={containerRef} className="relative z-10">
         <Container>
           
