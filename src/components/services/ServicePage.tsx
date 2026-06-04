@@ -9,6 +9,7 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { CircuitBackground } from "@/components/ui/CircuitBackground"
 import { SectionFade } from "@/components/ui/SectionFade"
+import { FinalCTA } from "@/components/FinalCTA"
 import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
@@ -23,7 +24,7 @@ export interface ServicePageProps {
     offer: { subtitle: string; title: string; description: string; features: Array<{ title: string; desc: string }> }
     benefits: { subtitle: string; title: string; items: Array<{ title: string; desc: string }> }
     faq: Array<{ question: string; answer: string }>
-    cta: { title: string; description: string; buttonText: string; buttonHref: string }
+    cta: { line1: string; line2: string; line3: string; description: string; buttonText: string; buttonHref: string }
 }
 
 export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, cta }: ServicePageProps) {
@@ -87,7 +88,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                 <Container className="relative z-10 py-12 md:py-16 lg:py-20">
                     <div className="max-w-4xl">
                         <div className="animate-service-hero">
-                            <Heading as="h1" className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight drop-shadow-xl text-balance">
+                            <Heading as="h1" className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-balance">
                                 <span className="text-white">{hero.titlePart1}</span> <span className="text-secondary">{hero.titlePart2}</span>
                             </Heading>
                             {/* --- SUPPRESSION DE LA SCROLLBAR ICI --- */}
@@ -334,7 +335,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                                             <div className="backdrop-blur-xl bg-primary/40 md:bg-white/10 border border-white/20 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-2xl max-w-2xl">
                                                 <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
                                                     <span className="flex items-center justify-center w-6 h-6 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-xs md:text-xl shrink-0">0{index + 1}</span>
-                                                    <Heading as="h3" className="text-lg md:text-3xl font-black text-white uppercase tracking-tight line-clamp-1 md:line-clamp-none">{benefit.title}</Heading>
+                                                    <Heading as="h3" className="text-lg md:text-3xl font-black text-white tracking-normal line-clamp-1 md:line-clamp-none">{benefit.title}</Heading>
                                                 </div>
                                                 <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-2 md:line-clamp-none">{benefit.desc}</Text>
                                             </div>
@@ -380,19 +381,14 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
             </Section>
 
             {/* 6. CTA FINAL */}
-            <Section className="relative overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image src={`/images/services/${serviceSlug}/cta-footer.jpg`} alt="Contact Trinexta" fill sizes="100vw" className="object-cover object-center" />
-                    <div className="absolute inset-0 bg-primary/90 backdrop-blur-sm" />
-                </div>
-                <Container className="relative z-10 text-center max-w-3xl px-4">
-                    <Heading as="h2" className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-6 leading-tight">{cta.title}</Heading>
-                    <Text className="text-white/80 text-base md:text-xl mb-8 md:mb-10 leading-relaxed">{cta.description}</Text>
-                    <Link href={cta.buttonHref} className="block w-full sm:w-auto">
-                        <Button variant="secondary" className="w-full sm:w-auto text-white font-bold px-6 py-3.5 md:px-8 md:py-6 text-sm md:text-lg h-auto whitespace-normal hover:scale-105 transition-transform">{cta.buttonText}</Button>
-                    </Link>
-                </Container>
-            </Section>
+            <FinalCTA
+                line1={cta.line1}
+                line2={cta.line2}
+                line3={cta.line3}
+                description={cta.description}
+                ctaLabel={cta.buttonText}
+                ctaHref={cta.buttonHref}
+            />
         </div>
     )
 }

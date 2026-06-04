@@ -108,7 +108,7 @@ export function WhyChooseUs() {
                           <span className="flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-sm md:text-xl shrink-0">
                             0{index + 1}
                           </span>
-                          <Heading as="h3" className="text-xl md:text-3xl font-black text-white uppercase tracking-tight">
+                          <Heading as="h3" className="text-xl md:text-3xl font-black text-white tracking-normal">
                             {reason.title}
                           </Heading>
                         </div>

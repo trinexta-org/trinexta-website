@@ -110,7 +110,9 @@ export const cybersecuriteData: ServicePageProps = {
   ],
 
   cta: {
-    title: "Prêt à blinder vos systèmes ?",
+    line1: "Prêt à",
+    line2: "blinder",
+    line3: "vos systèmes ?",
     description: "La cybersécurité n'est pas un luxe, c'est une nécessité stratégique. Ne laissez pas une faille informatique mettre en péril vos années de travail et votre activité. Nos experts sont prêts à auditer votre niveau de protection actuel et à mettre en place le bouclier dont vous avez besoin.",
     buttonText: "Sécuriser mon entreprise",
     buttonHref: "/contact",

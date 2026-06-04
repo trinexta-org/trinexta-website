@@ -72,7 +72,7 @@ export function KpiSection() {
 
       <Container className="relative z-10">
         <div className="mb-10 md:mb-16 lg:mb-24 flex items-center gap-4 md:gap-8 overflow-hidden">
-          <Heading as="h2" className="text-3xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter shrink-0 whitespace-nowrap">
+          <Heading as="h2" className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-normal shrink-0 whitespace-nowrap">
             Impact <span className="text-secondary">Réel</span>
           </Heading>
           <div className="h-[1px] w-full bg-white/10 hidden sm:block" />
@@ -88,7 +88,7 @@ export function KpiSection() {
               transition={{ duration: 0.8, delay: index * 0.1 }}
               className="group flex flex-col items-center md:items-start text-center md:text-left"
             >
-              <div className="text-[1.35rem] sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tighter mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
+              <div className="text-[1.35rem] sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-normal mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
                 <Counter value={kpi.value} suffix={kpi.suffix} />
               </div>
 

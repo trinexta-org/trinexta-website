@@ -110,7 +110,9 @@ export const infogeranceData: ServicePageProps = {
   ],
 
   cta: {
-    title: "Prêt à transformer votre informatique en atout stratégique ?",
+    line1: "Prêt à transformer",
+    line2: "votre informatique",
+    line3: "en atout ?",
     description: "Votre informatique ne doit plus être un sujet subi, mais un support fiable et performant de votre activité. Nos experts sont prêts à auditer vos besoins et à construire un cadre d'intervention clair et sur mesure pour votre entreprise.",
     buttonText: "Échanger avec un conseiller",
     buttonHref: "/contact",

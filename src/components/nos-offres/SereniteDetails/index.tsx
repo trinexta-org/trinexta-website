@@ -12,7 +12,7 @@ export function SereniteDetails() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-20 items-center mb-24">
           <div className="space-y-8">
             <span className="text-secondary font-mono text-xs tracking-widest uppercase">OFFRE SÉRÉNITÉ</span>
-            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-tighter text-white">
+            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-normal text-white">
               Votre informatique doit *soutenir* votre activité. Pas la *freiner*.
             </Heading>
             <Text className="text-white/80 text-base md:text-lg leading-relaxed">
@@ -38,7 +38,7 @@ export function SereniteDetails() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center mb-24">
           {stats.map((stat, idx) => (
             <div key={idx} className="p-8 rounded-2xl bg-white/[0.02] space-y-2">
-              <div className="text-4xl md:text-5xl font-black text-secondary tracking-tight">{stat.value}</div>
+              <div className="text-4xl md:text-5xl font-black text-secondary tracking-normal">{stat.value}</div>
               <div className="text-xs font-bold text-white/40 uppercase tracking-wider">{stat.label}</div>
             </div>
           ))}
@@ -61,7 +61,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-16 mb-24">
-          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold text-center tracking-tight text-white">Les 3 piliers de l&apos;offre *Sérénité*</Heading>
+          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold text-center tracking-normal text-white">Les 3 piliers de l&apos;offre *Sérénité*</Heading>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {pillars.map((p, i) => (
               <Card key={i} className="p-6 bg-white/[0.02] border-white/10 flex flex-col justify-between space-y-6">
@@ -84,7 +84,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-10 mb-24">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Support informatique PME : *pour qui* est l&apos;offre Sérénité ?</Heading>
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-normal text-white">Support informatique PME : *pour qui* est l&apos;offre Sérénité ?</Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {targets.map((target, i) => (
               <div key={i} className="flex items-start gap-4 bg-white/[0.02] p-6 rounded-2xl">
@@ -96,7 +96,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-10 mb-24">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Une tarification claire et sans *surprise*</Heading>
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-normal text-white">Une tarification claire et sans *surprise*</Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-8 rounded-2xl bg-white/[0.02] space-y-6">
               <div className="flex justify-between items-baseline">
@@ -139,7 +139,7 @@ export function SereniteDetails() {
         </div>
 
         <div className="space-y-8">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-white">Options disponibles</Heading>
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-normal text-white">Options disponibles</Heading>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {options.map((opt, i) => (
               <div key={i} className="p-8 rounded-2xl bg-white/[0.02] flex flex-col justify-between space-y-4">

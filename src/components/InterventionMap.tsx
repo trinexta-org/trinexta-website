@@ -210,7 +210,7 @@ export function InterventionMap() {
                                             {STEPS[step].subtitle}
                                         </span>
                                     </div>
-                                    <h2 className="text-white font-black text-2xl md:text-[1.75rem] leading-tight tracking-tight">
+                                    <h2 className="text-white font-black text-2xl md:text-[1.75rem] leading-tight tracking-normal">
                                         {STEPS[step].title}
                                     </h2>
                                     <p className="text-white/90 text-sm md:text-[0.925rem] leading-relaxed font-light">

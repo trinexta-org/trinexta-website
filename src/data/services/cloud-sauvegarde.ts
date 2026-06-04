@@ -102,7 +102,9 @@ export const cloudData: ServicePageProps = {
   ],
 
   cta: {
-    title: "Vos données sont votre capital. Protégez-les.",
+    line1: "Vos données,",
+    line2: "votre capital.",
+    line3: "Protégez-les.",
     description: "Ne laissez pas votre avenir dépendre d'une simple panne matérielle. Nos experts sont là pour concevoir une infrastructure cloud et une stratégie de sauvegarde taillées pour la résilience de votre entreprise.",
     buttonText: "Sécuriser mes données",
     buttonHref: "/contact",

@@ -26,7 +26,7 @@ export function PricingCard({ name, price, target, description, features, isFeat
       </div>
       
       <div className="min-h-[44px] flex items-baseline gap-1 mb-4">
-        <span className="text-3xl font-black text-white tracking-tight">{price}</span>
+        <span className="text-3xl font-black text-white tracking-normal">{price}</span>
         {price === "79€" && <span className="text-white/50 text-sm font-medium"> / mois</span>}
       </div>
       

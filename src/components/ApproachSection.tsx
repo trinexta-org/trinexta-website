@@ -54,7 +54,7 @@ export function ApproachSection() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="text-secondary text-xs md:text-sm font-bold tracking-widest uppercase mb-4 block"
+                className="text-secondary text-xs md:text-sm font-bold tracking-widest mb-4 block"
               >
                 Notre Méthodologie
               </motion.span>
@@ -65,7 +65,7 @@ export function ApproachSection() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
               >
-                <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-tight">
+                <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-white tracking-normal leading-tight">
                   Une approche <br /> en <span className="text-secondary">4 étapes</span>
                 </Heading>
               </motion.div>
@@ -104,7 +104,7 @@ export function ApproachSection() {
                 >
                   <div className="absolute -left-[37.5px] lg:-left-[85px] top-3 md:top-4 w-4 h-4 rounded-full bg-primary border-4 border-secondary group-hover:scale-150 group-hover:bg-secondary transition-all duration-300 z-10 shadow-[0_0_10px_var(--secondary)]" />
 
-                  <div className="absolute -top-10 md:-top-16 -left-4 md:-left-8 text-[80px] md:text-[150px] font-black text-white/[0.03] select-none pointer-events-none leading-none tracking-tighter transition-colors duration-500 group-hover:text-white/[0.06]">
+                  <div className="absolute -top-10 md:-top-16 -left-4 md:-left-8 text-[80px] md:text-[150px] font-black text-white/[0.03] select-none pointer-events-none leading-none tracking-normal transition-colors duration-500 group-hover:text-white/[0.06]">
                     {step.num}
                   </div>
 
@@ -113,7 +113,7 @@ export function ApproachSection() {
                       <span className="text-lg md:text-xl font-bold text-secondary font-mono">
                         {step.num}
                       </span>
-                      <h3 className="text-2xl md:text-4xl font-bold text-white uppercase tracking-tight group-hover:text-secondary transition-colors duration-300">
+                      <h3 className="text-2xl md:text-4xl font-bold text-white tracking-normal group-hover:text-secondary transition-colors duration-300">
                         {step.title}
                       </h3>
                     </div>

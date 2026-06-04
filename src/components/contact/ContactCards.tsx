@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { motion, useInView, Variants } from "framer-motion"
 import { Section } from "@/components/layout/Section"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
 import { GridCards } from "@/components/layout/GridCards"
 import { Heading, Text } from "@/components/ui/Typography"
 
@@ -126,7 +127,8 @@ export function ContactCards() {
   )
 
   return (
-    <Section id="coordonnees" className="py-16 md:py-24 bg-primary overflow-hidden">
+    <Section id="coordonnees" className="py-16 md:py-24 bg-primary overflow-hidden relative">
+      <CircuitBackground intensity="low" />
       <div ref={containerRef}>
         <GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">
           {CONTACT_CARDS.map((card, index) => {

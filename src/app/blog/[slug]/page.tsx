@@ -116,7 +116,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </span>
           </div>
           
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[1.1] mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-normal leading-[1.1] mb-8">
             {article.titre}
           </h1>
           
@@ -174,7 +174,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <Section className="border-t border-white/5 py-20">
           <Container>
             <div className="flex justify-between items-end mb-12">
-              <h2 className="text-3xl font-bold uppercase tracking-tight">Articles similaires</h2>
+              <h2 className="text-3xl font-bold tracking-normal">Articles similaires</h2>
               <Link href="/blog" className="text-secondary font-bold hover:underline">Voir tout le blog</Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

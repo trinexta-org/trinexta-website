@@ -4,6 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { motion, useInView, Variants } from "framer-motion"
 import { Section } from "@/components/layout/Section"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
 import { GridCards } from "@/components/layout/GridCards"
 import { Heading, Text } from "@/components/ui/Typography"
 
@@ -90,7 +91,8 @@ export function TrinextaMeaning() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   return (
-    <Section id="signification" className="py-16 md:py-32 bg-primary overflow-hidden">
+    <Section id="signification" className="py-16 md:py-32 bg-primary overflow-hidden relative">
+      <CircuitBackground intensity="low" />
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Text variant="lead" className="text-white/90 text-lg md:text-xl leading-relaxed drop-shadow-md">
           Le nom Trinexta n&apos;a pas été choisi au hasard. Il traduit notre vision profonde : 
@@ -128,7 +130,7 @@ export function TrinextaMeaning() {
                 <motion.span
                   custom={index}
                   variants={syllableVariants}
-                  className="text-5xl md:text-6xl font-black text-secondary tracking-tighter drop-shadow-lg inline-block origin-center w-full"
+                  className="text-5xl md:text-6xl font-black text-secondary tracking-normal drop-shadow-lg inline-block origin-center w-full"
                 >
                   {item.syllable}
                 </motion.span>

@@ -202,7 +202,7 @@ export function ServicesSection() {
 
                 <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-8 xl:p-10">
                   <div className="mt-auto">
-                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-tighter uppercase break-words">
+                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-normal break-words">
                       {service.title}
                     </h3>
 

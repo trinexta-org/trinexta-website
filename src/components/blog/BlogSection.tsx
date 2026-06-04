@@ -8,6 +8,7 @@ import Link from "next/link";
 import { urlForImage, formatDatePublication, ResumeArticle} from "@/lib/sanity";
 import { Container } from "../layout/Container";
 import { Section } from "../layout/Section";
+import { CircuitBackground } from "@/components/ui/CircuitBackground";
 
 interface BlogSectionProps {
   articles: ResumeArticle[]; 
@@ -21,14 +22,15 @@ export function BlogSection({ articles, categories, activeCategory, onCategoryCh
   const [activeId, setActiveId] = useState(articles[0]?.slug.current);
 
   return (
-    <Section className="bg-primary py-8 md:py-32"> 
+    <Section className="bg-primary py-8 md:py-32 relative overflow-hidden">
+      <CircuitBackground intensity="low" />
       <Container>
         <div className="flex flex-col lg:flex-row gap-10">
           
           {/* Sidebar des catégories */}
           <div className="w-full lg:w-1/3 px-4 md:px-0">
             <div className="sticky top-40 z-30">
-              <h2 className="text-xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-12">
+              <h2 className="text-xl md:text-5xl font-black text-white tracking-normal leading-none mb-12">
                 Le Mag <span className="text-secondary">Trinexta</span>
               </h2>
               
@@ -43,7 +45,7 @@ export function BlogSection({ articles, categories, activeCategory, onCategoryCh
                           : "text-white/40 hover:text-white/80 pl-4"
                       }`}
                       >
-                      <h3 className="text-xl font-bold uppercase tracking-tight">{cat.label}</h3>
+                      <h3 className="text-xl font-bold tracking-normal">{cat.label}</h3>
                       </button>
                   ))}
               </nav>
@@ -118,7 +120,7 @@ export function BlogSection({ articles, categories, activeCategory, onCategoryCh
                         )}
                       </div>
                       
-                      <h3 className="text-xl sm:text-2xl md:text-4xl font-black uppercase tracking-tighter mb-3 md:mb-4 text-white leading-tight line-clamp-3">
+                      <h3 className="text-xl sm:text-2xl md:text-4xl font-black tracking-normal mb-3 md:mb-4 text-white leading-tight line-clamp-3">
                         {post.titre}
                       </h3>
                       
