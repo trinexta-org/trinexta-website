@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useAnimationFrame } from "framer-motion"
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { Container } from "@/components/layout/Container"
 
 const DEPARTMENTS = [
@@ -157,6 +158,8 @@ export function InterventionMap() {
             <div className="absolute inset-0 pointer-events-none" style={{
                 background: "radial-gradient(ellipse 110% 110% at 50% 50%, transparent 38%, var(--primary) 100%)",
             }} />
+
+            <SectionFade edge="both" className="h-28 md:h-44" />
 
             <Container className="relative z-10">
                 <div className="flex items-center gap-3 mb-10 md:mb-14">

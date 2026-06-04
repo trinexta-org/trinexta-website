@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Section } from "@/components/layout/Section"
 import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { Container } from "@/components/layout/Container"
 import { Heading, Text } from "@/components/ui/Typography"
 import { pushGtmEvent } from "@/lib/gtm"
@@ -117,6 +118,8 @@ export function FinalCTA({
       <EnhancedRibbonBackground />
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[900px] h-full md:h-[900px] bg-secondary/5 blur-[160px] rounded-full pointer-events-none z-0" />
+
+      <SectionFade edge="both" />
 
       <Container className="relative z-10 text-center">
         <div className="space-y-8 md:space-y-16">
