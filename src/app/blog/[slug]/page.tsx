@@ -14,7 +14,7 @@ import { PortableTextBlock } from "@portabletext/types";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { generateSlug } from "@/lib/utils";
-import { ScrollToTop } from "@/components/blog/ScrollToTop";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { JsonLd, trinextaOrganization } from "@/components/seo/JsonLd";
 import {
   getArticleBySlug,
