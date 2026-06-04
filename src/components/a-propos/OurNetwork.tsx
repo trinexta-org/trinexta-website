@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
+import { SectionFade } from "@/components/ui/SectionFade"
 
 const networkFeatures = [
     {
@@ -27,8 +28,9 @@ const networkFeatures = [
 
 export function OurNetwork() {
     return (
-        <Section id="equipe" className="py-12 md:py-24 bg-primary border-t border-white/10 overflow-hidden">
-            <Container>
+        <Section id="equipe" container={false} className="relative py-12 md:py-24 bg-primary overflow-hidden">
+            <SectionFade edge="top" />
+            <Container className="relative z-10">
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center mb-12 md:mb-24">
                     <motion.div
