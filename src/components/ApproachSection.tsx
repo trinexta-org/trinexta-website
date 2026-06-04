@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
 
 const steps = [
   {
@@ -40,8 +41,9 @@ export function ApproachSection() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   return (
-    <Section container={false} className="relative bg-primary py-20 md:py-40">
-      <div ref={containerRef} className="relative">
+    <Section container={false} className="relative bg-primary py-20 md:py-40 overflow-hidden">
+      <CircuitBackground variant="traces" intensity="mid" />
+      <div ref={containerRef} className="relative z-10">
         <Container>
           
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">

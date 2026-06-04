@@ -5,6 +5,7 @@ import { motion, useInView, animate } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
 
 const kpis = [
   {
@@ -67,9 +68,9 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 export function KpiSection() {
   return (
     <Section container={false} className="relative bg-primary py-12 md:py-32 lg:py-40 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--secondary-rgb),0.05)_0%,transparent_70%)] pointer-events-none" />
+      <CircuitBackground variant="both" intensity="mid" />
 
-      <Container>
+      <Container className="relative z-10">
         <div className="mb-10 md:mb-16 lg:mb-24 flex items-center gap-4 md:gap-8 overflow-hidden">
           <Heading as="h2" className="text-3xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter shrink-0 whitespace-nowrap">
             Impact <span className="text-secondary">Réel</span>

@@ -1,5 +1,6 @@
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
 import { ShieldCheck, Award, Lock, CheckCircle } from "lucide-react"
 import { GoogleRatingSection } from "@/components/sections/GoogleRatingSection"
 
@@ -13,7 +14,8 @@ export function ReassuranceSection() {
 
   return (
     <Section container={false} className="py-10 md:py-14 bg-primary relative overflow-hidden">
-      <Container>
+      <CircuitBackground variant="traces" intensity="low" />
+      <Container className="relative z-10">
         <div className="flex flex-col items-center justify-center gap-10 text-center">
           
           <div className="w-full flex items-center justify-center">
