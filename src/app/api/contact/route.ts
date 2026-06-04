@@ -38,7 +38,9 @@ export async function POST(request: Request) {
 
     try {
       await sendNotificationEmail(data);
-    } catch {
+    } catch (error) {
+      console.error("Erreur envoi email contact:", error);
+
       await prisma.contactForm.delete({
         where: { id: savedContact.id },
       });
@@ -57,7 +59,9 @@ export async function POST(request: Request) {
       },
       { status: 200 }
     );
-  } catch {
+  } catch (error) {
+    console.error("Erreur traitement formulaire contact:", error);
+
     return NextResponse.json(
       { error: "Une erreur interne est survenue lors du traitement." },
       { status: 500 }
