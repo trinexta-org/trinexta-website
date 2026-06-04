@@ -79,7 +79,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
             {/* 1. HERO */}
             <ViewportHero>
                 <div className="absolute inset-0 z-0">
-                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} unoptimized priority fetchPriority="high" className="object-cover object-center" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} unoptimized fetchPriority="high" className="object-cover object-center" sizes="(max-width: 768px) 100vw, 50vw" />
                     <div className="absolute inset-0 bg-primary/90" />
                 </div>
                 <Container className="relative z-10 py-12 md:py-16 lg:py-20">
@@ -314,7 +314,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                                 className={`relative overflow-hidden cursor-pointer rounded-xl md:rounded-3xl shadow-2xl transition-all duration-500 ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"}`}
                             >
                                 <div className="absolute inset-0 w-full h-full">
-                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill sizes="(min-width: 768px) 20vw, 100vw" className="object-cover" priority={index === 0} />
+                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill sizes="(min-width: 768px) 20vw, 100vw" className="object-cover" fetchPriority={index === 0 ? "high" : "auto"} />
                                     <motion.div animate={{ opacity: isActive ? 0.7 : 0.3 }} className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
                                 </div>
 

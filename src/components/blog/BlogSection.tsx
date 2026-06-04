@@ -71,7 +71,6 @@ export function BlogSection({ articles, categories, activeCategory, onCategoryCh
                     src={urlForImage(post.imageUne).width(1200).url()}
                     alt={post.titre}
                     fill
-                    priority={index === 0}
                     fetchPriority={index === 0 ? "high" : "auto"}
                     sizes="(max-width: 768px) 100vw, 66vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-105"

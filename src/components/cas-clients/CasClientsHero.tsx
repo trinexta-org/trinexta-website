@@ -20,8 +20,7 @@ export function CasClientsHero() {
           src={slide.heroImage}
           alt={slide.clientName}
           fill
-          priority={i <= 2}
-          fetchPriority={i === 0 ? "high" : "auto"}
+          fetchPriority={i <= 2 ? "high" : "auto"}
           className="object-cover"
           sizes="100vw"
         />

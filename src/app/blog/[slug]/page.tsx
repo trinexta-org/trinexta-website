@@ -105,7 +105,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             fetchPriority="high"
             className="object-cover scale-105 blur-sm" 
             sizes="100vw"
-            priority 
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />

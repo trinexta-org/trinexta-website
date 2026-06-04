@@ -18,8 +18,7 @@ export function ContactHero() {
           src="/images/services/support-informatique/hero.jpg"
           alt="Contact Trinexta"
           fill
-          priority
-                    fetchPriority="high"
+          fetchPriority="high"
           className="object-cover object-center"
           sizes="100vw"
         />
