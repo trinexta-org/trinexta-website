@@ -92,7 +92,7 @@ export function CircuitBackground({
             cy={b.cy}
             r={b.r}
             fill={b.tint === "blue" ? "url(#mesh-blue)" : "url(#mesh-glow)"}
-            className="mesh-blob"
+            className={cn("mesh-blob", i % 2 === 1 && "mesh-blob--alt")}
             style={{ animationDuration: `${b.dur}s`, animationDelay: `${b.delay}s` }}
           />
         ))}
