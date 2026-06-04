@@ -100,7 +100,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         .url()
     : undefined;
 
-  const { "@context": unusedContext, ...publisherNode } = trinextaOrganization;
+  const publisherNode = Object.fromEntries(
+    Object.entries(trinextaOrganization).filter(([key]) => key !== "@context")
+  );
   const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",

@@ -5,7 +5,7 @@ import { CATEGORIES } from "@/components/blog/BlogList";
 import { SearchBar } from "@/components/blog/SearchBar";
 import { Suspense } from "react";
 
-const title = "Blog informatique TPE PME - Conseils IT | TRINEXTA";
+const title = "Blog informatique TPE PME - Conseils IT";
 const description = "Découvrez nos articles, conseils et guides en infogérance, cybersécurité et maintenance informatique pour les entreprises en Île-de-France.";
 
 type BlogPageProps = {
