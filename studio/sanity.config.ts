@@ -13,7 +13,44 @@ export default defineConfig({
   projectId: '93ztl6y7',
   dataset,
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Contenu')
+          .items([
+            S.listItem()
+              .title('Articles')
+              .child(
+                S.list()
+                  .title('Articles')
+                  .items([
+                    S.documentTypeListItem('article').title('Tous les articles'),
+                    S.divider(),
+                    S.listItem()
+                      .title('Articles publiés')
+                      .child(
+                        S.documentList()
+                          .title('Publiés')
+                          .filter('_type == "article" && datePublication <= now()')
+                          .defaultOrdering([{ field: 'datePublication', direction: 'desc' }])
+                      ),
+                    S.listItem()
+                      .title('Articles à venir')
+                      .child(
+                        S.documentList()
+                          .title('Programmation')
+                          .filter('_type == "article" && datePublication > now()')
+                          .defaultOrdering([{ field: 'datePublication', direction: 'asc' }])
+                      ),
+                  ])
+              ),
+            ...S.documentTypeListItems().filter(
+              (item) => item.getId() !== 'article'
+            ),
+          ]),
+    }),
+  ],
 
   schema: {
     types: schemaTypes,

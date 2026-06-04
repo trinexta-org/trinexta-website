@@ -2,25 +2,500 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a233e; 
+  --primary: #0a233e;
+  --primary-foreground: #ffffff;
+  --secondary: #5c92b8; 
+  --secondary-foreground: #ffffff;
+  --accent: #f0f5f9;
+  --accent-foreground: #0a233e;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #5c92b8;
+  --radius: 0.75rem; 
 }
 
 @theme inline {
+  --color-trinexta-dark: #0a233e;
+  --color-trinexta-blue: #5c92b8;
+  --color-ring: var(--ring);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular;
+  
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), Georgia, serif !important;
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+  /* force italic sur les <em> dans les titres Playfair — sans !important le navigateur peut ignorer font-style sur une font-family forcee */
+  h1 em, h2 em, h3 em, h4 em, h5 em, h6 em {
+    font-style: italic;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-in-scroll {
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    .animate-fade-in-scroll {
+      animation: fade-in-scroll linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 25%;
+    }
+  }
+
+  @supports not (animation-timeline: view()) {
+    .animate-fade-in-scroll {
+      animation: fade-in-scroll 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* HaloBackground — halos lumineux qui respirent (drift d'opacité + échelle),
+     lent et désynchronisé d'un halo a l'autre. transform-box fill-box pour que
+     l'échelle se fasse autour du centre du halo. */
+  /* Respiration + légère dérive. translate3d/scale + opacity uniquement :
+     composit GPU, aucun reflow ni repaint. % relatifs a la box du halo
+     (transform-box fill-box) -> déplacement discret. */
+  @keyframes mesh-breathe {
+    0%, 100% {
+      opacity: 0.45;
+      transform: translate3d(0, 0, 0) scale(0.92);
+    }
+    50% {
+      opacity: 1;
+      transform: translate3d(3%, -3%, 0) scale(1.08);
+    }
+  }
+  @keyframes mesh-breathe-alt {
+    0%, 100% {
+      opacity: 0.5;
+      transform: translate3d(0, 0, 0) scale(0.95);
+    }
+    50% {
+      opacity: 0.9;
+      transform: translate3d(-4%, 2.5%, 0) scale(1.06);
+    }
+  }
+  .halo-blob {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-name: mesh-breathe;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    will-change: opacity, transform;
+  }
+  .halo-blob--alt {
+    animation-name: mesh-breathe-alt;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .halo-blob,
+    .halo-blob--alt {
+      animation: none;
+      opacity: 0.7;
+    }
+  }
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes service-hero-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-service-hero {
+    opacity: 0;
+    animation: service-hero-fade-in 0.5s ease-in-out both;
+  }
+  @keyframes fade-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(-24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-down {
+    opacity: 0;
+    animation: fade-in-down 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-left {
+    opacity: 0;
+    animation: fade-in-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in-right {
+    opacity: 0;
+    animation: fade-in-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes badge-pop {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .animate-badge-pop {
+    opacity: 0;
+    animation: badge-pop 0.25s ease-out both;
+  }
+}
+
+/* ── MetricRow animations (CasClientCard) ──────────────────────────────
+   Total cycle ≈ 6.8s | Stagger 1.3s per row via --metric-delay CSS var
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes metric-show-avant {
+  0%   { opacity: 0; transform: translateY(-8px);  }
+  6%   { opacity: 1; transform: translateY(0);     }
+  38%  { opacity: 1; transform: translateY(0);     }
+  43%  { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 0; transform: translateY(-8px);  }
+}
+@keyframes metric-show-apres {
+  0%   { opacity: 0; transform: translateY(10px); }
+  49%  { opacity: 0; transform: translateY(10px); }
+  55%  { opacity: 1; transform: translateY(0);    }
+  96%  { opacity: 1; transform: translateY(0);    }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+@keyframes metric-sweep {
+  0%   { clip-path: inset(0 100% 0 0%);   }
+  42%  { clip-path: inset(0 100% 0 0%);   }
+  45%  { clip-path: inset(0 0%   0 0%);   }
+  49%  { clip-path: inset(0 0%   0 100%); }
+  100% { clip-path: inset(0 100% 0 0%);   }
+}
+.metric-avant {
+  animation: metric-show-avant 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+  animation-delay: var(--metric-delay, 0s);
+}
+.metric-apres {
+  animation: metric-show-apres 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+  animation-delay: var(--metric-delay, 0s);
+}
+.metric-sweep {
+  animation: metric-sweep 6.8s linear infinite;
+  animation-delay: var(--metric-delay, 0s);
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.prose h2 {
+  transition: all 0.5s ease;
+  padding-left: 0;
+}
+
+.prose h2:hover {
+  padding-left: 10px;
+  color: var(--color-secondary);
+}
+
+#tarteaucitronRoot *,
+#tarteaucitron * {
+  font-family: var(--font-sans) !important;
+}
+
+#tarteaucitronRoot #tarteaucitronAlertBig,
+#tarteaucitron,
+#tarteaucitronServices,
+#tarteaucitronScrollbar,
+#tarteaucitronRoot div,
+#tarteaucitron div,
+#tarteaucitron li,
+#tarteaucitron ul,
+#tarteaucitron p,
+#tarteaucitron span,
+#tarteaucitron h1,
+#tarteaucitron h2,
+#tarteaucitron h3,
+#tarteaucitron form,
+.tarteaucitronMainLine,
+.tarteaucitronDetails,
+.tarteaucitronInfo,
+.tarteaucitronList,
+#tarteaucitronCookiesList {
+  background-color: var(--primary) !important;
+  background: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  box-shadow: none !important;
+}
+
+#tarteaucitronRoot #tarteaucitronAlertBig {
+  border: 1px solid var(--secondary) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: 30px !important;
+}
+
+#tarteaucitron {
+  border: 1px solid var(--secondary) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+#tarteaucitronRoot #tarteaucitronDisclaimerAlert,
+#tarteaucitron span,
+#tarteaucitronRoot #tarteaucitronPrivacyUrl {
+  color: var(--primary-foreground) !important;
+  background: transparent !important;
+}
+
+#tarteaucitronRoot #tarteaucitronPrivacyUrl {
+  text-decoration: underline !important;
+}
+
+#tarteaucitronRoot #tarteaucitronPrivacyUrl:hover,
+#tarteaucitron a:hover {
+  color: var(--secondary) !important;
+}
+
+#tarteaucitron a {
+  color: var(--secondary) !important;
+}
+
+#tarteaucitron .tarteaucitronBorder {
+  border-top: 1px solid var(--secondary) !important;
+}
+
+#tarteaucitronRoot #tarteaucitronPersonalize2,
+#tarteaucitron #tarteaucitronAllAllowed,
+#tarteaucitron .tarteaucitronAllow,
+#tarteaucitron #tarteaucitronCloseAlert,
+#tarteaucitron .tarteaucitronClose {
+  background-color: var(--secondary) !important;
+  background: var(--secondary) !important;
+  color: var(--secondary-foreground) !important;
+  border: none !important;
+  border-radius: var(--radius) !important;
+  padding: 12px 24px !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+  text-transform: uppercase !important;
+  display: inline-block !important;
+}
+
+#tarteaucitronRoot #tarteaucitronAllDenied2,
+#tarteaucitron #tarteaucitronAllDenied,
+#tarteaucitron .tarteaucitronDeny,
+#tarteaucitronRoot #tarteaucitronPersonalize {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: var(--primary-foreground) !important;
+  border: 1px solid var(--secondary) !important;
+  border-radius: var(--radius) !important;
+  padding: 12px 24px !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+  text-transform: uppercase !important;
+  display: inline-block !important;
+}
+
+#tarteaucitronRoot #tarteaucitronPersonalize2:hover,
+#tarteaucitron #tarteaucitronAllAllowed:hover,
+#tarteaucitron .tarteaucitronAllow:hover,
+#tarteaucitronRoot #tarteaucitronAllDenied2:hover,
+#tarteaucitron #tarteaucitronAllDenied:hover,
+#tarteaucitron .tarteaucitronDeny:hover,
+#tarteaucitronRoot #tarteaucitronPersonalize:hover {
+  background-color: var(--secondary) !important;
+  background: var(--secondary) !important;
+  color: var(--secondary-foreground) !important;
+  opacity: 0.9 !important;
+}
+
+#tarteaucitron .tarteaucitronTitle {
+  background-color: transparent !important;
+}
+
+#tarteaucitron #tarteaucitronClosePanel:hover {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+#tarteaucitron #tarteaucitronClosePanel:hover::after {
+  color: var(--secondary) !important;
+}
+
+#tarteaucitronManager {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  overflow: hidden !important;
+  
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 24px !important;
+  z-index: 9999 !important;
+
+  background-color: var(--primary) !important;
+  background: var(--primary) !important;
+  border: 2px solid var(--secondary) !important;
+  
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E") !important;
+  background-size: 22px 22px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+#tarteaucitronManager:hover {
+  background-color: var(--secondary) !important;
+  background: var(--secondary) !important;
+  transform: scale(1.1) !important;
+}
+
+#tarteaucitronManager * {
+  display: none !important;
+}
+
+#tarteaucitronManager:hover {
+  background-color: var(--secondary) !important;
+  background: var(--secondary) !important;
+  transform: scale(1.1) !important;
+} 
+
+#tarteaucitronAlertBig::before {
+    content: none !important;
+    display: none !important;
+}
+
+#tarteaucitronServices button,
+.tarteaucitronTitle button,
+#tarteaucitronServicesTitle_mandatory button,
+#tarteaucitronServicesTitle_api button {
+    background-color: var(--secondary) !important;
+    background: var(--secondary) !important;
+    color: var(--secondary-foreground) !important;
+    border: none !important;
+}
+
+#tarteaucitronAlertBig {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 600px !important;
+    padding: 30px !important; 
+    z-index: 20000 !important;
+}
+
+#tarteaucitron #tarteaucitronClosePanel {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    z-index: 20001 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 10px !important;
+    cursor: pointer !important;
+    display: block !important;
+    font-size: 0 !important; 
+    color: transparent !important;
+}
+
+#tarteaucitron #tarteaucitronClosePanel::after {
+    content: "Fermer" !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--primary-foreground) !important;
+    text-decoration: underline !important;
 }

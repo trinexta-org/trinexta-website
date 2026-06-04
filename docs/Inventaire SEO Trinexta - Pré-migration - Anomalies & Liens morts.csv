@@ -1,0 +1,7 @@
+Adresse,Code HTTP,Statut,Indexabilité,Statut d'indexabilité,Title 1,Meta Description 1,H1-1,H1-2,H2-1,H2-2,Élément de lien en version canonique 1,Score de lisibilité de Flesch,Lisibilité,Ratio texte,URL de redirection,Type de page,Décision cible,Clics GSC et Impressions GSC,Priorité,Language,Version HTTP
+https://trinexta.com/contac/,301,Moved Permanently,Non indexable,Redirigé,,,,,,,,,,0,https://trinexta.com/contact/,,,,,,1.1
+https://trinexta.com/wp-content/plugins/popup-maker/dist/packages/block-library-style.css?ver=7424eb959f91acb8bbb2,404,Not Found,Non indexable,Erreur client ,,,,,,,,,,0,,,Supprimer,,,,1.1
+https://trinexta.com/wp-content/uploads/2025/06/icon-6.png,404,Not Found,Non indexable,Erreur client ,,,,,,,,,,0,,,Supprimer,,,,1.1
+https://trinexta.com/infogerance,301,Moved Permanently,Non indexable,Redirigé,,,,,,,,,,0,https://trinexta.com/infogerance/,,Supprimer,,,,1.1
+https://trinexta.com/support-informatique,301,Moved Permanently,Non indexable,Redirigé,,,,,,,,,,0,https://trinexta.com/support-informatique/,,Supprimer,,,,1.1
+https://trinexta.com/author/techleadforge-fr/,404,Not Found,Non indexable,Erreur client ,,,,,,,,,,0,,,Supprimer,,,,1.1

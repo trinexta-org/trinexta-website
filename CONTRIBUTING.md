@@ -25,7 +25,7 @@ cd studio && npm install && npm run dev   # http://localhost:3333
 | Branche   | Environnement        | Merge via       |
 |-----------|----------------------|-----------------|
 | `dev`     | local uniquement     | PR → staging    |
-| `staging` | staging.trinexta.com | PR → main       |
+| `staging` | staging.trinexta.fr  | PR → main       |
 | `main`    | trinexta.com         | PR approuvée    |
 
 Règle : **jamais de push direct sur `staging` ou `main`**. Toujours passer par une PR.
@@ -75,6 +75,18 @@ chore: mettre à jour prisma vers 7.9
 Ne jamais committer `.env.local`. Contacter le tech lead pour obtenir les valeurs manquantes.
 
 Les secrets de déploiement (SSH, DATABASE_URL en prod) sont gérés dans GitHub Secrets — accès tech lead uniquement.
+
+## Données statiques
+
+Les données statiques (listes de catégories, contenus de pages, configurations UI) vivent dans `src/data/`, pas dans les composants ou les routes.
+
+**Règle** : si une donnée est utilisée à plus d'un endroit, elle appartient à `src/data/`. Un composant ne doit jamais être la source de vérité d'une donnée partagée.
+
+Exemples actuels :
+- `src/data/categories.ts` — catégories blog, importé par sanity.ts, BlogList et le schéma Sanity Studio
+- `src/data/services/{slug}.ts` — contenus des pages service, chargé via `getServiceData(slug)`
+
+Si tu ajoutes un service, une catégorie ou toute donnée réutilisable : commence par `src/data/`.
 
 ## Base de données
 
