@@ -14,7 +14,6 @@ import { PortableTextBlock } from "@portabletext/types";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { generateSlug } from "@/lib/utils";
-import { ScrollToTop } from "@/components/blog/ScrollToTop";
 import {
   getArticleBySlug,
   getArticlesPopulaires,
@@ -185,7 +184,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </Container>
         </Section>
       )}
-      <ScrollToTop/>
     </main>
   );
 }
