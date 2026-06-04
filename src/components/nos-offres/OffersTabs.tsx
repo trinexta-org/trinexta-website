@@ -48,7 +48,7 @@ export function OffersTabs() {
   }, [])
 
   return (
-    <div id="offers-explorer" className="scroll-mt-[160px] w-full space-y-8">
+    <div id="offers-explorer" style={{ scrollMarginTop: `${headerHeight}px` }} className="w-full space-y-8">
       <div
         className="sticky z-30 bg-primary/95 backdrop-blur-md py-3 w-full"
         style={{ top: `${headerHeight}px` }}
