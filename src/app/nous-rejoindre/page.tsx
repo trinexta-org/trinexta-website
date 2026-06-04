@@ -31,13 +31,13 @@ export default function NousRejoindrePage() {
             
             <div className="space-y-6 text-white/80 text-base md:text-lg leading-relaxed">
               <Text>
-                Vous cherchez un cadre où votre maîtrise technique fait la différence. Chez TRINEXTA, nous recrutons des techniciens et ingénieurs passionnés par le support et l'infrastructure. 
+                Vous cherchez un cadre où votre maîtrise technique fait la différence. Chez TRINEXTA, nous recrutons des techniciens et ingénieurs passionnés par le support et l&apos;infrastructure. 
               </Text>
               <Text>
-                Nous vous confions des missions concrètes auprès de clients exigeants. Vous installez, configurez et maintenez des parcs informatiques réels. Nous écartons le micro-management pour privilégier l'autonomie et la responsabilité.
+                Nous vous confions des missions concrètes auprès de clients exigeants. Vous installez, configurez et maintenez des parcs informatiques réels. Nous écartons le micro-management pour privilégier l&apos;autonomie et la responsabilité.
               </Text>
               <Text>
-                Pas de jargon marketing, pas de réunions inutiles. Vous disposez des bons outils pour travailler, d'un salaire en adéquation avec votre valeur et d'une équipe solide sur laquelle vous appuyer en cas de blocage technique.
+                Pas de jargon marketing, pas de réunions inutiles. Vous disposez des bons outils pour travailler, d&apos;un salaire en adéquation avec votre valeur et d&apos;une équipe solide sur laquelle vous appuyer en cas de blocage technique.
               </Text>
             </div>
           </div>
