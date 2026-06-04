@@ -17,6 +17,7 @@ export type ResumeArticle = {
   extrait?: string;
   imageUne?: ImageArticle;
   tempsLecture?: number;
+  _updatedAt?: string
 };
 
 export type ArticleComplet = ResumeArticle & {
@@ -99,7 +100,8 @@ export async function getArticles(options?: OptionsRecherchesArticles): Promise<
       auteur,
       extrait,
       imageUne,
-      tempsLecture
+      tempsLecture,
+      _updatedAt
     },
     
     "total": count(*[${filtre}])
@@ -149,6 +151,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
       slug,
       categorie,
       datePublication,
+      _updatedAt,
       auteur,
       extrait,
       tempsLecture, 
@@ -162,6 +165,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
         slug,
         categorie,
         datePublication,
+        _updatedAt,
         auteur,
         extrait,
         imageUne,
