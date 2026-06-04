@@ -7,6 +7,8 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
@@ -346,7 +348,10 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
             </Section>
 
             {/* 5. FAQ */}
-            <Section id="faq" className="bg-primary/95 pb-16 md:pb-24 border-t border-white/5 pt-12 md:pt-16">
+            <Section id="faq" container={false} className="relative overflow-hidden bg-primary/95 pb-16 md:pb-24 pt-12 md:pt-16">
+                <CircuitBackground intensity="low" />
+                <SectionFade edge="both" />
+                <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <div className="mb-8 md:mb-10 text-center">
                         <span className="text-secondary text-xs font-mono font-bold uppercase tracking-widest block mb-2">Des réponses à vos interrogations</span>
@@ -371,6 +376,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                         })}
                     </div>
                 </div>
+                </Container>
             </Section>
 
             {/* 6. CTA FINAL */}

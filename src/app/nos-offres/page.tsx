@@ -6,6 +6,8 @@ import { PricingSection } from "@/components/nos-offres/PricingSection"
 import { NosOffresHero } from "@/components/nos-offres/NosOffresHero"
 import { DifferentiatorSection } from "@/components/nos-offres/DifferentiatorSection"
 import { FaqSection } from "@/components/nos-offres/FaqSection"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { officialFaqs } from "@/components/nos-offres/faqData" 
 import { FinalCTA } from "@/components/FinalCTA"
@@ -80,8 +82,10 @@ export default function NosOffresPage() {
         line1="Questions"
         line2="Fréquentes"
       />
-      <Section className="bg-primary pb-32 pt-12">
-        <Container>
+      <Section container={false} className="relative overflow-hidden bg-primary pb-32 pt-12">
+        <CircuitBackground intensity="low" />
+        <SectionFade edge="both" />
+        <Container className="relative z-10">
           <FaqSection />
         </Container>
       </Section>
