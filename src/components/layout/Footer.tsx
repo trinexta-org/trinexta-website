@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Container } from "./Container"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { SOCIAL_LINKS } from "@/data/social-links"
 
 const NAVIGATION = [
@@ -39,6 +40,8 @@ export function Footer() {
   return (
     <footer className="bg-primary relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <SectionFade edge="top" />
 
       <Container className="relative z-10">
         
