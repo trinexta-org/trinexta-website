@@ -39,9 +39,9 @@ export function CasClientCard({ item }: { item: CaseClient }) {
 
       {/* Card body */}
       <div className="flex flex-1 flex-col gap-4 px-5 pb-5 pt-4">
-        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-white">
+        <h2 className="line-clamp-2 text-sm font-bold leading-snug text-white">
           {item.title}
-        </h3>
+        </h2>
 
         <div className="flex flex-1 flex-col gap-3">
           {/* "Résultats obtenus" divider */}

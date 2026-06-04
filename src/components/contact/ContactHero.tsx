@@ -45,6 +45,7 @@ export function ContactHero() {
                     alt="Contact Trinexta"
                     fill
                     priority
+                    fetchPriority="high"
                     className="object-cover object-center"
                     sizes="100vw"
                 />

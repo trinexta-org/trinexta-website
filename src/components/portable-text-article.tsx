@@ -2,25 +2,38 @@ import Image from "next/image";
 import {
   PortableText,
   type PortableTextComponents,
+  type PortableTextBlock,
 } from "next-sanity";
 import { type CorpsArticle, type ImageArticle, urlForImage } from "@/lib/sanity";
 import { generateSlug } from "@/lib/utils";
+
+const extractTextFromBlock = (block: PortableTextBlock | undefined): string => {
+  if (!block || !block.children) return "";
+
+  if (Array.isArray(block.children)) {
+    return block.children
+      .map((child) => ('text' in child && typeof child.text === 'string' ? child.text : ''))
+      .join("");
+  }
+
+  return "";
+};
 
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
       <p className="text-lg leading-9 text-white/80">{children}</p>
     ),
-    h2: ({ children }) => {
-      const text = children?.toString() || "";
+    h2: ({ children, value }) => {
+      const text = extractTextFromBlock(value);
       return (
         <h2 id={generateSlug(text)} className="pt-12 pb-4 text-3xl font-black uppercase tracking-tighter text-white">
           {children}
         </h2>
       );
     },
-    h3: ({ children }) => {
-      const text = children?.toString() || "";
+    h3: ({ children, value }) => {
+      const text =extractTextFromBlock(value);
       return (
         <h3 id={generateSlug(text)} className="pt-8 pb-2 text-2xl font-bold tracking-tight text-white/90">
           {children}

@@ -38,6 +38,7 @@ export function AProposHero() {
           alt="L'équipe Trinexta by Trustech IT Support"
           fill
           priority
+          fetchPriority="high"
           className="object-cover grayscale opacity-60"
           sizes="100vw"
         />

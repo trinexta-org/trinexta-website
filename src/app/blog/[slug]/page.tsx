@@ -101,7 +101,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <Image 
             src={urlForImage(article.imageUne).width(1200).url()} 
             alt={article.titre}
-            fill 
+            fill
+            fetchPriority="high"
             className="object-cover scale-105 blur-sm" 
             sizes="100vw"
             priority 
