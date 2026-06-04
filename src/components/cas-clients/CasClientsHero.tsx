@@ -55,13 +55,15 @@ export function CasClientsHero() {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-xl text-white"
           >
             {slide.title.split(" ").map((word, i) => {
-              const clean = word.toLowerCase().replace(/[,.:]/g, "")
+              const isItalic = word.startsWith("*") && word.endsWith("*") && word.length > 2
+              const rawWord = isItalic ? word.slice(1, -1) : word
+              const clean = rawWord.toLowerCase().replace(/[,.:]/g, "")
               return (
                 <span
                   key={i}
                   className={`inline-block mr-2 sm:mr-3 ${highlightedWords.includes(clean) ? "text-secondary" : "text-white"}`}
                 >
-                  {word}
+                  {isItalic ? <em>{rawWord}</em> : rawWord}
                 </span>
               )
             })}

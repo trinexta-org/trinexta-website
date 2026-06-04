@@ -143,6 +143,25 @@ import { Heading, Text } from "@/components/ui/Typography"
 <Text variant="small">Note</Text>              // petit, discret
 ```
 
+#### Emphase italique dans les titres
+
+Par defaut, le dernier mot d'un titre de plus de 2 mots est mis en italique automatiquement.
+
+Pour choisir un mot specifique, utiliser `*mot*` dans la string — cela prend le dessus sur l'automatique.
+
+```tsx
+<Heading as="h2">Infogérance sans surprise</Heading>
+// rendu automatique : "Infogérance sans <em>surprise</em>"
+
+<Heading as="h2">Infogérance sans *surprise* garantie</Heading>
+// override explicite : "Infogérance sans <em>surprise</em> garantie"
+
+<Heading as="h2" emphasis={false}>Titre sans emphase</Heading>
+// desactiver l'emphase entierement
+```
+
+Regle editoriale : quand le dernier mot n'est pas le mot fort (preposition, article, adjectif faible), utiliser `*mot*` pour pointer le bon mot.
+
 ### Button
 
 ```tsx
