@@ -7,7 +7,8 @@ const NAVIGATION = [
   { name: "Accueil", href: "/" },
   { name: "Tarifs", href: "/nos-offres" }, 
   { name: "Cas clients", href: "/cas-clients" },
-  { name: "Blog Expertise", href: "/blog" }
+  { name: "Blog Expertise", href: "/blog" },
+  { name: "Nous rejoindre", href: "/nous-rejoindre" }
 ]
 
 const SERVICES = [
