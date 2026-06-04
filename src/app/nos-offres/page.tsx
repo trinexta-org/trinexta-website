@@ -43,8 +43,9 @@ export default function NosOffresPage() {
         line1="Nos formules"
         line2="claires & adaptées"
       />
-      <Section id="details" className="bg-primary py-24">
-        <Container>
+      <Section id="details" container={false} className="relative bg-primary py-24 overflow-hidden">
+        <HaloBackground intensity="low" />
+        <Container className="relative z-10">
           <PricingSection />
         </Container>
       </Section>
@@ -54,8 +55,9 @@ export default function NosOffresPage() {
         line1="Le catalogue"
         line2="en détail"
       />
-      <Section className="bg-primary pb-24 pt-12">
-        <Container>
+      <Section container={false} className="relative bg-primary pb-24 pt-12 overflow-hidden">
+        <HaloBackground intensity="low" />
+        <Container className="relative z-10">
           <Suspense fallback={
             <div className="w-full text-center py-12 text-white/50 font-mono text-sm animate-pulse">
               Chargement du catalogue Trinexta...
