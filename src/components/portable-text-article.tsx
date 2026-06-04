@@ -27,7 +27,7 @@ const portableTextComponents: PortableTextComponents = {
     h2: ({ children, value }) => {
       const text = extractTextFromBlock(value);
       return (
-        <h2 id={generateSlug(text)} className="pt-12 pb-4 text-3xl font-black uppercase tracking-tighter text-white">
+        <h2 id={generateSlug(text)} className="pt-12 pb-4 text-3xl font-black tracking-normal text-white">
           {children}
         </h2>
       );
@@ -35,7 +35,7 @@ const portableTextComponents: PortableTextComponents = {
     h3: ({ children, value }) => {
       const text =extractTextFromBlock(value);
       return (
-        <h3 id={generateSlug(text)} className="pt-8 pb-2 text-2xl font-bold tracking-tight text-white/90">
+        <h3 id={generateSlug(text)} className="pt-8 pb-2 text-2xl font-bold tracking-normal text-white/90">
           {children}
         </h3>
       );

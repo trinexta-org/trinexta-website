@@ -12,7 +12,7 @@ export function StudioDetails() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-20 items-center mb-24">
           <div className="space-y-8">
             <span className="text-secondary font-mono text-xs tracking-widest uppercase">TRINEXTA STUDIO</span>
-            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-tighter text-white">
+            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-normal text-white">
               Une présence digitale alignée avec votre *informatique*
             </Heading>
             <Text className="text-white/80 text-base md:text-lg leading-relaxed">
@@ -37,7 +37,7 @@ export function StudioDetails() {
 
         <div className="space-y-16 mb-24">
           <div className="space-y-4 text-center max-w-2xl mx-auto">
-            <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Pour répondre à vos besoins de *création*</Heading>
+            <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-normal text-white">Pour répondre à vos besoins de *création*</Heading>
             <Text className="text-white/60 text-sm md:text-base">Des technologies modernes choisies pour leur rapidité, leur sécurité et leur excellent référencement naturel (SEO).</Text>
           </div>
 
@@ -66,7 +66,7 @@ export function StudioDetails() {
         </div>
 
         <div className="space-y-16 mb-24">
-          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-center text-white">
+          <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-normal text-center text-white">
             Pourquoi nous *confier* vos projets web et SaaS ?
           </Heading>
 

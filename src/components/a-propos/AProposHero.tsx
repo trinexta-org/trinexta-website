@@ -30,7 +30,7 @@ export function AProposHero() {
         <div>
           <Heading
             as="h1"
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight drop-shadow-xl text-white text-balance"
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-white text-balance"
           >
             {slide.title.split(" ").map((word, i) => {
               const isItalic = word.startsWith("*") && word.endsWith("*") && word.length > 2

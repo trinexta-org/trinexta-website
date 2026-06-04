@@ -115,7 +115,9 @@ const supportData = {
   ],
 
   cta: {
-    title: "Vous avez un problème informatique récurrent ?",
+    line1: "Un problème",
+    line2: "informatique",
+    line3: "récurrent ?",
     description: "Libérez-vous définitivement de la gestion technique et des pannes stressantes. Confiez votre support informatique à Trinexta, transformez votre quotidien, et retrouvez enfin la sérénité nécessaire pour diriger votre entreprise.",
     buttonText: "Démarrer votre support",
     buttonHref: "/contact"

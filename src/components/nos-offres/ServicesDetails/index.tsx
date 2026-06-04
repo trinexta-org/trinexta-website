@@ -10,7 +10,7 @@ export function ServicesDetails() {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 items-center mb-24">
         <div className="space-y-6">
           <span className="text-secondary font-mono text-xs tracking-widest uppercase">SERVICES ANNEXES</span>
-          <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-tighter text-white">
+          <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-normal text-white">
             Un accompagnement IT sur mesure, au-delà du *support*
           </Heading>
           <Text className="text-white/80 text-base md:text-lg leading-relaxed">
@@ -36,7 +36,7 @@ export function ServicesDetails() {
 
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 items-start mb-24">
         <div className="xl:col-span-5 space-y-4">
-          <Heading as="h3" className="text-2xl md:text-3xl font-black tracking-tight text-white">
+          <Heading as="h3" className="text-2xl md:text-3xl font-black tracking-normal text-white">
             Notre approche : conseiller avant de *vendre*
           </Heading>
         </div>
@@ -52,7 +52,7 @@ export function ServicesDetails() {
 
       <div className="space-y-12 mb-24">
         <div className="space-y-2">
-          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Nos services sur *devis*</Heading>
+          <Heading as="h3" className="text-2xl md:text-3xl font-extrabold tracking-normal text-white">Nos services sur *devis*</Heading>
           <Text className="text-white/60 text-sm md:text-base">Voici les prestations les plus demandées par nos clients. Chaque intervention fait l&apos;objet d&apos;un échange préalable et d&apos;un devis personnalisé.</Text>
         </div>
 
@@ -80,7 +80,7 @@ export function ServicesDetails() {
       </div>
 
       <div className="space-y-8">
-        <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-tight text-center text-white">
+        <Heading as="h3" className="text-xl md:text-2xl font-bold tracking-normal text-center text-white">
           *Comment* ça se passe ?
         </Heading>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -98,7 +98,7 @@ export function ServicesDetails() {
 
       <div className="p-6 md:p-8 rounded-2xl bg-white/[0.01] border border-white/5 space-y-6">
         <div className="text-center space-y-1">
-          <Heading as="h3" className="text-xl font-bold tracking-tight text-white">Nos partenaires</Heading>
+          <Heading as="h3" className="text-xl font-bold tracking-normal text-white">Nos partenaires</Heading>
           <Text className="text-white/60 text-xs md:text-sm">
             Pour vous proposer des solutions fiables et cohérentes, nous nous appuyons sur des partenaires reconnus.
           </Text>
