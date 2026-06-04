@@ -99,57 +99,31 @@
     to { opacity: 1; }
   }
 
-  /* CircuitBackground — impulsion d'énergie le long des tracés (pathLength=1000).
-     0->1000 : l'impulsion entre par le bord et progresse vers le pad,
-     qu'elle atteint a 96.4% du cycle (cf. circuit-pad). */
-  @keyframes circuit-flux {
-    from { stroke-dashoffset: 0; }
-    to { stroke-dashoffset: 1000; }
+  /* CircuitBackground — halos lumineux qui respirent (drift d'opacité + échelle),
+     lent et désynchronisé d'un halo a l'autre. transform-box fill-box pour que
+     l'échelle se fasse autour du centre du halo. */
+  @keyframes mesh-breathe {
+    0%, 100% {
+      opacity: 0.45;
+      transform: scale(0.92);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.08);
+    }
   }
-  .circuit-flux {
-    animation-name: circuit-flux;
-    animation-timing-function: linear;
+  .mesh-blob {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-name: mesh-breathe;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-  }
-  /* Pad illuminé quand le front de l'impulsion le touche (contact a 96.4%),
-     montée nette puis longue rémanence (afterglow) qui se prolonge sur le
-     début du cycle suivant pour un glow franc et tenu. */
-  @keyframes circuit-pad {
-    0% {
-      opacity: 1;
-      filter: drop-shadow(0 0 6px var(--secondary)) drop-shadow(0 0 16px var(--secondary));
-    }
-    16% {
-      opacity: 0.14;
-      filter: none;
-    }
-    95% {
-      opacity: 0.14;
-      filter: none;
-    }
-    96.4% {
-      opacity: 1;
-      filter: drop-shadow(0 0 6px var(--secondary)) drop-shadow(0 0 16px var(--secondary));
-    }
-    100% {
-      opacity: 1;
-      filter: drop-shadow(0 0 6px var(--secondary)) drop-shadow(0 0 16px var(--secondary));
-    }
-  }
-  .circuit-pad {
-    opacity: 0.14;
-    animation-name: circuit-pad;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    will-change: opacity, transform;
   }
   @media (prefers-reduced-motion: reduce) {
-    .circuit-flux {
+    .mesh-blob {
       animation: none;
-      opacity: 0;
-    }
-    .circuit-pad {
-      animation: none;
-      opacity: 0.14;
+      opacity: 0.7;
     }
   }
   @keyframes fade-in-up {

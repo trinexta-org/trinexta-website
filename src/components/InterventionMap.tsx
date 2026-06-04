@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence, useAnimationFrame } from "framer-motion"
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
 import { Container } from "@/components/layout/Container"
 
 const DEPARTMENTS = [
@@ -148,6 +149,8 @@ export function InterventionMap() {
     return (
         <Section container={false} className="relative bg-primary overflow-hidden py-16 md:py-28">
 
+            <CircuitBackground intensity="low" />
+
             <div className="absolute inset-0 pointer-events-none" style={{
                 background: "radial-gradient(ellipse 65% 75% at 72% 52%, color-mix(in srgb, var(--secondary) 10%, transparent), transparent)",
             }} />
@@ -155,7 +158,7 @@ export function InterventionMap() {
                 background: "radial-gradient(ellipse 110% 110% at 50% 50%, transparent 38%, var(--primary) 100%)",
             }} />
 
-            <Container>
+            <Container className="relative z-10">
                 <div className="flex items-center gap-3 mb-10 md:mb-14">
                     <span className="relative flex h-2 w-2 shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-50" />

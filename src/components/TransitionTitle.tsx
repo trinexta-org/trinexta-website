@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading } from "@/components/ui/Typography"
+import { CircuitBackground } from "@/components/ui/CircuitBackground"
 
 function RibbonBackground() {
   return (
@@ -70,6 +71,8 @@ export function TransitionTitle({
       container={false} 
       className="bg-primary relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32"
     >
+      <CircuitBackground intensity="low" />
+
       <RibbonBackground />
 
       <Container className="relative z-10 text-center px-4">
