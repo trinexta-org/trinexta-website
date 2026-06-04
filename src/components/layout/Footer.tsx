@@ -20,9 +20,11 @@ const SERVICES = [
 
 const LEGAL = [
   { name: "Mentions légales", href: "/mentions-legales" },
-  { name: "CGV / CGS", href: "/cgv" },
-  { name: "Données personnelles", href: "/confidentialite" },
-  { name: "Gestion des cookies", href: "/cookies" }
+  { name: "Confidentialité", href: "/confidentialite" },
+  { name: "Cookies", href: "/cookies" },
+  { name: "Assistance cyber", href: "/charte-assistance" },
+  { name: "Réponse aux incidents", href: "/plan-reponse-incidents-securite" },
+  { name: "Tous les documents", href: "/informations-juridiques" },
 ]
 
 const PARTNERS = ["Microsoft", "Google", "Sophos", "Bitdefender", "OVH"]

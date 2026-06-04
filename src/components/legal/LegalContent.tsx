@@ -17,13 +17,19 @@ export function LegalContent({ data }: LegalContentProps) {
             <Heading as="h2" className="text-xl md:text-2xl font-bold text-white tracking-tight">
               {section.title}
             </Heading>
-            <div className="space-y-3">
-              {section.paragraphs.map((paragraph, pIdx) => (
-                <Text key={pIdx} className="text-sm md:text-base text-white/70 leading-relaxed">
-                  {paragraph}
-                </Text>
-              ))}
-            </div>
+            {section.content ? (
+              <div className="text-sm md:text-base text-white/70 leading-relaxed">
+                {section.content}
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {(section.paragraphs ?? []).map((paragraph, pIdx) => (
+                  <Text key={pIdx} className="text-sm md:text-base text-white/70 leading-relaxed">
+                    {paragraph}
+                  </Text>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
