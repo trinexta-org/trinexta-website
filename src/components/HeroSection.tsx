@@ -23,13 +23,7 @@ export function HeroSection() {
           <source src="/hero.mp4" type="video/mp4" />
         </video>
       }
-      overlays={
-        <>
-          <div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />
-          {/* Fondu bas : la vidéo se fond dans le bg-primary de la section suivante */}
-          <div className="absolute inset-x-0 bottom-0 h-40 md:h-56 bg-gradient-to-b from-transparent to-primary pointer-events-none" />
-        </>
-      }
+      overlays={<div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />}
       renderSlide={(slide) => (
         <div>
           <Heading
