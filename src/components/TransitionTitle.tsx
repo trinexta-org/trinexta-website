@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading } from "@/components/ui/Typography"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 
 function RibbonBackground() {
   return (
@@ -70,6 +71,8 @@ export function TransitionTitle({
       container={false} 
       className="bg-primary relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32"
     >
+      <HaloBackground intensity="low" />
+
       <RibbonBackground />
 
       <Container className="relative z-10 text-center px-4">
@@ -78,7 +81,7 @@ export function TransitionTitle({
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="text-secondary text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-4 md:mb-6 block"
+            className="text-secondary text-xs md:text-sm font-bold tracking-[0.2em] mb-4 md:mb-6 block"
           >
             {surtitle}
           </motion.span>
@@ -90,7 +93,7 @@ export function TransitionTitle({
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
         >
-          <Heading as="h2" className="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none">
+          <Heading as="h2" className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-none">
             {line1} <br /> <span className="text-secondary">{line2}</span>
           </Heading>
         </motion.div>

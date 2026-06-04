@@ -116,7 +116,9 @@ const ms365Data = {
   ],
 
   cta: {
-    title: "Prêt à optimiser votre collaboration et sécuriser votre écosystème ?",
+    line1: "Prêt à optimiser",
+    line2: "votre collaboration",
+    line3: "Microsoft 365 ?",
     description: "Faites de Microsoft 365 un véritable moteur de performance pour votre entreprise. Nos experts sont prêts à auditer votre environnement, sécuriser vos accès et former vos équipes pour tirer le meilleur parti de vos outils. Ne subissez plus votre informatique, pilotez-la avec Trinexta.",
     buttonText: "Échanger avec un conseiller",
     buttonHref: "/contact"

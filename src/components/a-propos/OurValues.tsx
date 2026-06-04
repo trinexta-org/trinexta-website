@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Section } from "@/components/layout/Section"
+import { HaloBackground } from "@/components/ui/HaloBackground"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
 
@@ -100,7 +101,8 @@ export function OurValues() {
     }
 
     return (
-        <Section id="valeurs-approfondies" className="py-16 md:py-24 bg-primary">
+        <Section id="valeurs-approfondies" className="py-16 md:py-24 bg-primary relative overflow-hidden">
+            <HaloBackground intensity="low" />
             <Container>
 
                 <div className="bg-white/[0.02] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col">

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Container } from "./Container"
+import { SectionFade } from "@/components/ui/SectionFade"
 import { SOCIAL_LINKS } from "@/data/social-links"
 
 const NAVIGATION = [
@@ -40,6 +41,8 @@ export function Footer() {
     <footer className="bg-primary relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
 
+      <SectionFade edge="top" />
+
       <Container className="relative z-10">
         
         {/* --- VERSION GRAND ÉCRAN --- */}
@@ -47,7 +50,7 @@ export function Footer() {
           <div className="grid grid-cols-5 gap-12 mb-8">
             <div className="space-y-8">
               <Link href="/" className="group block">
-                <span className="text-white font-black uppercase tracking-tighter text-3xl block leading-none">Trinexta</span>
+                <span className="text-white font-black uppercase tracking-normal text-3xl block leading-none">Trinexta</span>
                 <span className="text-secondary text-[9px] font-bold uppercase tracking-[0.4em] block mt-1">By Trustech IT Support</span>
               </Link>
               <div className="space-y-5">

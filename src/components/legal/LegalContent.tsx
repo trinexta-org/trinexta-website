@@ -14,7 +14,7 @@ export function LegalContent({ data }: LegalContentProps) {
       <div className="space-y-10">
         {data.sections.map((section, idx) => (
           <div key={idx} className="space-y-4 border-b border-white/5 pb-8 last:border-none last:pb-0">
-            <Heading as="h2" className="text-xl md:text-2xl font-bold text-white tracking-tight">
+            <Heading as="h2" className="text-xl md:text-2xl font-bold text-white tracking-normal">
               {section.title}
             </Heading>
             {section.content ? (
