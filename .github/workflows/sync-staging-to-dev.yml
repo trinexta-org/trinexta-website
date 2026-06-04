@@ -5,12 +5,16 @@ on:
     branches:
       - staging
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: dev
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -21,6 +25,5 @@ jobs:
 
       - name: Merge staging into dev
         run: |
-          git checkout dev
-          git merge origin/staging --no-edit -m "chore: sync staging -> dev [bot]"
+          git merge origin/staging -m "chore: sync staging -> dev [bot]"
           git push origin dev
