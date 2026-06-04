@@ -22,8 +22,6 @@ const LEGAL = [
   { name: "Mentions légales", href: "/mentions-legales" },
   { name: "Confidentialité", href: "/confidentialite" },
   { name: "Cookies", href: "/cookies" },
-  { name: "Assistance cyber", href: "/charte-assistance" },
-  { name: "Réponse aux incidents", href: "/plan-reponse-incidents-securite" },
   { name: "Tous les documents", href: "/informations-juridiques" },
 ]
 
