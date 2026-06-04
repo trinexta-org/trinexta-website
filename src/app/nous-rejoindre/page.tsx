@@ -15,7 +15,7 @@ export default function NousRejoindrePage() {
     <main className="bg-primary min-h-screen relative text-white">
       <PageHero 
         title="Nous rejoindre" 
-        imageSrc="/images/nous-rejoindre/heroNousRejoindre.jpg" 
+        imageSrc="/images/nous-rejoindre/heroNousRejoindre.webp" 
       />
 
       <Container className="py-20 md:py-32">
@@ -44,8 +44,8 @@ export default function NousRejoindrePage() {
 
           <div className="relative w-full aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl mt-8 xl:mt-0">
             <Image 
-              src="/images/nous-rejoindre/equipe.jpg" 
-              alt="L'environnement de travail chez Trinexta" 
+              src="/images/nous-rejoindre/technicien.webp" 
+              alt="Un technicien support informatique chez Trinexta" 
               fill 
               sizes="(max-width: 1280px) 100vw, 50vw"
               className="object-cover hover:scale-105 transition-transform duration-700"
