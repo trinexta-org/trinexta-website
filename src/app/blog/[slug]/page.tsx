@@ -23,7 +23,6 @@ import {
   ResumeArticle,
   HeadingTOC
 } from "@/lib/sanity";
-import { JsonLd } from "@/components/seo/JsonLd";
 
 type ArticlePageProps = {
   params: Promise<{
