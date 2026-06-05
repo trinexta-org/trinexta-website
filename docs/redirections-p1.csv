@@ -1,0 +1,10 @@
+source,target,match,action,code
+/,https://trinexta.fr/,url,url,301
+/blog/,https://trinexta.fr/blog,url,url,301
+/support-informatique/,https://trinexta.fr/support-informatique,url,url,301
+/infogerance/,https://trinexta.fr/infogerance,url,url,301
+/cybersecurite/,https://trinexta.fr/cybersecurite,url,url,301
+/contact/,https://trinexta.fr/contact,url,url,301
+/services-annexes/,https://trinexta.fr/nos-offres?tab=services-annexes,url,url,301
+/offre-serenite/,https://trinexta.fr/nos-offres?tab=serenite,url,url,301
+/offre-impulsion/,https://trinexta.fr/nos-offres?tab=impulsion,url,url,301
