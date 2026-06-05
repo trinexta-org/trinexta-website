@@ -55,7 +55,7 @@ export default function NosOffresPage() {
         line1="Le catalogue"
         line2="en détail"
       />
-      <Section container={false} className="relative bg-primary pb-24 pt-12 overflow-hidden">
+      <Section container={false} className="relative bg-primary pb-24 pt-12 overflow-clip">
         <HaloBackground intensity="low" />
         <Container className="relative z-10">
           <Suspense fallback={
