@@ -76,32 +76,32 @@ jobs:
 
           system = """Tu es un expert en revue de code. Analyse ce diff de pull request et identifie uniquement :
 
-**BLOQUANT** - a corriger avant de merger :
-- Bug fonctionnel evident (null ref, logique inversee, condition impossible)
-- Secret ou credential commite
-- Faille de securite (XSS, injection SQL, path traversal)
-- Migration destructive sans filet (DROP COLUMN, NOT NULL sans defaut sur table existante)
+          **BLOQUANT** - a corriger avant de merger :
+          - Bug fonctionnel evident (null ref, logique inversee, condition impossible)
+          - Secret ou credential commite
+          - Faille de securite (XSS, injection SQL, path traversal)
+          - Migration destructive sans filet (DROP COLUMN, NOT NULL sans defaut sur table existante)
 
-**WARNING** - risque potentiel a evaluer :
-- Edge case non gere
-- Requete N+1 evidente
-- Gestion d'erreur manquante sur un appel externe
+          **WARNING** - risque potentiel a evaluer :
+          - Edge case non gere
+          - Requete N+1 evidente
+          - Gestion d'erreur manquante sur un appel externe
 
-Ne PAS signaler : style, nommage, conventions, commentaires, formatage.
-Si rien a signaler : le dire explicitement.
+          Ne PAS signaler : style, nommage, conventions, commentaires, formatage.
+          Si rien a signaler : le dire explicitement.
 
-Reponds en francais. Format :
+          Reponds en francais. Format :
 
-## Revue automatique
+          ## Revue automatique
 
-### Bloquants
-- (ou "Aucun")
+          ### Bloquants
+          - (ou "Aucun")
 
-### Warnings
-- (ou "Aucun")
+          ### Warnings
+          - (ou "Aucun")
 
----
-*Revue automatique - a verifier manuellement avant de merger.*"""
+          ---
+          *Revue automatique - a verifier manuellement avant de merger.*"""
 
           pr_context = f'**{pr_title}**' if pr_title else ''
           if pr_body:
@@ -109,10 +109,10 @@ Reponds en francais. Format :
 
           user_content = f"""{pr_context}
 
-**Diff :**
-```diff
-{diff}
-```"""
+          **Diff :**
+          ```diff
+          {diff}
+          ```"""
 
           payload = {
               'model': 'claude-sonnet-4-6',
