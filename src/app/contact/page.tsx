@@ -14,7 +14,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 export const metadata: Metadata = {
   title: "Contact — Trinexta · Infogérance & Support informatique",
   description:
-    "Discutons de votre projet. Demande de devis, support ou candidature, l'équipe Trinexta vous répond sous 24h ouvrées.",
+    "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
 };
 
 export default function ContactPage() {

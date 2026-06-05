@@ -75,7 +75,7 @@ export async function sendNotificationEmail(data: ContactFormData) {
           toRecipients: [
             {
               emailAddress: {
-                address: fromEmail,
+                address: data.type === "support" ? "support@trinexta.fr" : fromEmail,
               },
             },
           ],

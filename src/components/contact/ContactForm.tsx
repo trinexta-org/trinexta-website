@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { contactFormSchema, ContactFormData, CONTACT_TYPES, SECTEURS, TAILLES, URGENCES } from "@/lib/validations/contact";
-import { pushGtmEvent } from "@/lib/gtm"; 
+import { pushGtmEvent } from "@/lib/gtm";
 
 export default function ContactForm() {
   const {
@@ -30,12 +30,12 @@ export default function ContactForm() {
       body: JSON.stringify(data),
     });
     const json = await res.json();
-    
+
     if (res.ok) {
       pushGtmEvent('form_submit', {
         form_id: 'contact_principal'
       });
-      
+
       setServerMessage(json.message);
     } else {
       setServerError(json.error ?? "Une erreur est survenue.");
@@ -128,7 +128,7 @@ export default function ContactForm() {
               <option value="" disabled className="bg-primary text-white/50">Sélectionnez...</option>
               {CONTACT_TYPES.map((t) => (
                 <option key={t} value={t} className="bg-primary text-white">
-                  {{ devis: "Demande de devis", support: "Support technique", candidature: "Candidature", autre: "Autre" }[t]}
+                  {{ devis: "Demande de devis", support: "Support technique", autre: "Autre" }[t]}
                 </option>
               ))}
             </select>
