@@ -12,6 +12,7 @@ import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
 import { sanityClient } from "@/lib/sanity"
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = "Infogérance et IT pour PME - Évry, Essonne | Trinexta";
 const description =
   "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France. Intervention sur site et à distance depuis Évry.";
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    url: "/",
+    url: siteUrl,
     type: "website",
   },
   twitter: {

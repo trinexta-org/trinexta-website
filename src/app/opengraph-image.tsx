@@ -7,11 +7,16 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
-  const logoData = await readFile(
-    join(process.cwd(), "public/images/trinexta-logo.png"),
-    "base64"
-  );
-  const logoSrc = `data:image/png;base64,${logoData}`;
+  let logoSrc: string | null = null;
+  try {
+    const logoData = await readFile(
+      join(process.cwd(), "public/images/trinexta-logo.png"),
+      "base64"
+    );
+    logoSrc = `data:image/png;base64,${logoData}`;
+  } catch {
+    // logo absent : on continue sans
+  }
 
   return new ImageResponse(
     (
@@ -27,7 +32,11 @@ export default async function Image() {
         }}
       >
         {/* Logo */}
-        <img src={logoSrc} height={48} style={{ objectFit: "contain", objectPosition: "left" }} />
+        {logoSrc ? (
+          <img src={logoSrc} height={48} style={{ objectFit: "contain", objectPosition: "left" }} />
+        ) : (
+          <div style={{ color: "#ffffff", fontSize: 28, fontWeight: 700 }}>TRINEXTA</div>
+        )}
 
         {/* Titre + accroche */}
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
