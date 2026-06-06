@@ -18,8 +18,9 @@ export async function sendNotificationEmail(data: ContactFormData) {
   const clientId = process.env.AZURE_CLIENT_ID;
   const clientSecret = process.env.AZURE_CLIENT_SECRET;
   const fromEmail = process.env.AZURE_FROM_EMAIL;
+  const supportEmail = process.env.SUPPORT_EMAIL;
 
-  if (!tenantId || !clientId || !clientSecret || !fromEmail) {
+  if (!tenantId || !clientId || !clientSecret || !fromEmail || !supportEmail) {
     throw new Error("Configuration de messagerie incomplète");
   }
 
@@ -75,7 +76,7 @@ export async function sendNotificationEmail(data: ContactFormData) {
           toRecipients: [
             {
               emailAddress: {
-                address: fromEmail,
+                address: data.type === "support" ? supportEmail : fromEmail,
               },
             },
           ],

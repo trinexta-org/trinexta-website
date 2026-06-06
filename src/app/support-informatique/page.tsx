@@ -1,8 +1,22 @@
+import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Support Informatique Expert pour TPE et PME | Trinexta",
   description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",
+  openGraph: {
+    title: "Support Informatique Expert pour TPE et PME | Trinexta",
+    description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",
+    url: "/support-informatique",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Support Informatique Expert pour TPE et PME | Trinexta",
+    description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",
+    images: ["/images/og-default.png"],
+  },
 }
 
 const supportData = {

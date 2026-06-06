@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const CONTACT_TYPES = ["devis", "support", "candidature", "autre"] as const
+export const CONTACT_TYPES = ["devis", "support", "autre"] as const
 export const SECTEURS = ["Commerce", "Sante", "BTP", "Finance", "IT", "Industrie", "Autre"] as const
 export const TAILLES = ["1-9", "10-49", "50-249", "250+"] as const
 export const URGENCES = ["Faible", "Normale", "Haute", "Critique"] as const
@@ -12,7 +12,7 @@ const optionalTrimmedText = z
   .optional();
 
 export const contactFormSchema = z.object({
-  type: z.enum(["devis", "support", "candidature", "autre"]),
+  type: z.enum(["devis", "support", "autre"]),
   prenom: z.string().trim().min(1, "Le prénom est requis"),
   nom: z.string().trim().min(1, "Le nom est requis"),
   email: z.string().trim().email("Le format de l'email est invalide"),
@@ -24,7 +24,7 @@ export const contactFormSchema = z.object({
   message: z.string().trim().min(1, "Le message est requis"),
   siret: z.string().trim().optional(),
 }).superRefine((data, ctx) => {
-  
+
   if (data.type === "devis") {
     if (!data.entreprise || data.entreprise.trim() === "") {
       ctx.addIssue({ code: "custom", message: "Le nom de l'entreprise est requis", path: ["entreprise"] });
@@ -35,7 +35,7 @@ export const contactFormSchema = z.object({
     if (!data.taille || data.taille === "") {
       ctx.addIssue({ code: "custom", message: "La taille est requise", path: ["taille"] });
     }
-    
+
     const siretRegex = /^\d{14}$/;
     if (!data.siret || !siretRegex.test(data.siret)) {
       ctx.addIssue({

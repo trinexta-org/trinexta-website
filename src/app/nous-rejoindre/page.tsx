@@ -8,6 +8,19 @@ import { Heading, Text } from "@/components/ui/Typography"
 export const metadata: Metadata = {
   title: "Nous rejoindre | Trinexta",
   description: "Rejoignez une équipe d'experts IT. Découvrez pourquoi travailler chez TRINEXTA et consultez nos offres sur Talentero.",
+  openGraph: {
+    title: "Nous rejoindre | Trinexta",
+    description: "Rejoignez une équipe d'experts IT. Découvrez pourquoi travailler chez TRINEXTA et consultez nos offres sur Talentero.",
+    url: "/nous-rejoindre",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nous rejoindre | Trinexta",
+    description: "Rejoignez une équipe d'experts IT. Découvrez pourquoi travailler chez TRINEXTA et consultez nos offres sur Talentero.",
+    images: ["/images/og-default.png"],
+  },
 }
 
 export default function NousRejoindrePage() {

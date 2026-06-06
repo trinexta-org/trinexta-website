@@ -33,6 +33,19 @@ export async function generateMetadata({
   return {
     title: `${item.title} | TRINEXTA`,
     description: item.metaDescription,
+    openGraph: {
+      title: `${item.title} | TRINEXTA`,
+      description: item.metaDescription,
+      url: `/cas-clients/${slug}`,
+      type: "website",
+      images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${item.title} | TRINEXTA`,
+      description: item.metaDescription,
+      images: ["/images/og-default.png"],
+    },
   }
 }
 

@@ -1,0 +1,171 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - dev
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  review:
+    name: Claude Review
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare diff
+        id: diff
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff origin/${{ github.base_ref }}...HEAD \
+            -- ':(exclude)package-lock.json' \
+               ':(exclude)src/generated/prisma' \
+            > /tmp/full_diff.txt
+
+          TOTAL=$(wc -l < /tmp/full_diff.txt)
+          head -n 800 /tmp/full_diff.txt > /tmp/diff.txt
+
+          echo "total=$TOTAL" >> $GITHUB_OUTPUT
+          [ "$TOTAL" -gt 800 ] && echo "truncated=true" >> $GITHUB_OUTPUT || echo "truncated=false" >> $GITHUB_OUTPUT
+
+      - name: PR trop grande - notifier
+        if: steps.diff.outputs.truncated == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const total = '${{ steps.diff.outputs.total }}';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: `> [!WARNING]\n> PR trop grande pour la revue automatique (${total} lignes hors lockfile) - revue manuelle requise @hyosua.`
+            });
+
+      - name: Call Claude
+        if: steps.diff.outputs.truncated == 'false'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          cat > /tmp/review.py << 'PYEOF'
+          import urllib.request
+          import urllib.error
+          import json
+          import os
+          import sys
+
+          api_key = os.environ['ANTHROPIC_API_KEY']
+          pr_title = os.environ.get('PR_TITLE', '').strip()
+          pr_body = os.environ.get('PR_BODY', '').strip()
+
+          with open('/tmp/diff.txt') as f:
+              diff = f.read().strip()
+
+          if not diff:
+              with open('/tmp/review.txt', 'w') as f:
+                  f.write('*Aucun changement de code detecte - revue automatique ignoree.*')
+              sys.exit(0)
+
+          system = """Tu es un expert en revue de code. Analyse ce diff de pull request et identifie uniquement :
+
+          **BLOQUANT** - a corriger avant de merger :
+          - Bug fonctionnel evident (null ref, logique inversee, condition impossible)
+          - Secret ou credential commite
+          - Faille de securite (XSS, injection SQL, path traversal)
+          - Migration destructive sans filet (DROP COLUMN, NOT NULL sans defaut sur table existante)
+
+          **WARNING** - risque potentiel a evaluer :
+          - Edge case non gere
+          - Requete N+1 evidente
+          - Gestion d'erreur manquante sur un appel externe
+
+          Ne PAS signaler : style, nommage, conventions, commentaires, formatage.
+          Si rien a signaler : le dire explicitement.
+
+          Reponds en francais. Format :
+
+          ## Revue automatique
+
+          ### Bloquants
+          - (ou "Aucun")
+
+          ### Warnings
+          - (ou "Aucun")
+
+          ---
+          *Revue automatique - a verifier manuellement avant de merger.*"""
+
+          pr_context = f'**{pr_title}**' if pr_title else ''
+          if pr_body:
+              pr_context += f'\n\n{pr_body}'
+
+          user_content = f"""{pr_context}
+
+          **Diff :**
+          ```diff
+          {diff}
+          ```"""
+
+          payload = {
+              'model': 'claude-sonnet-4-6',
+              'max_tokens': 1024,
+              'system': [
+                  {
+                      'type': 'text',
+                      'text': system,
+                      'cache_control': {'type': 'ephemeral'}
+                  }
+              ],
+              'messages': [{'role': 'user', 'content': user_content}]
+          }
+
+          req = urllib.request.Request(
+              'https://api.anthropic.com/v1/messages',
+              data=json.dumps(payload).encode(),
+              headers={
+                  'x-api-key': api_key,
+                  'anthropic-version': '2023-06-01',
+                  'anthropic-beta': 'prompt-caching-2024-07-31',
+                  'content-type': 'application/json'
+              }
+          )
+
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  data = json.loads(resp.read())
+                  review = data['content'][0]['text']
+          except urllib.error.HTTPError as e:
+              print(f'API error {e.code}: {e.read().decode()}', file=sys.stderr)
+              review = '*Revue automatique indisponible (erreur API) - verifier les logs.*'
+
+          with open('/tmp/review.txt', 'w') as f:
+              f.write(review)
+          PYEOF
+          python3 /tmp/review.py || echo '*Revue automatique indisponible.*' > /tmp/review.txt
+
+      - name: Post comment
+        if: steps.diff.outputs.truncated == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let review;
+            try {
+              review = fs.readFileSync('/tmp/review.txt', 'utf8');
+            } catch {
+              review = '*Revue automatique indisponible.*';
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: review
+            });

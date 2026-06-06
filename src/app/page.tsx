@@ -12,9 +12,25 @@ import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
 import { sanityClient } from "@/lib/sanity"
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const title = "Infogérance et IT pour PME - Évry, Essonne | Trinexta";
+const description =
+  "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France. Intervention sur site et à distance depuis Évry.";
+
 export const metadata: Metadata = {
-  title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
-  description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 }
 
 export default async function Home() {
