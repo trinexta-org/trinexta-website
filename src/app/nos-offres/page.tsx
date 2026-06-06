@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { Suspense } from "react"
 import { Section } from "@/components/layout/Section"
@@ -13,9 +14,22 @@ import { officialFaqs } from "@/components/nos-offres/faqData"
 import { FinalCTA } from "@/components/FinalCTA"
 import { OffersTabs } from "@/components/nos-offres/OffersTabs"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Nos offres | Trinexta - Tarifs et abonnements",
   description: "Découvrez nos offres d'infogérance pour TPE et PME. Tarifs clairs, support illimité et cybersécurité incluse.",
+  openGraph: {
+    title: "Nos offres | Trinexta - Tarifs et abonnements",
+    description: "Découvrez nos offres d'infogérance pour TPE et PME. Tarifs clairs, support illimité et cybersécurité incluse.",
+    url: "/nos-offres",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nos offres | Trinexta - Tarifs et abonnements",
+    description: "Découvrez nos offres d'infogérance pour TPE et PME. Tarifs clairs, support illimité et cybersécurité incluse.",
+    images: ["/images/og-default.png"],
+  },
 }
 
 export default function NosOffresPage() {
@@ -55,7 +69,7 @@ export default function NosOffresPage() {
         line1="Le catalogue"
         line2="en détail"
       />
-      <Section container={false} className="relative bg-primary pb-24 pt-12 overflow-hidden">
+      <Section container={false} className="relative bg-primary pb-24 pt-12 overflow-clip">
         <HaloBackground intensity="low" />
         <Container className="relative z-10">
           <Suspense fallback={

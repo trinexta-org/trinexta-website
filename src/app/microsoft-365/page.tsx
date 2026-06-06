@@ -1,8 +1,22 @@
+import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation | Trinexta",
   description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",
+  openGraph: {
+    title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation | Trinexta",
+    description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",
+    url: "/microsoft-365",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation | Trinexta",
+    description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",
+    images: ["/images/og-default.png"],
+  },
 }
 
 const ms365Data = {

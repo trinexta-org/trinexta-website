@@ -11,6 +11,19 @@ export const metadata: Metadata = {
   title: "Cas clients | TRINEXTA",
   description:
     "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
+  openGraph: {
+    title: "Cas clients | TRINEXTA",
+    description: "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
+    url: "/cas-clients",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cas clients | TRINEXTA",
+    description: "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
+    images: ["/images/og-default.png"],
+  },
 };
 
 export default function CaseClientsPage() {
