@@ -66,8 +66,8 @@ export const contactHeroSlides = [
     subtitle: "Une urgence technique ? Nos techniciens qualifiés interviennent rapidement à distance ou directement dans vos locaux pour garantir la continuité de votre activité."
   },
   {
-    part1: "Échangeons",
-    part2: "Ensemble",
+    part1: "Parlons",
+    part2: "Projets",
     subtitle: "Arrêtez de perdre du temps avec une informatique mal suivie. Discutons de vos besoins et trouvons la solution simple et fiable adaptée à votre entreprise."
   }
 ]
