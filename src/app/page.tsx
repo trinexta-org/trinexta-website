@@ -12,21 +12,23 @@ import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
 import { sanityClient } from "@/lib/sanity"
 
+const title = "Infogérance et IT pour PME - Évry, Essonne | Trinexta";
+const description =
+  "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France. Intervention sur site et à distance depuis Évry.";
+
 export const metadata: Metadata = {
-  title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
-  description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
+  title,
+  description,
   openGraph: {
-    title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
-    description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
+    title,
+    description,
     url: "/",
     type: "website",
-    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
-    description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
-    images: ["/images/og-default.png"],
+    title,
+    description,
   },
 }
 
