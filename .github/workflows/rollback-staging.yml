@@ -1,16 +1,15 @@
-name: Sync staging -> dev
+name: Rollback Staging
 
 on:
-  push:
-    branches:
-      - staging
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  sync:
+  rollback:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,7 +22,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Merge staging into dev
+      - name: Revert last commit on dev
         run: |
-          git merge origin/staging -m "chore: sync staging -> dev [bot]"
+          git revert HEAD --no-edit
           git push origin dev
