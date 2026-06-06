@@ -1,0 +1,27 @@
+name: Rollback Staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Revert to previous commit
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /var/www/trinexta-website
+            git fetch origin
+            PREV=$(git log origin/dev --format="%H" -2 | tail -1)
+            git checkout $PREV
+            npm ci
+            npx prisma generate
+            npm run build
+            pm2 startOrReload ecosystem.config.js --only trinexta-staging --update-env
+            pm2 save
