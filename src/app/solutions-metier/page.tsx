@@ -1,8 +1,22 @@
+import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
   description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+  openGraph: {
+    title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
+    description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+    url: "/solutions-metier",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
+    description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+    images: ["/images/og-default.png"],
+  },
 }
 
 const solutionsData = {

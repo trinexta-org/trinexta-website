@@ -15,6 +15,19 @@ import { sanityClient } from "@/lib/sanity"
 export const metadata: Metadata = {
   title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
   description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
+  openGraph: {
+    title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
+    description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
+    url: "/",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Trinexta | Infogérance à Évry et prestataire informatique dans l'Essonne",
+    description: "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France.",
+    images: ["/images/og-default.png"],
+  },
 }
 
 export default async function Home() {

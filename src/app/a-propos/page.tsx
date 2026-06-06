@@ -10,6 +10,19 @@ import { PartnersSection } from "@/components/PartnersSection"
 export const metadata: Metadata = {
   title: "À propos | Trinexta",
   description: "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
+  openGraph: {
+    title: "À propos | Trinexta",
+    description: "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
+    url: "/a-propos",
+    type: "website",
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "À propos | Trinexta",
+    description: "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
+    images: ["/images/og-default.png"],
+  },
 }
 
 export default async function AProposPage() {
