@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - staging
+      - dev
 
 jobs:
   deploy:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
@@ -19,10 +21,37 @@ jobs:
           script: |
             set -e
             cd /var/www/trinexta-website
-            git pull origin staging
+            git fetch origin
+            git checkout ${{ github.ref_name }}
+            git pull origin ${{ github.ref_name }}
             npm ci
             npx prisma migrate deploy
             npx prisma generate
             npm run build
             pm2 startOrReload ecosystem.config.js --only trinexta-staging --update-env
             pm2 save
+
+  sync:
+    name: Sync dev -> staging branch
+    needs: deploy
+    if: github.ref_name == 'dev'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Fast-forward staging to dev
+        run: |
+          git merge origin/dev --ff-only
+          git push origin staging
