@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 
 const profiles = [
     { role: "Support utilisateur", spec: "Helpdesk N1/N2", image: "/images/nos-offres/profiles/profile-support.jpg" },
@@ -33,7 +34,13 @@ export function ImpulsionProfiles() {
 
             <div className="mt-16 text-center px-6">
                 <p className="text-white/60 text-lg">
-                    Vous ne savez pas exactement quel profil il vous faut ? <span className="text-secondary font-bold cursor-pointer hover:underline">Décrivez votre situation, on vous oriente.</span>
+                    Vous ne savez pas exactement quel profil il vous faut ?{" "}
+                    <Link
+                        href="/contact"
+                        className="text-secondary font-bold hover:underline transition-all"
+                    >
+                        Décrivez votre situation, on vous oriente.
+                    </Link>
                 </p>
             </div>
         </div>

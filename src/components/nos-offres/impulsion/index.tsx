@@ -1,3 +1,8 @@
+"use client"
+
+import { Section } from "@/components/layout/Section"
+import { Container } from "@/components/layout/Container"
+import { TransitionTitle } from "@/components/TransitionTitle"
 import { ImpulsionIntro } from "./ImpulsionIntro"
 import { ImpulsionConcret } from "./ImpulsionConcret"
 import { ImpulsionSteps } from "./ImpulsionSteps"
@@ -5,17 +10,18 @@ import { ImpulsionPillars } from "./ImpulsionPillars"
 import { ImpulsionProfiles } from "./ImpulsionProfiles"
 import { ImpulsionPricing } from "./ImpulsionPricing"
 import { ImpulsionAssurances } from "./ImpulsionAssurances"
-import { TransitionTitle } from "@/components/TransitionTitle"
 
 export function ImpulsionDetails() {
   return (
-    <div className="space-y-24 pb-24">
+    <div id="impulsion" className="space-y-24 pb-24">
       
-      <div className="max-w-[1400px] mx-auto px-6 space-y-24">
-        <ImpulsionIntro />
-        <ImpulsionConcret />
-        <ImpulsionSteps />
-      </div>
+      <Section container={false} className="pt-0">
+        <Container className="max-w-[1400px] space-y-24">
+          <ImpulsionIntro />
+          <ImpulsionConcret />
+          <ImpulsionSteps />
+        </Container>
+      </Section>
 
       <div className="space-y-12">
         <TransitionTitle
@@ -23,9 +29,11 @@ export function ImpulsionDetails() {
           line1="Des experts du support"
           line2="à votre service"
         />
-        <div className="max-w-[1400px] mx-auto px-6">
-          <ImpulsionPillars />
-        </div>
+        <Section container={false} className="py-0">
+          <Container className="max-w-[1400px]">
+            <ImpulsionPillars />
+          </Container>
+        </Section>
       </div>
 
       <div className="space-y-12">
@@ -34,14 +42,18 @@ export function ImpulsionDetails() {
           line1="Les experts que"
           line2="nous envoyons"
         />
-        <div className="max-w-[1400px] mx-auto px-6">
-          <ImpulsionProfiles />
-        </div>
+        <Section container={false} className="py-0">
+          <Container className="max-w-[1400px]">
+            <ImpulsionProfiles />
+          </Container>
+        </Section>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6">
-        <ImpulsionPricing />
-      </div>
+      <Section container={false} className="py-0">
+        <Container className="max-w-[1400px]">
+          <ImpulsionPricing />
+        </Container>
+      </Section>
 
       <div className="space-y-12">
         <TransitionTitle
@@ -49,9 +61,11 @@ export function ImpulsionDetails() {
           line1="Simple, souple"
           line2="sans surprises"
         />
-        <div className="max-w-[1400px] mx-auto px-6">
-          <ImpulsionAssurances />
-        </div>
+        <Section container={false} className="py-0">
+          <Container className="max-w-[1400px]">
+            <ImpulsionAssurances />
+          </Container>
+        </Section>
       </div>
 
     </div>

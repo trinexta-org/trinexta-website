@@ -27,8 +27,8 @@ export function ImpulsionIntro() {
     return () => clearInterval(interval)
   }, [visible])
 
-  const img1 = "/images/nos-offres/impulsion.avif"
-  const img2 = "/images/nos-offres/technicien.jpg"
+  const img1 = "/images/nos-offres/impulsion.jpg"
+  const img2 = "/images/nos-offres/impulsion_2.jpg"
 
   return (
     <div ref={ref} className="py-10 lg:py-16 overflow-visible">
