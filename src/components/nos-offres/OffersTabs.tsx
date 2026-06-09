@@ -1,13 +1,9 @@
 "use client"
 
-import { useSearchParams, useRouter } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
+import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { Container } from "@/components/layout/Container"
-import { ImpulsionDetails } from "./ImpulsionDetails"
-import { SereniteDetails } from "./SereniteDetails"
-import { ServicesDetails } from "./ServicesDetails"
-import { StudioDetails } from "./StudioDetails"
 
 const tabs = [
   { id: "impulsion", label: "Offre Impulsion", sub: "Régie & Renfort IT" },
@@ -16,9 +12,7 @@ const tabs = [
   { id: "studio", label: "Trinexta Studio", sub: "Création Web & SaaS" }
 ]
 
-export function OffersTabs() {
-  const searchParams = useSearchParams()
-  const router = useRouter()
+export function OffersTabs({ activeSlug }: { activeSlug?: string }) {
   const [headerHeight, setHeaderHeight] = useState(60)
 
   useEffect(() => {
@@ -33,20 +27,6 @@ export function OffersTabs() {
     return () => observer.disconnect()
   }, [])
 
-  const tabParam = searchParams.get("tab")
-  const activeTab = tabParam && tabs.some(tab => tab.id === tabParam) ? tabParam : "impulsion"
-
-  useEffect(() => {
-    if (tabParam && typeof window !== 'undefined' && !window.location.hash.includes('offers-explorer')) {
-      const element = document.getElementById('offers-explorer')
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }, 100)
-      }
-    }
-  }, [])
-
   return (
     <div id="offers-explorer" style={{ scrollMarginTop: `${headerHeight}px` }} className="w-full space-y-8">
       <div
@@ -55,11 +35,12 @@ export function OffersTabs() {
       >
         <Container className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {tabs.map((tab) => {
-            const isSelected = activeTab === tab.id
+            const isSelected = activeSlug === tab.id
             return (
-              <button
+              <Link
                 key={tab.id}
-                onClick={() => router.push(`/nos-offres?tab=${tab.id}`, { scroll: false })}
+                href={`/nos-offres/${tab.id}`}
+                scroll={false}
                 className={`relative p-3 rounded-lg text-left transition-all duration-300 flex flex-col justify-center overflow-hidden group h-16 md:h-20 min-w-0 ${isSelected
                   ? "bg-secondary/10"
                   : "bg-white/[0.02] hover:bg-white/[0.05]"
@@ -80,27 +61,10 @@ export function OffersTabs() {
                     {tab.label}
                   </div>
                 </div>
-              </button>
+              </Link>
             )
           })}
         </Container>
-      </div>
-      <div className="w-full min-h-[500px] pt-4 px-2 md:px-0">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full"
-          >
-            {activeTab === "impulsion" && <ImpulsionDetails />}
-            {activeTab === "serenite" && <SereniteDetails />}
-            {activeTab === "services-annexes" && <ServicesDetails />}
-            {activeTab === "studio" && <StudioDetails />}
-          </motion.div>
-        </AnimatePresence>
       </div>
     </div>
   )

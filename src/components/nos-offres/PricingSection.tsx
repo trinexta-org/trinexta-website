@@ -3,6 +3,7 @@ import { PricingCard } from "./PricingCard"
 const offers = [
   {
     name: "Impulsion",
+    slug: "impulsion",
     price: "TJM / Forfait",
     target: "Mise à disposition & Régie IT",
     description: "Renforcez vos équipes avec un technicien support informatique qualifié, briefé et opérationnel immédiatement pour absorber vos surcharges.",
@@ -16,6 +17,7 @@ const offers = [
   },
   {
     name: "Sérénité",
+    slug: "serenite",
     price: "79€",
     target: "Solutions clés en main (1-20 postes)",
     description: "Confiez l'ensemble de vos besoins quotidiens (support, maintenance et sécurité) à un partenaire fiable avec un interlocuteur unique.",
@@ -30,6 +32,7 @@ const offers = [
   },
   {
     name: "Services Annexes",
+    slug: "services-annexes",
     price: "Sur devis",
     target: "Prestations et projets à la demande",
     description: "Faites évoluer votre infrastructure informatique grâce à des interventions ciblées, transparentes et planifiées selon vos contraintes.",
@@ -43,6 +46,7 @@ const offers = [
   },
   {
     name: "Trinexta Studio",
+    slug: "studio",
     price: "Sur devis",
     target: "Création Web & SaaS",
     description: "Pour répondre précisément à vos besoins de création : concevez des sites internet sur mesure, des applications web et des plateformes SaaS.",

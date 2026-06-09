@@ -22,10 +22,10 @@ export const menuItems: MenuItem[] = [
     label: "Nos offres",
     href: "/nos-offres",
     subMenu: [
-      { label: "Offre Impulsion", href: "/nos-offres?tab=impulsion#offers-explorer" },
-      { label: "Offre Sérénité", href: "/nos-offres?tab=serenite#offers-explorer" },
-      { label: "Services Annexes", href: "/nos-offres?tab=services-annexes#offers-explorer" },
-      { label: "Trinexta Studio", href: "/nos-offres?tab=studio#offers-explorer" },
+      { label: "Offre Impulsion", href: "/nos-offres/impulsion" },
+      { label: "Offre Sérénité", href: "/nos-offres/serenite" },
+      { label: "Services Annexes", href: "/nos-offres/services-annexes" },
+      { label: "Trinexta Studio", href: "/nos-offres/studio" },
     ]
   },
   {

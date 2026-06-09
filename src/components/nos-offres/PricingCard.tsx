@@ -11,9 +11,10 @@ interface PricingCardProps {
   description: string
   features: string[]
   isFeatured?: boolean
+  slug?: string
 }
 
-export function PricingCard({ name, price, target, description, features, isFeatured }: PricingCardProps) {
+export function PricingCard({ name, price, target, description, features, isFeatured, slug }: PricingCardProps) {
   return (
     <Card className={`flex flex-col h-full p-6 bg-white/[0.03] backdrop-blur-sm border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-white/10'}`}>
       
@@ -49,18 +50,28 @@ export function PricingCard({ name, price, target, description, features, isFeat
         ))}
       </ul>
       
-      <Link href="/contact" className="w-full mt-auto block">
-        <Button 
-          variant={isFeatured ? "primary" : "outline"} 
-          className={`w-full font-bold transition-all py-3 ${
-            isFeatured 
-              ? "bg-secondary text-primary hover:bg-secondary/90 border-none shadow-lg shadow-secondary/20" 
-              : "border-white/30 text-white hover:bg-white/10 hover:border-white"
-          }`}
-        >
-          {price === "Sur devis" || price.includes("TJM") ? "Demander un devis" : "Recevoir un devis"}
-        </Button>
-      </Link>
+      <div className="mt-auto flex flex-col gap-3">
+        <Link href="/contact" className="w-full block">
+          <Button 
+            variant={isFeatured ? "primary" : "outline"} 
+            className={`w-full font-bold transition-all py-3 ${
+              isFeatured 
+                ? "bg-secondary text-primary hover:bg-secondary/90 border-none shadow-lg shadow-secondary/20" 
+                : "border-white/30 text-white hover:bg-white/10 hover:border-white"
+            }`}
+          >
+            {price === "Sur devis" || price.includes("TJM") ? "Demander un devis" : "Recevoir un devis"}
+          </Button>
+        </Link>
+        {slug && (
+          <Link 
+            href={`/nos-offres/${slug}`} 
+            className="text-center text-xs text-white/60 hover:text-secondary font-medium transition-colors underline underline-offset-4"
+          >
+            Voir le détail de l'offre
+          </Link>
+        )}
+      </div>
     </Card>
   )
 }

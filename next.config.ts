@@ -24,17 +24,42 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/services-annexes",
-        destination: "/nos-offres?tab=services-annexes",
+        destination: "/nos-offres/services-annexes",
         statusCode: 301,
       },
       {
         source: "/offre-serenite",
-        destination: "/nos-offres?tab=serenite",
+        destination: "/nos-offres/serenite",
         statusCode: 301,
       },
       {
         source: "/offre-impulsion",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/nos-offres/impulsion",
+        statusCode: 301,
+      },
+
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "impulsion" }],
+        destination: "/nos-offres/impulsion",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "serenite" }],
+        destination: "/nos-offres/serenite",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "services-annexes" }],
+        destination: "/nos-offres/services-annexes",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "studio" }],
+        destination: "/nos-offres/studio",
         statusCode: 301,
       },
       {

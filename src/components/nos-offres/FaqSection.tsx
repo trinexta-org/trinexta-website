@@ -2,15 +2,25 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { officialFaqs } from "./faqData"
+import { OfferTag } from "./faqData"
 
-export function FaqSection() {
+export interface FaqItem {
+  question: string;
+  answer: string;
+  tags?: OfferTag[];
+}
+
+interface FaqSectionProps {
+  faqs: FaqItem[];
+}
+
+export function FaqSection({ faqs }: FaqSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="space-y-4">
-        {officialFaqs.map((faq, index) => {
+        {faqs.map((faq, index) => {
           const isOpen = openIndex === index
           return (
             <div
