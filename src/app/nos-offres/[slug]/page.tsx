@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/seo/JsonLd"
 import { OfferHero } from "@/components/nos-offres/OfferHero"
 import { ImpulsionDetails } from "@/components/nos-offres/impulsion"
 import { SereniteDetails } from "@/components/nos-offres/serenite"
-import { ServicesDetails } from "@/components/nos-offres/ServicesDetails"
+import { ServicesDetails } from "@/components/nos-offres/services-annexes"
 import { StudioDetails } from "@/components/nos-offres/StudioDetails"
 import { FaqSection } from "@/components/nos-offres/FaqSection"
 import { officialFaqs, OfferTag } from "@/components/nos-offres/faqData"
@@ -20,6 +20,7 @@ const OFFERS = {
     part1: "Offre",
     part2: "Impulsion",
     Component: ImpulsionDetails,
+    image: "/images/nos-offres/hero-impulsion.jpg",
   },
   "serenite": {
     title: "Offre Sérénité - Infogérance complète | Trinexta",
@@ -31,6 +32,7 @@ const OFFERS = {
     part1: "Offre",
     part2: "Sérénité",
     Component: SereniteDetails,
+    image: "/images/nos-offres/hero-serenite.jpg",
   },
   "services-annexes": {
     title: "Services Annexes IT & Cybersécurité | Trinexta",
@@ -42,6 +44,7 @@ const OFFERS = {
     part1: "Services",
     part2: "Annexes",
     Component: ServicesDetails,
+    image: "/images/nos-offres/hero-services.jpg",
   },
   "studio": {
     title: "Trinexta Studio - Création Web & SaaS | Trinexta",
@@ -53,6 +56,7 @@ const OFFERS = {
     part1: "Trinexta",
     part2: "Studio",
     Component: StudioDetails,
+    image: "/images/nos-offres/hero-studio.jpg",
   }
 }
 
@@ -98,6 +102,7 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
         part1={offer.part1} 
         part2={offer.part2} 
         subtitles={offer.subtitles} 
+        imageSrc={offer.image}
       />
 
       <div className="w-full relative z-10 pt-12">

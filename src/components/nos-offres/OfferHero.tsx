@@ -10,9 +10,10 @@ interface OfferHeroProps {
   part1: string
   part2: string
   subtitles: string[]
+  imageSrc: string 
 }
 
-export function OfferHero({ part1, part2, subtitles }: OfferHeroProps) {
+export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps) {
   const slides = subtitles.map((sub) => ({
     part1,
     part2,
@@ -26,11 +27,11 @@ export function OfferHero({ part1, part2, subtitles }: OfferHeroProps) {
       slideMinHeight="min-h-[250px]"
       staticBackground={
         <Image
-          src="/images/pricing/hero-offres.avif"
+          src={imageSrc}
           alt="Offre Trinexta"
           fill
           fetchPriority="high"
-          quality={50}
+          quality={80}
           className="object-cover object-center"
           sizes="100vw"
         />
