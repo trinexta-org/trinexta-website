@@ -13,10 +13,15 @@ import { TransitionTitle } from "@/components/TransitionTitle"
 import { officialFaqs } from "@/components/nos-offres/faqData" 
 import { FinalCTA } from "@/components/FinalCTA"
 import { OffersTabs } from "@/components/nos-offres/OffersTabs"
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: "Nos offres | Trinexta - Tarifs et abonnements",
+  title: "Nos offres | Tarifs et abonnements",
   description: "Découvrez nos offres d'infogérance pour TPE et PME. Tarifs clairs, support illimité et cybersécurité incluse.",
+  alternates: {
+    canonical: "/nos-offres",
+  },
+
   openGraph: {
     title: "Nos offres | Trinexta - Tarifs et abonnements",
     description: "Découvrez nos offres d'infogérance pour TPE et PME. Tarifs clairs, support illimité et cybersécurité incluse.",
@@ -47,7 +52,13 @@ export default function NosOffresPage() {
   }
 
   return (
-    <main className="bg-primary min-h-screen relative space-y-12"> 
+    <main className="bg-primary min-h-screen relative space-y-12">
+      <BreadcrumbJsonLd 
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "Nos Offres", url: "/nos-offres" }
+        ]} 
+      />
       <JsonLd data={jsonLd} />
 
       <NosOffresHero />

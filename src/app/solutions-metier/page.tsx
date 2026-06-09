@@ -2,8 +2,11 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
+  title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME",
   description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+  alternates: {
+    canonical: "/solutions-metier",
+  },
   openGraph: {
     title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
     description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",

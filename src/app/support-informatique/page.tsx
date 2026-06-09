@@ -2,8 +2,11 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Support Informatique Expert pour TPE et PME | Trinexta",
+  title: "Support Informatique Expert pour TPE et PME",
   description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",
+  alternates: {
+    canonical: "/support-informatique",
+  },
   openGraph: {
     title: "Support Informatique Expert pour TPE et PME | Trinexta",
     description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",

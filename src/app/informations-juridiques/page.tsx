@@ -5,15 +5,25 @@ import { FinalCTA } from "@/components/FinalCTA"
 import { Heading } from "@/components/ui/Typography"
 import { legalDocuments } from "@/data/legal-documents"
 import { LegalDocCard } from "@/components/legal/LegalDocCard"
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: "Informations juridiques - Trinexta",
+  title: "Informations juridiques",
   description: "Tous les documents légaux et contractuels de TRINEXTA : mentions légales, CGV, confidentialité, DPA, SLA et procédures de sécurité.",
+  alternates: {
+    canonical: "/informations-juridiques",
+  },
 }
 
 export default function InformationsJuridiquesPage() {
   return (
     <main className="bg-primary min-h-screen relative space-y-12 pb-12">
+      <BreadcrumbJsonLd 
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "informations-juridiques", url: "/informations-juridiques" }
+        ]} 
+      />
       <Section className="bg-primary pt-12 lg:pt-8 pb-6 lg:pb-8">
         <div className="max-w-4xl mb-6 lg:mb-8">
           <Heading as="h1" className="text-4xl md:text-5xl font-extrabold text-white mb-4" emphasis={false}>

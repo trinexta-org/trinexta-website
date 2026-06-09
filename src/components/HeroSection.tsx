@@ -5,6 +5,7 @@ import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { homeHeroSlides } from "@/data/heroes"
+import React from "react"
 
 export function HeroSection() {
   return (
@@ -18,16 +19,18 @@ export function HeroSection() {
           loop
           muted
           playsInline
+          poster="/hero-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/hero.mp4" type="video/mp4" />
         </video>
       }
       overlays={<div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />}
-      renderSlide={(slide) => (
+      
+      renderSlide={(slide, index, isActive) => (
         <div>
           <Heading
-            as="h1"
+            as={isActive ? "h1" : "h2"} 
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-white text-balance"
           >
             {slide.title.split(" ").map((word, i) => {
@@ -38,16 +41,18 @@ export function HeroSection() {
               const isHighlighted = targetKeywords.includes(cleanWord)
 
               return (
-                <span
-                  key={i}
-                  className={
-                    isHighlighted
-                      ? "text-secondary inline-block mr-2 sm:mr-3"
-                      : "text-white inline-block mr-2 sm:mr-3"
-                  }
-                >
-                  {isItalic ? <em>{rawWord}</em> : rawWord}
-                </span>
+                <React.Fragment key={i}>
+                  <span
+                    className={
+                      isHighlighted
+                        ? "text-secondary inline-block mr-2 sm:mr-3"
+                        : "text-white inline-block mr-2 sm:mr-3"
+                    }
+                  >
+                    {isItalic ? <em>{rawWord}</em> : rawWord}
+                  </span>
+                  {" "}
+                </React.Fragment>
               )
             })}
           </Heading>

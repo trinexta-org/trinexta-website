@@ -10,7 +10,7 @@ interface HeroCarouselProps<T> {
   renderBackground?: (slide: T, index: number) => ReactNode
   staticBackground?: ReactNode
   overlays?: ReactNode
-  renderSlide: (slide: T, index: number) => ReactNode
+  renderSlide: (slide: T, index: number, isActive: boolean) => ReactNode
   footer?: ReactNode
   containerPadding?: string
   slideMinHeight?: string
@@ -50,6 +50,7 @@ export function HeroCarousel<T>({
           key={i}
           className="absolute inset-0 transition-opacity duration-700 ease-in-out"
           style={{ opacity: i === current ? 1 : 0 }}
+          aria-hidden={i !== current}
         >
           {renderBackground(slide, i)}
         </div>
@@ -60,18 +61,22 @@ export function HeroCarousel<T>({
       <Container className={`relative z-10 w-full ${containerPadding}`}>
         <div className="max-w-5xl">
           <div className={`${slideMinHeight} relative w-full`}>
-            {slides.map((slide, i) => (
-              <div
-                key={i}
-                className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${
-                  i === current
-                    ? "opacity-100 translate-y-0 z-10 pointer-events-auto"
-                    : "opacity-0 translate-y-4 z-0 pointer-events-none"
-                }`}
-              >
-                {renderSlide(slide, i)}
-              </div>
-            ))}
+            {slides.map((slide, i) => {
+              const isActive = i === current;
+              return (
+                <div
+                  key={i}
+                  aria-hidden={!isActive}
+                  className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${
+                    isActive
+                      ? "opacity-100 translate-y-0 z-10 pointer-events-auto"
+                      : "opacity-0 translate-y-4 z-0 pointer-events-none"
+                  }`}
+                >
+                  {renderSlide(slide, i, isActive)}
+                </div>
+              );
+            })}
           </div>
 
           <div className="mt-6 flex items-center gap-3">

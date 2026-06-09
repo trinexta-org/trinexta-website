@@ -18,7 +18,7 @@ export function PageHero({ title, imageSrc }: PageHeroProps) {
           fill
           className="object-cover object-center"
           priority
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
         <div className="absolute inset-0 bg-primary/90" />
       </div>

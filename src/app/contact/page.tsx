@@ -10,11 +10,17 @@ import { HaloBackground } from "@/components/ui/HaloBackground";
 import { SectionFade } from "@/components/ui/SectionFade";
 import { ContactMap } from "@/components/contact/ContactMap";
 import { FinalCTA } from "@/components/FinalCTA";
+import { contactFaqs } from "@/components/contact/contactFaqData";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
-  title: "Contact — Trinexta · Infogérance & Support informatique",
+  title: "Contact · Infogérance & Support informatique",
   description:
     "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "Contact — Trinexta · Infogérance & Support informatique",
     description: "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
@@ -31,8 +37,29 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": contactFaqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer,
+        },
+      })),
+    }
+
   return (
     <main className="bg-primary min-h-screen relative">
+      <JsonLd data={jsonLd} />
+      <BreadcrumbJsonLd 
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "Contact", url: "/contact" }
+        ]} 
+      />
+
       <ContactHero />
       
       <ContactCards />

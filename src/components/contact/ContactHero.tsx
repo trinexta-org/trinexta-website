@@ -20,7 +20,7 @@ export function ContactHero() {
           fill
           fetchPriority="high"
           className="object-cover object-center"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       }
       overlays={<div className="absolute inset-0 bg-primary/90" />}

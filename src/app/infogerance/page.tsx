@@ -3,8 +3,11 @@ import { ServicePage } from "@/components/services/ServicePage";
 import { getServiceData } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "Infogérance Informatique pour TPE et PME | Trinexta",
+  title: "Infogérance Informatique pour TPE et PME",
   description: "Déléguez votre gestion informatique à des experts. Trinexta assure la supervision 24/7, la maintenance proactive et la sécurité de votre parc pour une productivité sans faille.",
+  alternates: {
+    canonical: "/infogerance",
+  },
   openGraph: {
     title: "Infogérance Informatique pour TPE et PME | Trinexta",
     description: "Déléguez votre gestion informatique à des experts. Trinexta assure la supervision 24/7, la maintenance proactive et la sécurité de votre parc pour une productivité sans faille.",

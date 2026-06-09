@@ -6,6 +6,7 @@ import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { aproposHeroSlides } from "@/data/heroes"
+import React from "react"
 
 const targetKeywords = ["simple,", "humaine", "utile", "humain", "centre", "simplifier", "soutenir"]
 
@@ -22,33 +23,36 @@ export function AProposHero() {
           fill
           fetchPriority="high"
           className="object-cover grayscale opacity-60"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       }
       overlays={<div className="absolute inset-0 bg-primary/70 lg:bg-primary/80" />}
-      renderSlide={(slide) => (
+      
+      renderSlide={(slide, index, isActive) => (
         <div>
           <Heading
-            as="h1"
+            as={isActive ? "h1" : "h2"}
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-white text-balance"
           >
             {slide.title.split(" ").map((word, i) => {
               const isItalic = word.startsWith("*") && word.endsWith("*") && word.length > 2
               const rawWord = isItalic ? word.slice(1, -1) : word
               const cleanWord = rawWord.toLowerCase().replace(/[,.]/g, "")
-              const isHighlighted =
-                targetKeywords.includes(cleanWord) || rawWord === "simple,"
+              const isHighlighted = targetKeywords.includes(cleanWord) || rawWord === "simple,"
+              
               return (
-                <span
-                  key={i}
-                  className={
-                    isHighlighted
-                      ? "text-secondary inline-block mr-2 sm:mr-3"
-                      : "text-white inline-block mr-2 sm:mr-3"
-                  }
-                >
-                  {isItalic ? <em>{rawWord}</em> : rawWord}
-                </span>
+                <React.Fragment key={i}>
+                  <span
+                    className={
+                      isHighlighted
+                        ? "text-secondary inline-block mr-2 sm:mr-3"
+                        : "text-white inline-block mr-2 sm:mr-3"
+                    }
+                  >
+                    {isItalic ? <em>{rawWord}</em> : rawWord}
+                  </span>
+                  {" "}
+                </React.Fragment>
               )
             })}
           </Heading>

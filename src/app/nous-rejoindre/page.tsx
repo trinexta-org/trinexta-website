@@ -4,10 +4,14 @@ import { PageHero } from "@/components/layout/PageHero"
 import { Container } from "@/components/layout/Container"
 import { FinalCTA } from "@/components/FinalCTA"
 import { Heading, Text } from "@/components/ui/Typography"
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: "Nous rejoindre | Trinexta",
+  title: "Nous rejoindre",
   description: "Rejoignez une équipe d'experts IT. Découvrez pourquoi travailler chez TRINEXTA et consultez nos offres sur Talentero.",
+  alternates: {
+    canonical: "/nous-rejoindre",
+  },
   openGraph: {
     title: "Nous rejoindre | Trinexta",
     description: "Rejoignez une équipe d'experts IT. Découvrez pourquoi travailler chez TRINEXTA et consultez nos offres sur Talentero.",
@@ -26,6 +30,12 @@ export const metadata: Metadata = {
 export default function NousRejoindrePage() {
   return (
     <main className="bg-primary min-h-screen relative text-white">
+      <BreadcrumbJsonLd 
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "nous-rejoindre", url: "/nous-rejoindre" }
+        ]} 
+      />
       <PageHero 
         title="Nous rejoindre" 
         imageSrc="/images/nous-rejoindre/heroNousRejoindre.webp" 
