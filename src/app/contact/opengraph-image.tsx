@@ -55,7 +55,7 @@ export default async function Image() {
               lineHeight: 1.4,
             }}
           >
-            L'équipe Trinexta vous répond sous 24h ouvrées.
+            L&apos;équipe Trinexta vous répond sous 24h ouvrées.
           </div>
         </div>
 

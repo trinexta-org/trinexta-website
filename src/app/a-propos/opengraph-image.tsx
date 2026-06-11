@@ -58,7 +58,7 @@ export default async function Image() {
               lineHeight: 1.4,
             }}
           >
-            Découvrez l'ADN de Trinexta et notre réseau national de 40 experts IT.
+            Découvrez l&apos;ADN de Trinexta et notre réseau national de 40 experts IT.
           </div>
         </div>
 

@@ -48,7 +48,7 @@ export default async function Image() {
               lineHeight: 1.15,
             }}
           >
-            Nos offres d'infogérance sur mesure.
+            Nos offres d&apos;infogérance sur mesure.
           </div>
           <div
             style={{
@@ -57,7 +57,7 @@ export default async function Image() {
               lineHeight: 1.4,
             }}
           >
-            Support technique, prestations sur devis et développement web : l'expertise technologique au service de votre croissance.
+            Support technique, prestations sur devis et développement web : l&apos;expertise technologique au service de votre croissance.
           </div>
         </div>
 
