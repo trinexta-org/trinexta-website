@@ -57,7 +57,7 @@ export function SereniteIntro() {
           </Text>
 
           <p className="py-6 px-6 italic text-white/90 text-sm leading-relaxed bg-white/[0.02] rounded-2xl">
-            Avec l'offre Sérénité, bénéficiez d'un accompagnement informatique complet : support illimité, maintenance proactive et cybersécurité. Un seul interlocuteur pour centraliser vos besoins.
+            Avec l&apos;offre Sérénité, bénéficiez d&apos;un accompagnement informatique complet : support illimité, maintenance proactive et cybersécurité. Un seul interlocuteur pour centraliser vos besoins.
           </p>
         </div>
 

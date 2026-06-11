@@ -37,8 +37,8 @@ export function SereniteConcret() {
                 alt="Approche globale Trinexta"
                 fill
                 className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-black/70 z-0"></div>
+             />
+             <div className="absolute inset-0 bg-black/70 z-0"></div>
           </div>
 
           <Image 
@@ -56,14 +56,14 @@ export function SereniteConcret() {
             
             <div className="space-y-6 mb-12">
               <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                Ce qu'on fait que les autres <br/> <span className="text-secondary">ne font pas</span>
+                Ce qu&apos;on fait que les autres <br/> <span className="text-secondary">ne font pas</span>
               </h2>
               <div className="space-y-4 text-base md:text-lg text-white/80 leading-relaxed">
                 <p>
                   Beaucoup de prestataires informatiques interviennent uniquement sur le matériel ou les problèmes les plus classiques. Chez TRINEXTA, notre approche est plus globale.
                 </p>
                 <p>
-                  Nous considérons que votre informatique est un tout. Dès qu'un outil freine votre activité, nous le considérons comme notre problème, même si ce n'est pas "notre" logiciel.
+                  Nous considérons que votre informatique est un tout. Dès qu&apos;un outil freine votre activité, nous le considérons comme notre problème, même si ce n&apos;est pas &quot;notre&quot; logiciel.
                 </p>
               </div>
             </div>
@@ -111,5 +111,5 @@ export function SereniteConcret() {
         </div>
       </div>
     </section>
-  )
+  ) 
 }
