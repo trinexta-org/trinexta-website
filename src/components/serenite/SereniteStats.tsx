@@ -29,7 +29,13 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
     }
   }, [isInView, value, suffix])
 
-  return <span ref={ref}>0{suffix}</span>
+  return (
+    <>
+      <span className="sr-only">{value}{suffix}</span>
+      
+      <span aria-hidden="true" ref={ref}>0{suffix}</span>
+    </>
+  )
 }
 
 export function SereniteStats() {
