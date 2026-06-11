@@ -14,6 +14,7 @@ import { SereniteTargets } from "@/components/serenite/SereniteTargets"
 import { SerenitePricing } from "@/components/serenite/SerenitePricing"
 import { SereniteOptions } from "@/components/serenite/SereniteOptions"
 import { SereniteDifferentiator } from "@/components/serenite/SereniteDifferentiator"
+import { FinalCTA } from "@/components/FinalCTA"
 
 export const metadata: Metadata = {
   title: "Offre Sérénité - Infogérance complète | Trinexta",
@@ -128,6 +129,15 @@ export default function NotreOffrePage() {
 
         </div>
       </div>
+
+      <FinalCTA
+        line1="Prêt à déléguer"
+        line2="votre informatique ?"
+        line3="Gagnez en sérénité."
+        description="Concentrez-vous sur votre cœur de métier. Trinexta s'occupe de la stabilité, de la sécurité et de la maintenance de votre infrastructure."
+        ctaLabel="Demander un audit gratuit"
+        ctaHref="/contact"
+      />
 
       <FaqSection faqs={filteredFaqs} />
     </main>
