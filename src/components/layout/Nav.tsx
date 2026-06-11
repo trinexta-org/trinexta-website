@@ -18,7 +18,7 @@ export interface MenuItem {
 
 export const menuItems: MenuItem[] = [
   { label: "Accueil", href: "/" },
-  { label: "Sérénité", href: "/serenite" },
+  { label: "Offre Sérénité", href: "/serenite" },
   {
     label: "Nos services",
     href: "/infogerance",
