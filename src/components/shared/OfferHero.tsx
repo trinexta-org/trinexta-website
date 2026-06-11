@@ -5,21 +5,33 @@ import Image from "next/image"
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
-import { offresHeroSlides } from "@/data/heroes"
 
-export function NosOffresHero() {
+interface OfferHeroProps {
+  part1: string
+  part2: string
+  subtitles: string[]
+  imageSrc: string 
+}
+
+export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps) {
+  const slides = subtitles.map((sub) => ({
+    part1,
+    part2,
+    subtitle: sub
+  }))
+
   return (
     <HeroCarousel
-      slides={offresHeroSlides}
+      slides={slides}
       containerPadding="py-12 md:py-16 lg:py-20"
       slideMinHeight="min-h-[250px]"
       staticBackground={
         <Image
-          src="/images/pricing/hero-offres.avif"
-          alt="Offres Trinexta"
+          src={imageSrc}
+          alt="Offre Trinexta"
           fill
           fetchPriority="high"
-          quality={50}
+          quality={80}
           className="object-cover object-center"
           sizes="100vw"
         />
@@ -42,14 +54,9 @@ export function NosOffresHero() {
       )}
       footer={
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <Link href="#details" className="w-full sm:w-auto">
-            <Button variant="secondary" size="lg" className="w-full text-white">
-              Voir les détails
-            </Button>
-          </Link>
           <Link href="/contact" className="w-full sm:w-auto">
-            <Button variant="outline" size="lg" className="w-full text-white border-white hover:bg-white/10">
-              Demander un devis
+            <Button variant="secondary" size="lg" className="w-full text-white">
+              Nous contacter
             </Button>
           </Link>
         </div>

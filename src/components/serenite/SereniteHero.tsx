@@ -5,33 +5,21 @@ import Image from "next/image"
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Button } from "@/components/ui/Button"
 import { Heading, Text } from "@/components/ui/Typography"
+import { offresHeroSlides } from "@/data/heroes"
 
-interface OfferHeroProps {
-  part1: string
-  part2: string
-  subtitles: string[]
-  imageSrc: string 
-}
-
-export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps) {
-  const slides = subtitles.map((sub) => ({
-    part1,
-    part2,
-    subtitle: sub
-  }))
-
+export function SereniteHero() {
   return (
     <HeroCarousel
-      slides={slides}
+      slides={offresHeroSlides}
       containerPadding="py-12 md:py-16 lg:py-20"
       slideMinHeight="min-h-[250px]"
       staticBackground={
         <Image
-          src={imageSrc}
-          alt="Offre Trinexta"
+          src="/images/pricing/hero-offres.avif"
+          alt="Offres Trinexta"
           fill
           fetchPriority="high"
-          quality={80}
+          quality={50}
           className="object-cover object-center"
           sizes="100vw"
         />
@@ -54,14 +42,14 @@ export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps)
       )}
       footer={
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <Link href="/contact" className="w-full sm:w-auto">
+          <Link href="#details" className="w-full sm:w-auto">
             <Button variant="secondary" size="lg" className="w-full text-white">
-              Demander un devis
+              Voir les détails
             </Button>
           </Link>
-          <Link href="/nos-offres" className="w-full sm:w-auto">
+          <Link href="/contact" className="w-full sm:w-auto">
             <Button variant="outline" size="lg" className="w-full text-white border-white hover:bg-white/10">
-              Retour aux offres
+              Demander un devis
             </Button>
           </Link>
         </div>

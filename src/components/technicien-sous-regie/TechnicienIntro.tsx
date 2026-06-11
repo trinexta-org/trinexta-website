@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 
-export function ImpulsionIntro() {
+export function TechnicienIntro() {
   const [visible, setVisible] = useState(false)
   const [swapped, setSwapped] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -47,7 +47,7 @@ export function ImpulsionIntro() {
           <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
             Votre technicien
             <br />
-            <em className="not-italic text-secondary">support</em> sur mesure
+            <em className="not-italic text-secondary">support</em> sous régie
           </h2>
 
           <div className="w-10 h-px bg-secondary/50" />
@@ -62,9 +62,9 @@ export function ImpulsionIntro() {
           </p>
 
           <p className="text-white/60 leading-relaxed">
-            L'offre Impulsion, c'est une solution souple et ciblée pour renforcer vos équipes,
+            La prestation Technicien sous régie, c'est une solution souple et ciblée pour renforcer vos équipes,
             absorber une hausse de charge, accompagner un projet ou sécuriser votre organisation
-            au quotidien. Vous gardez la maîtrise, tout en vous appuyant sur un professional
+            au quotidien. Vous gardez la maîtrise, tout en vous appuyant sur un professionnel
             opérationnel et orienté terrain.
           </p>
         </div>
@@ -129,14 +129,14 @@ export function ImpulsionIntro() {
           >
             <Image
               src={img1}
-              alt="Technicien support Impulsion"
+              alt="Technicien support sous régie"
               fill
               priority
               className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`}
             />
             <Image
               src={img2}
-              alt="Technicien support Impulsion"
+              alt="Technicien support sous régie"
               fill
               className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`}
             />

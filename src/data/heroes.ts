@@ -38,8 +38,8 @@ export const offresHeroSlides = [
     subtitle: "L'informatique PME clé en main. Support illimité, maintenance proactive et cybersécurité avancée pour piloter votre activité en toute tranquillité."
   },
   {
-    part1: "Offre",
-    part2: "Impulsion",
+    part1: "Technicien",
+    part2: "Sous régie",
     subtitle: "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité informatique."
   },
   {

@@ -11,7 +11,7 @@ const comparisonPoints = [
   {
     criterion: "Modèle & Agilité",
     market: "Des structures classiques et figées, limitées à un seul type de prestation informatique (infogérance pure ou simple placement).",
-    trinexta: "Modèle hybride inédit fusionnant services managés (Sérénité), support en régie (Impulsion) et édition de solutions SaaS (Talentero).",
+    trinexta: "Modèle hybride inédit fusionnant services managés (Sérénité), support en régie (Technicien sous régie) et édition de solutions SaaS (Talentero).",
   },
   {
     criterion: "Flexibilité & Réactivité",
@@ -25,7 +25,7 @@ const comparisonPoints = [
   },
 ]
 
-export function DifferentiatorSection() {
+export function SereniteDifferentiator() {
   return (
     <div className="w-full">
       <div className="border border-white/10 rounded-2xl overflow-hidden bg-white/[0.01] backdrop-blur-sm shadow-2xl">

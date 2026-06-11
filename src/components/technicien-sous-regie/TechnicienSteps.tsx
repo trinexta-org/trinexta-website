@@ -26,7 +26,7 @@ const steps = [
     },
 ]
 
-export function ImpulsionSteps() {
+export function TechnicienSteps() {
     const containerRef = useRef<HTMLDivElement>(null)
 
     const { scrollYProgress } = useScroll({

@@ -24,7 +24,7 @@ const pillars = [
   },
 ]
 
-export function ImpulsionPillars() {
+export function TechnicienPillars() {
   const [visible, setVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 

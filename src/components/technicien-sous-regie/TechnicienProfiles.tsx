@@ -13,7 +13,7 @@ const profiles = [
     { role: "Cybersécurité", spec: "Sensibilisation, audit, remédiation", image: "/images/nos-offres/profiles/profile-cyber.jpg" },
 ]
 
-export function ImpulsionProfiles() {
+export function TechnicienProfiles() {
     return (
         <div className="relative w-full overflow-hidden py-20 bg-primary">
             <div className="flex w-full overflow-hidden">

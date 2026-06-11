@@ -14,7 +14,7 @@ interface PricingCardProps {
   slug?: string
 }
 
-export function PricingCard({ name, price, target, description, features, isFeatured, slug }: PricingCardProps) {
+export function SerenitePricingCard({ name, price, target, description, features, isFeatured, slug }: PricingCardProps) {
   return (
     <Card className={`flex flex-col h-full p-6 bg-white/[0.03] backdrop-blur-sm border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-white/10'}`}>
       

@@ -18,16 +18,7 @@ export interface MenuItem {
 
 export const menuItems: MenuItem[] = [
   { label: "Accueil", href: "/" },
-  {
-    label: "Nos offres",
-    href: "/nos-offres",
-    subMenu: [
-      { label: "Offre Impulsion", href: "/nos-offres/impulsion" },
-      { label: "Offre Sérénité", href: "/nos-offres/serenite" },
-      { label: "Services Annexes", href: "/nos-offres/services-annexes" },
-      { label: "Trinexta Studio", href: "/nos-offres/studio" },
-    ]
-  },
+  { label: "Sérénité", href: "/serenite" },
   {
     label: "Nos services",
     href: "/infogerance",
@@ -38,8 +29,11 @@ export const menuItems: MenuItem[] = [
       { label: "Microsoft 365", href: "/microsoft-365" },
       { label: "Support Informatique", href: "/support-informatique" },
       { label: "Solutions Métier", href: "/solutions-metier" },
+      { label: "Technicien sous régie", href: "/technicien-sous-regie" },
+      { label: "Services Annexes", href: "/services-annexes" },
     ]
   },
+  { label: "Trinexta Studio", href: "/trinexta-studio" },
   { label: "Cas clients", href: "/cas-clients" },
   { label: "À propos", href: "/a-propos" },
   { label: "Blog", href: "/blog" },
@@ -81,8 +75,8 @@ export function Nav() {
 
             {/* Sous-menu au survol */}
             {link.subMenu && (
-              <div className="absolute top-[80%] left-0 w-56 pt-4 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                <div className="bg-background border border-border rounded-xl shadow-xl p-2 flex flex-col gap-1">
+              <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[650px] pt-4 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                <div className="bg-background border border-border rounded-xl shadow-xl p-4 grid grid-cols-3 gap-2">
                   {link.subMenu.map((sub) => (
                     sub.disabled ? (
                       <span

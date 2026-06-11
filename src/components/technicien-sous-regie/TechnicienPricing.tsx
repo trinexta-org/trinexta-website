@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 
-export function ImpulsionPricing() {
+export function TechnicienPricing() {
   return (
     <div className="py-24 bg-primary overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
