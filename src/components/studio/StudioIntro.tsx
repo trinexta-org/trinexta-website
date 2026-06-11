@@ -51,11 +51,11 @@ export function StudioIntro() {
           <div className="w-10 h-px bg-secondary/50" />
 
           <Text className="text-lg text-white/80 leading-relaxed">
-            Multiplier les interlocuteurs techniques est souvent source de lenteurs et d'incompréhensions : l'hébergeur rejette la faute sur le webmaster, qui rejette la faute sur votre informaticien. Chez TRINEXTA, nous supprimons cette complexité.
+            Multiplier les interlocuteurs techniques est souvent source de lenteurs et d&apos;incompréhensions : l&apos;hébergeur rejette la faute sur le webmaster, qui rejette la faute sur votre informaticien. Chez TRINEXTA, nous supprimons cette complexité.
           </Text>
 
           <p className="py-6 px-6 italic text-white/90 text-sm md:text-base leading-relaxed bg-white/[0.02] rounded-2xl">
-            Avec notre branche TRINEXTA Studio, nous concevons vos sites internet vitrines, vos applications web sur mesure et vos plateformes SaaS. L'avantage majeur ? Votre présence digitale et votre infrastructure informatique métier sont pilotées par la même équipe, garantissant une cohérence technique absolue.
+            Avec notre branche TRINEXTA Studio, nous concevons vos sites internet vitrines, vos applications web sur mesure et vos plateformes SaaS. L&apos;avantage majeur ? Votre présence digitale et votre infrastructure informatique métier sont pilotées par la même équipe, garantissant une cohérence technique absolue.
           </p>
         </div>
 

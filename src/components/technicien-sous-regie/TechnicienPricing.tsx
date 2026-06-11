@@ -21,7 +21,7 @@ export function TechnicienPricing() {
               <em className="italic font-light font-serif text-secondary">absolue</em>
             </h2>
             <p className="text-white/60 text-[16px] leading-[1.8] max-w-lg">
-              Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d'intégration.
+              Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d&apos;intégration.
             </p>
           </motion.div>
 

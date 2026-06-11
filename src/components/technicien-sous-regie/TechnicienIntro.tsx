@@ -55,14 +55,14 @@ export function TechnicienIntro() {
           <p className="text-lg text-white/80 leading-relaxed">
             Renforcez votre support informatique avec la bonne personne, au bon moment,{" "}
             <span className="text-white font-semibold">
-              sans les contraintes d'un recrutement classique.
+              sans les contraintes d&apos;un recrutement classique.
             </span>{" "}
             Nous vous aidons à intégrer un technicien support adapté à votre besoin, pour la durée
             qui correspond réellement à votre activité.
           </p>
 
           <p className="text-white/60 leading-relaxed">
-            La prestation Technicien sous régie, c'est une solution souple et ciblée pour renforcer vos équipes,
+            La prestation Technicien sous régie, c&apos;est une solution souple et ciblée pour renforcer vos équipes,
             absorber une hausse de charge, accompagner un projet ou sécuriser votre organisation
             au quotidien. Vous gardez la maîtrise, tout en vous appuyant sur un professionnel
             opérationnel et orienté terrain.

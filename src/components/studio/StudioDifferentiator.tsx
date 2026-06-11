@@ -21,7 +21,7 @@ const comparisonPoints = [
   {
     criterion: "Suivi & Maintenance",
     market: "Projets livrés sans engagement sur le long terme.",
-    trinexta: "Nous ne livrons pas des projets pour ensuite disparaître. Nous assurons le suivi, les mises à jour de sécurité et l'évolution technique continue pour garantir vos performances.",
+    trinexta: "Nous ne livrons pas des projets pour ensuite disparaître. Nous assurons le suivi, les mises à jour de sécurité et l&apos;évolution technique continue pour garantir vos performances.",
   },
 ]
 
