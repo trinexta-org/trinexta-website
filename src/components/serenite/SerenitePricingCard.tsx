@@ -68,7 +68,7 @@ export function SerenitePricingCard({ name, price, target, description, features
             href={`/nos-offres/${slug}`} 
             className="text-center text-xs text-white/60 hover:text-secondary font-medium transition-colors underline underline-offset-4"
           >
-            Voir le détail de l'offre
+            Voir le détail de l&apos;offre
           </Link>
         )}
       </div>

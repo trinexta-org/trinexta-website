@@ -1,6 +1,5 @@
 "use client"
 
-import { Heading } from "@/components/ui/Typography"
 import { Card } from "@/components/ui/Card"
 
 const structuralServices = [

@@ -55,7 +55,7 @@ export function ServicesIntro() {
           </Text>
 
           <p className="py-6 px-6 italic text-white/90 text-sm md:text-base leading-relaxed bg-white/[0.02] rounded-2xl">
-            Chaque entreprise a ses contraintes. C'est pour cela que ces services sont proposés sur devis : nous analysons votre besoin, nous vous recommandons une solution adaptée et nous vous annonçons un prix fixe avant toute intervention.
+            Chaque entreprise a ses contraintes. C&apos;est pour cela que ces services sont proposés sur devis : nous analysons votre besoin, nous vous recommandons une solution adaptée et nous vous annonçons un prix fixe avant toute intervention.
           </p>
         </div>
 

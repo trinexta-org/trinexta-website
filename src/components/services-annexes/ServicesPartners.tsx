@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { Heading } from "@/components/ui/Typography"
 
 const partnersList = [
     { name: "Microsoft", role: "Partenaire certifié.", src: "/images/partners/microsoft.png" },
@@ -26,7 +25,7 @@ export function ServicesPartners() {
                 ))}
             </div>
             <p className="text-xs text-white/40 text-center italic pt-3 border-t border-white/5">
-                Nous négocions les meilleurs tarifs possibles pour vous et nous préparons le matériel avant livraison afin qu'il soit prêt à l'emploi dès son arrivée.
+                Nous négocions les meilleurs tarifs possibles pour vous et nous préparons le matériel avant livraison afin qu&apos;il soit prêt à l&apos;emploi dès son arrivée.
             </p>
         </div>
     )

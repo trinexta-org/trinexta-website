@@ -74,13 +74,19 @@ function DemoCard({ demo, variant = 'tall', onSelect }: DemoCardProps) {
     return Math.max(0, renderedH - container.clientHeight);
   }, []);
 
+  const animateRef = useRef<(() => void) | null>(null);
+
   const animate = useCallback(() => {
     const img = imgRef.current;
     if (!img) return;
     currentY.current += (targetY.current - currentY.current) * 0.006;
     img.style.transform = `translateY(${-currentY.current}px)`;
-    animRef.current = requestAnimationFrame(animate);
+    animRef.current = requestAnimationFrame(() => animateRef.current?.());
   }, []);
+
+  useEffect(() => {
+    animateRef.current = animate;
+  }, [animate]);
 
   const stopLoop = useCallback(() => {
     if (animRef.current) { cancelAnimationFrame(animRef.current); animRef.current = null; }

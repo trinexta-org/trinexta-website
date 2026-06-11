@@ -53,7 +53,7 @@ export function SereniteTargets() {
 
             <div className="mt-16 text-center px-6">
                 <p className="text-white/60 text-lg">
-                    Vous avez un doute sur l'éligibilité de votre structure ?{" "}
+                    Vous avez un doute sur l&apos;éligibilité de votre structure ?{" "}
                     <Link
                         href="/contact"
                         className="text-secondary font-bold hover:underline transition-all"
