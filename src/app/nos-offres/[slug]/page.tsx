@@ -5,7 +5,7 @@ import { OfferHero } from "@/components/nos-offres/OfferHero"
 import { ImpulsionDetails } from "@/components/nos-offres/impulsion"
 import { SereniteDetails } from "@/components/nos-offres/serenite"
 import { ServicesDetails } from "@/components/nos-offres/services-annexes"
-import { StudioDetails } from "@/components/nos-offres/StudioDetails"
+import { StudioDetails } from "@/components/nos-offres/studio"
 import { FaqSection } from "@/components/nos-offres/FaqSection"
 import { officialFaqs, OfferTag } from "@/components/nos-offres/faqData"
 

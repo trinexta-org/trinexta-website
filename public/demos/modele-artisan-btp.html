@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bâti Néo — Maçonnerie & Rénovation à Évry-Courcouronnes (91)</title>
+  <meta name="description" content="Bâti Néo, artisan maçon à Évry-Courcouronnes : rénovation, gros œuvre, extension et terrasse en Essonne et Île-de-France. Devis gratuit sous 48h.">
+  <link rel="canonical" href="https://batineo.fr/artisan-btp">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bâti Néo — Maçonnerie & Rénovation à Évry-Courcouronnes">
+  <meta property="og:description" content="Artisan maçon en Essonne : rénovation, gros œuvre, extension. Devis gratuit sous 48h.">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"GeneralContractor","name":"Bâti Néo","telephone":"+33160000000","email":"contact@batineo.fr","priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"12 rue des Bâtisseurs","postalCode":"91000","addressLocality":"Évry-Courcouronnes","addressCountry":"FR"},"areaServed":["Évry-Courcouronnes","Corbeil-Essonnes","Essonne","Île-de-France"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"37"}}
+  </script>
+  <style>
+    :root {
+      --bg:#0b0d11; --surface:#12161f; --card:#171c27; --line:#242c3d;
+      --text:#f1f4f9; --muted:#94a1b8; --accent:#e28714; --accent-2:#fca330;
+      --maxw:1200px; --r:12px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    h1,h2,h3{font-family:Sora,system-ui,sans-serif;line-height:1.15;letter-spacing:-.03em}
+    a{color:inherit;text-decoration:none;transition:color .25s ease,background .25s ease,border-color .25s ease}
+    img{display:block;max-width:100%}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+    /* ── HEADER ── */
+    header{position:sticky;top:0;z-index:100;background:rgba(11,13,17,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);height:80px}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:100%;gap:32px}
+    .logo{font-family:Sora;font-weight:800;font-size:22px;display:flex;align-items:center;gap:10px;color:var(--text);flex-shrink:0}
+    .nav-menu{display:flex;align-items:center;gap:28px;font-weight:600;font-size:15px}
+    .nav-menu a{color:var(--muted)}
+    .nav-menu a:hover{color:var(--accent-2)}
+    .nav-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+    .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#0b0d11;font-weight:700;padding:12px 22px;border-radius:var(--r);font-size:15px;border:none;cursor:pointer;white-space:nowrap;transition:background .2s,transform .2s}
+    .btn:hover{background:var(--accent-2);transform:translateY(-1px)}
+    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+    .btn-ghost:hover{border-color:var(--accent);background:rgba(226,135,20,.05)}
+    .btn-sm{padding:10px 18px;font-size:14px}
+
+    /* ── BURGER ── */
+    .burger{display:none;width:40px;height:40px;position:relative;background:transparent;border:1px solid var(--line);border-radius:8px;cursor:pointer;z-index:110;flex-shrink:0}
+    .burger-line{position:absolute;left:10px;width:20px;height:2px;background:var(--text);transition:transform .3s ease,top .3s ease,opacity .3s ease}
+    .burger-line-1{top:13px}
+    .burger-line-2{top:19px}
+    .burger-line-3{top:25px}
+    body.nav-open .burger-line-1{top:19px;transform:rotate(45deg)}
+    body.nav-open .burger-line-2{opacity:0}
+    body.nav-open .burger-line-3{top:19px;transform:rotate(-45deg)}
+    body.nav-open{overflow:hidden}
+    body.nav-open .nav-drawer{transform:translateX(0);opacity:1}
+
+    /* ── MOBILE DRAWER ── */
+    .nav-drawer{
+      position:fixed;top:80px;right:0;bottom:0;width:min(320px,100vw);
+      background:var(--surface);border-left:1px solid var(--line);
+      padding:32px 24px;display:flex;flex-direction:column;gap:8px;
+      overflow-y:auto;z-index:99;
+      transform:translateX(100%);opacity:0;
+      transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .35s ease;
+    }
+    .nav-drawer .drawer-menu{display:flex;flex-direction:column;gap:4px}
+    .nav-drawer .drawer-menu a{
+      display:flex;align-items:center;gap:12px;padding:14px 16px;
+      border-radius:10px;font-size:16px;font-weight:600;color:var(--muted);
+      transition:background .2s,color .2s;
+    }
+    .nav-drawer .drawer-menu a:hover{background:var(--card);color:var(--text)}
+    .nav-drawer .drawer-menu a .dm-icon{width:36px;height:36px;border-radius:8px;background:rgba(226,135,20,.1);display:flex;align-items:center;justify-content:center;color:var(--accent-2);flex-shrink:0}
+    .drawer-sep{height:1px;background:var(--line);margin:12px 0}
+    .drawer-actions{display:flex;flex-direction:column;gap:12px}
+    .drawer-actions .btn{width:100%;padding:14px;font-size:15px;justify-content:center}
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:98;backdrop-filter:blur(4px)}
+    body.nav-open .nav-overlay{display:block}
+
+    /* ── HERO ── */
+    .hero{position:relative;padding:120px 0 100px;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 400px at 90% 20%,rgba(226,135,20,.12),transparent 70%);z-index:-1}
+    .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center}
+    .hero .tag{display:inline-flex;align-items:center;background:rgba(226,135,20,.08);color:var(--accent-2);border:1px solid rgba(226,135,20,.25);padding:6px 16px;border-radius:30px;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:24px}
+    .hero h1{font-size:clamp(36px,5vw,62px);font-weight:800;color:var(--text);margin-bottom:20px}
+    .hero h1 em{color:var(--accent-2);font-style:normal}
+    .hero p.lead{font-size:18px;color:var(--muted);max-width:54ch;margin-bottom:36px;line-height:1.7}
+    .hero .cta{display:flex;gap:16px;flex-wrap:wrap}
+    .hero .stats{display:flex;gap:40px;margin-top:56px;border-top:1px solid var(--line);padding-top:36px;flex-wrap:wrap}
+    .hero .stats .n{font-family:Sora;font-weight:800;font-size:34px;color:var(--text);line-height:1}
+    .hero .stats .l{font-size:13px;color:var(--muted);margin-top:6px;font-weight:500}
+
+    /* ── HERO VISUAL ── */
+    .hero-visual{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+    .hero-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+    .hero-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(226,135,20,.15) 0%,transparent 60%)}
+    .hero-badge{position:absolute;bottom:20px;left:20px;background:rgba(11,13,17,.85);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px}
+    .hero-badge .badge-icon{width:40px;height:40px;border-radius:8px;background:rgba(226,135,20,.15);display:flex;align-items:center;justify-content:center;color:var(--accent-2)}
+    .hero-badge .badge-text strong{display:block;font-size:15px;font-weight:700;color:var(--text)}
+    .hero-badge .badge-text span{font-size:12px;color:var(--muted)}
+
+    /* ── SECTIONS ── */
+    section{padding:100px 0;border-top:1px solid var(--line)}
+    .section-head{text-align:center;margin-bottom:64px}
+    .eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:12px}
+    .h2{font-size:clamp(28px,4vw,44px);font-weight:800}
+    .sub{color:var(--muted);max-width:64ch;margin:16px auto 0;font-size:17px}
+    .grid{display:grid;gap:24px}
+    .g2{grid-template-columns:repeat(2,1fr)}
+    .g3{grid-template-columns:repeat(3,1fr)}
+    .g4{grid-template-columns:repeat(4,1fr)}
+
+    /* ── CARDS ── */
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;position:relative;transition:border-color .25s,transform .25s,box-shadow .25s}
+    .card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+    .card-img{width:100%;height:200px;object-fit:cover;display:block}
+    .card-body{padding:28px;flex:1;display:flex;flex-direction:column}
+    .card .ic-container{width:48px;height:48px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--accent-2);margin-bottom:20px}
+    .card h3{font-size:19px;margin-bottom:10px;font-weight:700}
+    .card p{color:var(--muted);font-size:14px;line-height:1.65}
+
+    /* ── WHY ── */
+    .why{background:var(--surface)}
+    .why-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .why-img-wrap{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+    .why-img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+    .why-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,13,17,.7) 0%,transparent 50%)}
+    .why-stat{position:absolute;bottom:24px;left:24px;right:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .why-stat-card{background:rgba(11,13,17,.8);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;text-align:center}
+    .why-stat-card .wsn{font-family:Sora;font-weight:800;font-size:26px;color:var(--text);line-height:1}
+    .why-stat-card .wsl{font-size:12px;color:var(--muted);margin-top:4px}
+    .pills{display:flex;flex-direction:column;gap:16px}
+    .pill{display:flex;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;transition:border-color .2s}
+    .pill:hover{border-color:rgba(226,135,20,.3)}
+    .pill .chk-box{flex:none;width:36px;height:36px;border-radius:10px;background:rgba(226,135,20,.1);color:var(--accent-2);display:flex;align-items:center;justify-content:center}
+    .pill h3{font-size:16px;margin-bottom:4px;font-weight:700}
+    .pill p{color:var(--muted);font-size:13px;line-height:1.5}
+
+    /* ── RÉALISATIONS ── */
+    .realisations-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:16px}
+    .real-item{border-radius:16px;overflow:hidden;position:relative;cursor:pointer}
+    .real-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+    .real-item:hover img{transform:scale(1.04)}
+    .real-item.big{grid-row:span 2}
+    .real-item .real-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,13,17,.8) 0%,transparent 50%);opacity:0;transition:opacity .3s}
+    .real-item:hover .real-overlay{opacity:1}
+    .real-item .real-label{position:absolute;bottom:16px;left:16px;font-size:13px;font-weight:700;color:var(--text);transform:translateY(8px);opacity:0;transition:opacity .3s,transform .3s}
+    .real-item:hover .real-label{opacity:1;transform:none}
+
+    /* ── QUOTE ── */
+    .quote-section{background:var(--surface)}
+    .quote-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .quote-img-wrap{border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+    .quote-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+    .quote-content{display:flex;flex-direction:column;gap:32px}
+    .quote{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:36px;position:relative}
+    .quote::before{content:"\201C";position:absolute;top:-20px;left:24px;font-size:80px;font-family:Sora;color:var(--accent);line-height:1;opacity:.4}
+    .quote p{font-size:18px;font-family:Sora;font-weight:600;line-height:1.5;color:var(--text)}
+    .quote .who{color:var(--muted);margin-top:16px;font-size:14px;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+    .who-dot{width:4px;height:4px;border-radius:50%;background:var(--accent-2)}
+    .stars{color:var(--accent-2);font-size:16px;letter-spacing:3px;margin-bottom:12px}
+    .rating-badge{display:inline-flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+    .rating-badge .rb-score{font-family:Sora;font-weight:800;font-size:32px;color:var(--text);line-height:1}
+    .rating-badge .rb-info{font-size:13px;color:var(--muted)}
+    .rating-badge .rb-info strong{display:block;color:var(--text);font-size:15px}
+
+    /* ── FAQ ── */
+    .faq details{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 28px;margin-bottom:12px;transition:border-color .3s}
+    .faq details[open]{border-color:rgba(226,135,20,.3)}
+    .faq summary{cursor:pointer;list-style:none;font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"";flex-shrink:0;width:10px;height:10px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .3s}
+    .faq details[open] summary::after{transform:rotate(-135deg)}
+    .faq details p{color:var(--muted);padding-top:14px;font-size:14px;line-height:1.7;border-top:1px solid var(--line);margin-top:14px}
+
+    /* ── CTA BAND ── */
+    .band{background:linear-gradient(135deg,var(--surface) 0%,var(--card) 100%);border:1px solid var(--line);border-radius:28px;padding:80px 40px;text-align:center;position:relative;overflow:hidden}
+    .band::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 10% 90%,rgba(226,135,20,.07),transparent 70%)}
+    .band::after{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 90% 10%,rgba(226,135,20,.05),transparent 70%)}
+    .band h2{font-size:clamp(30px,4vw,46px);font-weight:800;margin-bottom:16px;position:relative;z-index:1}
+    .band p{margin:0 auto 36px;max-width:50ch;font-size:17px;color:var(--muted);position:relative;z-index:1}
+    .band .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+
+    /* ── FOOTER ── */
+    footer{background:var(--bg);padding:72px 0 36px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+    .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+    .footer-brand p{color:var(--muted);font-size:14px;line-height:1.7;margin-top:16px;max-width:28ch}
+    .footer-brand address{font-style:normal;margin-top:16px;font-size:13px;color:var(--muted);line-height:1.6}
+    footer h4{color:var(--text);font-family:Sora;margin-bottom:18px;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+    .footer-links{display:flex;flex-direction:column;gap:10px}
+    .footer-links a{color:var(--muted);font-size:14px;transition:color .2s;display:flex;align-items:center;gap:6px}
+    .footer-links a:hover{color:var(--accent-2)}
+    .footer-links a::before{content:"→";font-size:11px;color:var(--accent);opacity:.6}
+    .footer-contact a{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;margin-bottom:12px;transition:color .2s}
+    .footer-contact a:hover{color:var(--accent-2)}
+    .footer-contact .fc-icon{width:32px;height:32px;border-radius:8px;background:rgba(226,135,20,.08);border:1px solid rgba(226,135,20,.15);display:flex;align-items:center;justify-content:center;color:var(--accent-2);flex-shrink:0}
+    .copy{border-top:1px solid var(--line);padding-top:28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;flex-wrap:wrap;gap:16px}
+    .copy-links{display:flex;gap:20px}
+    .copy-links a:hover{color:var(--accent-2)}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .reveal.in{opacity:1;transform:none}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .nav-menu,.nav-actions{display:none}
+      .burger{display:flex;align-items:center;justify-content:center}
+      .nav-drawer{top:80px}
+      .hero{padding:72px 0 80px}
+      .hero-grid{grid-template-columns:1fr;gap:48px}
+      .why-inner{grid-template-columns:1fr;gap:40px}
+      .why-img-wrap{display:none}
+      .quote-inner{grid-template-columns:1fr;gap:32px}
+      .quote-img-wrap{display:none}
+      .fgrid{grid-template-columns:1fr 1fr;gap:36px}
+      .g3{grid-template-columns:repeat(2,1fr)}
+      .realisations-grid{grid-template-columns:repeat(2,1fr)}
+      .real-item.big{grid-row:span 1}
+    }
+    @media(max-width:640px){
+      .nav-drawer{width:100vw;border-left:none}
+      header{height:68px}
+      .nav-drawer{top:68px}
+      .hero{padding:56px 0 64px}
+      .hero .stats{gap:28px}
+      .fgrid{grid-template-columns:1fr;gap:32px}
+      .g3,.g4{grid-template-columns:1fr}
+      .g2{grid-template-columns:1fr}
+      .realisations-grid{grid-template-columns:1fr}
+      .real-item.big{grid-row:span 1}
+      .band{padding:48px 24px;border-radius:20px}
+      .quote{padding:28px 20px}
+      section{padding:72px 0}
+      .copy{justify-content:center;text-align:center}
+      .copy-links{justify-content:center}
+      .why-stat{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-overlay" onclick="document.body.classList.remove('nav-open')"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">
+      <img src="logo-batineo.png" alt="Bâti Néo" style="height:38px;width:auto">
+    </a>
+
+    <nav class="nav-menu">
+      <a href="#services">Services</a>
+      <a href="#atouts">Pourquoi nous</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#avis">Avis</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="tel:+33160000000" class="btn btn-ghost btn-sm">01 60 00 00 00</a>
+      <a href="#contact" class="btn btn-sm">Devis gratuit</a>
+    </div>
+
+    <button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">
+      <span class="burger-line burger-line-1"></span>
+      <span class="burger-line burger-line-2"></span>
+      <span class="burger-line burger-line-3"></span>
+    </button>
+  </div>
+</header>
+
+<!-- DRAWER MOBILE -->
+<div class="nav-drawer">
+  <nav class="drawer-menu">
+    <a href="#services" onclick="document.body.classList.remove('nav-open')">
+      <span class="dm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></span>
+      Services
+    </a>
+    <a href="#atouts" onclick="document.body.classList.remove('nav-open')">
+      <span class="dm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+      Pourquoi nous
+    </a>
+    <a href="#realisations" onclick="document.body.classList.remove('nav-open')">
+      <span class="dm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
+      Réalisations
+    </a>
+    <a href="#avis" onclick="document.body.classList.remove('nav-open')">
+      <span class="dm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      Avis clients
+    </a>
+    <a href="#faq" onclick="document.body.classList.remove('nav-open')">
+      <span class="dm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg></span>
+      FAQ
+    </a>
+  </nav>
+  <div class="drawer-sep"></div>
+  <div class="drawer-actions">
+    <a href="tel:+33160000000" class="btn btn-ghost">📞 01 60 00 00 00</a>
+    <a href="#contact" class="btn" onclick="document.body.classList.remove('nav-open')">Devis gratuit →</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag">Artisan maçon · Essonne (91)</span>
+      <h1>Vos travaux de <em>maçonnerie</em> et rénovation, bien faits du premier coup</h1>
+      <p class="lead">Bâti Néo accompagne particuliers et entreprises à Évry-Courcouronnes et dans toute l'Île-de-France : gros œuvre, rénovation, extensions et terrasses. Un interlocuteur unique, des délais tenus.</p>
+      <div class="cta">
+        <a href="#contact" class="btn">Demander un devis gratuit</a>
+        <a href="tel:+33160000000" class="btn btn-ghost">Nous appeler</a>
+      </div>
+      <div class="stats">
+        <div><div class="n">15 ans</div><div class="l">d'expérience terrain</div></div>
+        <div><div class="n">+400</div><div class="l">chantiers réalisés</div></div>
+        <div><div class="n">48h</div><div class="l">pour votre devis</div></div>
+        <div><div class="n">4,9/5</div><div class="l">37 avis Google</div></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <img class="hero-img"
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
+        alt="Chantier de maçonnerie Bâti Néo">
+      <div class="hero-img-overlay"></div>
+      <div class="hero-badge">
+        <div class="badge-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="badge-text">
+          <strong>Garantie décennale</strong>
+          <span>Tous travaux assurés</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Nos services</span>
+      <h2 class="h2">Ce que nous réalisons</h2>
+      <p class="sub">Du fondement à la finition, nous prenons en charge l'ensemble de vos travaux de maçonnerie et de rénovation.</p>
+    </div>
+    <div class="grid g3">
+      <article class="card reveal">
+        <img class="card-img" src="https://images.unsplash.com/photo-1590725121839-892b458a74fe?w=600&q=75" alt="Gros œuvre fondations">
+        <div class="card-body">
+          <div class="ic-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 4"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+          </div>
+          <h3>Gros œuvre & fondations</h3>
+          <p>Fondations, dalles, murs porteurs et structures. La base solide de votre projet, réalisée dans les règles de l'art.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <img class="card-img" src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=75" alt="Rénovation intérieure">
+        <div class="card-body">
+          <div class="ic-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 22V12"/></svg>
+          </div>
+          <h3>Rénovation complète</h3>
+          <p>Rénovation de maison ou d'appartement, réagencement et remise aux normes, avec coordination des corps de métier.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <img class="card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75" alt="Extension maison">
+        <div class="card-body">
+          <div class="ic-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M5 12h14m-7 0 7-7m-7 7-7-7"/></svg>
+          </div>
+          <h3>Extension & surélévation</h3>
+          <p>Agrandissez votre surface habitable : extension de plain-pied, surélévation, garage ou véranda maçonnée.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <img class="card-img" src="https://images.unsplash.com/photo-1464146072230-91cabc968266?w=600&q=75" alt="Terrasse extérieure">
+        <div class="card-body">
+          <div class="ic-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Terrasses & extérieurs</h3>
+          <p>Terrasses béton, dallage, murets et aménagements extérieurs durables et esthétiques.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <img class="card-img" src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&q=75" alt="Ravalement façade">
+        <div class="card-body">
+          <div class="ic-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"/></svg>
+          </div>
+          <h3>Étanchéité & ravalement</h3>
+          <p>Ravalement de façade, enduits, traitement de l'humidité et étanchéité pour protéger votre bien.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <img class="card-img" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=75" alt="Dépannage travaux">
+        <div class="card-body">
+          <div class="ic-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Dépannage & petits travaux</h3>
+          <p>Reprise de fissures, scellements, ouvertures de murs : nous intervenons aussi sur les chantiers ponctuels.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI NOUS -->
+<section id="atouts" class="why">
+  <div class="wrap">
+    <div class="why-inner">
+      <div class="why-img-wrap reveal">
+        <img class="why-img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="Artisan maçon au travail">
+        <div class="why-img-overlay"></div>
+        <div class="why-stat">
+          <div class="why-stat-card"><div class="wsn">15+</div><div class="wsl">Années d'expérience</div></div>
+          <div class="why-stat-card"><div class="wsn">400+</div><div class="wsl">Chantiers livrés</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-head" style="text-align:left;margin-bottom:40px">
+          <span class="eyebrow">Pourquoi Bâti Néo</span>
+          <h2 class="h2">Des artisans en qui avoir confiance</h2>
+        </div>
+        <div class="pills">
+          <div class="pill reveal">
+            <div class="chk-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><h3>Devis clair sous 48h</h3><p>Un chiffrage détaillé, sans surprise ni ligne cachée. Déplacement gratuit sur site.</p></div>
+          </div>
+          <div class="pill reveal">
+            <div class="chk-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><h3>Délais respectés</h3><p>Un planning défini ensemble et tenu jusqu'à la livraison, sans mauvaises surprises.</p></div>
+          </div>
+          <div class="pill reveal">
+            <div class="chk-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><h3>Garantie décennale</h3><p>Tous nos travaux sont couverts par une assurance décennale et une RC professionnelle.</p></div>
+          </div>
+          <div class="pill reveal">
+            <div class="chk-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><h3>Artisan local</h3><p>Basés à Évry, réactifs sur tout le 91 et l'Île-de-France. Un interlocuteur unique du début à la fin.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RÉALISATIONS -->
+<section id="realisations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Portfolio</span>
+      <h2 class="h2">Nos réalisations récentes</h2>
+      <p class="sub">Chaque chantier est unique. Voici quelques exemples de projets réalisés en Essonne.</p>
+    </div>
+    <div class="realisations-grid reveal">
+      <div class="real-item big">
+        <img src="https://images.unsplash.com/photo-1626885930974-4b69aa21bbf9?w=800&q=80" alt="Extension maison">
+        <div class="real-overlay"></div>
+        <span class="real-label">Extension 32 m² · Évry</span>
+      </div>
+      <div class="real-item">
+        <img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=600&q=75" alt="Terrasse béton">
+        <div class="real-overlay"></div>
+        <span class="real-label">Terrasse dalles · Corbeil</span>
+      </div>
+      <div class="real-item">
+        <img src="https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=600&q=75" alt="Ravalement façade">
+        <div class="real-overlay"></div>
+        <span class="real-label">Ravalement façade · Massy</span>
+      </div>
+      <div class="real-item">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75" alt="Rénovation intérieure">
+        <div class="real-overlay"></div>
+        <span class="real-label">Rénovation complète · Évry</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section id="avis" class="quote-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Témoignages</span>
+      <h2 class="h2">Ce que disent nos clients</h2>
+    </div>
+    <div class="quote-inner">
+      <div class="quote-img-wrap reveal">
+        <img class="quote-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Chantier terminé">
+      </div>
+      <div class="quote-content">
+        <div class="rating-badge reveal">
+          <div class="rb-score">4,9</div>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div class="rb-info"><strong>37 avis Google vérifiés</strong>sur Évry-Courcouronnes</div>
+          </div>
+        </div>
+        <div class="quote reveal">
+          <div class="stars">★★★★★</div>
+          <p>Extension réalisée dans les délais, équipe propre et à l'écoute. Le chantier était suivi de A à Z, on recommande sans hésiter.</p>
+          <div class="who"><span class="who-dot"></span>Sophie M. <span class="who-dot"></span> Corbeil-Essonnes · Extension 25 m²</div>
+        </div>
+        <div class="quote reveal">
+          <div class="stars">★★★★★</div>
+          <p>Devis rapide, prix honnête et travail soigné. Notre terrasse est exactement ce qu'on voulait. Merci à toute l'équipe.</p>
+          <div class="who"><span class="who-dot"></span>Marc D. <span class="who-dot"></span> Évry · Terrasse 40 m²</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2 class="h2">On répond à vos questions</h2>
+    </div>
+    <div style="max-width:800px;margin:0 auto">
+      <details open>
+        <summary>Le devis est-il vraiment gratuit ?</summary>
+        <p>Oui. Nous nous déplaçons sur site, étudions votre projet et vous remettons un devis détaillé et gratuit sous 48h, sans engagement de votre part.</p>
+      </details>
+      <details>
+        <summary>Sur quelles communes intervenez-vous ?</summary>
+        <p>Nous intervenons à Évry-Courcouronnes, Corbeil-Essonnes, et dans tout le département de l'Essonne ainsi qu'en Île-de-France.</p>
+      </details>
+      <details>
+        <summary>Vos travaux sont-ils assurés ?</summary>
+        <p>Oui, l'ensemble de nos prestations est couvert par une garantie décennale et une assurance responsabilité civile professionnelle.</p>
+      </details>
+      <details>
+        <summary>Gérez-vous les démarches administratives ?</summary>
+        <p>Nous vous accompagnons sur les déclarations de travaux et permis de construire liés à votre chantier.</p>
+      </details>
+      <details>
+        <summary>Quel est le délai moyen pour démarrer un chantier ?</summary>
+        <p>Selon la nature des travaux et notre planning, nous pouvons généralement démarrer sous 2 à 6 semaines après validation du devis.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact">
+  <div class="wrap">
+    <div class="band reveal">
+      <h2>Parlons de votre projet</h2>
+      <p>Un agrandissement, une rénovation ou un simple conseil ? Recevez votre devis gratuit sous 48h.</p>
+      <div class="cta">
+        <a href="tel:+33160000000" class="btn">Appeler le 01 60 00 00 00</a>
+        <a href="mailto:contact@batineo.fr" class="btn btn-ghost">Envoyer un e-mail</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="footer-brand">
+        <img src="logo-batineo.png" alt="Bâti Néo" style="height:38px;width:auto;margin-bottom:16px">
+        <p>Artisan maçon à Évry-Courcouronnes. Maçonnerie de confiance, rénovation et extensions en Essonne et Île-de-France.</p>
+        <address>12 rue des Bâtisseurs<br>91000 Évry-Courcouronnes</address>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="#services">Gros œuvre</a>
+          <a href="#services">Rénovation</a>
+          <a href="#services">Extension</a>
+          <a href="#services">Terrasses</a>
+          <a href="#services">Ravalement</a>
+        </div>
+      </div>
+      <div>
+        <h4>Entreprise</h4>
+        <div class="footer-links">
+          <a href="#atouts">Pourquoi nous</a>
+          <a href="#realisations">Réalisations</a>
+          <a href="#avis">Avis clients</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div class="footer-contact">
+          <a href="tel:+33160000000">
+            <span class="fc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.4 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 5.4 5.4l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+            01 60 00 00 00
+          </a>
+          <a href="mailto:contact@batineo.fr">
+            <span class="fc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+            contact@batineo.fr
+          </a>
+          <a href="#">
+            <span class="fc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            Lun–Ven : 8h–18h
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 2025 Bâti Néo. Tous droits réservés.</span>
+      <div class="copy-links">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) }
+  }), { threshold: .08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
