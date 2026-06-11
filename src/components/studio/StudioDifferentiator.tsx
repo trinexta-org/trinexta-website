@@ -21,7 +21,7 @@ const comparisonPoints = [
   {
     criterion: "Suivi & Maintenance",
     market: "Projets livrés sans engagement sur le long terme.",
-    trinexta: "Nous ne livrons pas des projets pour ensuite disparaître. Nous assurons le suivi, les mises à jour de sécurité et l&apos;évolution technique continue pour garantir vos performances.",
+    trinexta: "Nous ne livrons pas des projets pour ensuite disparaître. Nous assurons le suivi, les mises à jour de sécurité et l\u2019évolution technique continue pour garantir vos performances.",
   },
 ]
 
@@ -33,7 +33,7 @@ export function StudioDifferentiator() {
         <div className="hidden md:grid grid-cols-3 bg-white/[0.03] border-b border-white/10 p-6 text-sm font-bold tracking-wider uppercase text-white/50">
           <div>Critère</div>
           <div>Les agences web classiques</div>
-          <div className="text-secondary">L'approche Trinexta</div>
+          <div className="text-secondary">L&apos;approche Trinexta</div>
         </div>
 
         {/* Rows */}

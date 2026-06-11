@@ -64,7 +64,7 @@ export function TechnicienConcret() {
             
             <div className="space-y-6 mb-12">
               <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                Ce que l'on fait <br/> <span className="text-secondary">concrètement</span>
+                Ce que l&apos;on fait <br/> <span className="text-secondary">concrètement</span>
               </h2>
               <div className="space-y-4 text-base md:text-lg text-white/80 leading-relaxed">
                 <p>
