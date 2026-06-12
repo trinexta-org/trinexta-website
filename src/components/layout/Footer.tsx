@@ -39,7 +39,7 @@ export function Footer() {
   const mobileTitle = "text-white font-bold uppercase text-[10px] sm:text-[11px] mb-2 block"
 
   return (
-    <footer className="bg-primary relative overflow-hidden">
+    <footer className="bg-primary relative z-50 overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
 
       <SectionFade edge="top" />

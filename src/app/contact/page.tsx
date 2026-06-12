@@ -6,7 +6,6 @@ import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactCards } from "@/components/contact/ContactCards";
 import { ContactFormSection } from "@/components/contact/ContactFormSection";
 import { ContactFaq } from "@/components/contact/ContactFaq";
-import { HaloBackground } from "@/components/ui/HaloBackground";
 import { SectionFade } from "@/components/ui/SectionFade";
 import { ContactMap } from "@/components/contact/ContactMap";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -46,7 +45,6 @@ export default function ContactPage() {
       <ContactFormSection />
       
       <Section container={false} className="relative overflow-hidden bg-primary pb-32 pt-24">
-        <HaloBackground intensity="low" />
         <SectionFade edge="both" />
         <Container className="relative z-10">
           <ContactFaq />

@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 import { SectionFade } from "@/components/ui/SectionFade"
 import { GoogleRatingSection } from "@/components/sections/GoogleRatingSection"
 
@@ -16,7 +15,6 @@ const certifications = [
 export function ReassuranceSection() {
   return (
     <Section container={false} className="py-10 md:py-14 bg-primary relative overflow-hidden">
-      <HaloBackground intensity="low" />
       <SectionFade edge="bottom" />
       <Container className="relative z-10">
         <div className="flex flex-col items-center justify-center gap-10 text-center">

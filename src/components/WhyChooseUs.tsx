@@ -5,7 +5,6 @@ import { motion, AnimatePresence} from "framer-motion"
 import Image from "next/image"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 import { Container } from "@/components/layout/Container"
 
 const reasons = [
@@ -41,7 +40,6 @@ export function WhyChooseUs() {
 
   return (
     <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <HaloBackground intensity="low" />
       <Container className="relative z-10">
         <div ref={containerRef} className="flex flex-col md:flex-row h-[600px] md:h-[600px] w-full gap-3 md:gap-4">
           {reasons.map((reason, index) => {

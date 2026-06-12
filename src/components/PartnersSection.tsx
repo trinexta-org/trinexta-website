@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 
 export interface Partner {
   name: string;
@@ -18,7 +17,6 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
 
   return (
     <Section container={false} className="relative pt-8 pb-16 md:pb-32 overflow-hidden">
-      <HaloBackground intensity="low" />
       <style>{`
         @keyframes scroll-partners {
           0% { transform: translateX(0); }

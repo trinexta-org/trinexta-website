@@ -7,7 +7,6 @@ import { PricingSection } from "@/components/nos-offres/PricingSection"
 import { NosOffresHero } from "@/components/nos-offres/NosOffresHero"
 import { DifferentiatorSection } from "@/components/nos-offres/DifferentiatorSection"
 import { FaqSection } from "@/components/nos-offres/FaqSection"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 import { SectionFade } from "@/components/ui/SectionFade"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { officialFaqs } from "@/components/nos-offres/faqData" 
@@ -58,7 +57,6 @@ export default function NosOffresPage() {
         line2="claires & adaptées"
       />
       <Section id="details" container={false} className="relative bg-primary py-24 overflow-hidden">
-        <HaloBackground intensity="low" />
         <Container className="relative z-10">
           <PricingSection />
         </Container>
@@ -70,7 +68,6 @@ export default function NosOffresPage() {
         line2="en détail"
       />
       <Section container={false} className="relative bg-primary pb-24 pt-12 overflow-clip">
-        <HaloBackground intensity="low" />
         <Container className="relative z-10">
           <Suspense fallback={
             <div className="w-full text-center py-12 text-white/50 font-mono text-sm animate-pulse">
@@ -99,7 +96,6 @@ export default function NosOffresPage() {
         line2="Fréquentes"
       />
       <Section container={false} className="relative overflow-hidden bg-primary pb-32 pt-12">
-        <HaloBackground intensity="low" />
         <SectionFade edge="both" />
         <Container className="relative z-10">
           <FaqSection />
