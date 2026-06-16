@@ -107,50 +107,6 @@
     to { opacity: 1; }
   }
 
-  /* HaloBackground — halos lumineux qui respirent (drift d'opacité + échelle),
-     lent et désynchronisé d'un halo a l'autre. transform-box fill-box pour que
-     l'échelle se fasse autour du centre du halo. */
-  /* Respiration + légère dérive. translate3d/scale + opacity uniquement :
-     composit GPU, aucun reflow ni repaint. % relatifs a la box du halo
-     (transform-box fill-box) -> déplacement discret. */
-  @keyframes mesh-breathe {
-    0%, 100% {
-      opacity: 0.45;
-      transform: translate3d(0, 0, 0) scale(0.92);
-    }
-    50% {
-      opacity: 1;
-      transform: translate3d(3%, -3%, 0) scale(1.08);
-    }
-  }
-  @keyframes mesh-breathe-alt {
-    0%, 100% {
-      opacity: 0.5;
-      transform: translate3d(0, 0, 0) scale(0.95);
-    }
-    50% {
-      opacity: 0.9;
-      transform: translate3d(-4%, 2.5%, 0) scale(1.06);
-    }
-  }
-  .halo-blob {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation-name: mesh-breathe;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    will-change: opacity, transform;
-  }
-  .halo-blob--alt {
-    animation-name: mesh-breathe-alt;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .halo-blob,
-    .halo-blob--alt {
-      animation: none;
-      opacity: 0.7;
-    }
-  }
   @keyframes fade-in-up {
     from {
       opacity: 0;

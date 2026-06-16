@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 
 const steps = [
   {
@@ -42,7 +41,6 @@ export function ApproachSection() {
 
   return (
     <Section container={false} className="relative bg-primary py-20 md:py-40 overflow-hidden">
-      <HaloBackground intensity="mid" />
       <div ref={containerRef} className="relative z-10">
         <Container>
           

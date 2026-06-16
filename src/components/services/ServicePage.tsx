@@ -7,7 +7,6 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 import { SectionFade } from "@/components/ui/SectionFade"
 import { FinalCTA } from "@/components/FinalCTA"
 import { ViewportHero } from "@/components/layout/ViewportHero"
@@ -393,7 +392,6 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
 
             {/* 5. FAQ */}
             <Section id="faq" container={false} className="relative overflow-hidden bg-primary/95 pb-16 md:pb-24 pt-12 md:pt-16">
-                <HaloBackground intensity="low" />
                 <SectionFade edge="both" />
                 <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">

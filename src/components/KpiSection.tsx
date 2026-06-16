@@ -5,7 +5,6 @@ import { motion, useInView, animate } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 
 const kpis = [
   {
@@ -68,7 +67,6 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 export function KpiSection() {
   return (
     <Section container={false} className="relative bg-primary py-12 md:py-32 lg:py-40 overflow-hidden">
-      <HaloBackground intensity="mid" />
 
       <Container className="relative z-10">
         <div className="mb-10 md:mb-16 lg:mb-24 flex items-center gap-4 md:gap-8 overflow-hidden">

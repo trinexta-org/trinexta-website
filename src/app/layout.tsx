@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd, trinextaOrganization } from "@/components/seo/JsonLd";
 import { CookieBanner } from "@/components/seo/CookieBanner";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import { CircuitBorders } from "@/components/layout/CircuitBorders";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -54,6 +55,7 @@ export default function RootLayout({
     <html lang="fr" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} scroll-smooth`}>
       <body className="min-h-screen flex flex-col bg-background text-foreground font-sans antialiased">
         <JsonLd data={trinextaOrganization} />
+        <CircuitBorders />
         <Header />
         <main className="flex-1 flex flex-col">
           {children}
