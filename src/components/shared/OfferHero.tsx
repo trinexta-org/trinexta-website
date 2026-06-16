@@ -37,10 +37,10 @@ export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps)
         />
       }
       overlays={<div className="absolute inset-0 bg-primary/90" />}
-      renderSlide={(slide) => (
+      renderSlide={(slide, _index, isActive) => (
         <div>
           <Heading
-            as="h1"
+            as={isActive ? "h1" : "h2"}
             className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl"
           >
             <span className="text-white">{slide.part1}</span>{" "}
