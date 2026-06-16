@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio Équilibre — Kinésithérapie & Ostéopathie à Évry-Courcouronnes</title>
+  <meta name="description" content="Cabinet de kinésithérapie et ostéopathie à Évry-Courcouronnes. Rééducation, soins du dos, sport et bien-être. Prise de rendez-vous en ligne, sur place ou à domicile.">
+  <link rel="canonical" href="https://studio-equilibre.fr/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Studio Équilibre — Kinésithérapie & Ostéopathie à Évry">
+  <meta property="og:description" content="Rééducation, soins du dos et bien-être à Évry-Courcouronnes. Rendez-vous en ligne.">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Physiotherapy",
+    "name":"Studio Équilibre",
+    "telephone":"+33169000000",
+    "email":"contact@studio-equilibre.fr",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"5 allée du Parc",
+      "postalCode":"91000",
+      "addressLocality":"Évry-Courcouronnes",
+      "addressCountry":"FR"
+    },
+    "areaServed":["Évry-Courcouronnes","Essonne"],
+    "medicalSpecialty":["Physiotherapy","Osteopathic"],
+    "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:30","closes":"19:30"}],
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"58"}
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f9f6;
+      --surface: #e3ede6;
+      --card: #ffffff;
+      --line: #cbdacf;
+      --text: #14241e;
+      --muted: #4e5e57;
+      --soft: #8ba095;
+      --accent: #2f9e7e;
+      --accent-2: #1b6e55;
+      --maxw: 1160px;
+      --r: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent }
+    body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden }
+    
+    h1, h2, h3, h4 { font-family: Fraunces, Georgia, serif; line-height: 1.16; font-weight: 600; letter-spacing: -0.01em }
+    a { color: inherit; text-decoration: none; transition: all .25s ease }
+    img { display: block; max-width: 100%; object-fit: cover }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; font-family: Inter; font-weight: 600; font-size: 14.5px; padding: 15px 32px; border-radius: 30px; transition: all .25s ease; cursor: pointer; white-space: nowrap; border: none }
+    .btn-primary { background: var(--accent); color: #fff }
+    .btn-primary:hover { background: var(--accent-2); transform: translateY(-2px) }
+    .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.4); color: #fff }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1) }
+    .btn-sm { padding: 11px 22px; font-size: 13.5px }
+
+    header { position: sticky; top: 0; z-index: 100; background: rgba(245, 249, 246, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); height: 80px }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 24px }
+    .nav-logo img { height: 42px; width: auto }
+    .nav-links { display: flex; align-items: center; gap: 36px; font-size: 15px; font-weight: 500 }
+    .nav-links a { color: var(--muted) }
+    .nav-links a:hover { color: var(--accent) }
+    .nav-actions { display: flex; align-items: center; gap: 16px }
+    .nav-actions .btn-ghost { border-color: var(--line); color: var(--text) }
+    .nav-actions .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: transparent }
+
+    .burger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 16px; background: none; border: none; cursor: pointer; z-index: 200; position: relative }
+    .burger span { display: block; height: 2px; width: 100%; background: var(--text); transition: transform .3s ease, opacity .3s ease; transform-origin: center }
+    
+    body.nav-open .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg) }
+    body.nav-open .burger span:nth-child(2) { opacity: 0 }
+    body.nav-open .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
+    
+    .nav-overlay { position: fixed; inset: 0; background: rgba(20, 36, 30, 0.4); backdrop-filter: blur(12px); z-index: 140; opacity: 0; pointer-events: none; transition: opacity .4s ease; display: flex; align-items: center; justify-content: center }
+    body.nav-open .nav-overlay { opacity: 1; pointer-events: all }
+
+    .nav-drawer { background: var(--card); border: 1px solid var(--line); border-radius: 24px; width: calc(100% - 48px); max-width: 400px; padding: 48px 32px; display: flex; flex-direction: column; align-items: center; gap: 32px; box-shadow: 0 30px 70px rgba(20, 36, 30, 0.2); transform: scale(0.95); transition: transform .4s cubic-bezier(.16, 1, .3, 1) }
+    body.nav-open .nav-drawer { transform: scale(1) }
+    body.nav-open { overflow: hidden }
+    
+    .drawer-links { display: flex; flex-direction: column; gap: 20px; text-align: center; width: 100% }
+    .drawer-links a { font-family: Fraunces; font-size: 24px; color: var(--text); font-weight: 500 }
+    .drawer-links a:hover { color: var(--accent) }
+    .drawer-cta { display: flex; flex-direction: column; gap: 12px; width: 100% }
+    .drawer-cta .btn-ghost { border-color: var(--line); color: var(--text) }
+
+    .hero { position: relative; padding: 140px 0 120px; overflow: hidden; text-align: center; color: #fff }
+    .hero::before { content: ""; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1920&q=80') center/cover; z-index: -2 }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(20, 36, 30, 0.4), rgba(20, 36, 30, 0.85)); z-index: -1 }
+    
+    .hero > .wrap { position: relative; z-index: 1 }
+    .hero .tag { display: inline-block; background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 8px 18px; border-radius: 30px; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 24px; backdrop-filter: blur(4px) }
+    .hero h1 { font-size: clamp(38px, 6vw, 64px); margin-bottom: 24px; font-weight: 500; color: #fff }
+    .hero h1 em { color: #88d4be; font-style: italic; font-weight: 500 }
+    .hero p.lead { font-size: 20px; color: rgba(255,255,255,0.9); max-width: 58ch; margin: 0 auto 40px; font-weight: 400 }
+    .hero .cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap }
+    
+    .hero .stats { display: flex; gap: 48px; justify-content: center; margin-top: 72px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 48px; flex-wrap: wrap }
+    .hero .stats .n { font-family: Fraunces; font-weight: 500; font-size: 34px; color: #fff }
+    .hero .stats .l { font-size: 13.5px; color: rgba(255,255,255,0.7); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em }
+
+    section { padding: 120px 0; border-top: 1px solid var(--line) }
+    .section-head { margin-bottom: 64px }
+    .section-head.center { text-align: center }
+    .section-head.center .sub { margin-left: auto; margin-right: auto }
+    
+    .eyebrow { color: var(--accent-2); font-family: Inter; font-weight: 700; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 12px }
+    .h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 500; margin-bottom: 16px }
+    .sub { color: var(--muted); max-width: 60ch; font-size: 17px }
+
+    .grid { display: grid; gap: 32px }
+    .g3 { grid-template-columns: repeat(3, 1fr) }
+    
+    .img-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; transition: all .35s ease; display: flex; flex-direction: column }
+    .img-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(20, 36, 30, 0.08); border-color: var(--accent) }
+    .img-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-bottom: 1px solid var(--line) }
+    .img-card-body { padding: 32px; display: flex; flex-direction: column; flex: 1 }
+    .img-card h3 { font-size: 22px; margin-bottom: 12px; font-weight: 500 }
+    .img-card p { color: var(--muted); font-size: 15px; line-height: 1.6; flex: 1 }
+
+    .cabinet-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center }
+    .cabinet-img-wrap { border-radius: var(--r); overflow: hidden; box-shadow: 0 24px 64px rgba(20, 36, 30, 0.1) }
+    .cabinet-img-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover }
+
+    .pill-list { display: flex; flex-direction: column; gap: 24px; margin-top: 32px }
+    .pill { display: flex; gap: 20px; align-items: flex-start; padding-bottom: 24px; border-bottom: 1px solid var(--line) }
+    .pill:last-child { border-bottom: none; padding-bottom: 0 }
+    .pill .chk { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); color: var(--accent-2); display: flex; align-items: center; justify-content: center }
+    .pill h3 { font-size: 19px; margin-bottom: 6px; font-weight: 500 }
+    .pill p { color: var(--muted); font-size: 15px; line-height: 1.6 }
+
+    .quote-wrap { max-width: 800px; margin: 0 auto; text-align: center }
+    .quote { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 64px 48px; box-shadow: 0 10px 40px rgba(20, 36, 30, 0.02) }
+    .quote p { font-size: 24px; font-family: Fraunces; font-weight: 500; line-height: 1.5; font-style: italic }
+    .quote .who { color: var(--muted); margin-top: 24px; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase }
+    .stars { color: var(--accent); font-size: 18px; letter-spacing: 4px; margin-bottom: 20px }
+
+    .faq-wrapper { max-width: 760px; margin: 0 auto }
+    .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 28px; margin-bottom: 14px; transition: border-color .2s }
+    .faq details[open] { border-color: var(--accent) }
+    .faq summary { cursor:pointer; list-style:none; font-weight:600; font-size:16px; display:flex; justify-content:space-between; align-items:center }
+    .faq summary::-webkit-details-marker { display:none }
+    .faq summary::after { content:"+"; color:var(--accent); font-size:22px; font-weight: 400; transition: transform .2s }
+    .faq details[open] summary::after { content:"–" }
+    .faq details p { color:var(--muted); padding-top:16px; margin-top:16px; font-size:15px; border-top: 1px solid var(--line) }
+
+    .band { position: relative; background: var(--accent-2); color: #fff; border-radius: 24px; padding: 100px 48px; text-align: center; box-shadow: 0 20px 40px rgba(27, 110, 85, 0.15); overflow: hidden }
+    .band::before { content: ""; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80') center/cover; opacity: 0.15; mix-blend-mode: overlay }
+    .band h2 { font-size: clamp(32px, 4.5vw, 46px); font-weight: 500; margin-bottom: 16px; position: relative; z-index: 1 }
+    .band p { margin: 0 auto 40px; max-width: 50ch; font-size: 18px; color: rgba(255,255,255,0.85); position: relative; z-index: 1 }
+    .band .btn { background: #fff; color: var(--accent-2); position: relative; z-index: 1 }
+    .band .btn:hover { background: var(--surface) }
+
+    footer { background: var(--surface); color: var(--text); padding: 100px 0 40px; border-top: 1px solid var(--line) }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 64px; border-bottom: 1px solid var(--line); padding-bottom: 64px; margin-bottom: 40px }
+    footer h4 { font-family: Inter; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 24px }
+    footer a { display: block; margin-bottom: 12px; font-size: 14.5px; color: var(--muted) }
+    footer a:hover { color: var(--accent) }
+    .footer-brand p { font-size: 15px; color: var(--muted); line-height: 1.65; margin-top: 20px; max-width: 38ch }
+    
+    .copy { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; color: var(--soft); flex-wrap: wrap; gap: 16px }
+    .footer-bottom-links { display: flex; gap: 28px }
+    .footer-bottom-links a { color: var(--soft); font-size: 13.5px }
+    .footer-bottom-links a:hover { color: var(--accent) }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.16, 1, .3, 1), transform .8s cubic-bezier(.16, 1, .3, 1) }
+    .reveal.in { opacity: 1; transform: none }
+
+    @media(max-width:1024px) {
+      .nav-links, .nav-actions { display: none }
+      .burger { display: flex }
+      .cabinet-layout { grid-template-columns: 1fr; gap: 48px }
+      .cabinet-img-wrap { max-width: 600px; margin: 0 auto; order: 2 }
+      .cabinet-img-wrap img { aspect-ratio: 16/9 }
+      .footer-grid { grid-template-columns: 1.2fr 0.9fr 0.9fr; gap: 40px }
+    }
+
+    @media(max-width:768px) {
+      header { height: 72px }
+      section { padding: 80px 0 }
+      .g3, .footer-grid { grid-template-columns: 1fr }
+      .footer-grid { gap: 48px }
+      .hero { padding: 100px 0 80px }
+      .hero .stats { gap: 28px; flex-direction: column }
+      .quote, .band { padding: 48px 24px }
+      .copy { flex-direction: column; text-align: center }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="nav-logo">
+        <img src="logo-equilibre.png" alt="Studio Équilibre">
+      </a>
+      <nav class="nav-links">
+        <a href="#soins">Nos soins</a>
+        <a href="#cabinet">Le cabinet</a>
+        <a href="#avis">Avis</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+33169000000" class="btn btn-ghost btn-sm">01 69 00 00 00</a>
+        <a href="#rdv" class="btn btn-primary btn-sm">Rendez-vous</a>
+      </div>
+      <button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-overlay" onclick="document.body.classList.remove('nav-open')">
+    <div class="nav-drawer" onclick="event.stopPropagation()">
+      <nav class="drawer-links">
+        <a href="#soins">Nos soins de santé</a>
+        <a href="#cabinet">Le cabinet médical</a>
+        <a href="#avis">Avis des patients</a>
+        <a href="#faq">Questions fréquentes</a>
+      </nav>
+      <div class="drawer-cta">
+        <a href="#rdv" class="btn btn-primary" onclick="document.body.classList.remove('nav-open')">Prendre RDV en ligne</a>
+        <a href="tel:+33169000000" class="btn btn-ghost">Nous appeler</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="tag">Kinésithérapie & Ostéopathie · Évry (91)</span>
+      <h1>Retrouvez votre <em>mobilité</em><br>et votre bien-être</h1>
+      <p class="lead">Au Studio Équilibre, nos praticiens vous accompagnent dans votre rééducation, le soulagement de vos douleurs et la prévention. Une approche personnalisée au cœur d'Évry-Courcouronnes.</p>
+      <div class="cta">
+        <a href="#rdv" class="btn btn-primary">Prendre rendez-vous en ligne</a>
+        <a href="tel:+33169000000" class="btn btn-ghost">Nous contacter</a>
+      </div>
+      <div class="stats">
+        <div><div class="n">3</div><div class="l">Praticiens diplômés</div></div>
+        <div><div class="n">6j/7</div><div class="l">Consultations & Domicile</div></div>
+        <div><div class="n">4,9/5</div><div class="l">Avis certifiés Google</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="soins">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Prises en charge</span>
+        <h2 class="h2">Des soins adaptés à votre corps</h2>
+        <p class="sub">Que vous soyez athlète, en phase de convalescence post-opératoire ou freiné par des tensions, nos parcours thérapeutiques s'adaptent à vos besoins.</p>
+      </div>
+      
+      <div class="grid g3">
+        <article class="img-card reveal">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80" alt="Séance de rééducation">
+          <div class="img-card-body">
+            <h3>Rééducation Globale</h3>
+            <p>Suivi post-traumatique, chirurgical ou lié à une immobilisation pour recouvrer l'intégralité de vos fonctions motrices et articulaires.</p>
+          </div>
+        </article>
+        <article class="img-card reveal">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" alt="Étirements et posture">
+          <div class="img-card-body">
+            <h3>Posturologie & Dos</h3>
+            <p>Traitement ciblé des lombalgies, cervicalgies chroniques et corrections des déséquilibres posturaux professionnels.</p>
+          </div>
+        </article>
+        <article class="img-card reveal">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80" alt="Kinésithérapie du sport">
+          <div class="img-card-body">
+            <h3>Kiné du Sport</h3>
+            <p>Accompagnement, reprise d'activité, renforcement musculaire et prévention des récidives pour sportifs de tous niveaux.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="cabinet" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="cabinet-layout">
+        <div>
+          <div class="section-head" style="margin-bottom:24px">
+            <span class="eyebrow">L'Environnement</span>
+            <h2 class="h2">Un accompagnement serein et normé</h2>
+            <p class="sub" style="margin-left:0; margin-top:16px">Notre structure pluridisciplinaire vous accueille dans un cadre moderne, équipé des dernières technologies de rééducation et de physiothérapie.</p>
+          </div>
+          
+          <div class="pill-list">
+            <div class="pill reveal">
+              <div class="chk"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div>
+                <h3>Équipe Certifiée</h3>
+                <p>Tous nos kinésithérapeutes et ostéopathes sont diplômés d'État.</p>
+              </div>
+            </div>
+            <div class="pill reveal">
+              <div class="chk"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div>
+                <h3>Plan de Soin Dédié</h3>
+                <p>Une évaluation initiale pour définir un protocole sur mesure.</p>
+              </div>
+            </div>
+            <div class="pill reveal">
+              <div class="chk"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div>
+                <h3>Normes PMR</h3>
+                <p>Espace de santé de plain-pied avec parking réservé aux patients.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cabinet-img-wrap reveal">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80" alt="Intérieur du cabinet médical moderne">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="avis">
+    <div class="wrap quote-wrap">
+      <div class="quote reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p>« Praticiens extrêmement pédagogues, à l'écoute et méticuleux. Mes douleurs cervicales chroniques se sont estompées au fil des séances, complétées par d'excellents exercices de renforcement postural à faire chez soi. »</p>
+        <div class="who">Karim B. — Suivi au cabinet</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">FAQ Médicale</span>
+        <h2 class="h2">Préparer votre consultation</h2>
+      </div>
+      
+      <div class="faq-wrapper">
+        <details open>
+          <summary>Faut-il disposer d'une prescription pour consulter ?</summary>
+          <p>La présentation d'une ordonnance médicale est requise pour ouvrir vos droits au remboursement par la Sécurité Sociale et votre mutuelle en kinésithérapie. L'ostéopathie ne nécessite aucune ordonnance préalable.</p>
+        </details>
+        <details>
+          <summary>Quelles pièces dois-je apporter lors du premier rendez-vous ?</summary>
+          <p>Veuillez vous munir de votre carte Vitale, de votre prescription médicale de soins, ainsi que de vos examens complémentaires (radiographies, IRM, scanners) récents en lien avec votre pathologie.</p>
+        </details>
+        <details>
+          <summary>Proposez-vous le tiers payant ?</summary>
+          <p>Oui, nous pratiquons le tiers payant sur la part obligatoire de la Sécurité Sociale (et sur la part mutuelle selon les accords en vigueur de votre organisme).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="rdv">
+    <div class="wrap">
+      <div class="band reveal">
+        <h2>Planifiez votre bilan initial</h2>
+        <p>Prenez rendez-vous en quelques clics pour entamer votre parcours de soins avec nos professionnels de santé au cabinet.</p>
+        <a href="#" class="btn">Accéder à Doctolib</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="logo-equilibre.png" alt="Studio Équilibre" style="height:38px; width:auto">
+          <p>Structure de soins pluridisciplinaire dédiée à la kinésithérapie respiratoire, orthopédique, traumatologique et aux thérapies manuelles globales d'ostéopathie.</p>
+        </div>
+        <div class="footer-block">
+          <h4>Spécialités</h4>
+          <a href="#soins">Rééducation Motrice</a>
+          <a href="#soins">Traumatologie du Sport</a>
+          <a href="#soins">Thérapie Manuelle</a>
+          <a href="#soins">Soins Posturaux</a>
+        </div>
+        <div class="footer-block">
+          <h4>Praticiens & Cabinet</h4>
+          <a href="tel:+33169000000">01 69 00 00 00</a>
+          <a href="#infos">5 allée du Parc, 91000 Évry</a>
+          <a href="#faq">Remboursements & Mutuelles</a>
+        </div>
+      </div>
+      
+      <div class="copy">
+        <span>© 2026 Studio Équilibre. Établissement de soins conventionné.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Protection des données (RGPD)</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) }
+    }), { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.querySelectorAll('.drawer-links a').forEach(link => {
+      link.addEventListener('click', () => document.body.classList.remove('nav-open'));
+    });
+  </script>
+</body>
+
+</html>
