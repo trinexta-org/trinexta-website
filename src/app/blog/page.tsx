@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { getArticles } from "@/lib/sanity";
 import { BlogList } from "@/components/blog/BlogList";
 import { CATEGORIES } from "@/components/blog/BlogList";
-import { SearchBar } from "@/components/blog/SearchBar";
 import { Suspense } from "react";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { NewsletterModal } from "@/components/blog/NewsletterModal";
+import { NewsletterCTA } from "@/components/blog/NewsletterCTA";
 
 const title = "Blog informatique TPE PME - Conseils IT";
 const description = "Découvrez nos articles, conseils et guides en infogérance, cybersécurité et maintenance informatique pour les entreprises en Île-de-France.";
@@ -39,18 +40,17 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const { articles } = await getArticles({ query: q });
 
   return (
-    <main className="bg-primary min-h-screen pt-8 lg:pt-12 relative">
+    <main className="bg-primary min-h-screen relative text-white">
       <BreadcrumbJsonLd 
         items={[
           { name: "Accueil", url: "/" },
           { name: "blog", url: "/blog" }
         ]} 
       />
-      <Suspense fallback={<div className="h-14" />}>
-        <SearchBar />
-      </Suspense>
 
-      <BlogList initialArticles={articles} categories={CATEGORIES} searchQuery={q} />
+      <BlogList initialArticles={articles} categories={CATEGORIES} />
+      <NewsletterModal/>
+      <NewsletterCTA/>
     </main>
   );
 }

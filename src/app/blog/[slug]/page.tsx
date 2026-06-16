@@ -26,6 +26,9 @@ import {
   HeadingTOC
 } from "@/lib/sanity";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { NewsletterCTA } from "@/components/blog/NewsletterCTA";
+import { SommaireMobile } from "@/components/blog/SommaireMobile";
+import { DynamicImageScroll } from "@/components/blog/DynamicImageScroll";
 
 type ArticlePageProps = {
   params: Promise<{
@@ -126,6 +129,27 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     publisher: publisherNode,
   };
 
+  const fakeBlocks = [
+  {
+    id: "1",
+    texte: "Trinexta sécurise vos infrastructures contre les menaces modernes. Notre approche proactive de la cybersécurité permet de détecter les failles avant qu'elles ne soient exploitées, garantissant la continuité de votre activité B2B.",
+    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop",
+    altText: "Sécurité informatique"
+  },
+  {
+    id: "2",
+    texte: "L'infogérance sur-mesure pour les PME. Nous devenons votre direction informatique externe : gestion des serveurs, assistance utilisateur rapide, et maintenance préventive de tout votre parc informatique en Île-de-France.",
+    imageUrl: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&auto=format&fit=crop",
+    altText: "Serveurs et Cloud"
+  },
+  {
+    id: "3",
+    texte: "Migrez vers un Cloud souverain et performant. Trinexta vous accompagne dans l'externalisation de vos données avec des solutions de sauvegarde redondantes et hautement sécurisées, accessibles partout en toute flexibilité.",
+    imageUrl: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop",
+    altText: "Réseau et Cloud"
+  }
+];
+
   return (
     <>
       <JsonLd data={jsonLdData} />
@@ -152,20 +176,39 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
 
-          <Container className=" relative max-w-4xl">
-            <div className="flex gap-3 mb-6">
-              <span className="bg-secondary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-                {LIBELLES_CATEGORIES[article.categorie]}
+          <Container className="relative max-w-4xl z-10">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="bg-secondary text-white px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest shadow-lg">
+                {LIBELLES_CATEGORIES[article.categorie] || article.categorie}
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-normal leading-[1.1] mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] mb-8 text-balance drop-shadow-lg">
               {article.titre}
             </h1>
 
-            <div className="flex items-center gap-6 text-white/60 font-medium uppercase tracking-widest text-sm border-t border-white/10 pt-8">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-white/70 font-medium text-sm border-t border-white/20 pt-8 mt-4">
+              
+              {/* Badge Auteur */}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/30 shadow-inner">
+                  <span className="text-secondary font-black text-sm">
+                    {article.auteur ? article.auteur.charAt(0).toUpperCase() : "T"}
+                  </span>
+                </div>
+                <span className="text-white font-bold">{article.auteur || "Expert Trinexta"}</span>
+              </div>
+              
+              <div className="w-1.5 h-1.5 rounded-full bg-white/20 hidden sm:block" />
+              
               <span>{formatDatePublication(article.datePublication)}</span>
-              <span>{article.tempsLecture} min de lecture</span>
+              
+              <div className="w-1.5 h-1.5 rounded-full bg-white/20 hidden sm:block" />
+              
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                {article.tempsLecture} min de lecture
+              </span>
             </div>
           </Container>
         </header>
@@ -201,8 +244,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   </div>
                 </div>
               </aside>
-
+              
               <article className="w-full min-w-0">
+                <SommaireMobile titres={headings} />
                 <div className="prose prose-invert prose-lg max-w-full">
                   <PortableTextArticle value={article.contenu} />
                 </div>
@@ -227,7 +271,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
             </Container>
           </Section>
+
         )}
+        <NewsletterCTA/>
         <ScrollToTop />
       </main>
     </>

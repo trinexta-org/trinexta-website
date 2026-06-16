@@ -6,6 +6,7 @@ import {
 } from "next-sanity";
 import { type CorpsArticle, type ImageArticle, urlForImage } from "@/lib/sanity";
 import { generateSlug } from "@/lib/utils";
+import { DynamicImageScroll } from "./blog/DynamicImageScroll";
 
 const extractTextFromBlock = (block: PortableTextBlock | undefined): string => {
   if (!block || !block.children) return "";
@@ -77,7 +78,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   types: {
     image: ({ value }: { value: ImageArticle }) => {
-  if (!value.asset?._ref) return null;
+      if (!value.asset?._ref) return null;
 
       return (
         <figure className="space-y-3">
@@ -95,6 +96,25 @@ const portableTextComponents: PortableTextComponents = {
           ) : null}
         </figure>
       );
+    },
+    
+    // 2. --- NOUVEAU BLOC : LE CARROUSEL DYNAMIQUE ---
+    stickyScroll: ({ value }: { value: any }) => {
+      // Sécurité : on vérifie que le bloc contient bien des paires texte/image
+      if (!value?.blocks || value.blocks.length === 0) return null;
+
+      // On formate les données qui viennent de Sanity pour notre composant React
+      const formattedBlocks = value.blocks.map((block: any) => ({
+        id: block._key,
+        texte: block.texte,
+        // Si l'image existe on génère son URL, sinon on passe une chaîne vide
+        imageUrl: block.image?.asset?._ref 
+          ? urlForImage(block.image).width(800).url() 
+          : "",
+        altText: block.alt || "Illustration Trinexta",
+      }));
+
+      return <DynamicImageScroll blocks={formattedBlocks} />;
     },
   },
 };

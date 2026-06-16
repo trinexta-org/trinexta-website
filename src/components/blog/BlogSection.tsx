@@ -6,8 +6,13 @@ import Link from "next/link";
 import { urlForImage, formatDatePublication, ResumeArticle} from "@/lib/sanity";
 import { Container } from "../layout/Container";
 import { Section } from "../layout/Section";
+import { HaloBackground } from "@/components/ui/HaloBackground";
+import { BlogMarquee } from "./blogMarquee";
+
 
 interface BlogSectionProps {
+  heroArticle: ResumeArticle | null;
+  marqueeArticles: ResumeArticle[];
   articles: ResumeArticle[]; 
   categories: { id: string; label: string }[];
   activeCategory: string;
@@ -15,107 +20,113 @@ interface BlogSectionProps {
   searchQuery?: string;
 }
 
-export function BlogSection({ articles, categories, activeCategory, onCategoryChange }: BlogSectionProps) {
+export function BlogSection({ heroArticle, marqueeArticles, articles, categories, activeCategory, onCategoryChange }: BlogSectionProps) {
   
+  const getCategoryLabel = (catId: string) => {
+    return categories.find(c => c.id === catId)?.label || catId;
+  };
+
   return (
-    <Section className="bg-primary py-8 md:py-32 relative overflow-hidden">
+    <Section className="bg-primary py-8 md:py-24 relative overflow-hidden">
+      <HaloBackground intensity="low" />
+      
       <Container>
-        <div className="flex flex-col lg:flex-row gap-10">
+        {/* Titre Editorial Style */}
+        <div className="text-center mb-16 md:mb-20 relative z-10">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-none mb-6">
+            Insights & <span className="text-secondary">Innovations</span>
+          </h2>
+          <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto font-medium">
+            Explorez nos articles d&apos;experts, les tendances tech et nos guides pratiques pour maintenir votre entreprise performante.
+          </p>
+        </div>
+
+      
+      </Container>
+
+      {/* CARROUSEL DÉFILANT (Placé hors container pour utiliser 100% de la largeur écran) */}
+      <BlogMarquee articles={marqueeArticles} categoryLabel={getCategoryLabel} />
+
+      <Container className="mt-16 md:mt-24">
+        <div className="flex flex-col lg:flex-row gap-12 relative">
           
-          {/* Sidebar des catégories */}
-          <div className="w-full lg:w-1/3 px-4 md:px-0">
+          {/* Catégories Latérales */}
+          <div className="w-full lg:w-1/4 px-4 md:px-0">
             <div className="sticky top-40 z-30">
-              <h2 className="text-xl md:text-5xl font-black text-white tracking-normal leading-none mb-12">
-                Le Mag <span className="text-secondary">Trinexta</span>
-              </h2>
-              
-              <nav className="flex flex-col gap-6 border-white/10 pl-6">
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-6 border-b border-white/10 pb-3">Sujets d&apos;expertise</h3>
+              <nav className="flex flex-col gap-3">
                   {categories.map((cat) => (
                       <button
-                      key={cat.id}
-                      onClick={() => onCategoryChange(cat.id)}
-                      className={`text-left transition-all duration-300 ${
-                          activeCategory === cat.id 
-                          ? "text-secondary scale-105 border-l-2 border-secondary pl-4" 
-                          : "text-white/40 hover:text-white/80 pl-4"
-                      }`}
+                        key={cat.id}
+                        onClick={() => onCategoryChange(cat.id)}
+                        className={`text-left transition-all duration-300 py-1.5 text-base ${
+                            activeCategory === cat.id 
+                            ? "text-secondary font-black translate-x-1" 
+                            : "text-white/40 hover:text-white/80"
+                        }`}
                       >
-                      <h3 className="text-xl font-bold tracking-normal">{cat.label}</h3>
+                        {cat.label}
                       </button>
                   ))}
               </nav>
             </div>
           </div>
 
-          {/* Grille d'articles */}
-          <div className="w-full lg:w-2/3 px-4 md:px-0 space-y-12">
-
+          {/* Grille Principale "Knowledge Posts" */}
+          <div className="w-full lg:w-3/4 px-4 md:px-0">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-6 border-b border-white/10 pb-3">Tous les articles</h3>
+            
             {articles.length === 0 && (
-              <div className="text-center py-20 border border-dashed border-white/10 rounded-[40px]">
-                <h3 className="text-2xl font-bold text-white mb-2">Aucun article trouvé</h3>
-                <p className="text-white/50 mb-6">Essayez une autre recherche ou changez de catégorie.</p>
-                <Link href="/blog" className="text-secondary font-bold hover:underline">
-                  Réinitialiser la recherche
-                </Link>
+              <div className="text-center py-16 border border-dashed border-white/10 rounded-3xl">
+                <h4 className="text-xl font-bold text-white mb-2">Aucun article trouvé</h4>
+                <p className="text-white/50 text-sm">Modifiez vos filtres ou essayez une autre recherche.</p>
               </div>
             )}
 
-            {articles.map((post, index) => (
-              <div
-                key={post.slug.current}
-                id={`post-${post.slug.current}`}
-                className="relative aspect-video rounded-[40px] overflow-hidden group shadow-2xl border border-white/5 transition-all duration-500 hover:shadow-secondary/20 hover:border-white/20"
-              >
-                {post.imageUne ? (
-                  <Image
-                    src={urlForImage(post.imageUne).width(1200).url()}
-                    alt={post.titre}
-                    fill
-                    fetchPriority={index === 0 ? "high" : "auto"}
-                    sizes="(max-width: 768px) 100vw, 66vw"
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                    <span className="text-gray-400 text-sm">Image indisponible</span>
-                  </div>
-                )}
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent" />
-                <div className="absolute inset-0 p-4 md:p-10 flex flex-col justify-end transition-transform duration-500 group-hover:-translate-y-2">
-                  <div className="bg-primary/80 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8 max-w-xl transition-colors duration-500 group-hover:bg-primary/95">
-                    
-                    <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-3 md:mb-4 text-[9px] md:text-xs font-bold uppercase tracking-widest text-secondary">
-                      <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
-                        <Calendar className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> {formatDatePublication(post.datePublication)}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {articles.map((post) => (
+                <Link
+                  key={post.slug.current}
+                  href={`/blog/${post.slug.current}`}
+                  className="group flex flex-col bg-white/5 border border-white/10 rounded-[28px] overflow-hidden hover:border-secondary/40 transition-all duration-300"
+                >
+                  <div className="relative aspect-[16/10] w-full overflow-hidden">
+                    {post.imageUne ? (
+                      <Image
+                        src={urlForImage(post.imageUne).width(800).url()}
+                        alt={post.titre}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 38vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-104"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-white/5" />
+                    )}
+                    <div className="absolute top-4 left-4">
+                      <span className="px-2.5 py-1 bg-primary/80 backdrop-blur-md border border-white/10 rounded-full text-white text-[9px] font-bold uppercase tracking-wider">
+                        {getCategoryLabel(post.categorie)}
                       </span>
-                      {post.auteur && (
-                        <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
-                          <User className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> TRINEXTA
-                        </span>
-                      )}
-                      {post.tempsLecture && (
-                        <span className="flex items-center gap-1.5 md:gap-2 text-white/90">
-                          <Clock className="w-3 h-3 md:w-4 md:h-4 text-secondary" /> {post.tempsLecture} min
-                        </span>
-                      )}
                     </div>
+                  </div>
+                  
+                  <div className="p-6 md:p-8 flex flex-col flex-grow">
+                    <span className="text-secondary text-[11px] font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5" /> {formatDatePublication(post.datePublication)}
+                    </span>
                     
-                    <h3 className="text-xl sm:text-2xl md:text-4xl font-black tracking-normal mb-3 md:mb-4 text-white leading-tight line-clamp-3">
+                    <h3 className="text-lg md:text-xl font-bold text-white leading-snug mb-4 line-clamp-3 group-hover:text-secondary transition-colors font-sans">
                       {post.titre}
                     </h3>
                     
-                    <Link
-                      href={`/blog/${post.slug.current}`}
-                      className="inline-flex items-center gap-2 md:gap-3 bg-white text-primary px-4 py-2 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-secondary hover:text-white transition-all text-xs md:text-base w-fit"
-                    >
-                      Lire l&apos;article <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                    </Link>
+                    <div className="mt-auto pt-4 flex items-center gap-1.5 text-white/40 text-xs md:text-sm font-semibold group-hover:text-white transition-colors">
+                      Lire l&apos;article <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
+
         </div>
       </Container>  
     </Section>

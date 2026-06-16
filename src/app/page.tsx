@@ -12,6 +12,7 @@ import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
 import { sanityClient } from "@/lib/sanity"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
+import { NewsletterModal } from "@/components/blog/NewsletterModal"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = "Infogérance et IT pour PME - Évry, Essonne | Trinexta";
@@ -87,6 +88,7 @@ export default async function Home() {
       <InterventionMap />
 
       <FinalCTA />
+      <NewsletterModal/>
 
     </main>
   )

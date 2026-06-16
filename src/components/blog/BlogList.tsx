@@ -1,62 +1,108 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { BlogSection } from "./BlogSection";
 import { ResumeArticle } from "@/lib/sanity";
 import { CategorieOption, CATEGORIES_FILTRE } from "@/data/categories";
-import { ArrowRight } from "lucide-react";
+import { TransitionTitle } from "@/components/TransitionTitle";
+
+import Link from "next/link";
+import { Container } from "../layout/Container";
+import { BlogHero } from "./BlogHero";
+import { BlogPaginatedGrid } from "./BlogPaginatedGrid";
+import { FinalCTA } from "../FinalCTA";
+import { BlogCasClientPromo } from "./BlogCasClientPromo";
+import { BlogInteractiveCarousel } from "./BlogInteractiveCarousel";
 
 export { CATEGORIES_FILTRE as CATEGORIES };
 
-export function BlogList({ initialArticles, categories }: { initialArticles: ResumeArticle[], categories: CategorieOption[], searchQuery?: string }) {
+export function BlogList({ initialArticles, categories }: { initialArticles: ResumeArticle[], categories: CategorieOption[] }) {
   const [activeCategory, setActiveCategory] = useState("tous");
-  const [visibleCount, setVisibleCount] = useState(4); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(""); 
+  
+  const ITEMS_PER_PAGE = 6; 
 
-  const filtered = activeCategory === "tous" 
-    ? initialArticles 
-    : initialArticles.filter((a) => a.categorie === activeCategory);
-    
-  const visibleArticles = filtered.slice(0, visibleCount);
-  const hasMore = visibleCount < filtered.length;
+  const carouselArticles = initialArticles.slice(0, 3);
+  
+  const filtered = initialArticles.filter((a) => {
+    const matchesCat = activeCategory === "tous" || a.categorie === activeCategory;
+    const matchesSearch = a.titre.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          a.extrait?.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCat && matchesSearch;
+  });
+  
+  const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentPaginatedArticles = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const getCategoryLabel = (catId: string) => {
+    return categories.find(c => c.id === catId)?.label || catId;
+  };
+
+  const handleCategoryChange = (id: string) => {
+    setActiveCategory(id);
+    setCurrentPage(1); 
+  };
 
   return (
-    <div className="relative">
-      <BlogSection 
-        articles={visibleArticles}
+    <main className="relative bg-primary pb-32">
+      <BlogHero />
+
+
+      <div className="mt-12 mb-8">
+        <TransitionTitle
+          surtitle="À la une"
+          line1="Le Mag"
+          line2="Trinexta"
+        />
+      </div>
+
+      {/* 2. CARROUSEL */}
+      {carouselArticles.length > 0 && (
+        <div className="mb-20">
+          <BlogInteractiveCarousel 
+            articles={carouselArticles} 
+            categoryLabel={getCategoryLabel} 
+          />
+        </div>
+      )}
+
+      <div className="mb-12">
+        <TransitionTitle
+          surtitle="Études de cas"
+          line1="Notre expertise"
+          line2="en action"
+        />
+      </div>
+
+     {/* 3. SÉPARATEUR : ÉTUDE DE CAS */}
+      <BlogCasClientPromo />
+
+      {/* 4. SECTION DES ARTICLES AVEC RECHERCHE */}
+      <div id="tous-les-articles">
+        <TransitionTitle
+          surtitle={activeCategory !== "tous" || searchQuery ? "Résultats" : "Notre Blog"}
+          line1={activeCategory !== "tous" || searchQuery ? "Articles" : "Voir tous"}
+          line2={activeCategory !== "tous" || searchQuery ? "trouvés" : "les articles"}
+        />
+      </div>
+
+      <BlogPaginatedGrid 
+        articles={currentPaginatedArticles}
         categories={categories}
         activeCategory={activeCategory}
-        onCategoryChange={(id) => {
-          setActiveCategory(id);
-          setVisibleCount(4); 
-        }}
+        onCategoryChange={handleCategoryChange}
+        searchQuery={searchQuery}
+        onSearchChange={(v) => { setSearchQuery(v); setCurrentPage(1); }}
+        categoryLabel={getCategoryLabel}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
       />
 
-      <AnimatePresence>
-        {hasMore && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="flex justify-center pb-32"
-          >
-            <button 
-              onClick={() => setVisibleCount(p => p + 4)}
-              className="group relative inline-flex items-center gap-4 md:gap-6 bg-transparent border border-white/20 px-8 py-4 md:px-12 md:py-6 rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 hover:border-secondary"
-            >
-              <div className="absolute inset-0 bg-white translate-y-[102%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-
-              <span className="relative z-10 text-white group-hover:text-primary font-black text-xs md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] transition-colors duration-500">
-                Voir plus d&apos;articles
-              </span>
-              
-              <div className="relative z-10 text-secondary group-hover:text-primary transition-colors duration-500">
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+      <div className="mt-20">
+        <FinalCTA />
+      </div>
+    </main>
   );
 }
