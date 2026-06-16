@@ -2,8 +2,11 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation | Trinexta",
+  title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation",
   description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",
+  alternates: {
+    canonical: "/microsoft-365",
+  },
   openGraph: {
     title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation | Trinexta",
     description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",

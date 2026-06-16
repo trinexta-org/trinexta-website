@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
@@ -22,7 +23,7 @@ export function CasClientsHero() {
           fill
           fetchPriority={i <= 2 ? "high" : "auto"}
           className="object-cover"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       )}
       overlays={
@@ -31,7 +32,7 @@ export function CasClientsHero() {
           <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/65 to-transparent" />
         </>
       }
-      renderSlide={(slide) => (
+      renderSlide={(slide, index, isActive) => (
         <div className="space-y-4 md:space-y-5">
           <div className="flex flex-wrap items-center gap-3">
             {[
@@ -50,7 +51,7 @@ export function CasClientsHero() {
           </div>
 
           <Heading
-            as="h1"
+            as={isActive ? "h1" : "h2"}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-xl text-white"
           >
             {slide.title.split(" ").map((word, i) => {
@@ -58,12 +59,14 @@ export function CasClientsHero() {
               const rawWord = isItalic ? word.slice(1, -1) : word
               const clean = rawWord.toLowerCase().replace(/[,.:]/g, "")
               return (
-                <span
-                  key={i}
-                  className={`inline-block mr-2 sm:mr-3 ${highlightedWords.includes(clean) ? "text-secondary" : "text-white"}`}
-                >
-                  {isItalic ? <em>{rawWord}</em> : rawWord}
-                </span>
+                <React.Fragment key={i}>
+                  <span
+                    className={`inline-block mr-2 sm:mr-3 ${highlightedWords.includes(clean) ? "text-secondary" : "text-white"}`}
+                  >
+                    {isItalic ? <em>{rawWord}</em> : rawWord}
+                  </span>
+                  {" "}
+                </React.Fragment>
               )
             })}
           </Heading>

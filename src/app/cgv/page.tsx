@@ -3,15 +3,25 @@ import { Section } from "@/components/layout/Section"
 import { LegalContent } from "@/components/legal/LegalContent"
 import { FinalCTA } from "@/components/FinalCTA"
 import { cgvData } from "@/data/cgv"
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: `${cgvData.hero.title} — Trinexta`,
+  title: `${cgvData.hero.title}`,
   description: "Conditions Générales d'Utilisation du site Trinexta et description de nos services informatiques.",
+  alternates: {
+    canonical: "/cgv",
+  },
 }
 
 export default function CgvPage() {
   return (
     <main className="bg-primary min-h-screen relative space-y-12 pb-12">
+      <BreadcrumbJsonLd 
+        items={[
+        { name: "Accueil", url: "/" },
+        { name: "cgv", url: "/cgv" }
+        ]} 
+      />
       <Section className="bg-primary pt-24 pb-24">
         <LegalContent data={cgvData} />
       </Section>

@@ -113,6 +113,7 @@ export function ServicesDetails() {
                     alt={`Logo ${partner.name}`}
                     fill
                     className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                  />
               </div>
               <div className="space-y-1">
