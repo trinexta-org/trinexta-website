@@ -2,46 +2,7 @@
 
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { DemoModal } from "./DemoModal";
-
-interface DemoProject {
-  id: string;
-  imageUrl: string;
-  demoUrl: string;
-  label: string;
-}
-
-const DEMOS: DemoProject[] = [
-  {
-    id: 'btp',
-    label: 'Artisan BTP',
-    imageUrl: '/demos/btp.jpeg',
-    demoUrl: '/demos/modele-artisan-btp.html',
-  },
-  {
-    id: 'sante',
-    label: 'Santé Bien-être',
-    imageUrl: '/demos/sante.jpeg',
-    demoUrl: '/demos/modele-sante-bienetre.html',
-  },
-  {
-    id: 'restaurant',
-    label: 'Restaurant',
-    imageUrl: '/demos/restaurant.jpeg',
-    demoUrl: '/demos/modele-restaurant.html',
-  },
-  {
-    id: 'conseil',
-    label: 'Cabinet Conseil',
-    imageUrl: '/demos/conseil.jpeg',
-    demoUrl: '/demos/modele-cabinet-conseil.html',
-  },
-  {
-    id: 'commerce',
-    label: 'Commerce de proximité',
-    imageUrl: '/demos/commerce.jpeg',
-    demoUrl: '/demos/modele-commerce-proximite.html',
-  },
-];
+import { DEMOS, type DemoProject } from "@/data/demos";
 
 function ArrowsIcon() {
   return (
@@ -196,41 +157,35 @@ export default function StudioDemos() {
   const [selectedDemo, setSelectedDemo] = useState<DemoProject | null>(null);
 
   return (
-    <section id="demos" className="py-16 text-primary-foreground">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-10">
-
-        <div className="flex flex-col gap-5 sm:hidden">
-          {DEMOS.map((demo) => (
-            <div key={demo.id} style={{ aspectRatio: '4/5' }}>
-              <DemoCard demo={demo} variant="tall" onSelect={setSelectedDemo} />
-            </div>
-          ))}
-        </div>
-
-        <div className="hidden sm:flex flex-col gap-6">
-
-          <div className="grid grid-cols-2 gap-6">
-            <DemoCard demo={DEMOS[0]} variant="tall" onSelect={setSelectedDemo} />
-            <DemoCard demo={DEMOS[1]} variant="tall" onSelect={setSelectedDemo} />
+    <div className="text-primary-foreground">
+      <div className="flex flex-col gap-5 sm:hidden">
+        {DEMOS.map((demo) => (
+          <div key={demo.id} style={{ aspectRatio: '4/5' }}>
+            <DemoCard demo={demo} variant="tall" onSelect={setSelectedDemo} />
           </div>
-
-          <DemoCard demo={DEMOS[2]} variant="wide" onSelect={setSelectedDemo} />
-
-          <div className="grid grid-cols-2 gap-6">
-            <DemoCard demo={DEMOS[3]} variant="tall" onSelect={setSelectedDemo} />
-            <DemoCard demo={DEMOS[4]} variant="tall" onSelect={setSelectedDemo} />
-          </div>
-
-        </div>
-
+        ))}
       </div>
 
-      <DemoModal 
-        isOpen={!!selectedDemo} 
-        onClose={() => setSelectedDemo(null)} 
+      <div className="hidden sm:flex flex-col gap-6">
+        <div className="grid grid-cols-2 gap-6">
+          <DemoCard demo={DEMOS[0]} variant="tall" onSelect={setSelectedDemo} />
+          <DemoCard demo={DEMOS[1]} variant="tall" onSelect={setSelectedDemo} />
+        </div>
+
+        <DemoCard demo={DEMOS[2]} variant="wide" onSelect={setSelectedDemo} />
+
+        <div className="grid grid-cols-2 gap-6">
+          <DemoCard demo={DEMOS[3]} variant="tall" onSelect={setSelectedDemo} />
+          <DemoCard demo={DEMOS[4]} variant="tall" onSelect={setSelectedDemo} />
+        </div>
+      </div>
+
+      <DemoModal
+        isOpen={!!selectedDemo}
+        onClose={() => setSelectedDemo(null)}
         url={selectedDemo?.demoUrl || null}
         title={selectedDemo?.label || ""}
       />
-    </section>
+    </div>
   );
 }

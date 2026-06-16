@@ -36,15 +36,15 @@ export function TechnicienPricing() {
               animate={{ y: [-15, 15, -15] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               style={{ transform: "rotateX(10deg) rotateY(-15deg) rotateZ(3deg)" }}
-              className="relative w-[340px] h-[720px] bg-[#0a0f1d] rounded-[48px] border-[8px] border-[#1e293b] shadow-[-25px_40px_80px_rgba(0,0,0,0.6),0_0_50px_rgba(92,146,184,0.1),inset_0_0_4px_rgba(255,255,255,0.1)] flex flex-col"
+              className="relative w-[340px] h-[720px] bg-phone-body rounded-[48px] border-[8px] border-phone-frame shadow-[-25px_40px_80px_rgba(0,0,0,0.6),0_0_50px_rgba(92,146,184,0.1),inset_0_0_4px_rgba(255,255,255,0.1)] flex flex-col"
             >
-              <div className="absolute top-[110px] -left-[10px] w-[3px] h-[26px] bg-[#0f172a] rounded-l-md" />
-              <div className="absolute top-[160px] -left-[10px] w-[3px] h-[50px] bg-[#0f172a] rounded-l-md" />
-              <div className="absolute top-[220px] -left-[10px] w-[3px] h-[50px] bg-[#0f172a] rounded-l-md" />
-              <div className="absolute top-[180px] -right-[10px] w-[3px] h-[70px] bg-[#0f172a] rounded-r-md" />
+              <div className="absolute top-[110px] -left-[10px] w-[3px] h-[26px] bg-phone-button rounded-l-md" />
+              <div className="absolute top-[160px] -left-[10px] w-[3px] h-[50px] bg-phone-button rounded-l-md" />
+              <div className="absolute top-[220px] -left-[10px] w-[3px] h-[50px] bg-phone-button rounded-l-md" />
+              <div className="absolute top-[180px] -right-[10px] w-[3px] h-[70px] bg-phone-button rounded-r-md" />
 
               <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[110px] h-[32px] bg-black rounded-full z-40 shadow-[inset_0_0_4px_rgba(255,255,255,0.1)] flex items-center justify-end px-3">
-                 <div className="w-2.5 h-2.5 rounded-full bg-[#111] border border-white/10" />
+                 <div className="w-2.5 h-2.5 rounded-full bg-phone-camera border border-white/10" />
               </div>
 
               <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.03] via-transparent to-white/[0.01] pointer-events-none z-20 rounded-[40px]" />
@@ -62,9 +62,9 @@ export function TechnicienPricing() {
                     className="object-contain" 
                   />
                   <div className="flex flex-col gap-[5px] p-1">
-                    <div className="w-6 h-[1.5px] bg-[#1a1a1a]" />
-                    <div className="w-6 h-[1.5px] bg-[#1a1a1a]" />
-                    <div className="w-6 h-[1.5px] bg-[#1a1a1a]" />
+                    <div className="w-6 h-[1.5px] bg-neutral-900" />
+                    <div className="w-6 h-[1.5px] bg-neutral-900" />
+                    <div className="w-6 h-[1.5px] bg-neutral-900" />
                   </div>
                 </div>
 

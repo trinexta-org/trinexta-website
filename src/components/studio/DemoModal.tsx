@@ -86,15 +86,15 @@ export function DemoModal({ isOpen, onClose, url, title }: DemoModalProps) {
               </button>
             </div>
 
-            <div className="relative w-full flex-1 bg-[#0a0f1d] rounded-[44px] md:rounded-[48px] border-[10px] md:border-[12px] border-[#1e293b] shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_4px_rgba(255,255,255,0.1)] flex flex-col">
-              
-              <div className="absolute top-[110px] md:top-[15%] -left-[12px] md:-left-[14px] w-[3px] md:w-[4px] h-[26px] md:h-[40px] bg-[#0f172a] rounded-l-md" />
-              <div className="absolute top-[160px] md:top-[25%] -left-[12px] md:-left-[14px] w-[3px] md:w-[4px] h-[50px] md:h-[60px] bg-[#0f172a] rounded-l-md" />
-              <div className="absolute top-[220px] md:top-[35%] -left-[12px] md:-left-[14px] w-[3px] md:w-[4px] h-[50px] md:h-[60px] bg-[#0f172a] rounded-l-md" />
-              <div className="absolute top-[180px] md:top-[20%] -right-[12px] md:-right-[14px] w-[3px] md:w-[4px] h-[70px] md:h-[90px] bg-[#0f172a] rounded-r-md" />
+            <div className="relative w-full flex-1 bg-phone-body rounded-[44px] md:rounded-[48px] border-[10px] md:border-[12px] border-phone-frame shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_4px_rgba(255,255,255,0.1)] flex flex-col">
+
+              <div className="absolute top-[110px] md:top-[15%] -left-[12px] md:-left-[14px] w-[3px] md:w-[4px] h-[26px] md:h-[40px] bg-phone-button rounded-l-md" />
+              <div className="absolute top-[160px] md:top-[25%] -left-[12px] md:-left-[14px] w-[3px] md:w-[4px] h-[50px] md:h-[60px] bg-phone-button rounded-l-md" />
+              <div className="absolute top-[220px] md:top-[35%] -left-[12px] md:-left-[14px] w-[3px] md:w-[4px] h-[50px] md:h-[60px] bg-phone-button rounded-l-md" />
+              <div className="absolute top-[180px] md:top-[20%] -right-[12px] md:-right-[14px] w-[3px] md:w-[4px] h-[70px] md:h-[90px] bg-phone-button rounded-r-md" />
 
               <div className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 w-[100px] md:w-[140px] h-[26px] md:h-[34px] bg-black rounded-full z-40 shadow-[inset_0_0_4px_rgba(255,255,255,0.1)] flex items-center justify-end px-3">
-                 <div className="w-2.5 h-2.5 rounded-full bg-[#111] border border-white/10" />
+                 <div className="w-2.5 h-2.5 rounded-full bg-phone-camera border border-white/10" />
               </div>
 
               <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.03] via-transparent to-white/[0.01] pointer-events-none z-20 rounded-[34px] md:rounded-[36px]" />

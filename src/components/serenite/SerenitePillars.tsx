@@ -57,7 +57,7 @@ export function SerenitePillars() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 1024px) 100vw, 33vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/40 to-[#0B1221]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/40 to-primary" />
 
             <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-secondary/30">
               {p.num}
