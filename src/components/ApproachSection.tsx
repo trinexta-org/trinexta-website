@@ -75,7 +75,7 @@ export function ApproachSection() {
                 transition={{ delay: 0.2 }}
               >
                 <Text className="mt-6 text-white/70 text-base md:text-lg max-w-md leading-relaxed">
-                  Nous ne nous contentons pas de résoudre des problèmes informatiques. We construisons une base solide pour votre croissance.
+                  Nous ne nous contentons pas de résoudre des problèmes informatiques. Nous construisons une base solide pour votre croissance.
                 </Text>
               </motion.div>
             </div>

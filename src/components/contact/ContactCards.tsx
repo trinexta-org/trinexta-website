@@ -12,6 +12,7 @@ const CONTACT_CARDS = [
     id: "bureau",
     title: "Bureau d'activité",
     image: "/images/contact/bureau.webp",
+    alt: "Le Magelan Grand Paris Sud, bureau d'activité de trinexta",
     content: (
       <Text variant="small" className="text-white/80 leading-relaxed mt-4 drop-shadow-md font-medium">
         7 Rue Montespan<br />

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pétale & Co — Artisan Fleuriste à Évry-Courcouronnes | Livraison 7j/7</title>
+  <meta name="description" content="Pétale & Co, votre artisan fleuriste à Évry-Courcouronnes. Bouquets de saison, décoration florale pour mariages et deuil. Click & collect et livraison locale.">
+  <link rel="canonical" href="https://petale-co.fr/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pétale & Co — Fleuriste à Évry-Courcouronnes">
+  <meta property="og:description" content="Bouquets de saison, compositions sur mesure, livraison locale. Ouvert du mardi au dimanche.">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Florist",
+    "name":"Pétale & Co",
+    "priceRange":"€€",
+    "telephone":"+33160000001",
+    "email":"bonjour@petale-co.fr",
+    "image":"https://petale-co.fr/og.jpg",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"8 rue des Jardins",
+      "postalCode":"91000",
+      "addressLocality":"Évry-Courcouronnes",
+      "addressCountry":"FR"
+    },
+    "areaServed":["Évry-Courcouronnes","Courcouronnes","Essonne"],
+    "openingHoursSpecification":[
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"19:30"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"09:00","closes":"13:00"}
+    ],
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"124"}
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #fdfbfb;
+      --surface: #f7f2f0;
+      --card: #ffffff;
+      --line: #ebd9d4;
+      --text: #352a2a;
+      --muted: #7a6a66;
+      --accent: #c45d7c;
+      --accent-2: #7a9e6e;
+      --accent-g: linear-gradient(135deg, #c45d7c, #d37591);
+      --maxw: 1160px;
+      --r: 24px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent }
+    body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden }
+    
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1.14; font-weight: 700; letter-spacing: 0.01em }
+    a { color: inherit; text-decoration: none; transition: all .25s ease }
+    img { display: block; max-width: 100% }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: Inter; font-weight: 600; font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase; padding: 14px 30px; border-radius: 30px; transition: all .3s ease; cursor: pointer; white-space: nowrap; border: none }
+    .btn-primary { background: var(--accent-g); color: #fff; box-shadow: 0 8px 24px rgba(196, 93, 124, 0.15) }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(196, 93, 124, 0.25) }
+    .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--text) }
+    .btn-ghost:hover { border-color: var(--accent); background: rgba(196, 93, 124, 0.02) }
+    .btn-sm { padding: 10px 22px; font-size: 13px }
+
+    header { position: sticky; top: 0; z-index: 100; background: rgba(253, 251, 251, 0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); height: 90px }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 24px }
+    .nav-logo img { height: 44px; width: auto }
+    .nav-links { display: flex; align-items: center; gap: 40px; font-size: 15px; font-weight: 500 }
+    .nav-links a { color: var(--muted) }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent) }
+    .nav-actions { display: flex; align-items: center; gap: 20px; flex-shrink: 0 }
+
+    .burger { display: none; flex-direction: column; justify-content: center; align-items: center; width: 44px; height: 44px; background: none; border: none; cursor: pointer; z-index: 200; position: relative }
+    .burger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: transform .3s ease, opacity .3s ease; position: absolute }
+    .burger span:nth-child(1) { transform: translateY(-5px) }
+    .burger span:nth-child(2) { transform: translateY(5px) }
+    
+    body.nav-open .burger span:nth-child(1) { transform: translateY(0) rotate(45deg) }
+    body.nav-open .burger span:nth-child(2) { transform: translateY(0) rotate(-45deg) }
+    
+    .nav-drawer { position: fixed; inset: 0; background: rgba(253, 251, 251, 0.98); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; z-index: 150; opacity: 0; pointer-events: none; transition: opacity .4s cubic-bezier(.25, 1, .5, 1) }
+    body.nav-open .nav-drawer { opacity: 1; pointer-events: all }
+    
+    .drawer-links { display: flex; flex-direction: column; align-items: center; gap: 24px }
+    .drawer-links a { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-style: italic; font-weight: 600; color: var(--text); transition: transform .3s ease, color .3s ease }
+    .drawer-links a:hover { color: var(--accent); transform: scale(1.05) }
+    .drawer-cta { margin-top: 48px; text-align: center; width: 100%; max-width: 280px }
+    .drawer-cta .btn { width: 100%; margin-top: 16px }
+
+    .hero { position: relative; padding: 80px 0 100px; overflow: hidden }
+    .hero-bg { position: absolute; inset: 0; z-index: -1 }
+    .hero-bg::before { content: ""; position: absolute; inset: 0; background: radial-gradient(700px 500px at 85% -5%, rgba(196, 93, 124, 0.12), transparent 60%) }
+    .hero-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(400px 300px at 10% 90%, rgba(122, 158, 110, 0.1), transparent 60%) }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center }
+    
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(196, 93, 124, 0.08); color: var(--accent); border: 1px solid rgba(196, 93, 124, 0.15); padding: 7px 18px; border-radius: 30px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 24px }
+    .hero h1 { font-size: clamp(38px, 5.5vw, 68px); margin-bottom: 24px; font-weight: 600 }
+    .hero h1 em { color: var(--accent); font-style: italic; font-weight: 400 }
+    .hero .lead { font-size: 19px; color: var(--muted); max-width: 48ch; line-height: 1.65; margin-bottom: 40px }
+    .hero .cta { display: flex; gap: 16px; flex-wrap: wrap }
+
+    .hero-stats { display: flex; gap: 40px; margin-top: 64px; border-top: 1px solid var(--line); padding-top: 40px }
+    .stat-n { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 36px; color: var(--text); line-height: 1 }
+    .stat-l { font-size: 13px; color: var(--muted); margin-top: 6px; font-weight: 500; letter-spacing: 0.02em }
+
+    .hero-visual { position: relative }
+    .hero-card-main { background: var(--card); border: 12px solid #fff; border-radius: 32px; overflow: hidden; box-shadow: 0 40px 90px rgba(53, 42, 42, 0.05) }
+    .hero-card-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block }
+    
+    .hero-card-float { position: absolute; bottom: -16px; left: -24px; background: var(--card); border-radius: 20px; padding: 20px 24px; box-shadow: 0 16px 40px rgba(53, 42, 42, 0.04); min-width: 190px; display: flex; align-items: center; gap: 16px; border: 1px solid var(--line) }
+    .float-icon { width: 44px; height: 44px; background: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-2) }
+    .float-num { font-family: 'Cormorant Garamond'; font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.1 }
+    .float-label { font-size: 12px; color: var(--muted); margin-top: 2px }
+
+    section { padding: 120px 0; border-top: 1px solid var(--line) }
+    .section-head { margin-bottom: 64px }
+    .section-head.center { text-align: center }
+    .section-head.center .sub { margin-left: auto; margin-right: auto }
+    
+    .eyebrow { display: inline-block; color: var(--accent-2); font-family: Inter; font-weight: 700; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px }
+    .h2 { font-size: clamp(34px, 4.5vw, 52px); margin-bottom: 16px; font-weight: 600 }
+    .sub { color: var(--muted); max-width: 60ch; font-size: 17px; line-height: 1.7 }
+
+    .grid { display: grid; gap: 32px }
+    .g3 { grid-template-columns: repeat(3, 1fr) }
+    
+    .collection-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; transition: transform .4s cubic-bezier(.16, 1, .3, 1), box-shadow .4s cubic-bezier(.16, 1, .3, 1); display: flex; flex-direction: column }
+    .collection-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(196, 93, 124, 0.06) }
+    .c-img { width: 100%; aspect-ratio: 1/1; object-fit: cover }
+    .c-body { padding: 36px 32px; display: flex; flex-direction: column; flex: 1 }
+    .c-body h3 { font-size: 26px; margin-bottom: 10px; font-weight: 600 }
+    .c-body p { color: var(--muted); font-size: 15px; margin-bottom: 24px; flex: 1; line-height: 1.6 }
+    .c-price { font-weight: 600; color: var(--accent); font-size: 16px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 20px }
+
+    .surface-bg { background: var(--surface) }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px }
+    .service-item { padding: 12px }
+    .s-icon { width: 40px; height: 40px; color: var(--accent-2); margin-bottom: 20px }
+    .service-item h3 { font-size: 24px; margin-bottom: 12px; font-weight: 600 }
+    .service-item p { color: var(--muted); font-size: 15px; line-height: 1.65 }
+
+    .info-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: flex-start }
+    .info-img-wrap { border-radius: var(--r); overflow: hidden; box-shadow: 0 24px 64px rgba(53, 42, 42, 0.04) }
+    .info-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block }
+    
+    .info-box { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 40px; margin-bottom: 32px }
+    .info-box h3 { font-size: 22px; margin-bottom: 24px; font-weight: 600; border-bottom: 1px solid var(--line); padding-bottom: 12px; letter-spacing: 0.02em }
+    .hours { width: 100%; border-collapse: collapse; font-size: 15px }
+    .hours td { padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted) }
+    .hours tr:last-child td { border-bottom: none; padding-bottom: 0 }
+    .hours td:last-child { text-align: right; color: var(--text); font-weight: 600 }
+    
+    .contact-details { list-style: none }
+    .contact-details li { display: flex; gap: 16px; margin-bottom: 20px; color: var(--muted); font-size: 15px; line-height: 1.5 }
+    .contact-details li:last-child { margin-bottom: 0 }
+    .contact-details svg { flex-shrink: 0; color: var(--accent) }
+
+    .quote-container { max-width: 800px; margin: 0 auto; text-align: center }
+    .quote-box { padding: 40px 0; position: relative }
+    .stars { color: var(--accent); font-size: 16px; letter-spacing: 6px; margin-bottom: 24px }
+    .quote-text { font-family: 'Cormorant Garamond'; font-size: 32px; font-style: italic; color: var(--text); line-height: 1.4; font-weight: 500 }
+    .quote-author { margin-top: 28px; font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase }
+
+    .band { background: var(--surface); border-radius: var(--r); padding: 90px 40px; text-align: center; position: relative; border: 1px solid var(--line) }
+    .band h2 { font-size: clamp(34px, 4.5vw, 48px); margin-bottom: 16px; font-weight: 600 }
+    .band p { font-size: 18px; max-width: 48ch; margin: 0 auto 40px; color: var(--muted) }
+
+    footer { background: var(--surface); color: var(--text); padding: 100px 0 40px; border-top: 1px solid var(--line) }
+    .footer-layout { display: flex; justify-content: space-between; gap: 64px; margin-bottom: 80px }
+    .footer-brand { flex: 1.5; max-width: 360px }
+    .footer-brand p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-top: 24px }
+    .footer-nav { display: flex; gap: 80px; flex: 2; justify-content: flex-end }
+    .footer-col h4 { font-family: Inter; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 24px }
+    .footer-col a { display: block; color: var(--muted); font-size: 14.5px; margin-bottom: 14px }
+    .footer-col a:hover { color: var(--accent) }
+    .footer-contact-text { font-size: 14.5px; color: var(--muted); line-height: 1.6 }
+    
+    .footer-bottom { border-top: 1px solid var(--line); padding-top: 36px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted) }
+    .footer-bottom-links { display: flex; gap: 32px }
+    .footer-bottom-links a:hover { color: var(--accent) }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.16, 1, .3, 1), transform .8s cubic-bezier(.16, 1, .3, 1) }
+    .reveal.in { opacity: 1; transform: none }
+
+    @media(max-width:1024px) {
+      header { height: 80px }
+      .nav-links, .nav-actions { display: none }
+      .burger { display: flex }
+      .hero-grid { grid-template-columns: 1fr; gap: 56px }
+      .hero-visual { max-width: 440px; margin: 0 auto }
+      .grid { gap: 24px }
+      .info-grid { grid-template-columns: 1fr; gap: 48px }
+      .info-img-wrap { max-width: 400px; margin: 0 auto; order: 2 }
+      .footer-layout { flex-direction: column; gap: 48px; margin-bottom: 56px }
+      .footer-nav { justify-content: stroke; gap: 48px; flex-wrap: wrap }
+    }
+
+    @media(max-width:640px) {
+      section { padding: 80px 0 }
+      .g3, .services-grid { grid-template-columns: 1fr }
+      .hero-stats { gap: 24px; flex-wrap: wrap }
+      .footer-nav { flex-direction: column; gap: 36px }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 16px }
+      .band { padding: 64px 20px }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="nav-logo">
+        <img src="logo-petale.png" alt="Pétale & Co">
+      </a>
+      <nav class="nav-links">
+        <a href="#collections" class="active">Collections</a>
+        <a href="#services">Nos services</a>
+        <a href="#infos">Horaires & Accès</a>
+        <a href="#avis">Avis</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+33160000001" class="btn btn-ghost btn-sm">01 60 00 00 01</a>
+        <a href="#commander" class="btn btn-primary btn-sm">Commander</a>
+      </div>
+      <button class="burger" aria-label="Ouvrir le menu" onclick="document.body.classList.toggle('nav-open')">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-drawer">
+    <nav class="drawer-links">
+      <a href="#collections" onclick="document.body.classList.remove('nav-open')">Collections de saison</a>
+      <a href="#services" onclick="document.body.classList.remove('nav-open')">Nos services sur mesure</a>
+      <a href="#infos" onclick="document.body.classList.remove('nav-open')">Horaires & Atelier</a>
+      <a href="#avis" onclick="document.body.classList.remove('nav-open')">Mots doux des clients</a>
+    </nav>
+    <div class="drawer-cta">
+      <a href="#commander" class="btn btn-primary" onclick="document.body.classList.remove('nav-open')">Commander un bouquet</a>
+      <a href="tel:+33160000001" class="btn btn-ghost">Nous appeler</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-tag">Artisan Fleuriste · Évry-Courcouronnes</div>
+        <h1>Des fleurs qui font <em>du bien</em>, chaque jour</h1>
+        <p class="lead">Bouquets délicats façonnés à l'atelier, sélections botaniques durables et compositions sur mesure pour vos moments de vie. Expédition locale soignée.</p>
+        <div class="cta">
+          <a href="#commander" class="btn btn-primary">Commander un bouquet</a>
+          <a href="#collections" class="btn btn-ghost">Découvrir l'univers</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-n">6j/7</div>
+            <div class="stat-l">Atelier ouvert du mardi au dimanche</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">2h</div>
+            <div class="stat-l">Retrait Click & Collect à la boutique</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-card-main">
+          <img class="hero-card-img" src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=800&q=80" alt="Artisan fleuriste au travail">
+        </div>
+        <div class="hero-card-float">
+          <div class="float-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="float-num">Livraison verte</div>
+            <div class="float-label">À Évry et communes proches</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="collections">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Sélection éphémère</span>
+        <h2 class="h2">Cueillies au fil des saisons</h2>
+        <p class="sub">Chaque création est unique, imaginée à partir des arrivages du matin. Nous sélectionnons des producteurs écoresponsables pour des fleurs qui durent vraiment.</p>
+      </div>
+      <div class="grid g3">
+        <article class="collection-card reveal">
+          <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=600&q=80" alt="Le Bouquet du Moment" class="c-img">
+          <div class="c-body">
+            <h3>Le Bouquet du Moment</h3>
+            <p>Une création sauvage et poétique, réinventée chaque jour selon l'inspiration de l'artisan du marché.</p>
+            <div class="c-price"><span>À partir de</span> <span>25 €</span></div>
+          </div>
+        </article>
+        <article class="collection-card reveal">
+          <img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=600&q=80" alt="Roses de jardin" class="c-img">
+          <div class="c-body">
+            <h3>Roses d'Exception</h3>
+            <p>Une sélection de variétés anciennes et parfumées, assemblées avec finesse dans un écrin de feuillages délicats.</p>
+            <div class="c-price"><span>À partir de</span> <span>35 €</span></div>
+          </div>
+        </article>
+        <article class="collection-card reveal">
+          <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600&q=80" alt="Plantes choisies" class="c-img">
+          <div class="c-body">
+            <h3>Plantes d'Atelier</h3>
+            <p>Des végétaux graphiques et durables, rempotés dans de la terre organique, prêts à habiter vos intérieurs.</p>
+            <div class="c-price"><span>À partir de</span> <span>18 €</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="surface-bg">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Prestations</span>
+        <h2 class="h2">Pour accompagner la vie</h2>
+        <p class="sub">De la célébration intime au grand décor, nous mettons notre sensibilité végétale au service de vos histoires.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-item reveal">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <h3>Mariages & Fêtes</h3>
+          <p>Bouquets suspendus, tables fleuries et accessoires sur mesure. Nous dessinons l'atmosphère de votre journée.</p>
+        </div>
+        <div class="service-item reveal">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <h3>Abonnements Végétaux</h3>
+          <p>Des fleurs fraîches ou des plantes de saison livrées régulièrement pour embellir vos comptoirs ou votre salon.</p>
+        </div>
+        <div class="service-item reveal">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          <h3>Deuil & Souvenir</h3>
+          <p>Compositions naturelles et douces. Couronnes de feuillage et gerbes texturées pour un hommage tout en retenue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="infos">
+    <div class="wrap">
+      <div class="info-grid">
+        <div class="info-img-wrap reveal">
+          <img src="https://images.unsplash.com/photo-1507290439931-a861b5a38200?w=800&q=80" alt="Atelier d'artisan" class="info-img">
+        </div>
+        <div>
+          <div class="section-head" style="margin-bottom:40px">
+            <span class="eyebrow">L'Atelier</span>
+            <h2 class="h2">Nous rencontrer</h2>
+            <p class="sub">Passez nous voir pour choisir vos tiges à l'unité, respirer les parfums de la semaine ou échanger sur un projet de création.</p>
+          </div>
+          
+          <div class="info-box reveal">
+            <h3>Les Heures d'Ouverture</h3>
+            <table class="hours">
+              <tr><td>Lundi</td><td>Fermé au public</td></tr>
+              <tr><td>Mardi – Vendredi</td><td>09:00 – 19:30</td></tr>
+              <tr><td>Samedi</td><td>09:00 – 20:00</td></tr>
+              <tr><td>Dimanche</td><td>09:00 – 13:00</td></tr>
+            </table>
+          </div>
+
+          <div class="info-box reveal">
+            <h3>Atelier & Contact</h3>
+            <ul class="contact-details">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>8 rue des Jardins, 91000 Évry-Courcouronnes</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>01 60 00 00 01</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="avis" class="surface-bg">
+    <div class="wrap quote-container">
+      <div class="quote-box reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p class="quote-text">« Toujours de magnifiques fleurs fraîches et des créations originales. Mon bouquet de mariage a fait sensation et a tenu incroyablement longtemps. Une vraie écoute et des conseils adorables. »</p>
+        <div class="quote-author">Nadia R. — Cliente fidèle</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="commander">
+    <div class="wrap">
+      <div class="band reveal">
+        <h2>Offrez un peu de poésie</h2>
+        <p>Composez et réservez par simple appel : nous préparons votre commande pour une livraison verte ou un retrait express en boutique.</p>
+        <div style="display:flex; justify-content:center">
+          <a href="tel:+33160000001" class="btn btn-primary">Appeler l'Atelier : 01 60 00 00 01</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-layout">
+        <div class="footer-brand">
+          <img src="logo-petale.png" alt="Pétale & Co" style="height:40px; width:auto">
+          <p>Atelier d'artisan fleuriste dédié au design végétal écoresponsable, aux bouquets poétiques et à la livraison de proximité.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>L'Univers</h4>
+            <a href="#collections">Les Bouquets</a>
+            <a href="#collections">Les Plantes</a>
+            <a href="#services">Prestations Mariage</a>
+            <a href="#services">Abonnements</a>
+          </div>
+          <div class="footer-col">
+            <h4>Informations</h4>
+            <a href="#infos">Horaires d'Atelier</a>
+            <a href="#infos">Zone de livraison</a>
+            <a href="#avis">Mots doux clients</a>
+          </div>
+          <div class="footer-col" style="max-width:220px">
+            <h4>L'Atelier</h4>
+            <p class="footer-contact-text">8 rue des Jardins<br>91000 Évry-Courcouronnes</p>
+            <p class="footer-contact-text" style="margin-top:12px; font-weight:600; color:var(--text)">01 60 00 00 01</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Pétale & Co. Artisan végétal.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) }
+    }), { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.querySelectorAll('.drawer-links a').forEach(link => {
+      link.addEventListener('click', () => document.body.classList.remove('nav-open'));
+    });
+  </script>
+</body>
+
+</html>

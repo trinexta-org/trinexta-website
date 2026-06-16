@@ -13,24 +13,29 @@ const reasons = [
     title: "Équipe experte",
     description: "Vous bénéficiez d'un accompagnement assuré par des professionnels capables de comprendre vos enjeux, de traiter vos demandes avec sérieux et de vous orienter vers des solutions adaptées.",
     image: "/images/why-us/equipe.avif",
+    alt: "Équipe d'experts informatiques Trinexta collaborant sur un projet IT pour une PME en Île-de-France.",
   },
   {
     id: 2,
     title: "Solutions sur mesure",
     description: "Nos prestations sont pensées pour les TPE et PME, avec une approche utile, lisible et sans complexité inutile.",
     image: "/images/why-us/sur-mesure.avif",
+    alt: "Technicien Trinexta configurant une solution d'infogérance sur mesure sur un poste de travail.",
+
   },
   {
     id: 3,
     title: "Interlocuteur unique",
     description: "Vous gagnez en simplicité avec un contact privilégié pour centraliser vos demandes et suivre plus facilement vos sujets informatiques.",
     image: "/images/why-us/interlocuteur.avif",
+    alt: "Ordinateur portable affichant le tableau de bord de supervision proactive et de reporting IT Trinexta pour une PME.",
   },
   {
     id: 4,
     title: "Transparence totale",
     description: "Nos engagements sont clairs, nos interventions sont cadrées, et nos tarifs annoncés sans surprise.",
     image: "/images/why-us/transparence.avif",
+    alt: "Experte informatique de l'équipe Trinexta souriante lors d'une séance de brainstorming sur l'architecture réseau d'un client."
   },
 ]
 
@@ -66,10 +71,11 @@ export function WhyChooseUs() {
                 <div className="absolute inset-0 w-full h-full">
                   <Image
                     src={reason.image}
-                    alt={reason.title}
+                    alt={reason.alt}
                     fill
                     className="object-cover"
                     priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <motion.div
                     animate={{ opacity: isActive ? 0.7 : 0.3 }}
@@ -92,31 +98,32 @@ export function WhyChooseUs() {
                   )}
                 </AnimatePresence>
 
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ delay: 0.1 }}
-                      className="absolute bottom-4 md:bottom-10 left-4 md:left-10 right-4 md:right-10 z-10"
-                    >
-                      <div className="backdrop-blur-xl bg-white/10 border border-white/20 p-5 md:p-8 rounded-xl md:rounded-2xl shadow-2xl max-w-2xl">
-                        <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                          <span className="flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-sm md:text-xl shrink-0">
-                            0{index + 1}
-                          </span>
-                          <Heading as="h3" className="text-xl md:text-3xl font-black text-white tracking-normal">
-                            {reason.title}
-                          </Heading>
-                        </div>
-                        <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-4 md:line-clamp-none">
-                          {reason.description}
-                        </Text>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <motion.div
+                  initial={false}
+                  animate={{
+                    opacity: isActive ? 1 : 0, 
+                    scale: isActive ? 1 : 0.95 
+                  }}
+                  transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }}
+                  className={`absolute bottom-4 md:bottom-10 left-4 md:left-10 right-4 md:right-10 z-10 transition-all ${
+                    isActive ? "pointer-events-auto" : "pointer-events-none"
+                  }`}
+                  aria-hidden={!isActive}
+                >
+                  <div className="backdrop-blur-xl bg-white/10 border border-white/20 p-5 md:p-8 rounded-xl md:rounded-2xl shadow-2xl max-w-2xl">
+                    <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                      <span className="flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-sm md:text-xl shrink-0">
+                        0{index + 1}
+                      </span>
+                      <Heading as="h3" className="text-xl md:text-3xl font-black text-white tracking-normal">
+                        {reason.title}
+                      </Heading>
+                    </div>
+                    <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-4 md:line-clamp-none">
+                      {reason.description}
+                    </Text>
+                  </div>
+                </motion.div>
 
               </motion.div>
             )

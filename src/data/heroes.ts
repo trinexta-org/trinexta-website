@@ -31,29 +31,6 @@ export const aproposHeroSlides = [
   }
 ]
 
-export const offresHeroSlides = [
-  {
-    part1: "Offre",
-    part2: "Sérénité",
-    subtitle: "L'informatique PME clé en main. Support illimité, maintenance proactive et cybersécurité avancée pour piloter votre activité en toute tranquillité."
-  },
-  {
-    part1: "Offre",
-    part2: "Impulsion",
-    subtitle: "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité informatique."
-  },
-  {
-    part1: "Services",
-    part2: "Annexes",
-    subtitle: "Prestations IT sur mesure et à la demande. Conseils, achat de matériel, réseaux, sauvegardes professionnelles et migrations Microsoft 365."
-  },
-  {
-    part1: "Trinexta",
-    part2: "Studio",
-    subtitle: "Création et développement de sites internet sur mesure. Découvrez les plateformes et solutions web performantes conçues par notre entreprise."
-  }
-]
-
 export const contactHeroSlides = [
   {
     part1: "Contactez",

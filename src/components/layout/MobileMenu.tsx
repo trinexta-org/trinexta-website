@@ -81,29 +81,26 @@ export function MobileMenu() {
 
                     return (
                       <div key={link.label} className="flex flex-col">
-                        <div className="flex items-center justify-between py-3">
-                          {link.subMenu ? (
+                        <div className="flex items-center justify-between py-3 w-full">
+                          <Link 
+                            href={link.href} 
+                            onClick={() => setIsOpen(false)} 
+                            className={cn(
+                              "text-base font-bold w-fit transition-all",
+                              isActive ? "text-secondary border-b-2 border-secondary" : "text-primary"
+                            )}
+                          >
+                            {link.label}
+                          </Link>
+
+                          {link.subMenu && (
                             <button 
                               onClick={() => toggleSubMenu(link.label)} 
-                              className={cn(
-                                "text-base font-bold flex items-center gap-2 w-full text-left transition-colors",
-                                isSubOpen ? "text-secondary" : "text-primary"
-                              )}
+                              className="p-2 -mr-2 text-primary hover:text-secondary"
+                              aria-label="Déplier le sous-menu"
                             >
-                              {link.label}
-                              <ChevronDown className={cn("w-4 h-4 transition-transform", isSubOpen && "rotate-180")} />
+                              <ChevronDown className={cn("w-5 h-5 transition-transform", isSubOpen && "rotate-180")} />
                             </button>
-                          ) : (
-                            <Link 
-                              href={link.href} 
-                              onClick={() => setIsOpen(false)} 
-                              className={cn(
-                                "text-base font-bold w-fit transition-all",
-                                isActive ? "text-secondary border-b-2 border-secondary" : "text-primary"
-                              )}
-                            >
-                              {link.label}
-                            </Link>
                           )}
                         </div>
 

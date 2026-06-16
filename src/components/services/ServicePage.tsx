@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/Button"
 import { FadeIn } from "@/components/ui/FadeIn"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { GridCards } from "@/components/layout/GridCards"
+import { BreadcrumbJsonLd } from "../seo/BreadcrumbJsonLd";
 
 export interface ServicePageProps {
     serviceSlug: string
@@ -26,7 +27,22 @@ export interface ServicePageProps {
     cta: { line1: string; line2: string; line3: string; description: string; buttonText: string; buttonHref: string }
 }
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (media.matches !== matches) setMatches(media.matches);
+    const listener = () => setMatches(media.matches);
+    window.addEventListener("resize", listener);
+    return () => window.removeEventListener("resize", listener);
+  }, [matches, query]);
+  return matches;
+}
+
 export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, cta }: ServicePageProps) {
+    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
+    
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
     const [activeBenefit, setActiveBenefit] = useState(0)
 
@@ -35,6 +51,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalDataIndex, setModalDataIndex] = useState(0)
+    const isMobile = useMediaQuery("(max-width: 767px)");
 
     useEffect(() => {
         if (userInteracted) return;
@@ -64,20 +81,40 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
         });
     }
 
-    const jsonLd = {
+        const faqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": faq.map((item) => ({
-            "@type": "Question",
-            "name": item.question,
-            "acceptedAnswer": { "@type": "Answer", "text": item.answer },
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": { "@type": "Answer", "text": item.answer },
         })),
-    }
+    };
+
+    // 2. Schéma Service
+    const serviceSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": `${hero.titlePart1} ${hero.titlePart2}`,
+        "description": hero.description,
+        "provider": {
+        "@type": "LocalBusiness",
+        "name": "Trinexta",
+        },
+    };
+
 
     return (
         <div className="bg-primary min-h-screen text-white">
-            <JsonLd data={jsonLd} />
-
+            <JsonLd data={faqSchema} />
+            <JsonLd data={serviceSchema} />
+            <BreadcrumbJsonLd 
+                items={[
+                    { name: "Accueil", url: "/" },
+                    { name: "Nos Offres", url: "/nos-offres" },
+                    { name: `${hero.titlePart1} ${hero.titlePart2}`, url: `/nos-offres/${serviceSlug}` }
+                ]} 
+            />
             {/* 1. HERO */}
             <ViewportHero>
                 <div className="absolute inset-0 z-0">
@@ -154,112 +191,113 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                     <Heading as="h2" className="text-white text-3xl md:text-4xl">{offer.title}</Heading>
                     <Text variant="lead" className="text-white/80 text-base md:text-lg">{offer.description}</Text>
                 </div>
+                {!isMobile ? (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[minmax(180px,auto)] md:auto-rows-[minmax(220px,auto)]">
+                        {bentoOrder.map((currentDataIndex, gridPositionIndex) => {
 
-                <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[minmax(180px,auto)] md:auto-rows-[minmax(220px,auto)]">
-                    {bentoOrder.map((currentDataIndex, gridPositionIndex) => {
+                            const feat = offer.features[currentDataIndex];
+                            const isMainFocus = gridPositionIndex === 0;
+                            const isSecondaryWithImage = gridPositionIndex === 4;
+                            const hasImage = isMainFocus || isSecondaryWithImage;
 
-                        const feat = offer.features[currentDataIndex];
-                        const isMainFocus = gridPositionIndex === 0;
-                        const isSecondaryWithImage = gridPositionIndex === 4;
-                        const hasImage = isMainFocus || isSecondaryWithImage;
+                            const bentoClass = isMainFocus ? "md:col-span-2 md:row-span-2" : isSecondaryWithImage ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1";
+                            const imageIndex = isMainFocus ? 1 : 2;
 
-                        const bentoClass = isMainFocus ? "md:col-span-2 md:row-span-2" : isSecondaryWithImage ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1";
-                        const imageIndex = isMainFocus ? 1 : 2;
+                            return (
+                                <motion.div
+                                    layout
+                                    key={`bento-slot-${gridPositionIndex}`}
+                                    onClick={() => handleDesktopClick(gridPositionIndex)}
+                                    className={`relative overflow-hidden rounded-xl md:rounded-2xl border border-white/10 group ${bentoClass} ${!isMainFocus ? 'cursor-pointer hover:border-secondary/50' : 'cursor-default'} ${!hasImage ? 'bg-white/[0.02]' : ''}`}
+                                >
+                                    <AnimatePresence mode="popLayout">
+                                        <motion.div
+                                            key={`content-${currentDataIndex}`}
+                                            layoutId={`bento-item-${currentDataIndex}`}
+                                            transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+                                            className="absolute inset-0 w-full h-full"
+                                        >
+                                            {hasImage && (
+                                                <>
+                                                    <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
+                                                </>
+                                            )}
 
-                        return (
-                            <motion.div
-                                layout
-                                key={`bento-slot-${gridPositionIndex}`}
-                                onClick={() => handleDesktopClick(gridPositionIndex)}
-                                className={`relative overflow-hidden rounded-xl md:rounded-2xl border border-white/10 group ${bentoClass} ${!isMainFocus ? 'cursor-pointer hover:border-secondary/50' : 'cursor-default'} ${!hasImage ? 'bg-white/[0.02]' : ''}`}
-                            >
-                                <AnimatePresence mode="popLayout">
-                                    <motion.div
-                                        key={`content-${currentDataIndex}`}
-                                        layoutId={`bento-item-${currentDataIndex}`}
-                                        transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
-                                        className="absolute inset-0 w-full h-full"
-                                    >
-                                        {hasImage && (
-                                            <>
-                                                <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
-                                            </>
-                                        )}
-
-                                        {!isMainFocus && (
-                                            <div className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-20 group-hover:bg-secondary/40 transition-colors">
-                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                                                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                                                </svg>
-                                            </div>
-                                        )}
-
-                                        <div className={`relative z-10 h-full flex flex-col p-5 md:p-8 ${hasImage ? 'justify-end' : 'justify-start'}`}>
-                                            <Heading as="h3" className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">
-                                                {feat.title}
-                                            </Heading>
-
-                                            {isMainFocus ? (
-                                                <div className="overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-secondary/30 scrollbar-track-transparent">
-                                                    <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                                                        {feat.desc}
-                                                    </p>
-                                                </div>
-                                            ) : (
-                                                <div className="overflow-hidden">
-                                                    <p className="text-white/80 text-sm md:text-base leading-relaxed line-clamp-3">
-                                                        {feat.desc}
-                                                    </p>
+                                            {!isMainFocus && (
+                                                <div className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-20 group-hover:bg-secondary/40 transition-colors">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                                    </svg>
                                                 </div>
                                             )}
-                                        </div>
-                                    </motion.div>
-                                </AnimatePresence>
-                            </motion.div>
-                        )
-                    })}
-                </div>
 
-                <div className="grid md:hidden grid-cols-1 gap-4">
-                    {offer.features.map((feat, idx) => {
-                        const hasImage = idx === 0 || idx === 4;
-                        const imageIndex = idx === 0 ? 1 : 2;
+                                            <div className={`relative z-10 h-full flex flex-col p-5 md:p-8 ${hasImage ? 'justify-end' : 'justify-start'}`}>
+                                                <Heading as="h3" className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">
+                                                    {feat.title}
+                                                </Heading>
 
-                        return (
-                            <button
-                                key={`mobile-bento-${idx}`}
-                                onClick={() => {
-                                    setModalDataIndex(idx);
-                                    setIsModalOpen(true);
-                                }}
-                                className={`relative p-6 rounded-xl border border-white/10 text-left flex flex-col group overflow-hidden ${!hasImage ? 'bg-white/[0.03]' : 'min-h-[200px] justify-end'}`}
-                            >
-                                {hasImage && (
-                                    <>
-                                        <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill className="object-cover" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40" />
-                                    </>
-                                )}
+                                                {isMainFocus ? (
+                                                    <div className="overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-secondary/30 scrollbar-track-transparent">
+                                                        <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                                                            {feat.desc}
+                                                        </p>
+                                                    </div>
+                                                ) : (
+                                                    <div className="overflow-hidden">
+                                                        <p className="text-white/80 text-sm md:text-base leading-relaxed line-clamp-3">
+                                                            {feat.desc}
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 gap-4">
+                        {offer.features.map((feat, idx) => {
+                            const hasImage = idx === 0 || idx === 4;
+                            const imageIndex = idx === 0 ? 1 : 2;
 
-                                <div className="relative z-10">
-                                    <Heading as="h3" className="text-white text-lg font-bold mb-2 pr-10">
-                                        {feat.title}
-                                    </Heading>
-                                    <p className="text-white/80 text-sm leading-relaxed line-clamp-3">
-                                        {feat.desc}
-                                    </p>
-                                </div>
+                            return (
+                                <button
+                                    key={`mobile-bento-${idx}`}
+                                    onClick={() => {
+                                        setModalDataIndex(idx);
+                                        setIsModalOpen(true);
+                                    }}
+                                    className={`relative p-6 rounded-xl border border-white/10 text-left flex flex-col group overflow-hidden ${!hasImage ? 'bg-white/[0.03]' : 'min-h-[200px] justify-end'}`}
+                                >
+                                    {hasImage && (
+                                        <>
+                                            <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill className="object-cover" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40" />
+                                        </>
+                                    )}
 
-                                <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-10 group-hover:bg-secondary/20 transition-colors">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                                    </svg>
-                                </div>
-                            </button>
-                        )
-                    })}
-                </div>
+                                    <div className="relative z-10">
+                                        <Heading as="h3" className="text-white text-lg font-bold mb-2 pr-10">
+                                            {feat.title}
+                                        </Heading>
+                                        <p className="text-white/80 text-sm leading-relaxed line-clamp-3">
+                                            {feat.desc}
+                                        </p>
+                                    </div>
+
+                                    <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-10 group-hover:bg-secondary/20 transition-colors">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            )
+                        })}
+                    </div>
+                )}
 
                 <AnimatePresence>
                     {isModalOpen && (
@@ -328,19 +366,24 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                                     )}
                                 </AnimatePresence>
 
-                                <AnimatePresence>
-                                    {isActive && (
-                                        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ delay: 0.1 }} className="absolute bottom-3 md:bottom-10 left-3 right-3 md:left-10 md:right-10 z-10">
-                                            <div className="backdrop-blur-xl bg-primary/40 md:bg-white/10 border border-white/20 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-2xl max-w-2xl">
-                                                <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
-                                                    <span className="flex items-center justify-center w-6 h-6 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-xs md:text-xl shrink-0">0{index + 1}</span>
-                                                    <Heading as="h3" className="text-lg md:text-3xl font-black text-white tracking-normal line-clamp-1 md:line-clamp-none">{benefit.title}</Heading>
-                                                </div>
-                                                <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-2 md:line-clamp-none">{benefit.desc}</Text>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                               <motion.div 
+                                    initial={false} 
+                                    animate={{ 
+                                        opacity: isActive ? 1 : 0, 
+                                        scale: isActive ? 1 : 0.95 
+                                    }} 
+                                    transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }} 
+                                    className={`absolute bottom-3 md:bottom-10 left-3 right-3 md:left-10 md:right-10 z-10 transition-all ${isActive ? "pointer-events-auto" : "pointer-events-none"}`}
+                                    aria-hidden={!isActive}
+                                >
+                                    <div className="backdrop-blur-xl bg-primary/40 md:bg-white/10 border border-white/20 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-2xl max-w-2xl">
+                                        <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
+                                            <span className="flex items-center justify-center w-6 h-6 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-xs md:text-xl shrink-0">0{index + 1}</span>
+                                            <Heading as="h3" className="text-lg md:text-3xl font-black text-white tracking-normal line-clamp-1 md:line-clamp-none">{benefit.title}</Heading>
+                                        </div>
+                                        <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-2 md:line-clamp-none">{benefit.desc}</Text>
+                                    </div>
+                                </motion.div>
                             </motion.div>
                         )
                     })}

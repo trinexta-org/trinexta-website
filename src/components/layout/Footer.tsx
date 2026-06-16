@@ -5,19 +5,22 @@ import { SOCIAL_LINKS } from "@/data/social-links"
 
 const NAVIGATION = [
   { name: "Accueil", href: "/" },
-  { name: "Tarifs", href: "/nos-offres" }, 
+  { name: "Sérénité", href: "/serenite" },
+  { name: "Trinexta Studio", href: "/trinexta-studio" },
   { name: "Cas clients", href: "/cas-clients" },
   { name: "Blog Expertise", href: "/blog" },
   { name: "Nous rejoindre", href: "/nous-rejoindre" }
 ]
 
 const SERVICES = [
-  { name: "Infogérance PME", href: "/infogerance" }, 
-  { name: "Support informatique", href: "/support-informatique" }, 
-  { name: "Cybersécurité 360°", href: "/cybersecurite" }, 
-  { name: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" }, 
-  { name: "Microsoft 365", href: "/microsoft-365" }, 
-  { name: "Solutions métier", href: "/solutions-metier" }
+  { name: "Infogérance PME", href: "/infogerance" },
+  { name: "Cybersécurité 360°", href: "/cybersecurite" },
+  { name: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" },
+  { name: "Microsoft 365", href: "/microsoft-365" },
+  { name: "Support informatique", href: "/support-informatique" },
+  { name: "Solutions métier", href: "/solutions-metier" },
+  { name: "Technicien sous régie", href: "/technicien-sous-regie" },
+  { name: "Services Annexes", href: "/services-annexes" }
 ]
 
 const LEGAL = [
@@ -45,7 +48,7 @@ export function Footer() {
       <SectionFade edge="top" />
 
       <Container className="relative z-10">
-        
+
         {/* --- VERSION GRAND ÉCRAN --- */}
         <div className="hidden lg:block pt-20 pb-10">
           <div className="grid grid-cols-5 gap-12 mb-8">
@@ -132,7 +135,7 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-            
+
             <div>
               <span className={mobileTitle}>Services</span>
               <ul className="space-y-2">
@@ -141,7 +144,7 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-            
+
             <div>
               <span className={mobileTitle}>Légal</span>
               <ul className="space-y-2">
@@ -150,7 +153,7 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-            
+
             <div>
               <span className={mobileTitle}>Contact</span>
               <div className="space-y-4">

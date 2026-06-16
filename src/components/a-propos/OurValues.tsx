@@ -15,42 +15,51 @@ const values = [
     {
         title: "Accessibilité",
         desc: "Un accompagnement sérieux ne doit pas être réservé aux grandes structures. Vous bénéficiez d'un service fiable et réactif, quelle que soit votre taille. Nous ne proposons pas une réponse standardisée à tous les clients. Nous prenons le temps de comprendre votre environnement, vos besoins et vos objectifs pour vous orienter vers la solution la plus pertinente.",
-        image: "/images/a-propos/engagements/accessibilite.jpg"
+        image: "/images/a-propos/engagements/accessibilite.jpg",
+        alt: "Un clavier braille connecté à un ordinateur portable, symbolisant des solutions informatiques adaptables et accessibles à toutes les entreprises."
     },
     {
         title: "Proximité",
         desc: "Nous privilégions une relation directe, fondée sur l'écoute, la compréhension de vos besoins et l'adaptation à votre réalité terrain. Vous bénéficiez d’un point d’entrée clair, avec une prise en charge sérieuse et réactive. L’objectif est de vous apporter des réponses utiles, sans multiplier les intermédiaires ni compliquer inutilement la relation.",
-        image: "/images/a-propos/engagements/proximite.jpg"
+        image: "/images/a-propos/engagements/proximite.jpg",
+        alt: "Deux professionnelles échangeant face à face, illustrant l'écoute active et la relation de proximité au cœur de notre accompagnement informatique."
     },
     {
         title: "Réactivité",
         desc: "Chaque minute compte. Notre helpdesk est disponible du lundi au vendredi, de 8h30 à 18h, pour répondre rapidement à vos demandes et vous aider à résoudre les incidents du quotidien. Vous bénéficiez d’un point d’entrée clair, avec une prise en charge sérieuse et réactive pour limiter au maximum l'impact sur votre activité.",
-        image: "/images/a-propos/engagements/reactivite.jpg"
+        image: "/images/a-propos/engagements/reactivite.jpg",
+        alt: "Une horloge à clapet affichant le temps qui s'écoule, représentant la réactivité immédiate de notre support technique face aux urgences IT."
     },
     {
         title: "Transparence",
         desc: "Des relations simples et honnêtes. Vous savez ce qui est prévu et dans quel cadre nous intervenons. Pas de promesses floues, pas de mauvaises surprises. Chez Trinexta, l’accompagnement informatique repose sur l’échange, l’écoute et l’adaptation en toute transparence.",
-        image: "/images/a-propos/engagements/transparence.jpg"
+        image: "/images/a-propos/engagements/transparence.jpg",
+        alt: "Deux mains se tenant par le petit doigt, symbolisant des relations simples, honnêtes et une transparence absolue sans promesses floues."
     },
     {
         title: "Expertise partagée",
         desc: "Trinexta s’appuie sur un collectif de professionnels expérimentés, sélectionnés pour leur savoir-faire technique et leur capacité d’intervention. Cette logique de réseau nous permet de mobiliser les bonnes compétences selon les besoins, tout en gardant une approche souple et opérationnelle. Notre force réside dans cette expertise mutualisée au sein de notre réseau indépendant, vous assurant un support technique d’excellence pour toutes vos problématiques IT.",
-        image: "/images/a-propos/engagements/expertise.jpg"
+        image: "/images/a-propos/engagements/expertise.jpg",
+        alt: "Une équipe unissant ses mains au centre d'une table, illustrant la force du collectif et notre réseau d'experts informatiques indépendants."
     },
     {
         title: "Engagement",
         desc: "Votre satisfaction est notre ligne directrice. Nous nous engageons à fournir un accompagnement sérieux, avec des interventions de qualité, des délais respectés et une attention constante portée à l’efficacité des actions menées. Notre objectif n’est pas seulement d’intervenir, mais de construire une relation utile dans la durée.",
-        image: "/images/a-propos/engagements/engagement.jpg"
+        image: "/images/a-propos/engagements/engagement.jpg",
+       alt: "Une poignée de main entre deux professionnels au-dessus d'un document, garantissant notre engagement à fournir un accompagnement informatique sérieux et de qualité."
     },
     {
         title: "Agilité",
         desc: "Votre structure évolue, vos outils changent, vos besoins aussi. Nous faisons évoluer notre accompagnement en fonction de votre réalité, qu’il s’agisse de renforcer votre support, de sécuriser votre environnement ou de faire grandir votre organisation informatique. Cette souplesse fait partie intégrante de notre manière de travailler.",
-        image: "/images/a-propos/engagements/agilite.jpg"
+        image: "/images/a-propos/engagements/agilite.jpg",
+        alt: "Une professionnelle organisant des tâches avec des notes adhésives sur un mur, évoquant notre agilité et notre capacité d'adaptation à vos besoins."
     },
     {
         title: "L'humain au centre",
         desc: "Derrière chaque demande, il y a un dirigeant, un collaborateur, une équipe, une organisation à faire fonctionner. Chez Trinexta, nous sommes convaincus qu’une bonne informatique commence toujours par une bonne compréhension des personnes, des usages et des besoins. C’est pour cela que nous plaçons l’écoute, la confiance et la relation humaine au centre de notre accompagnement.",
-        image: "/images/a-propos/engagements/humain.jpg"
+        image: "/images/a-propos/engagements/humain.jpg",
+        alt: "Un homme en plein saut au-dessus d'un rocher en nature, incarnant la liberté et le dépassement des contraintes grâce à une approche informatique centrée sur l'humain."
+
     }
 ]
 
@@ -137,7 +146,7 @@ export function OurValues() {
                                         src={val.image}
                                         alt={`Miniature ${val.title}`}
                                         fill
-                                        sizes="200px"
+                                        sizes="200vw"
                                         className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-primary/60 flex items-center justify-center p-3 text-center transition-colors group-hover:bg-primary/40 group">
@@ -166,6 +175,7 @@ export function OurValues() {
                                     fill
                                     className="object-cover object-[center_25%]"
                                     priority
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
                                 <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">

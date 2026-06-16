@@ -1,9 +1,9 @@
-"use client"
-
 export function CircuitBorders() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-20 hidden 2xl:flex justify-between overflow-hidden">
-      
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-20 hidden 2xl:flex justify-between overflow-hidden"
+    >
       <div className="w-40 h-full text-secondary opacity-50 mix-blend-screen">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
