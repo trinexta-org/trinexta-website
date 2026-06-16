@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Axion Conseil — Conseil en gestion & stratégie pour TPE/PME</title>
+  <meta name="description"
+    content="Axion Conseil accompagne les dirigeants de TPE et PME : pilotage financier, optimisation de la performance et stratégie de croissance en Île-de-France.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07101f;
+      --surface: #0d1a2e;
+      --card: #111f35;
+      --card-2: #162540;
+      --line: #1e3050;
+      --text: #e8f0fc;
+      --muted: #7a94b8;
+      --soft: #a8bdd8;
+      --accent: #3d7eff;
+      --accent-2: #6fa1ff;
+      --accent-g: linear-gradient(135deg, #3d7eff, #6fa1ff);
+      --maxw: 1160px;
+      --r: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: Spectral, Georgia, serif;
+      line-height: 1.18;
+      font-weight: 700;
+      letter-spacing: -.01em
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    img {
+      display: block;
+      max-width: 100%
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: Inter;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: 10px;
+      transition: all .2s;
+      cursor: pointer;
+      white-space: nowrap;
+      border: none
+    }
+
+    .btn-primary {
+      background: var(--accent-g);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(61, 126, 255, .35)
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(61, 126, 255, .45)
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text)
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent-2)
+    }
+
+    .btn-sm {
+      padding: 10px 20px;
+      font-size: 14px
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 16, 31, .92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      height: 76px
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 24px
+    }
+
+    .nav-logo img {
+      height: 42px;
+      width: auto
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 15px;
+      font-weight: 500
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color .2s
+    }
+
+    .nav-links a:hover {
+      color: var(--text)
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 38px;
+      height: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 3px;
+      flex-shrink: 0
+    }
+
+    .burger span {
+      display: block;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .35s ease, opacity .35s ease, width .35s ease
+    }
+
+    .burger span:nth-child(2) {
+      width: 70%;
+      margin-left: auto
+    }
+
+    body.nav-open .burger span:nth-child(1) {
+      transform: translateY(11px) rotate(45deg)
+    }
+
+    body.nav-open .burger span:nth-child(2) {
+      opacity: 0;
+      width: 0
+    }
+
+    body.nav-open .burger span:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg)
+    }
+
+    .nav-drawer {
+      position: fixed;
+      inset: 76px 0 0 0;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      padding: 32px 24px 40px;
+      gap: 0;
+      overflow-y: auto;
+      z-index: 99;
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .35s cubic-bezier(.4, 0, .2, 1), opacity .3s ease;
+    }
+
+    body.nav-open .nav-drawer {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all
+    }
+
+    body.nav-open {
+      overflow: hidden
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column
+    }
+
+    .drawer-links a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--soft);
+      border-bottom: 1px solid var(--line);
+      transition: color .2s
+    }
+
+    .drawer-links a:hover {
+      color: var(--text)
+    }
+
+    .drawer-links a .dl-num {
+      font-family: Spectral;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      min-width: 20px
+    }
+
+    .drawer-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 32px
+    }
+
+    .drawer-cta .btn {
+      width: 100%;
+      justify-content: center;
+      padding: 15px
+    }
+
+    .hero {
+      position: relative;
+      padding: 108px 0 96px;
+      overflow: hidden
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1
+    }
+
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(700px 500px at 85% -5%, rgba(61, 126, 255, .18), transparent 60%)
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px 300px at 10% 90%, rgba(61, 126, 255, .06), transparent 60%)
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 64px;
+      align-items: center
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(61, 126, 255, .1);
+      color: var(--accent-2);
+      border: 1px solid rgba(61, 126, 255, .25);
+      padding: 7px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 28px
+    }
+
+    .hero-tag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      margin-bottom: 20px
+    }
+
+    .hero h1 em {
+      color: var(--accent-2);
+      font-style: italic
+    }
+
+    .hero .lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 50ch;
+      line-height: 1.75;
+      margin-bottom: 36px
+    }
+
+    .hero .cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 52px;
+      border-top: 1px solid var(--line);
+      padding-top: 36px
+    }
+
+    .hero-stats .stat {
+      flex: 1;
+      padding-right: 24px;
+      border-right: 1px solid var(--line)
+    }
+
+    .hero-stats .stat:last-child {
+      border-right: none;
+      padding-right: 0;
+      padding-left: 24px
+    }
+
+    .hero-stats .stat:not(:first-child) {
+      padding-left: 24px
+    }
+
+    .stat-n {
+      font-family: Spectral;
+      font-weight: 700;
+      font-size: 30px;
+      color: var(--text);
+      line-height: 1
+    }
+
+    .stat-l {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 5px
+    }
+
+    .hero-visual {
+      position: relative
+    }
+
+    .hero-card-main {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .4)
+    }
+
+    .hero-card-img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block
+    }
+
+    .hero-card-body {
+      padding: 24px
+    }
+
+    .hero-card-body h4 {
+      font-size: 16px;
+      margin-bottom: 6px
+    }
+
+    .hero-card-body p {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .hero-card-float {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--card-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .4);
+      min-width: 160px
+    }
+
+    .float-num {
+      font-family: Spectral;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-2);
+      line-height: 1
+    }
+
+    .float-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px
+    }
+
+    section {
+      padding: 96px 0;
+      border-top: 1px solid var(--line)
+    }
+
+    .section-head {
+      margin-bottom: 56px
+    }
+
+    .section-head.center {
+      text-align: center
+    }
+
+    .section-head.center .sub {
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent-2);
+      font-family: Inter;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 14px
+    }
+
+    .h2 {
+      font-size: clamp(26px, 3.8vw, 42px);
+      margin-bottom: 14px
+    }
+
+    .sub {
+      color: var(--muted);
+      max-width: 58ch;
+      font-size: 17px;
+      line-height: 1.7
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px
+    }
+
+    .g2 {
+      grid-template-columns: repeat(2, 1fr)
+    }
+
+    .g3 {
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 28px 28px 32px;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .exp-card:hover {
+      border-color: rgba(61, 126, 255, .45);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, .3)
+    }
+
+    .exp-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(61, 126, 255, .12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0
+    }
+
+    .exp-card h3 {
+      font-size: 18px;
+      line-height: 1.25
+    }
+
+    .exp-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65
+    }
+
+    .methode-bg {
+      background: var(--surface)
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 0;
+      counter-reset: step
+    }
+
+    .step-item {
+      padding: 36px 28px;
+      border-right: 1px solid var(--line);
+      position: relative;
+      counter-increment: step
+    }
+
+    .step-item:last-child {
+      border-right: none
+    }
+
+    .step-num {
+      font-family: Spectral;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: .1em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .step-num::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(61, 126, 255, .25)
+    }
+
+    .step-item h3 {
+      font-size: 19px;
+      margin-bottom: 10px
+    }
+
+    .step-item p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center
+    }
+
+    .results-img-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, .4)
+    }
+
+    .results-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block
+    }
+
+    .results-numbers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px
+    }
+
+    .result-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 28px;
+      transition: border-color .2s
+    }
+
+    .result-box:hover {
+      border-color: rgba(61, 126, 255, .3)
+    }
+
+    .result-n {
+      font-family: Spectral;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-2);
+      line-height: 1;
+      margin-bottom: 6px
+    }
+
+    .result-l {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .avis-bg {
+      background: var(--surface)
+    }
+
+    .avis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 0
+    }
+
+    .avis-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .avis-stars {
+      color: var(--accent);
+      font-size: 15px;
+      letter-spacing: 3px
+    }
+
+    .avis-text {
+      font-family: Spectral;
+      font-size: 17px;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--text)
+    }
+
+    .avis-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--line)
+    }
+
+    .avis-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-g);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Spectral;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0
+    }
+
+    .avis-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text)
+    }
+
+    .avis-role {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .avis-badge {
+      background: var(--card-2);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px
+    }
+
+    .avis-badge-score {
+      font-family: Spectral;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1
+    }
+
+    .avis-badge-stars {
+      color: var(--accent);
+      font-size: 17px;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 4px
+    }
+
+    .avis-badge-label {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .faq-wrap {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color .25s
+    }
+
+    details[open] {
+      border-color: rgba(61, 126, 255, .35)
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 20px 24px;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px
+    }
+
+    summary::-webkit-details-marker {
+      display: none
+    }
+
+    .summary-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(61, 126, 255, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s
+    }
+
+    details[open] .summary-icon {
+      background: rgba(61, 126, 255, .2)
+    }
+
+    .summary-icon svg {
+      transition: transform .3s
+    }
+
+    details[open] .summary-icon svg {
+      transform: rotate(45deg)
+    }
+
+    details p {
+      padding: 0 24px 20px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-top: 0
+    }
+
+    .band {
+      background: linear-gradient(135deg, #0d1e3d 0%, #102a52 100%);
+      border: 1px solid rgba(61, 126, 255, .25);
+      border-radius: 24px;
+      padding: 72px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px 300px at 50% 0%, rgba(61, 126, 255, .12), transparent 60%)
+    }
+
+    .band h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1
+    }
+
+    .band p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 48ch;
+      margin: 0 auto 36px;
+      position: relative;
+      z-index: 1
+    }
+
+    .band .cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1
+    }
+
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      padding: 64px 0 32px
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px
+    }
+
+    .footer-brand p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 26ch
+    }
+
+    .footer-brand address {
+      font-style: normal;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .footer-col h4 {
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 16px
+    }
+
+    .footer-col a {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+      transition: color .2s
+    }
+
+    .footer-col a:hover {
+      color: var(--accent-2)
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+      transition: color .2s
+    }
+
+    .footer-contact-item:hover {
+      color: var(--accent-2)
+    }
+
+    .fc-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--accent-2)
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .75s cubic-bezier(.16, 1, .3, 1), transform .75s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:1024px) {
+
+      .nav-links,
+      .nav-actions {
+        display: none
+      }
+
+      .burger {
+        display: flex
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 56px
+      }
+
+      .hero-visual {
+        display: none
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .step-item {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 28px 0
+      }
+
+      .step-item:last-child {
+        border-bottom: none
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+        gap: 40px
+      }
+
+      .results-img-wrap {
+        display: none
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px
+      }
+    }
+
+    @media(max-width:640px) {
+      header {
+        height: 68px
+      }
+
+      .nav-drawer {
+        top: 68px
+      }
+
+      .hero {
+        padding: 72px 0 72px
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 24px
+      }
+
+      .hero-stats .stat {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 0 0 24px
+      }
+
+      .hero-stats .stat:last-child {
+        border-bottom: none;
+        padding: 0
+      }
+
+      .hero-stats .stat:not(:first-child) {
+        padding-left: 0
+      }
+
+      section {
+        padding: 72px 0
+      }
+
+      .g3 {
+        grid-template-columns: 1fr
+      }
+
+      .g2 {
+        grid-template-columns: 1fr
+      }
+
+      .steps {
+        grid-template-columns: 1fr
+      }
+
+      .avis-grid {
+        grid-template-columns: 1fr
+      }
+
+      @media(max-width:640px) {
+
+        .results-numbers {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .results-numbers .result-box {
+          min-width: auto;
+        }
+
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center
+      }
+
+      .footer-bottom-links {
+        justify-content: center
+      }
+
+      .band {
+        padding: 48px 24px;
+        border-radius: 18px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="nav-logo">
+        <img src="logo-axion.png" alt="Axion Conseil">
+      </a>
+      <nav class="nav-links">
+        <a href="#expertises">Expertises</a>
+        <a href="#methode">Méthode</a>
+        <a href="#resultats">Résultats</a>
+        <a href="#avis">Avis</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+33161000000" class="btn btn-ghost btn-sm">01 61 00 00 00</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Premier RDV gratuit</a>
+      </div>
+      <button class="burger" aria-label="Ouvrir le menu" onclick="document.body.classList.toggle('nav-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-drawer">
+    <nav class="drawer-links">
+      <a href="#expertises" onclick="document.body.classList.remove('nav-open')"><span
+          class="dl-num">01</span>Expertises</a>
+      <a href="#methode" onclick="document.body.classList.remove('nav-open')"><span class="dl-num">02</span>Méthode</a>
+      <a href="#resultats" onclick="document.body.classList.remove('nav-open')"><span
+          class="dl-num">03</span>Résultats</a>
+      <a href="#avis" onclick="document.body.classList.remove('nav-open')"><span class="dl-num">04</span>Avis
+        clients</a>
+      <a href="#faq" onclick="document.body.classList.remove('nav-open')"><span class="dl-num">05</span>FAQ</a>
+    </nav>
+    <div class="drawer-cta">
+      <a href="tel:+33161000000" class="btn btn-ghost">📞 01 61 00 00 00</a>
+      <a href="#contact" class="btn btn-primary" onclick="document.body.classList.remove('nav-open')">Premier RDV
+        gratuit →</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-tag">Conseil en gestion & stratégie · Île-de-France</div>
+        <h1>Pilotez votre entreprise avec des <em>décisions éclairées</em></h1>
+        <p class="lead">Axion Conseil accompagne les dirigeants de TPE et PME : pilotage financier, optimisation de la
+          performance et stratégie de croissance. Des recommandations concrètes, pas des rapports qui dorment dans un
+          tiroir.</p>
+        <div class="cta">
+          <a href="#contact" class="btn btn-primary">Réserver un premier échange</a>
+          <a href="#expertises" class="btn btn-ghost">Nos expertises</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-n">+80</div>
+            <div class="stat-l">dirigeants accompagnés</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">12 ans</div>
+            <div class="stat-l">d'expérience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">5,0/5</div>
+            <div class="stat-l">satisfaction clients</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-card-main">
+          <img class="hero-card-img" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80"
+            alt="Conseil stratégique en entreprise">
+          <div class="hero-card-body">
+            <h4>Diagnostic stratégique</h4>
+            <p>Analyse complète de votre situation et feuille de route personnalisée</p>
+          </div>
+        </div>
+        <div class="hero-card-float">
+          <div class="float-num">+38%</div>
+          <div class="float-label">de rentabilité moyenne<br>constatée après 6 mois</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="expertises">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Nos expertises</span>
+        <h2 class="h2">Un accompagnement à 360°</h2>
+        <p class="sub">Nous intervenons sur les leviers qui comptent vraiment pour la santé et la croissance de votre
+          entreprise.</p>
+      </div>
+      <div class="grid g3">
+        <article class="exp-card reveal">
+          <div class="exp-icon">📊</div>
+          <h3>Pilotage & tableaux de bord</h3>
+          <p>Mise en place d'indicateurs clairs pour suivre votre activité et décider sur des chiffres fiables en temps
+            réel.</p>
+        </article>
+        <article class="exp-card reveal">
+          <div class="exp-icon">💶</div>
+          <h3>Gestion financière</h3>
+          <p>Trésorerie, rentabilité, prévisionnel : nous sécurisons et optimisons votre modèle économique sur le long
+            terme.</p>
+        </article>
+        <article class="exp-card reveal">
+          <div class="exp-icon">🎯</div>
+          <h3>Stratégie & croissance</h3>
+          <p>Plan de développement, nouveaux marchés, structuration : nous bâtissons votre feuille de route sur mesure.
+          </p>
+        </article>
+        <article class="exp-card reveal">
+          <div class="exp-icon">⚙️</div>
+          <h3>Organisation & process</h3>
+          <p>Optimisation des opérations et des outils pour gagner en efficacité, en clarté et en sérénité au quotidien.
+          </p>
+        </article>
+        <article class="exp-card reveal">
+          <div class="exp-icon">🤝</div>
+          <h3>Levée de fonds & financement</h3>
+          <p>Préparation du dossier, business plan et mise en relation avec les bons partenaires financiers.</p>
+        </article>
+        <article class="exp-card reveal">
+          <div class="exp-icon">📈</div>
+          <h3>Transmission & cession</h3>
+          <p>Valorisation, préparation et accompagnement lors d'une cession ou reprise d'entreprise en toute sérénité.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="methode" class="methode-bg">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Notre méthode</span>
+        <h2 class="h2">Une démarche claire en 4 étapes</h2>
+        <p class="sub">De l'analyse à la mise en œuvre, nous vous accompagnons à chaque étape de votre transformation.
+        </p>
+      </div>
+      <div class="steps reveal">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <h3>Diagnostic</h3>
+          <p>Nous analysons en profondeur votre situation, vos chiffres et vos objectifs pour identifier les vrais
+            leviers.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <h3>Recommandations</h3>
+          <p>Un plan d'action priorisé, concret et chiffré — sans jargon, directement actionnable par vos équipes.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <h3>Mise en œuvre</h3>
+          <p>Nous vous accompagnons dans l'exécution, à vos côtés sur le terrain pour garantir l'adoption.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">04</div>
+          <h3>Suivi</h3>
+          <p>Points réguliers, tableaux de bord partagés et ajustements continus pour tenir les objectifs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultats">
+    <div class="wrap">
+      <div class="results-grid">
+        <div class="results-img-wrap reveal">
+          <img class="results-img" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80"
+            alt="Réunion stratégique">
+        </div>
+        <div>
+          <div class="section-head">
+            <span class="eyebrow">Résultats concrets</span>
+            <h2 class="h2">Ce que nos clients obtiennent</h2>
+            <p class="sub">Des chiffres mesurés sur nos missions réelles avec nos clients TPE et PME.</p>
+          </div>
+          <div class="results-numbers reveal">
+            <div class="result-box">
+              <div class="result-n">+38%</div>
+              <div class="result-l">de rentabilité moyenne constatée après 6 mois d'accompagnement</div>
+            </div>
+            <div class="result-box">
+              <div class="result-n">-30%</div>
+              <div class="result-l">de tension de trésorerie grâce au pilotage prévisionnel</div>
+            </div>
+            <div class="result-box">
+              <div class="result-n">×2,4</div>
+              <div class="result-l">croissance du chiffre d'affaires sur 18 mois en moyenne</div>
+            </div>
+            <div class="result-box">
+              <div class="result-n">48h</div>
+              <div class="result-l">pour un premier diagnostic complet de votre situation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="avis" class="avis-bg">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Témoignages</span>
+        <h2 class="h2">Ce que disent nos clients</h2>
+      </div>
+      <div class="avis-badge reveal" style="max-width:400px;margin:0 auto 40px">
+        <div class="avis-badge-score">5,0</div>
+        <div>
+          <span class="avis-badge-stars">★★★★★</span>
+          <div class="avis-badge-label"><strong style="color:var(--text)">22 avis vérifiés</strong><br>satisfaction
+            client</div>
+        </div>
+      </div>
+      <div class="avis-grid reveal">
+        <div class="avis-card">
+          <div class="avis-stars">★★★★★</div>
+          <p class="avis-text">« En six mois, on a repris le contrôle de notre trésorerie et clarifié notre stratégie.
+            Un accompagnement pragmatique, jamais hors-sol. »</p>
+          <div class="avis-author">
+            <div class="avis-avatar">PM</div>
+            <div>
+              <div class="avis-name">Pierre M.</div>
+              <div class="avis-role">Dirigeant PME de services — 18 salariés</div>
+            </div>
+          </div>
+        </div>
+        <div class="avis-card">
+          <div class="avis-stars">★★★★★</div>
+          <p class="avis-text">« Notre business plan a convaincu deux investisseurs dès la première présentation. Sans
+            Axion Conseil, on n'aurait pas su comment le structurer. »</p>
+          <div class="avis-author">
+            <div class="avis-avatar">SL</div>
+            <div>
+              <div class="avis-name">Sophie L.</div>
+              <div class="avis-role">Fondatrice startup B2B — Essonne</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Questions fréquentes</span>
+        <h2 class="h2">Avant de travailler ensemble</h2>
+      </div>
+      <div class="faq-wrap">
+        <details open>
+          <summary>Le premier rendez-vous est-il gratuit ?
+            <span class="summary-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg></span>
+          </summary>
+          <p>Oui. Le premier échange (en visio ou dans nos bureaux à Évry) est gratuit et sans engagement. Il nous
+            permet de comprendre votre besoin et de voir si nous pouvons vous être utiles.</p>
+        </details>
+        <details>
+          <summary>Travaillez-vous avec les petites structures ?
+            <span class="summary-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg></span>
+          </summary>
+          <p>Absolument. Nous accompagnons aussi bien des indépendants et TPE que des PME jusqu'à une cinquantaine de
+            salariés.</p>
+        </details>
+        <details>
+          <summary>Comment sont facturées vos prestations ?
+            <span class="summary-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg></span>
+          </summary>
+          <p>Selon le besoin : mission ponctuelle au forfait, accompagnement récurrent mensuel, ou jours de conseil à la
+            carte. Tout est défini et transparent dès le départ, sans surprise.</p>
+        </details>
+        <details>
+          <summary>Intervenez-vous en dehors de l'Essonne ?
+            <span class="summary-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg></span>
+          </summary>
+          <p>Nos bureaux sont à Évry-Courcouronnes, mais nous accompagnons des clients dans toute l'Île-de-France, en
+            présentiel comme à distance selon vos préférences.</p>
+        </details>
+        <details>
+          <summary>Combien de temps dure une mission type ?
+            <span class="summary-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg></span>
+          </summary>
+          <p>Un diagnostic prend généralement 1 à 2 semaines. Un accompagnement complet s'étale sur 3 à 12 mois selon
+            vos objectifs. Nous nous adaptons à votre rythme.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="band reveal">
+        <h2>Faisons le point sur votre entreprise</h2>
+        <p>Un premier échange gratuit pour identifier vos priorités et les leviers à activer dès maintenant.</p>
+        <div class="cta">
+          <a href="tel:+33161000000" class="btn btn-primary">Réserver mon RDV — 01 61 00 00 00</a>
+          <a href="mailto:contact@axion-conseil.fr" class="btn btn-ghost"
+            style="color:#d7e3ff;border-color:rgba(255,255,255,.2)">Écrire un e-mail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="logo-axion.png" alt="Axion Conseil" style="height:38px;width:auto">
+          <p>Conseil en gestion, finance et stratégie pour les TPE et PME en Essonne et Île-de-France.</p>
+          <address>24 boulevard de l'Europe<br>91000 Évry-Courcouronnes</address>
+        </div>
+        <div class="footer-col">
+          <h4>Expertises</h4>
+          <a href="#expertises">Pilotage & tableaux de bord</a>
+          <a href="#expertises">Gestion financière</a>
+          <a href="#expertises">Stratégie & croissance</a>
+          <a href="#expertises">Levée de fonds</a>
+          <a href="#expertises">Transmission</a>
+        </div>
+        <div class="footer-col">
+          <h4>Cabinet</h4>
+          <a href="#methode">Notre méthode</a>
+          <a href="#resultats">Résultats</a>
+          <a href="#avis">Avis clients</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+33161000000" class="footer-contact-item"><span class="fc-dot"></span>01 61 00 00 00</a>
+          <a href="mailto:contact@axion-conseil.fr" class="footer-contact-item"><span
+              class="fc-dot"></span>contact@axion-conseil.fr</a>
+          <div class="footer-contact-item"><span class="fc-dot"></span>Lun–Ven · 9h–18h</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Axion Conseil. Tous droits réservés.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) }
+    }), { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.addEventListener('click', e => {
+      if (document.body.classList.contains('nav-open') && !e.target.closest('header') && !e.target.closest('.nav-drawer')) {
+        document.body.classList.remove('nav-open');
+      }
+    });
+  </script>
+</body>
+
+</html>

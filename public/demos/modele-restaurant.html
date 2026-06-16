@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le Comptoir d'Émile — Bistrot français à Évry-Courcouronnes</title>
+  <meta name="description"
+    content="Bistrot français à Évry-Courcouronnes : cuisine de saison, produits frais et carte du marché. Réservez votre table midi et soir. Terrasse et menu du jour.">
+  <link rel="canonical" href="https://lecomptoirdemile.fr/">
+  <meta property="og:type" content="restaurant">
+  <meta property="og:title" content="Le Comptoir d'Émile — Bistrot à Évry-Courcouronnes">
+  <meta property="og:description" content="Cuisine de saison, produits frais, carte du marché. Réservez midi et soir.">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Restaurant",
+    "name":"Le Comptoir d'Émile",
+    "servesCuisine":"Française",
+    "priceRange":"€€",
+    "telephone":"+33164000000",
+    "acceptsReservations":"True",
+    "image":"https://lecomptoirdemile.fr/og.jpg",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"3 place du Marché",
+      "postalCode":"91000",
+      "addressLocality":"Évry-Courcouronnes",
+      "addressCountry":"FR"
+    },
+    "openingHoursSpecification":[
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"12:00","closes":"14:30"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Thursday","Friday","Saturday"],"opens":"19:00","closes":"22:30"}
+    ],
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.7","reviewCount":"126"}
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #fbf7f1;
+      --surface: #f5edd0;
+      --card: #fffdfa;
+      --line: #eadaa2;
+      --text: #211915;
+      --muted: #66594e;
+      --soft: #9c8e82;
+      --accent: #8a2b2b;
+      --accent-2: #b5793a;
+      --maxw: 1160px;
+      --r: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.01em
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all .25s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      object-fit: cover
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Inter;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 15px 32px;
+      border-radius: var(--r);
+      transition: all .25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      border: none
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .btn-primary:hover {
+      background: #6b1f1f;
+      transform: translateY(-2px)
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--text);
+      color: var(--text)
+    }
+
+    .btn-ghost:hover {
+      background: var(--text);
+      color: var(--bg)
+    }
+
+    .btn-sm {
+      padding: 11px 22px;
+      font-size: 13px
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(251, 247, 241, 0.95);
+      border-bottom: 1px solid var(--line);
+      height: 85px;
+      backdrop-filter: blur(12px)
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 24px
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: auto
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em
+    }
+
+    .nav-links a {
+      color: var(--muted)
+    }
+
+    .nav-links a:hover {
+      color: var(--accent)
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 200;
+      position: relative
+    }
+
+    .burger span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--text);
+      transition: transform .3s ease, opacity .3s ease
+    }
+
+    body.nav-open .burger span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg)
+    }
+
+    body.nav-open .burger span:nth-child(2) {
+      opacity: 0
+    }
+
+    body.nav-open .burger span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg)
+    }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(33, 25, 21, 0.4);
+      backdrop-filter: blur(8px);
+      z-index: 140;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease
+    }
+
+    body.nav-open .nav-overlay {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 320px;
+      background: var(--card);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      padding: 100px 40px 40px;
+      z-index: 150;
+      transform: translateX(100%);
+      transition: transform .4s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    body.nav-open .nav-drawer {
+      transform: translateX(0)
+    }
+
+    body.nav-open {
+      overflow: hidden
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    .drawer-links a {
+      font-family: 'Playfair Display';
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text)
+    }
+
+    .drawer-links a:hover {
+      color: var(--accent)
+    }
+
+    .drawer-cta {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .drawer-cta .btn {
+      width: 100%;
+      text-align: center
+    }
+
+    .hero {
+      position: relative;
+      padding: 80px 0;
+      overflow: hidden;
+      text-align: center
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(800px 400px at 50% -10%, rgba(181, 121, 58, 0.12), transparent 70%)
+    }
+
+    .hero .tag {
+      display: inline-block;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-2);
+      margin-bottom: 20px
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      margin-bottom: 24px;
+      line-height: 1.1
+    }
+
+    .hero h1 em {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 600
+    }
+
+    .hero p.lead {
+      font-size: 19px;
+      color: var(--muted);
+      max-width: 52ch;
+      margin: 0 auto 32px;
+      font-family: Inter, sans-serif
+    }
+
+    .hero .cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px
+    }
+
+    .hero-img-wrap {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: var(--r);
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(33, 25, 21, 0.15)
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      aspect-ratio: 21/9;
+      object-fit: cover
+    }
+
+    section {
+      padding: 120px 0;
+      border-top: 1px solid var(--line)
+    }
+
+    .section-head {
+      margin-bottom: 56px
+    }
+
+    .section-head.center {
+      text-align: center
+    }
+
+    .section-head.center .sub {
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent-2);
+      font-family: Inter;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 14px
+    }
+
+    .h2 {
+      font-size: clamp(32px, 4.5vw, 46px);
+      font-weight: 700;
+      margin-bottom: 16px
+    }
+
+    .sub {
+      color: var(--muted);
+      max-width: 60ch;
+      font-size: 17px
+    }
+
+    .carte-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 64px;
+      align-items: center
+    }
+
+    .carte-img-wrap {
+      border-radius: var(--r);
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(33, 25, 21, 0.08)
+    }
+
+    .carte-img-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover
+    }
+
+    .menu-container {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 48px;
+      border-radius: var(--r)
+    }
+
+    .dish {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px dashed var(--line)
+    }
+
+    .dish-content {
+      flex: 1
+    }
+
+    .d-name {
+      font-family: 'Playfair Display';
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--text)
+    }
+
+    .d-desc {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin-top: 4px;
+      font-style: italic
+    }
+
+    .d-price {
+      font-family: 'Playfair Display';
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--accent);
+      white-space: nowrap
+    }
+
+    .menu-footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 14.5px;
+      color: var(--accent-2);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em
+    }
+
+    .feat {
+      background: #f5edd0
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px
+    }
+
+    .img-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease
+    }
+
+    .img-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(33, 25, 21, 0.08)
+    }
+
+    .img-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .img-card-body {
+      padding: 32px 24px;
+      text-align: center
+    }
+
+    .img-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: 700
+    }
+
+    .img-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6
+    }
+
+    .quote-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center
+    }
+
+    .stars {
+      color: var(--accent-2);
+      font-size: 16px;
+      letter-spacing: 5px;
+      margin-bottom: 20px
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display';
+      font-size: 26px;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text)
+    }
+
+    .quote-author {
+      color: var(--muted);
+      margin-top: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase
+    }
+
+    .info-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px
+    }
+
+    .infobox {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 48px;
+      border-radius: var(--r)
+    }
+
+    .infobox h3 {
+      font-size: 22px;
+      margin-bottom: 24px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+      padding-bottom: 6px
+    }
+
+    .hours {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px
+    }
+
+    .hours td {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted)
+    }
+
+    .hours tr:last-child td {
+      border-bottom: none
+    }
+
+    .hours td:last-child {
+      text-align: right;
+      color: var(--text);
+      font-weight: 600
+    }
+
+    .band {
+      background: linear-gradient(135deg, var(--accent) 0%, #541717 100%);
+      color: #fff;
+      padding: 80px 48px;
+      text-align: center;
+      border-radius: var(--r);
+      position: relative;
+      overflow: hidden
+    }
+
+    .band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80') center/cover;
+      opacity: 0.15;
+      mix-blend-mode: overlay
+    }
+
+    .band h2 {
+      font-size: clamp(30px, 4.5vw, 48px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1
+    }
+
+    .band p {
+      margin: 0 auto 36px;
+      max-width: 50ch;
+      font-size: 18px;
+      color: #f2dbdb;
+      position: relative;
+      z-index: 1
+    }
+
+    .band .btn {
+      background: #fff;
+      color: var(--accent);
+      position: relative;
+      z-index: 1
+    }
+
+    .band .btn:hover {
+      background: var(--bg)
+    }
+
+    footer {
+      background: #1a1412;
+      color: #bdae9b;
+      padding: 90px 0 40px;
+      text-align: center;
+      border-top: 2px solid var(--accent-2)
+    }
+
+    .footer-logo img {
+      height: 54px;
+      width: auto;
+      margin: 0 auto 28px
+    }
+
+    .footer-nav-grid {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      margin-bottom: 48px
+    }
+
+    .footer-block h4 {
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 16px
+    }
+
+    .footer-block a {
+      display: block;
+      color: #bdae9b;
+      font-size: 15px;
+      margin-bottom: 10px
+    }
+
+    .footer-block a:hover {
+      color: #fff
+    }
+
+    .footer-text {
+      font-size: 15px;
+      max-width: 40ch;
+      margin: 0 auto;
+      line-height: 1.7
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #2e2420;
+      padding-top: 32px;
+      margin-top: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #8c7e6c;
+      flex-wrap: wrap;
+      gap: 16px
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 24px
+    }
+
+    .footer-bottom-links a:hover {
+      color: #fff
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .8s cubic-bezier(.16, 1, .3, 1), transform .8s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:1024px) {
+
+      .nav-links,
+      .nav-actions {
+        display: none
+      }
+
+      .burger {
+        display: flex
+      }
+
+      .carte-layout {
+        grid-template-columns: 1fr;
+        gap: 48px
+      }
+
+      .carte-img-wrap {
+        max-width: 600px;
+        margin: 0 auto
+      }
+
+      .carte-img-wrap img {
+        aspect-ratio: 16/9
+      }
+    }
+
+    @media(max-width:768px) {
+      header {
+        height: 75px
+      }
+
+      .nav-drawer {
+        top: 0;
+        width: 100%;
+        max-width: 300px
+      }
+
+      .hero {
+        padding: 64px 0
+      }
+
+      .hero-img-wrap img {
+        aspect-ratio: 4/3
+      }
+
+      section {
+        padding: 80px 0
+      }
+
+      .grid3,
+      .info-layout {
+        grid-template-columns: 1fr
+      }
+
+      .menu-container {
+        padding: 32px 24px
+      }
+
+      .infobox {
+        padding: 32px
+      }
+
+      .footer-nav-grid {
+        flex-direction: column;
+        gap: 32px
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="nav-logo">
+        <img src="logo-emile.png" alt="Le Comptoir d'Émile">
+      </a>
+      <nav class="nav-links">
+        <a href="#carte">La carte</a>
+        <a href="#maison">La maison</a>
+        <a href="#infos">Infos & Horaires</a>
+        <a href="#avis">Avis</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+33164000000" class="btn btn-ghost btn-sm">01 64 00 00 00</a>
+        <a href="#reserver" class="btn btn-primary btn-sm">Réserver</a>
+      </div>
+      <button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-overlay" onclick="document.body.classList.remove('nav-open')"></div>
+
+  <div class="nav-drawer">
+    <nav class="drawer-links">
+      <a href="#carte">La carte du marché</a>
+      <a href="#maison">L'esprit maison</a>
+      <a href="#infos">Infos & Réservation</a>
+      <a href="#avis">Avis des convives</a>
+    </nav>
+    <div class="drawer-cta">
+      <a href="#reserver" class="btn btn-primary" onclick="document.body.classList.remove('nav-open')">Réserver une
+        table</a>
+      <a href="tel:+33164000000" class="btn btn-ghost">01 64 00 00 00</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap">
+      <span class="tag">Bistrot français · Évry-Courcouronnes</span>
+      <h1>Une cuisine de <em>saison</em>,<br>au goût du marché</h1>
+      <p class="lead">Des produits bruts, une carte courte qui se renouvelle au gré des arrivages et la convivialité
+        authentique d'un bistrot de quartier.</p>
+      <div class="cta">
+        <a href="#reserver" class="btn btn-primary">Réserver une table</a>
+        <a href="#carte" class="btn btn-ghost">Découvrir la carte</a>
+      </div>
+      <div class="hero-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1200&q=80"
+          alt="Ambiance salle de restaurant Le Comptoir d'Émile">
+      </div>
+    </div>
+  </section>
+
+  <section id="carte">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">L'Ardoise de la semaine</span>
+        <h2 class="h2">Notre Carte</h2>
+        <p class="sub">Notre cuisine est entièrement faite maison. La carte change régulièrement selon la disponibilité
+          de nos petits producteurs locaux.</p>
+      </div>
+
+      <div class="carte-layout">
+        <div class="carte-img-wrap reveal">
+          <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=80"
+            alt="Plat signature viande et légumes rôtis">
+        </div>
+        <div class="menu-container reveal">
+          <div class="dish">
+            <div class="dish-content">
+              <div class="d-name">Œuf parfait aux champignons</div>
+              <div class="d-desc">Cuit basse température, crème de cèpes, noisettes torréfiées.</div>
+            </div>
+            <div class="d-price">9 €</div>
+          </div>
+          <div class="dish">
+            <div class="dish-content">
+              <div class="d-name">Velouté de saison maraîcher</div>
+              <div class="d-desc">Légumes du moment liés à l'huile d'olive d'herbes fraîches.</div>
+            </div>
+            <div class="d-price">8 €</div>
+          </div>
+          <div class="dish">
+            <div class="dish-content">
+              <div class="d-name">Suprême de volaille fermière</div>
+              <div class="d-desc">Jus corsé réduit, écrasé de pommes de terre à la fourchette.</div>
+            </div>
+            <div class="d-price">19 €</div>
+          </div>
+          <div class="dish">
+            <div class="dish-content">
+              <div class="d-name">Dos de cabillaud côtier rôti</div>
+              <div class="d-desc">Émulsion au beurre blanc acidulé, légumes glacés du matin.</div>
+            </div>
+            <div class="d-price">21 €</div>
+          </div>
+          <div class="dish">
+            <div class="dish-content">
+              <div class="d-name">Tarte fine aux pommes d'Anjou</div>
+              <div class="d-desc">Pâte feuilletée légère, caramel au beurre salé, glace vanille gousse.</div>
+            </div>
+            <div class="d-price">8 €</div>
+          </div>
+          <div class="menu-footer">
+            Formule Midi : Entrée + Plat ou Plat + Dessert à 19€
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="maison" class="feat center">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Les valeurs</span>
+        <h2 class="h2">L'esprit du Comptoir</h2>
+      </div>
+      <div class="grid3">
+        <article class="img-card reveal">
+          <img src="https://picsum.photos/600/400?image=1073" alt="Produits frais et légumes de saison">
+          <div class="img-card-body">
+            <h3>Produits de terroir</h3>
+            <p>Filière courte et approvisionnements responsables : nous valorisons le travail des maraîchers locaux.</p>
+          </div>
+        </article>
+        <article class="img-card reveal">
+          <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=80" alt="Chef en cuisine">
+          <div class="img-card-body">
+            <h3>Fait Maison</h3>
+            <p>Toutes nos sauces, jus et desserts sont intégralement cuisinés sur place dans notre cuisine ouverte.</p>
+          </div>
+        </article>
+        <article class="img-card reveal">
+          <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=80" alt="Verres de vin">
+          <div class="img-card-body">
+            <h3>Vins de Propriétaires</h3>
+            <p>Une sélection minutieuse de bouteilles de vignerons indépendants pour sublimer vos accords.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="avis">
+    <div class="wrap quote-wrap">
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <p class="quote-text">« Une cuisine généreuse et d'une finesse incroyable, un accueil de quartier comme on les
+        aime. Notre adresse de référence à Évry pour nos repas d'affaires ou nos tablées amicales. »</p>
+      <div class="quote-author">Léa & Thomas — Habitués du Comptoir</div>
+    </div>
+  </section>
+
+  <section id="infos" class="feat">
+    <div class="wrap">
+      <div class="info-layout">
+        <div class="infobox reveal">
+          <h3>Les Horaires de Service</h3>
+          <table class="hours">
+            <tr>
+              <td>Lundi</td>
+              <td>Fermé</td>
+            </tr>
+            <tr>
+              <td>Mardi – Mercredi</td>
+              <td>12:00 – 14:30</td>
+            </tr>
+            <tr>
+              <td>Jeudi – Vendredi</td>
+              <td>12:00 – 14:30 · 19:00 – 22:30</td>
+            </tr>
+            <tr>
+              <td>Samedi</td>
+              <td>12:00 – 14:30 · 19:00 – 22:30</td>
+            </tr>
+            <tr>
+              <td>Dimanche</td>
+              <td>Fermé</td>
+            </tr>
+          </table>
+        </div>
+        <div class="infobox reveal">
+          <h3>Le Bistrot & Accès</h3>
+          <p style="color:var(--muted); margin-bottom:16px">3 place du Marché<br>91000 Évry-Courcouronnes</p>
+          <p style="margin-bottom:24px"><a href="tel:+33164000000"
+              style="color:var(--accent); font-weight:700; font-size:18px">01 64 00 00 00</a></p>
+          <p style="color:var(--muted); font-size:14.5px; line-height:1.6">Terrasse ombragée ouverte en saison ·
+            Établissement entièrement accessible aux PMR · Privatisation sur réservation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reserver">
+    <div class="wrap">
+      <div class="band reveal">
+        <h2>Réservez votre table</h2>
+        <p>Pour un déjeuner d'affaires rapide ou une soirée chaleureuse entre proches, contactez notre équipe pour
+          bloquer votre table.</p>
+        <a href="tel:+33164000000" class="btn btn-primary">Réserver par téléphone</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-logo">
+        <img src="logo-emile.png" alt="Le Comptoir d'Émile">
+      </div>
+
+      <div class="footer-nav-grid">
+        <div class="footer-block">
+          <h4>La Table</h4>
+          <a href="#carte">La Carte</a>
+          <a href="#maison">La Maison</a>
+          <a href="#infos">Horaires</a>
+        </div>
+        <div class="footer-block">
+          <h4>Réservations</h4>
+          <a href="tel:+33164000000">01 64 00 00 00</a>
+          <a href="#reserver">Repas de groupe</a>
+          <a href="#reserver">Privatisations</a>
+        </div>
+      </div>
+
+      <p class="footer-text">Le Comptoir d'Émile — Cuisine bourgeoise et de marché de saison. Établissement culinaire
+        implanté au cœur d'Évry-Courcouronnes.</p>
+
+      <div class="footer-bottom">
+        <span>© 2026 Le Comptoir d'Émile. Tous droits réservés.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) }
+    }), { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.querySelectorAll('.drawer-links a').forEach(link => {
+      link.addEventListener('click', () => document.body.classList.remove('nav-open'));
+    });
+  </script>
+</body>
+
+</html>

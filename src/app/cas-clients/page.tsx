@@ -6,11 +6,15 @@ import { CasClientsHero } from "@/components/cas-clients/CasClientsHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { FinalCTA } from "@/components/FinalCTA";
 import { caseClients } from "@/data/cas-clients";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
-  title: "Cas clients | TRINEXTA",
+  title: "Cas clients",
   description:
     "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
+    alternates: {
+      canonical: "/cas-clients",
+    },
   openGraph: {
     title: "Cas clients | TRINEXTA",
     description: "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
@@ -29,6 +33,12 @@ export const metadata: Metadata = {
 export default function CaseClientsPage() {
   return (
     <div className="bg-primary text-white">
+      <BreadcrumbJsonLd 
+              items={[
+                { name: "Accueil", url: "/" },
+                { name: "cas-clients", url: "/cas-clients" }
+              ]} 
+            />
       <CasClientsHero />
 
       <Section className="pt-0 md:pt-0 lg:pt-0">

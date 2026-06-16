@@ -4,7 +4,6 @@ import { useRef, useState, useEffect, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { motion, useInView, Variants } from "framer-motion"
 import { Section } from "@/components/layout/Section"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 import { GridCards } from "@/components/layout/GridCards"
 import { Heading, Text } from "@/components/ui/Typography"
 
@@ -13,6 +12,7 @@ const CONTACT_CARDS = [
     id: "bureau",
     title: "Bureau d'activité",
     image: "/images/contact/bureau.webp",
+    alt: "Le Magelan Grand Paris Sud, bureau d'activité de trinexta",
     content: (
       <Text variant="small" className="text-white/80 leading-relaxed mt-4 drop-shadow-md font-medium">
         7 Rue Montespan<br />
@@ -128,7 +128,6 @@ export function ContactCards() {
 
   return (
     <Section id="coordonnees" className="py-16 md:py-24 bg-primary overflow-hidden relative">
-      <HaloBackground intensity="low" />
       <div ref={containerRef}>
         <h2 className="sr-only">Nos coordonnées de contact</h2>
         <GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">

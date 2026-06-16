@@ -23,29 +23,58 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       {
-        source: "/services-annexes",
-        destination: "/nos-offres?tab=services-annexes",
-        statusCode: 301,
-      },
-      {
         source: "/offre-serenite",
-        destination: "/nos-offres?tab=serenite",
+        destination: "/serenite",
         statusCode: 301,
       },
       {
         source: "/offre-impulsion",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/technicien-sous-regie",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres/impulsion",
+        destination: "/technicien-sous-regie",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "impulsion" }],
+        destination: "/technicien-sous-regie",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "serenite" }],
+        destination: "/serenite",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "services-annexes" }],
+        destination: "/services-annexes",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        has: [{ type: "query", key: "tab", value: "studio" }],
+        destination: "/trinexta-studio",
+        statusCode: 301,
+      },
+      {
+        source: "/nos-offres",
+        destination: "/serenite",
         statusCode: 301,
       },
       {
         source: "/offre-essentielle",
-        destination: "/nos-offres",
+        destination: "/serenite",
         statusCode: 301,
       },
-      { source: "/tarifs", destination: "/nos-offres", statusCode: 301 },
+      { source: "/tarifs", destination: "/serenite", statusCode: 301 },
       {
         source: "/offre-decouverte-informatique-tpe-pme",
-        destination: "/nos-offres",
+        destination: "/serenite",
         statusCode: 301,
       },
       { source: "/nos-clients", destination: "/cas-clients", statusCode: 301 },
@@ -244,41 +273,41 @@ const nextConfig: NextConfig = {
         destination: "/support-informatique",
         statusCode: 301,
       },
-      // --- Pages orphelines -> offre-impulsion ---
+      // --- Pages orphelines -> offre-technicien-sous-regie ---
       {
         source:
           "/recruter-un-technicien-support-informatique-a-villejuif-sans-passer-par-un-cdi",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/technicien-sous-regie",
         statusCode: 301,
       },
       {
         source:
           "/poste-a-pourvoir-technicien-informatique-freelance-a-chevilly-larue",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/technicien-sous-regie",
         statusCode: 301,
       },
       {
         source:
           "/besoin-temporaire-de-support-it-a-cachan-faites-appel-a-un-professionnel-mobile",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/technicien-sous-regie",
         statusCode: 301,
       },
       {
         source:
           "/integrer-un-technicien-reseau-a-fresnes-solution-rapide-pour-pme-en-projet",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/technicien-sous-regie",
         statusCode: 301,
       },
       {
         source:
           "/accompagnement-de-migration-windows-a-meudon-renfort-ponctuel-sur-site",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/technicien-sous-regie",
         statusCode: 301,
       },
       {
         source:
           "/gerer-les-pics-dactivite-informatique-a-noisy-le-grand-renfort-flexible",
-        destination: "/nos-offres?tab=impulsion",
+        destination: "/technicien-sous-regie",
         statusCode: 301,
       },
     ];

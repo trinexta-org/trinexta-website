@@ -6,7 +6,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { Section } from "@/components/layout/Section"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 import { Container } from "@/components/layout/Container"
 
 const MotionLink = motion.create(Link)
@@ -17,42 +16,48 @@ const services = [
     title: "Infogérance",
     description: "**Pilotez** votre croissance, on gère le reste. **Maintenance proactive**, supervision 24/7 et gestion complète de votre parc matériel et logiciel.",
     image: "/images/services/infogerance.avif",
-    fillDir: "ltr"
+    fillDir: "ltr",
+    alt: "Techniciennes IT Trinexta inspectant une baie de serveurs pour assurer la supervision et l'infogérance d'une PME."
   },
   {
     id: 2,
     title: "Support",
     description: "Une **assistance illimitée** pour vos équipes. Résolution instantanée de vos incidents à **distance** ou intervention rapide **sur site**.",
     image: "/images/services/support.avif",
-    fillDir: "rtl"
+    fillDir: "rtl",
+    alt: "Téléphone classique symbolisant l'assistance informatique illimitée et le support technique réactif proposés par Trinexta."
   },
   {
     id: 3,
     title: "Cybersécurité",
     description: "**Blindez** vos systèmes. **Audits de sécurité**, EDR nouvelle génération, protection anti-ransomware et **sauvegardes immuables**.",
     image: "/images/services/cybersecurite.avif",
-    fillDir: "ltr"
+    fillDir: "ltr",
+    alt: "Expert en cybersécurité analysant les données sur un ordinateur portable pour protéger le réseau informatique d'une entreprise."
   },
   {
     id: 4,
     title: "Cloud",
     description: "**Modernisez** votre infrastructure. Hébergement souverain, serveurs dédiés et **Plan de Reprise d'Activité (PRA)** hautement disponible.",
     image: "/images/services/cloud.avif",
-    fillDir: "rtl"
+    fillDir: "rtl",
+    alt: ""
   },
   {
     id: 5,
     title: "Microsoft 365",
     description: "**Collaborez** sans limite. Migration sans coupure, sécurisation des tenants et **optimisation de vos licences** d'entreprise.",
     image: "/images/services/microsoft.avif",
-    fillDir: "ltr"
+    fillDir: "ltr",
+    alt: ""
   },
   {
     id: 6,
     title: "Solutions Métier",
     description: "Des outils qui épousent vos **processus**. Téléphonie VoIP, réseaux multisites et intégration de **logiciels spécialisés**.",
     image: "/images/services/solutions.avif",
-    fillDir: "rtl"
+    fillDir: "rtl",
+    alt: ""
   },
 ]
 
@@ -152,7 +157,6 @@ export function ServicesSection() {
 
   return (
     <Section container={false} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
-      <HaloBackground intensity="low" />
       <Container className="relative z-10">
         <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {
@@ -192,7 +196,7 @@ export function ServicesSection() {
                 <div className="absolute inset-0">
                   <Image
                     src={service.image}
-                    alt={service.title}
+                    alt={service.alt}
                     fill
                     sizes="(min-width: 768px) 31vw, 90vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"

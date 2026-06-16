@@ -6,10 +6,14 @@ import { TrinextaMeaning } from "@/components/a-propos/TrinextaMeaning"
 import { OurValues } from "@/components/a-propos/OurValues"
 import { OurNetwork } from "@/components/a-propos/OurNetwork"
 import { PartnersSection } from "@/components/PartnersSection"
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: "À propos | Trinexta",
+  title: "À propos",
   description: "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
+  alternates: {
+    canonical: "/a-propos",
+  },
   openGraph: {
     title: "À propos | Trinexta",
     description: "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
@@ -43,6 +47,12 @@ export default async function AProposPage() {
 
   return (
     <main className="bg-primary min-h-screen relative text-white">
+      <BreadcrumbJsonLd 
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "À Propos", url: "/a-propos" }
+        ]} 
+      />
       <AProposHero />
 
       <TransitionTitle

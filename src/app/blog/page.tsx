@@ -4,6 +4,7 @@ import { BlogList } from "@/components/blog/BlogList";
 import { CATEGORIES } from "@/components/blog/BlogList";
 import { SearchBar } from "@/components/blog/SearchBar";
 import { Suspense } from "react";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 const title = "Blog informatique TPE PME - Conseils IT";
 const description = "Découvrez nos articles, conseils et guides en infogérance, cybersécurité et maintenance informatique pour les entreprises en Île-de-France.";
@@ -39,6 +40,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <main className="bg-primary min-h-screen pt-8 lg:pt-12 relative">
+      <BreadcrumbJsonLd 
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "blog", url: "/blog" }
+        ]} 
+      />
       <Suspense fallback={<div className="h-14" />}>
         <SearchBar />
       </Suspense>

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { urlForImage, formatDatePublication, ResumeArticle} from "@/lib/sanity";
 import { Container } from "../layout/Container";
 import { Section } from "../layout/Section";
-import { HaloBackground } from "@/components/ui/HaloBackground";
 
 interface BlogSectionProps {
   articles: ResumeArticle[]; 
@@ -20,7 +19,6 @@ export function BlogSection({ articles, categories, activeCategory, onCategoryCh
   
   return (
     <Section className="bg-primary py-8 md:py-32 relative overflow-hidden">
-      <HaloBackground intensity="low" />
       <Container>
         <div className="flex flex-col lg:flex-row gap-10">
           

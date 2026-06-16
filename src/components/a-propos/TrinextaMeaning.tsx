@@ -4,7 +4,6 @@ import { useRef } from "react"
 import Image from "next/image"
 import { motion, useInView, Variants } from "framer-motion"
 import { Section } from "@/components/layout/Section"
-import { HaloBackground } from "@/components/ui/HaloBackground"
 import { GridCards } from "@/components/layout/GridCards"
 import { Heading, Text } from "@/components/ui/Typography"
 
@@ -13,19 +12,22 @@ const meanings = [
     syllable: "Tri",
     title: "Trois piliers au cœur de notre approche",
     desc: "Une expertise technique solide, une proximité humaine fondée sur l'écoute, et une souplesse d'intervention pour s'adapter à votre structure. Ces trois dimensions avancent ensemble pour un service fiable et accessible.",
-    image: "/images/a-propos/tri.jpg"
+    image: "/images/a-propos/tri.jpg",
+    alt: "",
   },
   {
     syllable: "Next",
     title: "Une informatique pensée pour évoluer",
     desc: "Nous ne nous contentons pas de gérer l'existant. « Next », c'est préparer l'avenir : faire les bons choix, anticiper les besoins et sécuriser l'environnement de travail. Votre informatique suit votre développement.",
-    image: "/images/a-propos/next.avif"
+    image: "/images/a-propos/next.avif",
+    alt: ""
   },
   {
     syllable: "A",
     title: "L'agilité au service de votre quotidien",
     desc: "Le « A » final symbolise notre capacité d'adaptation. Nous construisons un accompagnement souple, lisible et proportionné, sans lourdeur inutile ni complexité contractuelle.",
-    image: "/images/a-propos/a.jpg"
+    image: "/images/a-propos/a.jpg",
+    alt: ""
   }
 ]
 
@@ -70,7 +72,7 @@ const syllableVariants: Variants = {
 }
 
 const contentVariants: Variants = {
-   hidden: (_i: number) => ({ opacity: 0, y: 20 }),
+  hidden: (_i: number) => ({ opacity: 0, y: 20 }),
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
@@ -81,7 +83,7 @@ const contentVariants: Variants = {
 const imageVariants: Variants = {
   hidden: (_i: number) => ({ opacity: 0 }),
   visible: (i: number) => ({
-    opacity: 0.4, 
+    opacity: 0.4,
     transition: { delay: (i * 2.2) + 1.5, duration: 1, ease: "easeInOut" }
   })
 }
@@ -92,10 +94,9 @@ export function TrinextaMeaning() {
 
   return (
     <Section id="signification" className="py-16 md:py-32 bg-primary overflow-hidden relative">
-      <HaloBackground intensity="low" />
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Text variant="lead" className="text-white/90 text-lg md:text-xl leading-relaxed drop-shadow-md">
-          Le nom Trinexta n&apos;a pas été choisi au hasard. Il traduit notre vision profonde : 
+          Le nom Trinexta n&apos;a pas été choisi au hasard. Il traduit notre vision profonde :
           une synergie parfaite entre l&apos;expertise, l&apos;humain et l&apos;avenir de votre entreprise.
         </Text>
       </div>
