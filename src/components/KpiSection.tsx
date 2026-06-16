@@ -62,7 +62,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
     }
   }, [isInView, value, suffix])
 
-  return <span ref={ref}>0{suffix}</span>
+  return <span ref={ref}>{value}{suffix}</span>
 }
 
 export function KpiSection() {

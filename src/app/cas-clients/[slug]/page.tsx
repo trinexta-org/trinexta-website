@@ -31,8 +31,11 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${item.title} | TRINEXTA`,
+    title: `${item.title}`,
     description: item.metaDescription,
+    alternates: {
+      canonical: '/cas-clients/${slug}',
+    },
     openGraph: {
       title: `${item.title} | TRINEXTA`,
       description: item.metaDescription,

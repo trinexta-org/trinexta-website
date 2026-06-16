@@ -25,6 +25,7 @@ import {
   ResumeArticle,
   HeadingTOC
 } from "@/lib/sanity";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 type ArticlePageProps = {
   params: Promise<{
@@ -128,6 +129,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <>
       <JsonLd data={jsonLdData} />
+      <BreadcrumbJsonLd 
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "Blog", url: "/blog" },
+          { name: article.titre, url: `/blog/${slug}` }
+        ]} 
+      />
       <main className="bg-primary min-h-screen text-white">
         <ProgressBar />
 
