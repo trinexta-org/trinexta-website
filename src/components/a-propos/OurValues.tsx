@@ -148,7 +148,7 @@ export function OurValues() {
                                         src={val.image}
                                         alt={`Miniature ${val.title}`}
                                         fill
-                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        sizes="200vw"
                                         className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-primary/60 flex items-center justify-center p-3 text-center transition-colors group-hover:bg-primary/40 group">

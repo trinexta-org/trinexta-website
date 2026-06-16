@@ -119,7 +119,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
             {/* 1. HERO */}
             <ViewportHero>
                 <div className="absolute inset-0 z-0">
-                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt="{`${hero.titlePart1} ${hero.titlePart2}`}" fill quality={75} unoptimized fetchPriority="high" className="object-cover object-center" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} unoptimized fetchPriority="high" className="object-cover object-center" sizes="(max-width: 768px) 100vw, 50vw" />
                     <div className="absolute inset-0 bg-primary/90" />
                 </div>
                 <Container className="relative z-10 py-12 md:py-16 lg:py-20">

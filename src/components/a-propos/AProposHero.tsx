@@ -23,7 +23,7 @@ export function AProposHero() {
           fill
           fetchPriority="high"
           className="object-cover grayscale opacity-60"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="100vw"
         />
       }
       overlays={<div className="absolute inset-0 bg-primary/70 lg:bg-primary/80" />}
