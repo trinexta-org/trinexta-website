@@ -4,6 +4,7 @@ import { membreEquipe } from './membreEquipe'
 import { partenaire } from './partenaire'
 import { service } from './service'
 import { temoignage } from './temoignage'
+import { stickyScroll } from './stickySroll'
 
 export const schemaTypes = [
   service,
@@ -12,4 +13,5 @@ export const schemaTypes = [
   casClient,
   membreEquipe,
   partenaire,
+  stickyScroll,
 ]

@@ -48,7 +48,7 @@ export default function NousRejoindrePage() {
             <span className="text-secondary font-mono text-xs tracking-widest uppercase">
               Pourquoi nous rejoindre
             </span>
-            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight tracking-tighter text-white">
+            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight text-white">
               Votre expertise mérite le bon environnement
             </Heading>
             
