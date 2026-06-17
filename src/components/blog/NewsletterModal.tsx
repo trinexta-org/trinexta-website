@@ -9,23 +9,17 @@ export function NewsletterModal() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
 
- useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 1000); 
-
-    return () => clearTimeout(timer);
-
-    /* --- CODE DE PRODUCTION (À remettre plus tard) ---
+  useEffect(() => {
     const hasSeenPopup = localStorage.getItem("trinexta_newsletter_seen");
+
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 10000); 
+      }, 10000);
       return () => clearTimeout(timer);
     }
-    -------------------------------------------------- */
   }, []);
+
   const handleClose = () => {
     setIsOpen(false);
     localStorage.setItem("trinexta_newsletter_seen", "true");
@@ -54,7 +48,6 @@ export function NewsletterModal() {
       setTimeout(() => {
         handleClose();
       }, 3000);
-
     } catch (error) {
       console.error(error);
       setStatus("idle");
@@ -66,14 +59,14 @@ export function NewsletterModal() {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
             className="absolute inset-0 bg-primary/80 backdrop-blur-sm cursor-pointer"
           />
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -82,10 +75,10 @@ export function NewsletterModal() {
             {/* Lueur de fond */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/20 blur-[80px] rounded-full pointer-events-none" />
 
-            <button 
+            <button
               onClick={handleClose}
               className="absolute top-4 right-4 p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-colors z-10"
-              aria-label="bouton de sortie Newsletter"
+              aria-label="Fermer la fenêtre de newsletter"
             >
               <X className="w-5 h-5" />
             </button>
@@ -99,8 +92,9 @@ export function NewsletterModal() {
               </p>
 
               {status === "success" ? (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   className="bg-green-500/10 border border-green-500/20 text-green-400 p-6 rounded-2xl flex flex-col items-center gap-3"
                 >
                   <CheckCircle2 className="w-8 h-8" />
@@ -125,7 +119,9 @@ export function NewsletterModal() {
                     {status === "loading" ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                      <>Je m'abonne <Send className="w-4 h-4" /></>
+                      <>
+                        Je m'abonne <Send className="w-4 h-4" />
+                      </>
                     )}
                   </button>
                 </form>

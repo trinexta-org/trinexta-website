@@ -23,38 +23,46 @@ const extractTextFromBlock = (block: PortableTextBlock | undefined): string => {
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="text-lg leading-9 text-white/80">{children}</p>
+      <p className="text-lg leading-relaxed text-slate-300 mb-6 font-light">{children}</p>
     ),
+    
     h2: ({ children, value }) => {
       const text = extractTextFromBlock(value);
       return (
-        <h2 id={generateSlug(text)} className="pt-12 pb-4 text-3xl font-black tracking-normal text-white">
+        <h2 
+          id={generateSlug(text)} 
+          className="scroll-mt-32 pt-14 pb-4 text-3xl md:text-4xl font-black tracking-tight text-white border-b border-white/10 mb-8 mt-4"
+        >
           {children}
         </h2>
       );
     },
     h3: ({ children, value }) => {
-      const text =extractTextFromBlock(value);
+      const text = extractTextFromBlock(value);
       return (
-        <h3 id={generateSlug(text)} className="pt-8 pb-2 text-2xl font-bold tracking-normal text-white/90">
+        <h3 
+          id={generateSlug(text)} 
+          className="scroll-mt-32 pt-8 pb-3 text-2xl md:text-3xl font-bold tracking-normal text-white/90 mb-4"
+        >
           {children}
         </h3>
       );
     },
+    
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-zinc-300 pl-4 text-white/70">
+      <blockquote className="border-l-4 border-secondary bg-secondary/10 py-5 pl-6 pr-4 my-10 rounded-r-xl text-xl italic text-slate-300 shadow-inner">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="ml-6 list-disc space-y-2 text-base leading-8 text-white/70">
+      <ul className="ml-6 mb-8 list-disc space-y-3 text-lg text-slate-300 marker:text-secondary">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="ml-6 list-decimal space-y-2 text-base leading-8 text-white/70">
+      <ol className="ml-6 mb-8 list-decimal space-y-3 text-lg text-slate-300 marker:text-secondary">
         {children}
       </ol>
     ),
@@ -69,7 +77,7 @@ const portableTextComponents: PortableTextComponents = {
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noreferrer noopener" : undefined}
-          className="font-medium text-secondary underline underline-offset-4 hover:text-white"
+          className="font-medium text-secondary underline underline-offset-4 hover:text-white transition-colors"
         >
           {children}
         </a>
@@ -81,16 +89,18 @@ const portableTextComponents: PortableTextComponents = {
       if (!value.asset?._ref) return null;
 
       return (
-        <figure className="space-y-3">
-          <Image
-            src={urlForImage(value).width(1200).fit("max").auto("format").url()}
-            alt={value.alt ?? "Illustration"}
-            width={1200}
-            height={675}
-            className="w-full rounded-3xl object-cover"
-          />
+        <figure className="my-14">
+          <div className="relative w-full rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.4)]">
+            <Image
+              src={urlForImage(value).width(1200).fit("max").auto("format").url()}
+              alt={value.alt ?? "Illustration"}
+              width={1200}
+              height={675}
+              className="w-full object-cover hover:scale-[1.02] transition-transform duration-700"
+            />
+          </div>
           {value.legende ? (
-            <figcaption className="text-sm leading-6 text-zinc-500">
+            <figcaption className="text-sm text-center italic leading-6 text-slate-400 mt-4">
               {value.legende}
             </figcaption>
           ) : null}
@@ -98,16 +108,12 @@ const portableTextComponents: PortableTextComponents = {
       );
     },
     
-    // 2. --- NOUVEAU BLOC : LE CARROUSEL DYNAMIQUE ---
     stickyScroll: ({ value }: { value: any }) => {
-      // Sécurité : on vérifie que le bloc contient bien des paires texte/image
       if (!value?.blocks || value.blocks.length === 0) return null;
 
-      // On formate les données qui viennent de Sanity pour notre composant React
       const formattedBlocks = value.blocks.map((block: any) => ({
         id: block._key,
         texte: block.texte,
-        // Si l'image existe on génère son URL, sinon on passe une chaîne vide
         imageUrl: block.image?.asset?._ref 
           ? urlForImage(block.image).width(800).url() 
           : "",
@@ -129,7 +135,7 @@ export function PortableTextArticle({ value }: PortableTextArticleProps) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="max-w-none">
       <PortableText value={value} components={portableTextComponents} />
     </div>
   );

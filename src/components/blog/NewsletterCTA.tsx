@@ -14,6 +14,7 @@ export function NewsletterCTA() {
     if (!email) return;
 
     setStatus("loading");
+    setMessage(""); 
 
     try {
       const response = await fetch("/api/newsletter", {
@@ -22,14 +23,19 @@ export function NewsletterCTA() {
         body: JSON.stringify({ email }),
       });
 
-      if (!response.ok) throw new Error("Erreur réseau");
+      const data = await response.json();
 
-      setStatus("success");
-      setMessage("Merci ! Vous êtes maintenant inscrit.");
-      setEmail("");
+      if (response.ok) {
+        setStatus("success");
+        setMessage(data.message || "Merci ! Vous êtes maintenant inscrit.");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Une erreur est survenue. Veuillez réessayer.");
+      }
     } catch (error) {
       setStatus("error");
-      setMessage("Une erreur est survenue. Veuillez réessayer.");
+      setMessage("Impossible de joindre le serveur. Veuillez vérifier votre connexion.");
     }
   };
 
