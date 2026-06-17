@@ -7,7 +7,10 @@ const BASE_URL =
 
 const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}`, changeFrequency: "monthly", priority: 1 },
-  { url: `${BASE_URL}/nos-offres`, changeFrequency: "monthly", priority: 0.9 },
+  { url: `${BASE_URL}/serenite`, changeFrequency: "monthly", priority: 0.9 },
+  { url: `${BASE_URL}/technicien-sous-regie`, changeFrequency: "monthly", priority: 0.9 },
+  { url: `${BASE_URL}/services-annexes`, changeFrequency: "monthly", priority: 0.9 },
+  { url: `${BASE_URL}/trinexta-studio`, changeFrequency: "monthly", priority: 0.9 },
   { url: `${BASE_URL}/infogerance`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/cybersecurite`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/cloud-sauvegarde`, changeFrequency: "monthly", priority: 0.8 },
