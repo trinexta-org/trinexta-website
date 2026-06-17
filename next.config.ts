@@ -37,35 +37,7 @@ const nextConfig: NextConfig = {
         destination: "/technicien-sous-regie",
         statusCode: 301,
       },
-      {
-        source: "/nos-offres",
-        has: [{ type: "query", key: "tab", value: "impulsion" }],
-        destination: "/technicien-sous-regie",
-        statusCode: 301,
-      },
-      {
-        source: "/nos-offres",
-        has: [{ type: "query", key: "tab", value: "serenite" }],
-        destination: "/serenite",
-        statusCode: 301,
-      },
-      {
-        source: "/nos-offres",
-        has: [{ type: "query", key: "tab", value: "services-annexes" }],
-        destination: "/services-annexes",
-        statusCode: 301,
-      },
-      {
-        source: "/nos-offres",
-        has: [{ type: "query", key: "tab", value: "studio" }],
-        destination: "/trinexta-studio",
-        statusCode: 301,
-      },
-      {
-        source: "/nos-offres",
-        destination: "/serenite",
-        statusCode: 301,
-      },
+
       {
         source: "/offre-essentielle",
         destination: "/serenite",
