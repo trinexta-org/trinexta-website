@@ -28,7 +28,6 @@ import {
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA";
 import { SommaireMobile } from "@/components/blog/SommaireMobile";
-import { DynamicImageScroll } from "@/components/blog/DynamicImageScroll";
 
 type ArticlePageProps = {
   params: Promise<{

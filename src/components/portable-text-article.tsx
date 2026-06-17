@@ -6,7 +6,6 @@ import {
 } from "next-sanity";
 import { type CorpsArticle, type ImageArticle, urlForImage } from "@/lib/sanity";
 import { generateSlug } from "@/lib/utils";
-import { DynamicImageScroll } from "./blog/DynamicImageScroll";
 
 const extractTextFromBlock = (block: PortableTextBlock | undefined): string => {
   if (!block || !block.children) return "";
@@ -106,21 +105,6 @@ const portableTextComponents: PortableTextComponents = {
           ) : null}
         </figure>
       );
-    },
-    
-    stickyScroll: ({ value }: { value: any }) => {
-      if (!value?.blocks || value.blocks.length === 0) return null;
-
-      const formattedBlocks = value.blocks.map((block: any) => ({
-        id: block._key,
-        texte: block.texte,
-        imageUrl: block.image?.asset?._ref 
-          ? urlForImage(block.image).width(800).url() 
-          : "",
-        altText: block.alt || "Illustration Trinexta",
-      }));
-
-      return <DynamicImageScroll blocks={formattedBlocks} />;
     },
   },
 };
