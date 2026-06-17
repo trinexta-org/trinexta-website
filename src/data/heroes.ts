@@ -1,3 +1,7 @@
+import { HeroCarousel } from "@/components/ui/HeroCarousel"
+import Image from "next/image"
+import React from "react"
+
 export const homeHeroSlides = [
   {
     title: "*Simplifiez* votre informatique au quotidien",
@@ -46,5 +50,24 @@ export const contactHeroSlides = [
     part1: "Parlons",
     part2: "Projets",
     subtitle: "Arrêtez de perdre du temps avec une informatique mal suivie. Discutons de vos besoins et trouvons la solution simple et fiable adaptée à votre entreprise."
+  }
+]
+
+export const blogHeroSlides = [
+  {
+    title: "Insights, *Ideas* & Innovation",
+    subtitle: "Explorez nos articles d'experts, les tendances technologiques et nos conseils pratiques pour garder votre entreprise toujours en avance."
+  },
+  {
+    title: "Cybersécurité : *Anticiper* les menaces",
+    subtitle: "Protégez vos données et votre infrastructure grâce à nos guides détaillés sur les meilleures pratiques de sécurité informatique pour les PME."
+  },
+  {
+    title: "Une informatique *performante* et agile",
+    subtitle: "Découvrez comment l'infogérance moderne et le cloud transforment votre parc informatique en un véritable levier de croissance."
+  },
+  {
+    title: "La technologie au service de *l'Humain*",
+    subtitle: "Retrouvez nos retours d'expérience, études de cas et conseils pour garantir une adoption technologique fluide par vos équipes."
   }
 ]
