@@ -70,7 +70,7 @@ export function NewsletterModal() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-lg bg-[#0F172A] border border-white/10 rounded-3xl p-8 shadow-2xl overflow-hidden"
+            className="relative w-full max-w-lg bg-primary border border-white/10 rounded-3xl p-8 shadow-2xl overflow-hidden"
           >
             {/* Lueur de fond */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/20 blur-[80px] rounded-full pointer-events-none" />
@@ -85,10 +85,10 @@ export function NewsletterModal() {
 
             <div className="relative z-10 text-center mt-4">
               <h3 className="text-2xl font-black text-white mb-3">
-                Prenez une longueur d'avance
+                Prenez une longueur d&apos;avance
               </h3>
               <p className="text-white/70 text-sm mb-8 leading-relaxed px-4">
-                Recevez nos analyses exclusives sur l'infogérance et la cybersécurité. Pas de spam, que de l'expertise.
+                Recevez nos analyses exclusives sur l&apos;infogérance et la cybersécurité. Pas de spam, que de l&apos;expertise.
               </p>
 
               {status === "success" ? (
@@ -120,7 +120,7 @@ export function NewsletterModal() {
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
                       <>
-                        Je m'abonne <Send className="w-4 h-4" />
+                        Je m&apos;abonne <Send className="w-4 h-4" />
                       </>
                     )}
                   </button>

@@ -1,13 +1,15 @@
 import { prisma } from "@/lib/db"
 import { NextResponse } from "next/server";
+import { z } from "zod";
+
+const newsletterSchema = z.object({
+  email: z.string().email("Le format de l'adresse e-mail est invalide."),
+});
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
-
-    if (!email) {
-      return NextResponse.json({ error: "L'adresse e-mail est requise." }, { status: 400 });
-    }
+    const body = await request.json();
+    const { email } = newsletterSchema.parse(body);
 
     // ==========================================
     // ÉTAPE 1 : SAUVEGARDE DANS LA BASE DE DONNÉES (PRISMA)
@@ -85,7 +87,7 @@ export async function POST(request: Request) {
       saveToSentItems: "false"
     };
 
-    await fetch(`https://graph.microsoft.com/v1.0/users/${senderEmail}/sendMail`, {
+    const sendMailResponse = await fetch(`https://graph.microsoft.com/v1.0/users/${senderEmail}/sendMail`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -94,12 +96,20 @@ export async function POST(request: Request) {
       body: JSON.stringify(emailData)
     });
 
+    if (!sendMailResponse.ok) {
+      const errorText = await sendMailResponse.text();
+      console.error("Erreur Microsoft Graph :", errorText);
+      throw new Error(`Échec de l'envoi de l'e-mail de bienvenue (Statut: ${sendMailResponse.status})`);
+    }
+
     return NextResponse.json({ message: "Inscription réussie !" }, { status: 200 });
 
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: error.issues[0].message }, { status: 400 });
+    }
+
     console.error("Erreur Inscription:", error);
     return NextResponse.json({ error: "Une erreur est survenue." }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
   }
 }

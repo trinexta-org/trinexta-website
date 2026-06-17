@@ -43,7 +43,6 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
     setActiveIndex((prev) => (prev === articles.length - 1 ? 0 : prev + 1));
   };
 
-  // Sécurité si on n'a pas 3 articles
   if (articles.length === 0) return null;
 
   return (
@@ -55,7 +54,7 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
             Dernières <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-white">Publications</span>
           </h2>
           <p className="text-white/60 text-lg">
-            Explorez nos analyses, conseils et retours d'expérience pour sécuriser et optimiser l'infrastructure IT de votre entreprise.
+            Explorez nos analyses, conseils et retours d&apos;expérience pour sécuriser et optimiser l&apos;infrastructure IT de votre entreprise.
           </p>
         </div>
         
@@ -172,7 +171,7 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
                             {article.extrait || "Découvrez l'analyse complète de nos experts Trinexta."}
                           </p>
                           <div className="flex items-center gap-2 text-secondary text-sm font-bold">
-                            Lire l'article <ArrowRight className="w-4 h-4" />
+                            Lire l&apos;article <ArrowRight className="w-4 h-4" />
                           </div>
                         </motion.div>
                       )}
@@ -188,14 +187,14 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
                       animate={{ y: 0, opacity: 1, rotate: 0 }}
                       exit={{ y: 200, opacity: 0, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 120, damping: 15 }}
-                      // Positionné à right-4 et -bottom-8 pour être visible sans être rogné par l'overflow-hidden
+
                       className="hidden md:block absolute right-4 -bottom-8 w-[220px] h-[320px] bg-white rounded-t-[24px] border-[6px] border-b-0 border-slate-900 shadow-[0_0_50px_rgba(0,0,0,0.5)] z-30 overflow-hidden"
                     >
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl flex items-center justify-center z-40">
                         <div className="w-8 h-1 rounded-full bg-slate-800" />
                       </div>
 
-                      <div className="w-full h-full bg-[#F8FAFC] flex flex-col relative pt-8 px-4 pb-4">
+                      <div className="w-full h-full bg-background flex flex-col relative pt-8 px-4 pb-4">
                         {article.imageUne ? (
                           <div className="w-full h-24 rounded-xl relative overflow-hidden mb-3 shadow-sm">
                             <Image src={urlForImage(article.imageUne).width(300).url()} alt="preview" fill className="object-cover" />

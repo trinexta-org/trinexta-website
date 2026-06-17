@@ -1,12 +1,11 @@
 "use client";
 
-import { ArrowRight, Calendar, User, Clock } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlForImage, formatDatePublication, ResumeArticle} from "@/lib/sanity";
 import { Container } from "../layout/Container";
 import { Section } from "../layout/Section";
-import { HaloBackground } from "@/components/ui/HaloBackground";
 import { BlogMarquee } from "./blogMarquee";
 
 
@@ -20,7 +19,7 @@ interface BlogSectionProps {
   searchQuery?: string;
 }
 
-export function BlogSection({ heroArticle, marqueeArticles, articles, categories, activeCategory, onCategoryChange }: BlogSectionProps) {
+export function BlogSection({ marqueeArticles, articles, categories, activeCategory, onCategoryChange }: BlogSectionProps) {
   
   const getCategoryLabel = (catId: string) => {
     return categories.find(c => c.id === catId)?.label || catId;
@@ -28,7 +27,6 @@ export function BlogSection({ heroArticle, marqueeArticles, articles, categories
 
   return (
     <Section className="bg-primary py-8 md:py-24 relative overflow-hidden">
-      <HaloBackground intensity="low" />
       
       <Container>
         {/* Titre Editorial Style */}
@@ -44,7 +42,7 @@ export function BlogSection({ heroArticle, marqueeArticles, articles, categories
       
       </Container>
 
-      {/* CARROUSEL DÉFILANT (Placé hors container pour utiliser 100% de la largeur écran) */}
+      {/* CARROUSEL DÉFILANT */}
       <BlogMarquee articles={marqueeArticles} categoryLabel={getCategoryLabel} />
 
       <Container className="mt-16 md:mt-24">

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getArticles } from "@/lib/sanity";
 import { BlogList } from "@/components/blog/BlogList";
 import { CATEGORIES } from "@/components/blog/BlogList";
-import { Suspense } from "react";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { NewsletterModal } from "@/components/blog/NewsletterModal";
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA";

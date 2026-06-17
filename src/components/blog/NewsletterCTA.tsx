@@ -49,11 +49,11 @@ export function NewsletterCTA() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
           
           <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
               Ne manquez aucune <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-white">Actualité</span>
             </h2>
             <p className="text-white/70 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Rejoignez les experts IT et recevez nos meilleures analyses sur la cybersécurité, l'infogérance et le cloud directement dans votre boîte mail.
+              Rejoignez les experts IT et recevez nos meilleures analyses sur la cybersécurité, l&apos;infogérance et le cloud directement dans votre boîte mail.
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export function NewsletterCTA() {
                   placeholder="votre.email@entreprise.fr"
                   required
                   disabled={status === "loading" || status === "success"}
-                  className="w-full bg-[#0B1120] border border-white/10 text-white placeholder:text-white/40 rounded-2xl px-6 py-4 pr-16 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all disabled:opacity-50 shadow-inner"
+                  className="w-full bg-primary border border-white/10 text-white placeholder:text-white/40 rounded-2xl px-6 py-4 pr-16 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all disabled:opacity-50 shadow-inner"
                 />
                 <button
                   type="submit"

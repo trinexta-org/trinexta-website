@@ -65,7 +65,7 @@ export function BlogPaginatedGrid({
             Aucun article trouvé
           </h3>
           <p className="text-white/60 max-w-md mx-auto mb-8 leading-relaxed">
-            Nous n'avons pas trouvé de contenu correspondant à "{searchQuery}". Essayez d'autres mots-clés ou parcourez nos catégories.
+            Nous n&apos;avons pas trouvé de contenu correspondant à &quot;{searchQuery}&quot;. Essayez d&apos;autres mots-clés ou parcourez nos catégories.
           </p>
           <button
             onClick={() => onSearchChange("")}

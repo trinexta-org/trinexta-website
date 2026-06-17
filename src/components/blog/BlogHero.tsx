@@ -100,7 +100,7 @@ export function BlogHero() {
 
           <div className="mt-10 md:mt-12 pt-6">
             <Text className="text-sm md:text-base text-white/80 font-medium leading-relaxed max-w-3xl drop-shadow-md text-balance">
-              Le Mag Trinexta décrypte l'actualité IT et vous livre les meilleures pratiques pour sécuriser et infogérer votre infrastructure d'entreprise.
+              Le Mag Trinexta décrypte l&apos;actualité IT et vous livre les meilleures pratiques pour sécuriser et infogérer votre infrastructure d&apos;entreprise.
             </Text>
             <div className="flex items-center gap-2 mt-4 opacity-90">
               <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />

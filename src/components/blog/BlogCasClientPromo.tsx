@@ -25,12 +25,12 @@ export function BlogCasClientPromo() {
             </div>
             
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 leading-[1.1]">
-              Découvrez comment nous <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-white">transformons</span> l'IT de nos clients.
+              Découvrez comment nous <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-white">transformons</span> l&apos;IT de nos clients.
             </h3>
             
             <p className="text-white/60 text-base md:text-lg mb-8 leading-relaxed">
               Vous appréciez nos articles et nos conseils ? Allez plus loin en découvrant nos études de cas concrètes. 
-              Voyez les défis qu'ont rencontrés nos clients et les solutions d'infogérance et de cybersécurité que nous avons déployées pour eux.
+              Voyez les défis qu&apos;ont rencontrés nos clients et les solutions d&apos;infogérance et de cybersécurité que nous avons déployées pour eux.
             </p>
 
             <Link 

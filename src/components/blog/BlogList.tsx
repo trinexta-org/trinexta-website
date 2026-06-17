@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { ResumeArticle } from "@/lib/sanity";
 import { CategorieOption, CATEGORIES_FILTRE } from "@/data/categories";
 import { TransitionTitle } from "@/components/TransitionTitle";
-
-import Link from "next/link";
-import { Container } from "../layout/Container";
 import { BlogHero } from "./BlogHero";
 import { BlogPaginatedGrid } from "./BlogPaginatedGrid";
 import { FinalCTA } from "../FinalCTA";
@@ -16,10 +14,12 @@ import { BlogInteractiveCarousel } from "./BlogInteractiveCarousel";
 export { CATEGORIES_FILTRE as CATEGORIES };
 
 export function BlogList({ initialArticles, categories }: { initialArticles: ResumeArticle[], categories: CategorieOption[] }) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const [activeCategory, setActiveCategory] = useState("tous");
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState(""); 
-  
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const ITEMS_PER_PAGE = 6; 
 
   const carouselArticles = initialArticles.slice(0, 3);
@@ -42,6 +42,17 @@ export function BlogList({ initialArticles, categories }: { initialArticles: Res
   const handleCategoryChange = (id: string) => {
     setActiveCategory(id);
     setCurrentPage(1); 
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+
+    if (value) {
+      router.replace(`/blog?q=${encodeURIComponent(value)}`, { scroll: false });
+    } else {
+      router.replace(`/blog`, { scroll: false });
+    }
   };
 
   return (
@@ -93,7 +104,7 @@ export function BlogList({ initialArticles, categories }: { initialArticles: Res
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}
         searchQuery={searchQuery}
-        onSearchChange={(v) => { setSearchQuery(v); setCurrentPage(1); }}
+        onSearchChange={handleSearchChange}
         categoryLabel={getCategoryLabel}
         currentPage={currentPage}
         totalPages={totalPages}

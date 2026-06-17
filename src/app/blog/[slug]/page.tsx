@@ -128,26 +128,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     publisher: publisherNode,
   };
 
-  const fakeBlocks = [
-  {
-    id: "1",
-    texte: "Trinexta sécurise vos infrastructures contre les menaces modernes. Notre approche proactive de la cybersécurité permet de détecter les failles avant qu'elles ne soient exploitées, garantissant la continuité de votre activité B2B.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop",
-    altText: "Sécurité informatique"
-  },
-  {
-    id: "2",
-    texte: "L'infogérance sur-mesure pour les PME. Nous devenons votre direction informatique externe : gestion des serveurs, assistance utilisateur rapide, et maintenance préventive de tout votre parc informatique en Île-de-France.",
-    imageUrl: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&auto=format&fit=crop",
-    altText: "Serveurs et Cloud"
-  },
-  {
-    id: "3",
-    texte: "Migrez vers un Cloud souverain et performant. Trinexta vous accompagne dans l'externalisation de vos données avec des solutions de sauvegarde redondantes et hautement sécurisées, accessibles partout en toute flexibilité.",
-    imageUrl: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop",
-    altText: "Réseau et Cloud"
-  }
-];
 
   return (
     <>
@@ -182,7 +162,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] mb-8 text-balance drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.15] mb-8 text-balance drop-shadow-lg">
               {article.titre}
             </h1>
 

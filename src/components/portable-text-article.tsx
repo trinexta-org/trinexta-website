@@ -30,7 +30,7 @@ const portableTextComponents: PortableTextComponents = {
       return (
         <h2 
           id={generateSlug(text)} 
-          className="scroll-mt-32 pt-14 pb-4 text-3xl md:text-4xl font-black tracking-tight text-white border-b border-white/10 mb-8 mt-4"
+          className="scroll-mt-32 pt-14 pb-4 text-3xl md:text-4xl font-black text-white border-b border-white/10 mb-8 mt-4"
         >
           {children}
         </h2>

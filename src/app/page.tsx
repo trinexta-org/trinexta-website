@@ -12,7 +12,6 @@ import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
 import { sanityClient } from "@/lib/sanity"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
-import { NewsletterModal } from "@/components/blog/NewsletterModal"
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";

@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
+import { z } from "zod";
+
+const sanityPayloadSchema = z.object({
+  title: z.string(),
+  slug: z.object({ current: z.string() }),
+  imageUrl: z.string().optional(),
+  extrait: z.string().optional(),
+}).loose();
 
 export async function POST(request: Request) {
   try {
@@ -12,19 +20,34 @@ export async function POST(request: Request) {
     }
 
     const signature = request.headers.get(SIGNATURE_HEADER_NAME);
-    
+
+    if (!signature) {
+      console.error("Signature manquante dans la requête.");
+      return NextResponse.json({ error: "Accès refusé. Signature manquante." }, { status: 401 });
+    }
+
     const bodyText = await request.text();
 
-    if (!signature || !isValidSignature(bodyText, signature, secret)) {
-      console.error("Tentative d'accès non autorisée au Webhook.");
+    const isValid = await isValidSignature(bodyText, signature, secret);
+
+    if (!isValid) {
+      console.error("Tentative d'accès non autorisée au Webhook (Signature invalide).");
       return NextResponse.json({ error: "Accès refusé. Signature invalide." }, { status: 401 });
     }
 
-    const article = JSON.parse(bodyText);
-
-    if (!article || !article.title || !article.slug) {
-      return NextResponse.json({ error: "Données invalides" }, { status: 400 });
+   let article;
+    try {
+      article = sanityPayloadSchema.parse(JSON.parse(bodyText));
+    } catch (e) {
+      return NextResponse.json({ error: "Format de données invalide" }, { status: 400 });
     }
+
+    const escapeHtml = (unsafe: string) => {
+      return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    };
+
+    const safeTitle = escapeHtml(article.title);
+    const safeExtrait = article.extrait ? escapeHtml(article.extrait) : "Découvrez notre toute dernière analyse et nos conseils experts en IT.";
 
     const subscribers = await prisma.subscriber.findMany({
       where: { isActive: true },
@@ -106,7 +129,7 @@ export async function POST(request: Request) {
       saveToSentItems: "false"
     };
 
-    await fetch(`https://graph.microsoft.com/v1.0/users/${senderEmail}/sendMail`, {
+    const sendMailResponse = await fetch(`https://graph.microsoft.com/v1.0/users/${senderEmail}/sendMail`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -114,6 +137,12 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify(emailData)
     });
+
+    if (!sendMailResponse.ok) {
+      const errorText = await sendMailResponse.text();
+      console.error("Erreur Microsoft Graph :", errorText);
+      throw new Error(`L'envoi via Azure a échoué avec le statut ${sendMailResponse.status}`);
+    }
 
     return NextResponse.json({ message: `Notifications envoyées à ${subscribers.length} abonné(s) !` }, { status: 200 });
 
