@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
     const subscribers = await prisma.subscriber.findMany({
       where: { isActive: true },
-      select: { email: true }
+      select: { email: true, token: true }
     });
 
     if (subscribers.length === 0) {
@@ -62,6 +62,7 @@ export async function POST(request: Request) {
     const clientId = process.env.AZURE_CLIENT_ID;
     const clientSecret = process.env.AZURE_CLIENT_SECRET;
     const senderEmail = process.env.AZURE_FROM_EMAIL;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://trinexta.fr";
 
     if (!tenantId || !clientId || !clientSecret || !senderEmail) {
       throw new Error("Identifiants Azure manquants");
@@ -78,35 +79,35 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: tokenParams.toString(),
     });
-    
+
     const tokenData = await tokenResponse.json();
     const accessToken = tokenData.access_token;
 
-    const articleUrl = `https://www.trinexta.fr/blog/${article.slug.current}`;
-    const imageUrl = article.imageUrl || "https://www.trinexta.fr/images/default-blog.jpg";
+    const articleUrl = `${siteUrl}/blog/${article.slug.current}`;
+    const imageUrl = article.imageUrl || `${siteUrl}/images/default-blog.jpg`;
 
-    const emailHtmlContent = `
+    const buildEmailHtml = (unsubscribeUrl: string) => `
       <div style="background-color: #FFFFFF; font-family: Arial, Helvetica, sans-serif; color: #0F172A; padding: 20px; max-width: 900px; margin: 0 auto;">
-        
+
         <p style="font-size: 16px; color: #475569; line-height: 1.6; margin-bottom: 40px; text-align: left;">
           Bonjour,<br><br>
           Nous venons de publier un nouvel article qui pourrait vous intéresser sur le blog Trinexta.
         </p>
 
         <div style="font-size: 0; margin-bottom: 20px; text-align: center;">
-          
+
           <div style="display: inline-block; width: 100%; max-width: 420px; vertical-align: top; font-size: 16px; text-align: left;">
-            <img src="${imageUrl}" alt="${article.title}" style="width: 100%; height: auto; border-radius: 6px; display: block; object-fit: cover;" />
+            <img src="${imageUrl}" alt="${safeTitle}" style="width: 100%; height: auto; border-radius: 6px; display: block; object-fit: cover;" />
           </div>
 
           <div style="display: inline-block; width: 100%; max-width: 40px; height: 30px; font-size: 16px;"></div>
 
           <div style="display: inline-block; width: 100%; max-width: 400px; vertical-align: top; font-size: 16px; text-align: left;">
             <h2 style="font-size: 24px; font-weight: bold; color: #0F172A; margin: 0 0 15px 0; line-height: 1.3;">
-              ${article.title}
+              ${safeTitle}
             </h2>
             <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
-              ${article.extrait || "Découvrez notre toute dernière analyse et nos conseils experts en IT."}
+              ${safeExtrait}
             </p>
             <a href="${articleUrl}" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-size: 15px; font-weight: bold; text-decoration: none; padding: 14px 28px; border-radius: 4px; display: inline-block;">
               Lire l'article complet
@@ -114,35 +115,39 @@ export async function POST(request: Request) {
           </div>
         </div>
 
+        <p style="margin-top: 40px; font-size: 11px; color: #94A3B8; text-align: center;">
+          Vous recevez cet email car vous etes inscrit a la newsletter Trinexta.<br>
+          <a href="${unsubscribeUrl}" style="color: #94A3B8;">Se desabonner</a>
+        </p>
+
       </div>
     `;
 
-    const emailsList = subscribers.map(sub => ({ emailAddress: { address: sub.email } }));
+    await Promise.all(
+      subscribers.map(async (sub) => {
+        const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?token=${sub.token}`;
+        const sendMailResponse = await fetch(`https://graph.microsoft.com/v1.0/users/${senderEmail}/sendMail`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: {
+              subject: `Nouveau sur Trinexta : ${safeTitle}`,
+              body: { contentType: "HTML", content: buildEmailHtml(unsubscribeUrl) },
+              toRecipients: [{ emailAddress: { address: sub.email } }],
+            },
+            saveToSentItems: "false",
+          }),
+        });
 
-    const emailData = {
-      message: {
-        subject: `Nouveau sur Trinexta : ${article.title}`,
-        body: { contentType: "HTML", content: emailHtmlContent },
-        bccRecipients: emailsList,
-        toRecipients: [{ emailAddress: { address: senderEmail } }] 
-      },
-      saveToSentItems: "false"
-    };
-
-    const sendMailResponse = await fetch(`https://graph.microsoft.com/v1.0/users/${senderEmail}/sendMail`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(emailData)
-    });
-
-    if (!sendMailResponse.ok) {
-      const errorText = await sendMailResponse.text();
-      console.error("Erreur Microsoft Graph :", errorText);
-      throw new Error(`L'envoi via Azure a échoué avec le statut ${sendMailResponse.status}`);
-    }
+        if (!sendMailResponse.ok) {
+          const errorText = await sendMailResponse.text();
+          console.error(`Erreur envoi a ${sub.email} :`, errorText);
+        }
+      })
+    );
 
     return NextResponse.json({ message: `Notifications envoyées à ${subscribers.length} abonné(s) !` }, { status: 200 });
 

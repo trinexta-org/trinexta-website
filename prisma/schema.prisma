@@ -31,6 +31,7 @@ model ContactForm {
 model Subscriber {
   id         String   @id @default(cuid())
   email      String   @unique
+  token      String   @unique @default(uuid())
   isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())   
+  createdAt  DateTime @default(now())
 }
