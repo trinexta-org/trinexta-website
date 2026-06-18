@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Container } from "./Container"
 import { SectionFade } from "@/components/ui/SectionFade"
+import { FooterNewsletter } from "@/components/shared/FooterNewsletter"
 import { SOCIAL_LINKS } from "@/data/social-links"
 
 const NAVIGATION = [
@@ -60,6 +61,7 @@ export function Footer() {
               <div className="space-y-5">
                 <p className="text-white/70 text-[13px] leading-relaxed">Votre informatique simplifiée, en toute sérénité. <br />Expertise, Proximité, Réactivité.</p>
               </div>
+              <FooterNewsletter />
             </div>
 
             <div>
@@ -80,21 +82,23 @@ export function Footer() {
               </ul>
             </div>
 
-            <div>
-              <span className={desktopTitle}>Légal</span>
-              <ul className="flex flex-col gap-3.5">
-                {LEGAL.map((item) => (
-                  <li key={item.name}><Link href={item.href} className={desktopHover}>{item.name}</Link></li>
-                ))}
-              </ul>
-            </div>
+            <div className="col-span-2 grid grid-cols-2 gap-12 content-start">
+              <div>
+                <span className={desktopTitle}>Légal</span>
+                <ul className="flex flex-col gap-3.5">
+                  {LEGAL.map((item) => (
+                    <li key={item.name}><Link href={item.href} className={desktopHover}>{item.name}</Link></li>
+                  ))}
+                </ul>
+              </div>
 
-            <div>
-              <span className={desktopTitle}>Contact</span>
-              <div className="space-y-6">
-                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Bureau d&apos;activité</span><span className="text-white/70 text-[13px]">7 Rue Montespan, 91000 EVRY COURCOURONNES</span></div>
-                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Assistance</span><a href="tel:0978250746" className="text-white/70 hover:text-secondary text-[13px] block transition-colors">09 78 25 07 46</a></div>
-                <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Email</span><a href="mailto:contact@trinexta.fr" className="text-white/70 hover:text-secondary text-[13px] block transition-colors">contact@trinexta.fr</a></div>
+              <div>
+                <span className={desktopTitle}>Contact</span>
+                <div className="space-y-5">
+                  <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Bureau d&apos;activité</span><span className="text-white/70 text-[13px]">7 Rue Montespan, 91000 EVRY COURCOURONNES</span></div>
+                  <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Assistance</span><a href="tel:0978250746" className="text-white/70 hover:text-secondary text-[13px] block transition-colors">09 78 25 07 46</a></div>
+                  <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Email</span><a href="mailto:contact@trinexta.fr" className="text-white/70 hover:text-secondary text-[13px] block transition-colors">contact@trinexta.fr</a></div>
+                </div>
               </div>
             </div>
           </div>
@@ -125,6 +129,8 @@ export function Footer() {
               <span className="text-secondary text-[7px] font-bold uppercase block tracking-widest">By Trustech IT</span>
             </div>
           </div>
+
+          <FooterNewsletter compact />
 
           <div className="grid grid-cols-4 gap-y-8 gap-x-2 sm:gap-x-4 border-y border-white/5 py-6">
             <div>
@@ -171,6 +177,7 @@ export function Footer() {
                 </div>
               </div>
             </div>
+
           </div>
 
           {/* EXACTEMENT COMME SUR TA CAPTURE D'ÉCRAN */}

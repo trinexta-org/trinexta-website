@@ -15,23 +15,27 @@ export async function POST(request: Request) {
     // ÉTAPE 1 : SAUVEGARDE DANS LA BASE DE DONNÉES (PRISMA)
     // ==========================================
     
+    let subscriberToken: string;
+
     const existingSubscriber = await prisma.subscriber.findUnique({
       where: { email: email }
     });
 
     if (existingSubscriber) {
       if (!existingSubscriber.isActive) {
-        await prisma.subscriber.update({
+        const updated = await prisma.subscriber.update({
           where: { email: email },
           data: { isActive: true }
         });
+        subscriberToken = updated.token;
       } else {
         return NextResponse.json({ message: "Vous êtes déjà inscrit à notre newsletter !" }, { status: 200 });
       }
     } else {
-      await prisma.subscriber.create({
+      const created = await prisma.subscriber.create({
         data: { email: email }
       });
+      subscriberToken = created.token;
     }
 
     // ==========================================
@@ -41,6 +45,7 @@ export async function POST(request: Request) {
     const clientId = process.env.AZURE_CLIENT_ID;
     const clientSecret = process.env.AZURE_CLIENT_SECRET;
     const senderEmail = process.env.AZURE_FROM_EMAIL;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://trinexta.fr";
 
     if (!tenantId || !clientId || !clientSecret || !senderEmail) {
       console.error("Identifiants Azure manquants");
@@ -62,6 +67,8 @@ export async function POST(request: Request) {
     const tokenData = await tokenResponse.json();
     const accessToken = tokenData.access_token;
 
+    const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?token=${subscriberToken}`;
+
     const emailHtmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0F172A; color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #1E293B;">
         <div style="padding: 40px; text-align: center; border-bottom: 1px solid #1E293B;">
@@ -74,6 +81,11 @@ export async function POST(request: Request) {
           <p style="color: #94A3B8; line-height: 1.6; font-size: 15px;">Bonjour,</p>
           <p style="color: #94A3B8; line-height: 1.6; font-size: 15px;">Merci de l'intérêt que vous portez à l'expertise Trinexta. Nous vous confirmons que votre adresse e-mail a bien été ajoutée à notre liste d'envoi exclusive.</p>
           <p style="color: #94A3B8; line-height: 1.6; font-size: 15px;">Vous recevrez prochainement nos meilleures analyses sur la cybersécurité, l'infogérance et les stratégies Cloud pour les entreprises.</p>
+        </div>
+        <div style="padding: 20px 40px; border-top: 1px solid #1E293B; text-align: center;">
+          <p style="font-size: 11px; color: #475569; margin: 0;">
+            Pour ne plus recevoir nos emails : <a href="${unsubscribeUrl}" style="color: #475569;">Se désabonner</a>
+          </p>
         </div>
       </div>
     `;
