@@ -64,12 +64,19 @@ export function OurNetwork() {
                             <span className="text-secondary">d&apos;experts indépendants</span>
                         </Heading>
 
-                        <Text className="text-white/90 text-base md:text-xl leading-relaxed font-light mt-2 md:mt-0">
-                            Pour vous garantir une réactivité maximale et une expertise parfaitement adaptée à chaque situation, nous avons fait le choix d&apos;un modèle agile. Nous nous appuyons sur un réseau solide de plus de 40 techniciens IT freelances, rigoureusement sélectionnés pour leur savoir-faire terrain et leur sens du service.
+                        <div className="rounded-xl border border-secondary/40 bg-secondary/10 p-4 md:p-6 mt-2 md:mt-0">
+                            <p className="text-white font-bold text-sm md:text-base mb-1">Réponse à incident : une équipe interne, jamais sous-traitée.</p>
+                            <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                                La détection, le confinement, l&apos;investigation et la remédiation des incidents de cybersécurité sont réalisés exclusivement par l&apos;équipe technique interne de TRINEXTA. Pour les missions d&apos;infogérance, de support et de déploiement, nous nous appuyons en complément sur un réseau de techniciens partenaires afin de garantir réactivité et couverture territoriale.
+                            </p>
+                        </div>
+
+                        <Text className="text-white/90 text-base md:text-xl leading-relaxed font-light">
+                            Pour vous garantir une réactivité maximale et une expertise parfaitement adaptée à chaque situation, nous avons fait le choix d&apos;un modèle agile.
                         </Text>
 
                         <Text className="text-white/80 text-sm md:text-lg leading-relaxed">
-                            Contrairement aux agences traditionnelles souvent freinées par des lourdeurs administratives, notre organisation en réseau nous permet de mobiliser les bonnes compétences, au bon endroit, et au bon moment. Cette flexibilité structurelle est la clé de notre capacité à vous offrir un support technique d’excellence, capable d’évoluer au même rythme que votre entreprise.
+                            Pour le support et l&apos;infogérance, nous mobilisons en complément un réseau de techniciens partenaires qualifiés, sélectionnés pour leur savoir-faire terrain. Contrairement aux agences traditionnelles souvent freinées par des lourdeurs administratives, notre organisation en réseau nous permet de mobiliser les bonnes compétences, au bon endroit, et au bon moment.
                         </Text>
                     </motion.div>
                 </div>

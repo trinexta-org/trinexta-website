@@ -23,6 +23,21 @@ export interface ServicePageProps {
     problem: { subtitle: string; title: string; description: string; painPoints: string[] }
     offer: { subtitle: string; title: string; description: string; features: Array<{ title: string; desc: string }> }
     benefits: { subtitle: string; title: string; items: Array<{ title: string; desc: string }> }
+    incidentResponse?: {
+        surtitle: string
+        title: string
+        intro: string
+        items: Array<{ title: string; desc: string }>
+        ctaLabel: string
+        ctaHref: string
+        planHref: string
+    }
+    expertise?: {
+        surtitle: string
+        title: string
+        intro: string
+        items: string[]
+    }
     faq: Array<{ question: string; answer: string }>
     cta: { line1: string; line2: string; line3: string; description: string; buttonText: string; buttonHref: string }
 }
@@ -40,7 +55,7 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, cta }: ServicePageProps) {
+export function ServicePage({ serviceSlug, hero, problem, offer, benefits, incidentResponse, expertise, faq, cta }: ServicePageProps) {
     const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
     
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
@@ -390,6 +405,44 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                 </div>
             </Section>
 
+            {/* INCIDENT RESPONSE */}
+            {incidentResponse && (
+                <>
+                    <TransitionTitle surtitle={incidentResponse.surtitle} line1="Réponse à" line2="incident" />
+                    <Section id="incident-response" className="bg-primary pb-16 md:pb-24">
+                        <div className="max-w-3xl mx-auto text-center mb-10 md:mb-16 space-y-4">
+                            <Heading as="h2" className="text-white text-3xl md:text-4xl">{incidentResponse.title}</Heading>
+                            <Text className="text-white/80 text-base md:text-lg leading-relaxed">{incidentResponse.intro}</Text>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-14">
+                            {incidentResponse.items.map((item, idx) => (
+                                <FadeIn key={idx} delay={idx * 0.08}>
+                                    <div className="h-full flex flex-col gap-3 p-5 md:p-7 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-secondary/40 hover:bg-white/[0.05] transition-all duration-300">
+                                        <div className="flex items-center gap-3">
+                                            <span className="shrink-0 w-7 h-7 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center text-secondary font-bold text-xs">
+                                                {String(idx + 1).padStart(2, "0")}
+                                            </span>
+                                            <Heading as="h3" className="text-white text-base md:text-lg font-bold leading-tight">{item.title}</Heading>
+                                        </div>
+                                        <Text className="text-white/70 text-sm leading-relaxed">{item.desc}</Text>
+                                    </div>
+                                </FadeIn>
+                            ))}
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <Link href={incidentResponse.ctaHref}>
+                                <Button variant="secondary" className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold">
+                                    {incidentResponse.ctaLabel}
+                                </Button>
+                            </Link>
+                            <Link href={incidentResponse.planHref} className="text-secondary text-sm md:text-base hover:underline transition-colors">
+                                Voir notre méthodologie complète en 8 étapes
+                            </Link>
+                        </div>
+                    </Section>
+                </>
+            )}
+
             {/* 5. FAQ */}
             <Section id="faq" container={false} className="relative overflow-hidden bg-primary/95 pb-16 md:pb-24 pt-12 md:pt-16">
                 <SectionFade edge="both" />
@@ -420,6 +473,28 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, faq, 
                 </div>
                 </Container>
             </Section>
+
+            {/* EXPERTISE / VEILLE */}
+            {expertise && (
+                <Section id="expertise" container={false} className="relative overflow-hidden bg-primary/95 pb-16 md:pb-24 pt-12 md:pt-16">
+                    <SectionFade edge="both" />
+                    <Container className="relative z-10 max-w-3xl mx-auto">
+                        <div className="text-center mb-8 md:mb-10">
+                            <span className="text-secondary text-xs font-mono font-bold uppercase tracking-widest block mb-2">{expertise.surtitle}</span>
+                            <Heading as="h2" className="text-white text-3xl md:text-4xl">{expertise.title}</Heading>
+                        </div>
+                        <Text className="text-white/80 text-base md:text-lg leading-relaxed mb-6 text-center">{expertise.intro}</Text>
+                        <ul className="space-y-3">
+                            {expertise.items.map((item, idx) => (
+                                <li key={idx} className="flex items-start gap-3 text-white/70 text-sm md:text-base leading-relaxed">
+                                    <span className="text-secondary shrink-0 mt-1 font-bold">-</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </Container>
+                </Section>
+            )}
 
             {/* 6. CTA FINAL */}
             <FinalCTA

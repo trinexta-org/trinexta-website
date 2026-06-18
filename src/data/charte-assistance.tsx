@@ -116,7 +116,7 @@ export const charteAssistanceData: LegalData = {
             items={[
               "Isoler immédiatement les équipements.",
               "Déconnecter les serveurs concernés.",
-              "Conserver les preuves.",
+              "Conserver les preuves : ne rien supprimer, ne pas éteindre brutalement les machines, et laisser un professionnel réaliser une copie forensique avant toute intervention.",
               "Identifier les sauvegardes disponibles.",
             ]}
           />
