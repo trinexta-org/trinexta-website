@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
   title: `${planReponseIncidentsData.hero.title}`,
-  description: "Plan de réponse aux incidents de cybersécurité TRINEXTA - méthodologie structurée en 7 étapes pour détecter, contenir et résoudre les incidents.",
+  description: "Plan de réponse aux incidents de cybersécurité TRINEXTA - méthodologie structurée en 8 étapes pour détecter, contenir et résoudre les incidents.",
   alternates: {
     canonical: "/plan-reponse-incidents-securite",
   },
