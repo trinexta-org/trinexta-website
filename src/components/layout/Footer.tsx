@@ -31,7 +31,6 @@ const LEGAL = [
   { name: "Tous les documents", href: "/informations-juridiques" },
 ]
 
-const PARTNERS = ["Microsoft", "Google", "Sophos", "Bitdefender", "OVH"]
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -103,22 +102,6 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="pt-6 border-t border-white/5 flex justify-between items-center">
-            <div className="flex gap-8">
-              {PARTNERS.map((p) => (
-                <span key={p} className="text-[10px] text-white/20 font-black uppercase tracking-[0.2em] hover:text-white/60 transition-colors cursor-default">
-                  {p}
-                </span>
-              ))}
-            </div>
-            <div className="flex items-center gap-6">
-              {SOCIAL_LINKS.map(({ name, href, Icon }) => (
-                <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* --- VERSION TABLETTES & MOBILE --- */}
@@ -132,7 +115,7 @@ export function Footer() {
 
           <FooterNewsletter compact />
 
-          <div className="grid grid-cols-4 gap-y-8 gap-x-2 sm:gap-x-4 border-y border-white/5 py-6">
+          <div className="grid grid-cols-4 gap-y-8 gap-x-2 sm:gap-x-4 border-t border-white/5 pt-6 pb-2">
             <div>
               <span className={mobileTitle}>Navigation</span>
               <ul className="space-y-2">
@@ -180,28 +163,20 @@ export function Footer() {
 
           </div>
 
-          {/* EXACTEMENT COMME SUR TA CAPTURE D'ÉCRAN */}
-          <div className="flex justify-between items-center gap-4">
-            <div className="flex flex-wrap gap-x-3 gap-y-1">
-              {["Microsoft", "Google", "OVH"].map(p => (
-                <span key={p} className="text-[8px] text-white/20 font-black uppercase tracking-widest">{p}</span>
-              ))}
-            </div>
-            <div className="flex gap-4 shrink-0">
-              {SOCIAL_LINKS.map(({ name, href, Icon }) => (
-                <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* MENTIONS LÉGALES / COPYRIGHT */}
-        <div className="py-4 border-t border-white/5 text-center mt-4 lg:mt-0">
+        <div className="py-4 border-t border-white/5 flex items-center justify-between gap-4 mt-4 lg:mt-0">
           <p className="text-[9px] md:text-[10px] text-white/30 font-bold uppercase tracking-widest">
             © {currentYear} TrusTech IT Support – Tous droits réservés
           </p>
+          <div className="flex items-center gap-4 shrink-0">
+            {SOCIAL_LINKS.map(({ name, href, Icon }) => (
+              <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
         </div>
 
       </Container>
