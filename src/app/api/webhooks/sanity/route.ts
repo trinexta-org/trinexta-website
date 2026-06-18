@@ -96,17 +96,17 @@ export async function POST(request: Request) {
         <div style="font-size: 0; margin-bottom: 20px; text-align: center;">
           
           <div style="display: inline-block; width: 100%; max-width: 420px; vertical-align: top; font-size: 16px; text-align: left;">
-            <img src="${imageUrl}" alt="${article.title}" style="width: 100%; height: auto; border-radius: 6px; display: block; object-fit: cover;" />
+            <img src="${imageUrl}" alt="${safeTitle}" style="width: 100%; height: auto; border-radius: 6px; display: block; object-fit: cover;" />
           </div>
 
           <div style="display: inline-block; width: 100%; max-width: 40px; height: 30px; font-size: 16px;"></div>
 
           <div style="display: inline-block; width: 100%; max-width: 400px; vertical-align: top; font-size: 16px; text-align: left;">
             <h2 style="font-size: 24px; font-weight: bold; color: #0F172A; margin: 0 0 15px 0; line-height: 1.3;">
-              ${article.title}
+              ${safeTitle}
             </h2>
             <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
-              ${article.extrait || "Découvrez notre toute dernière analyse et nos conseils experts en IT."}
+              ${safeExtrait}
             </p>
             <a href="${articleUrl}" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-size: 15px; font-weight: bold; text-decoration: none; padding: 14px 28px; border-radius: 4px; display: inline-block;">
               Lire l'article complet
@@ -121,7 +121,7 @@ export async function POST(request: Request) {
 
     const emailData = {
       message: {
-        subject: `Nouveau sur Trinexta : ${article.title}`,
+        subject: `Nouveau sur Trinexta : ${safeTitle}`,
         body: { contentType: "HTML", content: emailHtmlContent },
         bccRecipients: emailsList,
         toRecipients: [{ emailAddress: { address: senderEmail } }] 
