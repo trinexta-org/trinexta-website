@@ -11,6 +11,7 @@ export const planReponseIncidentsData: LegalData = {
       title: "Présentation",
       paragraphs: [
         "TRINEXTA applique une méthodologie structurée permettant d'identifier, contenir, traiter et résoudre les incidents de sécurité affectant les systèmes d'information de ses clients. L'objectif est de réduire les impacts opérationnels, financiers et techniques, tout en assurant une reprise rapide des activités.",
+        "L'ensemble des opérations de réponse à incident et de remédiation est assuré par l'équipe interne de TRINEXTA, sans sous-traitance.",
       ],
     },
     {
@@ -70,25 +71,47 @@ export const planReponseIncidentsData: LegalData = {
       ],
     },
     {
-      title: "Étape 4 - Investigation",
+      title: "Étape 4 - Préservation de la preuve",
+      content: (
+        <div className="space-y-3 text-sm text-white/70">
+          <p>Avant toute manipulation d&apos;un disque ou d&apos;une machine virtuelle, TRINEXTA garantit l&apos;intégrité et la recevabilité des preuves :</p>
+          <ul className="space-y-2">
+            {[
+              "Aucune action directe sur le système d'origine : nous réalisons d'abord une copie bit à bit (image forensique) du disque, ou un snapshot pour les environnements virtualisés.",
+              "Toute l'analyse est ensuite menée sur la copie, jamais sur le support original.",
+              "L'intégrité est vérifiée par le calcul et le contrôle d'empreintes cryptographiques (hash SHA-256) avant et après copie.",
+              "Pour les supports physiques, utilisation d'un bloqueur d'écriture (write-blocker) afin d'empêcher toute modification.",
+              "Chaque opération est horodatée et journalisée, et une chaîne de conservation (chain of custody) est documentée pour assurer la recevabilité des éléments.",
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-secondary shrink-0 mt-0.5">-</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ),
+    },
+    {
+      title: "Étape 5 - Investigation",
       paragraphs: [
         "Analyse technique de l'origine de l'attaque, de la méthode utilisée, de l'étendue de la compromission, des données concernées et des journaux systèmes.",
       ],
     },
     {
-      title: "Étape 5 - Éradication",
+      title: "Étape 6 - Éradication",
       paragraphs: [
         "Suppression de la menace : nettoyage, réinstallation, application des correctifs de sécurité, réinitialisation des mots de passe et renforcement des protections.",
       ],
     },
     {
-      title: "Étape 6 - Restauration",
+      title: "Étape 7 - Restauration",
       paragraphs: [
         "Retour progressif à la normale : vérification des sauvegardes, restauration des données, validation des services et contrôles de sécurité.",
       ],
     },
     {
-      title: "Étape 7 - Retour d'expérience",
+      title: "Étape 8 - Retour d'expérience",
       paragraphs: [
         "TRINEXTA recommande une analyse des causes, la mise à jour des procédures, le renforcement des mesures de sécurité et la sensibilisation des utilisateurs.",
       ],

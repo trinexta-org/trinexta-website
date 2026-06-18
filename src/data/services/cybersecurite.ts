@@ -109,6 +109,53 @@ export const cybersecuriteData: ServicePageProps = {
     },
   ],
 
+  incidentResponse: {
+    surtitle: "Quand l'attaque a déjà eu lieu",
+    title: "Réponse à incident & remédiation",
+    intro: "Une cyberattaque ne s'arrête pas à la prévention. Lorsqu'un incident survient — ransomware, intrusion, compte compromis, site piraté — notre équipe intervient pour reprendre le contrôle, par une intervention sur site ou à distance selon l'urgence. Toutes les opérations de remédiation sont réalisées en interne par les équipes TRINEXTA, sans sous-traitance.",
+    items: [
+      {
+        title: "Intervention d'urgence sur site",
+        desc: "Déplacement dans toute l'Île-de-France pour prendre en charge un incident en cours ou avéré.",
+      },
+      {
+        title: "Confinement & isolation",
+        desc: "Isolation des postes touchés, blocage des comptes compromis, coupure des accès pour stopper la propagation.",
+      },
+      {
+        title: "Investigation",
+        desc: "Analyse de l'origine, de la méthode d'attaque et de l'étendue de la compromission, dans le respect de l'intégrité des preuves.",
+      },
+      {
+        title: "Éradication de la menace",
+        desc: "Suppression du code malveillant, réinstallation, application des correctifs, réinitialisation des accès et des identités.",
+      },
+      {
+        title: "Restauration & reprise d'activité",
+        desc: "Vérification et restauration des sauvegardes, validation des services, contrôles de sécurité avant remise en production.",
+      },
+      {
+        title: "Durcissement post-incident",
+        desc: "Renforcement des protections et recommandations pour éviter la récidive.",
+      },
+    ],
+    ctaLabel: "Signaler un incident",
+    ctaHref: "/charte-assistance",
+    planHref: "/plan-reponse-incidents-securite",
+  },
+
+  expertise: {
+    surtitle: "Veille permanente",
+    title: "Une expertise à jour",
+    intro: "La menace évolue chaque jour ; notre expertise aussi. Nos équipes maintiennent une veille active en sécurité numérique au travers de :",
+    items: [
+      "les bulletins et alertes du CERT-FR et de l'ANSSI, ainsi que les publications de Cybermalveillance.gouv.fr ;",
+      "les avis de sécurité de nos éditeurs partenaires (SentinelOne, Sophos, Bitdefender, Microsoft) ;",
+      "la formation continue et les certifications de nos techniciens (CompTIA Security+, etc.) ;",
+      "le suivi de médias spécialisés et de communautés professionnelles en cybersécurité.",
+    ],
+  },
+
   cta: {
     line1: "Prêt à",
     line2: "blinder",
