@@ -4,6 +4,58 @@ const sanityProjectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "93ztl6y7";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "img-src 'self' cdn.sanity.io data:",
+              "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net www.googletagmanager.com",
+              "style-src 'self' 'unsafe-inline'",
+              "font-src 'self'",
+              "frame-src 'self' www.google.com",
+              "connect-src 'self' www.google-analytics.com analytics.google.com www.googletagmanager.com",
+            ].join("; "),
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains",
+          },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+      {
+        source: "/demos/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "img-src 'self' images.unsplash.com picsum.photos data:",
+              "script-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
+              "font-src 'self' fonts.gstatic.com",
+              "connect-src 'self'",
+            ].join("; "),
+          },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // --- Pages services / offres ---
