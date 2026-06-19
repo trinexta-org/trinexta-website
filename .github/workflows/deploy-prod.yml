@@ -12,10 +12,13 @@ jobs:
     steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
+        env:
+          NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: NEXT_PUBLIC_GTM_ID
           script: |
             set -e
             cd /var/www/trinexta-prod
@@ -23,6 +26,7 @@ jobs:
             npm ci
             npx prisma migrate deploy
             npx prisma generate
+            : "${NEXT_PUBLIC_GTM_ID:?NEXT_PUBLIC_GTM_ID is missing in GitHub repository variables}"
             npm run build
             pm2 startOrReload ecosystem.config.js --only trinexta-prod --update-env
             pm2 save
