@@ -4,6 +4,41 @@ const sanityProjectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "93ztl6y7";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "img-src 'self' cdn.sanity.io data:",
+              "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net",
+              "style-src 'self' 'unsafe-inline'",
+              "font-src 'self'",
+              "frame-src www.google.com",
+              "connect-src 'self'",
+            ].join("; "),
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // --- Pages services / offres ---
