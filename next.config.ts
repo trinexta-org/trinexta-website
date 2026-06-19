@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline'",
               "font-src 'self'",
-              "frame-src www.google.com",
+              "frame-src 'self' www.google.com",
               "connect-src 'self' www.google-analytics.com analytics.google.com www.googletagmanager.com",
             ].join("; "),
           },
