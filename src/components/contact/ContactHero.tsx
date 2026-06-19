@@ -15,7 +15,7 @@ export function ContactHero() {
       slideMinHeight="min-h-[250px]"
       staticBackground={
         <Image
-          src="/images/services/support-informatique/hero.avif"
+          src="/images/services/support-informatique/hero-v2.avif"
           alt="Contact Trinexta"
           fill
           fetchPriority="high"
