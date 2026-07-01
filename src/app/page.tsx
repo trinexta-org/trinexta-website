@@ -15,7 +15,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const title = "Infogérance et IT pour PME - Évry, Essonne | Trinexta";
+const title = "Prestataire Informatique à Évry, en Essonne | Trinexta";
 const description =
   "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France. Intervention sur site et à distance depuis Évry.";
 
