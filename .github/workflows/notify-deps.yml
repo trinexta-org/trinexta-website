@@ -1,0 +1,102 @@
+name: Notify deps change
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - "package.json"
+  workflow_dispatch:
+
+jobs:
+  notify:
+    name: Teams notification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if dependencies changed
+        id: deps
+        run: |
+          git show HEAD~1:package.json > /tmp/prev-package.json 2>/dev/null || echo '{}' > /tmp/prev-package.json
+          node -e "
+            const prev = require('/tmp/prev-package.json');
+            const curr = require('./package.json');
+            const prevDeps = {...(prev.dependencies||{}), ...(prev.devDependencies||{})};
+            const currDeps = {...(curr.dependencies||{}), ...(curr.devDependencies||{})};
+            if (JSON.stringify(prevDeps) === JSON.stringify(currDeps)) {
+              console.log('changed=false');
+              process.exit(0);
+            }
+            const added   = Object.keys(currDeps).filter(k=>!prevDeps[k]).map(k=>k+'@'+currDeps[k]);
+            const removed = Object.keys(prevDeps).filter(k=>!currDeps[k]);
+            const updated = Object.keys(currDeps).filter(k=>prevDeps[k]&&prevDeps[k]!==currDeps[k]).map(k=>k+': '+prevDeps[k]+' → '+currDeps[k]);
+            const lines = [];
+            if (added.length)   lines.push('Ajoutées : '+added.join(', '));
+            if (removed.length) lines.push('Supprimées : '+removed.join(', '));
+            if (updated.length) lines.push('Mises à jour : '+updated.join(', '));
+            console.log('changed=true');
+            console.log('details='+lines.join(' | '));
+          " >> $GITHUB_OUTPUT
+
+      - name: Send Teams notification
+        if: steps.deps.outputs.changed == 'true'
+        env:
+          DETAILS: ${{ steps.deps.outputs.details }}
+          ACTOR: ${{ github.actor }}
+          SHA: ${{ github.sha }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          node -e "
+            const card = {
+              '\$schema': 'http://adaptivecards.io/schemas/adaptive-card.json',
+              type: 'AdaptiveCard',
+              version: '1.2',
+              body: [
+                {
+                  type: 'TextBlock',
+                  text: '📦 Dépendances mises à jour sur dev',
+                  weight: 'Bolder',
+                  size: 'Medium',
+                  color: 'Accent'
+                },
+                {
+                  type: 'TextBlock',
+                  text: process.env.DETAILS,
+                  wrap: true
+                },
+                {
+                  type: 'FactSet',
+                  facts: [
+                    { title: 'Repo', value: process.env.REPO_URL.split('/').slice(-1)[0] },
+                    { title: 'Auteur', value: process.env.ACTOR },
+                    { title: 'Commit', value: process.env.SHA.substring(0, 7) },
+                    { title: 'Action requise', value: 'npm install' }
+                  ]
+                }
+              ],
+              actions: [{
+                type: 'Action.OpenUrl',
+                title: 'Voir le commit',
+                url: process.env.REPO_URL + '/commit/' + process.env.SHA
+              }]
+            };
+            const https = require('https');
+            const url = new URL(process.env.WEBHOOK_URL);
+            const body = JSON.stringify(card);
+            const req = https.request({
+              hostname: url.hostname,
+              port: url.port || 443,
+              path: url.pathname + url.search,
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
+            }, res => {
+              console.log('Status:', res.statusCode);
+              res.on('data', d => process.stdout.write(d));
+            });
+            req.on('error', e => { console.error(e); process.exit(1); });
+            req.write(body);
+            req.end();
+          "
