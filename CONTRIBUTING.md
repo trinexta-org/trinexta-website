@@ -26,7 +26,7 @@ cd studio && npm install && npm run dev   # http://localhost:3333
 |-----------|----------------------|-----------------|
 | `dev`     | local uniquement     | PR → staging    |
 | `staging` | staging.trinexta.fr  | PR → main       |
-| `main`    | trinexta.com         | PR approuvée    |
+| `main`    | trinexta.fr          | PR approuvée    |
 
 Règle : **jamais de push direct sur `staging` ou `main`**. Toujours passer par une PR.
 
