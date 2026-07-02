@@ -3,7 +3,8 @@ import Image from "next/image"
 import { Phone, Mail } from "lucide-react"
 import { Nav } from "./Nav"
 import { MobileMenu } from "./MobileMenu"
-import { Container } from "./Container" 
+import { Container } from "./Container"
+import { Button } from "@/components/ui/Button"
 
 export function Header() {
   return (
@@ -38,6 +39,11 @@ export function Header() {
             </Link>
 
             <Nav />
+
+            <Button asChild variant="secondary" size="sm" className="hidden lg:inline-flex font-bold">
+              <Link href="/estimation">Estimer mon projet</Link>
+            </Button>
+
             <MobileMenu />
           </div>
         </Container>

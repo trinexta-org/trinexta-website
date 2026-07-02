@@ -35,3 +35,41 @@ model Subscriber {
   isActive   Boolean  @default(true)
   createdAt  DateTime @default(now())
 }
+
+// Estimation réalisée via le tunnel /estimation.
+// Anonyme par défaut : email et consentement uniquement si le visiteur
+// demande l'envoi du détail. Aucune IP ni donnée identifiante sinon.
+model Estimate {
+  id          String          @id @default(cuid())
+  sessionId   String
+  answers     Json
+  services    String[]
+  monthlyMin  Int?
+  monthlyMax  Int?
+  oneShotMin  Int?
+  oneShotMax  Int?
+  breakdown   Json
+  aiModifiers Json?
+  aiAnalyzed  Boolean         @default(false)
+  email       String?
+  consentAt   DateTime?
+  status      String          @default("complete")
+  createdAt   DateTime        @default(now())
+  events      EstimateEvent[]
+
+  @@index([sessionId])
+  @@index([createdAt])
+}
+
+// Étape franchie dans le tunnel, rattachée à une session éphémère.
+model EstimateEvent {
+  id         String    @id @default(cuid())
+  sessionId  String
+  step       String
+  estimateId String?
+  estimate   Estimate? @relation(fields: [estimateId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+
+  @@index([sessionId])
+  @@index([createdAt])
+}

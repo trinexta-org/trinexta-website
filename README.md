@@ -119,12 +119,29 @@ cd studio && npm run dev
 
 Se connecter au Studio avec son compte Google ou GitHub sur [sanity.io](https://sanity.io). Demander un acces au tech lead si besoin.
 
+## Purge des estimations (RGPD)
+
+Le tunnel `/estimation` stocke les parcours en base (tables `Estimate` / `EstimateEvent`). Les estimations anonymes (sans email) et les evenements orphelins de plus de 12 mois doivent etre purges automatiquement :
+
+```bash
+npm run purge:estimates
+```
+
+Sur le VPS, installer un cron mensuel (utilisateur qui possede le deploiement) :
+
+```cron
+# Purge RGPD des estimations anonymes - le 1er de chaque mois a 4h
+0 4 1 * * cd /var/www/trinexta-website && /usr/bin/node scripts/purge-estimates.mjs >> /var/log/trinexta-purge-estimates.log 2>&1
+```
+
+Le script lit `DATABASE_URL` depuis l'environnement, sinon depuis `.env.local` ou `.env` a la racine du projet. Adapter le chemin du projet et de node (`which node`) selon le VPS.
+
 ## Branches
 
 | Branche | Environnement |
 |---|---|
 | `dev` | local uniquement |
 | `staging` | staging.trinexta.fr |
-| `main` | trinexta.com |
+| `main` | trinexta.fr |
 
 Workflow : `dev` -> `staging` -> `main` via pull requests.
