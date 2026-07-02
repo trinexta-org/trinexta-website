@@ -17,6 +17,7 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/support-informatique`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/microsoft-365`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/solutions-metier`, changeFrequency: "monthly", priority: 0.8 },
+  { url: `${BASE_URL}/estimation`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/cas-clients`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${BASE_URL}/a-propos`, changeFrequency: "monthly", priority: 0.6 },
   { url: `${BASE_URL}/contact`, changeFrequency: "yearly", priority: 0.6 },

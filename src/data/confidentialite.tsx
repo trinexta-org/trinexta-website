@@ -117,6 +117,7 @@ export const confidentialiteData: LegalData = {
             ["Clients", "pendant toute la relation contractuelle, puis archivage conformément aux obligations légales."],
             ["Facturation", "10 ans conformément aux obligations comptables et fiscales."],
             ["Données techniques", "12 mois maximum, sauf obligation légale contraire."],
+            ["Estimations en ligne anonymes", "12 mois maximum, puis suppression automatique."],
             ["Cookies", "13 mois maximum."],
           ].map(([label, desc], i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
@@ -173,13 +174,21 @@ export const confidentialiteData: LegalData = {
       ],
     },
     {
-      title: "Article 14 - Modification de la politique",
+      title: "Article 14 - Simulateur d'estimation en ligne",
+      paragraphs: [
+        "Le site propose un simulateur d'estimation de prix accessible sur la page /estimation. Le parcours est anonyme par défaut : les réponses au questionnaire et un identifiant de session technique sont enregistrés à des fins statistiques et d'amélioration du service, sans aucune donnée identifiante. L'adresse IP n'est jamais conservée : elle est uniquement transformée de façon irréversible, en mémoire et temporairement, pour prévenir les abus.",
+        "La description libre éventuellement saisie est analysée automatiquement par un prestataire d'intelligence artificielle dans le seul but d'affiner l'estimation. Elle n'est pas conservée : nous vous invitons à ne pas y renseigner de données personnelles.",
+        "Si vous demandez l'envoi du détail par email, votre adresse est enregistrée avec votre consentement horodaté (base légale : consentement), aux fins d'envoi de l'estimation et de recontact commercial à son sujet. Vous pouvez retirer ce consentement à tout moment. Les estimations anonymes sont automatiquement supprimées après 12 mois ; les estimations associées à un email suivent la durée de conservation applicable aux prospects.",
+      ],
+    },
+    {
+      title: "Article 15 - Modification de la politique",
       paragraphs: [
         "TRINEXTA peut modifier la présente Politique de Confidentialité à tout moment afin de tenir compte des évolutions légales, réglementaires, techniques ou des nouveaux services proposés. Toute nouvelle version sera publiée sur le site.",
       ],
     },
     {
-      title: "Article 15 - Contact",
+      title: "Article 16 - Contact",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
