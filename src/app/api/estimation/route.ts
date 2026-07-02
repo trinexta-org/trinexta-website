@@ -2,10 +2,17 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { computeEstimate } from "@/lib/estimation/engine";
 import { detectServices } from "@/lib/estimation/flow";
+import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
 import { estimationCompletionSchema } from "@/lib/validations/estimation";
+
+const CREATE_MAX_REQUESTS_PER_WINDOW = 15;
 
 export async function POST(request: Request) {
   try {
+    if (!checkRateLimit(`create:${hashIp(getClientIp(request))}`, CREATE_MAX_REQUESTS_PER_WINDOW)) {
+      return NextResponse.json({ error: "Trop de requêtes, réessayez plus tard." }, { status: 429 });
+    }
+
     const body = await request.json();
     const validated = estimationCompletionSchema.safeParse(body);
 

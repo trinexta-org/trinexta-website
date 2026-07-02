@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
 import { estimationEventSchema } from "@/lib/validations/estimation";
+
+// Plafond large : un parcours complet légitime émet déjà ~9 événements
+// (jusqu'à 7 questions + étape libre + résultat).
+const EVENTS_MAX_REQUESTS_PER_WINDOW = 30;
 
 export async function POST(request: Request) {
   try {
+    if (!checkRateLimit(`events:${hashIp(getClientIp(request))}`, EVENTS_MAX_REQUESTS_PER_WINDOW)) {
+      return new Response(null, { status: 429 });
+    }
+
     const body = await request.json();
     const validated = estimationEventSchema.safeParse(body);
 

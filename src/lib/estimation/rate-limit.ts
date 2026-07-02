@@ -20,24 +20,28 @@ export function getClientIp(request: Request): string {
   return request.headers.get("x-real-ip") ?? "unknown";
 }
 
-/** true si la requête est autorisée, false si la limite est atteinte. */
-export function checkRateLimit(hashedIp: string): boolean {
+/**
+ * true si la requête est autorisée, false si la limite est atteinte.
+ * `key` doit être préfixé par endpoint (ex. `email:${hashIp(ip)}`) pour que
+ * chaque route ait son propre quota au lieu de partager un compteur global.
+ */
+export function checkRateLimit(key: string, maxRequests: number = MAX_REQUESTS_PER_WINDOW): boolean {
   const now = Date.now();
 
   // Nettoyage opportuniste des entrées expirées.
   if (requestLog.size > 1000) {
-    for (const [key, timestamps] of requestLog) {
-      if (timestamps.every((t) => now - t > WINDOW_MS)) requestLog.delete(key);
+    for (const [k, timestamps] of requestLog) {
+      if (timestamps.every((t) => now - t > WINDOW_MS)) requestLog.delete(k);
     }
   }
 
-  const timestamps = (requestLog.get(hashedIp) ?? []).filter((t) => now - t <= WINDOW_MS);
-  if (timestamps.length >= MAX_REQUESTS_PER_WINDOW) {
-    requestLog.set(hashedIp, timestamps);
+  const timestamps = (requestLog.get(key) ?? []).filter((t) => now - t <= WINDOW_MS);
+  if (timestamps.length >= maxRequests) {
+    requestLog.set(key, timestamps);
     return false;
   }
 
   timestamps.push(now);
-  requestLog.set(hashedIp, timestamps);
+  requestLog.set(key, timestamps);
   return true;
 }

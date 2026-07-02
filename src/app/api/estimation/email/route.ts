@@ -6,11 +6,18 @@ import {
   type EstimateEmailData,
 } from "@/lib/estimation/emails";
 import { sendMail } from "@/lib/mail";
+import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
 import { estimationEmailSchema } from "@/lib/validations/estimation";
 import type { EstimationAnswers } from "@/data/estimation";
 
+const EMAIL_MAX_REQUESTS_PER_WINDOW = 5;
+
 export async function POST(request: Request) {
   try {
+    if (!checkRateLimit(`email:${hashIp(getClientIp(request))}`, EMAIL_MAX_REQUESTS_PER_WINDOW)) {
+      return NextResponse.json({ error: "Trop de requêtes, réessayez plus tard." }, { status: 429 });
+    }
+
     const body = await request.json();
     const validated = estimationEmailSchema.safeParse(body);
 

@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Données invalides" }, { status: 400 });
     }
 
-    if (!checkRateLimit(hashIp(getClientIp(request)))) {
+    if (!checkRateLimit(`analyze:${hashIp(getClientIp(request))}`)) {
       return NextResponse.json({ error: "Trop de requêtes, réessayez plus tard." }, { status: 429 });
     }
 
