@@ -19,6 +19,9 @@ import { FinalCTA } from "@/components/FinalCTA"
 export const metadata: Metadata = {
   title: "Offre Sérénité - Infogérance complète | Trinexta",
   description: "L'informatique PME clé en main. Support illimité, maintenance proactive et cybersécurité avancée.",
+  alternates: {
+    canonical: "/serenite",
+  },
 }
 
 export default function NotreOffrePage() {
