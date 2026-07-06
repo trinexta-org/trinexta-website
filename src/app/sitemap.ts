@@ -5,7 +5,10 @@ import { caseClients } from "@/data/cas-clients";
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
 
-export const revalidate = 60 * 60 * 24 * 30; // 30 jours
+// 2 592 000 s = 30 jours. Valeur litterale requise (Next n'accepte pas d'expression ici).
+// Publication urgente : redeployer, ou demander l'indexation de l'URL directement dans GSC
+// sans attendre la mise a jour du sitemap.
+export const revalidate = 2592000;
 
 const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}`, changeFrequency: "monthly", priority: 1 },
@@ -34,7 +37,7 @@ type ArticleSlug = {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await sanityClient
     .fetch<ArticleSlug[]>(
-      `*[_type == "article" && datePublication <= now()]{ slug, _updatedAt }`
+      `*[_type == "article" && (!defined(datePublication) || datePublication <= now())]{ slug, _updatedAt }`
     )
     .catch(() => [] as ArticleSlug[]);
 
