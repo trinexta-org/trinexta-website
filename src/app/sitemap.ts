@@ -32,7 +32,7 @@ type ArticleSlug = {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await sanityClient
     .fetch<ArticleSlug[]>(
-      `*[_type == "article"]{ slug, _updatedAt }`
+      `*[_type == "article" && datePublication <= now()]{ slug, _updatedAt }`
     )
     .catch(() => [] as ArticleSlug[]);
 
