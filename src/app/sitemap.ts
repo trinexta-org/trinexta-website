@@ -5,6 +5,8 @@ import { caseClients } from "@/data/cas-clients";
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
 
+export const revalidate = 60 * 60 * 24 * 30; // 30 jours
+
 const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}`, changeFrequency: "monthly", priority: 1 },
   { url: `${BASE_URL}/serenite`, changeFrequency: "monthly", priority: 0.9 },
