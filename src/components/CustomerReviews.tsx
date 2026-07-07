@@ -50,11 +50,11 @@ function ReviewCard({ review }: { review: Review }) {
         </div>
         
         <Text className="text-white/70 line-clamp-4 flex-grow text-sm">
-          "{review.text}"
+          &quot;{review.text}&quot;
         </Text>
         
         <Text variant="small" className="text-white/50 font-medium mt-2 group-hover:text-white transition-colors">
-          Lire l'avis
+          Lire l&apos;avis
         </Text>
       </div>
     </a>
