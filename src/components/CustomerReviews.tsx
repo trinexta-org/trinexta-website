@@ -1,11 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { reviews, Review } from "@/data/reviews";
+import { pushGtmEvent } from "@/lib/gtm";
 
 function ReviewCard({ review }: { review: Review }) {
   const initial = review.authorName.charAt(0).toUpperCase();
@@ -50,11 +51,11 @@ function ReviewCard({ review }: { review: Review }) {
         </div>
         
         <Text className="text-white/70 line-clamp-4 flex-grow text-sm">
-          &quot;{review.text}&quot;
+          "{review.text}"
         </Text>
         
         <Text variant="small" className="text-white/50 font-medium mt-2 group-hover:text-white transition-colors">
-          Lire l&apos;avis
+          Lire l'avis
         </Text>
       </div>
     </a>
@@ -64,18 +65,45 @@ function ReviewCard({ review }: { review: Review }) {
 export function CustomerReviews() {
   const half = Math.ceil(reviews.length / 2);
   const col1Data = [...reviews.slice(0, half), ...reviews.slice(0, half)];
-  const col2Data = [...reviews.slice(half), ...reviews.slice(half)];
+  let col2Data = [...reviews.slice(half), ...reviews.slice(half)];
+  
+  if (col2Data.length === 0 && reviews.length > 0) {
+    col2Data = [...reviews, ...reviews];
+  }
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Correction : Gestion du scroll mobile propre (sans 'window' et avec boucle)
   const handlePrev = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: -window.innerWidth * 0.85, behavior: "smooth" });
-  };
-  const handleNext = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: window.innerWidth * 0.85, behavior: "smooth" });
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.85; // 85% de la largeur visible du carrousel
+
+      if (scrollLeft <= 10) {
+        // Si on est au début, on rembobine à la fin
+        scrollRef.current.scrollTo({ left: scrollWidth, behavior: "smooth" });
+      } else {
+        scrollRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      }
+    }
   };
 
-  const googleReviewsUrl = "https://www.google.com/search?sca_esv=d7a897ae2fa4bc83&hl=fr-FR&gl=fr&sxsrf=APpeQnsmj9UBvj_RpLyWrK9KyoJRqFR_pg:1783430744173&q=Trinexta+Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2tTA3MzGyMDQytLQwNbU0NzIz28DI-IqRN6QoMy-1oiRRwbEss3gRKyofAGYqAVc6AAAA&rldimm=5876428121985597266&tbm=lcl&sa=X&ved=2ahUKEwiKj_Of1cCVAxUtTaQEHQ6vLiIQ9fQKegQIOxAG&biw=1920&bih=945&dpr=1#lkt=LocalPoiReviews";
+  const handleNext = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.85;
+
+      // Si on est à la fin (avec une petite marge d'erreur de 10px)
+      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+        // Retour au début
+        scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      }
+    }
+  };
+
+  const googleReviewsUrl = "https://search.google.com/local/reviews?placeid=ChIJc2S4AsfG144RUj8RBz5EjVE";
 
   return (
     <Section id="avis-clients" className="bg-primary py-20 overflow-hidden">
@@ -114,7 +142,6 @@ export function CustomerReviews() {
           <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-primary to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary to-transparent z-10 pointer-events-none" />
 
-          {/* Colonne 1 */}
           <div className="flex flex-col gap-8 animate-slide-up group-hover:[animation-play-state:paused]">
             {col1Data.map((review, index) => (
               <div key={`col1-${review.id}-${index}`}>
@@ -123,7 +150,6 @@ export function CustomerReviews() {
             ))}
           </div>
 
-          {/* Colonne 2 */}
           <div className="flex flex-col gap-8 animate-slide-down group-hover:[animation-play-state:paused]">
             {col2Data.map((review, index) => (
               <div key={`col2-${review.id}-${index}`}>
@@ -131,7 +157,6 @@ export function CustomerReviews() {
               </div>
             ))}
           </div>
-
         </div>
 
         {/* =========================================
@@ -142,12 +167,25 @@ export function CustomerReviews() {
             href={googleReviewsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-primary text-white font-bold hover:bg-white hover:text-primary transition-colors duration-300 shadow-lg"
+            onClick={() => {
+              pushGtmEvent('cta_click', {
+                cta_name: "Voir tous nos avis sur Google",
+                cta_url: googleReviewsUrl
+              });
+            }}
+            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-primary px-8 py-4 shadow-lg transition-all duration-500 border border-white/10"
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-            </svg>
-            Voir tous nos avis sur Google
+            <div className="absolute inset-0 bg-white translate-y-[102%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+
+            <div className="relative z-10 flex items-center gap-3 text-white group-hover:text-primary transition-colors duration-500 font-bold">
+              <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              Voir tous nos avis sur Google
+            </div>
           </a>
         </div>
 
