@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
@@ -51,11 +51,11 @@ function ReviewCard({ review }: { review: Review }) {
         </div>
         
         <Text className="text-white/70 line-clamp-4 flex-grow text-sm">
-          "{review.text}"
+          &quot;{review.text}&quot;
         </Text>
         
         <Text variant="small" className="text-white/50 font-medium mt-2 group-hover:text-white transition-colors">
-          Lire l'avis
+          Lire l&apos;avis
         </Text>
       </div>
     </a>
@@ -103,7 +103,7 @@ export function CustomerReviews() {
     }
   };
 
-  const googleReviewsUrl = "https://search.google.com/local/reviews?placeid=ChIJc2S4AsfG144RUj8RBz5EjVE";
+  const googleReviewsUrl = "https://www.google.com/maps/place/Trinexta/@48.6326865,2.4333193,17z/data=!3m1!5s0x47e60abc06fcdc81:0x35938f41a286dfbf!4m18!1m9!3m8!1s0x8ed7c6c702b86473:0x518d443e07113f52!2sTrinexta!8m2!3d48.632683!4d2.4358942!9m1!1b1!16s%2Fg%2F11m782phyh!3m7!1s0x8ed7c6c702b86473:0x518d443e07113f52!8m2!3d48.632683!4d2.4358942!9m1!1b1!16s%2Fg%2F11m782phyh?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D";
 
   return (
     <Section id="avis-clients" className="bg-primary py-20 overflow-hidden">
