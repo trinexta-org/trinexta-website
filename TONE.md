@@ -1,4 +1,4 @@
-# Ton éditorial — trinexta.com
+# Ton éditorial — trinexta.fr
 
 À appliquer sur toutes les copies du site : hero, cards, CTA, descriptions de services, titres de pages.
 

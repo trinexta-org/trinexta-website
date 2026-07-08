@@ -15,6 +15,9 @@ import { FinalCTA } from "@/components/FinalCTA"
 export const metadata: Metadata = {
     title: "Trinexta Studio - Création Web & SaaS | Trinexta",
     description: "Développement de sites internet sur mesure. Plateformes et solutions web performantes conçues par notre entreprise.",
+    alternates: {
+        canonical: "/trinexta-studio",
+    },
 }
 
 export default function TrinextaStudioPage() {

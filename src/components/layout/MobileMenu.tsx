@@ -134,6 +134,14 @@ export function MobileMenu() {
                       </div>
                     )
                   })}
+
+                  <Link
+                    href="/estimation"
+                    onClick={() => setIsOpen(false)}
+                    className="mt-4 inline-flex items-center justify-center rounded-xl bg-secondary px-4 py-3 text-sm font-bold text-secondary-foreground shadow-md transition-all hover:bg-secondary/90 active:scale-95"
+                  >
+                    Estimer mon projet
+                  </Link>
                 </div>
               </motion.aside>
             </FocusTrap>

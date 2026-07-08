@@ -2,7 +2,7 @@
 
 # Contexte projet — trinexta-website
 
-Refonte from scratch du site trinexta.com. Abandon de WordPress vers Next.js 16 + Sanity + PostgreSQL. Hébergé sur VPS OVH, géré via PM2 + Nginx. Public cible : PME en Île-de-France cherchant un prestataire IT/infogérance.
+Refonte from scratch du site trinexta.fr. Abandon de WordPress vers Next.js 16 + Sanity + PostgreSQL. Hébergé sur VPS OVH, géré via PM2 + Nginx. Public cible : PME en Île-de-France cherchant un prestataire IT/infogérance.
 
 ## Objectifs métier
 
@@ -14,7 +14,7 @@ Refonte from scratch du site trinexta.com. Abandon de WordPress vers Next.js 16 
 ## Workflow de déploiement
 
 ```
-dev (local) → staging (staging.trinexta.fr) → main (trinexta.com)
+dev (local) → staging (staging.trinexta.fr) → main (trinexta.fr)
 ```
 
 Chaque transition se fait via pull request. Le deploy est automatique via `.github/workflows/deploy.yml` sur push `staging` et `main`.

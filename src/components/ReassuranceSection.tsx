@@ -2,7 +2,6 @@ import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { SectionFade } from "@/components/ui/SectionFade"
-import { GoogleRatingSection } from "@/components/sections/GoogleRatingSection"
 
 const certifications = [
   { name: "CompTIA", src: "/images/certifications/compteia.webp", width: 602, height: 501 },
@@ -18,10 +17,6 @@ export function ReassuranceSection() {
       <SectionFade edge="bottom" />
       <Container className="relative z-10">
         <div className="flex flex-col items-center justify-center gap-10 text-center">
-
-          <div className="w-full flex items-center justify-center">
-            <GoogleRatingSection />
-          </div>
 
           <div className="w-full border-t border-white/10 pt-8 mt-2">
             <p className="text-[10px] font-bold tracking-widest uppercase text-white/30 mb-8">

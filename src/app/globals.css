@@ -190,6 +190,24 @@
     opacity: 0;
     animation: badge-pop 0.25s ease-out both;
   }
+
+  @keyframes slide-up {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(-50% - 0.75rem)); }
+  }
+
+  @keyframes slide-down {
+    0% { transform: translateY(calc(-50% - 0.75rem)); }
+    100% { transform: translateY(0); }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 35s linear infinite;
+  }
+
+  .animate-slide-down {
+    animation: slide-down 40s linear infinite;
+  }
 }
 
 /* ── MetricRow animations (CasClientCard) ──────────────────────────────
