@@ -5,6 +5,8 @@ import type { EstimationAnswers } from "@/data/estimation";
 import { ESTIMATION_QUESTIONS_BY_ID } from "@/data/estimation";
 import { computeEstimate, type EstimationResult } from "@/lib/estimation/engine";
 import { getQuestionSequence } from "@/lib/estimation/flow";
+import { cn } from "@/lib/utils";
+import { ChatBubble } from "./ChatBubble";
 import { FreeTextStep } from "./FreeTextStep";
 import { QuestionStep } from "./QuestionStep";
 import { ResultScreen } from "./ResultScreen";
@@ -12,6 +14,21 @@ import { ResultScreen } from "./ResultScreen";
 type WizardPhase = "questions" | "freetext" | "analyzing" | "result";
 
 const FIRST_QUESTION_ID = "effectif";
+
+/** Nexi accueille au début, varie ses poses pendant la conversation. */
+function nexiAvatar(index: number): string {
+  if (index <= 0) return "/images/nexi/nexi1-avatar.png";
+  return index % 2 === 1 ? "/images/nexi/nexi2-avatar.png" : "/images/nexi/nexi4-avatar.png";
+}
+
+/** Petite phrase d'accompagnement, à la place d'un pourcentage froid. */
+function stepMood(step: number, total: number): string {
+  if (step >= total) return "La dernière ligne droite";
+  if (step === total - 1) return "Dernière question";
+  if (step === 1) return "On commence simple";
+  if (step / total >= 0.5) return "Vous y êtes presque";
+  return "Chaque réponse affine le prix";
+}
 
 /** Envoi d'événement de parcours, jamais bloquant pour le visiteur. */
 function trackEvent(sessionId: string, step: string) {
@@ -36,16 +53,21 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
   const [estimateId, setEstimateId] = useState<string | null>(null);
   const trackedSteps = useRef(new Set<string>());
   const containerRef = useRef<HTMLDivElement>(null);
+  const endRef = useRef<HTMLDivElement>(null);
   const skipInitialScroll = useRef(true);
 
-  // Après un clic sur une carte en bas de page, la question suivante s'affiche
-  // plus haut : on ramène le haut du wizard dans le viewport.
+  // Le fil grandit vers le bas : on suit le dernier message, comme une messagerie.
+  // Sur le résultat, on remonte en haut du wizard.
   useEffect(() => {
     if (skipInitialScroll.current) {
       skipInitialScroll.current = false;
       return;
     }
-    containerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (phase === "result") {
+      containerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
   }, [currentId, phase]);
 
   const track = useCallback(
@@ -92,13 +114,10 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
     goForward(answers, currentId);
   };
 
-  const handleBack = () => {
-    if (phase === "freetext") {
-      setPhase("questions");
-      setCurrentId(sequence[sequence.length - 1]);
-    } else if (currentIndex > 0) {
-      setCurrentId(sequence[currentIndex - 1]);
-    }
+  /** Revenir sur une réponse du fil : la conversation reprend à cette question. */
+  const handleEdit = (questionId: string) => {
+    setPhase("questions");
+    setCurrentId(questionId);
   };
 
   const finish = useCallback(
@@ -171,55 +190,100 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
   }
 
   const stepNumber = phase === "questions" ? currentIndex + 1 : totalSteps;
-  const canGoBack = phase === "freetext" || (phase === "questions" && currentIndex > 0);
+
+  // Questions déjà répondues, affichées comme historique de conversation.
+  const answeredIds = phase === "questions" ? sequence.slice(0, Math.max(currentIndex, 0)) : sequence;
+
+  const answerLabel = (questionId: string): string | null => {
+    const question = ESTIMATION_QUESTIONS_BY_ID[questionId];
+    const value = answers[questionId];
+    if (value == null) return null;
+    const ids = Array.isArray(value) ? value : [value];
+    const labels = ids
+      .map((id) => question.options.find((option) => option.id === id)?.label)
+      .filter((label): label is string => Boolean(label));
+    return labels.length > 0 ? labels.join(" · ") : null;
+  };
 
   return (
     <div ref={containerRef} className="scroll-mt-24">
-      {/* Barre de progression */}
+      {/* Progression : un segment par étape, une phrase plutôt qu'un pourcentage */}
       <div className="mb-8">
-        <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-white/50">
-          <span>
+        <div className="mb-3 flex items-baseline justify-between gap-4">
+          <span className="text-xs font-bold uppercase tracking-widest text-white/50">
             {phase === "questions" ? `Question ${stepNumber} sur ${totalSteps - 1}` : "Dernière étape"}
           </span>
-          <span>{Math.round((stepNumber / totalSteps) * 100)} %</span>
+          <span className="font-serif text-sm italic text-secondary">
+            {stepMood(stepNumber, totalSteps)}
+          </span>
         </div>
-        <div className="h-1 overflow-hidden rounded-full bg-white/10">
-          <div
-            className="h-full rounded-full bg-secondary transition-all duration-500"
-            style={{ width: `${(stepNumber / totalSteps) * 100}%` }}
-          />
+        <div className="flex gap-1.5" aria-hidden="true">
+          {Array.from({ length: totalSteps }).map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                "h-1 flex-1 rounded-full transition-colors duration-500",
+                i < stepNumber ? "bg-secondary" : "bg-white/10"
+              )}
+            />
+          ))}
         </div>
       </div>
 
-      {canGoBack && (
-        <button
-          type="button"
-          onClick={handleBack}
-          className="mb-6 inline-flex items-center gap-1 text-sm text-white/60 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
-        >
-          <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Retour
-        </button>
+      {/* Historique de la conversation */}
+      {answeredIds.length > 0 && (
+        <div className="mb-6 space-y-5">
+          {answeredIds.map((questionId, index) => {
+            const label = answerLabel(questionId);
+            if (!label) return null;
+            return (
+              <div key={questionId} className="space-y-2">
+                <ChatBubble side="trinexta" avatar={nexiAvatar(index)}>
+                  <p className="font-serif font-bold text-white">
+                    {ESTIMATION_QUESTIONS_BY_ID[questionId].title}
+                  </p>
+                </ChatBubble>
+                <div className="flex flex-col items-end">
+                  <div className="max-w-[85%] rounded-2xl rounded-tr-md border border-secondary/40 bg-secondary/15 px-4 py-2.5 sm:max-w-[75%]">
+                    <p className="text-sm font-bold text-white">{label}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleEdit(questionId)}
+                    className="mt-1 text-xs text-white/40 underline-offset-2 transition-colors hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+                  >
+                    Modifier
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       )}
 
-      {phase === "questions" && (
-        <QuestionStep
-          question={ESTIMATION_QUESTIONS_BY_ID[currentId]}
-          value={answers[currentId]}
-          onSelect={handleSelect}
-          onContinue={handleContinue}
-        />
-      )}
+      {/* Message courant */}
+      <div aria-live="polite">
+        {phase === "questions" && (
+          <QuestionStep
+            question={ESTIMATION_QUESTIONS_BY_ID[currentId]}
+            value={answers[currentId]}
+            avatar={nexiAvatar(currentIndex)}
+            onSelect={handleSelect}
+            onContinue={handleContinue}
+          />
+        )}
 
-      {(phase === "freetext" || phase === "analyzing") && (
-        <FreeTextStep
-          analyzing={phase === "analyzing"}
-          onSubmit={handleFreeTextSubmit}
-          onSkip={handleSkip}
-        />
-      )}
+        {(phase === "freetext" || phase === "analyzing") && (
+          <FreeTextStep
+            analyzing={phase === "analyzing"}
+            avatar={nexiAvatar(sequence.length)}
+            onSubmit={handleFreeTextSubmit}
+            onSkip={handleSkip}
+          />
+        )}
+      </div>
+
+      <div ref={endRef} className="scroll-mb-6" aria-hidden="true" />
     </div>
   );
 }
