@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Entrance } from "@/components/ui/Entrance";
@@ -29,18 +30,25 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
   return (
     <Entrance direction="up">
       <div className="text-center">
+        <Image
+          src="/images/nexi/nexi3-avatar.png"
+          alt="Nexi, la mascotte Trinexta, pouces levés"
+          width={80}
+          height={80}
+          className="mx-auto mb-4 h-16 w-16 rounded-full border-2 border-secondary/40 object-cover md:h-20 md:w-20"
+        />
         <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
           Votre estimation
         </p>
         <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">
-          Voici votre fourchette
+          Voici votre <em className="text-secondary">fourchette</em>
         </h2>
 
         <div className="mx-auto mt-8 flex max-w-2xl flex-col gap-4 sm:flex-row sm:justify-center">
           {hasMonthly && (
             <div className="flex-1 rounded-2xl border border-secondary/40 bg-secondary/10 p-6">
               <p className="text-sm font-bold uppercase tracking-widest text-white/60">Au mois</p>
-              <p className="mt-2 text-2xl font-black text-white md:text-3xl">
+              <p className="mt-2 font-serif text-3xl font-bold text-white md:text-4xl">
                 {eurosRange(result.monthlyMin, result.monthlyMax)}
               </p>
               <p className="mt-1 text-sm text-white/60">par mois, hors taxes</p>
@@ -49,7 +57,7 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
           {hasOneShot && (
             <div className="flex-1 rounded-2xl border border-white/20 bg-white/5 p-6">
               <p className="text-sm font-bold uppercase tracking-widest text-white/60">Votre projet</p>
-              <p className="mt-2 text-2xl font-black text-white md:text-3xl">
+              <p className="mt-2 font-serif text-3xl font-bold text-white md:text-4xl">
                 {eurosRange(result.oneShotMin, result.oneShotMax)}
               </p>
               <p className="mt-1 text-sm text-white/60">en une fois, hors taxes</p>
