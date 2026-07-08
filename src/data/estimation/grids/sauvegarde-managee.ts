@@ -1,29 +1,27 @@
 import type { ServiceGrid } from "../types";
 
-// PLACEHOLDER : valeurs tarifaires non validées par Valoux.
-// Ne pas merger vers main avant validation de la grille.
+// Grille officielle Valoux (benchmark marché, 2026-07).
+// Les environnements multi-serveurs relèvent de Cloud & PRA (sur devis),
+// détecté en plus de ce service : pas d'ajustement "plusieurs serveurs" ici.
 
-export const cloudSauvegardeGrid: ServiceGrid = {
-  serviceId: "cloud-sauvegarde",
-  label: "Cloud & Sauvegarde",
+export const sauvegardeManageeGrid: ServiceGrid = {
+  serviceId: "sauvegarde-managee",
+  label: "Sauvegarde managée",
   pricing: {
     kind: "recurring",
     unitLabel: "poste",
     unitQuestionId: "parc",
     fallbackUnits: 10,
-    base: 40,
     tiers: [
-      { upTo: 5, unitPrice: 12 },
-      { upTo: 15, unitPrice: 10 },
-      { upTo: 40, unitPrice: 8 },
-      { upTo: null, unitPrice: 7 },
+      { upTo: 5, unitPrice: 15 },
+      { upTo: 15, unitPrice: 13 },
+      { upTo: 40, unitPrice: 11 },
     ],
   },
   spreadPercent: 10,
   widenedSpreadPercent: 20,
   answerAdjustments: [
     { questionId: "serveurs", optionId: "un", percent: 25, label: "Sauvegarde d'un serveur ou NAS" },
-    { questionId: "serveurs", optionId: "plusieurs", percent: 50, label: "Sauvegarde de plusieurs serveurs" },
     { questionId: "criticite", optionId: "critique", percent: 15, label: "Reprise rapide exigée" },
   ],
   aiModifiers: [

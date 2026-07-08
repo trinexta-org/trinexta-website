@@ -1,7 +1,6 @@
 import type { ServiceGrid } from "../types";
 
-// PLACEHOLDER : valeurs tarifaires non validées par Valoux.
-// Ne pas merger vers main avant validation de la grille.
+// Grille officielle Valoux (benchmark marché, 2026-07).
 
 export const trinextaStudioGrid: ServiceGrid = {
   serviceId: "trinexta-studio",
@@ -12,12 +11,11 @@ export const trinextaStudioGrid: ServiceGrid = {
     fallbackTierOptionId: "standard",
     tiers: [
       { optionId: "simple", min: 2500, max: 5000 },
-      { optionId: "standard", min: 5000, max: 12000 },
+      { optionId: "standard", min: 5000, max: 15000 },
       { optionId: "sur-mesure", min: 12000, max: 25000 },
     ],
   },
   spreadPercent: 0,
-  widenedSpreadPercent: 15,
   answerAdjustments: [
     { questionId: "projet-type", optionId: "app", percent: 50, label: "Application web ou mobile" },
   ],

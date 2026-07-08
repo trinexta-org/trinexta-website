@@ -8,10 +8,12 @@ import { escapeHtml } from "@/lib/mail";
 export interface BreakdownEntry {
   serviceId: string;
   label: string;
-  kind: "recurring" | "one-shot";
+  kind: "recurring" | "one-shot" | "sur-devis";
   min: number;
   max: number;
   lines: string[];
+  /** Mention informative de la grille (ex. licences en sus), hors calcul */
+  note?: string;
 }
 
 export interface EstimateEmailData {
@@ -28,6 +30,11 @@ const COLOR_SECONDARY = "#5c92b8";
 
 function euros(value: number) {
   return `${value.toLocaleString("fr-FR")} €`;
+}
+
+/** "X €" si calcul exact, "X € à Y €" sinon. */
+function eurosRange(min: number, max: number) {
+  return min === max ? euros(min) : `${euros(min)} à ${euros(max)}`;
 }
 
 /** Récapitule les réponses en libellés lisibles (question -> réponse). */
@@ -59,12 +66,17 @@ function serviceBlocks(breakdown: BreakdownEntry[]): string {
         <p style="margin:0;font-weight:bold;color:${COLOR_PRIMARY};">
           ${escapeHtml(service.label)}
           <span style="float:right;color:${COLOR_SECONDARY};">
-            ${euros(service.min)} à ${euros(service.max)}${service.kind === "recurring" ? " /mois" : ""}
+            ${
+              service.kind === "sur-devis"
+                ? "Sur devis"
+                : `${eurosRange(service.min, service.max)}${service.kind === "recurring" ? " /mois" : ""}`
+            }
           </span>
         </p>
         <ul style="margin:8px 0 0;padding-left:18px;color:#666;font-size:14px;">
           ${service.lines.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}
         </ul>
+        ${service.note ? `<p style="margin:8px 0 0;color:#999;font-size:13px;font-style:italic;">${escapeHtml(service.note)}</p>` : ""}
       </div>`
     )
     .join("");
@@ -75,14 +87,14 @@ function totalsBlock(data: EstimateEmailData): string {
   if (data.monthlyMax) {
     parts.push(
       `<p style="margin:4px 0;font-size:20px;font-weight:bold;color:${COLOR_PRIMARY};">
-        ${euros(data.monthlyMin ?? 0)} à ${euros(data.monthlyMax)} <span style="font-size:14px;font-weight:normal;color:#666;">par mois, hors taxes</span>
+        ${eurosRange(data.monthlyMin ?? 0, data.monthlyMax)} <span style="font-size:14px;font-weight:normal;color:#666;">par mois, hors taxes</span>
       </p>`
     );
   }
   if (data.oneShotMax) {
     parts.push(
       `<p style="margin:4px 0;font-size:20px;font-weight:bold;color:${COLOR_PRIMARY};">
-        ${euros(data.oneShotMin ?? 0)} à ${euros(data.oneShotMax)} <span style="font-size:14px;font-weight:normal;color:#666;">en une fois, hors taxes</span>
+        ${eurosRange(data.oneShotMin ?? 0, data.oneShotMax)} <span style="font-size:14px;font-weight:normal;color:#666;">en une fois, hors taxes</span>
       </p>`
     );
   }

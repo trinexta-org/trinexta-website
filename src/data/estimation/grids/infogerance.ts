@@ -1,7 +1,6 @@
 import type { ServiceGrid } from "../types";
 
-// PLACEHOLDER : valeurs tarifaires non validées par Valoux.
-// Ne pas merger vers main avant validation de la grille.
+// Grille officielle Valoux (benchmark marché, 2026-07).
 
 export const infogeranceGrid: ServiceGrid = {
   serviceId: "infogerance",
@@ -11,12 +10,10 @@ export const infogeranceGrid: ServiceGrid = {
     unitLabel: "poste",
     unitQuestionId: "parc",
     fallbackUnits: 10,
-    base: 90,
     tiers: [
-      { upTo: 5, unitPrice: 45 },
-      { upTo: 15, unitPrice: 39 },
-      { upTo: 40, unitPrice: 33 },
-      { upTo: null, unitPrice: 28 },
+      { upTo: 5, unitPrice: 79 },
+      { upTo: 15, unitPrice: 74 },
+      { upTo: 40, unitPrice: 69 },
     ],
   },
   spreadPercent: 10,

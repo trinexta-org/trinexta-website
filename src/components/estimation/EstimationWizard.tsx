@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { EstimationAnswers } from "@/data/estimation";
 import { ESTIMATION_QUESTIONS_BY_ID } from "@/data/estimation";
 import { computeEstimate, type EstimationResult } from "@/lib/estimation/engine";
@@ -35,6 +35,18 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
   const [result, setResult] = useState<EstimationResult | null>(null);
   const [estimateId, setEstimateId] = useState<string | null>(null);
   const trackedSteps = useRef(new Set<string>());
+  const containerRef = useRef<HTMLDivElement>(null);
+  const skipInitialScroll = useRef(true);
+
+  // Après un clic sur une carte en bas de page, la question suivante s'affiche
+  // plus haut : on ramène le haut du wizard dans le viewport.
+  useEffect(() => {
+    if (skipInitialScroll.current) {
+      skipInitialScroll.current = false;
+      return;
+    }
+    containerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [currentId, phase]);
 
   const track = useCallback(
     (step: string) => {
@@ -147,12 +159,14 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
 
   if (phase === "result" && result) {
     return (
-      <ResultScreen
-        result={result}
-        estimateId={estimateId}
-        bookingsUrl={bookingsUrl}
-        onRestart={handleRestart}
-      />
+      <div ref={containerRef} className="scroll-mt-24">
+        <ResultScreen
+          result={result}
+          estimateId={estimateId}
+          bookingsUrl={bookingsUrl}
+          onRestart={handleRestart}
+        />
+      </div>
     );
   }
 
@@ -160,7 +174,7 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
   const canGoBack = phase === "freetext" || (phase === "questions" && currentIndex > 0);
 
   return (
-    <div>
+    <div ref={containerRef} className="scroll-mt-24">
       {/* Barre de progression */}
       <div className="mb-8">
         <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-white/50">
