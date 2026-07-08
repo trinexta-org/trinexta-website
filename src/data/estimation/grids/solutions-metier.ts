@@ -1,7 +1,6 @@
 import type { ServiceGrid } from "../types";
 
-// PLACEHOLDER : valeurs tarifaires non validées par Valoux.
-// Ne pas merger vers main avant validation de la grille.
+// Grille officielle Valoux (benchmark marché, 2026-07).
 
 export const solutionsMetierGrid: ServiceGrid = {
   serviceId: "solutions-metier",
@@ -17,7 +16,6 @@ export const solutionsMetierGrid: ServiceGrid = {
     ],
   },
   spreadPercent: 0,
-  widenedSpreadPercent: 15,
   answerAdjustments: [
     { questionId: "projet-type", optionId: "automatisation", percent: -30, label: "Automatisation et intégration d'outils existants" },
   ],

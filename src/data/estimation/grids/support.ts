@@ -1,7 +1,6 @@
 import type { ServiceGrid } from "../types";
 
-// PLACEHOLDER : valeurs tarifaires non validées par Valoux.
-// Ne pas merger vers main avant validation de la grille.
+// Grille officielle Valoux (benchmark marché, 2026-07).
 
 export const supportGrid: ServiceGrid = {
   serviceId: "support",
@@ -11,12 +10,10 @@ export const supportGrid: ServiceGrid = {
     unitLabel: "poste",
     unitQuestionId: "parc",
     fallbackUnits: 10,
-    base: 50,
     tiers: [
-      { upTo: 5, unitPrice: 25 },
-      { upTo: 15, unitPrice: 21 },
-      { upTo: 40, unitPrice: 17 },
-      { upTo: null, unitPrice: 14 },
+      { upTo: 5, unitPrice: 59 },
+      { upTo: 15, unitPrice: 53 },
+      { upTo: 40, unitPrice: 49 },
     ],
   },
   spreadPercent: 10,

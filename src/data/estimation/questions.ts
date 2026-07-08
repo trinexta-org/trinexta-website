@@ -153,6 +153,32 @@ export const ESTIMATION_QUESTIONS: EstimationQuestion[] = [
     ],
   },
   {
+    id: "renfort-categorie",
+    title: "Sur quel terrain ce renfort doit-il intervenir ?",
+    options: [
+      {
+        id: "support-infra",
+        label: "Support & Infrastructure",
+        description: "Assistance utilisateurs, postes, réseau, serveurs",
+      },
+      {
+        id: "developpement",
+        label: "Développement",
+        description: "Sites, applications, outils métier, intégrations",
+      },
+      {
+        id: "cybersecurite",
+        label: "Cybersécurité",
+        description: "Sécurisation, audits, conformité, gestion des accès",
+      },
+      {
+        id: "pilotage",
+        label: "Pilotage",
+        description: "Chefferie de projet, coordination, conduite du changement",
+      },
+    ],
+  },
+  {
     id: "renfort-profil",
     title: "Quel renfort vous faudrait-il ?",
     options: [
@@ -166,13 +192,30 @@ export const ESTIMATION_QUESTIONS: EstimationQuestion[] = [
         id: "regulier",
         label: "Régulier, à temps partiel",
         description: "Une présence récurrente chaque semaine",
-        units: 8,
+        units: 10,
       },
       {
         id: "plein",
         label: "À temps plein",
         description: "Un technicien dédié sur plusieurs mois",
-        units: 18,
+        units: 20,
+      },
+    ],
+  },
+  {
+    id: "renfort-duree",
+    title: "Sur quelle durée imaginez-vous cette collaboration ?",
+    subtitle: "Un engagement plus long donne droit à un tarif préférentiel.",
+    options: [
+      {
+        id: "6-mois",
+        label: "6 mois",
+        description: "Engagement sur un semestre",
+      },
+      {
+        id: "12-mois",
+        label: "12 mois",
+        description: "Engagement sur l'année",
       },
     ],
   },

@@ -49,6 +49,7 @@ export async function POST(request: Request) {
           min: s.min,
           max: s.max,
           lines: s.lines,
+          ...(s.note ? { note: s.note } : {}),
         })),
         aiModifiers: appliedAiModifiers.length > 0 ? appliedAiModifiers : undefined,
         aiAnalyzed,

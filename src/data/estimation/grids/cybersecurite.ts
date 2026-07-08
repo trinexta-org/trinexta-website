@@ -1,7 +1,7 @@
 import type { ServiceGrid } from "../types";
 
-// PLACEHOLDER : valeurs tarifaires non validées par Valoux.
-// Ne pas merger vers main avant validation de la grille.
+// Grille officielle Valoux (benchmark marché, 2026-07).
+// Non cumulée avec l'infogérance (déjà incluse) : voir detectServices.
 
 export const cybersecuriteGrid: ServiceGrid = {
   serviceId: "cybersecurite",
@@ -11,12 +11,10 @@ export const cybersecuriteGrid: ServiceGrid = {
     unitLabel: "poste",
     unitQuestionId: "parc",
     fallbackUnits: 10,
-    base: 60,
     tiers: [
-      { upTo: 5, unitPrice: 18 },
-      { upTo: 15, unitPrice: 15 },
-      { upTo: 40, unitPrice: 12 },
-      { upTo: null, unitPrice: 10 },
+      { upTo: 5, unitPrice: 39 },
+      { upTo: 15, unitPrice: 34 },
+      { upTo: 40, unitPrice: 29 },
     ],
   },
   spreadPercent: 10,
