@@ -106,8 +106,10 @@ export interface RangePricing {
 }
 
 /** Service toujours sur devis : aucun calcul, carte sans montant */
-export interface QuotePricing {
-  kind: "quote";
+export interface SurDevisPricing {
+  kind: "sur-devis";
+  /** Ligne explicative affichée à la place du calcul */
+  line: string;
 }
 
 export type ServicePricing =
@@ -115,7 +117,7 @@ export type ServicePricing =
   | OneShotPricing
   | OneShotFormulaPricing
   | RangePricing
-  | QuotePricing;
+  | SurDevisPricing;
 
 /** Ajustement déterministe déclenché par une réponse du wizard.
  * `percent` est multiplicatif (% du prix) pour recurring/one-shot/one-shot-formula,
@@ -146,7 +148,7 @@ export interface ServiceGrid {
   /** Demi-largeur de la fourchette autour du prix calculé, en % */
   spreadPercent: number;
   /** Demi-largeur élargie quand aucune analyse IA n'a affiné l'estimation.
-   * Ignoré par le moteur pour les kinds one-shot, one-shot-formula et quote. */
+   * Ignoré par le moteur pour les kinds one-shot, one-shot-formula et sur-devis. */
   widenedSpreadPercent?: number;
   /** Mention informative affichée après les lignes de calcul (hors total) */
   note?: string;

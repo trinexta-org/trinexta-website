@@ -1,6 +1,7 @@
 import {
   ESTIMATION_QUESTIONS_BY_ID,
   MAX_QUESTIONS,
+  RENFORT_MODE_B_PROFILS,
   type EstimationAnswers,
   type EstimationServiceId,
 } from "@/data/estimation";
@@ -9,9 +10,6 @@ import {
 // et quels services déduire des réponses. Fonctions pures et déterministes.
 
 const BASE_QUESTION_IDS = ["effectif", "besoins"] as const;
-
-/** Profils de renfort éligibles au Mode B (engagement long, question durée). */
-const RENFORT_MODE_B_PROFILS = ["regulier", "plein"];
 
 /** Régie par catégorie choisie à `renfort-categorie` (fallback si tronquée). */
 const REGIE_BY_CATEGORIE: Record<string, EstimationServiceId> = {

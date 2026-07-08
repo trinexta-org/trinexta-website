@@ -1,3 +1,4 @@
+import { RENFORT_MODE_B_PROFILS } from "../questions";
 import type { EstimationServiceId, ServiceGrid } from "../types";
 
 // Grilles régie officielles Valoux (benchmark marché, 2026-07).
@@ -24,7 +25,7 @@ export function makeRegieGrid(params: {
       unitQuestionId: "renfort-profil",
       fallbackUnits: 10,
       modeBQuestionId: "renfort-profil",
-      modeBOptionIds: ["regulier", "plein"],
+      modeBOptionIds: RENFORT_MODE_B_PROFILS,
       engagementQuestionId: "renfort-duree",
       engagementDiscounts: { "6-mois": -5, "12-mois": -10 },
       floorFactor: 0.85,

@@ -74,7 +74,7 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
           <div key={service.serviceId} className="rounded-2xl border border-white/15 bg-white/5 p-5">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <p className="font-bold text-white">{service.label}</p>
-              {service.kind === "quote" ? (
+              {service.kind === "sur-devis" ? (
                 <p className="font-black text-secondary">Sur devis</p>
               ) : (
                 <p className="font-black text-secondary">
@@ -89,7 +89,7 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
               ))}
             </ul>
             {service.note && <p className="mt-3 text-sm italic text-white/50">{service.note}</p>}
-            {service.kind === "quote" && (
+            {service.kind === "sur-devis" && (
               <div className="mt-4">
                 {bookingsUrl ? (
                   <a

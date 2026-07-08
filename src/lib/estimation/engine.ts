@@ -23,8 +23,8 @@ export interface AppliedModifier {
 export interface ServiceEstimate {
   serviceId: EstimationServiceId;
   label: string;
-  kind: "recurring" | "one-shot" | "quote";
-  /** Euros par mois (recurring) ou euros (one-shot). 0 pour un "quote". */
+  kind: "recurring" | "one-shot" | "sur-devis";
+  /** Euros par mois (recurring) ou euros (one-shot). 0 pour un "sur-devis". */
   min: number;
   max: number;
   /** Lignes de décomposition affichables */
@@ -58,9 +58,6 @@ const RANGE_EFFECTIF_DELTAS: Record<string, number> = {
   moyenne: 0,
   grande: 0.15,
 };
-
-/** Demi-largeur de la fourchette affichée autour du tarif jour régie */
-const RANGE_DISPLAY_SPREAD = 0.05;
 
 function roundTo(value: number, step: number) {
   return Math.max(step, Math.round(value / step) * step);
@@ -158,7 +155,7 @@ function computeServiceEstimate(
 
     if (!tier) {
       // Volume au-delà du dernier palier tarifé : bascule en devis.
-      kind = "quote";
+      kind = "sur-devis";
       const lastTier = tiers[tiers.length - 1];
       lines.push(`Au-delà de ${lastTier.upTo} ${unitLabel}s, sur devis`);
     } else {
@@ -199,17 +196,18 @@ function computeServiceEstimate(
     const { unitLabel, unitQuestionId, fallbackUnits } = grid.pricing;
     const { dayRate, engagementLabel } = computeRangeDayRate(grid.pricing, answers, modifiers);
     const units = getUnits(answers, unitQuestionId, fallbackUnits);
-    min = roundTo(dayRate * (1 - RANGE_DISPLAY_SPREAD) * units, 10);
-    max = roundTo(dayRate * (1 + RANGE_DISPLAY_SPREAD) * units, 10);
+    const spread = grid.spreadPercent / 100;
+    min = roundTo(dayRate * (1 - spread) * units, 10);
+    max = roundTo(dayRate * (1 + spread) * units, 10);
     const plural = units > 1 ? "s" : "";
     lines.push(`${units} ${unitLabel}${plural} par mois environ, autour de ${formatEuros(Math.round(dayRate))} €/${unitLabel}`);
     if (engagementLabel) lines.push(engagementLabel);
   } else {
-    kind = "quote";
-    lines.push("Sur devis : dépend du volume, du nombre de serveurs et du niveau de reprise (RPO/RTO)");
+    kind = "sur-devis";
+    lines.push(grid.pricing.line);
   }
 
-  if (kind !== "quote") {
+  if (kind !== "sur-devis") {
     for (const modifier of modifiers) {
       const sign = modifier.percent > 0 ? "+" : "";
       lines.push(`${modifier.label} : ${sign}${modifier.percent} %`);
@@ -239,7 +237,7 @@ export function computeEstimate(
     computeServiceEstimate(ESTIMATION_GRIDS[serviceId], answers, aiModifierIds, aiAnalyzed)
   );
 
-  // Les services "quote" ne contribuent à aucun total.
+  // Les services "sur-devis" ne contribuent à aucun total.
   const recurring = services.filter((s) => s.kind === "recurring");
   const oneShot = services.filter((s) => s.kind === "one-shot");
 

@@ -14,7 +14,12 @@ import { solutionsMetierGrid } from "./grids/solutions-metier";
 import { trinextaStudioGrid } from "./grids/trinexta-studio";
 
 export * from "./types";
-export { ESTIMATION_QUESTIONS, ESTIMATION_QUESTIONS_BY_ID, MAX_QUESTIONS } from "./questions";
+export {
+  ESTIMATION_QUESTIONS,
+  ESTIMATION_QUESTIONS_BY_ID,
+  MAX_QUESTIONS,
+  RENFORT_MODE_B_PROFILS,
+} from "./questions";
 
 export const ESTIMATION_GRIDS: Record<EstimationServiceId, ServiceGrid> = {
   infogerance: infogeranceGrid,

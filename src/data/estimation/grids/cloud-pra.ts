@@ -7,7 +7,10 @@ import type { ServiceGrid } from "../types";
 export const cloudPraGrid: ServiceGrid = {
   serviceId: "cloud-pra",
   label: "Cloud & PRA",
-  pricing: { kind: "quote" },
+  pricing: {
+    kind: "sur-devis",
+    line: "Sur devis : dépend du volume, du nombre de serveurs et du niveau de reprise (RPO/RTO)",
+  },
   spreadPercent: 0,
   answerAdjustments: [],
   aiModifiers: [],

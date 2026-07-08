@@ -8,7 +8,7 @@ import { escapeHtml } from "@/lib/mail";
 export interface BreakdownEntry {
   serviceId: string;
   label: string;
-  kind: "recurring" | "one-shot" | "quote";
+  kind: "recurring" | "one-shot" | "sur-devis";
   min: number;
   max: number;
   lines: string[];
@@ -67,7 +67,7 @@ function serviceBlocks(breakdown: BreakdownEntry[]): string {
           ${escapeHtml(service.label)}
           <span style="float:right;color:${COLOR_SECONDARY};">
             ${
-              service.kind === "quote"
+              service.kind === "sur-devis"
                 ? "Sur devis"
                 : `${eurosRange(service.min, service.max)}${service.kind === "recurring" ? " /mois" : ""}`
             }

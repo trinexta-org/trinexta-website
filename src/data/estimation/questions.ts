@@ -7,6 +7,10 @@ import type { EstimationQuestion } from "./types";
 
 export const MAX_QUESTIONS = 7;
 
+/** Profils de `renfort-profil` éligibles au Mode B (engagement long).
+ * Conditionne l'affichage de `renfort-duree` (flow) et la décote régie (grilles). */
+export const RENFORT_MODE_B_PROFILS = ["regulier", "plein"];
+
 export const ESTIMATION_QUESTIONS: EstimationQuestion[] = [
   {
     id: "effectif",
