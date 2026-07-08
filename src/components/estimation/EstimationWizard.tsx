@@ -114,8 +114,19 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
     goForward(answers, currentId);
   };
 
-  /** Revenir sur une réponse du fil : la conversation reprend à cette question. */
+  /** Revenir sur une réponse du fil : la conversation reprend à cette question.
+   * Les réponses en aval sont effacées : le branchement peut changer, et le fil
+   * ne doit pas montrer des réponses qui ne font peut-être plus partie du parcours. */
   const handleEdit = (questionId: string) => {
+    const index = sequence.indexOf(questionId);
+    if (index >= 0) {
+      const kept: EstimationAnswers = {};
+      for (const id of sequence.slice(0, index + 1)) {
+        const value = answers[id];
+        if (value != null) kept[id] = value;
+      }
+      setAnswers(kept);
+    }
     setPhase("questions");
     setCurrentId(questionId);
   };
@@ -196,6 +207,7 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
 
   const answerLabel = (questionId: string): string | null => {
     const question = ESTIMATION_QUESTIONS_BY_ID[questionId];
+    if (!question) return null;
     const value = answers[questionId];
     if (value == null) return null;
     const ids = Array.isArray(value) ? value : [value];
