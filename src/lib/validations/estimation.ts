@@ -31,12 +31,19 @@ export const estimationAnalyzeSchema = z.object({
   text: z.string().trim().min(1).max(ESTIMATION_FREETEXT_MAX_LENGTH),
 });
 
-export const estimationEmailSchema = z.object({
+const FRENCH_PHONE_REGEX = /^(?:\+33|0)\s*[1-9](?:[\s.-]?\d{2}){4}$/;
+
+export const estimationLeadSchema = z.object({
   estimateId: z.string().min(1).max(40),
   email: z.email("Le format de l'email est invalide"),
+  telephone: z
+    .string()
+    .trim()
+    .regex(FRENCH_PHONE_REGEX, "Le format du téléphone est invalide"),
+  entreprise: z.string().trim().min(1, "Le nom de l'entreprise est requis").max(200),
   consent: z.literal(true, "Le consentement est requis"),
 });
 
 export type EstimationCompletionData = z.infer<typeof estimationCompletionSchema>;
 export type EstimationAnalyzeData = z.infer<typeof estimationAnalyzeSchema>;
-export type EstimationEmailData = z.infer<typeof estimationEmailSchema>;
+export type EstimationLeadData = z.infer<typeof estimationLeadSchema>;

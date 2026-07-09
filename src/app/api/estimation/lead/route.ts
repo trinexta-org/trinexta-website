@@ -7,19 +7,19 @@ import {
 } from "@/lib/estimation/emails";
 import { sendMail } from "@/lib/mail";
 import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
-import { estimationEmailSchema } from "@/lib/validations/estimation";
+import { estimationLeadSchema } from "@/lib/validations/estimation";
 import type { EstimationAnswers } from "@/data/estimation";
 
-const EMAIL_MAX_REQUESTS_PER_WINDOW = 5;
+const LEAD_MAX_REQUESTS_PER_WINDOW = 5;
 
 export async function POST(request: Request) {
   try {
-    if (!checkRateLimit(`email:${hashIp(getClientIp(request))}`, EMAIL_MAX_REQUESTS_PER_WINDOW)) {
+    if (!checkRateLimit(`lead:${hashIp(getClientIp(request))}`, LEAD_MAX_REQUESTS_PER_WINDOW)) {
       return NextResponse.json({ error: "Trop de requêtes, réessayez plus tard." }, { status: 429 });
     }
 
     const body = await request.json();
-    const validated = estimationEmailSchema.safeParse(body);
+    const validated = estimationLeadSchema.safeParse(body);
 
     if (!validated.success) {
       return NextResponse.json(
@@ -28,18 +28,19 @@ export async function POST(request: Request) {
       );
     }
 
-    const { estimateId, email } = validated.data;
+    const { estimateId, email, telephone, entreprise } = validated.data;
 
     const estimate = await prisma.estimate.findUnique({ where: { id: estimateId } });
     if (!estimate) {
       return NextResponse.json({ error: "Estimation introuvable" }, { status: 404 });
     }
 
-    // L'estimation ne devient identifiée qu'après consentement explicite (validé par le schéma).
+    // Le lead est exploitable dès le consentement : le rappel téléphonique ne
+    // dépend pas de la réussite de l'envoi de l'email de détail ci-dessous.
     const consentAt = new Date();
     await prisma.estimate.update({
       where: { id: estimateId },
-      data: { email, consentAt, status: "lead" },
+      data: { email, telephone, entreprise, consentAt, status: "lead" },
     });
 
     const emailData: EstimateEmailData = {
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
       oneShotMax: estimate.oneShotMax,
     };
 
+    let emailSent = true;
     try {
       await sendMail({
         to: email,
@@ -59,36 +61,27 @@ export async function POST(request: Request) {
       });
     } catch (error) {
       console.error("Erreur envoi email estimation:", error);
-
-      // L'envoi a échoué : on ne conserve pas l'email sans service rendu.
-      await prisma.estimate.update({
-        where: { id: estimateId },
-        data: { email: null, consentAt: null, status: "complete" },
-      });
-
-      return NextResponse.json(
-        { error: "L'envoi de l'email a échoué. Votre estimation reste affichée, réessayez dans un instant." },
-        { status: 500 }
-      );
+      emailSent = false;
     }
 
-    // Notification interne : un échec ne doit pas faire échouer la demande du visiteur.
+    // Notification interne : envoyée même si l'email au prospect a échoué,
+    // l'équipe doit savoir qu'il y a un lead à rappeler.
     try {
       const teamEmail = process.env.AZURE_FROM_EMAIL;
       if (teamEmail) {
         await sendMail({
           to: teamEmail,
           subject: `Nouveau lead estimation : ${estimate.services.join(", ")}`,
-          html: buildTeamNotificationHtml(emailData, email, estimateId),
+          html: buildTeamNotificationHtml(emailData, { email, telephone, entreprise }, estimateId, emailSent),
         });
       }
     } catch (error) {
       console.error("Erreur notification équipe estimation:", error);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, emailSent });
   } catch (error) {
-    console.error("Erreur traitement email estimation:", error);
+    console.error("Erreur traitement lead estimation:", error);
     return NextResponse.json({ error: "Une erreur interne est survenue." }, { status: 500 });
   }
 }

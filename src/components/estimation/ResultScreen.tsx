@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Entrance } from "@/components/ui/Entrance";
 import type { EstimationResult } from "@/lib/estimation/engine";
-import { EmailCapture } from "./EmailCapture";
+import { LeadCapture } from "./LeadCapture";
 
 interface ResultScreenProps {
   result: EstimationResult;
@@ -123,11 +123,11 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
       </div>
 
       <div className="mt-12 rounded-3xl border border-white/15 bg-white/5 p-6 md:p-8">
-        <h3 className="text-xl font-black text-white">Recevez le détail par email</h3>
+        <h3 className="text-xl font-black text-white">Un expert vous recontacte pour affiner ce chiffrage</h3>
         <p className="mb-6 mt-1 text-sm text-white/60">
-          Récapitulatif complet, décomposition par service et prochaines étapes.
+          Vous recevez aussi le détail complet par email, avec la décomposition par service.
         </p>
-        <EmailCapture estimateId={estimateId} />
+        <LeadCapture estimateId={estimateId} />
       </div>
 
       <div className="mt-8 flex flex-col items-center gap-4 text-center">
