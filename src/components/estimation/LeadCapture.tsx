@@ -15,6 +15,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
   const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [emailSent, setEmailSent] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,6 +50,8 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
         const json = await res.json().catch(() => null);
         throw new Error(json?.error ?? "L'envoi a échoué.");
       }
+      const json = await res.json().catch(() => null);
+      setEmailSent(json?.emailSent !== false);
       setSent(true);
     } catch (err) {
       setError(
@@ -66,8 +69,9 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
       <div className="rounded-2xl border border-secondary/40 bg-secondary/10 p-6 text-center">
         <p className="font-bold text-white">C&apos;est envoyé.</p>
         <p className="mt-1 text-sm text-white/70">
-          Le détail de votre estimation arrive dans votre boîte mail d&apos;ici quelques minutes,
-          et un expert Trinexta va vous appeler pour l&apos;affiner.
+          {emailSent
+            ? "Le détail de votre estimation arrive dans votre boîte mail d'ici quelques minutes, et un expert Trinexta va vous appeler pour l'affiner."
+            : "Un expert Trinexta va vous appeler pour affiner votre estimation. L'envoi de l'email de détail a rencontré un souci, il pourra vous le renvoyer directement."}
         </p>
       </div>
     );
