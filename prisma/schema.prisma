@@ -53,6 +53,8 @@ model Estimate {
   aiModifiers Json?
   aiAnalyzed  Boolean         @default(false)
   email       String?
+  prenom      String?
+  nom         String?
   telephone   String?
   entreprise  String?
   consentAt   DateTime?

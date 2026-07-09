@@ -101,7 +101,7 @@ function totalsBlock(data: EstimateEmailData): string {
   return parts.join("");
 }
 
-export function buildEstimateEmailHtml(data: EstimateEmailData, bookingsUrl?: string): string {
+export function buildEstimateEmailHtml(data: EstimateEmailData, prenom: string, bookingsUrl?: string): string {
   const rdvUrl = bookingsUrl || `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr"}/contact`;
 
   return `
@@ -110,7 +110,7 @@ export function buildEstimateEmailHtml(data: EstimateEmailData, bookingsUrl?: st
       <h1 style="color:#ffffff;margin:0;font-size:22px;">Votre estimation Trinexta</h1>
     </div>
     <div style="padding:24px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;">
-      <p>Bonjour,</p>
+      <p>Bonjour ${escapeHtml(prenom)},</p>
       <p>Voici le détail de l'estimation réalisée sur trinexta.fr. Elle est indicative et non contractuelle : le devis final se construit avec vous, après un échange sur votre situation réelle.</p>
 
       <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Votre fourchette</h2>
@@ -135,6 +135,8 @@ export function buildEstimateEmailHtml(data: EstimateEmailData, bookingsUrl?: st
 }
 
 export interface EstimateLeadContact {
+  prenom: string;
+  nom: string;
   email: string;
   telephone: string;
   entreprise: string;
@@ -150,6 +152,7 @@ export function buildTeamNotificationHtml(
   <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;color:#333;">
     <h2 style="color:${COLOR_PRIMARY};">Nouveau lead via le tunnel d'estimation</h2>
     ${!emailSent ? `<p style="color:#c0392b;font-weight:bold;">L'email de détail envoyé au prospect a échoué, à renvoyer manuellement si besoin.</p>` : ""}
+    <p><strong>Nom :</strong> ${escapeHtml(lead.prenom)} ${escapeHtml(lead.nom)}</p>
     <p><strong>Entreprise :</strong> ${escapeHtml(lead.entreprise)}</p>
     <p><strong>Téléphone :</strong> ${escapeHtml(lead.telephone)}</p>
     <p><strong>Email :</strong> ${escapeHtml(lead.email)}</p>

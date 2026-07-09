@@ -9,6 +9,8 @@ interface LeadCaptureProps {
 }
 
 export function LeadCapture({ estimateId }: LeadCaptureProps) {
+  const [prenom, setPrenom] = useState("");
+  const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
   const [entreprise, setEntreprise] = useState("");
@@ -40,6 +42,8 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           estimateId,
+          prenom: prenom.trim(),
+          nom: nom.trim(),
           email: email.trim(),
           telephone: telephone.trim(),
           entreprise: entreprise.trim(),
@@ -79,6 +83,38 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="estimation-prenom" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
+            Prénom
+          </label>
+          <Input
+            id="estimation-prenom"
+            type="text"
+            required
+            value={prenom}
+            onChange={(e) => setPrenom(e.target.value)}
+            placeholder="Jean"
+            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="estimation-nom" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
+            Nom
+          </label>
+          <Input
+            id="estimation-nom"
+            type="text"
+            required
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
+            placeholder="Dupont"
+            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+          />
+        </div>
+      </div>
+
       <div>
         <label htmlFor="estimation-email" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
           Email professionnel
