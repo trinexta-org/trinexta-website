@@ -35,6 +35,8 @@ const FRENCH_PHONE_REGEX = /^(?:\+33|0)\s*[1-9](?:[\s.-]?\d{2}){4}$/;
 
 export const estimationLeadSchema = z.object({
   estimateId: z.string().min(1).max(40),
+  prenom: z.string().trim().min(1, "Le prénom est requis").max(100),
+  nom: z.string().trim().min(1, "Le nom est requis").max(100),
   email: z.email("Le format de l'email est invalide"),
   telephone: z
     .string()

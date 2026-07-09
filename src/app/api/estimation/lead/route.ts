@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { estimateId, email, telephone, entreprise } = validated.data;
+    const { estimateId, prenom, nom, email, telephone, entreprise } = validated.data;
 
     const estimate = await prisma.estimate.findUnique({ where: { id: estimateId } });
     if (!estimate) {
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     const consentAt = new Date();
     await prisma.estimate.update({
       where: { id: estimateId },
-      data: { email, telephone, entreprise, consentAt, status: "lead" },
+      data: { prenom, nom, email, telephone, entreprise, consentAt, status: "lead" },
     });
 
     const emailData: EstimateEmailData = {
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       await sendMail({
         to: email,
         subject: "Votre estimation Trinexta, en détail",
-        html: buildEstimateEmailHtml(emailData, process.env.NEXT_PUBLIC_BOOKINGS_URL),
+        html: buildEstimateEmailHtml(emailData, prenom, process.env.NEXT_PUBLIC_BOOKINGS_URL),
       });
     } catch (error) {
       console.error("Erreur envoi email estimation:", error);
@@ -72,7 +72,12 @@ export async function POST(request: Request) {
         await sendMail({
           to: teamEmail,
           subject: `Nouveau lead estimation : ${estimate.services.join(", ")}`,
-          html: buildTeamNotificationHtml(emailData, { email, telephone, entreprise }, estimateId, emailSent),
+          html: buildTeamNotificationHtml(
+            emailData,
+            { prenom, nom, email, telephone, entreprise },
+            estimateId,
+            emailSent
+          ),
         });
       }
     } catch (error) {
