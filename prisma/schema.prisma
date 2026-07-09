@@ -37,8 +37,9 @@ model Subscriber {
 }
 
 // Estimation réalisée via le tunnel /estimation.
-// Anonyme par défaut : email et consentement uniquement si le visiteur
-// demande l'envoi du détail. Aucune IP ni donnée identifiante sinon.
+// Anonyme par défaut : email, téléphone, entreprise et consentement
+// uniquement si le visiteur demande à être recontacté. Aucune IP ni
+// donnée identifiante sinon.
 model Estimate {
   id          String          @id @default(cuid())
   sessionId   String
@@ -52,6 +53,8 @@ model Estimate {
   aiModifiers Json?
   aiAnalyzed  Boolean         @default(false)
   email       String?
+  telephone   String?
+  entreprise  String?
   consentAt   DateTime?
   status      String          @default("complete")
   createdAt   DateTime        @default(now())

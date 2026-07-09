@@ -123,7 +123,7 @@ export function buildEstimateEmailHtml(data: EstimateEmailData, bookingsUrl?: st
       <table style="font-size:14px;border-collapse:collapse;">${answersSummaryRows(data.answers)}</table>
 
       <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Et maintenant ?</h2>
-      <p>Un échange de 30 minutes suffit pour transformer cette fourchette en devis précis. On regarde votre parc, vos priorités, et on vous dit concrètement ce qu'on ferait.</p>
+      <p>Un de nos experts va vous appeler pour affiner ce chiffrage avec votre situation réelle. Si vous préférez avancer plus vite de votre côté, vous pouvez aussi prendre rendez-vous directement.</p>
       <p style="text-align:center;margin:24px 0;">
         <a href="${escapeHtml(rdvUrl)}" style="background:${COLOR_SECONDARY};color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
           Prendre rendez-vous
@@ -134,15 +134,25 @@ export function buildEstimateEmailHtml(data: EstimateEmailData, bookingsUrl?: st
   </div>`;
 }
 
+export interface EstimateLeadContact {
+  email: string;
+  telephone: string;
+  entreprise: string;
+}
+
 export function buildTeamNotificationHtml(
   data: EstimateEmailData,
-  leadEmail: string,
-  estimateId: string
+  lead: EstimateLeadContact,
+  estimateId: string,
+  emailSent: boolean
 ): string {
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;color:#333;">
     <h2 style="color:${COLOR_PRIMARY};">Nouveau lead via le tunnel d'estimation</h2>
-    <p><strong>Email :</strong> ${escapeHtml(leadEmail)}</p>
+    ${!emailSent ? `<p style="color:#c0392b;font-weight:bold;">L'email de détail envoyé au prospect a échoué, à renvoyer manuellement si besoin.</p>` : ""}
+    <p><strong>Entreprise :</strong> ${escapeHtml(lead.entreprise)}</p>
+    <p><strong>Téléphone :</strong> ${escapeHtml(lead.telephone)}</p>
+    <p><strong>Email :</strong> ${escapeHtml(lead.email)}</p>
     <p><strong>Estimation :</strong> ${escapeHtml(estimateId)}</p>
     ${totalsBlock(data)}
     <h3 style="color:${COLOR_PRIMARY};">Services détectés</h3>
