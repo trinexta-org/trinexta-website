@@ -14,6 +14,7 @@ const DEPARTMENTS = [
     { id: "94", name: "Val-de-Marne", angle: 145, radius: 0.44 },
     { id: "95", name: "Val-d'Oise", angle: 310, radius: 0.52 },
     { id: "77", name: "Seine-et-Marne", angle: 110, radius: 0.62 },
+    { id: "91", name: "Essonne", angle: 185, radius: 0.43 },
 ]
 
 const STEPS = [
@@ -28,8 +29,8 @@ const STEPS = [
         id: "DEP_IDF",
         label: "02",
         title: "Déploiement régional",
-        subtitle: "6 départements couverts",
-        text: "Le signal se déploie vers Paris, les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne, le Val-d'Oise et la Seine-et-Marne. Intervention sur site en moins de 4h.",
+        subtitle: "7 départements couverts",
+        text: "Le signal se déploie vers Paris, les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne, le Val-d'Oise, la Seine-et-Marne et l'Essonne. Intervention sur site en moins de 4h.",
     },
     {
         id: "EXP_NAT",
@@ -264,7 +265,7 @@ export function InterventionMap() {
                                             Cibles actives
                                         </span>
                                         <span className="text-[9px] font-mono text-secondary/50 font-bold">
-                                            {DEPARTMENTS.length}&thinsp;/&thinsp;6
+                                            {DEPARTMENTS.length}&thinsp;/&thinsp;7
                                         </span>
                                     </div>
                                     <div className="grid grid-cols-2"
