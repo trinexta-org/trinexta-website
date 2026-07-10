@@ -268,21 +268,23 @@ export function InterventionMap() {
                                             {DEPARTMENTS.length}&thinsp;/&thinsp;7
                                         </span>
                                     </div>
-                                    <div className="grid grid-cols-2"
-                                        style={{ gap: "1px", background: "color-mix(in srgb, var(--secondary) 10%, transparent)" }}>
+                                    <div className="flex flex-wrap gap-1.5 p-3">
                                         {DEPARTMENTS.map((d, i) => (
                                             <motion.div
                                                 key={d.id}
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ delay: 0.07 * i }}
-                                                className="flex items-center gap-2.5 px-3 py-2"
-                                                style={{ background: "color-mix(in srgb, var(--primary) 95%, transparent)" }}
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ delay: 0.06 * i }}
+                                                className="flex items-center gap-1.5 pl-2 pr-2.5 py-1 rounded-full"
+                                                style={{
+                                                    border: "1px solid color-mix(in srgb, var(--secondary) 25%, transparent)",
+                                                    background: "color-mix(in srgb, var(--secondary) 6%, transparent)",
+                                                }}
                                             >
                                                 <span className="w-1.5 h-1.5 rounded-full shrink-0"
                                                     style={{ background: "color-mix(in srgb, var(--secondary) 80%, transparent)" }} />
                                                 <span className="text-secondary font-mono text-[11px] font-bold">{d.id}</span>
-                                                <span className="text-white/80 text-[9px] truncate font-medium">{d.name}</span>
+                                                <span className="text-white/70 text-[9px] font-medium">{d.name}</span>
                                             </motion.div>
                                         ))}
                                     </div>
