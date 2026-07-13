@@ -66,6 +66,36 @@ model Estimate {
   @@index([createdAt])
 }
 
+// Audit SEO gratuit lancé depuis /audit-seo. Identité captée au Gate (en amont),
+// analyse mécanique + synthèse IA. Un enregistrement = une Cible = un Rapport.
+model SeoAudit {
+  id          String    @id @default(cuid())
+  // Lead (identité captée au Gate)
+  prenom      String
+  nom         String
+  email       String
+  entreprise  String
+  telephone   String?
+  consentAt   DateTime?
+  // Cible
+  url         String
+  domain      String
+  // Résultat mécanique
+  scoreGlobal Int?
+  sousScores  Json?
+  findings    Json?
+  pagespeed   Json?
+  aiSummary   String?
+  // pending → done → lead ; failed en cas d'échec d'analyse
+  status      String    @default("pending")
+  ipHash      String?
+  createdAt   DateTime  @default(now())
+
+  @@index([email])
+  @@index([domain])
+  @@index([createdAt])
+}
+
 // Étape franchie dans le tunnel, rattachée à une session éphémère.
 model EstimateEvent {
   id         String    @id @default(cuid())
