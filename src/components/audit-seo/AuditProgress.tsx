@@ -11,7 +11,7 @@ import { CheckCircle2, Circle, Loader2 } from "lucide-react";
 const STEPS = [
   { label: "Récupération de la page", estMs: 1500 },
   { label: "Analyse technique & contenu", estMs: 2000 },
-  { label: "Test de performance (PageSpeed)", estMs: 15000 },
+  { label: "Test de performance", estMs: 15000 },
   { label: "Génération de la synthèse IA", estMs: 4000 },
   { label: "Finalisation du rapport", estMs: 2000 },
 ];
@@ -76,7 +76,7 @@ export function AuditProgress() {
               <span
                 className={
                   isDone
-                    ? "text-sm text-white/60 line-through decoration-white/30"
+                    ? "text-sm text-white/40"
                     : isActive
                       ? "text-sm font-bold text-white"
                       : "text-sm text-white/40"
