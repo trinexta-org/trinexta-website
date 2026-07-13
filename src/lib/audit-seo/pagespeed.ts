@@ -6,7 +6,9 @@ import type { AxisScore, PageSpeedMetric, PageSpeedResult } from "./types";
 // jamais un chiffre : l'axe est marqué « non mesuré » (dégradation propre).
 
 const PAGESPEED_ENDPOINT = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
-const PAGESPEED_TIMEOUT_MS = 20000;
+// PSI mobile (Lighthouse complet) dépasse souvent 20s, surtout sans clé API
+// (quota partagé, plus lent). 45s laisse le temps à l'essentiel des runs.
+const PAGESPEED_TIMEOUT_MS = 45000;
 
 interface RawAudit {
   numericValue?: number;
@@ -63,10 +65,17 @@ export async function fetchPageSpeed(url: string): Promise<PageSpeedResult | nul
       signal: controller.signal,
       headers: { Accept: "application/json" },
     });
-    if (!response.ok) return null;
+    if (!response.ok) {
+      console.error(`PageSpeed HTTP ${response.status} pour ${url}`);
+      return null;
+    }
     const raw = await response.json();
-    return extractPageSpeed(raw);
-  } catch {
+    const result = extractPageSpeed(raw);
+    if (!result) console.error(`PageSpeed réponse inexploitable pour ${url}`);
+    return result;
+  } catch (error) {
+    const reason = controller.signal.aborted ? "timeout" : error;
+    console.error(`PageSpeed échec pour ${url}:`, reason);
     return null;
   } finally {
     clearTimeout(timeout);

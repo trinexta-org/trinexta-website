@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { auditSeoRequestSchema } from "@/lib/validations/audit-seo";
 import type { TeaserResponse } from "@/lib/audit-seo/types";
 import { AuditTeaser } from "./AuditTeaser";
+import { AuditProgress } from "./AuditProgress";
 
 type Phase = "form" | "loading" | "result";
 
@@ -71,17 +72,7 @@ export function AuditForm() {
   };
 
   if (phase === "loading") {
-    return (
-      <div className="flex flex-col items-center gap-6 rounded-2xl border border-white/10 bg-black/20 p-10 text-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-secondary" />
-        <div>
-          <p className="font-bold text-white">Analyse en cours</p>
-          <p className="mt-1 text-sm text-white/60">
-            On inspecte votre page, ça prend quelques secondes.
-          </p>
-        </div>
-      </div>
-    );
+    return <AuditProgress />;
   }
 
   if (phase === "result" && teaser) {
