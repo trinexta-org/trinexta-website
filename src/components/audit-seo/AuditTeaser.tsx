@@ -21,9 +21,16 @@ function scoreTone(score: number): string {
 export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
   return (
     <div className="space-y-8">
-      <div className="rounded-xl border border-secondary/30 bg-secondary/10 px-4 py-3 text-center text-sm text-white/80">
-        Le rapport complet vient d&apos;être envoyé par email.
-      </div>
+      {teaser.reportSent ? (
+        <div className="rounded-xl border border-secondary/30 bg-secondary/10 px-4 py-3 text-center text-sm text-white/80">
+          Le rapport complet vient d&apos;être envoyé par email.
+        </div>
+      ) : (
+        <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-center text-sm text-white/80">
+          L&apos;envoi de votre rapport par email a échoué, notre équipe a été notifiée et vous
+          recontactera.
+        </div>
+      )}
 
       <div className="rounded-2xl border border-white/10 bg-black/20 p-8 text-center">
         <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">

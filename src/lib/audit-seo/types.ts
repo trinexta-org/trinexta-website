@@ -61,4 +61,6 @@ export interface TeaserResponse {
   topFindings: Finding[];
   /** Synthèse IA (priorisation + angle SEO local), null si non générée. */
   aiSummary: string | null;
+  /** false si l'envoi du rapport par email au prospect a échoué. */
+  reportSent: boolean;
 }

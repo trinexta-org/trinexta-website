@@ -144,6 +144,7 @@ export async function POST(request: Request) {
       axes: result.axes,
       topFindings: result.findings.slice(0, 3),
       aiSummary: synthesis?.summary ?? null,
+      reportSent,
     };
 
     return NextResponse.json(teaser, { status: 201 });
