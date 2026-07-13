@@ -8,7 +8,7 @@ import { Menu, X, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FocusTrap } from "focus-trap-react"
 import { menuItems } from "./Nav"
-import { cn } from "@/lib/utils" 
+import { cn } from "@/lib/utils"
 
 export function MobileMenu() {
   const pathname = usePathname()
@@ -82,9 +82,9 @@ export function MobileMenu() {
                     return (
                       <div key={link.label} className="flex flex-col">
                         <div className="flex items-center justify-between py-3 w-full">
-                          <Link 
-                            href={link.href} 
-                            onClick={() => setIsOpen(false)} 
+                          <Link
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
                             className={cn(
                               "text-base font-bold w-fit transition-all",
                               isActive ? "text-secondary border-b-2 border-secondary" : "text-primary"

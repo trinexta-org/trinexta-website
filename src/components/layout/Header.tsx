@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Phone, Mail } from "lucide-react"
+import { Phone, Mail, Search } from "lucide-react"
 import { Nav } from "./Nav"
 import { MobileMenu } from "./MobileMenu"
 import { Container } from "./Container"
@@ -12,6 +12,10 @@ export function Header() {
       <div className="hidden lg:block bg-primary text-white">
         <Container>
           <div className="flex items-center justify-end h-10 gap-6">
+            <Link href="/audit-seo" className="flex items-center gap-1.5 rounded-full bg-secondary text-secondary-foreground pl-2.5 pr-3 py-1 text-xs font-bold hover:bg-secondary/90 transition-colors">
+              <Search className="h-3.5 w-3.5 stroke-[1.5]" />
+              <span>Audit SEO gratuit</span>
+            </Link>
             <a href="tel:0978250746" className="flex items-center gap-2 text-xs font-medium hover:text-secondary transition-colors">
               <Phone className="h-3.5 w-3.5 stroke-[1.5]" />
               <span>09 78 25 07 46</span>

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { JsonLd, trinextaLocalBusiness } from "@/components/seo/JsonLd"
 import { Metadata } from "next"
 import { HeroSection } from "@/components/HeroSection"
@@ -14,6 +15,9 @@ import { sanityClient } from "@/lib/sanity"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 import { CustomerReviews } from "@/components/CustomerReviews"
+import { Section } from "@/components/layout/Section"
+import { BannerCTA } from "@/components/layout/BannerCTA"
+import { Button } from "@/components/ui/Button"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = "Partenaire Informatique à Évry, en Essonne | Trinexta";
@@ -70,6 +74,19 @@ export default async function Home() {
         line2="Infogérance"
       />
       <ServicesSection />
+
+      <Section className="py-12 md:py-16">
+        <BannerCTA
+          variant="primary"
+          title="Votre site est-il vraiment vu par Google ?"
+          description="Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
+          action={
+            <Button asChild variant="secondary" size="lg">
+              <Link href="/audit-seo">Lancer mon audit gratuit</Link>
+            </Button>
+          }
+        />
+      </Section>
 
       <ApproachSection />
 
