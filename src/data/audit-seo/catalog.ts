@@ -28,7 +28,7 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     id: "title-length",
     axis: "on-page",
     severity: "mineur",
-    weight: 6,
+    weight: 4,
     symptom: "Le titre de la page est trop court ou trop long.",
     impact:
       "Un titre mal calibré est tronqué ou peu incitatif dans les résultats de recherche, ce qui réduit le nombre de visiteurs qui cliquent.",
@@ -46,7 +46,7 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     id: "meta-description-length",
     axis: "on-page",
     severity: "mineur",
-    weight: 6,
+    weight: 4,
     symptom: "La méta description est trop courte ou trop longue.",
     impact:
       "L'extrait affiché sous votre lien est coupé ou trop maigre, il donne moins envie de cliquer que celui des concurrents.",
@@ -82,7 +82,7 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     id: "canonical-missing",
     axis: "on-page",
     severity: "mineur",
-    weight: 5,
+    weight: 4,
     symptom: "La page ne déclare pas d'URL canonique.",
     impact:
       "En cas de doublons d'adresses, Google répartit votre popularité sur plusieurs versions au lieu d'une seule, ce qui affaiblit votre classement.",
@@ -91,7 +91,7 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     id: "open-graph-missing",
     axis: "on-page",
     severity: "mineur",
-    weight: 5,
+    weight: 4,
     symptom: "La page n'a pas de balises de partage (Open Graph).",
     impact:
       "Partagée sur LinkedIn, Facebook ou WhatsApp, votre page s'affiche sans titre ni visuel soigné et récolte beaucoup moins de clics.",
@@ -100,7 +100,7 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     id: "structured-data-missing",
     axis: "on-page",
     severity: "mineur",
-    weight: 6,
+    weight: 4,
     symptom: "La page n'a pas de données structurées.",
     impact:
       "Vous passez à côté des affichages enrichis de Google (étoiles, informations entreprise), qui rendent votre lien plus visible.",
@@ -109,10 +109,10 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     id: "content-thin",
     axis: "on-page",
     severity: "majeur",
-    weight: 6,
+    weight: 14,
     symptom: "La page contient très peu de texte.",
     impact:
-      "Avec trop peu de contenu, Google manque d'éléments pour vous juger crédible sur le sujet et vous classe derrière des pages plus fournies.",
+      "Avec trop peu de contenu, Google manque d'éléments pour vous juger crédible sur le sujet, et les assistants IA (ChatGPT, Google AI) n'ont rien à citer : vous restez derrière des pages plus fournies.",
   },
 
   // ---- Axe technique / crawlabilité (somme des poids = 100) ----
@@ -121,6 +121,8 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     axis: "technique",
     severity: "critique",
     weight: 25,
+    // Grave mais la page reste fonctionnelle : plafonne le global à 55.
+    scoreCap: 55,
     symptom: "La page n'est pas servie en HTTPS.",
     impact:
       "Les navigateurs affichent un avertissement de sécurité qui fait fuir les visiteurs, et Google défavorise les sites non sécurisés.",
@@ -130,6 +132,8 @@ export const CHECK_CATALOG: Record<CheckId, CheckDefinition> = {
     axis: "technique",
     severity: "critique",
     weight: 30,
+    // Page invisible dans Google : le reste du score est théorique, plafond 30.
+    scoreCap: 30,
     symptom: "La page demande explicitement à ne pas être indexée.",
     impact:
       "Cette page est invisible dans Google : aucun visiteur ne peut la trouver via une recherche, quoi qu'elle contienne.",

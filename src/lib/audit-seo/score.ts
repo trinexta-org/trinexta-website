@@ -62,6 +62,13 @@ export function computeScore(outcomes: CheckOutcome[], extraAxes: AxisScore[] = 
 
   const axes = [...catalogAxisScores, ...extraAxes];
 
+  // Gating par constat critique : un check qui casse l'accès à la page plafonne
+  // le Score global (le plus bas gagne), indépendamment du reste. Ex. noindex →
+  // page invisible, un beau score technique n'y change rien.
+  const caps = CHECK_LIST.filter(
+    (c) => failed.has(c.id) && c.scoreCap !== undefined
+  ).map((c) => c.scoreCap as number);
+
   // Constats triés du plus grave au moins grave (gravité, puis poids, puis id).
   findings.sort((a, b) => {
     const bySeverity = SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity];
@@ -71,7 +78,7 @@ export function computeScore(outcomes: CheckOutcome[], extraAxes: AxisScore[] = 
     return a.id.localeCompare(b.id);
   });
 
-  const scoreGlobal = computeGlobal(axes);
+  const scoreGlobal = Math.min(computeGlobal(axes), ...caps);
 
   return { scoreGlobal, axes, findings };
 }

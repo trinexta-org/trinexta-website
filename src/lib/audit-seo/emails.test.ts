@@ -48,6 +48,30 @@ describe("buildAuditReportHtml", () => {
     expect(html).not.toMatch(/<meta name/i);
     expect(html).not.toMatch(/ajoutez|balise à ajouter|voici comment/i);
   });
+
+  it("intègre le bloc « ce que cet audit ne mesure pas » (4 dims)", () => {
+    expect(html).toContain("Ce que cet audit ne mesure pas");
+    expect(html).toContain("Le SEO local");
+    expect(html).toContain("La conversion");
+    expect(html).toContain("La concurrence");
+    expect(html).toContain("Le reste du site");
+  });
+
+  it("propose l'offre d'audit approfondi déduit", () => {
+    expect(html).toContain("390");
+    expect(html).toMatch(/déduit/i);
+  });
+
+  it("adapte la conclusion au palier de score (moyen)", () => {
+    // score 63 => palier moyen
+    expect(html).toMatch(/base est correcte/i);
+  });
+
+  it("pointe le CTA vers /contact pré-rempli quand aucun bookings", () => {
+    const noBookings = buildAuditReportHtml(DATA, "Jean");
+    expect(noBookings).toContain("/contact?");
+    expect(noBookings).toContain("audit_score=63");
+  });
 });
 
 describe("buildAuditTeamNotificationHtml", () => {
