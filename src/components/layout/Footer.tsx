@@ -8,6 +8,7 @@ const NAVIGATION = [
   { name: "Accueil", href: "/" },
   { name: "Sérénité", href: "/serenite" },
   { name: "Trinexta Studio", href: "/trinexta-studio" },
+  { name: "Audit SEO gratuit", href: "/audit-seo" },
   { name: "Cas clients", href: "/cas-clients" },
   { name: "Blog Expertise", href: "/blog" },
   { name: "Nous rejoindre", href: "/nous-rejoindre" }
