@@ -36,6 +36,11 @@ export interface CheckDefinition {
   severity: Severity;
   /** Points retirés au sous-score de l'axe si le check échoue (0-100). */
   weight: number;
+  /**
+   * Plafond du Score GLOBAL si ce check échoue (constat critique qui casse
+   * l'accès à la page). Le plus bas gagne. Absent = pas de gate.
+   */
+  scoreCap?: number;
   symptom: string;
   impact: string;
 }

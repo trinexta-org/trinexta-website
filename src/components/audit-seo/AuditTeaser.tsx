@@ -1,3 +1,11 @@
+import {
+  AUDIT_BLIND_SPOTS,
+  buildAuditContactUrl,
+  DEEP_AUDIT_OFFER_LABEL,
+  getScoreBand,
+  SCORE_BAND_NARRATIVE,
+  type ScoreBand,
+} from "@/data/audit-seo";
 import type { Finding, TeaserResponse } from "@/lib/audit-seo/types";
 
 const severityLabel: Record<Finding["severity"], string> = {
@@ -12,13 +20,17 @@ const severityClass: Record<Finding["severity"], string> = {
   mineur: "bg-white/10 text-white/70 border-white/20",
 };
 
-function scoreTone(score: number): string {
-  if (score >= 80) return "text-emerald-400";
-  if (score >= 50) return "text-amber-400";
-  return "text-red-400";
-}
+const scoreToneByBand: Record<ScoreBand, string> = {
+  haut: "text-emerald-400",
+  moyen: "text-amber-400",
+  bas: "text-red-400",
+};
 
 export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
+  const band = getScoreBand(teaser.scoreGlobal);
+  const narrative = SCORE_BAND_NARRATIVE[band];
+  const contactUrl = buildAuditContactUrl("", teaser.url, teaser.scoreGlobal);
+
   return (
     <div className="space-y-8">
       {teaser.reportSent ? (
@@ -36,7 +48,7 @@ export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
         <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
           Score SEO de votre page
         </p>
-        <p className={`mt-3 text-6xl font-black ${scoreTone(teaser.scoreGlobal)}`}>
+        <p className={`mt-3 text-6xl font-black ${scoreToneByBand[band]}`}>
           {teaser.scoreGlobal}
           <span className="text-2xl text-white/40">/100</span>
         </p>
@@ -78,6 +90,37 @@ export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
             Le détail des constats arrive dans le rapport complet.
           </p>
         )}
+      </div>
+
+      <div>
+        <h2 className="text-lg font-black text-white">Ce que cet audit ne mesure pas</h2>
+        <p className="mt-2 text-sm text-white/60">
+          Une seule page, analysée de façon automatique. Quatre angles décisifs restent hors de
+          portée d&apos;un audit gratuit.
+        </p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {AUDIT_BLIND_SPOTS.map((spot) => (
+            <li key={spot.title} className="rounded-xl border border-white/10 bg-black/20 p-4">
+              <p className="font-bold text-white">{spot.title}</p>
+              <p className="mt-1 text-sm text-white/60">{spot.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="rounded-2xl border border-secondary/30 bg-secondary/10 p-6 sm:p-8">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+          Et maintenant ?
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-white/80">{narrative.conclusion}</p>
+        <p className="mt-4 text-sm text-white/60">{DEEP_AUDIT_OFFER_LABEL}.</p>
+        <p className="mt-4 font-bold text-white">{narrative.ctaHook}</p>
+        <a
+          href={contactUrl}
+          className="mt-5 inline-flex items-center justify-center rounded-xl bg-secondary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-secondary/90"
+        >
+          Discuter de ma visibilité
+        </a>
       </div>
     </div>
   );

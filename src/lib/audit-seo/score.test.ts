@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CHECK_LIST } from "@/data/audit-seo/catalog";
+import { CHECK_CATALOG, CHECK_LIST } from "@/data/audit-seo/catalog";
 import { computeScore, type CheckOutcome } from "./score";
 import type { AxisScore } from "./types";
 
@@ -66,6 +66,35 @@ describe("computeScore — global pondéré et dégradation propre", () => {
     };
     const result = computeScore(outcomes(), [perf]);
     expect(result.scoreGlobal).toBe(100); // perf ignoré, pas de 0 fictif
+  });
+});
+
+describe("computeScore — gating par constat critique", () => {
+  it("robots-noindex plafonne le global à 30", () => {
+    const result = computeScore(outcomes(["robots-noindex"]));
+    expect(result.scoreGlobal).toBe(30);
+  });
+
+  it("https-missing plafonne le global à 55", () => {
+    const result = computeScore(outcomes(["https-missing"]));
+    expect(result.scoreGlobal).toBe(55);
+  });
+
+  it("le plafond le plus bas gagne quand plusieurs gates s'appliquent", () => {
+    const result = computeScore(outcomes(["robots-noindex", "https-missing"]));
+    expect(result.scoreGlobal).toBe(30);
+  });
+
+  it("title-missing ne plafonne pas (pas de gate, page accessible)", () => {
+    const result = computeScore(outcomes(["title-missing"]));
+    expect(result.scoreGlobal).toBeGreaterThan(30);
+    expect(CHECK_CATALOG["title-missing"].scoreCap).toBeUndefined();
+  });
+});
+
+describe("computeScore — recalibrage content-thin", () => {
+  it("content-thin pèse 14 (bande majeure)", () => {
+    expect(CHECK_CATALOG["content-thin"].weight).toBe(14);
   });
 });
 
