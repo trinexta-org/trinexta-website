@@ -1,4 +1,12 @@
 import { AXES, AXIS_ORDER } from "@/data/audit-seo/axes";
+import {
+  AUDIT_BLIND_SPOTS,
+  buildAuditContactUrl,
+  DEEP_AUDIT_OFFER_LABEL,
+  getScoreBand,
+  SCORE_BAND_NARRATIVE,
+  type ScoreBand,
+} from "@/data/audit-seo";
 import { escapeHtml } from "@/lib/mail";
 import type { AxisScore, Finding, Severity } from "./types";
 
@@ -37,10 +45,15 @@ export interface AuditLeadContact {
   entreprise: string;
 }
 
+// Couleur du score dérivée du palier centralisé (source de vérité des seuils).
+const BAND_HEX: Record<ScoreBand, string> = {
+  haut: "#1e8449",
+  moyen: COLOR_SECONDARY,
+  bas: "#c0392b",
+};
+
 function scoreColor(score: number): string {
-  if (score >= 80) return "#1e8449";
-  if (score >= 50) return COLOR_SECONDARY;
-  return "#c0392b";
+  return BAND_HEX[getScoreBand(score)];
 }
 
 function scoreHeaderBlock(scoreGlobal: number): string {
@@ -99,13 +112,43 @@ function aiSummaryBlock(aiSummary: string | null): string {
     </div>`;
 }
 
+/** Bloc constant "Ce que cet audit ne mesure pas" (mêmes 4 dims que le teaser). */
+function blindSpotsBlock(): string {
+  const items = AUDIT_BLIND_SPOTS.map(
+    (spot) => `<div style="border:1px solid #e5e5e5;border-radius:8px;padding:14px;margin-bottom:10px;">
+      <p style="margin:0;font-weight:bold;color:${COLOR_PRIMARY};">${escapeHtml(spot.title)}</p>
+      <p style="margin:4px 0 0;font-size:14px;color:#666;">${escapeHtml(spot.description)}</p>
+    </div>`
+  ).join("");
+  return `<h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Ce que cet audit ne mesure pas</h2>
+    <p style="font-size:14px;color:#666;margin:0 0 12px;">Une seule page, analysée automatiquement. Quatre angles décisifs restent hors de portée d'un audit gratuit.</p>
+    ${items}`;
+}
+
+/** Section conclusion "Et maintenant ?", pilotée par le palier de score. */
+function nextStepBlock(scoreGlobal: number, rdvUrl: string): string {
+  const narrative = SCORE_BAND_NARRATIVE[getScoreBand(scoreGlobal)];
+  return `<h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Et maintenant ?</h2>
+    <p style="font-size:14px;line-height:1.6;color:#333;">${escapeHtml(narrative.conclusion)}</p>
+    <p style="font-size:14px;line-height:1.6;color:#333;">${escapeHtml(DEEP_AUDIT_OFFER_LABEL)}.</p>
+    <p style="font-size:14px;line-height:1.6;color:#333;font-weight:bold;">${escapeHtml(narrative.ctaHook)}</p>
+    <p style="text-align:center;margin:24px 0;">
+      <a href="${escapeHtml(rdvUrl)}" style="background:${COLOR_SECONDARY};color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
+        Prendre rendez-vous
+      </a>
+    </p>`;
+}
+
 export function buildAuditReportHtml(
   data: AuditEmailData,
   prenom: string,
   bookingsUrl?: string
 ): string {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
-  const rdvUrl = bookingsUrl || `${siteUrl}/contact`;
+  // CTA : bookings si défini (comportement conservé), sinon /contact pré-rempli
+  // avec l'URL auditée et le score.
+  const rdvUrl =
+    bookingsUrl || buildAuditContactUrl(siteUrl, data.url, data.scoreGlobal);
 
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#333;">
@@ -126,13 +169,10 @@ export function buildAuditReportHtml(
       <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Ce que nous avons repéré</h2>
       ${findingsByAxisBlock(data.findings)}
 
-      <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Et maintenant ?</h2>
-      <p>Cet audit pointe les symptômes et leur impact sur votre visibilité. Le plan d'action précis, priorisé pour votre activité, se construit lors d'un échange avec un de nos experts.</p>
-      <p style="text-align:center;margin:24px 0;">
-        <a href="${escapeHtml(rdvUrl)}" style="background:${COLOR_SECONDARY};color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
-          Prendre rendez-vous
-        </a>
-      </p>
+      ${blindSpotsBlock()}
+
+      ${nextStepBlock(data.scoreGlobal, rdvUrl)}
+
       <p style="font-size:12px;color:#999;">Vous recevez cet email parce que vous avez lancé un audit SEO sur trinexta.fr. Vos données sont traitées selon notre <a href="${escapeHtml(siteUrl)}/confidentialite" style="color:${COLOR_SECONDARY};">politique de confidentialité</a>.</p>
     </div>
   </div>`;

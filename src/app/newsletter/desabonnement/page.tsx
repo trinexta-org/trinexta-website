@@ -1,5 +1,14 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Container } from "@/components/layout/Container"
+
+export const metadata: Metadata = {
+  title: "Désabonnement newsletter",
+  robots: {
+    index: false,
+    follow: true,
+  },
+}
 
 type Props = {
   searchParams: Promise<{ status?: string }>

@@ -145,7 +145,7 @@ export async function getArticles(options?: OptionsRecherchesArticles): Promise<
 
 export async function getArticleBySlug(slug: string): Promise<ArticleComplet | null> {
   return sanityClient.fetch<ArticleComplet | null>(`
-    *[_type == "article" && slug.current == $slug][0] {
+    *[_type == "article" && slug.current == $slug && datePublication <= now()][0] {
       _id,
       titre,
       slug,

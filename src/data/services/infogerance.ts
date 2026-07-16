@@ -2,11 +2,12 @@ import type { ServicePageProps } from "@/components/services/ServicePage";
 
 export const infogeranceData: ServicePageProps = {
   serviceSlug: "infogerance",
+  canonicalPath: "/infogerance",
 
   hero: {
-    titlePart1: "Infogérance",
-    titlePart2: "Informatique",
-    description: "Dans un monde où la continuité numérique est le pilier de votre compétitivité, votre informatique ne doit plus être une contrainte, mais un levier. Trinexta propose aux TPE et PME une infogérance complète et réactive. Nous ne nous contentons pas de réparer ; nous bâtissons, surveillons et optimisons votre environnement de travail pour qu'il soit le support fiable et infaillible de votre croissance, tout en éliminant les surprises budgétaires et techniques.",
+    titlePart1: "Infogérance informatique",
+    titlePart2: "à Évry-Courcouronnes",
+    description: "Pour les TPE et PME d'Évry-Courcouronnes et de l'Essonne, l'informatique ne doit plus être une contrainte quotidienne. Trinexta assure une infogérance complète et réactive : supervision, maintenance, support et sécurité du parc, avec un cadre clair pour éliminer les surprises budgétaires et techniques.",
     ctaText: "Être rappelé pour l'infogérance",
     ctaHref: "/contact",
   },
@@ -49,6 +50,32 @@ export const infogeranceData: ServicePageProps = {
         desc: "Besoin d'installer un logiciel sur cinq postes différents ou de modifier un paramètre de sécurité global ? Nous le faisons à distance, sans aucun déplacement physique et sans immobiliser vos équipes. C'est plus rapide, beaucoup plus fluide pour vos collaborateurs, et cela garantit une homogénéité de configuration sur l'ensemble de votre flotte informatique, assurant ainsi une meilleure performance globale.",
       },
     ],
+  },
+
+  localSeo: {
+    subtitle: "Ancrage local",
+    title: "Infogérance pour les PME d'Évry-Courcouronnes et de l'Essonne",
+    description: "Nous intervenons auprès des dirigeants qui veulent un parc stable, des postes suivis et un partenaire joignable quand l'activité ne peut pas attendre.",
+    items: [
+      {
+        title: "Zone d'intervention",
+        desc: "Évry-Courcouronnes, Corbeil-Essonnes, Ris-Orangis, le centre Essonne et les sites franciliens suivis à distance.",
+      },
+      {
+        title: "Profils accompagnés",
+        desc: "TPE, PME, commerces, cabinets et équipes de bureau qui n'ont pas toujours un responsable informatique interne.",
+      },
+      {
+        title: "Sujets récurrents",
+        desc: "Postes lents, mises à jour repoussées, sauvegardes mal suivies, incidents utilisateurs et manque de visibilité sur le parc.",
+      },
+      {
+        title: "Démarrage",
+        desc: "On cartographie vos postes, vos logiciels critiques et vos risques avant de définir un périmètre d'infogérance utile.",
+      },
+    ],
+    ctaText: "Évaluer mon parc",
+    ctaHref: "/contact",
   },
 
   benefits: {

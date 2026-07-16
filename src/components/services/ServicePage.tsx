@@ -20,9 +20,18 @@ import { BannerCTA } from "@/components/layout/BannerCTA"
 
 export interface ServicePageProps {
     serviceSlug: string
+    canonicalPath?: string
     hero: { titlePart1: string; titlePart2: string; description: string; ctaText: string; ctaHref: string }
     problem: { subtitle: string; title: string; description: string; painPoints: string[] }
     offer: { subtitle: string; title: string; description: string; features: Array<{ title: string; desc: string }> }
+    localSeo?: {
+        subtitle: string
+        title: string
+        description: string
+        items: Array<{ title: string; desc: string }>
+        ctaText: string
+        ctaHref: string
+    }
     benefits: { subtitle: string; title: string; items: Array<{ title: string; desc: string }> }
     incidentResponse?: {
         surtitle: string
@@ -56,8 +65,8 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-export function ServicePage({ serviceSlug, hero, problem, offer, benefits, incidentResponse, expertise, faq, cta }: ServicePageProps) {
-    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
+export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, localSeo, benefits, incidentResponse, expertise, faq, cta }: ServicePageProps) {
+    const breadcrumbPath = canonicalPath ?? `/${serviceSlug}`;
     
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
     const [activeBenefit, setActiveBenefit] = useState(0)
@@ -70,7 +79,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, incid
     const isMobile = useMediaQuery("(max-width: 767px)");
 
     useEffect(() => {
-        if (userInteracted) return;
+        if (userInteracted || isMobile) return;
 
         const interval = setInterval(() => {
             setBentoOrder((prev) => {
@@ -81,7 +90,7 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, incid
             })
         }, 15000)
         return () => clearInterval(interval)
-    }, [userInteracted])
+    }, [isMobile, userInteracted])
 
     const handleDesktopClick = (gridIndex: number) => {
         if (gridIndex === 0) return;
@@ -127,14 +136,13 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, incid
             <BreadcrumbJsonLd 
                 items={[
                     { name: "Accueil", url: "/" },
-                    { name: "Nos Offres", url: "/nos-offres" },
-                    { name: `${hero.titlePart1} ${hero.titlePart2}`, url: `/nos-offres/${serviceSlug}` }
+                    { name: `${hero.titlePart1} ${hero.titlePart2}`, url: breadcrumbPath }
                 ]} 
             />
             {/* 1. HERO */}
             <ViewportHero>
                 <div className="absolute inset-0 z-0">
-                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} unoptimized fetchPriority="high" className="object-cover object-center" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} priority fetchPriority="high" className="object-cover object-center" sizes="100vw" />
                     <div className="absolute inset-0 bg-primary/90" />
                 </div>
                 <Container className="relative z-10 py-12 md:py-16 lg:py-20">
@@ -185,11 +193,11 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, incid
                     </div>
 
                     <div className="relative w-full h-[300px] sm:h-[400px] lg:h-auto lg:aspect-square max-w-[500px] mx-auto lg:max-w-none mt-4 lg:mt-0">
-                        <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute top-0 right-0 w-[75%] h-[75%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-10">
+                        <motion.div animate={isMobile ? undefined : { y: [0, -10, 0] }} transition={isMobile ? undefined : { duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute top-0 right-0 w-[75%] h-[75%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-10">
                             <Image src={`/images/services/${serviceSlug}/problem-1.jpg`} alt="Problème IT" fill sizes="(min-width: 1024px) 38vw, (min-width: 640px) 56vw, 75vw" className="object-cover" />
                             <div className="absolute inset-0 bg-primary/20" />
                         </motion.div>
-                        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-20">
+                        <motion.div animate={isMobile ? undefined : { y: [0, 10, 0] }} transition={isMobile ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-20">
                             <Image src={`/images/services/${serviceSlug}/problem-2.jpg`} alt="Frustration IT" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 60vw" className="object-cover" />
                             <div className="absolute inset-0 bg-secondary/20" />
                         </motion.div>
@@ -347,6 +355,31 @@ export function ServicePage({ serviceSlug, hero, problem, offer, benefits, incid
                     )}
                 </AnimatePresence>
             </Section>
+
+            {localSeo && (
+                <Section id="zone-intervention" className="bg-primary/95 pb-16 md:pb-24">
+                    <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
+                        <div className="space-y-4">
+                            <span className="text-secondary text-xs font-mono font-bold uppercase tracking-widest block">{localSeo.subtitle}</span>
+                            <Heading as="h2" className="text-white text-3xl md:text-4xl">{localSeo.title}</Heading>
+                            <Text className="text-white/80 text-base md:text-lg leading-relaxed">{localSeo.description}</Text>
+                            <Link href={localSeo.ctaHref} className="inline-flex">
+                                <Button variant="secondary" className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold">
+                                    {localSeo.ctaText}
+                                </Button>
+                            </Link>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {localSeo.items.map((item) => (
+                                <div key={item.title} className="h-full rounded-xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                                    <Heading as="h3" className="text-white text-lg font-bold mb-2">{item.title}</Heading>
+                                    <Text className="text-white/70 text-sm leading-relaxed">{item.desc}</Text>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Section>
+            )}
 
             {/* TRANSITION */}
             <TransitionTitle surtitle={benefits.subtitle} line1="Vos" line2="Bénéfices" />

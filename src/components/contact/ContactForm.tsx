@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
@@ -14,8 +14,29 @@ export default function ContactForm() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({ resolver: zodResolver(contactFormSchema) });
+
+  // Pré-remplissage depuis la query (CTA de l'audit SEO : URL auditée + score).
+  // Lu après hydratation (window.location) pour garder le formulaire rendu côté
+  // serveur, sans forcer le rendu client de la page. L'utilisateur reste libre.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const auditUrl = params.get("audit_url");
+    if (type && (CONTACT_TYPES as readonly string[]).includes(type)) {
+      setValue("type", type as ContactFormData["type"]);
+    }
+    if (auditUrl) {
+      const auditScore = params.get("audit_score");
+      const score = auditScore ? ` (score ${auditScore}/100)` : "";
+      setValue(
+        "message",
+        `Bonjour, j'ai réalisé l'audit SEO gratuit de la page ${auditUrl}${score}. Je souhaite en discuter, notamment l'audit approfondi et les pistes pour améliorer ma visibilité.`
+      );
+    }
+  }, [setValue]);
 
   const [serverMessage, setServerMessage] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
