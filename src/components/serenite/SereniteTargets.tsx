@@ -1,6 +1,3 @@
-"use client"
-
-import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -36,19 +33,14 @@ export function SereniteTargets() {
     return (
         <div className="relative w-full overflow-hidden py-12">
             <div className="flex w-full overflow-hidden">
-                <motion.div
-                    className="flex gap-6"
-                    animate={{ x: ["0%", "-50%"] }}
-                    transition={{
-                        duration: 30,
-                        ease: "linear",
-                        repeat: Infinity,
-                    }}
+                <div
+                    className="flex gap-6 animate-marquee"
+                    style={{ animationDuration: "30s" }}
                 >
                     {[...targets, ...targets].map((target, i) => (
                         <TargetCard key={i} {...target} />
                     ))}
-                </motion.div>
+                </div>
             </div>
 
             <div className="mt-16 text-center px-6">

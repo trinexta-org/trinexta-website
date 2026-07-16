@@ -258,6 +258,130 @@
   animation-play-state: paused;
 }
 
+/* ── FinalCTA animations (ribbon background + heading color cycle) ────
+   Ribbon path duration set per-path via --dash-duration inline style
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes ribbon-dash {
+  from { stroke-dashoffset: 3000; }
+  to   { stroke-dashoffset: 0; }
+}
+.ribbon-fiber {
+  stroke-dasharray: 3000;
+  animation: ribbon-dash var(--dash-duration, 30s) linear infinite;
+}
+
+@keyframes cta-word-1 {
+  0%, 50%, 75% { color: var(--secondary); }
+  100%         { color: var(--primary-foreground); }
+}
+@keyframes cta-word-2 {
+  0%, 100% { color: var(--primary-foreground); }
+  25%, 75% { color: var(--secondary); }
+}
+@keyframes cta-word-3 {
+  0%, 50%, 100% { color: var(--primary-foreground); }
+  75%           { color: var(--secondary); }
+}
+.cta-word-1 { animation: cta-word-1 8s linear infinite; }
+.cta-word-2 { animation: cta-word-2 8s linear infinite; }
+.cta-word-3 { animation: cta-word-3 8s linear infinite; }
+
+/* ── Stat bar reveal (KpiSection, SereniteStats): width 12px → 48px ──── */
+@keyframes bar-grow {
+  from { width: 12px; }
+  to   { width: 48px; }
+}
+@supports (animation-timeline: view()) {
+  .animate-bar-grow {
+    width: 12px;
+    animation: bar-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 25%;
+  }
+}
+@supports not (animation-timeline: view()) {
+  .animate-bar-grow {
+    width: 12px;
+    animation: bar-grow 1s ease-out 0.5s forwards;
+  }
+}
+
+/* ── Scroll progress line (ApproachSection, ServicesProcess, TechnicienSteps)
+   Fills as the step list scrolls through the viewport
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes grow-line {
+  from { height: 0%; }
+  to   { height: 100%; }
+}
+@supports (animation-timeline: view()) {
+  .scroll-progress-line {
+    height: 0%;
+    animation: grow-line linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 100%;
+  }
+}
+@supports not (animation-timeline: view()) {
+  .scroll-progress-line {
+    height: 100%;
+  }
+}
+
+/* ── Decorative float loop (phone mockups, hero cards) ────────────────
+   Configure amplitude/duration via --float-from / --float-to / --float-duration
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes float-y {
+  0%, 100% { transform: translateY(var(--float-from, -15px)); }
+  50%      { transform: translateY(var(--float-to, 15px)); }
+}
+.animate-float-y {
+  animation: float-y var(--float-duration, 6s) ease-in-out infinite;
+}
+
+/* ── Blog reading progress bar (ProgressBar) ──────────────────────────
+   No JS fallback: hidden on browsers without scroll-driven animations,
+   it's a nice-to-have indicator, not required to read the article.
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes progress-scale {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.scroll-progress-bar {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress-bar {
+    display: block;
+    transform-origin: left;
+    animation: progress-scale linear;
+    animation-timeline: scroll(root);
+  }
+}
+
+/* ── Service card "Découvrir" arrow fill (ServicesSection) ────────────
+   Fills left-to-right or right-to-left depending on card direction
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes arrow-fill-ltr {
+  0%   { clip-path: inset(0 100% 0 0); }
+  40%  { clip-path: inset(0 0 0 0); }
+  50%  { clip-path: inset(0 0 0 0); }
+  90%  { clip-path: inset(0 0 0 100%); }
+  100% { clip-path: inset(0 100% 0 0); }
+}
+@keyframes arrow-fill-rtl {
+  0%   { clip-path: inset(0 0 0 100%); }
+  40%  { clip-path: inset(0 0 0 0); }
+  50%  { clip-path: inset(0 0 0 0); }
+  90%  { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 100%); }
+}
+.animate-arrow-fill-ltr {
+  animation: arrow-fill-ltr 3s ease-in-out infinite;
+}
+.animate-arrow-fill-rtl {
+  animation: arrow-fill-rtl 3s ease-in-out infinite;
+}
+
 .prose h2 {
   transition: all 0.5s ease;
   padding-left: 0;

@@ -1,10 +1,7 @@
-"use client"
-
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 const steps = [
   {
@@ -30,74 +27,47 @@ const steps = [
 ]
 
 export function ApproachSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  })
-
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
-
   return (
     <Section container={false} className="relative bg-primary py-20 md:py-40 overflow-hidden">
-      <div ref={containerRef} className="relative z-10">
+      <div className="relative z-10">
         <Container>
-          
+
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          
+
           <div className="lg:col-span-5 relative">
             <div className="lg:sticky lg:top-1/3">
-              <motion.span 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+              <FadeIn
+                direction="right"
                 className="text-secondary text-xs md:text-sm font-bold tracking-widest mb-4 block"
               >
                 Notre Méthodologie
-              </motion.span>
-              
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-              >
+              </FadeIn>
+
+              <FadeIn direction="right" delay={0.1}>
                 <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-white tracking-normal leading-tight">
                   Une approche <br /> en <span className="text-secondary">4 étapes</span>
                 </Heading>
-              </motion.div>
+              </FadeIn>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
+              <FadeIn direction="right" delay={0.2}>
                 <Text className="mt-6 text-white/70 text-base md:text-lg max-w-md leading-relaxed">
                   Nous ne nous contentons pas de résoudre des problèmes informatiques. Nous construisons une base solide pour votre croissance.
                 </Text>
-              </motion.div>
+              </FadeIn>
             </div>
           </div>
 
           <div className="lg:col-span-7 relative mt-12 lg:mt-0 pl-8 lg:pl-20">
-            
+
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/5 rounded-full" />
-            
-            <motion.div 
-              className="absolute left-0 top-0 w-1 bg-secondary rounded-full shadow-[0_0_15px_var(--secondary)]"
-              style={{ height: lineHeight }}
-            />
+
+            <div className="scroll-progress-line absolute left-0 top-0 w-1 bg-secondary rounded-full shadow-[0_0_15px_var(--secondary)]" />
 
             <div className="flex flex-col gap-16 md:gap-32 pb-16 md:pb-32">
               {steps.map((step) => (
-                <motion.div 
+                <FadeIn
                   key={step.num}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  direction="up"
                   className="relative group"
                 >
                   <div className="absolute -left-[37.5px] lg:-left-[85px] top-3 md:top-4 w-4 h-4 rounded-full bg-primary border-4 border-secondary group-hover:scale-150 group-hover:bg-secondary transition-all duration-300 z-10 shadow-[0_0_10px_var(--secondary)]" />
@@ -119,7 +89,7 @@ export function ApproachSection() {
                       {step.description}
                     </p>
                   </div>
-                </motion.div>
+                </FadeIn>
               ))}
             </div>
 

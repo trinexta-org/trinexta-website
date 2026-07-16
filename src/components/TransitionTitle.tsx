@@ -1,9 +1,7 @@
-"use client"
-
-import { motion } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading } from "@/components/ui/Typography"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 function RibbonBackground() {
   return (
@@ -74,36 +72,39 @@ export function TransitionTitle({
 
       <Container className="relative z-10 text-center px-4">
         {surtitle && (
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+          <FadeIn
+            direction="up"
             className="text-secondary text-xs md:text-sm font-bold tracking-[0.2em] mb-4 md:mb-6 block"
           >
             {surtitle}
-          </motion.span>
+          </FadeIn>
         )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-        >
+        <FadeIn direction="up" delay={0.1}>
           <Heading as="h2" className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-none">
             {line1} <br /> <span className="text-secondary">{line2}</span>
           </Heading>
-        </motion.div>
+        </FadeIn>
 
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="origin-center"
-        >
-          <div className="h-1.5 md:h-2 w-20 md:w-32 bg-secondary mx-auto mt-6 md:mt-10 rounded-full shadow-[0_0_20px_var(--secondary)]" />
-        </motion.div>
+        <style>{`
+          @keyframes bar-reveal {
+            from { opacity: 0; transform: scaleX(0); }
+            to { opacity: 1; transform: scaleX(1); }
+          }
+          @supports (animation-timeline: view()) {
+            .bar-reveal {
+              animation: bar-reveal linear both;
+              animation-timeline: view();
+              animation-range: entry 5% cover 25%;
+            }
+          }
+          @supports not (animation-timeline: view()) {
+            .bar-reveal {
+              animation: bar-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+            }
+          }
+        `}</style>
+        <div className="bar-reveal origin-center h-1.5 md:h-2 w-20 md:w-32 bg-secondary mx-auto mt-6 md:mt-10 rounded-full shadow-[0_0_20px_var(--secondary)]" />
       </Container>
     </Section>
   )

@@ -1,7 +1,4 @@
-"use client"
-
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 const steps = [
     {
@@ -27,18 +24,9 @@ const steps = [
 ]
 
 export function TechnicienSteps() {
-    const containerRef = useRef<HTMLDivElement>(null)
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start center", "end center"],
-    })
-
-    const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
-
     return (
         <section className="relative bg-primary py-20 md:py-32 overflow-hidden">
-            <div ref={containerRef} className="max-w-[1400px] mx-auto px-6">
+            <div className="max-w-[1400px] mx-auto px-6">
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
 
@@ -62,19 +50,13 @@ export function TechnicienSteps() {
                     <div className="lg:col-span-7 relative mt-12 lg:mt-0 pl-8 lg:pl-20">
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/5 rounded-full" />
 
-                        <motion.div
-                            className="absolute left-0 top-0 w-1 bg-secondary rounded-full shadow-[0_0_15px_var(--secondary)]"
-                            style={{ height: lineHeight }}
-                        />
+                        <div className="scroll-progress-line absolute left-0 top-0 w-1 bg-secondary rounded-full shadow-[0_0_15px_var(--secondary)]" />
 
                         <div className="flex flex-col gap-16 md:gap-32 pb-16 md:pb-32">
                             {steps.map((step) => (
-                                <motion.div
+                                <FadeIn
                                     key={step.num}
-                                    initial={{ opacity: 0, y: 50 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-100px" }}
-                                    transition={{ duration: 0.7, ease: "easeOut" }}
+                                    direction="up"
                                     className="relative group"
                                 >
                                     <div className="absolute -left-[37.5px] lg:-left-[85px] top-3 md:top-4 w-4 h-4 rounded-full bg-primary border-4 border-secondary group-hover:scale-150 group-hover:bg-secondary transition-all duration-300 z-10 shadow-[0_0_10px_var(--secondary)]" />
@@ -96,7 +78,7 @@ export function TechnicienSteps() {
                                             {step.desc}
                                         </p>
                                     </div>
-                                </motion.div>
+                                </FadeIn>
                             ))}
                         </div>
                     </div>

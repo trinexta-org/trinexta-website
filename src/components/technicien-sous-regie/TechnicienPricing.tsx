@@ -1,7 +1,5 @@
-"use client"
-
-import { motion } from "framer-motion"
 import Image from "next/image"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 export function TechnicienPricing() {
   return (
@@ -9,13 +7,7 @@ export function TechnicienPricing() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="w-full lg:w-1/2"
-          >
+          <FadeIn direction="right" className="w-full lg:w-1/2">
             <h2 className="text-[36px] md:text-[44px] text-white mb-6 leading-tight font-black">
               Notre modèle : la transparence <br />
               <em className="italic font-light font-serif text-secondary">absolue</em>
@@ -23,20 +15,22 @@ export function TechnicienPricing() {
             <p className="text-white/60 text-[16px] leading-[1.8] max-w-lg">
               Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d&apos;intégration.
             </p>
-          </motion.div>
+          </FadeIn>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <FadeIn
+            direction="up"
+            delay={0.2}
             className="w-full lg:w-1/2 flex justify-center lg:justify-end [perspective:1200px]"
           >
-            <motion.div
-              animate={{ y: [-15, 15, -15] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              style={{ transform: "rotateX(10deg) rotateY(-15deg) rotateZ(3deg)" }}
+            <style>{`
+              @keyframes phone-float {
+                0%, 100% { transform: rotateX(10deg) rotateY(-15deg) rotateZ(3deg) translateY(-15px); }
+                50%      { transform: rotateX(10deg) rotateY(-15deg) rotateZ(3deg) translateY(15px); }
+              }
+            `}</style>
+            <div
               className="relative w-[340px] h-[720px] bg-phone-body rounded-[48px] border-[8px] border-phone-frame shadow-[-25px_40px_80px_rgba(0,0,0,0.6),0_0_50px_rgba(92,146,184,0.1),inset_0_0_4px_rgba(255,255,255,0.1)] flex flex-col"
+              style={{ animation: "phone-float 6s ease-in-out infinite" }}
             >
               <div className="absolute top-[110px] -left-[10px] w-[3px] h-[26px] bg-phone-button rounded-l-md" />
               <div className="absolute top-[160px] -left-[10px] w-[3px] h-[50px] bg-phone-button rounded-l-md" />
@@ -97,8 +91,8 @@ export function TechnicienPricing() {
               </div>
 
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/40 rounded-full z-40" />
-            </motion.div>
-          </motion.div>
+            </div>
+          </FadeIn>
 
         </div>
       </div>
