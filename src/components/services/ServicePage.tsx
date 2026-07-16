@@ -228,17 +228,18 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                             const imageIndex = isMainFocus ? 1 : 2;
 
                             return (
-                                <motion.div
-                                    layout
+                                <div
                                     key={`bento-slot-${gridPositionIndex}`}
                                     onClick={() => handleDesktopClick(gridPositionIndex)}
                                     className={`relative overflow-hidden rounded-xl md:rounded-2xl border border-white/10 group ${bentoClass} ${!isMainFocus ? 'cursor-pointer hover:border-secondary/50' : 'cursor-default'} ${!hasImage ? 'bg-white/[0.02]' : ''}`}
                                 >
-                                    <AnimatePresence mode="popLayout">
+                                    <AnimatePresence mode="wait">
                                         <motion.div
                                             key={`content-${currentDataIndex}`}
-                                            layoutId={`bento-item-${currentDataIndex}`}
-                                            transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+                                            initial={{ opacity: 0, scale: 0.98 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.98 }}
+                                            transition={{ duration: 0.4 }}
                                             className="absolute inset-0 w-full h-full"
                                         >
                                             {hasImage && (
@@ -277,7 +278,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                             </div>
                                         </motion.div>
                                     </AnimatePresence>
-                                </motion.div>
+                                </div>
                             )
                         })}
                     </div>
