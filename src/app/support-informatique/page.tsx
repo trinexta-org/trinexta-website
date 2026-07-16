@@ -2,33 +2,34 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Support Informatique Expert pour TPE et PME",
-  description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",
+  title: "Support informatique TPE PME à Évry",
+  description: "Support informatique à Évry pour TPE et PME : assistance postes, logiciels métier, outils collaboratifs et résolution rapide des pannes.",
   alternates: {
     canonical: "/support-informatique",
   },
   openGraph: {
-    title: "Support Informatique Expert pour TPE et PME | Trinexta",
-    description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",
+    title: "Support informatique TPE PME à Évry | Trinexta",
+    description: "Support informatique à Évry pour TPE et PME : assistance postes, logiciels métier, outils collaboratifs et résolution rapide des pannes.",
     url: "/support-informatique",
     type: "website",
     images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Support Informatique Expert pour TPE et PME | Trinexta",
-    description: "Assistance technique complète : postes, logiciels métier et outils collaboratifs. Trinexta est votre partenaire de confiance pour résoudre vos pannes et sécuriser votre productivité au quotidien.",
+    title: "Support informatique TPE PME à Évry | Trinexta",
+    description: "Support informatique à Évry pour TPE et PME : assistance postes, logiciels métier, outils collaboratifs et résolution rapide des pannes.",
     images: ["/images/og-default.png"],
   },
 }
 
 const supportData = {
   serviceSlug: "support-informatique",
+  canonicalPath: "/support-informatique",
   
   hero: {
-    titlePart1: "Support",
-    titlePart2: "Informatique", 
-    description: "Un ordinateur qui bloque, un logiciel récalcitrant, une imprimante déconnectée ? Ces incidents, bien que mineurs en apparence, sont les premiers freins à la croissance de votre entreprise. Ne perdez plus de temps à jouer les techniciens par défaut. Trinexta intervient avec réactivité pour résoudre vos problèmes techniques et assurer la continuité totale de votre activité, vous permettant ainsi de vous concentrer exclusivement sur votre cœur de métier.",
+    titlePart1: "Support informatique",
+    titlePart2: "TPE PME à Évry",
+    description: "Un ordinateur qui bloque, un logiciel récalcitrant, une imprimante déconnectée ? Pour les TPE et PME d'Évry-Courcouronnes et de l'Essonne, ces incidents sont les premiers freins à l'activité. Trinexta intervient avec réactivité pour résoudre vos problèmes techniques et garder vos équipes concentrées sur leur métier.",
     ctaText: "Obtenir une assistance réactive",
     ctaHref: "/contact"
   },
@@ -71,6 +72,32 @@ const supportData = {
         desc: "Chaque intervention est rigoureusement documentée dans votre dossier technique. Si une difficulté se reproduit, nous possédons déjà l'historique de la résolution, ce qui nous permet de gagner un temps précieux et d'éviter les allers-retours inutiles."
       }
     ]
+  },
+
+  localSeo: {
+    subtitle: "Zone d'intervention",
+    title: "Un support proche des entreprises d'Évry et de l'Essonne",
+    description: "Nous accompagnons les TPE, PME, cabinets, commerces et équipes administratives qui ont besoin d'un interlocuteur informatique clair, disponible et capable de prendre les sujets jusqu'au bout.",
+    items: [
+      {
+        title: "Secteur couvert",
+        desc: "Évry-Courcouronnes, Corbeil-Essonnes, le centre Essonne et les sites franciliens suivis à distance.",
+      },
+      {
+        title: "Entreprises accompagnées",
+        desc: "Structures de 1 à 50 postes, équipes sans service IT interne ou entreprises qui veulent renforcer leur support existant.",
+      },
+      {
+        title: "Problèmes traités",
+        desc: "Postes bloqués, messagerie, imprimantes, logiciels métier, accès Microsoft 365 et incidents utilisateurs récurrents.",
+      },
+      {
+        title: "Premier échange",
+        desc: "On qualifie le parc, les outils critiques et les urgences pour mettre en place un support utile dès les premières demandes.",
+      },
+    ],
+    ctaText: "Parler de mon support",
+    ctaHref: "/contact",
   },
   
   benefits: {

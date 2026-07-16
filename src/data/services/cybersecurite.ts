@@ -2,11 +2,12 @@ import type { ServicePageProps } from "@/components/services/ServicePage";
 
 export const cybersecuriteData: ServicePageProps = {
   serviceSlug: "cybersecurite",
+  canonicalPath: "/cybersecurite",
 
   hero: {
-    titlePart1: "Cybersécurité",
-    titlePart2: "Proactive",
-    description: "Dans un paysage numérique où les menaces évoluent chaque jour, la sécurité de votre entreprise ne peut plus être une option, ni un sujet réservé aux grands groupes. Trinexta vous propose une cybersécurité conçue spécifiquement pour les TPE et PME : une protection efficace, invisible et surtout simple à gérer au quotidien. Nous combinons des technologies de pointe (EDR et IA) avec une approche humaine pour sécuriser vos données, vos accès et votre activité, sans jargon inutile et sans alourdir votre quotidien technique.",
+    titlePart1: "Cybersécurité PME",
+    titlePart2: "en Essonne",
+    description: "Les menaces ne visent plus seulement les grands groupes. Trinexta protège les TPE et PME en Essonne avec une cybersécurité concrète : EDR, anti-ransomware, protection contre le phishing, surveillance et réponse à incident, sans jargon inutile ni charge technique pour vos équipes.",
     ctaText: "Contactez-nous pour protéger votre entreprise",
     ctaHref: "/contact",
   },
@@ -49,6 +50,32 @@ export const cybersecuriteData: ServicePageProps = {
         desc: "L'humain reste le maillon le plus vulnérable de la chaîne de sécurité. Nos outils renforcent la détection des e-mails frauduleux, des liens piégés et des sites de phishing sophistiqués qui imitent les services légitimes (Microsoft 365, banques, etc.). Nous protégeons ainsi vos accès, vos mots de passe et vos données sensibles contre l'ingénierie sociale.",
       },
     ],
+  },
+
+  localSeo: {
+    subtitle: "Protection locale",
+    title: "Cybersécurité pour PME en Essonne",
+    description: "Nous aidons les entreprises locales à réduire les risques les plus concrets : ransomware, compte Microsoft 365 compromis, phishing crédible, postes non protégés et sauvegardes insuffisantes.",
+    items: [
+      {
+        title: "Zone couverte",
+        desc: "Évry-Courcouronnes, Corbeil-Essonnes, le centre Essonne et les entreprises franciliennes suivies à distance.",
+      },
+      {
+        title: "Entreprises concernées",
+        desc: "PME, cabinets, commerces et structures avec données clients, postes partagés ou outils métier critiques.",
+      },
+      {
+        title: "Risques prioritaires",
+        desc: "Ransomware, vol d'identifiants, phishing, postes isolés, comptes sans MFA et absence de procédure en cas d'incident.",
+      },
+      {
+        title: "Action rapide",
+        desc: "On vérifie les protections en place, les accès sensibles et la capacité de reprise avant de durcir ce qui expose vraiment l'activité.",
+      },
+    ],
+    ctaText: "Faire le point sécurité",
+    ctaHref: "/contact",
   },
 
   benefits: {
