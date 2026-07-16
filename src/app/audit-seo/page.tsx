@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Link2, Gauge, ClipboardList, AlertTriangle, AlertCircle } from "lucide-react";
+import { Link2, Gauge, ClipboardList } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { ViewportHero } from "@/components/layout/ViewportHero";
@@ -9,6 +9,7 @@ import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { AuditForm } from "@/components/audit-seo/AuditForm";
+import { ScoreGauge } from "@/components/audit-seo/ScoreGauge";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { Entrance } from "@/components/ui/Entrance";
 
@@ -59,13 +60,13 @@ const STEPS = [
 const EXAMPLE_FINDINGS = [
   {
     severity: "critique" as const,
-    icon: AlertCircle,
+    label: "Critique",
     symptom: "Images non compressées",
     impact: "+2,1s de chargement sur mobile",
   },
   {
     severity: "majeur" as const,
-    icon: AlertTriangle,
+    label: "Majeur",
     symptom: "Balise title dupliquée",
     impact: "Sur 4 pages du site",
   },
@@ -74,6 +75,11 @@ const EXAMPLE_FINDINGS = [
 const severityClass: Record<(typeof EXAMPLE_FINDINGS)[number]["severity"], string> = {
   critique: "bg-red-500/15 text-red-300 border-red-500/30",
   majeur: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+};
+
+const severityAccent: Record<(typeof EXAMPLE_FINDINGS)[number]["severity"], string> = {
+  critique: "border-red-500/70",
+  majeur: "border-amber-500/70",
 };
 
 export default function AuditSeoPage() {
@@ -188,35 +194,41 @@ export default function AuditSeoPage() {
           </FadeIn>
 
           <FadeIn delay={0.15} direction="up">
-            <div className="relative rounded-2xl border border-white/10 bg-black/20 p-6 md:p-8">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-6 md:p-8">
               <span className="absolute -top-3 right-6 rounded-full border border-white/20 bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white/50">
                 Exemple
               </span>
 
-              <div className="rounded-xl border border-white/10 bg-black/20 p-6 text-center">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1/2 top-0 h-56 w-56 -translate-x-1/2 -translate-y-1/3 rounded-full bg-secondary/15 blur-[90px]"
+              />
+
+              <div className="relative text-center">
                 <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
                   Score SEO de la page
                 </p>
-                <p className="mt-2 text-5xl font-black text-amber-400">
-                  62<span className="text-xl text-white/40">/100</span>
-                </p>
+                <div className="mt-4 flex justify-center">
+                  <ScoreGauge score={62} colorClass="text-amber-400" size={176} />
+                </div>
                 <p className="mt-1 truncate text-xs text-white/50">monsite.fr/accueil</p>
               </div>
 
-              <ul className="mt-4 space-y-3">
+              <ul className="relative mt-6 space-y-2.5">
                 {EXAMPLE_FINDINGS.map((finding) => (
                   <li
                     key={finding.symptom}
-                    className="flex items-start gap-3 rounded-xl border border-white/10 bg-black/20 p-4"
+                    className={`rounded-r-lg border-l-2 bg-white/[0.03] py-3 pl-4 pr-4 ${severityAccent[finding.severity]}`}
                   >
-                    <finding.icon
-                      className={`mt-0.5 h-4 w-4 shrink-0 rounded-full border p-0.5 ${severityClass[finding.severity]}`}
-                      aria-hidden="true"
-                    />
-                    <div>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`inline-block rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${severityClass[finding.severity]}`}
+                      >
+                        {finding.label}
+                      </span>
                       <p className="font-bold text-white">{finding.symptom}</p>
-                      <p className="mt-0.5 text-sm text-white/60">{finding.impact}</p>
                     </div>
+                    <p className="mt-1 text-sm text-white/60">{finding.impact}</p>
                   </li>
                 ))}
               </ul>
