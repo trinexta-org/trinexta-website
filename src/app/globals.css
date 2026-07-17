@@ -382,6 +382,20 @@
   animation: arrow-fill-rtl 3s ease-in-out infinite;
 }
 
+/* ── Animations decoratives en boucle infinie : coupees si l'utilisateur
+   a demande moins de mouvement au niveau OS/navigateur (WCAG 2.3.3) ──── */
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-fiber,
+  .cta-word-1,
+  .cta-word-2,
+  .cta-word-3,
+  .animate-float-y,
+  .animate-arrow-fill-ltr,
+  .animate-arrow-fill-rtl {
+    animation: none;
+  }
+}
+
 /* ── Values carousel progress bar (OurValues) ──────────────────────────
    Redémarre à chaque changement d'onglet actif (remount via key React)
    ──────────────────────────────────────────────────────────────────── */
