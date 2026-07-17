@@ -1,14 +1,12 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
+import { useInView } from "@/hooks/useInView"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-
-const MotionLink = motion.create(Link)
 
 const services = [
   {
@@ -94,19 +92,14 @@ function CharteFormattedText({ children }: { children: string }) {
 }
 
 function AnimatedArrow({ direction }: { direction: string }) {
-  const clipPathLTR = ["inset(0 100% 0 0)", "inset(0 0 0 0)", "inset(0 0 0 0)", "inset(0 0 0 100%)", "inset(0 100% 0 0)"]
-  const clipPathRTL = ["inset(0 0 0 100%)", "inset(0 0 0 0)", "inset(0 0 0 0)", "inset(0 100% 0 0)", "inset(0 0 0 100%)"]
-
   return (
     <div className="relative w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 flex-shrink-0">
       <ArrowRight className="w-full h-full text-white/20 absolute inset-0" />
-      <motion.div
-        animate={{ clipPath: direction === "ltr" ? clipPathLTR : clipPathRTL }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", times: [0, 0.4, 0.5, 0.9, 1] }}
-        className="absolute inset-0 text-secondary"
+      <div
+        className={`absolute inset-0 text-secondary ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
       >
         <ArrowRight className="w-full h-full" />
-      </motion.div>
+      </div>
     </div>
   )
 }
@@ -124,8 +117,7 @@ const getServiceUrl = (title: string) => {
 };
 
 export function ServicesSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
+  const [sectionRef, isInView] = useInView<HTMLDivElement>({ once: true, rootMargin: "-100px" })
   const [order, setOrder] = useState([0, 1, 2, 3, 4, 5])
   const [isCarouselActive, setIsCarouselActive] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -162,34 +154,41 @@ export function ServicesSection() {
           {services.map((service, index) => {
             const currentSlot = activePositions[isMobile ? index : order[index]]
 
-            return (
-              <MotionLink
-                key={service.id}
-                href={getServiceUrl(service.title)}
-                animate={isInView ? {
+            const target = isInView
+              ? {
                   opacity: 1,
                   scale: currentSlot.scale,
                   rotateY: currentSlot.rotateY,
                   top: currentSlot.top,
                   left: currentSlot.left,
-                  zIndex: currentSlot.zIndex
-                } : {
+                  zIndex: currentSlot.zIndex,
+                }
+              : {
                   opacity: 0,
                   scale: 0.1,
                   rotateY: 180,
                   top: "20%",
                   left: "50%",
-                  zIndex: 0
-                }}
-                transition={{
-                  duration: 1.2,
-                  ease: "easeInOut",
-                  delay: isCarouselActive ? 0 : index * 0.1
-                }}
+                  zIndex: 0,
+                }
+
+            return (
+              <Link
+                key={service.id}
+                href={getServiceUrl(service.title)}
                 style={{
                   position: "absolute",
                   width: isMobile ? "90%" : "31%",
-                  transformStyle: "preserve-3d"
+                  transformStyle: "preserve-3d",
+                  top: target.top,
+                  left: target.left,
+                  zIndex: target.zIndex,
+                  opacity: target.opacity,
+                  transform: `scale(${target.scale}) rotateY(${target.rotateY}deg)`,
+                  transitionProperty: "opacity, transform, top, left",
+                  transitionDuration: "1.2s",
+                  transitionTimingFunction: "ease-in-out",
+                  transitionDelay: `${isCarouselActive ? 0 : index * 0.1}s`,
                 }}
                 className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-white/10 cursor-pointer bg-primary block"
               >
@@ -212,13 +211,13 @@ export function ServicesSection() {
 
                     <CharteFormattedText>{service.description}</CharteFormattedText>
 
-                    <motion.div whileHover={{ x: 5 }} className="flex items-center">
+                    <div className="flex items-center transition-transform duration-300 hover:translate-x-[5px]">
                       <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">Découvrir</span>
                       <AnimatedArrow direction={service.fillDir} />
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
-              </MotionLink>
+              </Link>
             )
           })}
         </div>

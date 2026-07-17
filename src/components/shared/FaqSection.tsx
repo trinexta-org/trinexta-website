@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { OfferTag } from "./faqData"
 
 export interface FaqItem {
@@ -37,20 +36,16 @@ export function FaqSection({ faqs }: FaqSectionProps) {
                 </span>
               </button>
 
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <div className="p-5 pt-0 border-t border-white/5 text-sm md:text-base text-white/70 leading-relaxed whitespace-pre-line">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div
+                className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+              >
+                <div className={`overflow-hidden transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}>
+                  <div className="p-5 pt-0 border-t border-white/5 text-sm md:text-base text-white/70 leading-relaxed whitespace-pre-line">
+                    {faq.answer}
+                  </div>
+                </div>
+              </div>
             </div>
           )
         })}

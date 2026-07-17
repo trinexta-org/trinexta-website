@@ -1,6 +1,4 @@
-"use client"
-
-import { motion } from "framer-motion"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 const options = [
   {
@@ -22,11 +20,8 @@ const options = [
 
 export function SereniteOptions() {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+    <FadeIn
+      direction="up"
       className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
     >
       <div className="md:row-span-2 bg-white/[0.03] rounded-[32px] p-8 md:p-12 border border-white/5 flex flex-col justify-between min-h-[300px] hover:bg-white/[0.04] transition-colors">
@@ -70,6 +65,6 @@ export function SereniteOptions() {
           {options[2].price}
         </div>
       </div>
-    </motion.div>
+    </FadeIn>
   )
 }

@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { usePresence } from "@/hooks/usePresence"
 
 interface DemoModalProps {
   isOpen: boolean
@@ -12,6 +12,15 @@ interface DemoModalProps {
 
 export function DemoModal({ isOpen, onClose, url, title }: DemoModalProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const { shouldRender, isVisible } = usePresence(isOpen && !!url, 400)
+
+  // Fige le contenu affiché pendant l'animation de sortie (le parent nulle `url` dès la fermeture)
+  const [content, setContent] = useState({ url, title })
+  useEffect(() => {
+    if (isOpen && url) {
+      queueMicrotask(() => setContent({ url, title }))
+    }
+  }, [isOpen, url, title])
 
   useEffect(() => {
     if (isOpen) {
@@ -48,35 +57,28 @@ export function DemoModal({ isOpen, onClose, url, title }: DemoModalProps) {
     }
   }
 
+  if (!shouldRender || !content.url) return null
+
   return (
-    <AnimatePresence>
-      {isOpen && url && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pt-16 sm:p-6 sm:pt-40 pb-6 sm:pb-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-primary/95 backdrop-blur-md cursor-pointer"
-          />
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pt-16 sm:p-6 sm:pt-40 pb-6 sm:pb-10">
+      <div
+        onClick={onClose}
+        className={`absolute inset-0 bg-primary/95 backdrop-blur-md cursor-pointer transition-opacity duration-[400ms] ${isVisible ? "opacity-100" : "opacity-0"}`}
+      />
 
-          <button
-            onClick={onClose}
-            className="md:hidden absolute top-4 right-4 z-[10000] w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg"
-          >
-            ✕
-          </button>
+      <button
+        onClick={onClose}
+        className="md:hidden absolute top-4 right-4 z-[10000] w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg"
+      >
+        ✕
+      </button>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="relative w-full max-w-[375px] md:max-w-[1024px] h-[82vh] md:h-[75vh] flex flex-col z-10 mx-auto"
-          >
+      <div
+        className={`relative w-full max-w-[375px] md:max-w-[1024px] h-[82vh] md:h-[75vh] flex flex-col z-10 mx-auto transition-all duration-[400ms] ease-out ${isVisible ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-5"}`}
+      >
             <div className="hidden md:flex items-center justify-between w-full mb-4 px-2 md:px-0 shrink-0">
               <span className="text-white/80 text-sm font-medium bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-sm hidden md:block">
-                Aperçu : <span className="text-white font-bold">{title}</span>
+                Aperçu : <span className="text-white font-bold">{content.title}</span>
               </span>
               <button
                 onClick={onClose}
@@ -106,10 +108,10 @@ export function DemoModal({ isOpen, onClose, url, title }: DemoModalProps) {
                 
                 <iframe
                   ref={iframeRef}
-                  src={url}
+                  src={content.url}
                   onLoad={handleIframeLoad}
                   className="absolute inset-0 w-full h-full border-none z-10 bg-white"
-                  title={title}
+                  title={content.title}
                   sandbox="allow-scripts allow-same-origin"
                 />
               </div>
@@ -117,9 +119,7 @@ export function DemoModal({ isOpen, onClose, url, title }: DemoModalProps) {
               <div className="absolute bottom-2 md:bottom-3 left-1/2 -translate-x-1/2 w-[100px] md:w-[120px] h-[4px] md:h-[5px] bg-white/40 rounded-full z-40" />
 
             </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+      </div>
+    </div>
   )
 }

@@ -1,6 +1,4 @@
-"use client"
-
-import { motion } from "framer-motion"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 const comparisonPoints = [
   {
@@ -39,12 +37,10 @@ export function StudioDifferentiator() {
         {/* Rows */}
         <div className="divide-y divide-white/10">
           {comparisonPoints.map((point, index) => (
-            <motion.div
+            <FadeIn
               key={index}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              direction="up"
+              delay={index * 0.1}
               className="grid grid-cols-1 md:grid-cols-3 p-6 gap-4 md:gap-6 items-start hover:bg-white/[0.01] transition-colors"
             >
               <div className="text-lg font-bold text-white md:text-base">
@@ -63,7 +59,7 @@ export function StudioDifferentiator() {
                   {point.trinexta}
                 </span>
               </div>
-            </motion.div>
+            </FadeIn>
           ))}
         </div>
       </div>

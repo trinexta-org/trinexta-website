@@ -1,11 +1,9 @@
-"use client"
-
 import Image from "next/image"
-import { motion } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
 import { SectionFade } from "@/components/ui/SectionFade"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 const networkFeatures = [
     {
@@ -33,11 +31,8 @@ export function OurNetwork() {
             <Container className="relative z-10">
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center mb-12 md:mb-24">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6 }}
+                    <FadeIn
+                        direction="right"
                         className="w-full lg:w-1/2 relative h-[250px] sm:h-[350px] md:h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shrink-0"
                     >
                         <Image
@@ -50,13 +45,10 @@ export function OurNetwork() {
                         />
                         <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
                         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                    </motion.div>
+                    </FadeIn>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6 }}
+                    <FadeIn
+                        direction="left"
                         className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6"
                     >
                         <Heading as="h3" className="text-3xl md:text-5xl text-white font-black leading-tight">
@@ -78,17 +70,15 @@ export function OurNetwork() {
                         <Text className="text-white/80 text-sm md:text-lg leading-relaxed">
                             Pour le support et l&apos;infogérance, nous mobilisons en complément un réseau de techniciens partenaires qualifiés, sélectionnés pour leur savoir-faire terrain. Contrairement aux agences traditionnelles souvent freinées par des lourdeurs administratives, notre organisation en réseau nous permet de mobiliser les bonnes compétences, au bon endroit, et au bon moment.
                         </Text>
-                    </motion.div>
+                    </FadeIn>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                     {networkFeatures.map((feature, idx) => (
-                        <motion.div
+                        <FadeIn
                             key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            direction="up"
+                            delay={idx * 0.1}
                             className="relative overflow-hidden flex flex-col gap-4 p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] hover:border-secondary/40 transition-all duration-500 group shadow-lg"
                         >
                             <span className="absolute -right-4 -top-6 text-[100px] md:text-[140px] font-black text-white/[0.02] group-hover:text-secondary/[0.04] transition-colors duration-500 pointer-events-none select-none">
@@ -103,7 +93,7 @@ export function OurNetwork() {
                             <Text className="text-sm md:text-base text-white/70 leading-relaxed font-light relative z-10">
                                 {feature.desc}
                             </Text>
-                        </motion.div>
+                        </FadeIn>
                     ))}
                 </div>
 

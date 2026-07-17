@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { motion, useInView, animate } from "framer-motion"
+import { useCountUp } from "@/hooks/useCountUp"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { FadeIn } from "@/components/ui/FadeIn"
 
 const kpis = [
   {
@@ -42,24 +42,10 @@ const kpis = [
 ]
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
-
-  useEffect(() => {
-    if (isInView && ref.current) {
-      const controls = animate(0, value, {
-        duration: 2.3,
-        ease: "easeOut",
-        onUpdate(latest) {
-          if (ref.current) {
-            ref.current.textContent = Intl.NumberFormat("fr-FR").format(Math.floor(latest)) + suffix
-          }
-        }
-      })
-
-      return controls.stop
-    }
-  }, [isInView, value, suffix])
+  const ref = useCountUp<HTMLSpanElement>({
+    value,
+    format: (n) => Intl.NumberFormat("fr-FR").format(n) + suffix,
+  })
 
   return <span ref={ref}>{value}{suffix}</span>
 }
@@ -78,12 +64,10 @@ export function KpiSection() {
 
         <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 md:gap-10 lg:gap-12">
           {kpis.map((kpi, index) => (
-            <motion.div
+            <FadeIn
               key={kpi.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
+              direction="up"
+              delay={index * 0.1}
               className="group flex flex-col items-center md:items-start text-center md:text-left"
             >
               <div className="text-[1.35rem] sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-normal mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
@@ -91,12 +75,7 @@ export function KpiSection() {
               </div>
 
               <div className="space-y-1 md:space-y-4 w-full flex flex-col items-center md:items-start">
-                <motion.div
-                  initial={{ width: 12 }}
-                  whileInView={{ width: 48 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className="h-[1px] md:h-1 bg-secondary"
-                />
+                <div className="animate-bar-grow h-[1px] md:h-1 bg-secondary" />
                 <h3 className="text-[9px] sm:text-xs md:text-base lg:text-lg font-bold text-secondary uppercase tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] leading-tight">
                   <span className="md:hidden">{kpi.title}</span>
                   <span className="hidden md:inline">{kpi.fullTitle}</span>
@@ -105,7 +84,7 @@ export function KpiSection() {
                   {kpi.description}
                 </Text>
               </div>
-            </motion.div>
+            </FadeIn>
           ))}
         </div>
       </Container>

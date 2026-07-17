@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef, useCallback, type CSSProperties } from "react"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
+import { useCrossfade } from "@/hooks/useCrossfade"
 
 const AUTOPLAY_DELAY = 4000
 const PAUSE_AFTER_CLICK = 10000
@@ -68,6 +68,7 @@ export function OurValues() {
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
     const scrollRef = useRef<HTMLDivElement>(null)
     const safeActive = active % values.length
+    const { displayValue: displayActive, isVisible: contentVisible } = useCrossfade(safeActive, 400)
     const scrollToActive = useCallback((idx: number) => {
         const container = scrollRef.current
         if (!container) return
@@ -120,12 +121,10 @@ export function OurValues() {
                         </Text>
 
                         <div className="h-0.5 bg-white/10 rounded-full mb-4 overflow-hidden">
-                            <motion.div
+                            <div
                                 key={safeActive}
-                                className="h-full bg-secondary rounded-full"
-                                initial={{ width: "0%" }}
-                                animate={{ width: "100%" }}
-                                transition={{ duration: AUTOPLAY_DELAY / 1000, ease: "linear" }}
+                                className="h-full bg-secondary rounded-full animate-progress-fill"
+                                style={{ "--progress-duration": `${AUTOPLAY_DELAY}ms` } as CSSProperties}
                             />
                         </div>
 
@@ -159,39 +158,32 @@ export function OurValues() {
                         </div>
                     </div>
 
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={safeActive}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.4 }}
-                            className="flex flex-col"
-                        >
-                            <div className="relative h-[250px] md:h-[400px] w-full">
-                                <Image
-                                    src={values[safeActive].image}
-                                    alt={values[safeActive].title}
-                                    fill
-                                    className="object-cover object-[center_25%]"
-                                    priority
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
-                                <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">
-                                    <Heading as="h2" className="text-4xl md:text-6xl text-white font-black drop-shadow-lg">
-                                        {values[safeActive].title}
-                                    </Heading>
-                                </div>
+                    <div
+                        className={`flex flex-col transition-all duration-[400ms] ${contentVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}`}
+                    >
+                        <div className="relative h-[250px] md:h-[400px] w-full">
+                            <Image
+                                src={values[displayActive].image}
+                                alt={values[displayActive].title}
+                                fill
+                                className="object-cover object-[center_25%]"
+                                priority
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
+                            <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">
+                                <Heading as="h2" className="text-4xl md:text-6xl text-white font-black drop-shadow-lg">
+                                    {values[displayActive].title}
+                                </Heading>
                             </div>
+                        </div>
 
-                            <div className="p-6 md:p-12 min-h-[180px] bg-primary/30">
-                                <Text className="text-lg md:text-xl text-white/90 leading-relaxed max-w-4xl font-medium">
-                                    {values[safeActive].desc}
-                                </Text>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
+                        <div className="p-6 md:p-12 min-h-[180px] bg-primary/30">
+                            <Text className="text-lg md:text-xl text-white/90 leading-relaxed max-w-4xl font-medium">
+                                {values[displayActive].desc}
+                            </Text>
+                        </div>
+                    </div>
 
                 </div>
             </Container>
