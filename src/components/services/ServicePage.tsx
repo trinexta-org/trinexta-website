@@ -1,10 +1,9 @@
 "use client"
 
 import { JsonLd } from "@/components/seo/JsonLd";
-import { useState, useEffect } from "react"
+import { useState, useEffect, type CSSProperties } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { SectionFade } from "@/components/ui/SectionFade"
@@ -17,6 +16,8 @@ import { TransitionTitle } from "@/components/TransitionTitle"
 import { GridCards } from "@/components/layout/GridCards"
 import { BreadcrumbJsonLd } from "../seo/BreadcrumbJsonLd";
 import { BannerCTA } from "@/components/layout/BannerCTA"
+import { usePresence } from "@/hooks/usePresence"
+import { useCrossfade } from "@/hooks/useCrossfade"
 
 export interface ServicePageProps {
     serviceSlug: string
@@ -52,6 +53,66 @@ export interface ServicePageProps {
     cta: { line1: string; line2: string; line3: string; description: string; buttonText: string; buttonHref: string }
 }
 
+interface BentoCellProps {
+    serviceSlug: string
+    features: Array<{ title: string; desc: string }>
+    currentDataIndex: number
+    isMainFocus: boolean
+    hasImage: boolean
+    bentoClass: string
+    imageIndex: number
+    onClick: () => void
+}
+
+function BentoCell({ serviceSlug, features, currentDataIndex, isMainFocus, hasImage, bentoClass, imageIndex, onClick }: BentoCellProps) {
+    const { displayValue: displayDataIndex, isVisible } = useCrossfade(currentDataIndex, 400)
+    const feat = features[displayDataIndex]
+
+    return (
+        <div
+            onClick={onClick}
+            className={`relative overflow-hidden rounded-xl md:rounded-2xl border border-white/10 group ${bentoClass} ${!isMainFocus ? 'cursor-pointer hover:border-secondary/50' : 'cursor-default'} ${!hasImage ? 'bg-white/[0.02]' : ''}`}
+        >
+            <div className={`absolute inset-0 w-full h-full transition-all duration-[400ms] ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"}`}>
+                {hasImage && (
+                    <>
+                        <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
+                    </>
+                )}
+
+                {!isMainFocus && (
+                    <div className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-20 group-hover:bg-secondary/40 transition-colors">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg>
+                    </div>
+                )}
+
+                <div className={`relative z-10 h-full flex flex-col p-5 md:p-8 ${hasImage ? 'justify-end' : 'justify-start'}`}>
+                    <Heading as="h3" className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">
+                        {feat.title}
+                    </Heading>
+
+                    {isMainFocus ? (
+                        <div className="overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-secondary/30 scrollbar-track-transparent">
+                            <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                                {feat.desc}
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="overflow-hidden">
+                            <p className="text-white/80 text-sm md:text-base leading-relaxed line-clamp-3">
+                                {feat.desc}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
@@ -76,6 +137,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalDataIndex, setModalDataIndex] = useState(0)
+    const { shouldRender: modalShouldRender, isVisible: modalVisible } = usePresence(isModalOpen, 300)
     const isMobile = useMediaQuery("(max-width: 767px)");
 
     useEffect(() => {
@@ -193,14 +255,20 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                     </div>
 
                     <div className="relative w-full h-[300px] sm:h-[400px] lg:h-auto lg:aspect-square max-w-[500px] mx-auto lg:max-w-none mt-4 lg:mt-0">
-                        <motion.div animate={isMobile ? undefined : { y: [0, -10, 0] }} transition={isMobile ? undefined : { duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute top-0 right-0 w-[75%] h-[75%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-10">
+                        <div
+                            className={`absolute top-0 right-0 w-[75%] h-[75%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-10 ${!isMobile ? "animate-float-y" : ""}`}
+                            style={{ "--float-from": "0px", "--float-to": "-10px", "--float-duration": "6s" } as CSSProperties}
+                        >
                             <Image src={`/images/services/${serviceSlug}/problem-1.jpg`} alt="Problème IT" fill sizes="(min-width: 1024px) 38vw, (min-width: 640px) 56vw, 75vw" className="object-cover" />
                             <div className="absolute inset-0 bg-primary/20" />
-                        </motion.div>
-                        <motion.div animate={isMobile ? undefined : { y: [0, 10, 0] }} transition={isMobile ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-20">
+                        </div>
+                        <div
+                            className={`absolute bottom-0 left-0 w-[60%] h-[60%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-20 ${!isMobile ? "animate-float-y" : ""}`}
+                            style={{ "--float-from": "0px", "--float-to": "10px", "--float-duration": "5s" } as CSSProperties}
+                        >
                             <Image src={`/images/services/${serviceSlug}/problem-2.jpg`} alt="Frustration IT" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 60vw" className="object-cover" />
                             <div className="absolute inset-0 bg-secondary/20" />
-                        </motion.div>
+                        </div>
                     </div>
 
                 </div>
@@ -219,7 +287,6 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[minmax(180px,auto)] md:auto-rows-[minmax(220px,auto)]">
                         {bentoOrder.map((currentDataIndex, gridPositionIndex) => {
 
-                            const feat = offer.features[currentDataIndex];
                             const isMainFocus = gridPositionIndex === 0;
                             const isSecondaryWithImage = gridPositionIndex === 4;
                             const hasImage = isMainFocus || isSecondaryWithImage;
@@ -228,57 +295,17 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                             const imageIndex = isMainFocus ? 1 : 2;
 
                             return (
-                                <div
+                                <BentoCell
                                     key={`bento-slot-${gridPositionIndex}`}
+                                    serviceSlug={serviceSlug}
+                                    features={offer.features}
+                                    currentDataIndex={currentDataIndex}
+                                    isMainFocus={isMainFocus}
+                                    hasImage={hasImage}
+                                    bentoClass={bentoClass}
+                                    imageIndex={imageIndex}
                                     onClick={() => handleDesktopClick(gridPositionIndex)}
-                                    className={`relative overflow-hidden rounded-xl md:rounded-2xl border border-white/10 group ${bentoClass} ${!isMainFocus ? 'cursor-pointer hover:border-secondary/50' : 'cursor-default'} ${!hasImage ? 'bg-white/[0.02]' : ''}`}
-                                >
-                                    <AnimatePresence mode="wait">
-                                        <motion.div
-                                            key={`content-${currentDataIndex}`}
-                                            initial={{ opacity: 0, scale: 0.98 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.98 }}
-                                            transition={{ duration: 0.4 }}
-                                            className="absolute inset-0 w-full h-full"
-                                        >
-                                            {hasImage && (
-                                                <>
-                                                    <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
-                                                </>
-                                            )}
-
-                                            {!isMainFocus && (
-                                                <div className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-20 group-hover:bg-secondary/40 transition-colors">
-                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                                                    </svg>
-                                                </div>
-                                            )}
-
-                                            <div className={`relative z-10 h-full flex flex-col p-5 md:p-8 ${hasImage ? 'justify-end' : 'justify-start'}`}>
-                                                <Heading as="h3" className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">
-                                                    {feat.title}
-                                                </Heading>
-
-                                                {isMainFocus ? (
-                                                    <div className="overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-secondary/30 scrollbar-track-transparent">
-                                                        <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                                                            {feat.desc}
-                                                        </p>
-                                                    </div>
-                                                ) : (
-                                                    <div className="overflow-hidden">
-                                                        <p className="text-white/80 text-sm md:text-base leading-relaxed line-clamp-3">
-                                                            {feat.desc}
-                                                        </p>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </motion.div>
-                                    </AnimatePresence>
-                                </div>
+                                />
                             )
                         })}
                     </div>
@@ -324,37 +351,35 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                     </div>
                 )}
 
-                <AnimatePresence>
-                    {isModalOpen && (
-                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:hidden">
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsModalOpen(false)} className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
+                {modalShouldRender && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:hidden">
+                        <div
+                            onClick={() => setIsModalOpen(false)}
+                            className={`absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity duration-300 ${modalVisible ? "opacity-100" : "opacity-0"}`}
+                        />
 
-                            <motion.div
-                                initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                                className="relative w-full max-w-md h-[75vh] rounded-3xl overflow-hidden bg-primary shadow-2xl flex flex-col border border-white/20"
-                            >
-                                <div className="absolute inset-0 z-0">
-                                    <Image
-                                        src={`/images/services/${serviceSlug}/bento-1.jpg`}
-                                        alt={offer.features[modalDataIndex].title}
-                                        fill
-                                        className="object-cover opacity-30"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/95 to-primary/40" />
-                                </div>
+                        <div
+                            className={`relative w-full max-w-md h-[75vh] rounded-3xl overflow-hidden bg-primary shadow-2xl flex flex-col border border-white/20 transition-all duration-300 ${modalVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-5 scale-95"}`}
+                        >
+                            <div className="absolute inset-0 z-0">
+                                <Image
+                                    src={`/images/services/${serviceSlug}/bento-1.jpg`}
+                                    alt={offer.features[modalDataIndex].title}
+                                    fill
+                                    className="object-cover opacity-30"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/95 to-primary/40" />
+                            </div>
 
-                                <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white backdrop-blur-md border border-white/20">✕</button>
+                            <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white backdrop-blur-md border border-white/20">✕</button>
 
-                                <div className="relative z-10 p-6 flex flex-col h-full justify-end overflow-y-auto pt-20">
-                                    <Heading as="h3" className="text-2xl text-white font-bold mb-4">{offer.features[modalDataIndex].title}</Heading>
-                                    <p className="text-white/90 text-base leading-relaxed">{offer.features[modalDataIndex].desc}</p>
-                                </div>
-                            </motion.div>
+                            <div className="relative z-10 p-6 flex flex-col h-full justify-end overflow-y-auto pt-20">
+                                <Heading as="h3" className="text-2xl text-white font-bold mb-4">{offer.features[modalDataIndex].title}</Heading>
+                                <p className="text-white/90 text-base leading-relaxed">{offer.features[modalDataIndex].desc}</p>
+                            </div>
                         </div>
-                    )}
-                </AnimatePresence>
+                    </div>
+                )}
             </Section>
 
             {localSeo && (
@@ -395,35 +420,23 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                     {benefits.items.map((benefit, index) => {
                         const isActive = activeBenefit === index;
                         return (
-                            <motion.div
+                            <div
                                 key={index}
-                                layout onClick={() => setActiveBenefit(index)}
-                                initial={false}
-                                animate={{ flex: isActive ? 12 : 1 }}
-                                transition={{ type: "spring", stiffness: 150, damping: 20, mass: 0.8 }}
-                                className={`relative overflow-hidden cursor-pointer rounded-xl md:rounded-3xl shadow-2xl transition-all duration-500 ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"}`}
+                                onClick={() => setActiveBenefit(index)}
+                                style={{ flex: isActive ? 12 : 1 }}
+                                className={`relative overflow-hidden cursor-pointer rounded-xl md:rounded-3xl shadow-2xl transition-[flex,border-color,opacity] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"}`}
                             >
                                 <div className="absolute inset-0 w-full h-full">
                                     <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill sizes="(min-width: 768px) 20vw, 100vw" className="object-cover" fetchPriority={index === 0 ? "high" : "auto"} />
-                                    <motion.div animate={{ opacity: isActive ? 0.7 : 0.3 }} className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
+                                    <div className={`absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent transition-opacity duration-500 ${isActive ? "opacity-70" : "opacity-30"}`} />
                                 </div>
 
-                                <AnimatePresence>
-                                    {!isActive && (
-                                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                            <span className="text-white/60 font-bold text-lg md:text-3xl md:-rotate-90 whitespace-nowrap tracking-widest">0{index + 1}</span>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300 ${isActive ? "opacity-0" : "opacity-100"}`}>
+                                    <span className="text-white/60 font-bold text-lg md:text-3xl md:-rotate-90 whitespace-nowrap tracking-widest">0{index + 1}</span>
+                                </div>
 
-                               <motion.div 
-                                    initial={false} 
-                                    animate={{ 
-                                        opacity: isActive ? 1 : 0, 
-                                        scale: isActive ? 1 : 0.95 
-                                    }} 
-                                    transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }} 
-                                    className={`absolute bottom-3 md:bottom-10 left-3 right-3 md:left-10 md:right-10 z-10 transition-all ${isActive ? "pointer-events-auto" : "pointer-events-none"}`}
+                                <div
+                                    className={`absolute bottom-3 md:bottom-10 left-3 right-3 md:left-10 md:right-10 z-10 transition-all duration-300 ${isActive ? "opacity-100 scale-100 delay-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}`}
                                     aria-hidden={!isActive}
                                 >
                                     <div className="backdrop-blur-xl bg-primary/40 md:bg-white/10 border border-white/20 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-2xl max-w-2xl">
@@ -433,8 +446,8 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                         </div>
                                         <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-2 md:line-clamp-none">{benefit.desc}</Text>
                                     </div>
-                                </motion.div>
-                            </motion.div>
+                                </div>
+                            </div>
                         )
                     })}
                 </div>

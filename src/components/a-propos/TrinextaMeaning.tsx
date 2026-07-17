@@ -1,8 +1,8 @@
 "use client"
 
-import { useRef } from "react"
+import { useSyncExternalStore, type CSSProperties } from "react"
 import Image from "next/image"
-import { motion, useInView, Variants } from "framer-motion"
+import { useInView } from "@/hooks/useInView"
 import { Section } from "@/components/layout/Section"
 import { GridCards } from "@/components/layout/GridCards"
 import { Heading, Text } from "@/components/ui/Typography"
@@ -31,66 +31,31 @@ const meanings = [
   }
 ]
 
-const cardVariants: Variants = {
-  hidden: (_i: number) => ({ opacity: 0, scale: 0.9, y: 30 }),
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { delay: i * 2.2, duration: 0.6, ease: "easeOut" }
-  })
-}
-
-const getAnimProps = (index: number) => {
-  switch (index) {
-    case 0: return { scale: 3.5, y: 120 }
-    case 1: return { scale: 2.2, y: 120 }
-    case 2: return { scale: 5.0, y: 120 }
-    default: return { scale: 3, y: 120 }
+function getCardStyle(index: number, visible: boolean, reducedMotion: boolean): CSSProperties {
+  if (reducedMotion) return {}
+  return {
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(32px)",
+    transitionProperty: "opacity, transform",
+    transitionDuration: "700ms",
+    transitionTimingFunction: "ease-out",
+    transitionDelay: `${index * 100}ms`,
   }
-}
-
-const syllableVariants: Variants = {
-  hidden: (i: number) => {
-    const props = getAnimProps(i)
-    return { opacity: 0, scale: props.scale, y: props.y }
-  },
-  visible: (i: number) => {
-    const props = getAnimProps(i)
-    return {
-      opacity: [0, 1, 1, 1],
-      scale: [props.scale, props.scale, props.scale, 1],
-      y: [props.y, props.y, props.y, 0],
-      transition: {
-        delay: i * 2.2,
-        duration: 1.8,
-        times: [0, 0.3, 0.6, 1],
-        ease: "easeInOut"
-      }
-    }
-  }
-}
-
-const contentVariants: Variants = {
-  hidden: (_i: number) => ({ opacity: 0, y: 20 }),
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: (i * 2.2) + 1.5, duration: 0.6, ease: "easeOut" }
-  })
-}
-
-const imageVariants: Variants = {
-  hidden: (_i: number) => ({ opacity: 0 }),
-  visible: (i: number) => ({
-    opacity: 0.4,
-    transition: { delay: (i * 2.2) + 1.5, duration: 1, ease: "easeInOut" }
-  })
 }
 
 export function TrinextaMeaning() {
-  const containerRef = useRef(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
+  const [containerRef, isInView] = useInView<HTMLDivElement>({ once: true, rootMargin: "-100px" })
+  const reducedMotion = useSyncExternalStore(
+    (callback) => {
+      const mql = window.matchMedia("(prefers-reduced-motion: reduce)")
+      mql.addEventListener("change", callback)
+      return () => mql.removeEventListener("change", callback)
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false
+  )
+
+  const visible = isInView || reducedMotion
 
   return (
     <Section id="signification" className="py-16 md:py-32 bg-primary overflow-hidden relative">
@@ -104,19 +69,12 @@ export function TrinextaMeaning() {
       <div ref={containerRef}>
         <GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">
           {meanings.map((item, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              variants={cardVariants}
+            <div
+              key={item.syllable}
+              style={getCardStyle(index, visible, reducedMotion)}
               className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] min-h-[420px] flex flex-col p-8 group shadow-2xl"
             >
-              <motion.div
-                custom={index}
-                variants={imageVariants}
-                className="absolute inset-0 z-0 mix-blend-screen"
-              >
+              <div className="absolute inset-0 z-0 mix-blend-screen opacity-40">
                 <Image
                   src={item.image}
                   alt={`Illustration ${item.syllable} Trinexta`}
@@ -125,31 +83,23 @@ export function TrinextaMeaning() {
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
-              </motion.div>
+              </div>
 
               <div className="relative z-10 flex flex-col h-full items-center text-center">
-                <motion.span
-                  custom={index}
-                  variants={syllableVariants}
-                  className="text-5xl md:text-6xl font-black text-secondary tracking-normal drop-shadow-lg inline-block origin-center w-full"
-                >
+                <span className="text-5xl md:text-6xl font-black text-secondary tracking-normal drop-shadow-lg inline-block origin-center w-full">
                   {item.syllable}
-                </motion.span>
+                </span>
 
-                <motion.div
-                  custom={index}
-                  variants={contentVariants}
-                  className="mt-6 space-y-4 flex-grow flex flex-col justify-start w-full text-left"
-                >
+                <div className="mt-6 space-y-4 flex-grow flex flex-col justify-start w-full text-left">
                   <Heading as="h3" className="text-xl md:text-2xl text-white font-bold leading-tight drop-shadow-md">
                     {item.title}
                   </Heading>
                   <Text className="text-white/80 leading-relaxed text-sm md:text-base font-medium">
                     {item.desc}
                   </Text>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </GridCards>
       </div>

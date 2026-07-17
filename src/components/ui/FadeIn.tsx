@@ -8,24 +8,26 @@ interface FadeInProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function FadeIn({ children, delay = 0, direction = "up", className, ...props }: FadeInProps) {
-  // On utilise des classes Tailwind personnalisées qu'on va définir dans globals.css
-  const directionClasses = {
-    up: "translate-y-8",
-    down: "-translate-y-8",
-    left: "translate-x-8",
-    right: "-translate-x-8",
-    none: "translate-x-0 translate-y-0",
+  // Offset initial via `transform` (pas les utilitaires Tailwind `translate-*`, qui posent
+  // la propriété CSS `translate` — distincte de `transform` — que @keyframes fade-in-scroll
+  // n'anime jamais : l'élément resterait décalé en permanence une fois l'animation "terminée").
+  const directionTransforms = {
+    up: "translateY(2rem)",
+    down: "translateY(-2rem)",
+    left: "translateX(2rem)",
+    right: "translateX(-2rem)",
+    none: "translate(0, 0)",
   }
 
   return (
     <div
       className={cn(
         "opacity-0 motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out animate-fade-in-scroll",
-        "motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:translate-x-0", // Gestion native de prefers-reduced-motion
-        directionClasses[direction],
+        "motion-reduce:opacity-100 motion-reduce:transform-none", // Gestion native de prefers-reduced-motion
         className
       )}
       style={{
+        transform: directionTransforms[direction],
         transitionDelay: `${delay}s`,
         ...props.style,
       }}

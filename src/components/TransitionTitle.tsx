@@ -104,7 +104,7 @@ export function TransitionTitle({
             }
           }
         `}</style>
-        <div className="bar-reveal origin-center h-1.5 md:h-2 w-20 md:w-32 bg-secondary mx-auto mt-6 md:mt-10 rounded-full shadow-[0_0_20px_var(--secondary)]" />
+        <div className="bar-reveal origin-center h-1.5 md:h-2 w-20 md:w-32 bg-secondary mx-auto mt-10 md:mt-14 rounded-full shadow-[0_0_20px_var(--secondary)]" />
       </Container>
     </Section>
   )
