@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useAnimationFrame } from "framer-motion"
+import { useState, useEffect, useRef, type CSSProperties } from "react"
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { SectionFade } from "@/components/ui/SectionFade"
@@ -45,6 +44,10 @@ const RING_RADII = [0.22, 0.38, 0.52, 0.68, 0.84]
 const RING_KM = [25, 50, 75, 100, 125]
 const SWEEP_SPAN = 65
 const SIZE = 500
+// Vitesse d'origine : delta * 0.035 deg/ms = 35 deg/s -> période d'un tour complet
+const SWEEP_PERIOD_S = 360 / 35
+const LOCK_RADIUS = 21
+const LOCK_CIRCUMFERENCE = 2 * Math.PI * LOCK_RADIUS
 
 function polarToXY(angleDeg: number, r: number, cx: number, cy: number, maxR: number) {
     const rad = ((angleDeg - 90) * Math.PI) / 180
@@ -69,48 +72,29 @@ function gearRingPath(cx: number, cy: number, numTeeth: number, tipR: number, ro
 }
 
 
-function SweepArm({
-    cx, cy, maxR,
-    onCrossRef,
-}: {
-    cx: number
-    cy: number
-    maxR: number
-    onCrossRef: React.MutableRefObject<((ids: string[]) => void) | null>
-}) {
-    const [angle, setAngle] = useState(0)
-    const angleRef = useRef(0)
-    const prevRef = useRef(0)
-
-    useAnimationFrame((_, delta) => {
-        prevRef.current = angleRef.current
-        angleRef.current = (angleRef.current + delta * 0.035) % 360
-        setAngle(angleRef.current)
-
-        const pa = prevRef.current
-        const na = angleRef.current
-        const crossed = DEPARTMENTS.filter(d => {
-            const da = d.angle
-            return na >= pa ? (da > pa && da <= na) : (da > pa || da <= na)
-        }).map(d => d.id)
-
-        if (crossed.length > 0) onCrossRef.current?.(crossed)
-    })
-
+function SweepArm({ cx, cy, maxR }: { cx: number; cy: number; maxR: number }) {
+    // Forme dessinée à angle=0 (pointe vers le haut), puis tournée en continu
+    // par animateTransform natif SVG — plus de boucle JS par frame.
     const toRad = (deg: number) => ((deg - 90) * Math.PI) / 180
-    const tipX = cx + Math.cos(toRad(angle)) * maxR * 0.93
-    const tipY = cy + Math.sin(toRad(angle)) * maxR * 0.93
+    const R = maxR * 0.93
+    const tipX = cx + Math.cos(toRad(0)) * R
+    const tipY = cy + Math.sin(toRad(0)) * R
     const trailPath = (span: number) => {
-        const R = maxR * 0.93
-        const ex = cx + Math.cos(toRad(angle)) * R
-        const ey = cy + Math.sin(toRad(angle)) * R
-        const sx = cx + Math.cos(toRad(angle - span)) * R
-        const sy = cy + Math.sin(toRad(angle - span)) * R
-        return `M ${cx} ${cy} L ${ex} ${ey} A ${R} ${R} 0 0 0 ${sx} ${sy} Z`
+        const sx = cx + Math.cos(toRad(-span)) * R
+        const sy = cy + Math.sin(toRad(-span)) * R
+        return `M ${cx} ${cy} L ${tipX} ${tipY} A ${R} ${R} 0 0 0 ${sx} ${sy} Z`
     }
 
     return (
         <g>
+            <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from={`0 ${cx} ${cy}`}
+                to={`360 ${cx} ${cy}`}
+                dur={`${SWEEP_PERIOD_S}s`}
+                repeatCount="indefinite"
+            />
             <path d={trailPath(SWEEP_SPAN)} fill="var(--secondary)" fillOpacity="0.07" />
             <path d={trailPath(18)} fill="var(--secondary)" fillOpacity="0.17" />
             <line x1={cx} y1={cy} x2={tipX} y2={tipY}
@@ -125,18 +109,37 @@ function SweepArm({
 export function InterventionMap() {
     const [step, setStep] = useState(0)
     const [flashKeys, setFlashKeys] = useState<Record<string, number>>({})
-    const onCrossRef = useRef<((ids: string[]) => void) | null>(null)
+    const stepRef = useRef(0)
 
     useEffect(() => {
-        onCrossRef.current = (ids: string[]) => {
-            if (step < 1) return
-            setFlashKeys(prev => {
-                const next = { ...prev }
-                for (const id of ids) next[id] = (prev[id] ?? 0) + 1
-                return next
-            })
-        }
+        stepRef.current = step
     }, [step])
+
+    // Vitesse de rotation constante -> horaire de passage sur chaque département
+    // calculable à l'avance, remplace la détection par frame de l'ancien SweepArm.
+    useEffect(() => {
+        const timers: ReturnType<typeof setTimeout>[] = []
+        const periodMs = SWEEP_PERIOD_S * 1000
+
+        DEPARTMENTS.forEach(d => {
+            const firstDelayMs = (d.angle / 360) * periodMs
+            const trigger = () => {
+                if (stepRef.current < 1) return
+                setFlashKeys(prev => ({ ...prev, [d.id]: (prev[d.id] ?? 0) + 1 }))
+            }
+            const first = setTimeout(() => {
+                trigger()
+                const interval = setInterval(trigger, periodMs)
+                timers.push(interval)
+            }, firstDelayMs)
+            timers.push(first)
+        })
+
+        return () => timers.forEach(t => {
+            clearTimeout(t)
+            clearInterval(t)
+        })
+    }, [])
 
     useEffect(() => {
         const t = setInterval(() => setStep(s => (s + 1) % 3), 6000)
@@ -189,33 +192,27 @@ export function InterventionMap() {
                                 {STEPS[step].label}
                             </span>
 
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={step}
-                                    initial={{ opacity: 0, y: 14 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: 0.32, ease: "easeOut" }}
-                                    className="relative space-y-3 pl-4"
-                                    style={{ borderLeft: "2px solid color-mix(in srgb, var(--secondary) 40%, transparent)" }}
-                                >
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-[10px] font-mono font-bold text-secondary uppercase tracking-[0.22em]">
-                                            {STEPS[step].label}
-                                        </span>
-                                        <div className="h-px w-6 bg-secondary/40" />
-                                        <span className="text-[10px] font-mono text-secondary/90 font-bold uppercase tracking-wider">
-                                            {STEPS[step].subtitle}
-                                        </span>
-                                    </div>
-                                    <h2 className="text-white font-black text-2xl md:text-[1.75rem] leading-tight tracking-normal">
-                                        {STEPS[step].title}
-                                    </h2>
-                                    <p className="text-white/90 text-sm md:text-[0.925rem] leading-relaxed font-light">
-                                        {STEPS[step].text}
-                                    </p>
-                                </motion.div>
-                            </AnimatePresence>
+                            <div
+                                key={step}
+                                className="relative space-y-3 pl-4 animate-fade-in-up"
+                                style={{ borderLeft: "2px solid color-mix(in srgb, var(--secondary) 40%, transparent)" }}
+                            >
+                                <div className="flex items-center gap-2">
+                                    <span className="text-[10px] font-mono font-bold text-secondary uppercase tracking-[0.22em]">
+                                        {STEPS[step].label}
+                                    </span>
+                                    <div className="h-px w-6 bg-secondary/40" />
+                                    <span className="text-[10px] font-mono text-secondary/90 font-bold uppercase tracking-wider">
+                                        {STEPS[step].subtitle}
+                                    </span>
+                                </div>
+                                <h2 className="text-white font-black text-2xl md:text-[1.75rem] leading-tight tracking-normal">
+                                    {STEPS[step].title}
+                                </h2>
+                                <p className="text-white/90 text-sm md:text-[0.925rem] leading-relaxed font-light">
+                                    {STEPS[step].text}
+                                </p>
+                            </div>
                         </div>
 
                         <div className="flex gap-2">
@@ -228,13 +225,10 @@ export function InterventionMap() {
                                 >
                                     <div className="h-px w-full bg-white/20 overflow-hidden">
                                         {step === i && (
-                                            <motion.div
+                                            <div
                                                 key={`bar-${step}`}
-                                                initial={{ scaleX: 0 }}
-                                                animate={{ scaleX: 1 }}
-                                                transition={{ duration: 6, ease: "linear" }}
-                                                className="h-full bg-secondary origin-left"
-                                                style={{ width: "100%" }}
+                                                className="h-full bg-secondary animate-progress-fill"
+                                                style={{ "--progress-duration": "6s" } as CSSProperties}
                                             />
                                         )}
                                         {step > i && <div className="h-full w-full bg-secondary/50" />}
@@ -246,51 +240,44 @@ export function InterventionMap() {
                             ))}
                         </div>
 
-                        <AnimatePresence>
-                            {step >= 1 && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 8 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 4 }}
-                                    transition={{ duration: 0.4, ease: "easeOut" }}
-                                    className="rounded-xl overflow-hidden"
-                                    style={{
-                                        border: "1px solid color-mix(in srgb, var(--secondary) 20%, transparent)",
-                                        background: "color-mix(in srgb, var(--secondary) 5%, transparent)",
-                                    }}
-                                >
-                                    <div className="flex items-center justify-between px-4 py-2"
-                                        style={{ borderBottom: "1px solid color-mix(in srgb, var(--secondary) 15%, transparent)" }}>
-                                        <span className="text-[9px] font-mono text-secondary/60 font-bold uppercase tracking-[0.22em]">
-                                            Cibles actives
-                                        </span>
-                                        <span className="text-[9px] font-mono text-secondary/50 font-bold">
-                                            {DEPARTMENTS.length}&thinsp;/&thinsp;7
-                                        </span>
-                                    </div>
-                                    <div className="flex flex-wrap gap-1.5 p-3">
-                                        {DEPARTMENTS.map((d, i) => (
-                                            <motion.div
-                                                key={d.id}
-                                                initial={{ opacity: 0, scale: 0.9 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ delay: 0.06 * i }}
-                                                className="flex items-center gap-1.5 pl-2 pr-2.5 py-1 rounded-full"
-                                                style={{
-                                                    border: "1px solid color-mix(in srgb, var(--secondary) 25%, transparent)",
-                                                    background: "color-mix(in srgb, var(--secondary) 6%, transparent)",
-                                                }}
-                                            >
-                                                <span className="w-1.5 h-1.5 rounded-full shrink-0"
-                                                    style={{ background: "color-mix(in srgb, var(--secondary) 80%, transparent)" }} />
-                                                <span className="text-secondary font-mono text-[11px] font-bold">{d.id}</span>
-                                                <span className="text-white/70 text-[9px] font-medium">{d.name}</span>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                        {step >= 1 && (
+                            <div
+                                className="rounded-xl overflow-hidden animate-fade-in-up"
+                                style={{
+                                    border: "1px solid color-mix(in srgb, var(--secondary) 20%, transparent)",
+                                    background: "color-mix(in srgb, var(--secondary) 5%, transparent)",
+                                    "--y-from": "8px",
+                                } as CSSProperties}
+                            >
+                                <div className="flex items-center justify-between px-4 py-2"
+                                    style={{ borderBottom: "1px solid color-mix(in srgb, var(--secondary) 15%, transparent)" }}>
+                                    <span className="text-[9px] font-mono text-secondary/60 font-bold uppercase tracking-[0.22em]">
+                                        Cibles actives
+                                    </span>
+                                    <span className="text-[9px] font-mono text-secondary/50 font-bold">
+                                        {DEPARTMENTS.length}&thinsp;/&thinsp;7
+                                    </span>
+                                </div>
+                                <div className="flex flex-wrap gap-1.5 p-3">
+                                    {DEPARTMENTS.map((d, i) => (
+                                        <div
+                                            key={d.id}
+                                            className="flex items-center gap-1.5 pl-2 pr-2.5 py-1 rounded-full animate-fade-in-scale"
+                                            style={{
+                                                border: "1px solid color-mix(in srgb, var(--secondary) 25%, transparent)",
+                                                background: "color-mix(in srgb, var(--secondary) 6%, transparent)",
+                                                animationDelay: `${0.06 * i}s`,
+                                            }}
+                                        >
+                                            <span className="w-1.5 h-1.5 rounded-full shrink-0"
+                                                style={{ background: "color-mix(in srgb, var(--secondary) 80%, transparent)" }} />
+                                            <span className="text-secondary font-mono text-[11px] font-bold">{d.id}</span>
+                                            <span className="text-white/70 text-[9px] font-medium">{d.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* CORRECTIF : Ajout d'un container dédié pour lier la carte et l'image */}
@@ -307,10 +294,9 @@ export function InterventionMap() {
                                 transform: "translate(-50%, -60%)",
                                 width: "26%", aspectRatio: "1/1",
                             }}>
-                                <motion.div
-                                    animate={{ y: [0, -8, 0] }}
-                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className="relative w-full h-full drop-shadow-2xl"
+                                <div
+                                    className="relative w-full h-full drop-shadow-2xl animate-float-y"
+                                    style={{ "--float-from": "0px", "--float-to": "-8px", "--float-duration": "4s" } as CSSProperties}
                                 >
                                     <Image
                                         src="/images/map/isometric-hq.png"
@@ -320,7 +306,7 @@ export function InterventionMap() {
                                         className="object-contain"
                                         priority
                                     />
-                                </motion.div>
+                                </div>
                             </div>
 
                             <svg viewBox={`0 0 ${SIZE} ${SIZE}`} width={SIZE} height={SIZE}
@@ -498,41 +484,37 @@ export function InterventionMap() {
                                 </g>
 
                                 <g clipPath="url(#radar-clip)">
-                                    <SweepArm cx={cx} cy={cy} maxR={maxR} onCrossRef={onCrossRef} />
+                                    <SweepArm cx={cx} cy={cy} maxR={maxR} />
                                 </g>
 
                                 {step >= 1 && DEPARTMENTS.map((d, i) => {
                                     const pos = polarToXY(d.angle, d.radius, cx, cy, maxR)
                                     const fk = flashKeys[d.id] ?? 0
                                     return (
-                                        <motion.g key={d.id}
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            transition={{ delay: i * 0.09, type: "spring", stiffness: 280, damping: 22 }}
-                                            style={{ transformOrigin: `${pos.x}px ${pos.y}px` }}
+                                        <g key={d.id}
+                                            className="animate-fade-in-scale"
+                                            style={{ transformOrigin: `${pos.x}px ${pos.y}px`, "--scale-from": "0", animationDelay: `${i * 0.09}s` } as CSSProperties}
                                         >
                                             {fk > 0 && (
-                                                <motion.circle
+                                                <circle
                                                     key={`lock-${fk}`}
                                                     cx={pos.x} cy={pos.y}
-                                                    r={21}
+                                                    r={LOCK_RADIUS}
                                                     fill="none"
                                                     stroke="var(--secondary)"
                                                     strokeWidth="2"
-                                                    initial={{ pathLength: 0, strokeOpacity: 0.95 }}
-                                                    animate={{ pathLength: 1, strokeOpacity: 0.30 }}
-                                                    transition={{ duration: 0.40, ease: "easeOut" }}
+                                                    strokeDasharray={LOCK_CIRCUMFERENCE}
+                                                    className="animate-radar-lock"
+                                                    style={{ "--circ": LOCK_CIRCUMFERENCE } as CSSProperties}
                                                 />
                                             )}
                                             {fk > 0 && (
-                                                <motion.rect
+                                                <rect
                                                     key={`flash-${fk}`}
                                                     x={pos.x - 4} y={pos.y - 4}
                                                     width={8} height={8}
                                                     fill="var(--secondary)"
-                                                    initial={{ opacity: 1, scale: 2.8, rotate: 45 }}
-                                                    animate={{ opacity: 0, scale: 0.4 }}
-                                                    transition={{ duration: 0.30, ease: "easeOut" }}
+                                                    className="animate-radar-flash"
                                                     style={{ transformOrigin: `${pos.x}px ${pos.y}px` }}
                                                 />
                                             )}
@@ -560,7 +542,7 @@ export function InterventionMap() {
                                             >
                                                 {d.id}
                                             </text>
-                                        </motion.g>
+                                        </g>
                                     )
                                 })}
 

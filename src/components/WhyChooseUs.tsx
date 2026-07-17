@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { motion, AnimatePresence} from "framer-motion"
 import Image from "next/image"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
@@ -51,21 +50,11 @@ export function WhyChooseUs() {
             const isActive = active === index;
 
             return (
-              <motion.div
+              <div
                 key={reason.id}
-                layout
                 onClick={() => setActive(index)}
-                initial={false}
-                animate={{
-                  flex: isActive ? 12 : 1,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 150,
-                  damping: 20,
-                  mass: 0.8
-                }}
-                className={`relative overflow-hidden cursor-pointer rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"
+                style={{ flex: isActive ? 12 : 1 }}
+                className={`relative overflow-hidden cursor-pointer rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"
                   }`}
               >
                 <div className="absolute inset-0 w-full h-full">
@@ -77,36 +66,25 @@ export function WhyChooseUs() {
                     priority={index === 0}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <motion.div
-                    animate={{ opacity: isActive ? 0.7 : 0.3 }}
-                    className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"
+                  <div
+                    style={{ opacity: isActive ? 0.7 : 0.3 }}
+                    className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent transition-opacity duration-500"
                   />
                 </div>
 
-                <AnimatePresence>
-                  {!isActive && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                    >
-                      <span className="text-white/40 font-bold text-xl md:text-3xl rotate-0 md:-rotate-90 whitespace-nowrap tracking-widest">
-                        0{index + 1}
-                      </span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div
+                  style={{ opacity: isActive ? 0 : 1 }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300"
+                  aria-hidden={isActive}
+                >
+                  <span className="text-white/40 font-bold text-xl md:text-3xl rotate-0 md:-rotate-90 whitespace-nowrap tracking-widest">
+                    0{index + 1}
+                  </span>
+                </div>
 
-                <motion.div
-                  initial={false}
-                  animate={{
-                    opacity: isActive ? 1 : 0, 
-                    scale: isActive ? 1 : 0.95 
-                  }}
-                  transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }}
-                  className={`absolute bottom-4 md:bottom-10 left-4 md:left-10 right-4 md:right-10 z-10 transition-all ${
-                    isActive ? "pointer-events-auto" : "pointer-events-none"
+                <div
+                  className={`absolute bottom-4 md:bottom-10 left-4 md:left-10 right-4 md:right-10 z-10 transition-all duration-300 ${
+                    isActive ? "opacity-100 scale-100 delay-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
                   }`}
                   aria-hidden={!isActive}
                 >
@@ -123,9 +101,9 @@ export function WhyChooseUs() {
                       {reason.description}
                     </Text>
                   </div>
-                </motion.div>
+                </div>
 
-              </motion.div>
+              </div>
             )
           })}
         </div>

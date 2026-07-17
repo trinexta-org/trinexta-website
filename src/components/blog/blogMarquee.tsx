@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { urlForImage, ResumeArticle } from "@/lib/sanity";
@@ -36,16 +35,14 @@ export function BlogMarquee({ articles, categoryLabel }: BlogMarqueeProps) {
 
               return (
                 <Link href={`/blog/${article.slug.current}`} key={uniqueKey}>
-                  <motion.div
-                    layout
+                  <div
                     onMouseEnter={() => setHoveredSlug(article.slug.current)}
                     onMouseLeave={() => setHoveredSlug(null)}
                     className={`relative h-[300px] md:h-[380px] rounded-[32px] overflow-hidden border border-white/10 cursor-pointer bg-white/5 transition-all duration-300 ${
-                      isHovered 
-                        ? "w-[320px] md:w-[580px] border-secondary/40 shadow-[0_0_30px_rgba(var(--secondary-rgb),0.1)]" 
+                      isHovered
+                        ? "w-[320px] md:w-[580px] border-secondary/40 shadow-[0_0_30px_rgba(var(--secondary-rgb),0.1)]"
                         : "w-[240px] md:w-[290px]"
                     }`}
-                    transition={{ type: "spring", stiffness: 260, damping: 28 }}
                   >
                     {/* Image de fond */}
                     {article.imageUne ? (
@@ -69,30 +66,28 @@ export function BlogMarquee({ articles, categoryLabel }: BlogMarqueeProps) {
                         <span>{categoryLabel(article.categorie)}</span>
                       </div>
                       
-                      <motion.h4 layout className="text-white font-black text-base md:text-lg leading-snug line-clamp-2">
+                      <h4 className="text-white font-black text-base md:text-lg leading-snug line-clamp-2">
                         {article.titre}
-                      </motion.h4>
+                      </h4>
 
                       {/* Révélation de l'extrait au survol */}
-                      <AnimatePresence>
-                        {isHovered && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                            animate={{ opacity: 1, height: "auto", marginTop: 12 }}
-                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                            className="overflow-hidden"
-                          >
+                      <div
+                        className="grid transition-[grid-template-rows] duration-300 ease-out"
+                        style={{ gridTemplateRows: isHovered ? "1fr" : "0fr" }}
+                      >
+                        <div className={`overflow-hidden transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
+                          <div className={`transition-[margin-top] duration-300 ${isHovered ? "mt-3" : "mt-0"}`}>
                             <p className="text-white/60 text-xs md:text-sm line-clamp-2 mb-4 font-medium">
                               {article.extrait || "Découvrez l'analyse complète de nos experts Trinexta et optimisez vos infrastructures informatiques."}
                             </p>
                             <div className="flex items-center gap-2 text-secondary text-xs md:text-sm font-bold">
                               Lire la suite <ArrowRight className="w-4 h-4" />
                             </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </Link>
               );
             })}

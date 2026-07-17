@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, TargetAndTransition } from "framer-motion";
+import { CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
@@ -52,56 +52,53 @@ function EnhancedRibbonBackground() {
           </defs>
 
           {Array.from({ length: 40 }).map((_, i) => (
-            <motion.path
+            <path
               key={`bg-fiber-${i}`}
               d={`M-100,${50 + i * 18} Q 600,${400 + (i - 20) * 12} 1300,${150 + i * 14}`}
               fill="none"
               stroke="url(#grad-fiber-primary)"
               strokeWidth="0.2"
-              initial={{ strokeDashoffset: 3000 }}
-              animate={{ strokeDashoffset: 0 }}
-              transition={{
-                duration: 35 + (i % 8),
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{ strokeDasharray: 3000, opacity: 0.15 }}
+              className="ribbon-fiber"
+              style={
+                {
+                  opacity: 0.15,
+                  "--dash-duration": `${35 + (i % 8)}s`,
+                } as CSSProperties
+              }
             />
           ))}
 
           {Array.from({ length: 15 }).map((_, i) => (
-            <motion.path
+            <path
               key={`energy-fiber-${i}`}
               d={`M-100,${100 + i * 45} C 300,${50 + i * 25} 900,${750 - i * 25} 1300,${350 + i * 15}`}
               fill="none"
               stroke="url(#grad-fiber-white)"
               strokeWidth="0.6"
-              initial={{ strokeDashoffset: 3000 }}
-              animate={{ strokeDashoffset: 0 }}
-              transition={{
-                duration: 18 + (i % 4),
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{ strokeDasharray: 3000, opacity: 0.3 }}
+              className="ribbon-fiber"
+              style={
+                {
+                  opacity: 0.3,
+                  "--dash-duration": `${18 + (i % 4)}s`,
+                } as CSSProperties
+              }
             />
           ))}
 
           {Array.from({ length: 8 }).map((_, i) => (
-            <motion.path
+            <path
               key={`master-fiber-${i}`}
               d={`M-100,${200 + i * 70} C 400,${900} 800,${-100} 1300,${600 - i * 50}`}
               fill="none"
               stroke="url(#grad-fiber-primary)"
               strokeWidth="1.2"
-              initial={{ strokeDashoffset: 3000 }}
-              animate={{ strokeDashoffset: 0 }}
-              transition={{
-                duration: 25 + i * 2,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{ strokeDasharray: 3000, opacity: 0.4 }}
+              className="ribbon-fiber"
+              style={
+                {
+                  opacity: 0.4,
+                  "--dash-duration": `${25 + i * 2}s`,
+                } as CSSProperties
+              }
             />
           ))}
         </svg>
@@ -127,39 +124,6 @@ export function FinalCTA({
   ctaLabel = "Prendre RDV gratuit",
   ctaHref = "/contact",
 }: FinalCTAProps) {
-  const sec = "var(--secondary)";
-  const white = "var(--primary-foreground)";
-
-  const part1Animation: TargetAndTransition = {
-    color: [sec, sec, sec, white],
-    transition: {
-      duration: 8,
-      times: [0, 0.5, 0.75, 1],
-      repeat: Infinity,
-      ease: "linear",
-    },
-  };
-
-  const part2Animation: TargetAndTransition = {
-    color: [white, sec, sec, white],
-    transition: {
-      duration: 8,
-      times: [0, 0.25, 0.75, 1],
-      repeat: Infinity,
-      ease: "linear",
-    },
-  };
-
-  const part3Animation: TargetAndTransition = {
-    color: [white, white, sec, white],
-    transition: {
-      duration: 8,
-      times: [0, 0.5, 0.75, 1],
-      repeat: Infinity,
-      ease: "linear",
-    },
-  };
-
   return (
     <Section
       container={false}
@@ -178,9 +142,9 @@ export function FinalCTA({
             as="h2"
             className="text-3xl sm:text-5xl md:text-8xl text-white tracking-normal leading-[0.9] lowercase flex flex-col items-center"
           >
-            <motion.span animate={part1Animation}>{line1}</motion.span>
-            <motion.span animate={part2Animation}>{line2}</motion.span>
-            <motion.span animate={part3Animation}>{line3}</motion.span>
+            <span className="cta-word-1">{line1}</span>
+            <span className="cta-word-2">{line2}</span>
+            <span className="cta-word-3">{line3}</span>
           </Heading>
 
           <Text className="text-white/70 text-base md:text-xl font-light max-w-2xl mx-auto leading-relaxed">

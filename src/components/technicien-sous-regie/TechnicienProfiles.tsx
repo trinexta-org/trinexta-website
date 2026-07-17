@@ -1,6 +1,3 @@
-"use client"
-
-import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -17,19 +14,14 @@ export function TechnicienProfiles() {
     return (
         <div className="relative w-full overflow-hidden py-20 bg-primary">
             <div className="flex w-full overflow-hidden">
-                <motion.div
-                    className="flex gap-6"
-                    animate={{ x: ["0%", "-50%"] }}
-                    transition={{
-                        duration: 30,
-                        ease: "linear",
-                        repeat: Infinity,
-                    }}
+                <div
+                    className="flex gap-6 animate-marquee"
+                    style={{ animationDuration: "30s" }}
                 >
                     {[...profiles, ...profiles].map((profile, i) => (
                         <ChainLink key={i} {...profile} />
                     ))}
-                </motion.div>
+                </div>
             </div>
 
             <div className="mt-16 text-center px-6">

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { urlForImage, ResumeArticle } from "@/lib/sanity";
@@ -81,17 +80,14 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
           const isHovered = hoveredIndex === index;
 
           return (
-            <motion.div
+            <div
               key={article.slug.current}
-              initial={false}
-              animate={{
-                x: `${position * 110}%`,
-                scale: isCenter ? 1 : 0.85,
+              style={{
+                transform: `translateX(${position * 110}%) scale(${isCenter ? 1 : 0.85})`,
                 zIndex: isCenter ? 30 : 10,
                 opacity: isCenter ? 1 : 0.4,
               }}
-              transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              className={`absolute h-full transition-all duration-500 ease-out ${
+              className={`absolute h-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
                 isCenter && isHovered ? "w-[85vw] md:w-[48%]" : "w-[75vw] md:w-[32%]"
               }`}
             >
@@ -158,37 +154,28 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
                       {article.titre}
                     </h3>
 
-                    <AnimatePresence>
-                      {(isCenter && isHovered) && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0, y: 10 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: 10 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <p className="text-white/70 text-sm line-clamp-2 mb-4 mt-2 pr-2">
-                            {article.extrait || "Découvrez l'analyse complète de nos experts Trinexta."}
-                          </p>
-                          <div className="flex items-center gap-2 text-secondary text-sm font-bold">
-                            Lire l&apos;article <ArrowRight className="w-4 h-4" />
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div
+                      className="grid transition-[grid-template-rows] duration-300 ease-out"
+                      style={{ gridTemplateRows: isCenter && isHovered ? "1fr" : "0fr" }}
+                    >
+                      <div className={`overflow-hidden transition-opacity duration-300 ${isCenter && isHovered ? "opacity-100" : "opacity-0"}`}>
+                        <p className="text-white/70 text-sm line-clamp-2 mb-4 mt-2 pr-2">
+                          {article.extrait || "Découvrez l'analyse complète de nos experts Trinexta."}
+                        </p>
+                        <div className="flex items-center gap-2 text-secondary text-sm font-bold">
+                          Lire l&apos;article <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 {/* ANIMATION TÉLÉPHONE (AJUSTÉE À L'INTÉRIEUR) */}
-                <AnimatePresence>
-                  {(isCenter && isHovered) && (
-                    <motion.div
-                      initial={{ y: 200, opacity: 0, rotate: 5 }}
-                      animate={{ y: 0, opacity: 1, rotate: 0 }}
-                      exit={{ y: 200, opacity: 0, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 120, damping: 15 }}
-
-                      className="hidden md:block absolute right-4 -bottom-8 w-[220px] h-[320px] bg-white rounded-t-[24px] border-[6px] border-b-0 border-slate-900 shadow-[0_0_50px_rgba(0,0,0,0.5)] z-30 overflow-hidden"
+                {isCenter && (
+                    <div
+                      className={`hidden md:block absolute right-4 -bottom-8 w-[220px] h-[320px] bg-white rounded-t-[24px] border-[6px] border-b-0 border-slate-900 shadow-[0_0_50px_rgba(0,0,0,0.5)] z-30 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+                        isHovered ? "translate-y-0 opacity-100 rotate-0" : "translate-y-[200px] opacity-0 rotate-[5deg] pointer-events-none"
+                      }`}
                     >
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl flex items-center justify-center z-40">
                         <div className="w-8 h-1 rounded-full bg-slate-800" />
@@ -222,12 +209,11 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
                         
                         <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-[#F8FAFC] to-transparent" />
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                )}
 
               </Link>
-            </motion.div>
+            </div>
           );
         })}
       </div>
