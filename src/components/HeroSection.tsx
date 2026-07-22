@@ -1,13 +1,34 @@
 "use client"
 
+import React, { useEffect, useState } from "react"
+import { preload } from "react-dom"
 import Link from "next/link"
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { homeHeroSlides } from "@/data/heroes"
-import React from "react"
 
 export function HeroSection() {
+  preload("/hero-poster.webp", {
+    as: "image",
+    fetchPriority: "high",
+    type: "image/webp",
+  })
+
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false)
+
+  useEffect(() => {
+    const loadVideo = () => setShouldLoadVideo(true)
+
+    if (document.readyState === "complete") {
+      loadVideo()
+      return
+    }
+
+    window.addEventListener("load", loadVideo, { once: true })
+    return () => window.removeEventListener("load", loadVideo)
+  }, [])
+
   return (
     <HeroCarousel
       slides={homeHeroSlides}
@@ -20,12 +41,10 @@ export function HeroSection() {
           muted
           playsInline
           preload="none"
-          fetchPriority="low"
+          src={shouldLoadVideo ? "/hero.mp4" : undefined}
           poster="/hero-poster.webp"
           className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
+        />
       }
       overlays={<div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />}
       
