@@ -19,7 +19,9 @@ export function HeroSection() {
           loop
           muted
           playsInline
-          poster="/hero-poster.jpg"
+          preload="none"
+          fetchPriority="low"
+          poster="/hero-poster.webp"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/hero.mp4" type="video/mp4" />

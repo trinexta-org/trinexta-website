@@ -53,6 +53,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} scroll-smooth`}>
+      <link
+        rel="preload"
+        as="image"
+        href="/hero-poster.webp"
+        fetchPriority="high"
+        type="image/webp"
+      />
       <body className="min-h-screen flex flex-col bg-background text-foreground font-sans antialiased">
         <JsonLd data={trinextaOrganization} />
         <CircuitBorders />
