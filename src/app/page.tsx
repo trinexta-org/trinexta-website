@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import Link from "next/link"
 import { JsonLd, trinextaLocalBusiness } from "@/components/seo/JsonLd"
 import { Metadata } from "next"
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function Home() {
+async function PartnersData() {
   const partnersQuery = `*[_type == "partenaire" && type == "editeur"] | order(ordre asc) {
     "name": nom,
     "logoSrc": logo.asset->url,
@@ -57,6 +58,10 @@ export default async function Home() {
     // Sanity inaccessible - section partenaires masquée
   }
 
+  return <PartnersSection partners={partnersData} />;
+}
+
+export default function Home() {
   return (
     <main className="min-h-screen bg-primary relative">
       <JsonLd data={trinextaLocalBusiness} />
@@ -104,7 +109,9 @@ export default async function Home() {
         line1="Nos Partenaires"
         line2="Technologiques"
       />
-      <PartnersSection partners={partnersData} />
+      <Suspense fallback={null}>
+        <PartnersData />
+      </Suspense>
 
       <InterventionMap />
 
