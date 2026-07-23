@@ -304,7 +304,6 @@ export function InterventionMap() {
                                         fill
                                         sizes="(max-width: 768px) 120px, 160px"
                                         className="object-contain"
-                                        priority
                                     />
                                 </div>
                             </div>

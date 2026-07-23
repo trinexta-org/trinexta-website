@@ -63,7 +63,6 @@ export function WhyChooseUs() {
                     alt={reason.alt}
                     fill
                     className="object-cover"
-                    priority={index === 0}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div
