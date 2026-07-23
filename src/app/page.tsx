@@ -75,7 +75,7 @@ export default async function Home() {
       />
       <ServicesSection />
 
-      <Section className="py-12 md:py-16">
+      <Section className="bg-background py-12 md:py-16">
         <BannerCTA
           variant="primary"
           title="Votre site est-il vraiment vu par Google ?"

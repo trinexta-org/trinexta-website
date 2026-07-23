@@ -19,17 +19,17 @@ function ReviewCard({ review }: { review: Review }) {
       className="block w-full h-full focus:outline-none group"
       aria-label={`Lire l'avis de ${review.authorName} sur Google`}
     >
-      <div className="bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-2xl flex flex-col gap-4 p-6 h-full shadow-sm relative">
+      <div className="bg-muted/50 border border-primary/10 hover:bg-muted hover:border-primary/20 transition-all duration-300 rounded-2xl flex flex-col gap-4 p-6 h-full shadow-sm relative">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold shrink-0">
               {initial}
             </div>
             <div>
-              <Heading as="h4" className="text-white text-base leading-tight">
+              <Heading as="h4" className="text-primary text-base leading-tight">
                 {review.authorName}
               </Heading>
-              <Text variant="small" className="text-white/50">
+              <Text variant="small" className="text-muted-foreground">
                 il y a quelques temps
               </Text>
             </div>
@@ -50,11 +50,11 @@ function ReviewCard({ review }: { review: Review }) {
           <svg className="w-4 h-4 text-blue-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6 12.6l1.5-1.5 2.6 2.6 6.4-6.4 1.5 1.5-8.1 8.1z"/></svg>
         </div>
         
-        <Text className="text-white/70 line-clamp-4 flex-grow text-sm">
+        <Text className="text-muted-foreground line-clamp-4 flex-grow text-sm">
           &quot;{review.text}&quot;
         </Text>
-        
-        <Text variant="small" className="text-white/50 font-medium mt-2 group-hover:text-white transition-colors">
+
+        <Text variant="small" className="text-muted-foreground font-medium mt-2 group-hover:text-primary transition-colors">
           Lire l&apos;avis
         </Text>
       </div>
@@ -106,7 +106,7 @@ export function CustomerReviews() {
   const googleReviewsUrl = "https://www.google.com/maps/place/Trinexta/@48.6326865,2.4333193,17z/data=!3m1!5s0x47e60abc06fcdc81:0x35938f41a286dfbf!4m18!1m9!3m8!1s0x8ed7c6c702b86473:0x518d443e07113f52!2sTrinexta!8m2!3d48.632683!4d2.4358942!9m1!1b1!16s%2Fg%2F11m782phyh!3m7!1s0x8ed7c6c702b86473:0x518d443e07113f52!8m2!3d48.632683!4d2.4358942!9m1!1b1!16s%2Fg%2F11m782phyh?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D";
 
   return (
-    <Section id="avis-clients" className="bg-primary py-20 overflow-hidden">
+    <Section id="avis-clients" className="bg-background py-20 overflow-hidden">
       <Container>
         
         {/* =========================================
@@ -125,10 +125,10 @@ export function CustomerReviews() {
           </div>
 
           <div className="flex items-center justify-center gap-4 mt-6 relative z-40">
-            <button onClick={handlePrev} className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all active:scale-95" aria-label="Avis précédent">
+            <button onClick={handlePrev} className="w-12 h-12 rounded-full bg-muted border border-primary/10 flex items-center justify-center text-primary hover:bg-muted hover:border-primary/20 transition-all active:scale-95" aria-label="Avis précédent">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={handleNext} className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all active:scale-95" aria-label="Avis suivant">
+            <button onClick={handleNext} className="w-12 h-12 rounded-full bg-muted border border-primary/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all active:scale-95" aria-label="Avis suivant">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -139,8 +139,8 @@ export function CustomerReviews() {
             ========================================= */}
         <div className="hidden lg:grid grid-cols-2 gap-8 h-[600px] overflow-hidden relative group max-w-4xl mx-auto">
           
-          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-primary to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
 
           <div className="flex flex-col gap-8 animate-slide-up group-hover:[animation-play-state:paused]">
             {col1Data.map((review, index) => (

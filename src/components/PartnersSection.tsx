@@ -15,7 +15,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
   const itemsCount = partners.length || 11;
 
   return (
-    <Section container={false} className="relative pt-8 pb-16 md:pb-32 overflow-hidden">
+    <Section container={false} className="relative bg-background pt-8 pb-16 md:pb-32 overflow-hidden">
       <style>{`
         @keyframes scroll-partners {
           0% { transform: translateX(0); }
@@ -64,11 +64,11 @@ function PartnerCard({ partner, ariaHidden }: { partner: Partner, ariaHidden?: b
           alt={`Logo ${partner.name}`}
           fill
           sizes="(max-width: 768px) 40px, 56px"
-          className={`object-contain ${partner.isCircle ? 'rounded-full bg-white/5 shadow-inner' : 'rounded-md'}`}
+          className={`object-contain ${partner.isCircle ? 'rounded-full bg-muted shadow-inner' : 'rounded-md'}`}
         />
       </div>
 
-      <span className="text-white/70 text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase">
+      <span className="text-muted-foreground text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase">
         {partner.name}
       </span>
     </div>
