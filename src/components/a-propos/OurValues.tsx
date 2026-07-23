@@ -110,7 +110,7 @@ export function OurValues() {
     }
 
     return (
-        <Section id="valeurs-approfondies" className="py-16 md:py-24 bg-primary relative overflow-hidden">
+        <Section id="valeurs-approfondies" dark className="py-16 md:py-24">
             <Container>
 
                 <div className="bg-white/[0.02] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col">

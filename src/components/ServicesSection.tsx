@@ -148,7 +148,7 @@ export function ServicesSection() {
   const activePositions = isMobile ? mobilePositions : positions
 
   return (
-    <Section container={false} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
+    <Section container={false} dark className="min-h-screen pt-8 pb-16 md:pb-32 perspective-[2000px]">
       <Container className="relative z-10">
         <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {

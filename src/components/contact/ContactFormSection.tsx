@@ -8,7 +8,7 @@ import ContactForm from "@/components/contact/ContactForm";
 
 export function ContactFormSection() {
   return (
-    <Section container={false} id="formulaire" className="relative bg-primary py-24 md:py-32 overflow-hidden">
+    <Section container={false} id="formulaire" dark className="py-24 md:py-32">
       <SectionFade edge="both" />
 
       <Container className="relative z-10">

@@ -28,7 +28,7 @@ const steps = [
 
 export function ApproachSection() {
   return (
-    <Section container={false} className="relative bg-primary py-20 md:py-40 overflow-hidden">
+    <Section container={false} dark className="py-20 md:py-40">
       <div className="relative z-10">
         <Container>
 

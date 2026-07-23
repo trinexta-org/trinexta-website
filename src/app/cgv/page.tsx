@@ -22,7 +22,7 @@ export default function CgvPage() {
         { name: "cgv", url: "/cgv" }
         ]} 
       />
-      <Section className="bg-primary pt-24 pb-24">
+      <Section dark className="pt-24 pb-24">
         <LegalContent data={cgvData} />
       </Section>
 

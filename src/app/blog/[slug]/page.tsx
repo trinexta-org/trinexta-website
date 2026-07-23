@@ -192,7 +192,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </Container>
         </header>
 
-        <Section className="py-10 md:py-20">
+        <Section className="bg-primary py-10 md:py-20">
           <Container>
             <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 md:gap-16">
               <aside className="hidden lg:block w-[240px]">
@@ -237,7 +237,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </Section>
 
         {article.related && article.related.length > 0 && (
-          <Section className="border-t border-white/5 py-20">
+          <Section dark className="border-t border-white/5 py-20">
             <Container>
               <div className="flex justify-between items-end mb-12">
                 <h2 className="text-3xl font-bold tracking-normal">Articles similaires</h2>

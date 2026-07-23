@@ -13,7 +13,7 @@ const certifications = [
 
 export function ReassuranceSection() {
   return (
-    <Section container={false} className="py-10 md:py-14 bg-primary relative overflow-hidden">
+    <Section container={false} dark className="py-10 md:py-14">
       <SectionFade edge="bottom" />
       <Container className="relative z-10">
         <div className="flex flex-col items-center justify-center gap-10 text-center">

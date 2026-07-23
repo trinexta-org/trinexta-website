@@ -71,7 +71,7 @@ export default function ContactPage() {
 
       <ContactFormSection />
       
-      <Section container={false} className="relative overflow-hidden bg-primary pb-32 pt-24">
+      <Section container={false} dark className="pb-32 pt-24">
         <SectionFade edge="both" />
         <Container className="relative z-10">
           <ContactFaq />

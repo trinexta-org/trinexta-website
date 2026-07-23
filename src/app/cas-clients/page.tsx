@@ -41,7 +41,7 @@ export default function CaseClientsPage() {
             />
       <CasClientsHero />
 
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section dark className="pt-0 md:pt-0 lg:pt-0">
         <GridCards columns={3} mobileColumns={1} gap="gap-6 md:gap-8">
           {caseClients.map((item, i) => (
             <Reveal key={item.slug} delay={i * 0.1}>

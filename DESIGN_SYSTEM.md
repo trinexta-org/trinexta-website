@@ -242,11 +242,11 @@ import { Reveal } from "@/components/ui/Reveal"
 
 ### HaloBackground + SectionFade
 
-`HaloBackground` : halos lumineux de fond (Server Component, zero JS). A poser en premier enfant de toute section `bg-primary`. `intensity` : `"low"` (defaut) | `"mid"` | `"high"`.
+`HaloBackground` : halos lumineux de fond (Server Component, zero JS), positionne en `-z-10` en interne. A poser en premier enfant de toute section `bg-primary`. `intensity` : `"low"` (defaut) | `"mid"` | `"high"`. `grain` (bool, defaut `false`) : ajoute une texture de grain statique tres subtile, utile sur les sections sans image ni halo marque.
 
 `SectionFade` : fondu `bg-primary` sur le bord d'une section pour raccorder deux sections sombres sans ligne de demarcation. `edge` : `"bottom"` (defaut) | `"top"` | `"both"`.
 
-**Prerequis** : la Section doit avoir `relative overflow-hidden`. Ordre dans la Section : `HaloBackground` → `SectionFade` → contenu en `relative z-10`.
+**Prerequis** : la Section doit avoir `relative overflow-hidden`. Grace au `-z-10` interne a `HaloBackground`, le contenu existant n'a pas besoin d'etre explicitement remis en `relative z-10` : poser `HaloBackground` (et `SectionFade` si besoin) comme premier(s) enfant(s) suffit.
 
 ---
 
