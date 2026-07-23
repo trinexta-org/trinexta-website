@@ -58,7 +58,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-primary relative">
+    <main className="min-h-screen bg-background relative">
       <JsonLd data={trinextaLocalBusiness} />
       <BreadcrumbJsonLd
         items={[
