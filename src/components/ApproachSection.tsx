@@ -29,7 +29,7 @@ const steps = [
 export function ApproachSection() {
   return (
     <Section container={false} dark className="py-20 md:py-40">
-      <div className="relative z-10">
+      <div>
         <Container>
 
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">

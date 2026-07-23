@@ -73,7 +73,7 @@ export default function ContactPage() {
       
       <Section container={false} dark className="pb-32 pt-24">
         <SectionFade edge="both" />
-        <Container className="relative z-10">
+        <Container>
           <ContactFaq />
         </Container>
       </Section>

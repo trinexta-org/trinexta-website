@@ -6,7 +6,6 @@ import { EstimationWizard } from "@/components/estimation/EstimationWizard";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { Entrance } from "@/components/ui/Entrance";
 import { SectionFade } from "@/components/ui/SectionFade";
-import { HaloBackground } from "@/components/ui/HaloBackground"
 
 export const metadata: Metadata = {
   title: "Estimation en ligne · Chiffrez votre projet informatique",
@@ -90,10 +89,8 @@ export default function EstimationPage() {
         </Container>
       </section>
 
-      <Section container={false} className="relative overflow-hidden bg-primary py-12 md:py-16">
-        <HaloBackground intensity="mid" />
-
-        <Container className="relative z-10 max-w-3xl">
+      <Section container={false} dark className="py-12 md:py-16">
+        <Container className="max-w-3xl">
           <EstimationWizard bookingsUrl={process.env.NEXT_PUBLIC_BOOKINGS_URL} />
 
           <Entrance direction="none" delay={0.4}>

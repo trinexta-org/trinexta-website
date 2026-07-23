@@ -15,7 +15,7 @@ export function ReassuranceSection() {
   return (
     <Section container={false} dark className="py-10 md:py-14">
       <SectionFade edge="bottom" />
-      <Container className="relative z-10">
+      <Container>
         <div className="flex flex-col items-center justify-center gap-10 text-center">
 
           <div className="w-full border-t border-white/10 pt-8 mt-2">

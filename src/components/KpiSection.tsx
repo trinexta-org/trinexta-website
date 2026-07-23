@@ -54,7 +54,7 @@ export function KpiSection() {
   return (
     <Section container={false} dark className="py-12 md:py-32 lg:py-40">
 
-      <Container className="relative z-10">
+      <Container>
         <div className="mb-10 md:mb-16 lg:mb-24 flex items-center gap-4 md:gap-8 overflow-hidden">
           <Heading as="h2" className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-normal shrink-0 whitespace-nowrap">
             Impact <span className="text-secondary">Réel</span>

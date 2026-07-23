@@ -11,7 +11,7 @@ interface HaloBackgroundProps {
 const INTENSITY_CLASSES: Record<Intensity, { top: string; bottom: string }> = {
     low: { top: "bg-secondary/5", bottom: "bg-secondary/5" },
     mid: { top: "bg-secondary/10", bottom: "bg-secondary/5" },
-    high: { top: "bg-secondary/10", bottom: "bg-secondary/5" },
+    high: { top: "bg-secondary/15", bottom: "bg-secondary/10" },
 }
 
 const GRAIN_SVG =

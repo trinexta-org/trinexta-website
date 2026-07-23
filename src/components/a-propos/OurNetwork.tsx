@@ -28,7 +28,7 @@ export function OurNetwork() {
     return (
         <Section id="equipe" container={false} dark className="py-12 md:py-24">
             <SectionFade edge="top" />
-            <Container className="relative z-10">
+            <Container>
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center mb-12 md:mb-24">
                     <FadeIn
