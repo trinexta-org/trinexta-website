@@ -19,3 +19,12 @@ export function buildAuditContactUrl(base: string, url: string, score: number): 
   });
   return `${base}/contact?${params.toString()}`;
 }
+
+export const AUDIT_ORDER_PRICE_EUR_HT = 490;
+export const AUDIT_ORDER_VAT_RATE = 0.2;
+export const AUDIT_ORDER_PRICE_EUR_TTC =
+  Math.round(AUDIT_ORDER_PRICE_EUR_HT * (1 + AUDIT_ORDER_VAT_RATE) * 100) / 100;
+
+export const AUDIT_ORDER_OFFER_LABEL = `Audit SEO Expert (${AUDIT_ORDER_PRICE_EUR_HT}€ HT, entièrement déduit si vous nous confiez la refonte)`;
+
+export const AUDIT_ORDER_DELAY_LABEL = "Restitution sous 72h ouvrées";

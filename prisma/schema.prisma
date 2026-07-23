@@ -14,13 +14,13 @@ datasource db {
 
 model ContactForm {
   id         String   @id @default(cuid())
-  type       String   
+  type       String
   prenom     String
   nom        String
   email      String
   telephone  String?
   entreprise String?
-  siret      String? 
+  siret      String?
   secteur    String?
   taille     String?
   urgence    String?
@@ -29,11 +29,11 @@ model ContactForm {
 }
 
 model Subscriber {
-  id         String   @id @default(cuid())
-  email      String   @unique
-  token      String   @unique @default(uuid())
-  isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  email     String   @unique
+  token     String   @unique @default(uuid())
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
 }
 
 // Estimation réalisée via le tunnel /estimation.
@@ -106,5 +106,28 @@ model EstimateEvent {
   createdAt  DateTime  @default(now())
 
   @@index([sessionId])
+  @@index([createdAt])
+}
+
+model AuditOrder {
+  id                    String    @id @default(cuid())
+  prenom                String
+  nom                   String
+  email                 String
+  entreprise            String
+  tva                   String?
+  url                   String
+  seoAuditId            String?
+  stripeSessionId       String?
+  stripePaymentIntentId String?
+  amountEur             Int
+  status                String    @default("pending")
+  cgvAcceptedAt         DateTime
+  createdAt             DateTime  @default(now())
+  paidAt                DateTime?
+  deliveredAt           DateTime?
+
+  @@index([email])
+  @@index([status])
   @@index([createdAt])
 }
