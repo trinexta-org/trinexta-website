@@ -149,7 +149,7 @@ export default function AuditSeoPage() {
         </Container>
       </ViewportHero>
 
-      <Section id="comment-ca-marche" className="bg-primary">
+      <Section id="comment-ca-marche" dark>
         <FadeIn direction="up">
           <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
             Comment ça marche
@@ -174,7 +174,7 @@ export default function AuditSeoPage() {
         </GridCards>
       </Section>
 
-      <Section id="apercu-rapport" className="bg-primary/95">
+      <Section id="apercu-rapport" dark>
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <FadeIn direction="up">
             <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">

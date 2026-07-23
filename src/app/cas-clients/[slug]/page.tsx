@@ -118,7 +118,7 @@ export default async function CaseClientDetailPage({
       </ViewportHero>
 
       {/* Timeline */}
-      <Section className="pb-16 pt-4 md:pt-6">
+      <Section dark className="pb-16 pt-4 md:pt-6">
         <div className="space-y-0">
 
           {/* Phase 01 — Situation initiale */}

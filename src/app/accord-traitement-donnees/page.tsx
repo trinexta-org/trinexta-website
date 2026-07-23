@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 export default function AccordTraitementDonneesPage() {
   return (
     <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      <BreadcrumbJsonLd 
+      <BreadcrumbJsonLd
         items={[
           { name: "Accueil", url: "/" },
           { name: "accord-traitement-donnees", url: "/accord-traitement-donnees" }
-        ]} 
+        ]}
       />
-      <Section className="bg-primary pt-24 pb-24">
+      <Section dark className="pt-24 pb-24">
         <LegalContent data={dpaData} />
       </Section>
 

@@ -52,14 +52,14 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export function KpiSection() {
   return (
-    <Section container={false} className="relative bg-primary py-12 md:py-32 lg:py-40 overflow-hidden">
+    <Section container={false} className="bg-background py-12 md:py-32 lg:py-40">
 
-      <Container className="relative z-10">
+      <Container>
         <div className="mb-10 md:mb-16 lg:mb-24 flex items-center gap-4 md:gap-8 overflow-hidden">
-          <Heading as="h2" className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-normal shrink-0 whitespace-nowrap">
+          <Heading as="h2" className="text-3xl md:text-5xl lg:text-6xl font-black text-primary tracking-normal shrink-0 whitespace-nowrap">
             Impact <span className="text-secondary">Réel</span>
           </Heading>
-          <div className="h-[1px] w-full bg-white/10 hidden sm:block" />
+          <div className="h-[1px] w-full bg-primary/10 hidden sm:block" />
         </div>
 
         <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 md:gap-10 lg:gap-12">
@@ -70,7 +70,7 @@ export function KpiSection() {
               delay={index * 0.1}
               className="group flex flex-col items-center md:items-start text-center md:text-left"
             >
-              <div className="text-[1.35rem] sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-normal mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
+              <div className="text-[1.35rem] sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-primary tracking-normal mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
                 <Counter value={kpi.value} suffix={kpi.suffix} />
               </div>
 
@@ -80,7 +80,7 @@ export function KpiSection() {
                   <span className="md:hidden">{kpi.title}</span>
                   <span className="hidden md:inline">{kpi.fullTitle}</span>
                 </h3>
-                <Text className="hidden md:block text-white/60 text-sm xl:text-base leading-relaxed font-medium">
+                <Text className="hidden md:block text-muted-foreground text-sm xl:text-base leading-relaxed font-medium">
                   {kpi.description}
                 </Text>
               </div>

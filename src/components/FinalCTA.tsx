@@ -4,7 +4,6 @@ import { CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
-import { SectionFade } from "@/components/ui/SectionFade";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { pushGtmEvent } from "@/lib/gtm";
@@ -134,16 +133,16 @@ export function FinalCTA({
   return (
     <Section
       container={false}
-      className="relative bg-primary overflow-hidden py-24 md:py-48"
+      className="relative bg-background overflow-hidden py-16 md:py-24"
     >
+      <Container>
+        <div className="relative overflow-hidden rounded-3xl bg-primary border border-primary/10 shadow-2xl px-6 py-20 md:py-32">
 
       <EnhancedRibbonBackground />
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[900px] h-full md:h-[900px] bg-secondary/5 blur-[160px] rounded-full pointer-events-none z-0" />
 
-      <SectionFade edge="both" />
-
-      <Container className="relative z-10 text-center">
+      <div className="relative z-10 text-center">
         <div className="space-y-8 md:space-y-16">
           <Heading
             as="h2"
@@ -180,6 +179,8 @@ export function FinalCTA({
               </div>
             </Link>
           </div>
+        </div>
+      </div>
         </div>
       </Container>
     </Section>

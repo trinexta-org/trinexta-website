@@ -43,8 +43,8 @@ export function WhyChooseUs() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <Container className="relative z-10">
+    <Section container={false} className="bg-background pt-8 pb-16 md:pb-32">
+      <Container>
         <div ref={containerRef} className="flex flex-col md:flex-row h-[600px] md:h-[600px] w-full gap-3 md:gap-4">
           {reasons.map((reason, index) => {
             const isActive = active === index;

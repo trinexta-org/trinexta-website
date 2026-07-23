@@ -24,8 +24,8 @@ function RibbonBackground() {
         <defs>
           <linearGradient id="grad-ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="transparent" stopOpacity="0" />
-            <stop offset="30%" stopColor="var(--secondary)" stopOpacity="0.4" />
-            <stop offset="60%" stopColor="var(--primary-foreground)" stopOpacity="0.8" />
+            <stop offset="30%" stopColor="var(--secondary)" stopOpacity="0.35" />
+            <stop offset="60%" stopColor="var(--primary)" stopOpacity="0.45" />
             <stop offset="90%" stopColor="var(--secondary)" stopOpacity="0.2" />
             <stop offset="100%" stopColor="transparent" stopOpacity="0" />
           </linearGradient>
@@ -63,7 +63,7 @@ export function TransitionTitle({
   return (
     <Section 
       container={false} 
-      className="bg-primary relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32"
+      className="bg-background relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32"
     >
       <RibbonBackground />
 
@@ -78,7 +78,7 @@ export function TransitionTitle({
         )}
 
         <FadeIn direction="up" delay={0.1}>
-          <Heading as="h2" className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-none">
+          <Heading as="h2" className="text-4xl md:text-6xl lg:text-7xl font-black text-primary tracking-normal leading-none">
             {line1} <br /> <span className="text-secondary">{line2}</span>
           </Heading>
         </FadeIn>

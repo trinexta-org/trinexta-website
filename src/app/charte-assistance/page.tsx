@@ -22,7 +22,7 @@ export default function CharteAssistancePage() {
         { name: "charte-assistance", url: "/charte-assistance" }
         ]} 
       />
-      <Section className="bg-primary pt-24 pb-24">
+      <Section dark className="pt-24 pb-24">
         <LegalContent data={charteAssistanceData} />
       </Section>
 

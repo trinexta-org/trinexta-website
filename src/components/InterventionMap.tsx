@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, type CSSProperties } from "react"
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
-import { SectionFade } from "@/components/ui/SectionFade"
 import { Container } from "@/components/layout/Container"
 
 const DEPARTMENTS = [
@@ -151,7 +150,9 @@ export function InterventionMap() {
     const maxR = SIZE / 2 - 24
 
     return (
-        <Section container={false} className="relative bg-primary overflow-hidden py-16 md:py-28">
+        <Section container={false} className="relative bg-background overflow-hidden py-16 md:py-28">
+          <Container>
+            <div className="relative overflow-hidden rounded-3xl bg-primary border border-primary/10 shadow-2xl px-5 py-12 md:px-10 md:py-16">
 
             <div className="absolute inset-0 pointer-events-none" style={{
                 background: "radial-gradient(ellipse 65% 75% at 72% 52%, color-mix(in srgb, var(--secondary) 10%, transparent), transparent)",
@@ -160,9 +161,7 @@ export function InterventionMap() {
                 background: "radial-gradient(ellipse 110% 110% at 50% 50%, transparent 38%, var(--primary) 100%)",
             }} />
 
-            <SectionFade edge="both" className="h-28 md:h-44" />
-
-            <Container className="relative z-10">
+            <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-10 md:mb-14">
                     <span className="relative flex h-2 w-2 shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-50" />
@@ -563,7 +562,9 @@ export function InterventionMap() {
                     </div>
 
                 </div>
-            </Container>
+                </div>
+            </div>
+          </Container>
         </Section>
     )
 }

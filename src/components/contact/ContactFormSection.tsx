@@ -8,10 +8,10 @@ import ContactForm from "@/components/contact/ContactForm";
 
 export function ContactFormSection() {
   return (
-    <Section container={false} id="formulaire" className="relative bg-primary py-24 md:py-32 overflow-hidden">
+    <Section container={false} id="formulaire" dark className="py-24 md:py-32">
       <SectionFade edge="both" />
 
-      <Container className="relative z-10">
+      <Container>
         <FadeIn direction="up">
           <div className="max-w-4xl mx-auto p-6 sm:p-10 md:p-12 lg:p-16 rounded-[2.5rem] border border-white/10 shadow-2xl bg-white/5 backdrop-blur-md">
             <ContactForm />

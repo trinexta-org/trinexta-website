@@ -63,7 +63,7 @@ async function PartnersData() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-primary relative">
+    <main className="min-h-screen bg-background relative">
       <JsonLd data={trinextaLocalBusiness} />
       <BreadcrumbJsonLd
         items={[
@@ -80,7 +80,7 @@ export default function Home() {
       />
       <ServicesSection />
 
-      <Section className="py-12 md:py-16">
+      <Section className="bg-background py-12 md:py-16">
         <BannerCTA
           variant="primary"
           title="Votre site est-il vraiment vu par Google ?"

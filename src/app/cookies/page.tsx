@@ -22,7 +22,7 @@ export default function CookiesPage() {
           { name: "cookies", url: "/cookies" }
         ]} 
       />
-      <Section className="bg-primary pt-24 pb-24">
+      <Section dark className="pt-24 pb-24">
         <LegalContent data={cookiesData} />
       </Section>
 

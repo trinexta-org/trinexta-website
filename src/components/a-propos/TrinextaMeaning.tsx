@@ -58,7 +58,7 @@ export function TrinextaMeaning() {
   const visible = isInView || reducedMotion
 
   return (
-    <Section id="signification" className="py-16 md:py-32 bg-primary overflow-hidden relative">
+    <Section id="signification" dark className="py-16 md:py-32">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Text variant="lead" className="text-white/90 text-lg md:text-xl leading-relaxed drop-shadow-md">
           Le nom Trinexta n&apos;a pas été choisi au hasard. Il traduit notre vision profonde :
