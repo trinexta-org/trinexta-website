@@ -11,7 +11,7 @@ export interface Partner {
 }
 
 export function PartnersSection({ partners }: { partners: Partner[] }) {
-  const carouselPartners = [...partners, ...partners, ...partners, ...partners, ...partners]
+  const carouselPartners = [...partners, ...partners, ...partners]
   const itemsCount = partners.length || 11;
 
   return (
