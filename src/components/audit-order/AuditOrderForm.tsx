@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Typography";
 import { auditOrderRequestSchema } from "@/lib/validations/audit-order";
 
-type Phase = "form" | "loading" | "confirmation";
+type Phase = "form" | "loading";
 
 const fieldClass =
     "h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary";
@@ -56,7 +56,17 @@ export function AuditOrderForm() {
                 const json = await res.json().catch(() => null);
                 throw new Error(json?.error ?? "La demande a échoué.");
             }
-            setPhase("confirmation");
+            const { id } = await res.json();
+
+            const checkoutRes = await fetch(`/api/audit-order/${id}/checkout`, {
+                method: "POST",
+            });
+            if (!checkoutRes.ok) {
+                const json = await checkoutRes.json().catch(() => null);
+                throw new Error(json?.error ?? "La redirection vers le paiement a échoué.");
+            }
+            const { url } = await checkoutRes.json();
+            window.location.href = url;
         } catch (err) {
             setError(
                 err instanceof Error && err.message !== "Failed to fetch"
@@ -66,16 +76,6 @@ export function AuditOrderForm() {
             setPhase("form");
         }
     };
-
-    if (phase === "confirmation") {
-        return (
-            <div className="rounded-2xl border border-white/10 bg-black/20 p-6 text-center">
-                <Text className="text-white">
-                    Votre demande est enregistrée. Vous recevrez les prochaines étapes par email.
-                </Text>
-            </div>
-        );
-    }
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
