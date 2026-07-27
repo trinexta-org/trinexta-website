@@ -17,6 +17,7 @@ vi.mock("@/lib/db", () => ({
 
 import { POST } from "@/app/api/audit-order/route";
 import { AUDIT_ORDER_PRICE_EUR } from "@/data/audit-seo/offer";
+import { CGV_VENTE_EN_LIGNE_VERSION } from "@/data/cgv-audit-expert";
 
 const validPayload = {
     url: "https://mon-site.fr",
@@ -53,6 +54,7 @@ describe("POST /api/audit-order", () => {
                 status: "pending",
                 amountEur: AUDIT_ORDER_PRICE_EUR,
                 cgvAcceptedAt: expect.any(Date),
+                cgvVersion: CGV_VENTE_EN_LIGNE_VERSION,
             }),
         });
     });

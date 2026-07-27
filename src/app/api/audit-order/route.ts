@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { AUDIT_ORDER_PRICE_EUR } from "@/data/audit-seo/offer";
+import { CGV_VENTE_EN_LIGNE_VERSION } from "@/data/cgv-audit-expert";
 import { auditOrderRequestSchema } from "@/lib/validations/audit-order";
 import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
 
@@ -44,6 +45,7 @@ export async function POST(request: Request) {
                 amountEur: AUDIT_ORDER_PRICE_EUR,
                 status: "pending",
                 cgvAcceptedAt: new Date(),
+                cgvVersion: CGV_VENTE_EN_LIGNE_VERSION,
             },
         });
 
