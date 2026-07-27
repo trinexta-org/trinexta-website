@@ -16,7 +16,7 @@ vi.mock("@/lib/db", () => ({
 }));
 
 import { POST } from "@/app/api/audit-order/route";
-import { AUDIT_ORDER_PRICE_EUR_HT } from "@/data/audit-seo/offer";
+import { AUDIT_ORDER_PRICE_EUR } from "@/data/audit-seo/offer";
 
 const validPayload = {
     url: "https://mon-site.fr",
@@ -51,7 +51,7 @@ describe("POST /api/audit-order", () => {
         expect(createMock).toHaveBeenCalledWith({
             data: expect.objectContaining({
                 status: "pending",
-                amountEur: AUDIT_ORDER_PRICE_EUR_HT,
+                amountEur: AUDIT_ORDER_PRICE_EUR,
                 cgvAcceptedAt: expect.any(Date),
             }),
         });

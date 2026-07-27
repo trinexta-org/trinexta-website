@@ -112,11 +112,12 @@ export async function POST(request: Request) {
       await sendMail({
         to: email,
         subject: "Votre audit SEO Trinexta",
-        html: buildAuditReportHtml(emailData, prenom, process.env.NEXT_PUBLIC_BOOKINGS_URL),
+        html: buildAuditReportHtml(emailData, prenom, audit.id),
       });
     } catch (mailError) {
       console.error("Erreur envoi rapport audit SEO:", mailError);
       reportSent = false;
+      
     }
 
     try {

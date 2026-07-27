@@ -67,9 +67,15 @@ describe("POST /api/audit-order/[id]/checkout", () => {
             expect.objectContaining({
                 metadata: { auditOrderId: "order_1" },
                 invoice_creation: { enabled: true },
+                line_items: [
+                    expect.objectContaining({
+                        price_data: expect.objectContaining({ unit_amount: 49000 }),
+                    }),
+                ],
             })
         );
         expect(updateMock).toHaveBeenCalledWith({
+            
             where: { id: "order_1" },
             data: { stripeSessionId: "cs_test_1" },
         });

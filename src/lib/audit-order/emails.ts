@@ -32,7 +32,7 @@ export function buildAuditOrderPaidNotificationHtml(order: AuditOrderPaidNotific
     <p><strong>Email :</strong> ${escapeHtml(order.email)}</p>
     <p><strong>N° TVA :</strong> ${order.tva ? escapeHtml(order.tva) : "Non renseigné"}</p>
     <p><strong>Site à auditer :</strong> ${safeUrlHtml(order.url)}</p>
-    <p><strong>Montant :</strong> ${order.amountEur} € HT</p>
+    <p><strong>Montant :</strong> ${order.amountEur} € TTC</p>
     <p><strong>Payé le :</strong> ${order.paidAt ? order.paidAt.toLocaleString("fr-FR") : "Non renseigné"}</p>
   </div>`;
 }
