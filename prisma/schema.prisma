@@ -123,6 +123,7 @@ model AuditOrder {
   amountEur             Int
   status                String    @default("pending")
   cgvAcceptedAt         DateTime
+  cgvVersion            String
   createdAt             DateTime  @default(now())
   paidAt                DateTime?
   deliveredAt           DateTime?
