@@ -3,6 +3,13 @@ import { escapeHtml } from "@/lib/mail";
 const COLOR_PRIMARY = "#0a233e";
 const COLOR_SECONDARY = "#5c92b8";
 
+function safeUrlHtml(url: string): string {
+    const isSafe = /^https?:\/\//i.test(url);
+    const safeText = escapeHtml(url);
+    if (!isSafe) return safeText;
+    return `<a href="${safeText}" style="color:${COLOR_SECONDARY};">${safeText}</a>`;
+}
+
 export interface AuditOrderPaidNotificationData {
     id: string;
     prenom: string;
@@ -24,7 +31,7 @@ export function buildAuditOrderPaidNotificationHtml(order: AuditOrderPaidNotific
     <p><strong>Entreprise :</strong> ${escapeHtml(order.entreprise)}</p>
     <p><strong>Email :</strong> ${escapeHtml(order.email)}</p>
     <p><strong>N° TVA :</strong> ${order.tva ? escapeHtml(order.tva) : "Non renseigné"}</p>
-    <p><strong>Site à auditer :</strong> <a href="${escapeHtml(order.url)}" style="color:${COLOR_SECONDARY};">${escapeHtml(order.url)}</a></p>
+    <p><strong>Site à auditer :</strong> ${safeUrlHtml(order.url)}</p>
     <p><strong>Montant :</strong> ${order.amountEur} € HT</p>
     <p><strong>Payé le :</strong> ${order.paidAt ? order.paidAt.toLocaleString("fr-FR") : "Non renseigné"}</p>
   </div>`;
