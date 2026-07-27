@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getStripe } from "@/lib/stripe";
-import { AUDIT_ORDER_VAT_RATE } from "@/data/audit-seo/offer";
 import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
 
 const AUDIT_ORDER_CHECKOUT_MAX_PER_IP = 10;
@@ -32,7 +31,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
             return NextResponse.json({ error: "Configuration serveur invalide." }, { status: 500 });
         }
 
-        const amountTtcCents = Math.round(order.amountEur * (1 + AUDIT_ORDER_VAT_RATE) * 100);
+        const amountEurCents = Math.round(order.amountEur * 100);
 
         const stripe = getStripe();
         const session = await stripe.checkout.sessions.create({
@@ -41,7 +40,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
                 {
                     price_data: {
                         currency: "eur",
-                        unit_amount: amountTtcCents,
+                        unit_amount: amountEurCents,
                         product_data: {
                             name: "Audit SEO Expert",
                             description: order.url,

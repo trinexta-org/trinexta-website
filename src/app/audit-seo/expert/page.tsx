@@ -5,11 +5,8 @@ import { Heading, Text } from "@/components/ui/Typography";
 import { Entrance } from "@/components/ui/Entrance";
 import { AuditOrderForm } from "@/components/audit-order/AuditOrderForm";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import {
-    AUDIT_ORDER_PRICE_EUR_HT,
-    AUDIT_ORDER_PRICE_EUR_TTC,
-    AUDIT_ORDER_DELAY_LABEL,
-} from "@/data/audit-seo/offer";
+import { prisma } from "@/lib/db";
+import { AUDIT_ORDER_PRICE_EUR, AUDIT_ORDER_DELAY_LABEL } from "@/data/audit-seo/offer";
 
 export const metadata: Metadata = {
     title: "Audit SEO Expert · Analyse manuelle et livrable détaillé",
@@ -41,7 +38,20 @@ const INCLUS = [
     "Restitution en visio de 30 à 45 minutes",
 ];
 
-export default function AuditSeoExpertPage() {
+export default async function AuditSeoExpertPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ seoAuditId?: string }>;
+}) {
+    const { seoAuditId } = await searchParams;
+
+    const seoAudit = seoAuditId
+        ? await prisma.seoAudit.findUnique({
+            where: { id: seoAuditId },
+            select: { id: true, url: true, prenom: true, nom: true, email: true, entreprise: true },
+        })
+        : null;
+
     return (
         <main className="relative bg-primary">
             <BreadcrumbJsonLd
@@ -84,19 +94,27 @@ export default function AuditSeoExpertPage() {
                             ))}
                         </ul>
 
-                        <p className="mt-6 text-2xl font-black text-white">
-                            {AUDIT_ORDER_PRICE_EUR_HT}€ HT
-                            <span className="ml-2 text-sm font-normal text-white/50">
-                                ({AUDIT_ORDER_PRICE_EUR_TTC}€ TTC)
-                            </span>
-                        </p>
+                        <p className="mt-6 text-2xl font-black text-white">{AUDIT_ORDER_PRICE_EUR}€ TTC</p>
                         <p className="mt-1 text-sm text-white/50">
                             Entièrement déduit si vous nous confiez la refonte de votre site.
                         </p>
                     </Entrance>
 
                     <div id="commande-form" className="mt-10 scroll-mt-24">
-                        <AuditOrderForm />
+                        <AuditOrderForm
+                            initialValues={
+                                seoAudit
+                                    ? {
+                                        url: seoAudit.url,
+                                        prenom: seoAudit.prenom,
+                                        nom: seoAudit.nom,
+                                        email: seoAudit.email,
+                                        entreprise: seoAudit.entreprise,
+                                        seoAuditId: seoAudit.id,
+                                    }
+                                    : undefined
+                            }
+                        />
                     </div>
                 </Container>
             </ViewportHero>

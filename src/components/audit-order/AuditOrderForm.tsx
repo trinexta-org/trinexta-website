@@ -12,15 +12,24 @@ const fieldClass =
     "h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary";
 const labelClass = "mb-2 block text-[11px] font-bold uppercase tracking-widest text-white";
 
-export function AuditOrderForm() {
+interface AuditOrderFormInitialValues {
+    url?: string;
+    prenom?: string;
+    nom?: string;
+    email?: string;
+    entreprise?: string;
+    seoAuditId?: string;
+}
+
+export function AuditOrderForm({ initialValues }: { initialValues?: AuditOrderFormInitialValues }) {
     const [phase, setPhase] = useState<Phase>("form");
     const [error, setError] = useState<string | null>(null);
 
-    const [url, setUrl] = useState("");
-    const [prenom, setPrenom] = useState("");
-    const [nom, setNom] = useState("");
-    const [email, setEmail] = useState("");
-    const [entreprise, setEntreprise] = useState("");
+    const [url, setUrl] = useState(initialValues?.url ?? "");
+    const [prenom, setPrenom] = useState(initialValues?.prenom ?? "");
+    const [nom, setNom] = useState(initialValues?.nom ?? "");
+    const [email, setEmail] = useState(initialValues?.email ?? "");
+    const [entreprise, setEntreprise] = useState(initialValues?.entreprise ?? "");
     const [tva, setTva] = useState("");
     const [consent, setConsent] = useState(false);
 
@@ -36,6 +45,7 @@ export function AuditOrderForm() {
             entreprise: entreprise.trim(),
             tva: tva.trim(),
             consent,
+            ...(initialValues?.seoAuditId ? { seoAuditId: initialValues.seoAuditId } : {}),
         };
 
         const parsed = auditOrderRequestSchema.safeParse(payload);
