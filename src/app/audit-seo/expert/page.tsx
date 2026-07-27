@@ -46,10 +46,12 @@ export default async function AuditSeoExpertPage({
     const { seoAuditId } = await searchParams;
 
     const seoAudit = seoAuditId
-        ? await prisma.seoAudit.findUnique({
-            where: { id: seoAuditId },
-            select: { id: true, url: true, prenom: true, nom: true, email: true, entreprise: true },
-        })
+        ? await prisma.seoAudit
+            .findUnique({
+                where: { id: seoAuditId },
+                select: { id: true, url: true, prenom: true, nom: true, email: true, entreprise: true },
+            })
+            .catch(() => null)
         : null;
 
     return (
