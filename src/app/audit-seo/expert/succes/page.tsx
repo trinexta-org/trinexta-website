@@ -5,7 +5,6 @@ import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { getStripe } from "@/lib/stripe";
-import { AUDIT_ORDER_DELAY_LABEL } from "@/data/audit-seo/offer";
 
 export const metadata: Metadata = {
     title: "Commande confirmée · Audit SEO Expert",
@@ -26,7 +25,7 @@ async function getPaidSession(sessionId: string | undefined) {
 const TIMELINE_STEPS = [
     { label: "Payé", done: true },
     { label: "Analyse par l'expert", done: false },
-    { label: `Livrable ${AUDIT_ORDER_DELAY_LABEL.toLowerCase()}`, done: false },
+    { label: "Livrable sous 72h ouvrées", done: false },
     { label: "Restitution visio (au créneau réservé)", done: false },
 ];
 

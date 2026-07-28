@@ -1,5 +1,5 @@
 import type { FaqItem } from "@/components/shared/FaqSection";
-import { AUDIT_ORDER_DELAY_LABEL, AUDIT_ORDER_PRICE_EUR } from "./offer";
+import { AUDIT_ORDER_PRICE_EUR } from "./offer";
 
 export const expertAuditFaqs: FaqItem[] = [
     {
@@ -8,7 +8,7 @@ export const expertAuditFaqs: FaqItem[] = [
     },
     {
         question: "Sous combien de temps je reçois l'audit ?",
-        answer: `${AUDIT_ORDER_DELAY_LABEL}. Vous recevez le livrable détaillé par email, puis vous échangez avec l'expert lors de la restitution en visio au créneau réservé.`,
+        answer: "Livrable sous 72h ouvrées. Vous recevez le livrable détaillé par email, puis vous échangez avec l'expert lors de la restitution en visio au créneau réservé.",
     },
     {
         question: "Et si le délai n'est pas tenu ?",
