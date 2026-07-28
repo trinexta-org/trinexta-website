@@ -100,7 +100,7 @@ export default async function AuditSeoExpertPage({
                         </Text>
 
                         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                            <Button asChild variant="secondary" size="lg">
+                            <Button asChild variant="secondary" size="lg" className="text-base sm:text-lg">
                                 <a href="#commande-form">Commander mon audit expert</a>
                             </Button>
                             <Button asChild variant="ghost" size="md" className="text-white hover:bg-white/10 hover:text-white">

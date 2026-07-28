@@ -203,7 +203,7 @@ export function AuditOrderForm({ initialValues }: { initialValues?: AuditOrderFo
                 variant="secondary"
                 size="lg"
                 disabled={!consent || phase === "loading"}
-                className="w-full sm:w-auto"
+                className="w-full text-base sm:w-auto sm:text-lg"
             >
                 {phase === "loading" ? "Envoi en cours..." : "Commander mon audit expert"}
             </Button>
