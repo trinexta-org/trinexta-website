@@ -1,10 +1,10 @@
 const SOMMAIRE_ITEMS = [
-    "Couverture — identification du client, de l'URL auditée et de la date de réalisation",
-    "Synthèse exécutive — score global sur 100 et les 3 constats les plus critiques",
-    "Scores par pilier — Performance, Contenu, Technique et Local, chacun noté sur 100",
-    "Constats majeurs — le problème, pourquoi c'est grave, une analogie et comment on le voit",
-    "Constats secondaires — la liste des points additionnels à corriger",
-    "Recommandations — un plan d'action en 3 paliers, du plus rapide au plus stratégique",
+    "Couverture : identification du client, de l'URL auditée et de la date de réalisation",
+    "Synthèse exécutive : score global sur 100 et les 3 constats les plus critiques",
+    "Scores par pilier : Performance, Contenu, Technique et Local, chacun noté sur 100",
+    "Constats majeurs : le problème, pourquoi c'est grave, une analogie et comment on le voit",
+    "Constats secondaires : la liste des points additionnels à corriger",
+    "Recommandations : un plan d'action en 3 paliers, du plus rapide au plus stratégique",
 ];
 
 export function SommaireLivrable() {

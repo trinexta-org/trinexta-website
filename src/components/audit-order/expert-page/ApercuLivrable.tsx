@@ -32,7 +32,7 @@ export function ApercuLivrable() {
                     {data.couverture.titreRapport}
                 </Heading>
                 <Text className="mt-1 text-white/60">
-                    {data.couverture.client} — {data.couverture.url}
+                    {data.couverture.client} · {data.couverture.url}
                 </Text>
                 <Text className="mt-1 text-white/40" variant="small">
                     {data.couverture.date} · Réalisé par {data.couverture.realisePar}
