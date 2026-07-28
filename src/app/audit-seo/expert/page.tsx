@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/layout/Container";
-import { ViewportHero } from "@/components/layout/ViewportHero";
+import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
+import { Button } from "@/components/ui/Button";
 import { Entrance } from "@/components/ui/Entrance";
 import { AuditOrderForm } from "@/components/audit-order/AuditOrderForm";
+import { SommaireLivrable } from "@/components/audit-order/expert-page/SommaireLivrable";
+import { ApercuLivrable } from "@/components/audit-order/expert-page/ApercuLivrable";
+import { GarantieBlock } from "@/components/audit-order/expert-page/GarantieBlock";
+import { FaqSection } from "@/components/shared/FaqSection";
+import { expertAuditFaqs } from "@/data/audit-seo/expert-faq";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { prisma } from "@/lib/db";
 import { AUDIT_ORDER_PRICE_EUR, AUDIT_ORDER_DELAY_LABEL } from "@/data/audit-seo/offer";
@@ -32,12 +40,6 @@ export const metadata: Metadata = {
     },
 };
 
-const INCLUS = [
-    "Analyse manuelle complète par un expert SEO",
-    "Livrable détaillé au format Word/PDF, charte Trinexta",
-    "Restitution en visio de 30 à 45 minutes",
-];
-
 export default async function AuditSeoExpertPage({
     searchParams,
 }: {
@@ -64,8 +66,27 @@ export default async function AuditSeoExpertPage({
                 ]}
             />
 
-            <ViewportHero>
-                <Container className="relative z-10 max-w-3xl py-12 md:py-16 lg:py-20">
+            <Section className="relative overflow-hidden pt-12 md:pt-16 lg:pt-20">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/audit-seo/hero-audit-seo-expert.webp"
+                        alt="Un expert Trinexta analysant un site"
+                        fill
+                        quality={75}
+                        priority
+                        fetchPriority="high"
+                        className="object-cover object-center"
+                        sizes="100vw"
+                    />
+                    <div className="absolute inset-0 bg-primary/90" />
+                </div>
+
+                <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+                    <div className="absolute -top-40 left-1/2 h-[480px] w-[720px] max-w-full -translate-x-1/2 rounded-full bg-secondary/10 blur-[140px]" />
+                    <div className="absolute -left-48 bottom-0 h-[420px] w-[560px] rounded-full bg-secondary/5 blur-[120px]" />
+                </div>
+
+                <Container className="relative z-10 max-w-3xl">
                     <Entrance direction="up">
                         <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
                             Audit SEO Expert
@@ -78,31 +99,42 @@ export default async function AuditSeoExpertPage({
                             suivi d&apos;une restitution en visio. {AUDIT_ORDER_DELAY_LABEL}.
                         </Text>
 
-                        <ul className="mt-6 space-y-2">
-                            {INCLUS.map((item) => (
-                                <li key={item} className="flex items-center gap-2 text-sm text-white/60">
-                                    <svg
-                                        className="h-3.5 w-3.5 shrink-0 text-secondary"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth={2.5}
-                                        viewBox="0 0 24 24"
-                                        aria-hidden="true"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                            <Button asChild variant="secondary" size="lg" className="text-base sm:text-lg">
+                                <a href="#commande-form">Commander mon audit expert</a>
+                            </Button>
+                            <Button asChild variant="ghost" size="md" className="text-white hover:bg-white/10 hover:text-white">
+                                <Link href="/audit-seo">Pas sûr ? Testez l&apos;audit gratuit</Link>
+                            </Button>
+                        </div>
+                    </Entrance>
+                </Container>
+            </Section>
 
-                        <p className="mt-6 text-2xl font-black text-white">{AUDIT_ORDER_PRICE_EUR}€ TTC</p>
+            <Section className="py-16 md:py-20 lg:py-24">
+                <Container className="max-w-5xl space-y-10">
+                    <SommaireLivrable />
+                    <ApercuLivrable />
+                    <GarantieBlock />
+                </Container>
+            </Section>
+
+            <Section className="pb-16 md:pb-20 lg:pb-24">
+                <Container className="max-w-5xl">
+                    <FaqSection faqs={expertAuditFaqs} />
+                </Container>
+            </Section>
+
+            <Section id="commande-form" className="scroll-mt-24 pb-16 md:pb-20 lg:pb-24">
+                <Container className="max-w-3xl">
+                    <Entrance direction="up">
+                        <p className="text-2xl font-black text-white">{AUDIT_ORDER_PRICE_EUR}€ TTC</p>
                         <p className="mt-1 text-sm text-white/50">
                             Entièrement déduit si vous nous confiez la refonte de votre site.
                         </p>
                     </Entrance>
 
-                    <div id="commande-form" className="mt-10 scroll-mt-24">
+                    <div className="mt-10">
                         <AuditOrderForm
                             initialValues={
                                 seoAudit
@@ -118,8 +150,15 @@ export default async function AuditSeoExpertPage({
                             }
                         />
                     </div>
+
+                    <p className="mt-6 text-center text-sm text-white/50">
+                        Pas encore prêt ?{" "}
+                        <Link href="/audit-seo" className="underline hover:text-white">
+                            Commencez par l&apos;audit gratuit
+                        </Link>
+                    </p>
                 </Container>
-            </ViewportHero>
+            </Section>
         </main>
     );
 }

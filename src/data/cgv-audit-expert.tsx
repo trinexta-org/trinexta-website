@@ -74,9 +74,10 @@ export const cgvAuditExpertData: LegalData = {
             ],
         },
         {
-            title: "Article 5 - Délai de livraison",
+            title: "Article 5 - Délai de livraison et garantie",
             paragraphs: [
-                `${AUDIT_ORDER_DELAY_LABEL}, à compter de la confirmation du paiement. Ce délai constitue un objectif de service. En cas de dépassement significatif, le Client en est informé par e-mail.`,
+                `${AUDIT_ORDER_DELAY_LABEL}, à compter de la confirmation du paiement.`,
+                `Si ce délai n'est pas respecté, TRINEXTA rembourse intégralement le Client. Cette garantie porte exclusivement sur le respect du délai de livraison du livrable ; elle ne constitue pas un droit de rétractation ou de satisfait-ou-remboursé sur le contenu de la prestation elle-même.`,
             ],
         },
         {

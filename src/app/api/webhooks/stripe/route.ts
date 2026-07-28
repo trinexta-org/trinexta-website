@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { prisma } from "@/lib/db";
 import { getStripe } from "@/lib/stripe";
 import { sendMail } from "@/lib/mail";
-import { buildAuditOrderPaidNotificationHtml } from "@/lib/audit-order/emails";
+import { buildAuditOrderClientConfirmationHtml, buildAuditOrderPaidNotificationHtml } from "@/lib/audit-order/emails";
 
 export async function POST(request: Request) {
     const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -79,6 +79,20 @@ export async function POST(request: Request) {
         } catch (error) {
             console.error("Erreur envoi notification paiement:", error);
         }
+    }
+
+    try {
+        await sendMail({
+            to: updatedOrder.email,
+            subject: "Votre commande Audit SEO Expert est confirmée",
+            html: buildAuditOrderClientConfirmationHtml({
+                prenom: updatedOrder.prenom,
+                url: updatedOrder.url,
+                amountEur: updatedOrder.amountEur,
+            }),
+        });
+    } catch (error) {
+        console.error("Erreur envoi confirmation client:", error);
     }
 
     return NextResponse.json({ received: true }, { status: 200 });
