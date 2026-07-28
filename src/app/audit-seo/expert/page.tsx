@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Heading, Text } from "@/components/ui/Typography";
@@ -65,8 +66,27 @@ export default async function AuditSeoExpertPage({
                 ]}
             />
 
-            <Section className="pt-12 md:pt-16 lg:pt-20">
-                <Container className="max-w-3xl">
+            <Section className="relative overflow-hidden pt-12 md:pt-16 lg:pt-20">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/audit-seo/hero-audit-seo-expert.webp"
+                        alt="Un expert Trinexta analysant un site"
+                        fill
+                        quality={75}
+                        priority
+                        fetchPriority="high"
+                        className="object-cover object-center"
+                        sizes="100vw"
+                    />
+                    <div className="absolute inset-0 bg-primary/90" />
+                </div>
+
+                <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+                    <div className="absolute -top-40 left-1/2 h-[480px] w-[720px] max-w-full -translate-x-1/2 rounded-full bg-secondary/10 blur-[140px]" />
+                    <div className="absolute -left-48 bottom-0 h-[420px] w-[560px] rounded-full bg-secondary/5 blur-[120px]" />
+                </div>
+
+                <Container className="relative z-10 max-w-3xl">
                     <Entrance direction="up">
                         <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
                             Audit SEO Expert
@@ -83,7 +103,7 @@ export default async function AuditSeoExpertPage({
                             <Button asChild variant="secondary" size="lg">
                                 <a href="#commande-form">Commander mon audit expert</a>
                             </Button>
-                            <Button asChild variant="ghost" size="md">
+                            <Button asChild variant="ghost" size="md" className="text-white hover:bg-white/10 hover:text-white">
                                 <Link href="/audit-seo">Pas sûr ? Testez l&apos;audit gratuit</Link>
                             </Button>
                         </div>
