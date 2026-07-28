@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Typography";
 import { auditOrderRequestSchema } from "@/lib/validations/audit-order";
+import { AUDIT_ORDER_CONSENT_LABEL } from "@/data/cgv-audit-expert";
 
 type Phase = "form" | "loading";
 
@@ -188,11 +189,23 @@ export function AuditOrderForm({ initialValues }: { initialValues?: AuditOrderFo
                     className="mt-0.5 h-4 w-4 shrink-0 accent-secondary"
                 />
                 <span>
-                    J&apos;accepte les{" "}
+                    {AUDIT_ORDER_CONSENT_LABEL.cgvBefore}
                     <a href="/cgv-audit-expert" className="underline hover:text-white" target="_blank">
-                        conditions générales de vente
+                        {AUDIT_ORDER_CONSENT_LABEL.cgvLink}
                     </a>
-                    .
+                    {AUDIT_ORDER_CONSENT_LABEL.cgvAfter}
+                    {/* Mention visuellement secondaire, mais jamais sous text-white/60 :
+                        c'est la preuve de la renonciation, elle doit rester lisible. */}
+                    <span className="mt-1 block text-xs leading-relaxed text-white/60">
+                        {AUDIT_ORDER_CONSENT_LABEL.immediateExecution}{" "}
+                        <a
+                            href="/cgv-audit-expert#article-6"
+                            className="underline hover:text-white/80"
+                            target="_blank"
+                        >
+                            En savoir plus
+                        </a>
+                    </span>
                 </span>
             </label>
 

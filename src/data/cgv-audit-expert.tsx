@@ -9,6 +9,25 @@ import { AUDIT_ORDER_PRICE_EUR, AUDIT_ORDER_DELAY_LABEL } from "./audit-seo/offe
  */
 export const CGV_VENTE_EN_LIGNE_VERSION = "2026-07-28"
 
+/**
+ * Libellé de la case à cocher du formulaire de commande. Il vaut à la fois
+ * acceptation des CGV et demande expresse d'exécution immédiate au sens de
+ * l'article L221-28 du Code de la consommation : c'est la preuve de la
+ * renonciation au droit de rétractation décrite à l'article 6 ci-dessous.
+ *
+ * Il vit ici, et pas dans le composant, pour être versionné avec les CGV :
+ * toute modification de ce texte impose de bumper CGV_VENTE_EN_LIGNE_VERSION,
+ * faute de quoi AuditOrder.cgvVersion ne permet plus de savoir ce que le
+ * Client a réellement accepté.
+ */
+export const AUDIT_ORDER_CONSENT_LABEL = {
+    cgvBefore: "J'accepte les ",
+    cgvLink: "conditions générales de vente",
+    cgvAfter: ".",
+    immediateExecution:
+        "Je demande le démarrage immédiat de mon audit et je reconnais ne plus pouvoir me rétracter une fois celui-ci livré.",
+} as const
+
 export const cgvAuditExpertData: LegalData = {
     hero: {
         title: "CGV — Vente en ligne (Audit SEO Expert)",
@@ -63,16 +82,13 @@ export const cgvAuditExpertData: LegalData = {
         },
         {
             title: "Article 6 - Droit de rétractation",
-            content: (
-                <div className="space-y-3">
-                    <p className="text-sm md:text-base text-white/70 leading-relaxed">
-                        Conformément à l&apos;article L221-3 du Code de la consommation, un droit de rétractation de 14 jours peut s&apos;appliquer aux contrats conclus entre professionnels, sous réserve que le contrat soit conclu hors établissement, que l&apos;objet du contrat n&apos;entre pas dans le champ de l&apos;activité principale du Client, et que le Client emploie cinq salariés ou moins.
-                    </p>
-                    <p className="text-sm md:text-base text-white/70 leading-relaxed">
-                        Les modalités précises d&apos;application de ce droit à la prestation Audit SEO Expert, ainsi que les conditions d&apos;exercice éventuelles de ce droit compte tenu du délai de livraison de 72h ouvrées, sont en cours de validation par TRINEXTA et seront précisées dans une version ultérieure des présentes CGV.
-                    </p>
-                </div>
-            ),
+            paragraphs: [
+                "Conformément à l'article L221-3 du Code de la consommation, un droit de rétractation de quatorze jours peut s'appliquer aux contrats conclus entre professionnels, sous réserve que le contrat soit conclu hors établissement, que l'objet du contrat n'entre pas dans le champ de l'activité principale du Client, et que le Client emploie cinq salariés ou moins.",
+                "Conformément à l'article L221-28 du même code, ce droit ne peut être exercé lorsque la prestation a été intégralement exécutée avant la fin du délai de quatorze jours, dès lors que le Client a expressément demandé l'exécution immédiate de la prestation et reconnu perdre son droit de rétractation une fois celle-ci pleinement exécutée.",
+                "Cette demande expresse et cette reconnaissance sont recueillies sur le formulaire de commande /audit-seo/expert au moyen de la case à cocher dont la validation conditionne la commande. Le libellé de cette case mentionne expressément le démarrage immédiat de la prestation et la perte du droit de rétractation une fois l'audit livré. La date de cette acceptation ainsi que la version des présentes CGV alors en vigueur sont enregistrées par TRINEXTA.",
+                "Tant que l'audit n'a pas été livré, le Client éligible au droit de rétractation peut l'exercer par simple demande écrite adressée à TRINEXTA (article 9). Conformément à l'article L221-25 du Code de la consommation, le Client ayant demandé l'exécution immédiate reste redevable du montant correspondant à la prestation déjà fournie à la date de sa demande. Le remboursement du solde intervient dans un délai de quatorze jours à compter de la réception de celle-ci.",
+                "Le Client qui souhaite conserver son droit de rétractation pendant toute la durée du délai de quatorze jours ne peut pas commander selon les modalités de l'article 5. Il est invité à contacter TRINEXTA (article 9) afin de convenir d'un délai d'exécution compatible.",
+            ],
         },
         {
             title: "Article 7 - Responsabilité",
