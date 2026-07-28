@@ -36,7 +36,7 @@ export function OurNetwork() {
                         className="w-full lg:w-1/2 relative h-[250px] sm:h-[350px] md:h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shrink-0"
                     >
                         <Image
-                            src="/images/a-propos/reseau.jpg"
+                            src="/images/a-propos/reseau.webp"
                             alt="Le réseau de techniciens Trinexta en intervention"
                             fill
                             sizes="(max-width: 1024px) 100vw, 50vw"
