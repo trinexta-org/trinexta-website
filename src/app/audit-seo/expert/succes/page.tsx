@@ -23,6 +23,13 @@ async function getPaidSession(sessionId: string | undefined) {
     }
 }
 
+const TIMELINE_STEPS = [
+    { label: "Payé", done: true },
+    { label: "Analyse par l'expert", done: false },
+    { label: `Livrable ${AUDIT_ORDER_DELAY_LABEL.toLowerCase()}`, done: false },
+    { label: "Restitution visio (au créneau réservé)", done: false },
+];
+
 export default async function AuditSeoExpertSuccesPage({
     searchParams,
 }: {
@@ -30,6 +37,7 @@ export default async function AuditSeoExpertSuccesPage({
 }) {
     const { session_id } = await searchParams;
     const paidSession = await getPaidSession(session_id);
+    const bookingsUrl = process.env.NEXT_PUBLIC_BOOKINGS_URL;
 
     return (
         <main className="relative bg-primary">
@@ -43,7 +51,53 @@ export default async function AuditSeoExpertSuccesPage({
                             <Text className="mt-4 text-white/70">
                                 Merci, votre paiement a bien été reçu. Un email de confirmation vous a été envoyé.
                             </Text>
-                            <Text className="mt-2 text-white/70">{AUDIT_ORDER_DELAY_LABEL}.</Text>
+
+                            <div className="mt-10 text-left">
+                                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                                    Et maintenant ?
+                                </p>
+                                <ol className="mt-4 space-y-3">
+                                    {TIMELINE_STEPS.map((step, index) => (
+                                        <li key={step.label} className="flex items-center gap-3">
+                                            <span
+                                                className={
+                                                    step.done
+                                                        ? "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-black text-white"
+                                                        : "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/20 text-xs font-black text-white/40"
+                                                }
+                                            >
+                                                {index + 1}
+                                            </span>
+                                            <span className={step.done ? "font-bold text-white" : "text-white/60"}>
+                                                {step.label}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div>
+
+                            <div className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-6">
+                                <p className="font-bold text-white">Réservez votre créneau de restitution</p>
+                                <p className="mt-1 text-sm text-white/60">
+                                    Choisissez dès maintenant un créneau pour votre visio de restitution.
+                                </p>
+                                <Button asChild variant="secondary" size="lg" className="mt-4">
+                                    {bookingsUrl ? (
+                                        <a href={bookingsUrl} target="_blank" rel="noopener noreferrer">
+                                            Prendre rendez-vous
+                                        </a>
+                                    ) : (
+                                        <Link href="/contact">Prendre rendez-vous</Link>
+                                    )}
+                                </Button>
+                            </div>
+
+                            <Text className="mt-6 text-sm text-white/50">
+                                Une question ?{" "}
+                                <Link href="/contact" className="underline hover:text-white">
+                                    Contactez-nous
+                                </Link>
+                            </Text>
                         </>
                     ) : (
                         <>
@@ -57,7 +111,7 @@ export default async function AuditSeoExpertSuccesPage({
                         </>
                     )}
 
-                    <Button asChild variant="secondary" size="lg" className="mt-8">
+                    <Button asChild variant="ghost" size="md" className="mt-8">
                         <Link href="/">Retour à l&apos;accueil</Link>
                     </Button>
                 </Container>

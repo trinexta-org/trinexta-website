@@ -207,6 +207,8 @@ export function AuditOrderForm({ initialValues }: { initialValues?: AuditOrderFo
             >
                 {phase === "loading" ? "Envoi en cours..." : "Commander mon audit expert"}
             </Button>
+
+            <p className="text-xs text-white/40">Paiement sécurisé via Stripe</p>
         </form>
     );
 }
