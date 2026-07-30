@@ -80,15 +80,18 @@ export default async function AuditSeoExpertSuccesPage({
                                 <p className="mt-1 text-sm text-white/60">
                                     Choisissez dès maintenant un créneau pour votre visio de restitution.
                                 </p>
-                                <Button asChild variant="secondary" size="lg" className="mt-4">
-                                    {bookingsUrl ? (
-                                        <a href={bookingsUrl} target="_blank" rel="noopener noreferrer">
-                                            Prendre rendez-vous
-                                        </a>
-                                    ) : (
+                                {bookingsUrl ? (
+                                    <iframe
+                                        src={bookingsUrl}
+                                        title="Réserver un créneau de restitution"
+                                        className="mt-4 h-[700px] w-full rounded-xl border-0"
+                                        scrolling="yes"
+                                    />
+                                ) : (
+                                    <Button asChild variant="secondary" size="lg" className="mt-4">
                                         <Link href="/contact">Prendre rendez-vous</Link>
-                                    )}
-                                </Button>
+                                    </Button>
+                                )}
                             </div>
 
                             <Text className="mt-6 text-sm text-white/50">
