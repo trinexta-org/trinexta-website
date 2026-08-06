@@ -67,7 +67,7 @@ export default function NousRejoindrePage() {
 
           <div className="relative w-full aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl mt-8 xl:mt-0">
             <Image 
-              src="/images/nous-rejoindre/technicien.webp" 
+              src="/images/nous-rejoindre/join-us.webp"
               alt="Un technicien support informatique chez Trinexta" 
               fill 
               sizes="(max-width: 1280px) 100vw, 50vw"
