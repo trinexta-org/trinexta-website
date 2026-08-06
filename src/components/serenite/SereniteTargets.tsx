@@ -10,7 +10,7 @@ const targets = [
     {
         role: "Cabinets professionnels",
         spec: "Comptables, avocats, consultants...",
-        image: "/images/nos-offres/targets/target-cabinets.jpg"
+        image: "/images/nos-offres/targets/target-cabinets.webp"
     },
     {
         role: "Commerces & Boutiques",

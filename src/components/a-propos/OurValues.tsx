@@ -21,7 +21,7 @@ const values = [
     {
         title: "Proximité",
         desc: "Nous privilégions une relation directe, fondée sur l'écoute, la compréhension de vos besoins et l'adaptation à votre réalité terrain. Vous bénéficiez d’un point d’entrée clair, avec une prise en charge sérieuse et réactive. L’objectif est de vous apporter des réponses utiles, sans multiplier les intermédiaires ni compliquer inutilement la relation.",
-        image: "/images/a-propos/engagements/proximite.jpg",
+        image: "/images/a-propos/engagements/proximite.webp",
         alt: "Deux professionnelles échangeant face à face, illustrant l'écoute active et la relation de proximité au cœur de notre accompagnement informatique."
     },
     {
@@ -45,13 +45,13 @@ const values = [
     {
         title: "Engagement",
         desc: "Votre satisfaction est notre ligne directrice. Nous nous engageons à fournir un accompagnement sérieux, avec des interventions de qualité, des délais respectés et une attention constante portée à l’efficacité des actions menées. Notre objectif n’est pas seulement d’intervenir, mais de construire une relation utile dans la durée.",
-        image: "/images/a-propos/engagements/engagement.jpg",
+        image: "/images/a-propos/engagements/engagement.webp",
        alt: "Une poignée de main entre deux professionnels au-dessus d'un document, garantissant notre engagement à fournir un accompagnement informatique sérieux et de qualité."
     },
     {
         title: "Agilité",
         desc: "Votre structure évolue, vos outils changent, vos besoins aussi. Nous faisons évoluer notre accompagnement en fonction de votre réalité, qu’il s’agisse de renforcer votre support, de sécuriser votre environnement ou de faire grandir votre organisation informatique. Cette souplesse fait partie intégrante de notre manière de travailler.",
-        image: "/images/a-propos/engagements/agilite.jpg",
+        image: "/images/a-propos/engagements/agilite.webp",
         alt: "Une professionnelle organisant des tâches avec des notes adhésives sur un mur, évoquant notre agilité et notre capacité d'adaptation à vos besoins."
     },
     {

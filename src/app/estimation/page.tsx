@@ -46,7 +46,7 @@ export default function EstimationPage() {
       {/* Hero : photo + voile primary, comme les autres pages du site */}
       <section className="relative overflow-hidden">
         <Image
-          src="/images/pricing/hero-offres.avif"
+          src="/images/pricing/hero-offres.webp"
           alt=""
           fill
           priority

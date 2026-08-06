@@ -204,7 +204,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
             {/* 1. HERO */}
             <ViewportHero>
                 <div className="absolute inset-0 z-0">
-                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} priority fetchPriority="high" className="object-cover object-center" sizes="100vw" />
+                    <Image src={`/images/services/${serviceSlug}/hero.webp`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} priority fetchPriority="high" className="object-cover object-center" sizes="100vw" />
                     <div className="absolute inset-0 bg-primary/90" />
                 </div>
                 <Container className="relative z-10 py-12 md:py-16 lg:py-20">
@@ -259,14 +259,14 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                             className={`absolute top-0 right-0 w-[75%] h-[75%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-10 ${!isMobile ? "animate-float-y" : ""}`}
                             style={{ "--float-from": "0px", "--float-to": "-10px", "--float-duration": "6s" } as CSSProperties}
                         >
-                            <Image src={`/images/services/${serviceSlug}/problem-1.jpg`} alt="Problème IT" fill sizes="(min-width: 1024px) 38vw, (min-width: 640px) 56vw, 75vw" className="object-cover" />
+                            <Image src={`/images/services/${serviceSlug}/problem-1.webp`} alt="Problème IT" fill sizes="(min-width: 1024px) 38vw, (min-width: 640px) 56vw, 75vw" className="object-cover" />
                             <div className="absolute inset-0 bg-primary/20" />
                         </div>
                         <div
                             className={`absolute bottom-0 left-0 w-[60%] h-[60%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 z-20 ${!isMobile ? "animate-float-y" : ""}`}
                             style={{ "--float-from": "0px", "--float-to": "10px", "--float-duration": "5s" } as CSSProperties}
                         >
-                            <Image src={`/images/services/${serviceSlug}/problem-2.jpg`} alt="Frustration IT" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 60vw" className="object-cover" />
+                            <Image src={`/images/services/${serviceSlug}/problem-2.webp`} alt="Frustration IT" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 60vw" className="object-cover" />
                             <div className="absolute inset-0 bg-secondary/20" />
                         </div>
                     </div>
@@ -427,7 +427,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                 className={`relative overflow-hidden cursor-pointer rounded-xl md:rounded-3xl shadow-2xl transition-[flex,border-color,opacity] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"}`}
                             >
                                 <div className="absolute inset-0 w-full h-full">
-                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill sizes="(min-width: 768px) 20vw, 100vw" className="object-cover" fetchPriority={index === 0 ? "high" : "auto"} />
+                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.webp`} alt={benefit.title} fill sizes="(min-width: 768px) 20vw, 100vw" className="object-cover" fetchPriority={index === 0 ? "high" : "auto"} />
                                     <div className={`absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent transition-opacity duration-500 ${isActive ? "opacity-70" : "opacity-30"}`} />
                                 </div>
 

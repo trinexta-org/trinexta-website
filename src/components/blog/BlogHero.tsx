@@ -26,7 +26,7 @@ export function BlogHero() {
       slideMinHeight="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px]"
       staticBackground={
         <Image
-          src="/images/blog/hero-bg.jpg" 
+          src="/images/blog/hero-bg.webp" 
           alt=""
           fill
           fetchPriority="high"

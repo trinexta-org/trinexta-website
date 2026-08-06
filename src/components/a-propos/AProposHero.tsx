@@ -18,7 +18,7 @@ export function AProposHero() {
       slideMinHeight="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px]"
       staticBackground={
         <Image
-          src="/images/a-propos/hero-apropos.jpg"
+          src="/images/a-propos/hero-apropos.webp"
           alt="L'équipe Trinexta by Trustech IT Support"
           fill
           fetchPriority="high"

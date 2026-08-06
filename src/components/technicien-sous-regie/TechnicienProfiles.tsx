@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 const profiles = [
-    { role: "Support utilisateur", spec: "Helpdesk N1/N2", image: "/images/nos-offres/profiles/profile-support.jpg" },
+    { role: "Support utilisateur", spec: "Helpdesk N1/N2", image: "/images/nos-offres/profiles/services-projets.webp" },
     { role: "Gestion de parc", spec: "De proximité", image: "/images/nos-offres/profiles/profile-parc.jpg" },
     { role: "Systèmes et réseaux", spec: "Architecture & maintenance", image: "/images/nos-offres/profiles/profile-reseau.jpg" },
     { role: "Microsoft 365", spec: "Azure · Intune", image: "/images/nos-offres/profiles/profile-m365.jpg" },

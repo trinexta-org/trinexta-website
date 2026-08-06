@@ -27,7 +27,7 @@ export function ServicesIntro() {
   }, [visible])
 
   const img1 = "/images/nos-offres/services-annexes.jpg"
-  const img2 = "/images/nos-offres/services-projets.jpg"
+  const img2 = "/images/nos-offres/services-projets.webp"
 
   return (
     <div ref={ref} className="py-10 lg:py-16 overflow-visible">

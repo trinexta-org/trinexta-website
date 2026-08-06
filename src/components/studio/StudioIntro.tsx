@@ -27,7 +27,7 @@ export function StudioIntro() {
   }, [visible])
 
   const img1 = "/images/nos-offres/studio.jpg"
-  const img2 = "/images/nos-offres/studio-projets.jpg"
+  const img2 = "/images/nos-offres/studio-projets.webp"
 
   return (
     <div ref={ref} className="py-10 lg:py-16 overflow-visible">
