@@ -63,7 +63,7 @@ export function WhyChooseUs() {
                     alt={reason.alt}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 768px) 100vw, 80vw"
                   />
                   <div
                     style={{ opacity: isActive ? 0.7 : 0.3 }}

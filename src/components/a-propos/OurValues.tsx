@@ -168,7 +168,7 @@ export function OurValues() {
                                 fill
                                 className="object-cover object-[center_25%]"
                                 priority
-                                sizes="(max-width: 768px) 100vw, 50vw"
+                                sizes="(max-width: 768px) 100vw, 1216px"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
                             <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">

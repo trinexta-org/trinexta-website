@@ -23,7 +23,7 @@ export function CasClientsHero() {
           fill
           fetchPriority={i <= 2 ? "high" : "auto"}
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="100vw"
         />
       )}
       overlays={
