@@ -30,6 +30,9 @@ jobs:
             npm run build
             pm2 startOrReload ecosystem.config.js --only trinexta-staging --update-env
             pm2 save
+            # Encode les images LCP maintenant plutot que de faire attendre
+            # le premier visiteur (~2 s d'encodage AVIF par variante).
+            node scripts/prewarm-images.mjs http://127.0.0.1:3010 || true
 
   sync:
     name: Sync dev -> staging branch
