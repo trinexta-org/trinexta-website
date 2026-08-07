@@ -41,7 +41,6 @@ export function OurNetwork() {
                             fill
                             sizes="(max-width: 1024px) 100vw, 50vw"
                             className="object-cover"
-                            priority
                         />
                         <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
                         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />

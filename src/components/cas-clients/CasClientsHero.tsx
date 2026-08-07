@@ -21,7 +21,8 @@ export function CasClientsHero() {
           src={slide.heroImage}
           alt={slide.clientName}
           fill
-          fetchPriority={i <= 2 ? "high" : "auto"}
+          loading={i === 0 ? "eager" : "lazy"}
+          fetchPriority={i === 0 ? "high" : "low"}
           className="object-cover"
           sizes="100vw"
         />

@@ -29,7 +29,8 @@ export function BlogHero() {
           src="/images/blog/hero-bg.jpg" 
           alt=""
           fill
-          fetchPriority="high"
+          preload
+          quality={50}
           className="object-cover grayscale opacity-60"
           sizes="100vw"
         />

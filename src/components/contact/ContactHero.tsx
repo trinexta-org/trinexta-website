@@ -18,7 +18,8 @@ export function ContactHero() {
           src="/images/services/support-informatique/hero-v2.avif"
           alt="Contact Trinexta"
           fill
-          fetchPriority="high"
+          preload
+          quality={50}
           className="object-cover object-center"
           sizes="100vw"
         />

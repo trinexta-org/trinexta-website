@@ -167,7 +167,6 @@ export function OurValues() {
                                 alt={values[displayActive].title}
                                 fill
                                 className="object-cover object-[center_25%]"
-                                priority
                                 sizes="(max-width: 768px) 100vw, 1216px"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />

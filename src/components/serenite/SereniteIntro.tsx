@@ -101,7 +101,7 @@ export function SereniteIntro() {
               animation: "floatFront 6s ease-in-out infinite",
             }}
           >
-            <Image src={img1} alt="Infogérance Trinexta" fill priority className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`} />
+            <Image src={img1} alt="Infogérance Trinexta" fill sizes="(max-width: 1024px) 100vw, 45vw" className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`} />
             <Image src={img2} alt="Infogérance Trinexta" fill className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`} />
             <div className="absolute inset-0 hidden lg:block z-10" style={{ background: "linear-gradient(to right, var(--color-primary) 0%, rgba(10,35,62,0.85) 20%, rgba(10,35,62,0.3) 45%, transparent 70%)" }} />
           </div>
