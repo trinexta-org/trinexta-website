@@ -10,8 +10,20 @@ import { useCrossfade } from "@/hooks/useCrossfade"
 const AUTOPLAY_DELAY = 4000
 const PAUSE_AFTER_CLICK = 10000
 
+// La zone visuelle desktop fait 1216x400 (ratio 3,04) alors que les sources
+// tournent autour de 1,5 : object-cover jette ~50% de la hauteur. Le cadrage
+// par défaut convient à la majorité des visuels, les autres surchargent.
+const DEFAULT_OBJECT_POSITION = "center 25%"
 
-const values = [
+type ValueItem = {
+    title: string
+    desc: string
+    image: string
+    alt: string
+    objectPosition?: string
+}
+
+const values: ValueItem[] = [
     {
         title: "Accessibilité",
         desc: "Un accompagnement sérieux ne doit pas être réservé aux grandes structures. Vous bénéficiez d'un service fiable et réactif, quelle que soit votre taille. Nous ne proposons pas une réponse standardisée à tous les clients. Nous prenons le temps de comprendre votre environnement, vos besoins et vos objectifs pour vous orienter vers la solution la plus pertinente.",
@@ -21,7 +33,9 @@ const values = [
     {
         title: "Proximité",
         desc: "Nous privilégions une relation directe, fondée sur l'écoute, la compréhension de vos besoins et l'adaptation à votre réalité terrain. Vous bénéficiez d’un point d’entrée clair, avec une prise en charge sérieuse et réactive. L’objectif est de vous apporter des réponses utiles, sans multiplier les intermédiaires ni compliquer inutilement la relation.",
-        image: "/images/a-propos/engagements/proximite.jpg",
+        image: "/images/a-propos/engagements/proximite.webp",
+        // Cadrage haut : à 25% les visages de l'équipe sont coupés au sommet.
+        objectPosition: "center 10%",
         alt: "Deux professionnelles échangeant face à face, illustrant l'écoute active et la relation de proximité au cœur de notre accompagnement informatique."
     },
     {
@@ -58,6 +72,8 @@ const values = [
         title: "L'humain au centre",
         desc: "Derrière chaque demande, il y a un dirigeant, un collaborateur, une équipe, une organisation à faire fonctionner. Chez Trinexta, nous sommes convaincus qu’une bonne informatique commence toujours par une bonne compréhension des personnes, des usages et des besoins. C’est pour cela que nous plaçons l’écoute, la confiance et la relation humaine au centre de notre accompagnement.",
         image: "/images/a-propos/engagements/humain.jpg",
+        // Cadrage haut : à 25% la tête du sujet sort entièrement du cadre.
+        objectPosition: "center 10%",
         alt: "Un homme en plein saut au-dessus d'un rocher en nature, incarnant la liberté et le dépassement des contraintes grâce à une approche informatique centrée sur l'humain."
 
     }
@@ -166,7 +182,8 @@ export function OurValues() {
                                 src={values[displayActive].image}
                                 alt={values[displayActive].title}
                                 fill
-                                className="object-cover object-[center_25%]"
+                                className="object-cover"
+                                style={{ objectPosition: values[displayActive].objectPosition ?? DEFAULT_OBJECT_POSITION }}
                                 sizes="(max-width: 768px) 100vw, 1216px"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
