@@ -16,6 +16,23 @@ const ACCEPT_IMAGE = "image/avif,image/webp,image/apng,*/*";
 
 const decodeHtml = (s) => s.replace(/&amp;/g, "&").replace(/&#x27;/g, "'");
 
+// pm2 startOrReload rend la main avant que le process Next n'accepte des
+// connexions ; sans ça le premier fetch échoue et `|| true` masque tout le
+// pré-chauffage au lieu de juste l'absence d'images LCP en cache.
+async function waitForServer(maxAttempts = 15, delayMs = 2000) {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const res = await fetch(`${BASE_URL}/sitemap.xml`);
+      if (res.ok) return;
+      console.warn(`  serveur pas pret (HTTP ${res.status}), tentative ${attempt}/${maxAttempts}`);
+    } catch (err) {
+      console.warn(`  serveur pas pret (${err.message}), tentative ${attempt}/${maxAttempts}`);
+    }
+    await new Promise((r) => setTimeout(r, delayMs));
+  }
+  throw new Error(`serveur indisponible sur ${BASE_URL} apres ${maxAttempts} tentatives`);
+}
+
 async function getRoutes() {
   const res = await fetch(`${BASE_URL}/sitemap.xml`);
   if (!res.ok) throw new Error(`sitemap.xml : HTTP ${res.status}`);
@@ -44,6 +61,7 @@ function extractPreloadedImages(html) {
   return urls;
 }
 
+await waitForServer();
 const routes = await getRoutes();
 console.log(`${routes.length} pages à inspecter sur ${BASE_URL}`);
 

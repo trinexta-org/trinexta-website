@@ -28,6 +28,9 @@ jobs:
             npx prisma migrate deploy
             npx prisma generate
             npm run build
+            # minimumCacheTTL=31j : sans purge, les images remplacees sous le
+            # meme chemin resteraient servies depuis l'ancien cache jusqu'a 31j.
+            rm -rf .next/cache/images
             pm2 startOrReload ecosystem.config.js --only trinexta-staging --update-env
             pm2 save
             # Encode les images LCP maintenant plutot que de faire attendre

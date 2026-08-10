@@ -29,6 +29,9 @@ jobs:
             npx prisma generate
             : "${NEXT_PUBLIC_GTM_ID:?NEXT_PUBLIC_GTM_ID is missing in GitHub Actions variables or secrets}"
             npm run build
+            # minimumCacheTTL=31j : sans purge, les images remplacees sous le
+            # meme chemin resteraient servies depuis l'ancien cache jusqu'a 31j.
+            rm -rf .next/cache/images
             pm2 startOrReload ecosystem.config.js --only trinexta-prod --update-env
             pm2 save
             # Encode les images LCP maintenant plutot que de faire attendre
