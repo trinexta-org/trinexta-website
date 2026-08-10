@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "purge:estimates": "node scripts/purge-estimates.mjs",
-    "ci": "npm run lint && npm run prisma:generate && npm run typecheck && npm run test && npm run build"
+    "ci": "npm run lint && npm run prisma:generate && npm run typecheck && npm run test && npm run build",
+    "prewarm:images": "node scripts/prewarm-images.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.109.1",

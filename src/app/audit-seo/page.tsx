@@ -97,9 +97,8 @@ export default function AuditSeoPage() {
             src="/images/audit-seo/hero-audit-seo.avif"
             alt="Résultats de recherche Google"
             fill
-            quality={75}
-            priority
-            fetchPriority="high"
+            quality={50}
+            preload
             className="object-cover object-center"
             sizes="100vw"
           />

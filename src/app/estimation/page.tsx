@@ -49,8 +49,7 @@ export default function EstimationPage() {
           src="/images/pricing/hero-offres.avif"
           alt=""
           fill
-          priority
-          fetchPriority="high"
+          preload
           className="object-cover object-center"
           sizes="100vw"
         />

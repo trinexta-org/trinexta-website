@@ -29,13 +29,13 @@ export function Header() {
       </div>
 
       <nav className="bg-white border-b border-border shadow-sm relative z-40">
-        <Container> 
+        <Container>
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link href="/" className="flex items-center">
-              <Image 
-                src="/images/trinexta-logo.avif" 
+              <Image
+                src="/images/trinexta-logo.avif"
                 alt="Logo TRINEXTA"
-                width={200} 
+                width={200}
                 height={60}
                 unoptimized
                 className="h-10 lg:h-12 w-auto object-contain"
@@ -44,11 +44,22 @@ export function Header() {
 
             <Nav />
 
-            <Button asChild variant="secondary" size="sm" className="hidden lg:inline-flex font-bold">
-              <Link href="/estimation">Estimer mon projet</Link>
-            </Button>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/audit-seo"
+                aria-label="Audit SEO gratuit"
+                className="flex items-center gap-1.5 rounded-full bg-secondary text-secondary-foreground pl-2.5 pr-3 py-1.5 text-xs font-bold hover:bg-secondary/90 transition-colors lg:hidden"
+              >
+                <Search className="h-3.5 w-3.5 stroke-[1.5]" />
+                <span className="hidden sm:inline">Audit SEO gratuit</span>
+              </Link>
 
-            <MobileMenu />
+              <Button asChild variant="secondary" size="sm" className="hidden lg:inline-flex font-bold">
+                <Link href="/estimation">Estimer mon projet</Link>
+              </Button>
+
+              <MobileMenu />
+            </div>
           </div>
         </Container>
       </nav>

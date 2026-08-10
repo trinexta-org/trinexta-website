@@ -19,6 +19,16 @@ import { BannerCTA } from "@/components/layout/BannerCTA"
 import { usePresence } from "@/hooks/usePresence"
 import { useCrossfade } from "@/hooks/useCrossfade"
 
+const bentoImageExtOverrides: Record<string, string> = {
+    "infogerance/1": "webp",
+    "infogerance/2": "webp",
+}
+
+function bentoImageSrc(serviceSlug: string, imageIndex: number) {
+    const ext = bentoImageExtOverrides[`${serviceSlug}/${imageIndex}`] ?? "jpg"
+    return `/images/services/${serviceSlug}/bento-${imageIndex}.${ext}`
+}
+
 export interface ServicePageProps {
     serviceSlug: string
     canonicalPath?: string
@@ -76,7 +86,7 @@ function BentoCell({ serviceSlug, features, currentDataIndex, isMainFocus, hasIm
             <div className={`absolute inset-0 w-full h-full transition-all duration-[400ms] ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"}`}>
                 {hasImage && (
                     <>
-                        <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <Image src={bentoImageSrc(serviceSlug, imageIndex)} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
                     </>
                 )}
@@ -204,7 +214,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
             {/* 1. HERO */}
             <ViewportHero>
                 <div className="absolute inset-0 z-0">
-                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={75} priority fetchPriority="high" className="object-cover object-center" sizes="100vw" />
+                    <Image src={`/images/services/${serviceSlug}/hero.avif`} alt={`${hero.titlePart1} ${hero.titlePart2}`} fill quality={50} preload className="object-cover object-center" sizes="100vw" />
                     <div className="absolute inset-0 bg-primary/90" />
                 </div>
                 <Container className="relative z-10 py-12 md:py-16 lg:py-20">
@@ -326,7 +336,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                 >
                                     {hasImage && (
                                         <>
-                                            <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill className="object-cover" />
+                                            <Image src={bentoImageSrc(serviceSlug, imageIndex)} alt={feat.title} fill className="object-cover" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40" />
                                         </>
                                     )}
@@ -363,7 +373,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                         >
                             <div className="absolute inset-0 z-0">
                                 <Image
-                                    src={`/images/services/${serviceSlug}/bento-1.jpg`}
+                                    src={bentoImageSrc(serviceSlug, 1)}
                                     alt={offer.features[modalDataIndex].title}
                                     fill
                                     className="object-cover opacity-30"
@@ -427,7 +437,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                 className={`relative overflow-hidden cursor-pointer rounded-xl md:rounded-3xl shadow-2xl transition-[flex,border-color,opacity] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isActive ? "border-2 border-secondary" : "border border-white/10 opacity-70 md:opacity-100"}`}
                             >
                                 <div className="absolute inset-0 w-full h-full">
-                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill sizes="(min-width: 768px) 20vw, 100vw" className="object-cover" fetchPriority={index === 0 ? "high" : "auto"} />
+                                    <Image src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`} alt={benefit.title} fill sizes={isActive ? "(min-width: 768px) 80vw, 100vw" : "(min-width: 768px) 8vw, 100vw"} className="object-cover" fetchPriority={index === 0 ? "high" : "auto"} />
                                     <div className={`absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent transition-opacity duration-500 ${isActive ? "opacity-70" : "opacity-30"}`} />
                                 </div>
 

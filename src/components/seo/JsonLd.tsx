@@ -40,7 +40,7 @@ export const trinextaLocalBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Trinexta",
-  "image": "https://trinexta.fr/images/hero.jpg",
+  "image": "https://trinexta.fr/images/og-default.png",
   "@id": "https://trinexta.fr",
   "url": "https://trinexta.fr",
   "telephone": "+33978250746",
