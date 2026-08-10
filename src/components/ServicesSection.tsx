@@ -197,7 +197,7 @@ export function ServicesSection() {
                     src={service.image}
                     alt={service.alt}
                     fill
-                    sizes="(min-width: 768px) 31vw, 90vw"
+                    sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />

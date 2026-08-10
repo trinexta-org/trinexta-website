@@ -19,6 +19,16 @@ import { BannerCTA } from "@/components/layout/BannerCTA"
 import { usePresence } from "@/hooks/usePresence"
 import { useCrossfade } from "@/hooks/useCrossfade"
 
+const bentoImageExtOverrides: Record<string, string> = {
+    "infogerance/1": "webp",
+    "infogerance/2": "webp",
+}
+
+function bentoImageSrc(serviceSlug: string, imageIndex: number) {
+    const ext = bentoImageExtOverrides[`${serviceSlug}/${imageIndex}`] ?? "jpg"
+    return `/images/services/${serviceSlug}/bento-${imageIndex}.${ext}`
+}
+
 export interface ServicePageProps {
     serviceSlug: string
     canonicalPath?: string
@@ -76,7 +86,7 @@ function BentoCell({ serviceSlug, features, currentDataIndex, isMainFocus, hasIm
             <div className={`absolute inset-0 w-full h-full transition-all duration-[400ms] ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"}`}>
                 {hasImage && (
                     <>
-                        <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <Image src={bentoImageSrc(serviceSlug, imageIndex)} alt={feat.title} fill sizes="(min-width: 768px) 44vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40 md:to-transparent" />
                     </>
                 )}
@@ -326,7 +336,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                 >
                                     {hasImage && (
                                         <>
-                                            <Image src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`} alt={feat.title} fill className="object-cover" />
+                                            <Image src={bentoImageSrc(serviceSlug, imageIndex)} alt={feat.title} fill className="object-cover" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40" />
                                         </>
                                     )}
@@ -363,7 +373,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                         >
                             <div className="absolute inset-0 z-0">
                                 <Image
-                                    src={`/images/services/${serviceSlug}/bento-1.jpg`}
+                                    src={bentoImageSrc(serviceSlug, 1)}
                                     alt={offer.features[modalDataIndex].title}
                                     fill
                                     className="object-cover opacity-30"
