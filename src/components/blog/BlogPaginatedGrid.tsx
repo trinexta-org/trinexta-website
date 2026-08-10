@@ -69,7 +69,7 @@ export function BlogPaginatedGrid({
           </p>
           <button
             onClick={() => onSearchChange("")}
-            className="px-6 py-3 bg-secondary/10 text-secondary text-sm font-semibold rounded-xl hover:bg-secondary/20 transition-colors"
+            className="px-6 py-3 bg-secondary/10 text-secondary-strong text-sm font-semibold rounded-xl hover:bg-secondary/20 transition-colors"
           >
             Effacer la recherche
           </button>
@@ -100,7 +100,7 @@ export function BlogPaginatedGrid({
               {/* TEXTE EN BAS */}
               <div className="flex-grow flex flex-col">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-secondary text-[11px] font-bold uppercase tracking-wider block">
+                  <span className="text-secondary-strong text-[11px] font-bold uppercase tracking-wider block">
                     {categoryLabel(post.categorie)}
                   </span>
                   {post.tempsLecture && (
@@ -111,7 +111,7 @@ export function BlogPaginatedGrid({
                   )}
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-secondary transition-colors">
+                <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-secondary-strong transition-colors">
                   {post.titre}
                 </h3>
                 <p className="text-white/60 text-sm line-clamp-3">
@@ -154,7 +154,7 @@ export function BlogPaginatedGrid({
           <button 
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage === safeTotalPages}
-            className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:text-white disabled:cursor-not-allowed transition-all"
+            className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-secondary-strong hover:bg-secondary hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:text-white disabled:cursor-not-allowed transition-all"
             aria-label="page suivante"
           >
             <ArrowRight className="w-5 h-5" />

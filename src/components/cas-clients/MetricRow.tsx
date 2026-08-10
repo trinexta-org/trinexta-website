@@ -15,7 +15,7 @@ export function MetricRow({ metric, rowIndex }: MetricRowProps) {
       className="relative overflow-hidden rounded-xl border border-white/[0.08]"
       style={{ "--metric-delay": `${rowIndex * 1.3}s` } as React.CSSProperties}
     >
-      <div className="relative z-20 border-b border-white/[0.06] bg-white/[0.03] px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.20em] text-secondary">
+      <div className="relative z-20 border-b border-white/[0.06] bg-white/[0.03] px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.20em] text-secondary-strong">
         {metric.indicator}
       </div>
       <div className="relative min-h-[52px]">

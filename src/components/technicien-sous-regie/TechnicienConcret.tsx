@@ -64,7 +64,7 @@ export function TechnicienConcret() {
             
             <div className="space-y-6 mb-12">
               <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                Ce que l&apos;on fait <br/> <span className="text-secondary">concrètement</span>
+                Ce que l&apos;on fait <br/> <span className="text-secondary-strong">concrètement</span>
               </h2>
               <div className="space-y-4 text-base md:text-lg text-white/80 leading-relaxed">
                 <p>
@@ -94,7 +94,7 @@ export function TechnicienConcret() {
                       </span>
                       
                       <svg 
-                        className={`w-6 h-6 transform transition-transform duration-500 ${isActive ? "rotate-180 text-secondary" : "text-white/40"}`} 
+                        className={`w-6 h-6 transform transition-transform duration-500 ${isActive ? "rotate-180 text-secondary-strong" : "text-white/40"}`} 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"

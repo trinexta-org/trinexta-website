@@ -49,7 +49,7 @@ export const cgvAuditExpertData: LegalData = {
                 "Immatriculée au Registre du Commerce et des Sociétés d'Évry sous le numéro 942 020 082",
                 "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
                 "Téléphone : 09 78 25 07 46",
-                <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+                <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
             ],
         },
         {
@@ -106,7 +106,7 @@ export const cgvAuditExpertData: LegalData = {
             title: "Article 9 - Contact",
             paragraphs: [
                 "Téléphone : 09 78 25 07 46",
-                <span key="email-c"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+                <span key="email-c"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
             ],
         },
     ],

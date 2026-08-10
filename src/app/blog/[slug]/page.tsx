@@ -171,7 +171,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               {/* Badge Auteur */}
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/30 shadow-inner">
-                  <span className="text-secondary font-black text-sm">
+                  <span className="text-secondary-strong font-black text-sm">
                     {article.auteur ? article.auteur.charAt(0).toUpperCase() : "T"}
                   </span>
                 </div>
@@ -211,7 +211,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                           href={`/blog/${post.slug.current}`}
                           className="block group"
                         >
-                          <p className="text-sm font-medium text-white/70 group-hover:text-secondary transition-colors leading-snug">
+                          <p className="text-sm font-medium text-white/70 group-hover:text-secondary-strong transition-colors leading-snug">
                             {post.titre}
                           </p>
                           <span className="text-[10px] text-white/30 uppercase mt-1 block">
@@ -241,7 +241,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <Container>
               <div className="flex justify-between items-end mb-12">
                 <h2 className="text-3xl font-bold tracking-normal">Articles similaires</h2>
-                <Link href="/blog" className="text-secondary font-bold hover:underline">Voir tout le blog</Link>
+                <Link href="/blog" className="text-secondary-strong font-bold hover:underline">Voir tout le blog</Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {article.related.map((relatedPost: ResumeArticle) => (

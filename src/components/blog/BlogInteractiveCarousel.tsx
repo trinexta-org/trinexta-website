@@ -60,11 +60,11 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
         <Link 
           href="#tous-les-articles"
           onClick={handleScrollToArticles}
-          className="inline-flex items-center gap-2 text-secondary font-bold text-sm md:text-base hover:text-white transition-colors duration-300 group whitespace-nowrap mb-2"
+          className="inline-flex items-center gap-2 text-secondary-strong font-bold text-sm md:text-base hover:text-white transition-colors duration-300 group whitespace-nowrap mb-2"
         >
           Voir tous les articles
           <span className="bg-secondary/10 p-1.5 rounded-full group-hover:bg-secondary transition-colors">
-            <ArrowRight className="w-4 h-4 text-secondary group-hover:text-white" />
+            <ArrowRight className="w-4 h-4 text-secondary-strong group-hover:text-white" />
           </span>
         </Link>
       </div>
@@ -162,7 +162,7 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
                         <p className="text-white/70 text-sm line-clamp-2 mb-4 mt-2 pr-2">
                           {article.extrait || "Découvrez l'analyse complète de nos experts Trinexta."}
                         </p>
-                        <div className="flex items-center gap-2 text-secondary text-sm font-bold">
+                        <div className="flex items-center gap-2 text-secondary-strong text-sm font-bold">
                           Lire l&apos;article <ArrowRight className="w-4 h-4" />
                         </div>
                       </div>
@@ -228,7 +228,7 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
         </button>
         <button
           onClick={handleNext}
-          className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all active:scale-95"
+          className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-secondary-strong hover:bg-secondary hover:text-white transition-all active:scale-95"
           aria-label="Article suivant"
         >
           <ChevronRight className="w-5 h-5" />

@@ -18,9 +18,9 @@ export const planReponseIncidentsData: LegalData = {
       title: "Signaler un incident",
       content: (
         <div className="space-y-2 text-sm text-white/70">
-          <p><span className="text-white font-semibold">Téléphone :</span> <a href="tel:0978250746" className="text-secondary hover:underline transition-colors">09 78 25 07 46</a></p>
-          <p><span className="text-white font-semibold">Support :</span> <a href="mailto:support@trinexta.fr" className="text-secondary hover:underline transition-colors">support@trinexta.fr</a></p>
-          <p><span className="text-white font-semibold">Contact :</span> <a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></p>
+          <p><span className="text-white font-semibold">Téléphone :</span> <a href="tel:0978250746" className="text-secondary-strong hover:underline transition-colors">09 78 25 07 46</a></p>
+          <p><span className="text-white font-semibold">Support :</span> <a href="mailto:support@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">support@trinexta.fr</a></p>
+          <p><span className="text-white font-semibold">Contact :</span> <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></p>
         </div>
       ),
     },
@@ -53,7 +53,7 @@ export const planReponseIncidentsData: LegalData = {
                 ].map(([crit, desc]) => (
                   <tr key={crit}>
                     <td className="py-3 pr-6 align-top">
-                      <span className="text-secondary font-bold text-xs">{crit}</span>
+                      <span className="text-secondary-strong font-bold text-xs">{crit}</span>
                     </td>
                     <td className="py-3 text-white/70 text-sm align-top">{desc}</td>
                   </tr>
@@ -84,7 +84,7 @@ export const planReponseIncidentsData: LegalData = {
               "Chaque opération est horodatée et journalisée, et une chaîne de conservation (chain of custody) est documentée pour assurer la recevabilité des éléments.",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="text-secondary shrink-0 mt-0.5">-</span>
+                <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -123,27 +123,27 @@ export const planReponseIncidentsData: LegalData = {
           <div>
             <p className="text-white font-semibold mb-1">Déclarer l&apos;incident à la CNIL</p>
             <p className="mb-1">En cas de violation de données personnelles (sous 72 heures lorsque cela s&apos;applique).</p>
-            <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">cnil.fr</a>
+            <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">cnil.fr</a>
           </div>
           <div>
             <p className="text-white font-semibold mb-1">Consulter l&apos;ANSSI</p>
             <p className="mb-1">Recommandations et guides de sécurité.</p>
-            <a href="https://www.ssi.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">ssi.gouv.fr</a>
+            <a href="https://www.ssi.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">ssi.gouv.fr</a>
           </div>
           <div>
             <p className="text-white font-semibold mb-1">Consulter le CERT-FR</p>
             <p className="mb-1">Veille, alertes et réponse aux attaques.</p>
-            <a href="https://www.cert.ssi.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">cert.ssi.gouv.fr</a>
+            <a href="https://www.cert.ssi.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">cert.ssi.gouv.fr</a>
           </div>
           <div>
             <p className="text-white font-semibold mb-1">Signaler via PHAROS</p>
             <p className="mb-1">Signalement des contenus frauduleux ou illicites.</p>
-            <a href="https://www.internet-signalement.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">internet-signalement.gouv.fr</a>
+            <a href="https://www.internet-signalement.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">internet-signalement.gouv.fr</a>
           </div>
           <div>
             <p className="text-white font-semibold mb-1">Cybermalveillance.gouv.fr</p>
             <p className="mb-1">Assistance nationale aux victimes.</p>
-            <a href="https://www.cybermalveillance.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">cybermalveillance.gouv.fr</a>
+            <a href="https://www.cybermalveillance.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">cybermalveillance.gouv.fr</a>
           </div>
         </div>
       ),
@@ -165,7 +165,7 @@ export const planReponseIncidentsData: LegalData = {
             "Sensibilisation cybersécurité",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span>{item}</span>
             </li>
           ))}
@@ -180,7 +180,7 @@ export const planReponseIncidentsData: LegalData = {
           <ul className="space-y-1.5">
             {["Essonne (91)", "Paris (75)", "Hauts-de-Seine (92)", "Seine-Saint-Denis (93)", "Val-de-Marne (94)", "Yvelines (78)", "Val-d'Oise (95)", "Seine-et-Marne (77)"].map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                <span className="text-secondary shrink-0 mt-0.5">-</span>
+                <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
                 <span>{item}</span>
               </li>
             ))}

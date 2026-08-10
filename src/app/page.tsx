@@ -63,7 +63,7 @@ async function PartnersData() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-primary relative">
+    <main className="min-h-screen bg-surface relative">
       <JsonLd data={trinextaLocalBusiness} />
       <BreadcrumbJsonLd
         items={[
@@ -71,7 +71,6 @@ export default function Home() {
         ]} 
       />
       <HeroSection />
-      <ReassuranceSection />
 
       <TransitionTitle
         surtitle="Notre cœur de métier"
@@ -104,6 +103,10 @@ export default function Home() {
       />
       <WhyChooseUs />
 
+      <InterventionMap />
+
+      <ReassuranceSection />
+
       <TransitionTitle
         surtitle="Écosystème"
         line1="Nos Partenaires"
@@ -113,14 +116,11 @@ export default function Home() {
         <PartnersData />
       </Suspense>
 
-      <InterventionMap />
-
       <TransitionTitle
         surtitle="Expérience"
         line1="Ce qu'ils disent"
         line2="de nous"
       />
-
       <CustomerReviews/>
 
       <FinalCTA />

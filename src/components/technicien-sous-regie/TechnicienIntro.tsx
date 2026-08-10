@@ -47,7 +47,7 @@ export function TechnicienIntro() {
           <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
             Votre technicien
             <br />
-            <em className="not-italic text-secondary">support</em> sous régie
+            <em className="not-italic text-secondary-strong">support</em> sous régie
           </h2>
 
           <div className="w-10 h-px bg-secondary/50" />

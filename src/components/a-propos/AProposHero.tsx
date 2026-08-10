@@ -45,7 +45,7 @@ export function AProposHero() {
                   <span
                     className={
                       isHighlighted
-                        ? "text-secondary inline-block mr-2 sm:mr-3"
+                        ? "text-secondary-strong inline-block mr-2 sm:mr-3"
                         : "text-white inline-block mr-2 sm:mr-3"
                     }
                   >

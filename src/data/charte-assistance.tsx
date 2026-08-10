@@ -8,7 +8,7 @@ function ListSection({ title, items }: { title: string; items: string[] }) {
       <ul className="space-y-1.5">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-            <span className="text-secondary shrink-0 mt-0.5">-</span>
+            <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
             <span>{item}</span>
           </li>
         ))}
@@ -33,9 +33,9 @@ export const charteAssistanceData: LegalData = {
       title: "Contact d'urgence",
       content: (
         <div className="space-y-2 text-sm text-white/70">
-          <p><span className="text-white font-semibold">Téléphone :</span> <a href="tel:0978250746" className="text-secondary hover:underline transition-colors">09 78 25 07 46</a></p>
-          <p><span className="text-white font-semibold">Support :</span> <a href="mailto:support@trinexta.fr" className="text-secondary hover:underline transition-colors">support@trinexta.fr</a></p>
-          <p><span className="text-white font-semibold">Contact :</span> <a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></p>
+          <p><span className="text-white font-semibold">Téléphone :</span> <a href="tel:0978250746" className="text-secondary-strong hover:underline transition-colors">09 78 25 07 46</a></p>
+          <p><span className="text-white font-semibold">Support :</span> <a href="mailto:support@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">support@trinexta.fr</a></p>
+          <p><span className="text-white font-semibold">Contact :</span> <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></p>
           <p><span className="text-white font-semibold">Bureau :</span> 7 rue Montespan, 91000 Évry-Courcouronnes</p>
           <p><span className="text-white font-semibold">Horaires :</span> du lundi au vendredi, 08h00 - 19h00</p>
         </div>
@@ -92,14 +92,14 @@ export const charteAssistanceData: LegalData = {
                 "Contrôler les applications autorisées.",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                  <span className="text-secondary shrink-0 mt-0.5">-</span>
+                  <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
             <p className="text-sm text-white/70 mt-3">
               Centre de sécurité Microsoft :{" "}
-              <a href="https://security.microsoft.com" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">
+              <a href="https://security.microsoft.com" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">
                 security.microsoft.com
               </a>
             </p>
@@ -144,7 +144,7 @@ export const charteAssistanceData: LegalData = {
               "Ne communiquez jamais vos identifiants.",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                <span className="text-secondary shrink-0 mt-0.5">-</span>
+                <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -166,7 +166,7 @@ export const charteAssistanceData: LegalData = {
             "Vérifiez vos obligations de notification auprès de la CNIL (sous 72 heures lorsqu'elles s'appliquent).",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span>{item}</span>
             </li>
           ))}
@@ -187,7 +187,7 @@ export const charteAssistanceData: LegalData = {
             "Surveillance des connexions",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span>{item}</span>
             </li>
           ))}
@@ -239,7 +239,7 @@ export const charteAssistanceData: LegalData = {
             <div key={name}>
               <p className="text-white font-semibold">{name}</p>
               <p className="mb-1">{desc}</p>
-              <a href={href} target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">
+              <a href={href} target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">
                 {label}
               </a>
             </div>
@@ -264,7 +264,7 @@ export const charteAssistanceData: LegalData = {
               "Seine-et-Marne (77)",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                <span className="text-secondary shrink-0 mt-0.5">-</span>
+                <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
                 <span>{item}</span>
               </li>
             ))}

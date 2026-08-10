@@ -18,8 +18,8 @@ export function BlogCasClientPromo() {
           {/* COLONNE GAUCHE : Texte & CTA */}
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 mb-6">
-              <Briefcase className="w-4 h-4 text-secondary" />
-              <span className="text-secondary text-[11px] font-bold uppercase tracking-wider">
+              <Briefcase className="w-4 h-4 text-secondary-strong" />
+              <span className="text-secondary-strong text-[11px] font-bold uppercase tracking-wider">
                 De la théorie à la pratique
               </span>
             </div>
@@ -66,7 +66,7 @@ export function BlogCasClientPromo() {
             {/* Carte flottante 1 : Performance */}
             <div className="absolute -left-4 md:-left-12 top-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl flex items-center gap-4 animate-bounce hover:scale-105 transition-transform" style={{ animationDuration: '4s' }}>
               <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
-                <TrendingUp className="w-5 h-5 text-secondary" />
+                <TrendingUp className="w-5 h-5 text-secondary-strong" />
               </div>
               <div>
                 <p className="text-white/50 text-[10px] font-bold uppercase tracking-wider">Disponibilité</p>

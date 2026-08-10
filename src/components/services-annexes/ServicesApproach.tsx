@@ -56,7 +56,7 @@ export function ServicesApproach() {
             
             <div className="space-y-6 mb-12">
               <Heading as="h3" className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                Notre approche : <br/> <span className="text-secondary">conseiller avant de vendre</span>
+                Notre approche : <br/> <span className="text-secondary-strong">conseiller avant de vendre</span>
               </Heading>
               <div className="text-base md:text-lg text-white/80 leading-relaxed">
                 <p>
@@ -83,7 +83,7 @@ export function ServicesApproach() {
                       </span>
                       
                       <svg 
-                        className={`w-6 h-6 transform transition-transform duration-500 ${isActive ? "rotate-180 text-secondary" : "text-white/40"}`} 
+                        className={`w-6 h-6 transform transition-transform duration-500 ${isActive ? "rotate-180 text-secondary-strong" : "text-white/40"}`} 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"

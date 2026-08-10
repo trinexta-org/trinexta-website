@@ -56,12 +56,12 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="ml-6 mb-8 list-disc space-y-3 text-lg text-slate-300 marker:text-secondary">
+      <ul className="ml-6 mb-8 list-disc space-y-3 text-lg text-slate-300 marker:text-secondary-strong">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="ml-6 mb-8 list-decimal space-y-3 text-lg text-slate-300 marker:text-secondary">
+      <ol className="ml-6 mb-8 list-decimal space-y-3 text-lg text-slate-300 marker:text-secondary-strong">
         {children}
       </ol>
     ),
@@ -76,7 +76,7 @@ const portableTextComponents: PortableTextComponents = {
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noreferrer noopener" : undefined}
-          className="font-medium text-secondary underline underline-offset-4 hover:text-white transition-colors"
+          className="font-medium text-secondary-strong underline underline-offset-4 hover:text-white transition-colors"
         >
           {children}
         </a>

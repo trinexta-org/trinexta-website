@@ -76,7 +76,7 @@ export function SerenitePillars() {
             <div className="flex flex-1 flex-col gap-4 mt-auto pt-4">
               <div className="flex items-center gap-2.5">
                 <div className="h-px flex-1 bg-gradient-to-r from-secondary/40 to-transparent" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-secondary/80 whitespace-nowrap">
+                <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-secondary-strong/80 whitespace-nowrap">
                   Ce qui est inclus
                 </span>
                 <div className="h-px flex-1 bg-gradient-to-l from-secondary/40 to-transparent" />

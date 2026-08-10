@@ -7,6 +7,7 @@ import Link from "next/link"
 import { useInView } from "@/hooks/useInView"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { Heading } from "@/components/ui/Typography"
 
 const services = [
   {
@@ -80,10 +81,10 @@ const mobilePositions = [
 function CharteFormattedText({ children }: { children: string }) {
   const parts = children.split(/(\*\*.*?\*\*)/g)
   return (
-    <p className="text-white/80 text-xs md:text-sm lg:text-base leading-relaxed mb-6 md:mb-8 line-clamp-3">
+    <p className="text-white/70 text-xs md:text-sm lg:text-base leading-relaxed mb-6 md:mb-8 line-clamp-3">
       {parts.map((part, index) => {
         if (part.startsWith("**") && part.endsWith("**")) {
-          return <strong key={index} className="text-secondary font-bold">{part.slice(2, -2)}</strong>
+          return <strong key={index} className="text-secondary-strong font-bold">{part.slice(2, -2)}</strong>
         }
         return part
       })}
@@ -96,7 +97,7 @@ function AnimatedArrow({ direction }: { direction: string }) {
     <div className="relative w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 flex-shrink-0">
       <ArrowRight className="w-full h-full text-white/20 absolute inset-0" />
       <div
-        className={`absolute inset-0 text-secondary ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
+        className={`absolute inset-0 text-secondary-strong ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
       >
         <ArrowRight className="w-full h-full" />
       </div>
@@ -148,7 +149,7 @@ export function ServicesSection() {
   const activePositions = isMobile ? mobilePositions : positions
 
   return (
-    <Section container={false} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
+    <Section container={false} className="relative bg-surface overflow-hidden py-16 md:py-28">
       <Container className="relative z-10">
         <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {
@@ -190,7 +191,7 @@ export function ServicesSection() {
                   transitionTimingFunction: "ease-in-out",
                   transitionDelay: `${isCarouselActive ? 0 : index * 0.1}s`,
                 }}
-                className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-white/10 cursor-pointer bg-primary block"
+                className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-primary/10 cursor-pointer bg-primary block"
               >
                 <div className="absolute inset-0">
                   <Image
@@ -205,9 +206,12 @@ export function ServicesSection() {
 
                 <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-8 xl:p-10">
                   <div className="mt-auto">
-                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-normal break-words">
+                    <Heading
+                      as="h3"
+                      className="text-xl md:text-2xl xl:text-4xl text-white mb-2 md:mb-4 break-words"
+                    >
                       {service.title}
-                    </h3>
+                    </Heading>
 
                     <CharteFormattedText>{service.description}</CharteFormattedText>
 

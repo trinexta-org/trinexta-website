@@ -88,7 +88,7 @@ export default async function AuditSeoExpertPage({
 
                 <Container className="relative z-10 max-w-3xl">
                     <Entrance direction="up">
-                        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                             Audit SEO Expert
                         </p>
                         <Heading as="h1" className="mt-3 text-white">

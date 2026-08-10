@@ -33,12 +33,12 @@ export function ServicesProcess() {
           {/* Texte Sticky */}
           <div className="lg:col-span-5 relative">
             <div className="lg:sticky lg:top-[25vh]">
-              <span className="text-secondary text-xs md:text-sm font-bold tracking-widest mb-4 block uppercase">
+              <span className="text-secondary-strong text-xs md:text-sm font-bold tracking-widest mb-4 block uppercase">
                 Processus
               </span>
               <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-tight">
                 Comment ça se passe, <br />
-                <em className="not-italic text-secondary">du premier appel au résultat ?</em>
+                <em className="not-italic text-secondary-strong">du premier appel au résultat ?</em>
               </Heading>
               <p className="mt-8 text-white/70 text-base md:text-lg max-w-md leading-relaxed">
                 Quatre étapes. Aucune surprise. Un cadre clair pour démarrer votre collaboration sans friction.
@@ -67,10 +67,10 @@ export function ServicesProcess() {
 
                   <div className="relative z-10 pt-2">
                     <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                      <span className="text-lg md:text-xl font-bold text-secondary font-mono">
+                      <span className="text-lg md:text-xl font-bold text-secondary-strong font-mono">
                         {step.num}
                       </span>
-                      <h3 className="text-2xl md:text-4xl font-bold text-white tracking-normal group-hover:text-secondary transition-colors duration-300">
+                      <h3 className="text-2xl md:text-4xl font-bold text-white tracking-normal group-hover:text-secondary-strong transition-colors duration-300">
                         {step.title}
                       </h3>
                     </div>

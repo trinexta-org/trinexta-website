@@ -36,11 +36,11 @@ const LEGAL = [
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
-  const desktopHover = "inline-block py-2 text-white/70 hover:text-secondary text-[13px] transition-colors duration-300"
-  const desktopTitle = "text-white font-black uppercase tracking-[0.2em] text-[11px] mb-6 block"
+  const desktopHover = "inline-block py-2 text-white/70 hover:text-secondary-strong text-[14px] transition-colors duration-300"
+  const desktopTitle = "text-white font-black uppercase tracking-[0.2em] text-[12px] mb-6 block"
 
-  const mobileHover = "inline-block py-2 text-white/80 hover:text-secondary text-[10px] sm:text-[11px] block transition-colors leading-snug break-words"
-  const mobileTitle = "text-white font-bold uppercase text-[10px] sm:text-[11px] mb-2 block"
+  const mobileHover = "inline-block py-2 text-white/80 hover:text-secondary-strong text-[11px] sm:text-[12px] block transition-colors leading-snug break-words"
+  const mobileTitle = "text-white font-bold uppercase text-[11px] sm:text-[12px] mb-2 block"
 
   return (
     <footer className="bg-primary relative z-10 overflow-hidden">
@@ -55,11 +55,11 @@ export function Footer() {
           <div className="grid grid-cols-5 gap-12 mb-8">
             <div className="space-y-8">
               <Link href="/" className="group block">
-                <span className="text-white font-black uppercase tracking-normal text-3xl block leading-none">Trinexta</span>
-                <span className="text-secondary text-[9px] font-bold uppercase tracking-[0.4em] block mt-1">By Trustech IT Support</span>
+                <span className="text-white font-black uppercase tracking-normal text-4xl block leading-none">Trinexta</span>
+                <span className="text-secondary-strong text-[10px] font-bold uppercase tracking-[0.4em] block mt-1">By Trustech IT Support</span>
               </Link>
               <div className="space-y-5">
-                <p className="text-white/70 text-[13px] leading-relaxed">Votre informatique simplifiée, en toute sérénité. <br />Expertise, Proximité, Réactivité.</p>
+                <p className="text-white/70 text-[14px] leading-relaxed">Votre informatique simplifiée, en toute sérénité. <br />Expertise, Proximité, Réactivité.</p>
               </div>
               <FooterNewsletter />
             </div>
@@ -95,9 +95,9 @@ export function Footer() {
               <div>
                 <span className={desktopTitle}>Contact</span>
                 <div className="space-y-5">
-                  <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Bureau d&apos;activité</span><span className="text-white/70 text-[13px]">7 Rue Montespan, 91000 EVRY COURCOURONNES</span></div>
-                  <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Assistance</span><a href="tel:0978250746" className="text-white/70 hover:text-secondary text-[13px] block transition-colors">09 78 25 07 46</a></div>
-                  <div className="group"><span className="block text-[9px] text-secondary font-bold uppercase mb-1.5">Email</span><a href="mailto:contact@trinexta.fr" className="text-white/70 hover:text-secondary text-[13px] block transition-colors">contact@trinexta.fr</a></div>
+                  <div className="group"><span className="block text-[10px] text-secondary-strong font-bold uppercase mb-1.5">Bureau d&apos;activité</span><span className="text-white/70 text-[14px]">7 Rue Montespan, 91000 EVRY COURCOURONNES</span></div>
+                  <div className="group"><span className="block text-[10px] text-secondary-strong font-bold uppercase mb-1.5">Assistance</span><a href="tel:0978250746" className="text-white/70 hover:text-secondary-strong text-[14px] block transition-colors">09 78 25 07 46</a></div>
+                  <div className="group"><span className="block text-[10px] text-secondary-strong font-bold uppercase mb-1.5">Email</span><a href="mailto:contact@trinexta.fr" className="text-white/70 hover:text-secondary-strong text-[14px] block transition-colors">contact@trinexta.fr</a></div>
                 </div>
               </div>
             </div>
@@ -109,8 +109,8 @@ export function Footer() {
         <div className="block lg:hidden pt-8 pb-4 space-y-8">
           <div className="flex items-center justify-between gap-4">
             <div className="shrink-0">
-              <span className="text-white font-black uppercase text-lg leading-none block">Trinexta</span>
-              <span className="text-secondary text-[7px] font-bold uppercase block tracking-widest">By Trustech IT</span>
+              <span className="text-white font-black uppercase text-xl leading-none block">Trinexta</span>
+              <span className="text-secondary-strong text-[8px] font-bold uppercase block tracking-widest">By Trustech IT</span>
             </div>
           </div>
 
@@ -148,15 +148,16 @@ export function Footer() {
               <span className={mobileTitle}>Contact</span>
               <div className="space-y-4">
                 <div>
-                  <span className="block text-[7.5px] sm:text-[8px] text-secondary font-bold uppercase mb-1">Bureau</span>
-                  <span className="text-white/70 text-[8.5px] sm:text-[10px] block leading-snug break-words">7 Rue Montespan, 91000 EVRY</span>
+                  <span className="block text-[8.5px] sm:text-[9px] text-[#6fa0c5] font-bold uppercase mb-1">Bureau</span>
+                  <span className="text-white/70 text-[9.5px] sm:text-[11px] block leading-snug break-words">7 Rue Montespan, 91000 EVRY</span>
                 </div>
                 <div>
-                  <span className="block text-[7.5px] sm:text-[8px] text-secondary font-bold uppercase mb-1">Assistance</span>
+                  <span className="block text-[8.5px] sm:text-[9px] text-[#6fa0c5] font-bold uppercase mb-1">Assistance</span>
                   <a href="tel:0978250746" className={mobileHover}>09 78 25 07 46</a>
                 </div>
                 <div>
-                  <span className="block text-[7.5px] sm:text-[8px] text-secondary font-bold uppercase mb-1">Email</span>
+                  <span className="block text-[8.5px] sm:text-[9px] text-[#6fa0c5] font-bold uppercase mb-1">Email</span>
+
                   <a href="mailto:contact@trinexta.fr" className={mobileHover}>contact@trinexta.fr</a>
                 </div>
               </div>
@@ -168,12 +169,12 @@ export function Footer() {
 
         {/* MENTIONS LÉGALES / COPYRIGHT */}
         <div className="py-4 border-t border-white/5 flex items-center justify-between gap-4 mt-4 lg:mt-0">
-          <p className="text-[9px] md:text-[10px] text-white/30 font-bold uppercase tracking-widest">
+          <p className="text-[10px] md:text-[11px] text-white/50 font-bold uppercase tracking-widest">
             © {currentYear} TrusTech IT Support – Tous droits réservés
           </p>
           <div className="flex items-center gap-4 shrink-0">
             {SOCIAL_LINKS.map(({ name, href, Icon }) => (
-              <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-white/20 hover:text-secondary transition-all transform hover:-translate-y-1">
+              <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-white/20 hover:text-secondary-strong transition-all transform hover:-translate-y-1">
                 <Icon className="w-4 h-4" />
               </a>
             ))}

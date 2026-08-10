@@ -113,11 +113,11 @@ export default function AuditSeoPage() {
 
         <Container className="relative z-10 max-w-3xl">
           <Entrance direction="up">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
               Audit SEO gratuit
             </p>
             <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">
-              Votre page est-elle vue par <em className="text-secondary">Google</em> ?
+              Votre page est-elle vue par <em className="text-secondary-strong">Google</em> ?
             </h1>
             <p className="mt-4 max-w-xl text-white/70">
               Collez l&apos;adresse d&apos;une page, on l&apos;analyse et on vous rend un score SEO
@@ -127,7 +127,7 @@ export default function AuditSeoPage() {
               {REASSURANCES.map((item) => (
                 <li key={item} className="flex items-center gap-2 text-sm text-white/60">
                   <svg
-                    className="h-3.5 w-3.5 shrink-0 text-secondary"
+                    className="h-3.5 w-3.5 shrink-0 text-secondary-strong"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth={2.5}
@@ -150,7 +150,7 @@ export default function AuditSeoPage() {
 
       <Section id="comment-ca-marche" className="bg-primary">
         <FadeIn direction="up">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
             Comment ça marche
           </p>
           <Heading as="h2" className="mt-3 max-w-xl text-white">
@@ -162,7 +162,7 @@ export default function AuditSeoPage() {
           {STEPS.map((step, index) => (
             <FadeIn key={step.title} delay={index * 0.1} direction="up">
               <div className="h-full rounded-2xl border border-white/10 bg-black/20 p-6">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary/10 text-secondary-strong">
                   <step.icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <p className="mt-4 font-bold text-white">{step.title}</p>
@@ -176,7 +176,7 @@ export default function AuditSeoPage() {
       <Section id="apercu-rapport" className="bg-primary/95">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <FadeIn direction="up">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
               À quoi ressemble votre rapport
             </p>
             <Heading as="h2" className="mt-3 text-white">
@@ -204,7 +204,7 @@ export default function AuditSeoPage() {
               />
 
               <div className="relative text-center">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                   Score SEO de la page
                 </p>
                 <div className="mt-4 flex justify-center">

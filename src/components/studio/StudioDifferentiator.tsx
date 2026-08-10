@@ -31,7 +31,7 @@ export function StudioDifferentiator() {
         <div className="hidden md:grid grid-cols-3 bg-white/[0.03] border-b border-white/10 p-6 text-sm font-bold tracking-wider uppercase text-white/50">
           <div>Critère</div>
           <div>Les agences web classiques</div>
-          <div className="text-secondary">L&apos;approche Trinexta</div>
+          <div className="text-secondary-strong">L&apos;approche Trinexta</div>
         </div>
 
         {/* Rows */}
@@ -48,14 +48,14 @@ export function StudioDifferentiator() {
               </div>
 
               <div className="space-y-1 md:space-y-0">
-                <span className="inline-block md:hidden text-xs font-bold uppercase text-secondary/80 mr-2">Marché :</span>
+                <span className="inline-block md:hidden text-xs font-bold uppercase text-secondary-strong/80 mr-2">Marché :</span>
                 <span className="text-sm text-white/50 leading-relaxed">{point.market}</span>
               </div>
 
               <div className="space-y-1 md:space-y-0 bg-secondary/5 md:bg-transparent p-3 md:p-0 rounded-xl border border-secondary/10 md:border-none">
-                <span className="inline-block md:hidden text-xs font-bold uppercase text-secondary mr-2">Trinexta :</span>
+                <span className="inline-block md:hidden text-xs font-bold uppercase text-secondary-strong mr-2">Trinexta :</span>
                 <span className="text-sm font-medium text-white flex items-start gap-2 leading-relaxed">
-                  <span className="text-secondary shrink-0 hidden md:inline">→</span>
+                  <span className="text-secondary-strong shrink-0 hidden md:inline">→</span>
                   {point.trinexta}
                 </span>
               </div>

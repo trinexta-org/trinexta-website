@@ -40,7 +40,7 @@ export function NewsletterCTA() {
   };
 
   return (
-    <section className="relative w-full py-16 md:py-24 border-t border-white/5 bg-gradient-to-b from-transparent to-white/[0.02] overflow-hidden">
+    <section className="relative w-full py-16 md:py-24 border-t border-white/5 bg-primary bg-gradient-to-b from-primary to-black/20 overflow-hidden">
       
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 bg-secondary/10 blur-[100px] rounded-full pointer-events-none opacity-50" />

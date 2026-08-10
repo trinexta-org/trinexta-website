@@ -61,7 +61,7 @@ export function Nav() {
               href={link.href}
               className={cn(
                 "text-sm font-bold transition-colors relative py-6 flex items-center",
-                isActive ? "text-secondary" : "text-primary hover:text-secondary"
+                isActive ? "text-secondary-strong" : "text-primary hover:text-secondary-strong"
               )}
             >
               {link.label}
@@ -90,7 +90,7 @@ export function Nav() {
                       <Link
                         key={sub.label}
                         href={sub.href}
-                        className="block px-4 py-2.5 text-sm text-primary font-semibold hover:bg-accent hover:text-secondary rounded-lg transition-colors"
+                        className="block px-4 py-2.5 text-sm text-primary font-semibold hover:bg-accent hover:text-secondary-strong rounded-lg transition-colors"
                       >
                         {sub.label}
                       </Link>

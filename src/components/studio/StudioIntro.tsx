@@ -43,9 +43,9 @@ export function StudioIntro() {
           `}
           style={{ transitionDelay: "100ms" }}
         >
-          <span className="text-secondary font-mono text-xs tracking-widest uppercase">TRINEXTA STUDIO</span>
+          <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">TRINEXTA STUDIO</span>
           <Heading as="h2" className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            Une présence digitale alignée avec <em className="not-italic text-secondary">votre informatique</em>
+            Une présence digitale alignée avec <em className="not-italic text-secondary-strong">votre informatique</em>
           </Heading>
 
           <div className="w-10 h-px bg-secondary/50" />

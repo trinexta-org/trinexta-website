@@ -29,7 +29,7 @@ export function TechnicienProfiles() {
                     Vous ne savez pas exactement quel profil il vous faut ?{" "}
                     <Link
                         href="/contact"
-                        className="text-secondary font-bold hover:underline transition-all"
+                        className="text-secondary-strong font-bold hover:underline transition-all"
                     >
                         Décrivez votre situation, on vous oriente.
                     </Link>
@@ -52,7 +52,7 @@ function ChainLink({ role, spec, image }: { role: string; spec: string; image: s
             </div>
             <div className="p-6">
                 <h4 className="font-bold text-white text-lg mb-1">{role}</h4>
-                <p className="text-secondary text-sm font-medium">{spec}</p>
+                <p className="text-secondary-strong text-sm font-medium">{spec}</p>
             </div>
         </div>
     )

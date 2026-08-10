@@ -58,11 +58,11 @@ export default function EstimationPage() {
         <SectionFade edge="bottom" />
         <Container className="relative z-10 max-w-3xl py-16 md:py-24">
           <Entrance direction="up">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
               Estimation gratuite
             </p>
             <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">
-              Combien ça coûte, chez <em className="text-secondary">vous</em> ?
+              Combien ça coûte, chez <em className="text-secondary-strong">vous</em> ?
             </h1>
             <p className="mt-4 max-w-xl text-white/70">
               Quelques questions sur votre quotidien, une fourchette de prix immédiate.
@@ -72,7 +72,7 @@ export default function EstimationPage() {
               {REASSURANCES.map((item) => (
                 <li key={item} className="flex items-center gap-2 text-sm text-white/60">
                   <svg
-                    className="h-3.5 w-3.5 shrink-0 text-secondary"
+                    className="h-3.5 w-3.5 shrink-0 text-secondary-strong"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth={2.5}
@@ -106,7 +106,7 @@ export default function EstimationPage() {
                 s&apos;affiche sans laisser d&apos;email : vous arrivez au premier échange
                 en connaissant déjà les ordres de grandeur.
               </p>
-              <p className="mt-3 font-serif text-sm italic text-secondary">
+              <p className="mt-3 font-serif text-sm italic text-secondary-strong">
                 L&apos;équipe Trinexta
               </p>
             </div>

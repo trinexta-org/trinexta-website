@@ -211,7 +211,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                     <div className="max-w-4xl">
                         <div className="animate-service-hero">
                             <Heading as="h1" className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-balance">
-                                <span className="text-white">{hero.titlePart1}</span> <span className="text-secondary">{hero.titlePart2}</span>
+                                <span className="text-white">{hero.titlePart1}</span> <span className="text-secondary-strong">{hero.titlePart2}</span>
                             </Heading>
                             {/* --- SUPPRESSION DE LA SCROLLBAR ICI --- */}
                             <div className="mt-4 md:mt-6 max-w-2xl">
@@ -386,7 +386,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                 <Section id="zone-intervention" className="bg-primary/95 pb-16 md:pb-24">
                     <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
                         <div className="space-y-4">
-                            <span className="text-secondary text-xs font-mono font-bold uppercase tracking-widest block">{localSeo.subtitle}</span>
+                            <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block">{localSeo.subtitle}</span>
                             <Heading as="h2" className="text-white text-3xl md:text-4xl">{localSeo.title}</Heading>
                             <Text className="text-white/80 text-base md:text-lg leading-relaxed">{localSeo.description}</Text>
                             <Link href={localSeo.ctaHref} className="inline-flex">
@@ -467,7 +467,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                 <FadeIn key={idx} delay={idx * 0.08}>
                                     <div className="h-full flex flex-col gap-3 p-5 md:p-7 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-secondary/40 hover:bg-white/[0.05] transition-all duration-300">
                                         <div className="flex items-center gap-3">
-                                            <span className="shrink-0 w-7 h-7 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center text-secondary font-bold text-xs">
+                                            <span className="shrink-0 w-7 h-7 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center text-secondary-strong font-bold text-xs">
                                                 {String(idx + 1).padStart(2, "0")}
                                             </span>
                                             <Heading as="h3" className="text-white text-base md:text-lg font-bold leading-tight">{item.title}</Heading>
@@ -483,7 +483,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                     {incidentResponse.ctaLabel}
                                 </Button>
                             </Link>
-                            <Link href={incidentResponse.planHref} className="text-secondary text-sm md:text-base hover:underline transition-colors">
+                            <Link href={incidentResponse.planHref} className="text-secondary-strong text-sm md:text-base hover:underline transition-colors">
                                 Voir notre méthodologie complète en 8 étapes
                             </Link>
                         </div>
@@ -497,7 +497,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                 <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <div className="mb-8 md:mb-10 text-center">
-                        <span className="text-secondary text-xs font-mono font-bold uppercase tracking-widest block mb-2">Des réponses à vos interrogations</span>
+                        <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block mb-2">Des réponses à vos interrogations</span>
                         <Heading as="h2" className="text-white text-3xl md:text-4xl">Questions Fréquentes</Heading>
                     </div>
                     <div className="space-y-2 md:space-y-3">
@@ -507,7 +507,7 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                                 <div key={index} className="bg-white/[0.02] border border-white/10 rounded-lg md:rounded-xl overflow-hidden transition-colors hover:border-white/20">
                                     <button onClick={() => setOpenFaqIndex(isOpen ? null : index)} className="w-full px-4 md:px-6 py-4 md:py-5 text-left flex justify-between items-center gap-3 md:gap-4 group">
                                         <span className="font-bold text-white/90 text-sm md:text-base group-hover:text-white transition-colors">{item.question}</span>
-                                        <span className={`text-secondary font-mono font-black text-lg md:text-xl transition-transform duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}>+</span>
+                                        <span className={`text-secondary-strong font-mono font-black text-lg md:text-xl transition-transform duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}>+</span>
                                     </button>
                                     <div className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
                                         <div className="px-4 md:px-6 pb-4 md:pb-5 pt-0">
@@ -528,14 +528,14 @@ export function ServicePage({ serviceSlug, canonicalPath, hero, problem, offer, 
                     <SectionFade edge="both" />
                     <Container className="relative z-10 max-w-3xl mx-auto">
                         <div className="text-center mb-8 md:mb-10">
-                            <span className="text-secondary text-xs font-mono font-bold uppercase tracking-widest block mb-2">{expertise.surtitle}</span>
+                            <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block mb-2">{expertise.surtitle}</span>
                             <Heading as="h2" className="text-white text-3xl md:text-4xl">{expertise.title}</Heading>
                         </div>
                         <Text className="text-white/80 text-base md:text-lg leading-relaxed mb-6 text-center">{expertise.intro}</Text>
                         <ul className="space-y-3">
                             {expertise.items.map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-3 text-white/70 text-sm md:text-base leading-relaxed">
-                                    <span className="text-secondary shrink-0 mt-1 font-bold">-</span>
+                                    <span className="text-secondary-strong shrink-0 mt-1 font-bold">-</span>
                                     <span>{item}</span>
                                 </li>
                             ))}

@@ -48,7 +48,7 @@ export function SereniteTargets() {
                     Vous avez un doute sur l&apos;éligibilité de votre structure ?{" "}
                     <Link
                         href="/contact"
-                        className="text-secondary font-bold hover:underline transition-all"
+                        className="text-secondary-strong font-bold hover:underline transition-all"
                     >
                         Contactez-nous pour une étude personnalisée.
                     </Link>
@@ -73,7 +73,7 @@ function TargetCard({ role, spec, image }: { role: string; spec: string; image: 
             </div>
             <div className="p-6 pt-4">
                 <h4 className="font-bold text-white text-lg mb-1">{role}</h4>
-                <p className="text-secondary text-sm font-medium leading-relaxed">{spec}</p>
+                <p className="text-secondary-strong text-sm font-medium leading-relaxed">{spec}</p>
             </div>
         </div>
     )

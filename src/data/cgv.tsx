@@ -21,8 +21,8 @@ export const cgvData: LegalData = {
         "Immatriculée au Registre du Commerce et des Sociétés d'Évry sous le numéro 942 020 082",
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
         "Téléphone : 09 78 25 07 46",
-        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
-        <span key="site"><a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">https://www.trinexta.fr</a></span>,
+        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="site"><a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.trinexta.fr</a></span>,
       ],
     },
     {
@@ -152,7 +152,7 @@ export const cgvData: LegalData = {
       title: "Article 22 - Contact",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
-        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
     },
     {
@@ -169,7 +169,7 @@ export const cgvData: LegalData = {
         "SIREN : 942 020 082",
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
         "Téléphone : 09 78 25 07 46",
-        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
     },
     {
@@ -221,7 +221,7 @@ export const cgvData: LegalData = {
     {
       title: "CGU — Article 9 - Données personnelles",
       paragraphs: [
-        <span key="dp">Les traitements de données personnelles sont réalisés conformément au RGPD, à la Loi Informatique et Libertés et à la <a href="/confidentialite" className="text-secondary hover:underline transition-colors">Politique de Confidentialité</a> publiée sur le site.</span>,
+        <span key="dp">Les traitements de données personnelles sont réalisés conformément au RGPD, à la Loi Informatique et Libertés et à la <a href="/confidentialite" className="text-secondary-strong hover:underline transition-colors">Politique de Confidentialité</a> publiée sur le site.</span>,
       ],
     },
     {

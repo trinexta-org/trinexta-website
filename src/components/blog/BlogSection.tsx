@@ -32,7 +32,7 @@ export function BlogSection({ marqueeArticles, articles, categories, activeCateg
         {/* Titre Editorial Style */}
         <div className="text-center mb-16 md:mb-20 relative z-10">
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-none mb-6">
-            Insights & <span className="text-secondary">Innovations</span>
+            Insights & <span className="text-secondary-strong">Innovations</span>
           </h2>
           <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto font-medium">
             Explorez nos articles d&apos;experts, les tendances tech et nos guides pratiques pour maintenir votre entreprise performante.
@@ -59,7 +59,7 @@ export function BlogSection({ marqueeArticles, articles, categories, activeCateg
                         onClick={() => onCategoryChange(cat.id)}
                         className={`text-left transition-all duration-300 py-1.5 text-base ${
                             activeCategory === cat.id 
-                            ? "text-secondary font-black translate-x-1" 
+                            ? "text-secondary-strong font-black translate-x-1" 
                             : "text-white/40 hover:text-white/80"
                         }`}
                       >
@@ -108,11 +108,11 @@ export function BlogSection({ marqueeArticles, articles, categories, activeCateg
                   </div>
                   
                   <div className="p-6 md:p-8 flex flex-col flex-grow">
-                    <span className="text-secondary text-[11px] font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <span className="text-secondary-strong text-[11px] font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" /> {formatDatePublication(post.datePublication)}
                     </span>
                     
-                    <h3 className="text-lg md:text-xl font-bold text-white leading-snug mb-4 line-clamp-3 group-hover:text-secondary transition-colors font-sans">
+                    <h3 className="text-lg md:text-xl font-bold text-white leading-snug mb-4 line-clamp-3 group-hover:text-secondary-strong transition-colors font-sans">
                       {post.titre}
                     </h3>
                     

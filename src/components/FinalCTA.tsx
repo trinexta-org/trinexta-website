@@ -175,7 +175,7 @@ export function FinalCTA({
                 {ctaLabel}
               </span>
 
-              <div className="relative z-10 text-secondary group-hover:text-primary transition-colors duration-500">
+              <div className="relative z-10 text-secondary-strong group-hover:text-primary transition-colors duration-500">
                 <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>

@@ -53,7 +53,7 @@ export function OurNetwork() {
                     >
                         <Heading as="h3" className="text-3xl md:text-5xl text-white font-black leading-tight">
                             La force d&apos;un réseau <br className="hidden md:block" />
-                            <span className="text-secondary">d&apos;experts indépendants</span>
+                            <span className="text-secondary-strong">d&apos;experts indépendants</span>
                         </Heading>
 
                         <div className="rounded-xl border border-secondary/40 bg-secondary/10 p-4 md:p-6 mt-2 md:mt-0">
@@ -81,7 +81,7 @@ export function OurNetwork() {
                             delay={idx * 0.1}
                             className="relative overflow-hidden flex flex-col gap-4 p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] hover:border-secondary/40 transition-all duration-500 group shadow-lg"
                         >
-                            <span className="absolute -right-4 -top-6 text-[100px] md:text-[140px] font-black text-white/[0.02] group-hover:text-secondary/[0.04] transition-colors duration-500 pointer-events-none select-none">
+                            <span className="absolute -right-4 -top-6 text-[100px] md:text-[140px] font-black text-white/[0.02] group-hover:text-secondary-strong/[0.04] transition-colors duration-500 pointer-events-none select-none">
                                 0{idx + 1}
                             </span>
 
