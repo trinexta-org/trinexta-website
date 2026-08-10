@@ -148,15 +148,15 @@ export function Footer() {
               <span className={mobileTitle}>Contact</span>
               <div className="space-y-4">
                 <div>
-                  <span className="block text-[8.5px] sm:text-[9px] text-[#6fa0c5] font-bold uppercase mb-1">Bureau</span>
+                  <span className="block text-[8.5px] sm:text-[9px] text-[var(--secondary)] font-bold uppercase mb-1">Bureau</span>
                   <span className="text-white/70 text-[9.5px] sm:text-[11px] block leading-snug break-words">7 Rue Montespan, 91000 EVRY</span>
                 </div>
                 <div>
-                  <span className="block text-[8.5px] sm:text-[9px] text-[#6fa0c5] font-bold uppercase mb-1">Assistance</span>
+                  <span className="block text-[8.5px] sm:text-[9px] text-[var(--secondary)] font-bold uppercase mb-1">Assistance</span>
                   <a href="tel:0978250746" className={mobileHover}>09 78 25 07 46</a>
                 </div>
                 <div>
-                  <span className="block text-[8.5px] sm:text-[9px] text-[#6fa0c5] font-bold uppercase mb-1">Email</span>
+                  <span className="block text-[8.5px] sm:text-[9px] text-[var(--secondary)] font-bold uppercase mb-1">Email</span>
 
                   <a href="mailto:contact@trinexta.fr" className={mobileHover}>contact@trinexta.fr</a>
                 </div>

@@ -56,41 +56,6 @@ export function WhyChooseUs() {
     <Section container={false} className="relative bg-surface pt-8 pb-16 md:pb-32 overflow-hidden">
       <Container className="relative z-10">
 
-        <div className="flex items-center justify-center gap-3 md:gap-5 mb-8 md:mb-12">
-          {reasons.map((reason, index) => {
-            const isActive = active === index
-            const isDone = index < active
-            return (
-              <button
-                key={reason.id}
-                onClick={() => { setActive(index); setIsPaused(true) }}
-                className="group flex items-center gap-3 md:gap-5"
-                aria-label={`Voir : ${reason.title}`}
-              >
-                <span
-                  className={`relative flex items-center justify-center rounded-full font-mono font-bold transition-all duration-500 ${
-                    isActive
-                      ? "w-9 h-9 md:w-11 md:h-11 text-sm md:text-base bg-secondary-strong text-white shadow-[0_0_20px_rgba(92,146,184,0.6)]"
-
-                      : "w-7 h-7 md:w-9 md:h-9 text-xs md:text-sm bg-white border border-border text-muted-foreground group-hover:border-secondary/50 group-hover:text-secondary-strong"
-                  }`}
-                >
-                  {isDone ? (
-                    <svg viewBox="0 0 20 20" fill="none" className="w-3.5 h-3.5 md:w-4 md:h-4">
-                      <path d="M4 10.5L8 14.5L16 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  ) : (
-                    `0${index + 1}`
-                  )}
-                </span>
-                {index < reasons.length - 1 && (
-                  <span className={`hidden sm:block h-px w-8 md:w-16 transition-colors duration-500 ${isDone ? "bg-secondary" : "bg-border"}`} />
-                )}
-              </button>
-            )
-          })}
-        </div>
-
         <div
           ref={containerRef}
           onMouseEnter={() => setIsPaused(true)}

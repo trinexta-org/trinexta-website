@@ -61,7 +61,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
     <div className={cn("border-t border-white/5 pt-4", className)}>
       <div className="flex items-center gap-2 text-secondary-strong">
         <Mail className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} aria-hidden="true" />
-        <span className="font-bold uppercase text-[8px] tracking-widest text-[#6fa0c5]">Newsletter</span>
+        <span className="font-bold uppercase text-[8px] tracking-widest text-[var(--secondary)]">Newsletter</span>
       </div>
 
       <p className={cn("mt-2 leading-snug text-white/55", compact ? "text-[10px]" : "text-xs")}>

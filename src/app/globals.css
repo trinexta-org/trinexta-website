@@ -10,11 +10,11 @@
   --phone-frame: #1e293b;
   --phone-button: #0f172a;
   --phone-camera: #111111;
-  --secondary-foreground: #0a233e;
+  --primary-foreground: #ffffff;
   --secondary: #5c92b8; 
   --secondary-strong: #356b8f;
   --secondary-strong-foreground: #ffffff;
-  --ssecondary-foreground: #0a233e;
+  --secondary-foreground: #0a233e;
   --accent: #f0f5f9;
   --accent-foreground: #0a233e;
   --muted: #f4f4f5;
@@ -23,6 +23,8 @@
   --input: #e4e4e7;
   --ring: #5c92b8;
   --radius: 0.75rem; 
+
+  
 }
 @theme inline {
   --color-trinexta-dark: #0a233e;
