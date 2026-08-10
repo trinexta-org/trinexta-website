@@ -62,7 +62,7 @@ export function CasClientsHero() {
               return (
                 <React.Fragment key={i}>
                   <span
-                    className={`inline-block mr-2 sm:mr-3 ${highlightedWords.includes(clean) ? "text-secondary" : "text-white"}`}
+                    className={`inline-block mr-2 sm:mr-3 ${highlightedWords.includes(clean) ? "text-secondary-strong" : "text-white"}`}
                   >
                     {isItalic ? <em>{rawWord}</em> : rawWord}
                   </span>

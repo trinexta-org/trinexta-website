@@ -86,7 +86,7 @@ export function TrinextaMeaning() {
               </div>
 
               <div className="relative z-10 flex flex-col h-full items-center text-center">
-                <span className="text-5xl md:text-6xl font-black text-secondary tracking-normal drop-shadow-lg inline-block origin-center w-full">
+                <span className="text-5xl md:text-6xl font-black text-secondary-strong tracking-normal drop-shadow-lg inline-block origin-center w-full">
                   {item.syllable}
                 </span>
 

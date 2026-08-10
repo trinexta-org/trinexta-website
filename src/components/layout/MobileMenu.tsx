@@ -35,7 +35,7 @@ export function MobileMenu() {
     <div className="lg:hidden flex items-center">
       <button
         onClick={handleOpen}
-        className="p-2 -mr-2 text-primary hover:text-secondary transition-colors"
+        className="p-2 -mr-2 text-primary hover:text-secondary-strong transition-colors"
         aria-label="Ouvrir le menu"
       >
         <Menu className="h-6 w-6" />

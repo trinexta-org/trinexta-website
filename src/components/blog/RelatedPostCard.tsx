@@ -17,7 +17,7 @@ export function RelatedPostCard({ article }: { article: ResumeArticle }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
       </div>
-      <h3 className="text-xl font-bold leading-tight group-hover:text-secondary transition-colors">
+      <h3 className="text-xl font-bold leading-tight group-hover:text-secondary-strong transition-colors">
         {article.titre}
       </h3>
       <p className="text-white/50 text-sm mt-3 line-clamp-2">{article.extrait}</p>

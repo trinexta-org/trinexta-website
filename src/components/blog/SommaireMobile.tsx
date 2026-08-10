@@ -88,7 +88,7 @@ export function SommaireMobile({ titres }: Props) {
       >
         <div className="flex items-center justify-between p-6 border-b border-white/5">
           <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <List className="w-5 h-5 text-secondary" />
+            <List className="w-5 h-5 text-secondary-strong" />
             Sommaire
           </h3>
           <button 
@@ -106,7 +106,7 @@ export function SommaireMobile({ titres }: Props) {
               onClick={() => handleClick(titre.id)}
               className={`text-left transition-colors ${
                 titre.level === "h3" 
-                  ? "ml-4 text-sm text-white/50 hover:text-secondary" 
+                  ? "ml-4 text-sm text-white/50 hover:text-secondary-strong" 
                   : "text-base text-white/90 font-medium hover:text-white"
               }`}
             >

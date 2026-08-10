@@ -4,7 +4,7 @@ export function CircuitBorders() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-20 hidden 2xl:flex justify-between overflow-hidden"
     >
-      <div className="w-40 h-full text-secondary opacity-50 mix-blend-screen">
+      <div className="w-40 h-full text-secondary-strong opacity-50 mix-blend-screen">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="circuit-pattern-left" x="0" y="0" width="100%" height="400" patternUnits="userSpaceOnUse">
@@ -17,7 +17,7 @@ export function CircuitBorders() {
         </svg>
       </div>
 
-      <div className="w-40 h-full text-secondary opacity-50 mix-blend-screen scale-x-[-1]">
+      <div className="w-40 h-full text-secondary-strong opacity-50 mix-blend-screen scale-x-[-1]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="circuit-pattern-right" x="0" y="0" width="100%" height="400" patternUnits="userSpaceOnUse">

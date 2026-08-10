@@ -20,7 +20,7 @@ export const confidentialiteData: LegalData = {
         "SASU au capital de 15 000 €",
         "SIREN : 942 020 082",
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
-        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
         "Téléphone : 09 78 25 07 46",
       ],
     },
@@ -41,7 +41,7 @@ export const confidentialiteData: LegalData = {
               <ul className="space-y-1">
                 {items.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-secondary shrink-0">-</span>
+                    <span className="text-secondary-strong shrink-0">-</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -65,7 +65,7 @@ export const confidentialiteData: LegalData = {
             ["Communication", "informations commerciales, actualités, invitations professionnelles."],
           ].map(([label, desc], i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
@@ -83,7 +83,7 @@ export const confidentialiteData: LegalData = {
             ["Consentement", "pour certaines opérations marketing ou l'utilisation de cookies non essentiels."],
           ].map(([label, desc], i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
@@ -121,7 +121,7 @@ export const confidentialiteData: LegalData = {
             ["Cookies", "13 mois maximum."],
           ].map(([label, desc], i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
@@ -148,7 +148,7 @@ export const confidentialiteData: LegalData = {
             ["Droit de retrait du consentement", "à tout moment lorsque le traitement repose sur celui-ci."],
           ].map(([label, desc], i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
@@ -158,7 +158,7 @@ export const confidentialiteData: LegalData = {
     {
       title: "Article 11 - Exercice des droits",
       paragraphs: [
-        <span key="droits">Toute demande peut être adressée à TRINEXTA par e-mail à <a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a>. Pour des raisons de sécurité, une preuve d&apos;identité pourra être demandée.</span>,
+        <span key="droits">Toute demande peut être adressée à TRINEXTA par e-mail à <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a>. Pour des raisons de sécurité, une preuve d&apos;identité pourra être demandée.</span>,
       ],
     },
     {
@@ -191,7 +191,7 @@ export const confidentialiteData: LegalData = {
       title: "Article 16 - Contact",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
-        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
     },
   ],

@@ -25,7 +25,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
                      focus:bg-white/10 focus:border-secondary focus:ring-2 focus:ring-secondary/20 focus:outline-none"
         />
         
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center text-white/40 group-focus-within:text-secondary transition-colors duration-300">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center text-white/40 group-focus-within:text-secondary-strong transition-colors duration-300">
           <Search className="w-4 h-4" />
         </div>
         

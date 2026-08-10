@@ -18,12 +18,12 @@
 | Classe Tailwind             | Usage                                      |
 |-----------------------------|--------------------------------------------|
 | `text-primary` `bg-primary` | Bleu fonce - titres, header, footer        |
-| `text-secondary` `bg-secondary` | Bleu clair - liens actifs, accents     |
+| `text-secondary-strong` `bg-secondary` | Bleu clair - liens actifs, accents     |
 | `text-muted-foreground`     | Gris - descriptions, texte secondaire      |
 | `bg-accent`                 | Fond tres clair - cartes, hover            |
 | `bg-background`             | Blanc - fond de page                       |
 | `border-border`             | Bordures                                   |
-| `text-primary-foreground` `text-secondary-foreground` | Blanc - texte sur fond colore |
+| `text-primary-foreground` `text-secondary-strong-foreground` | Blanc - texte sur fond colore |
 | `text-white/70`             | Texte secondaire sur fond sombre (footer, dark sections) |
 
 ---

@@ -32,7 +32,7 @@ export function SerenitePricingCard({ name, price, target, description, features
       </div>
       
       <div className="min-h-[36px] flex items-center mb-3">
-        <Text className="text-xs font-bold text-secondary uppercase tracking-wider">{target}</Text>
+        <Text className="text-xs font-bold text-secondary-strong uppercase tracking-wider">{target}</Text>
       </div>
 
       <div className="min-h-[76px] flex items-start mb-6">
@@ -44,7 +44,7 @@ export function SerenitePricingCard({ name, price, target, description, features
       <ul className="flex-grow space-y-4 mb-8">
         {features.map((feature, i) => (
           <li key={i} className="flex items-start gap-3 text-sm text-white/80 leading-snug">
-            <span className="text-secondary shrink-0 mt-0.5">✓</span>
+            <span className="text-secondary-strong shrink-0 mt-0.5">✓</span>
             <span>{feature}</span>
           </li>
         ))}
@@ -66,7 +66,7 @@ export function SerenitePricingCard({ name, price, target, description, features
         {slug && (
           <Link 
             href={`/nos-offres/${slug}`} 
-            className="text-center text-xs text-white/60 hover:text-secondary font-medium transition-colors underline underline-offset-4"
+            className="text-center text-xs text-white/60 hover:text-secondary-strong font-medium transition-colors underline underline-offset-4"
           >
             Voir le détail de l&apos;offre
           </Link>

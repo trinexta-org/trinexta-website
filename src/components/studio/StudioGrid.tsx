@@ -52,13 +52,13 @@ export function StudioGrid() {
             <ul className="space-y-1.5 pt-2 border-t border-white/5">
               {service.points.map((pt, k) => (
                 <li key={k} className="text-xs text-white/80 flex items-start gap-2">
-                  <span className="text-secondary shrink-0 mt-0.5">✓</span>
+                  <span className="text-secondary-strong shrink-0 mt-0.5">✓</span>
                   <span>{pt}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="text-[10px] font-bold text-secondary uppercase tracking-wider border-t border-white/5 pt-3">
+          <div className="text-[10px] font-bold text-secondary-strong uppercase tracking-wider border-t border-white/5 pt-3">
             {service.stack}
           </div>
         </Card>

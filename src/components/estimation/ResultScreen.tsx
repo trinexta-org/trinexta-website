@@ -37,11 +37,11 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
           height={80}
           className="mx-auto mb-4 h-16 w-16 rounded-full border-2 border-secondary/40 object-cover md:h-20 md:w-20"
         />
-        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
           Votre estimation
         </p>
         <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">
-          Voici votre <em className="text-secondary">fourchette</em>
+          Voici votre <em className="text-secondary-strong">fourchette</em>
         </h2>
 
         <div className="mx-auto mt-8 flex max-w-2xl flex-col gap-4 sm:flex-row sm:justify-center">
@@ -83,9 +83,9 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <p className="font-bold text-white">{service.label}</p>
               {service.kind === "sur-devis" ? (
-                <p className="font-black text-secondary">Sur devis</p>
+                <p className="font-black text-secondary-strong">Sur devis</p>
               ) : (
-                <p className="font-black text-secondary">
+                <p className="font-black text-secondary-strong">
                   {eurosRange(service.min, service.max)}
                   {service.kind === "recurring" ? " /mois" : ""}
                 </p>
@@ -104,14 +104,14 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
                     href={bookingsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-bold text-secondary underline transition-colors hover:text-white"
+                    className="text-sm font-bold text-secondary-strong underline transition-colors hover:text-white"
                   >
                     Parlons-en de vive voix
                   </a>
                 ) : (
                   <Link
                     href="/contact"
-                    className="text-sm font-bold text-secondary underline transition-colors hover:text-white"
+                    className="text-sm font-bold text-secondary-strong underline transition-colors hover:text-white"
                   >
                     Parlons-en de vive voix
                   </Link>

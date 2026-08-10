@@ -45,7 +45,7 @@ export default function NousRejoindrePage() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 items-center">
           
           <div className="space-y-8">
-            <span className="text-secondary font-mono text-xs tracking-widest uppercase">
+            <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">
               Pourquoi nous rejoindre
             </span>
             <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight text-white">

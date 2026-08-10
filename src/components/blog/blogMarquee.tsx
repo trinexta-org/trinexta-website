@@ -62,7 +62,7 @@ export function BlogMarquee({ articles, categoryLabel }: BlogMarqueeProps) {
 
                     {/* Contenu textuel */}
                     <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
-                      <div className="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-wider text-secondary">
+                      <div className="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-wider text-secondary-strong">
                         <span>{categoryLabel(article.categorie)}</span>
                       </div>
                       
@@ -80,7 +80,7 @@ export function BlogMarquee({ articles, categoryLabel }: BlogMarqueeProps) {
                             <p className="text-white/60 text-xs md:text-sm line-clamp-2 mb-4 font-medium">
                               {article.extrait || "Découvrez l'analyse complète de nos experts Trinexta et optimisez vos infrastructures informatiques."}
                             </p>
-                            <div className="flex items-center gap-2 text-secondary text-xs md:text-sm font-bold">
+                            <div className="flex items-center gap-2 text-secondary-strong text-xs md:text-sm font-bold">
                               Lire la suite <ArrowRight className="w-4 h-4" />
                             </div>
                           </div>

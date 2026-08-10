@@ -21,7 +21,7 @@ export function ContactFaq() {
                                 className="w-full flex items-center justify-between p-5 text-left font-bold text-white hover:bg-white/[0.02] transition-colors gap-4"
                             >
                                 <span className="text-base md:text-lg">{faq.question}</span>
-                                <span className={`text-secondary text-xl transform transition-transform duration-300 ${isOpen ? 'rotate-45' : 'rotate-0'}`}>
+                                <span className={`text-secondary-strong text-xl transform transition-transform duration-300 ${isOpen ? 'rotate-45' : 'rotate-0'}`}>
                                     ＋
                                 </span>
                             </button>

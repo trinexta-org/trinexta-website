@@ -55,7 +55,7 @@ export async function generateMetadata({
 function PhaseLabel({ number, label }: { number: string; label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="font-mono text-xl font-bold text-secondary tracking-widest md:text-2xl">
+      <span className="font-mono text-xl font-bold text-secondary-strong tracking-widest md:text-2xl">
         {number}
       </span>
       <span className="text-xl font-bold uppercase tracking-[0.12em] text-white/80 md:text-2xl">
@@ -87,7 +87,7 @@ export default async function CaseClientDetailPage({
             <Entrance delay={0} duration={0.6}>
               <Link
                 href="/cas-clients"
-                className="inline-flex text-sm font-semibold text-secondary hover:text-white"
+                className="inline-flex text-sm font-semibold text-secondary-strong hover:text-white"
               >
                 Retour aux cas clients
               </Link>
@@ -263,7 +263,7 @@ export default async function CaseClientDetailPage({
                 {/* Result pull-quote */}
                 <FadeIn delay={0.3}>
                   <div className="mt-8 rounded-2xl border border-secondary/30 bg-secondary/[0.07] p-6">
-                    <Text className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary">
+                    <Text className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary-strong">
                       En résumé
                     </Text>
                     <Text className="text-sm italic leading-relaxed text-white/80 md:text-base">

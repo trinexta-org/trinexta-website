@@ -43,9 +43,9 @@ export function ServicesIntro() {
           `}
           style={{ transitionDelay: "100ms" }}
         >
-          <span className="text-secondary font-mono text-xs tracking-widest uppercase">SERVICES ANNEXES</span>
+          <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">SERVICES ANNEXES</span>
           <Heading as="h2" className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            Un accompagnement IT sur mesure, au-delà du <em className="not-italic text-secondary">support</em>
+            Un accompagnement IT sur mesure, au-delà du <em className="not-italic text-secondary-strong">support</em>
           </Heading>
 
           <div className="w-10 h-px bg-secondary/50" />

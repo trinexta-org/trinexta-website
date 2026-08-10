@@ -67,7 +67,7 @@ export default function ContactForm() {
     return (
       <div className="py-12 text-center space-y-4">
         <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
-          <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 text-secondary-strong" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -242,7 +242,7 @@ export default function ContactForm() {
 
       <p className="text-center text-white/60 text-xs mt-4 block">
         En soumettant ce formulaire, vous acceptez notre{" "}
-        <a href="/confidentialite" className="text-secondary underline hover:text-white transition-colors">
+        <a href="/confidentialite" className="text-secondary-strong underline hover:text-white transition-colors">
           politique de confidentialité
         </a>.
       </p>

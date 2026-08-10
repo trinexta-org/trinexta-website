@@ -1,16 +1,20 @@
 @import "tailwindcss";
-
+ 
 :root {
   --background: #ffffff;
   --foreground: #0a233e;
   --primary: #0a233e;
+  --primary-elevated: #1a3a5c;
+  --surface: #eef3f9;  
   --phone-body: #0a0f1d;
   --phone-frame: #1e293b;
   --phone-button: #0f172a;
   --phone-camera: #111111;
-  --primary-foreground: #ffffff;
+  --secondary-foreground: #0a233e;
   --secondary: #5c92b8; 
-  --secondary-foreground: #ffffff;
+  --secondary-strong: #356b8f;
+  --secondary-strong-foreground: #ffffff;
+  --ssecondary-foreground: #0a233e;
   --accent: #f0f5f9;
   --accent-foreground: #0a233e;
   --muted: #f4f4f5;
@@ -20,7 +24,6 @@
   --ring: #5c92b8;
   --radius: 0.75rem; 
 }
-
 @theme inline {
   --color-trinexta-dark: #0a233e;
   --color-trinexta-blue: #5c92b8;
@@ -30,11 +33,15 @@
   --color-phone-camera: var(--phone-camera);
   --color-ring: var(--ring);
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-elevated: var(--primary-elevated);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-strong: var(--secondary-strong);
+  --color-secondary-strong-foreground: var(--secondary-strong-foreground);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
@@ -48,10 +55,10 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
+ 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
-
+ 
   @keyframes accordion-down {
     from { height: 0; }
     to { height: var(--radix-accordion-content-height); }
@@ -61,7 +68,7 @@
     to { height: 0; }
   }
 }
-
+ 
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -79,7 +86,7 @@
     font-style: italic;
   }
 }
-
+ 
 @layer utilities {
   @keyframes fade-in-scroll {
     to {
@@ -87,7 +94,7 @@
       transform: translate(0, 0);
     }
   }
-
+ 
   @supports (animation-timeline: view()) {
     .animate-fade-in-scroll {
       animation: fade-in-scroll linear both;
@@ -95,18 +102,18 @@
       animation-range: entry 5% cover 25%;
     }
   }
-
+ 
   @supports not (animation-timeline: view()) {
     .animate-fade-in-scroll {
       animation: fade-in-scroll 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   }
-
+ 
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-
+ 
   @keyframes fade-in-up {
     from {
       opacity: 0;
@@ -161,7 +168,7 @@
       transform: translateX(0);
     }
   }
-
+ 
   .animate-fade-in {
     opacity: 0;
     animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -190,26 +197,26 @@
     opacity: 0;
     animation: badge-pop 0.25s ease-out both;
   }
-
+ 
   @keyframes slide-up {
     0% { transform: translateY(0); }
     100% { transform: translateY(calc(-50% - 0.75rem)); }
   }
-
+ 
   @keyframes slide-down {
     0% { transform: translateY(calc(-50% - 0.75rem)); }
     100% { transform: translateY(0); }
   }
-
+ 
   .animate-slide-up {
     animation: slide-up 35s linear infinite;
   }
-
+ 
   .animate-slide-down {
     animation: slide-down 40s linear infinite;
   }
 }
-
+ 
 /* ── MetricRow animations (CasClientCard) ──────────────────────────────
    Total cycle ≈ 6.8s | Stagger 1.3s per row via --metric-delay CSS var
    ──────────────────────────────────────────────────────────────────── */
@@ -246,7 +253,7 @@
   animation: metric-sweep 6.8s linear infinite;
   animation-delay: var(--metric-delay, 0s);
 }
-
+ 
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -257,7 +264,7 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
-
+ 
 /* ── FinalCTA animations (ribbon background + heading color cycle) ────
    Ribbon path duration set per-path via --dash-duration inline style
    ──────────────────────────────────────────────────────────────────── */
@@ -279,7 +286,7 @@
 [data-animate="true"] .ribbon-line {
   animation-play-state: running;
 }
-
+ 
 @keyframes cta-word-1 {
   0%, 50%, 75% { color: var(--secondary); }
   100%         { color: var(--primary-foreground); }
@@ -295,7 +302,7 @@
 .cta-word-1 { animation: cta-word-1 8s linear infinite; }
 .cta-word-2 { animation: cta-word-2 8s linear infinite; }
 .cta-word-3 { animation: cta-word-3 8s linear infinite; }
-
+ 
 /* ── Stat bar reveal (KpiSection, SereniteStats): width 12px → 48px ──── */
 @keyframes bar-grow {
   from { width: 12px; }
@@ -315,7 +322,7 @@
     animation: bar-grow 1s ease-out 0.5s forwards;
   }
 }
-
+ 
 /* ── Scroll progress line (ApproachSection, ServicesProcess, TechnicienSteps)
    Fills as the step list scrolls through the viewport
    ──────────────────────────────────────────────────────────────────── */
@@ -336,7 +343,7 @@
     height: 100%;
   }
 }
-
+ 
 /* ── Decorative float loop (phone mockups, hero cards) ────────────────
    Configure amplitude/duration via --float-from / --float-to / --float-duration
    ──────────────────────────────────────────────────────────────────── */
@@ -347,7 +354,7 @@
 .animate-float-y {
   animation: float-y var(--float-duration, 6s) ease-in-out infinite;
 }
-
+ 
 /* ── Blog reading progress bar (ProgressBar) ──────────────────────────
    No JS fallback: hidden on browsers without scroll-driven animations,
    it's a nice-to-have indicator, not required to read the article.
@@ -367,7 +374,7 @@
     animation-timeline: scroll(root);
   }
 }
-
+ 
 /* ── Service card "Découvrir" arrow fill (ServicesSection) ────────────
    Fills left-to-right or right-to-left depending on card direction
    ──────────────────────────────────────────────────────────────────── */
@@ -391,7 +398,7 @@
 .animate-arrow-fill-rtl {
   animation: arrow-fill-rtl 3s ease-in-out infinite;
 }
-
+ 
 /* ── Animations decoratives en boucle infinie : coupees si l'utilisateur
    a demande moins de mouvement au niveau OS/navigateur (WCAG 2.3.3) ──── */
 @media (prefers-reduced-motion: reduce) {
@@ -406,7 +413,7 @@
     animation: none;
   }
 }
-
+ 
 /* ── Values carousel progress bar (OurValues) ──────────────────────────
    Redémarre à chaque changement d'onglet actif (remount via key React)
    ──────────────────────────────────────────────────────────────────── */
@@ -419,7 +426,7 @@
   animation: progress-fill linear both;
   animation-duration: var(--progress-duration, 4s);
 }
-
+ 
 /* ── Generic entrance animations (key-remount replay) ──────────────────
    Replayed by changing the element's React `key`, no JS state needed.
    ──────────────────────────────────────────────────────────────────── */
@@ -430,7 +437,7 @@
 .animate-fade-in-up {
   animation: fade-in-up 0.35s ease-out both;
 }
-
+ 
 @keyframes fade-in-scale {
   from { opacity: 0; transform: scale(var(--scale-from, 0.9)); }
   to   { opacity: 1; transform: scale(1); }
@@ -438,7 +445,7 @@
 .animate-fade-in-scale {
   animation: fade-in-scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-
+ 
 /* ── InterventionMap radar pulses (lock/flash on department crossing) ──
    Replayed via key remount on each crossing (see InterventionMap.tsx).
    ──────────────────────────────────────────────────────────────────── */
@@ -449,7 +456,7 @@
 .animate-radar-lock {
   animation: radar-lock-draw 0.4s ease-out both;
 }
-
+ 
 @keyframes radar-flash {
   from { opacity: 1; transform: scale(2.8) rotate(45deg); }
   to   { opacity: 0; transform: scale(0.4) rotate(45deg); }
@@ -457,22 +464,22 @@
 .animate-radar-flash {
   animation: radar-flash 0.3s ease-out both;
 }
-
+ 
 .prose h2 {
   transition: all 0.5s ease;
   padding-left: 0;
 }
-
+ 
 .prose h2:hover {
   padding-left: 10px;
   color: var(--color-secondary);
 }
-
+ 
 #tarteaucitronRoot *,
 #tarteaucitron * {
   font-family: var(--font-sans) !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronAlertBig,
 #tarteaucitron,
 #tarteaucitronServices,
@@ -497,42 +504,42 @@
   color: var(--primary-foreground) !important;
   box-shadow: none !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronAlertBig {
   border: 1px solid var(--secondary) !important;
   border-radius: var(--radius-xl) !important;
   padding: 30px !important;
 }
-
+ 
 #tarteaucitron {
   border: 1px solid var(--secondary) !important;
   border-radius: var(--radius-xl) !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronDisclaimerAlert,
 #tarteaucitron span,
 #tarteaucitronRoot #tarteaucitronPrivacyUrl {
   color: var(--primary-foreground) !important;
   background: transparent !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronPrivacyUrl {
   text-decoration: underline !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronPrivacyUrl:hover,
 #tarteaucitron a:hover {
   color: var(--secondary) !important;
 }
-
+ 
 #tarteaucitron a {
   color: var(--secondary) !important;
 }
-
+ 
 #tarteaucitron .tarteaucitronBorder {
   border-top: 1px solid var(--secondary) !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronPersonalize2,
 #tarteaucitron #tarteaucitronAllAllowed,
 #tarteaucitron .tarteaucitronAllow,
@@ -549,7 +556,7 @@
   text-transform: uppercase !important;
   display: inline-block !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronAllDenied2,
 #tarteaucitron #tarteaucitronAllDenied,
 #tarteaucitron .tarteaucitronDeny,
@@ -565,7 +572,7 @@
   text-transform: uppercase !important;
   display: inline-block !important;
 }
-
+ 
 #tarteaucitronRoot #tarteaucitronPersonalize2:hover,
 #tarteaucitron #tarteaucitronAllAllowed:hover,
 #tarteaucitron .tarteaucitronAllow:hover,
@@ -578,20 +585,20 @@
   color: var(--secondary-foreground) !important;
   opacity: 0.9 !important;
 }
-
+ 
 #tarteaucitron .tarteaucitronTitle {
   background-color: transparent !important;
 }
-
+ 
 #tarteaucitron #tarteaucitronClosePanel:hover {
   background-color: transparent !important;
   background: transparent !important;
 }
-
+ 
 #tarteaucitron #tarteaucitronClosePanel:hover::after {
   color: var(--secondary) !important;
 }
-
+ 
 #tarteaucitronManager {
   width: 48px !important;
   height: 48px !important;
@@ -604,7 +611,7 @@
   bottom: 24px !important;
   left: 24px !important;
   z-index: 9999 !important;
-
+ 
   background-color: var(--primary) !important;
   background: var(--primary) !important;
   border: 2px solid var(--secondary) !important;
@@ -617,28 +624,28 @@
   transition: all 0.3s ease !important;
   cursor: pointer !important;
 }
-
+ 
 #tarteaucitronManager:hover {
   background-color: var(--secondary) !important;
   background: var(--secondary) !important;
   transform: scale(1.1) !important;
 }
-
+ 
 #tarteaucitronManager * {
   display: none !important;
 }
-
+ 
 #tarteaucitronManager:hover {
   background-color: var(--secondary) !important;
   background: var(--secondary) !important;
   transform: scale(1.1) !important;
 } 
-
+ 
 #tarteaucitronAlertBig::before {
     content: none !important;
     display: none !important;
 }
-
+ 
 #tarteaucitronServices button,
 .tarteaucitronTitle button,
 #tarteaucitronServicesTitle_mandatory button,
@@ -648,7 +655,7 @@
     color: var(--secondary-foreground) !important;
     border: none !important;
 }
-
+ 
 #tarteaucitronAlertBig {
     position: fixed !important;
     top: 50% !important;
@@ -659,7 +666,7 @@
     padding: 30px !important; 
     z-index: 20000 !important;
 }
-
+ 
 #tarteaucitron #tarteaucitronClosePanel {
     position: absolute !important;
     top: 10px !important;
@@ -673,7 +680,7 @@
     font-size: 0 !important; 
     color: transparent !important;
 }
-
+ 
 #tarteaucitron #tarteaucitronClosePanel::after {
     content: "Fermer" !important;
     font-size: 14px !important;
@@ -681,3 +688,4 @@
     color: var(--primary-foreground) !important;
     text-decoration: underline !important;
 }
+ 

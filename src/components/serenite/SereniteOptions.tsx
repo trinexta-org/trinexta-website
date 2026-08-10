@@ -33,7 +33,7 @@ export function SereniteOptions() {
             {options[0].desc}
           </p>
         </div>
-        <div className="text-xl md:text-2xl font-black text-secondary mt-12">
+        <div className="text-xl md:text-2xl font-black text-secondary-strong mt-12">
           {options[0].price}
         </div>
       </div>
@@ -47,7 +47,7 @@ export function SereniteOptions() {
             {options[1].desc}
           </p>
         </div>
-        <div className="text-lg font-black text-secondary mt-6">
+        <div className="text-lg font-black text-secondary-strong mt-6">
           {options[1].price}
         </div>
       </div>
@@ -61,7 +61,7 @@ export function SereniteOptions() {
             {options[2].desc}
           </p>
         </div>
-        <div className="text-lg font-black text-secondary mt-6">
+        <div className="text-lg font-black text-secondary-strong mt-6">
           {options[2].price}
         </div>
       </div>

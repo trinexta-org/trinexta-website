@@ -59,10 +59,10 @@ export function TechnicienPillars() {
             style={{ transitionDelay: `${100 + i * 150}ms` }}
           >
             <div className="mb-6">
-              <h4 className="font-bold text-2xl text-white mb-2 group-hover:text-secondary transition-colors">
+              <h4 className="font-bold text-2xl text-white mb-2 group-hover:text-secondary-strong transition-colors">
                 {pillar.title}
               </h4>
-              <span className="text-secondary/80 text-sm font-medium uppercase tracking-wider">
+              <span className="text-secondary-strong/80 text-sm font-medium uppercase tracking-wider">
                 {pillar.subtitle}
               </span>
             </div>

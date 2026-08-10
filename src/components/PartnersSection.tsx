@@ -64,11 +64,11 @@ function PartnerCard({ partner, ariaHidden }: { partner: Partner, ariaHidden?: b
           alt={`Logo ${partner.name}`}
           fill
           sizes="(max-width: 768px) 40px, 56px"
-          className={`object-contain ${partner.isCircle ? 'rounded-full bg-white/5 shadow-inner' : 'rounded-md'}`}
+          className={`object-contain ${partner.isCircle ? 'rounded-full bg-white shadow-sm ring-1 ring-border' : 'rounded-md'}`}
         />
       </div>
 
-      <span className="text-white/70 text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase">
+      <span className="text-primary/70 text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase">
         {partner.name}
       </span>
     </div>
