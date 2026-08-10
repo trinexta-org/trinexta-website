@@ -31,7 +31,11 @@ jobs:
             npm run build
             # minimumCacheTTL=31j : sans purge, les images remplacees sous le
             # meme chemin resteraient servies depuis l'ancien cache jusqu'a 31j.
-            rm -rf .next/cache/images
+            # Purge non bloquante : si des fichiers de cache appartiennent a un
+            # autre user (changement de user PM2), set -e couperait le script
+            # avant le reload et laisserait le process sur l'ancien build.
+            rm -rf .next/cache/images \
+              || echo "ATTENTION: purge du cache images incomplete (droits), images potentiellement perimees"
             pm2 startOrReload ecosystem.config.js --only trinexta-prod --update-env
             pm2 save
             # Encode les images LCP maintenant plutot que de faire attendre
