@@ -78,7 +78,7 @@ export function ApproachSection() {
 
                   <div className="relative z-10 pt-2">
                     <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                      <span className="text-lg md:text-xl font-bold text-secondary-strong-strong font-mono">
+                      <span className="text-lg md:text-xl font-bold text-secondary-strong font-mono">
                         {step.num}
                       </span>
                       <h3 className="text-2xl md:text-4xl font-bold text-primary tracking-normal group-hover:text-secondary-strong transition-colors duration-300">
