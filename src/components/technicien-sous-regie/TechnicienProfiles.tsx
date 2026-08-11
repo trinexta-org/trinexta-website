@@ -12,7 +12,7 @@ const profiles = [
 
 export function TechnicienProfiles() {
     return (
-        <div className="relative w-full overflow-hidden py-20 bg-primary">
+        <div className="relative w-full overflow-hidden py-20 bg-surface">
             <div className="flex w-full overflow-hidden">
                 <div
                     className="flex gap-6 animate-marquee"
@@ -25,7 +25,7 @@ export function TechnicienProfiles() {
             </div>
 
             <div className="mt-16 text-center px-6">
-                <p className="text-white/60 text-lg">
+                <p className="text-muted-foreground text-lg">
                     Vous ne savez pas exactement quel profil il vous faut ?{" "}
                     <Link
                         href="/contact"

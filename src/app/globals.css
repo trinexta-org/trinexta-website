@@ -6,6 +6,7 @@
   --primary: #0a233e;
   --primary-elevated: #1a3a5c;
   --surface: #eef3f9;  
+  --surface-strong: #dce7f2;
   --phone-body: #0a0f1d;
   --phone-frame: #1e293b;
   --phone-button: #0f172a;
@@ -33,6 +34,7 @@
   --color-phone-frame: var(--phone-frame);
   --color-phone-button: var(--phone-button);
   --color-phone-camera: var(--phone-camera);
+  --color-surface-strong: var(--surface-strong);
   --color-ring: var(--ring);
   --color-background: var(--background);
   --color-surface: var(--surface);

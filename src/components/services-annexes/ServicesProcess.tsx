@@ -26,7 +26,7 @@ const steps = [
 
 export function ServicesProcess() {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
+    <section className="relative bg-surface py-20 md:py-32 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           
@@ -36,11 +36,11 @@ export function ServicesProcess() {
               <span className="text-secondary-strong text-xs md:text-sm font-bold tracking-widest mb-4 block uppercase">
                 Processus
               </span>
-              <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-tight">
+              <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-foreground leading-tight">
                 Comment ça se passe, <br />
                 <em className="not-italic text-secondary-strong">du premier appel au résultat ?</em>
               </Heading>
-              <p className="mt-8 text-white/70 text-base md:text-lg max-w-md leading-relaxed">
+              <p className="mt-8 text-muted-foreground text-base md:text-lg max-w-md leading-relaxed">
                 Quatre étapes. Aucune surprise. Un cadre clair pour démarrer votre collaboration sans friction.
               </p>
             </div>
@@ -48,7 +48,7 @@ export function ServicesProcess() {
 
           {/* Timeline */}
           <div className="lg:col-span-7 relative mt-12 lg:mt-0 pl-8 lg:pl-20">
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/5 rounded-full" />
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-border rounded-full" />
             
             <div className="scroll-progress-line absolute left-0 top-0 w-1 bg-secondary rounded-full shadow-[0_0_15px_var(--secondary)]" />
 
@@ -59,9 +59,9 @@ export function ServicesProcess() {
                   direction="up"
                   className="relative group"
                 >
-                  <div className="absolute -left-[37.5px] lg:-left-[85px] top-3 md:top-4 w-4 h-4 rounded-full bg-primary border-4 border-secondary group-hover:scale-150 group-hover:bg-secondary transition-all duration-300 z-10 shadow-[0_0_10px_var(--secondary)]" />
+                  <div className="absolute -left-[37.5px] lg:-left-[85px] top-3 md:top-4 w-4 h-4 rounded-full bg-surface border-4 border-secondary group-hover:scale-150 group-hover:bg-secondary transition-all duration-300 z-10 shadow-[0_0_10px_var(--secondary)]" />
 
-                  <div className="absolute -top-10 md:-top-16 -left-4 md:-left-8 text-[80px] md:text-[150px] font-black text-white/[0.03] select-none pointer-events-none leading-none transition-colors duration-500 group-hover:text-white/[0.06]">
+                  <div className="absolute -top-10 md:-top-16 -left-4 md:-left-8 text-[80px] md:text-[150px] font-black text-foreground/[0.04] select-none pointer-events-none leading-none transition-colors duration-500 group-hover:text-foreground/[0.08]">
                     {step.num}
                   </div>
 
@@ -70,11 +70,11 @@ export function ServicesProcess() {
                       <span className="text-lg md:text-xl font-bold text-secondary-strong font-mono">
                         {step.num}
                       </span>
-                      <h3 className="text-2xl md:text-4xl font-bold text-white tracking-normal group-hover:text-secondary-strong transition-colors duration-300">
+                      <h3 className="text-2xl md:text-4xl font-bold text-foreground tracking-normal group-hover:text-secondary-strong transition-colors duration-300">
                         {step.title}
                       </h3>
                     </div>
-                    <p className="text-white/80 text-sm md:text-xl leading-relaxed max-w-2xl font-light">
+                    <p className="text-muted-foreground text-sm md:text-xl leading-relaxed max-w-2xl font-light">
                       {step.desc}
                     </p>
                   </div>
