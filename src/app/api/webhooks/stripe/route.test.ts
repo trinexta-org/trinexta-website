@@ -1,5 +1,8 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
+// Parcours payant derriere un flag : les cas nominaux supposent l'offre en ligne.
+vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
+
 const findUniqueMock = vi.fn();
 const updateMock = vi.fn();
 vi.mock("@/lib/db", () => ({

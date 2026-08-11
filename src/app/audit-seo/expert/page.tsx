@@ -14,7 +14,12 @@ import { FaqSection } from "@/components/shared/FaqSection";
 import { expertAuditFaqs } from "@/data/audit-seo/expert-faq";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { prisma } from "@/lib/db";
-import { AUDIT_ORDER_PRICE_EUR, AUDIT_ORDER_DELAY_LABEL } from "@/data/audit-seo/offer";
+import { notFound } from "next/navigation";
+import {
+    isAuditExpertEnabled,
+    AUDIT_ORDER_PRICE_EUR,
+    AUDIT_ORDER_DELAY_LABEL,
+} from "@/data/audit-seo/offer";
 
 export const metadata: Metadata = {
     title: "Audit SEO Expert · Analyse manuelle et livrable détaillé",
@@ -45,6 +50,8 @@ export default async function AuditSeoExpertPage({
 }: {
     searchParams: Promise<{ seoAuditId?: string }>;
 }) {
+    if (!isAuditExpertEnabled()) notFound();
+
     const { seoAuditId } = await searchParams;
 
     const seoAudit = seoAuditId
