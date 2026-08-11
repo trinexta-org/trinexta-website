@@ -6,7 +6,7 @@ import type { ServiceGrid } from "../types";
 
 export const microsoft365GestionGrid: ServiceGrid = {
   serviceId: "microsoft-365-gestion",
-  label: "Microsoft 365 — gestion",
+  label: "Microsoft 365 - gestion",
   pricing: {
     kind: "recurring",
     unitLabel: "utilisateur",

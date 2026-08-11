@@ -30,7 +30,7 @@ export const AUDIT_ORDER_CONSENT_LABEL = {
 
 export const cgvAuditExpertData: LegalData = {
     hero: {
-        title: "CGV — Vente en ligne (Audit SEO Expert)",
+        title: "CGV - Vente en ligne (Audit SEO Expert)",
         imageSrc: "/images/legal/hero-utilisation.jpg",
     },
     sections: [

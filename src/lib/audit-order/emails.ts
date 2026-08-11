@@ -25,7 +25,7 @@ export interface AuditOrderPaidNotificationData {
 export function buildAuditOrderPaidNotificationHtml(order: AuditOrderPaidNotificationData): string {
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;color:#333;">
-    <h2 style="color:${COLOR_PRIMARY};">Paiement confirmé — Audit SEO Expert</h2>
+    <h2 style="color:${COLOR_PRIMARY};">Paiement confirmé - Audit SEO Expert</h2>
     <p><strong>Commande :</strong> ${escapeHtml(order.id)}</p>
     <p><strong>Client :</strong> ${escapeHtml(order.prenom)} ${escapeHtml(order.nom)}</p>
     <p><strong>Entreprise :</strong> ${escapeHtml(order.entreprise)}</p>
