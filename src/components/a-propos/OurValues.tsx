@@ -52,9 +52,9 @@ const values: ValueItem[] = [
     },
     {
         title: "Expertise partagée",
-        desc: "Trinexta s’appuie sur un collectif de professionnels expérimentés, sélectionnés pour leur savoir-faire technique et leur capacité d’intervention. Cette logique de réseau nous permet de mobiliser les bonnes compétences selon les besoins, tout en gardant une approche souple et opérationnelle. Notre force réside dans cette expertise mutualisée au sein de notre réseau indépendant, vous assurant un support technique d’excellence pour toutes vos problématiques IT.",
+        desc: "Trinexta s’appuie sur un collectif de professionnels expérimentés, sélectionnés pour leur savoir-faire technique et leur capacité d’intervention. Cette logique de réseau nous permet de mobiliser les bonnes compétences selon les besoins, tout en gardant une approche souple et opérationnelle. Notre force réside dans cette expertise mutualisée, vous assurant un support technique d’excellence pour toutes vos problématiques IT.",
         image: "/images/a-propos/engagements/expertise.jpg",
-        alt: "Une équipe unissant ses mains au centre d'une table, illustrant la force du collectif et notre réseau d'experts informatiques indépendants."
+        alt: "Une équipe unissant ses mains au centre d'une table, illustrant la force du collectif et l'expertise mutualisée au service de votre informatique."
     },
     {
         title: "Engagement",

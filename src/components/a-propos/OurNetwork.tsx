@@ -8,15 +8,15 @@ import { FadeIn } from "@/components/ui/FadeIn"
 const networkFeatures = [
     {
         title: "Techniciens qualifiés",
-        desc: "Des professionnels opérationnels avec plus de 2 ans d'expérience. Nous ne laissons rien au hasard dans la sélection de nos experts. Chaque technicien de notre réseau est évalué sur ses compétences techniques réelles, sa capacité à résoudre des problèmes complexes et son aisance relationnelle. Ils sont capables d'intervenir concrètement sur vos enjeux et de s'intégrer naturellement à votre environnement de travail, garantissant ainsi une continuité de service irréprochable et une communication fluide avec vos équipes."
+        desc: "Des professionnels opérationnels avec plus de 2 ans d'expérience. Nous ne laissons rien au hasard dans la sélection des intervenants. Chaque technicien est évalué sur ses compétences techniques réelles, sa capacité à résoudre des problèmes complexes et son aisance relationnelle. Ils sont capables d'intervenir concrètement sur vos enjeux et de s'intégrer naturellement à votre environnement de travail, garantissant ainsi une continuité de service irréprochable et une communication fluide avec vos équipes."
     },
     {
         title: "Planning flexible",
-        desc: "Mission ponctuelle, besoin récurrent, renfort temporaire ou accompagnement dans la durée : vous gardez la maîtrise totale du cadre d'intervention. L'agilité de notre réseau nous permet de dimensionner notre accompagnement en fonction de vos pics d'activité ou de vos projets de transformation tels qu'une migration, un déménagement ou le déploiement de nouveau matériel. Vous ne payez que pour l'expertise dont vous avez réellement besoin, sans vous engager dans des contrats rigides."
+        desc: "Mission ponctuelle, besoin récurrent, renfort temporaire ou accompagnement dans la durée : vous gardez la maîtrise totale du cadre d'intervention. Notre organisation nous permet de dimensionner notre accompagnement en fonction de vos pics d'activité ou de vos projets de transformation tels qu'une migration, un déménagement ou le déploiement de nouveau matériel. Vous ne payez que pour l'expertise dont vous avez réellement besoin, sans vous engager dans des contrats rigides."
     },
     {
         title: "Couverture nationale",
-        desc: "Une assistance sur site disponible partout en France, y compris pour les organisations multi-sites, sans frais de déplacement cachés. Que votre siège soit à Paris, avec des agences à Lyon, Bordeaux ou Lille, vous bénéficiez d'un point de contact unique. Nous coordonnons nos techniciens locaux pour vous assurer une qualité de service homogène sur l'ensemble de vos sites, simplifiant ainsi considérablement la gestion globale de votre parc informatique."
+        desc: "Une assistance sur site disponible partout en France, y compris pour les organisations multi-sites, sans frais de déplacement cachés. Que votre siège soit à Paris, avec des agences à Lyon, Bordeaux ou Lille, vous bénéficiez d'un point de contact unique. Nous coordonnons les techniciens sur place pour vous assurer une qualité de service homogène sur l'ensemble de vos sites, simplifiant ainsi considérablement la gestion globale de votre parc informatique."
     },
     {
         title: "Réponse rapide",
@@ -51,23 +51,16 @@ export function OurNetwork() {
                         className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6"
                     >
                         <Heading as="h3" className="text-3xl md:text-5xl text-white font-black leading-tight">
-                            La force d&apos;un réseau <br className="hidden md:block" />
-                            <span className="text-secondary">d&apos;experts indépendants</span>
+                            Les bonnes compétences <br className="hidden md:block" />
+                            <span className="text-secondary">au bon moment</span>
                         </Heading>
 
-                        <div className="rounded-xl border border-secondary/40 bg-secondary/10 p-4 md:p-6 mt-2 md:mt-0">
-                            <p className="text-white font-bold text-sm md:text-base mb-1">Réponse à incident : une équipe interne, jamais sous-traitée.</p>
-                            <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                                La détection, le confinement, l&apos;investigation et la remédiation des incidents de cybersécurité sont réalisés exclusivement par l&apos;équipe technique interne de TRINEXTA. Pour les missions d&apos;infogérance, de support et de déploiement, nous nous appuyons en complément sur un réseau de techniciens partenaires afin de garantir réactivité et couverture territoriale.
-                            </p>
-                        </div>
-
                         <Text className="text-white/90 text-base md:text-xl leading-relaxed font-light">
-                            Pour vous garantir une réactivité maximale et une expertise parfaitement adaptée à chaque situation, nous avons fait le choix d&apos;un modèle agile.
+                            Pour vous garantir une réactivité maximale et une expertise adaptée à chaque situation, nous avons fait le choix d&apos;un modèle agile.
                         </Text>
 
                         <Text className="text-white/80 text-sm md:text-lg leading-relaxed">
-                            Pour le support et l&apos;infogérance, nous mobilisons en complément un réseau de techniciens partenaires qualifiés, sélectionnés pour leur savoir-faire terrain. Contrairement aux agences traditionnelles souvent freinées par des lourdeurs administratives, notre organisation en réseau nous permet de mobiliser les bonnes compétences, au bon endroit, et au bon moment.
+                            Selon la nature de la mission, nous mobilisons nos équipes ou des techniciens partenaires sélectionnés pour leur savoir-faire terrain. Contrairement aux agences traditionnelles souvent freinées par des lourdeurs administratives, cette organisation nous permet d&apos;envoyer la bonne compétence, au bon endroit, et au bon moment.
                         </Text>
                     </FadeIn>
                 </div>
