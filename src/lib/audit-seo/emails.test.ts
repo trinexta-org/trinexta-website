@@ -1,9 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   buildAuditReportHtml,
   buildAuditTeamNotificationHtml,
   type AuditEmailData,
 } from "./emails";
+
+// L'upsell audit expert est derriere un flag : les cas nominaux ci-dessous
+// decrivent l'offre en ligne. Le cas hors ligne a son propre bloc en fin de fichier.
+vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
 
 const DATA: AuditEmailData = {
   url: "https://exemple.fr/",
@@ -25,8 +29,7 @@ const DATA: AuditEmailData = {
 };
 
 describe("buildAuditReportHtml", () => {
-  const html = buildAuditReportHtml(DATA, "Jean", "https://bookings.example/trinexta");
-
+  const html = buildAuditReportHtml(DATA, "Jean", "audit_123");
   it("affiche le score global et les sous-scores", () => {
     expect(html).toContain("63");
     expect(html).toContain("Référencement on-page");
@@ -38,10 +41,10 @@ describe("buildAuditReportHtml", () => {
     expect(html).toContain("Google compose un extrait au hasard");
   });
 
-  it("intègre la synthèse IA et le CTA RDV", () => {
+  it("intègre la synthèse IA et le CTA de commande", () => {
     expect(html).toContain("Deux points pèsent sur votre visibilité.");
-    expect(html).toContain("https://bookings.example/trinexta");
-    expect(html).toContain("Prendre rendez-vous");
+    expect(html).toContain("audit-seo/expert?seoAuditId=audit_123");
+    expect(html).toContain("Commander mon audit expert");
   });
 
   it("ne divulgue pas de méthode de correction", () => {
@@ -58,7 +61,7 @@ describe("buildAuditReportHtml", () => {
   });
 
   it("propose l'offre d'audit approfondi déduit", () => {
-    expect(html).toContain("390");
+    expect(html).toContain("490");
     expect(html).toMatch(/déduit/i);
   });
 
@@ -67,10 +70,24 @@ describe("buildAuditReportHtml", () => {
     expect(html).toMatch(/base est correcte/i);
   });
 
-  it("pointe le CTA vers /contact pré-rempli quand aucun bookings", () => {
-    const noBookings = buildAuditReportHtml(DATA, "Jean");
-    expect(noBookings).toContain("/contact?");
-    expect(noBookings).toContain("audit_score=63");
+  it("le lien de commande reflète l'auditId fourni", () => {
+    const other = buildAuditReportHtml(DATA, "Jean", "audit_456");
+    expect(other).toContain("seoAuditId=audit_456");
+    expect(other).not.toContain("seoAuditId=audit_123");
+  });
+});
+
+describe("buildAuditReportHtml, offre expert hors ligne", () => {
+  it("remplace le CTA de commande par un renvoi vers le contact", () => {
+    vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "false");
+    const html = buildAuditReportHtml(DATA, "Jean", "audit_123");
+    vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
+
+    expect(html).not.toContain("audit-seo/expert");
+    expect(html).not.toContain("Commander mon audit expert");
+    expect(html).not.toContain("490");
+    expect(html).toContain("/contact");
+    expect(html).toContain("Parler à un expert");
   });
 });
 

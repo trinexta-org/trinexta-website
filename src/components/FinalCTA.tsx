@@ -8,10 +8,17 @@ import { SectionFade } from "@/components/ui/SectionFade";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { pushGtmEvent } from "@/lib/gtm";
+import { useInView } from "@/hooks/useInView";
 
 function EnhancedRibbonBackground() {
+  const [ref, isInView] = useInView<HTMLDivElement>();
+
   return (
-    <div className="absolute inset-0 z-0 flex items-center justify-center opacity-70 pointer-events-none overflow-hidden w-full">
+    <div
+      ref={ref}
+      data-animate={isInView ? "true" : "false"}
+      className="absolute inset-0 z-0 flex items-center justify-center opacity-70 pointer-events-none overflow-hidden w-full"
+    >
       <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_0%,black_15%,black_85%,transparent_100%)] w-full h-full">
         <svg
           className="w-[120%] h-full -ml-[10%]"
@@ -51,10 +58,10 @@ function EnhancedRibbonBackground() {
             </linearGradient>
           </defs>
 
-          {Array.from({ length: 40 }).map((_, i) => (
+          {Array.from({ length: 13 }).map((_, i) => (
             <path
               key={`bg-fiber-${i}`}
-              d={`M-100,${50 + i * 18} Q 600,${400 + (i - 20) * 12} 1300,${150 + i * 14}`}
+              d={`M-100,${50 + i * 54} Q 600,${400 + (i - 6) * 36} 1300,${150 + i * 42}`}
               fill="none"
               stroke="url(#grad-fiber-primary)"
               strokeWidth="0.2"
@@ -68,10 +75,10 @@ function EnhancedRibbonBackground() {
             />
           ))}
 
-          {Array.from({ length: 15 }).map((_, i) => (
+          {Array.from({ length: 5 }).map((_, i) => (
             <path
               key={`energy-fiber-${i}`}
-              d={`M-100,${100 + i * 45} C 300,${50 + i * 25} 900,${750 - i * 25} 1300,${350 + i * 15}`}
+              d={`M-100,${100 + i * 135} C 300,${50 + i * 75} 900,${750 - i * 75} 1300,${350 + i * 45}`}
               fill="none"
               stroke="url(#grad-fiber-white)"
               strokeWidth="0.6"
@@ -85,10 +92,10 @@ function EnhancedRibbonBackground() {
             />
           ))}
 
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 2 }).map((_, i) => (
             <path
               key={`master-fiber-${i}`}
-              d={`M-100,${200 + i * 70} C 400,${900} 800,${-100} 1300,${600 - i * 50}`}
+              d={`M-100,${200 + i * 280} C 400,${900} 800,${-100} 1300,${600 - i * 200}`}
               fill="none"
               stroke="url(#grad-fiber-primary)"
               strokeWidth="1.2"

@@ -1,28 +1,25 @@
+"use client"
+
+import { type CSSProperties } from "react"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading } from "@/components/ui/Typography"
 import { FadeIn } from "@/components/ui/FadeIn"
+import { useInView } from "@/hooks/useInView"
 
 function RibbonBackground() {
+  const [ref, isInView] = useInView<HTMLDivElement>()
+
   return (
-    <div 
+    <div
+      ref={ref}
+      data-animate={isInView ? "true" : "false"}
       className="absolute inset-0 z-0 flex items-center justify-center opacity-70 pointer-events-none"
       style={{
         WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
         maskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)"
       }}
     >
-      <style>{`
-        @keyframes flow-ribbon {
-          from { stroke-dashoffset: 3000; }
-          to { stroke-dashoffset: 0; }
-        }
-        .ribbon-line {
-          stroke-dasharray: 3000;
-          animation: flow-ribbon 20s linear infinite;
-        }
-      `}</style>
-
       <svg className="w-full h-full" viewBox="0 0 1200 400" preserveAspectRatio="none">
         <defs>
           <linearGradient id="grad-ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -34,10 +31,10 @@ function RibbonBackground() {
           </linearGradient>
         </defs>
 
-        {Array.from({ length: 60 }).map((_, i) => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <path
             key={`ribbon-${i}`}
-            d={`M-200,${80 + i * 6} C 400,${350 - i * 4} 700,${200 - i * 0.5} 1400,${150 + i * 3}`}
+            d={`M-200,${80 + i * 18} C 400,${350 - i * 12} 700,${200 - i * 1.5} 1400,${150 + i * 9}`}
             fill="none"
             stroke="url(#grad-ribbon)"
             strokeWidth={0.5 + (i % 3) * 0.3}
@@ -45,8 +42,8 @@ function RibbonBackground() {
             style={{
               opacity: 0.3 + (i % 4) * 0.15,
               animationDelay: `${i * 0.05}s`,
-              animationDuration: `${15 + (i % 5)}s`
-            }}
+              "--dash-duration": `${15 + (i % 5)}s`
+            } as CSSProperties}
           />
         ))}
       </svg>

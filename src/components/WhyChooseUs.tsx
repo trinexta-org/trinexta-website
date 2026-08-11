@@ -11,14 +11,14 @@ const reasons = [
     id: 1,
     title: "Équipe experte",
     description: "Vous bénéficiez d'un accompagnement assuré par des professionnels capables de comprendre vos enjeux, de traiter vos demandes avec sérieux et de vous orienter vers des solutions adaptées.",
-    image: "/images/why-us/equipe.avif",
+    image: "/images/why-us/equipe.webp",
     alt: "Équipe d'experts informatiques Trinexta collaborant sur un projet IT pour une PME en Île-de-France.",
   },
   {
     id: 2,
     title: "Solutions sur mesure",
     description: "Nos prestations sont pensées pour les TPE et PME, avec une approche utile, lisible et sans complexité inutile.",
-    image: "/images/why-us/sur-mesure.avif",
+    image: "/images/why-us/sur-mesure.webp",
     alt: "Technicien Trinexta configurant une solution d'infogérance sur mesure sur un poste de travail.",
 
   },
@@ -26,14 +26,14 @@ const reasons = [
     id: 3,
     title: "Interlocuteur unique",
     description: "Vous gagnez en simplicité avec un contact privilégié pour centraliser vos demandes et suivre plus facilement vos sujets informatiques.",
-    image: "/images/why-us/interlocuteur.avif",
+    image: "/images/why-us/interlocuteur.webp",
     alt: "Ordinateur portable affichant le tableau de bord de supervision proactive et de reporting IT Trinexta pour une PME.",
   },
   {
     id: 4,
     title: "Transparence totale",
     description: "Nos engagements sont clairs, nos interventions sont cadrées, et nos tarifs annoncés sans surprise.",
-    image: "/images/why-us/transparence.avif",
+    image: "/images/why-us/transparence.webp",
     alt: "Experte informatique de l'équipe Trinexta souriante lors d'une séance de brainstorming sur l'architecture réseau d'un client."
   },
 ]
@@ -63,8 +63,7 @@ export function WhyChooseUs() {
                     alt={reason.alt}
                     fill
                     className="object-cover"
-                    priority={index === 0}
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 78vw, 940px"
                   />
                   <div
                     style={{ opacity: isActive ? 0.7 : 0.3 }}

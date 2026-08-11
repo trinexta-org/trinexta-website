@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Link2, Gauge, ClipboardList } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { ViewportHero } from "@/components/layout/ViewportHero";
 import { GridCards } from "@/components/layout/GridCards";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
@@ -92,15 +91,14 @@ export default function AuditSeoPage() {
         ]}
       />
 
-      <ViewportHero>
+      <Section className="relative overflow-hidden pt-12 md:pt-16 lg:pt-20">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/audit-seo/hero-audit-seo.avif"
             alt="Résultats de recherche Google"
             fill
-            quality={75}
-            priority
-            fetchPriority="high"
+            quality={50}
+            preload
             className="object-cover object-center"
             sizes="100vw"
           />
@@ -112,7 +110,7 @@ export default function AuditSeoPage() {
           <div className="absolute -left-48 bottom-0 h-[420px] w-[560px] rounded-full bg-secondary/5 blur-[120px]" />
         </div>
 
-        <Container className="relative z-10 max-w-3xl py-12 md:py-16 lg:py-20">
+        <Container className="relative z-10 max-w-3xl">
           <Entrance direction="up">
             <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
               Audit SEO gratuit
@@ -141,13 +139,13 @@ export default function AuditSeoPage() {
                 </li>
               ))}
             </ul>
-          </Entrance>
 
-          <div id="audit-form" className="mt-10 scroll-mt-24">
-            <AuditForm />
-          </div>
+            <Button asChild variant="secondary" size="lg" className="mt-8">
+              <a href="#audit-form">Voir mon score</a>
+            </Button>
+          </Entrance>
         </Container>
-      </ViewportHero>
+      </Section>
 
       <Section id="comment-ca-marche" className="bg-primary">
         <FadeIn direction="up">
@@ -235,6 +233,12 @@ export default function AuditSeoPage() {
             </div>
           </FadeIn>
         </div>
+      </Section>
+
+      <Section id="audit-form" className="scroll-mt-24 bg-primary pb-16 md:pb-20 lg:pb-24">
+        <Container className="max-w-3xl">
+          <AuditForm />
+        </Container>
       </Section>
     </main>
   );

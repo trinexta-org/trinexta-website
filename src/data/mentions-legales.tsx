@@ -30,7 +30,7 @@ export const mentionsLegalesData: LegalData = {
         "Capital social : 15 000 € entièrement souscrit et libéré",
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes, France",
         "Bureau d'activité : 7 rue Montespan, 91000 Évry-Courcouronnes, France",
-        "SIREN : 942 020 082 — SIRET : 942 020 082 00015",
+        "SIREN : 942 020 082 - SIRET : 942 020 082 00015",
         "TVA intracommunautaire : FR81 942 020 082",
         "Immatriculation : Registre du Commerce et des Sociétés d'Évry",
         "Téléphone : 09 78 25 07 46",

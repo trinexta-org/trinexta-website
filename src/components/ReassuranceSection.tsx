@@ -4,11 +4,11 @@ import { Container } from "@/components/layout/Container"
 import { SectionFade } from "@/components/ui/SectionFade"
 
 const certifications = [
-  { name: "CompTIA", src: "/images/certifications/compteia.webp", width: 602, height: 501 },
-  { name: "CompTIA Security+", src: "/images/certifications/comptia-security.webp", width: 600, height: 600 },
-  { name: "ISO 27001", src: "/images/certifications/iso-27001.webp", width: 413, height: 401 },
-  { name: "ITIL", src: "/images/certifications/itil.webp", width: 600, height: 400 },
-  { name: "Microsoft 365", src: "/images/certifications/microsoft365.webp", width: 600, height: 600 },
+  { name: "CompTIA", src: "/images/certifications/compteia.webp", width: 320, height: 266 },
+  { name: "CompTIA Security+", src: "/images/certifications/comptia-security.webp", width: 320, height: 320 },
+  { name: "ISO 27001", src: "/images/certifications/iso-27001.webp", width: 320, height: 311 },
+  { name: "ITIL", src: "/images/certifications/itil.webp", width: 320, height: 213 },
+  { name: "Microsoft 365", src: "/images/certifications/microsoft365.webp", width: 320, height: 320 },
 ]
 
 export function ReassuranceSection() {

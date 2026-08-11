@@ -30,8 +30,8 @@ export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps)
           src={imageSrc}
           alt="Offre Trinexta"
           fill
-          fetchPriority="high"
-          quality={80}
+          preload
+          quality={50}
           className="object-cover object-center"
           sizes="100vw"
         />

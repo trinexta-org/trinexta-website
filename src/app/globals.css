@@ -268,6 +268,16 @@
 .ribbon-fiber {
   stroke-dasharray: 3000;
   animation: ribbon-dash var(--dash-duration, 30s) linear infinite;
+  animation-play-state: paused;
+}
+.ribbon-line {
+  stroke-dasharray: 3000;
+  animation: ribbon-dash var(--dash-duration, 20s) linear infinite;
+  animation-play-state: paused;
+}
+[data-animate="true"] .ribbon-fiber,
+[data-animate="true"] .ribbon-line {
+  animation-play-state: running;
 }
 
 @keyframes cta-word-1 {
@@ -386,6 +396,7 @@
    a demande moins de mouvement au niveau OS/navigateur (WCAG 2.3.3) ──── */
 @media (prefers-reduced-motion: reduce) {
   .ribbon-fiber,
+  .ribbon-line,
   .cta-word-1,
   .cta-word-2,
   .cta-word-3,
