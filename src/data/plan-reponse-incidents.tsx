@@ -11,7 +11,7 @@ export const planReponseIncidentsData: LegalData = {
       title: "Présentation",
       paragraphs: [
         "TRINEXTA applique une méthodologie structurée permettant d'identifier, contenir, traiter et résoudre les incidents de sécurité affectant les systèmes d'information de ses clients. L'objectif est de réduire les impacts opérationnels, financiers et techniques, tout en assurant une reprise rapide des activités.",
-        "L'ensemble des opérations de réponse à incident et de remédiation est assuré par l'équipe interne de TRINEXTA, sans sous-traitance.",
+        "Les opérations de réponse à incident et de remédiation sont pilotées par TRINEXTA, qui reste votre interlocuteur unique du signalement jusqu'au retour à la normale.",
       ],
     },
     {

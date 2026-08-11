@@ -5,7 +5,7 @@ import type { ServiceGrid } from "../types";
 
 export const microsoft365MiseEnPlaceGrid: ServiceGrid = {
   serviceId: "microsoft-365-mise-en-place",
-  label: "Microsoft 365 — mise en place",
+  label: "Microsoft 365 - mise en place",
   pricing: {
     kind: "one-shot-formula",
     setupFee: 490,

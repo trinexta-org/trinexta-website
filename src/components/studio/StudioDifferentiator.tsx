@@ -2,9 +2,9 @@ import { FadeIn } from "@/components/ui/FadeIn"
 
 const comparisonPoints = [
   {
-    criterion: "Développement 100% Interne",
+    criterion: "Développement maîtrisé",
     market: "Sous-traitance opaque ou offshore fréquente.",
-    trinexta: "Aucune sous-traitance. Vos outils, plateformes et sites internet sont intégralement pensés, designés et codés par nos équipes de développeurs en interne.",
+    trinexta: "Vos outils, plateformes et sites internet sont pensés, designés et codés par des développeurs que nous sélectionnons et pilotons, sans intermédiaire opaque.",
   },
   {
     criterion: "Hébergement Souverain",

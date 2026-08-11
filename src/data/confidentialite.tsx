@@ -164,7 +164,7 @@ export const confidentialiteData: LegalData = {
     {
       title: "Article 12 - Réclamation auprès de la CNIL",
       paragraphs: [
-        <span key="cnil">Si vous estimez que vos droits ne sont pas respectés, vous pouvez déposer une réclamation auprès de la Commission Nationale de l&apos;Informatique et des Libertés (CNIL) : 3 Place de Fontenoy, 75007 Paris — <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">www.cnil.fr</a></span>,
+        <span key="cnil">Si vous estimez que vos droits ne sont pas respectés, vous pouvez déposer une réclamation auprès de la Commission Nationale de l&apos;Informatique et des Libertés (CNIL) : 3 Place de Fontenoy, 75007 Paris - <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">www.cnil.fr</a></span>,
       ],
     },
     {
