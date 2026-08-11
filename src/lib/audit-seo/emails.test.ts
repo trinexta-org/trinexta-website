@@ -1,9 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   buildAuditReportHtml,
   buildAuditTeamNotificationHtml,
   type AuditEmailData,
 } from "./emails";
+
+// L'upsell audit expert est derriere un flag : les cas nominaux ci-dessous
+// decrivent l'offre en ligne. Le cas hors ligne a son propre bloc en fin de fichier.
+vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
 
 const DATA: AuditEmailData = {
   url: "https://exemple.fr/",
@@ -70,6 +74,20 @@ describe("buildAuditReportHtml", () => {
     const other = buildAuditReportHtml(DATA, "Jean", "audit_456");
     expect(other).toContain("seoAuditId=audit_456");
     expect(other).not.toContain("seoAuditId=audit_123");
+  });
+});
+
+describe("buildAuditReportHtml, offre expert hors ligne", () => {
+  it("remplace le CTA de commande par un renvoi vers le contact", () => {
+    vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "false");
+    const html = buildAuditReportHtml(DATA, "Jean", "audit_123");
+    vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
+
+    expect(html).not.toContain("audit-seo/expert");
+    expect(html).not.toContain("Commander mon audit expert");
+    expect(html).not.toContain("490");
+    expect(html).toContain("/contact");
+    expect(html).toContain("Parler à un expert");
   });
 });
 

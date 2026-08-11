@@ -1,5 +1,8 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
+// Parcours payant derriere un flag : les cas nominaux supposent l'offre en ligne.
+vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
+
 vi.mock("@/lib/estimation/rate-limit", () => ({
     checkRateLimit: vi.fn(() => true),
     getClientIp: vi.fn(() => "127.0.0.1"),
@@ -81,6 +84,17 @@ describe("POST /api/audit-order", () => {
         const response = await POST(buildRequest(rest));
 
         expect(response.status).toBe(400);
+        expect(createMock).not.toHaveBeenCalled();
+    });
+
+    it("répond 404 et ne crée rien quand l'offre expert est hors ligne", async () => {
+        vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "false");
+
+        const response = await POST(buildRequest(validPayload));
+
+        vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
+
+        expect(response.status).toBe(404);
         expect(createMock).not.toHaveBeenCalled();
     });
 });

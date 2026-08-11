@@ -4,8 +4,14 @@ import { prisma } from "@/lib/db";
 import { getStripe } from "@/lib/stripe";
 import { sendMail } from "@/lib/mail";
 import { buildAuditOrderClientConfirmationHtml, buildAuditOrderPaidNotificationHtml } from "@/lib/audit-order/emails";
+import { isAuditExpertEnabled } from "@/data/audit-seo/offer";
 
 export async function POST(request: Request) {
+    // Offre hors ligne tant que Stripe n'est pas operationnel : aucun evenement traite.
+    if (!isAuditExpertEnabled()) {
+        return NextResponse.json({ error: "Ressource introuvable." }, { status: 404 });
+    }
+
     const secret = process.env.STRIPE_WEBHOOK_SECRET;
 
     if (!secret) {

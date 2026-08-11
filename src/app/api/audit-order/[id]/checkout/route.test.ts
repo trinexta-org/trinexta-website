@@ -1,5 +1,8 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
+// Parcours payant derriere un flag : les cas nominaux supposent l'offre en ligne.
+vi.stubEnv("NEXT_PUBLIC_AUDIT_EXPERT_ENABLED", "true");
+
 vi.mock("@/lib/estimation/rate-limit", () => ({
     checkRateLimit: vi.fn(() => true),
     getClientIp: vi.fn(() => "127.0.0.1"),

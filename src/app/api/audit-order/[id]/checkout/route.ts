@@ -2,10 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getStripe } from "@/lib/stripe";
 import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
+import { isAuditExpertEnabled } from "@/data/audit-seo/offer";
 
 const AUDIT_ORDER_CHECKOUT_MAX_PER_IP = 10;
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
+    // Offre hors ligne tant que Stripe n'est pas operationnel : aucune route de paiement exposee.
+    if (!isAuditExpertEnabled()) {
+        return NextResponse.json({ error: "Ressource introuvable." }, { status: 404 });
+    }
+
     try {
         const ipHash = hashIp(getClientIp(request));
         if (!checkRateLimit(`audit-order-checkout:${ipHash}`, AUDIT_ORDER_CHECKOUT_MAX_PER_IP)) {

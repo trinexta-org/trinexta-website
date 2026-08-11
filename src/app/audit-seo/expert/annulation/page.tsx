@@ -4,6 +4,8 @@ import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
+import { notFound } from "next/navigation";
+import { isAuditExpertEnabled } from "@/data/audit-seo/offer";
 
 export const metadata: Metadata = {
     title: "Paiement annulé · Audit SEO Expert",
@@ -11,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function AuditSeoExpertAnnulationPage() {
+    if (!isAuditExpertEnabled()) notFound();
+
     return (
         <main className="relative bg-primary">
             <Section className="py-12 md:py-16 lg:py-20">

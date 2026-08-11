@@ -4,6 +4,8 @@ import { LegalContent } from "@/components/legal/LegalContent"
 import { FinalCTA } from "@/components/FinalCTA"
 import { cgvAuditExpertData } from "@/data/cgv-audit-expert"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
+import { notFound } from "next/navigation"
+import { isAuditExpertEnabled } from "@/data/audit-seo/offer"
 
 export const metadata: Metadata = {
     title: `${cgvAuditExpertData.hero.title}`,
@@ -14,6 +16,8 @@ export const metadata: Metadata = {
 }
 
 export default function CgvAuditExpertPage() {
+    if (!isAuditExpertEnabled()) notFound()
+
     return (
         <main className="bg-primary min-h-screen relative space-y-12 pb-12">
             <BreadcrumbJsonLd

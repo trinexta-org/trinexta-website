@@ -3,6 +3,7 @@ import {
   AUDIT_BLIND_SPOTS,
   AUDIT_ORDER_OFFER_LABEL,
   buildAuditUpsellUrl,
+  isAuditExpertEnabled,
   getScoreBand,
   SCORE_BAND_NARRATIVE,
   type ScoreBand,
@@ -125,16 +126,26 @@ function blindSpotsBlock(): string {
     ${items}`;
 }
 
-/** Section conclusion "Et maintenant ?", pilotée par le palier de score. */
-function nextStepBlock(scoreGlobal: number, upsellUrl: string): string {
+/**
+ * Section conclusion "Et maintenant ?", pilotée par le palier de score.
+ * Tant que l'audit expert n'est pas en vente, le CTA renvoie vers le contact.
+ */
+function nextStepBlock(scoreGlobal: number, upsellUrl: string, siteUrl: string): string {
   const narrative = SCORE_BAND_NARRATIVE[getScoreBand(scoreGlobal)];
+  const expertEnabled = isAuditExpertEnabled();
+  const ctaUrl = expertEnabled ? upsellUrl : `${siteUrl}/contact`;
+  const ctaLabel = expertEnabled ? "Commander mon audit expert" : "Parler à un expert";
+  const offerLine = expertEnabled
+    ? `<p style="font-size:14px;line-height:1.6;color:#333;">${escapeHtml(AUDIT_ORDER_OFFER_LABEL)}.</p>`
+    : "";
+
   return `<h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Et maintenant ?</h2>
     <p style="font-size:14px;line-height:1.6;color:#333;">${escapeHtml(narrative.conclusion)}</p>
-    <p style="font-size:14px;line-height:1.6;color:#333;">${escapeHtml(AUDIT_ORDER_OFFER_LABEL)}.</p>
+    ${offerLine}
     <p style="font-size:14px;line-height:1.6;color:#333;font-weight:bold;">${escapeHtml(narrative.ctaHook)}</p>
     <p style="text-align:center;margin:24px 0;">
-      <a href="${escapeHtml(upsellUrl)}" style="background:${COLOR_SECONDARY};color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
-        Commander mon audit expert
+      <a href="${escapeHtml(ctaUrl)}" style="background:${COLOR_SECONDARY};color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
+        ${ctaLabel}
       </a>
     </p>`;
 }
@@ -168,7 +179,7 @@ export function buildAuditReportHtml(
 
       ${blindSpotsBlock()}
 
-      ${nextStepBlock(data.scoreGlobal, upsellUrl)}
+      ${nextStepBlock(data.scoreGlobal, upsellUrl, siteUrl)}
 
       <p style="font-size:12px;color:#999;">Vous recevez cet email parce que vous avez lancé un audit SEO sur trinexta.fr. Vos données sont traitées selon notre <a href="${escapeHtml(siteUrl)}/confidentialite" style="color:${COLOR_SECONDARY};">politique de confidentialité</a>.</p>
     </div>
