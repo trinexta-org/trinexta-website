@@ -37,7 +37,7 @@ export function TechnicienConcret() {
     <section className="py-12 lg:py-24">
       <div className="max-w-[1400px] mx-auto px-6">
         
-        <div className="relative rounded-[2.5rem] lg:rounded-[3.5rem] overflow-hidden shadow-2xl bg-[#0a1128] min-h-[700px] flex items-center">
+        <div className="relative rounded-[2.5rem] lg:rounded-[3.5rem] overflow-hidden shadow-2xl bg-primary min-h-[700px] flex items-center">
           
           <div className="md:hidden absolute inset-0 z-0">
              <Image 
@@ -58,7 +58,7 @@ export function TechnicienConcret() {
 
           <div className="hidden md:block absolute inset-0 bg-black/40 z-0"></div>
 
-          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#0a1128]/95 via-[#0a1128]/50 to-transparent z-0"></div>
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/50 to-transparent z-0"></div>
 
           <div className="relative z-10 w-full lg:w-[55%] p-10 lg:p-20 h-full flex flex-col justify-center">
             

@@ -51,19 +51,21 @@ function RibbonBackground() {
   )
 }
 
-export function TransitionTitle({ 
-  surtitle, 
-  line1, 
-  line2 
-}: { 
-  surtitle?: string; 
-  line1: string; 
-  line2: string 
+export function TransitionTitle({
+  surtitle,
+  line1,
+  line2,
+  background = "bg-surface"
+}: {
+  surtitle?: string;
+  line1: string;
+  line2: string;
+  background?: string;
 }) {
   return (
-    <Section 
-      container={false} 
-      className="bg-surface relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32"
+    <Section
+      container={false}
+      className={`${background} relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32`}
     >
       <RibbonBackground />
 

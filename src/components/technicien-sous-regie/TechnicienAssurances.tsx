@@ -25,38 +25,38 @@ export function TechnicienAssurances() {
       direction="up"
       className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
     >
-      <div className="md:row-span-2 bg-white/[0.03] rounded-[32px] p-8 md:p-12 border border-white/5 flex flex-col justify-center">
-        <h4 className="text-white font-bold text-2xl md:text-3xl mb-4 leading-snug">
+      <div className="md:row-span-2 bg-background rounded-[32px] p-8 md:p-12 border border-border flex flex-col justify-center">
+        <h4 className="text-foreground font-bold text-2xl md:text-3xl mb-4 leading-snug">
           {assurances[0].title}
         </h4>
-        <p className="text-white/60 text-[15px] leading-relaxed">
+        <p className="text-muted-foreground text-[15px] leading-relaxed">
           {assurances[0].desc}
         </p>
       </div>
 
-      <div className="bg-white/[0.03] rounded-[32px] p-8 border border-white/5 flex flex-col justify-center">
-        <h4 className="text-white font-bold text-xl mb-3 leading-snug">
+      <div className="bg-background rounded-[32px] p-8 border border-border flex flex-col justify-center">
+        <h4 className="text-foreground font-bold text-xl mb-3 leading-snug">
           {assurances[1].title}
         </h4>
-        <p className="text-white/60 text-[14px] leading-relaxed">
+        <p className="text-muted-foreground text-[14px] leading-relaxed">
           {assurances[1].desc}
         </p>
       </div>
 
-      <div className="bg-white/[0.03] rounded-[32px] p-8 border border-white/5 flex flex-col justify-center">
-        <h4 className="text-white font-bold text-xl mb-3 leading-snug">
+      <div className="bg-background rounded-[32px] p-8 border border-border flex flex-col justify-center">
+        <h4 className="text-foreground font-bold text-xl mb-3 leading-snug">
           {assurances[2].title}
         </h4>
-        <p className="text-white/60 text-[14px] leading-relaxed">
+        <p className="text-muted-foreground text-[14px] leading-relaxed">
           {assurances[2].desc}
         </p>
       </div>
 
-      <div className="md:col-span-2 bg-white/[0.03] rounded-[32px] p-8 md:p-12 border border-white/5">
-        <h4 className="text-white font-bold text-2xl mb-4 leading-snug">
+      <div className="md:col-span-2 bg-background rounded-[32px] p-8 md:p-12 border border-border">
+        <h4 className="text-foreground font-bold text-2xl mb-4 leading-snug">
           {assurances[3].title}
         </h4>
-        <p className="text-white/60 text-[15px] leading-relaxed md:max-w-3xl">
+        <p className="text-muted-foreground text-[15px] leading-relaxed md:max-w-3xl">
           {assurances[3].desc}
         </p>
       </div>
