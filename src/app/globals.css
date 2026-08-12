@@ -23,9 +23,16 @@
   --border: #e4e4e7;
   --input: #e4e4e7;
   --ring: #5c92b8;
-  --radius: 0.75rem; 
+  --radius: 0.75rem;
 
-  
+  /* Fonds de section — voir SectionBackground */
+  --surface-tint: #f6fafd;
+  --primary-tint: #24507d;
+
+  /* Surfaces vitrees — --glass-blur est le curseur a bouger en premier */
+  --glass-bg: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-blur: 16px;
 }
 @theme inline {
   --color-trinexta-dark: #0a233e;
@@ -784,29 +791,6 @@
   }
 }
 
-.wave-transition {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.wave-transition--flip {
-  transform: scaleY(-1);
-}
-
-.wave-transition__svg {
-  width: 100%;
-  height: 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wave-transition__svg animate {
-    display: none;
-  }
-}
-
 /* Raccord vague entre deux sections de couleurs differentes */
 .wave-divider {
   position: relative;
@@ -827,175 +811,48 @@
     display: none;
   }
 }
-/* â”€â”€ BlobDotsBackground â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── SectionBackground ────────────────────────────────────────────────
+   Fond de section unique : mesh de degrades radiaux en CSS pur. Zero JS,
+   aucun filtre SVG plein ecran. A poser en premier enfant absolu d'une
+   Section `relative overflow-hidden`, contenu garde en `relative z-10`.
+   `tone` decide de la matiere, `intensity` de son amplitude.
+   ──────────────────────────────────────────────────────────────────── */
 
-.blob-dots-bg {
+.section-bg {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  pointer-events: none;
   z-index: 0;
-  background: linear-gradient(
-    160deg,
-    var(--primary-elevated) 0%,
-    var(--secondary-strong) 45%,
-    var(--secondary) 100%
-  );
-}
-
-.blob-dots-bg__blob {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
-}
-
-.blob-dots-bg__blob--top-right {
-  top: -80px;
-  right: -80px;
-  width: 260px;
-  height: 260px;
-  animation: blob-dots-pulse 8s ease-in-out infinite;
-}
-
-.blob-dots-bg__blob--bottom-left {
-  bottom: -100px;
-  left: -100px;
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-  animation: blob-dots-pulse 10s ease-in-out infinite;
-  animation-delay: -3s;
-}
-
-.blob-dots-bg__blob--drift {
-  top: 40%;
-  right: 10%;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-  animation: blob-dots-drift 14s ease-in-out infinite;
-}
-
-.blob-dots-bg__grid {
-  position: absolute;
-  opacity: 0.5;
-}
-
-.blob-dots-bg__grid circle {
-  fill: white;
-}
-
-.blob-dots-bg__grid--large {
-  top: 60px;
-  right: 60px;
-}
-
-.blob-dots-bg__grid--small {
-  bottom: 40px;
-  left: 40px;
-  opacity: 0.4;
-}
-
-@keyframes blob-dots-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.15); opacity: 1; }
-}
-
-@keyframes blob-dots-drift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-20px, 20px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .blob-dots-bg__blob {
-    animation: none;
-  }
-}
-/* ── BlobBackground ──────────────────────────────────────────────────── */
-
-.blob-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
   pointer-events: none;
-  z-index: 0;
 }
 
-.blob-bg--dark {
-  background: linear-gradient(
-    160deg,
-    var(--primary) 0%,
-    var(--primary-elevated) 55%,
-    var(--secondary-strong) 100%
-  );
+/* Blocs clairs : delta volontairement imperceptible, pas de grain. */
+.section-bg--light {
+  background:
+    radial-gradient(120% 90% at 12% -10%, var(--surface-tint) 0%, transparent 62%),
+    radial-gradient(90% 80% at 100% 110%, var(--surface-strong) 0%, transparent 64%);
 }
 
-.blob-bg--dark .blob-bg__blob {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+/* Blocs sombres : mesh de 3 halos. C'est lui qui donne au verre
+   quelque chose a flouter — sans lui, le verre n'est que du flou decoratif. */
+.section-bg--dark {
+  background:
+    radial-gradient(58% 62% at 78% 8%, color-mix(in srgb, var(--secondary) 28%, transparent) 0%, transparent 68%),
+    radial-gradient(52% 58% at 8% 34%, color-mix(in srgb, var(--primary-tint) 85%, transparent) 0%, transparent 70%),
+    radial-gradient(70% 70% at 46% 118%, color-mix(in srgb, var(--secondary-strong) 30%, transparent) 0%, transparent 66%);
 }
 
-.blob-bg--light {
-  background: linear-gradient(
-    160deg,
-    var(--surface-strong) 0%,
-    var(--secondary) 100%
-  );
-}
+.section-bg--low { opacity: 0.5; }
+.section-bg--mid { opacity: 0.75; }
+.section-bg--high { opacity: 1; }
 
-.blob-bg--light .blob-bg__blob {
-  background: radial-gradient(circle, rgba(10, 35, 62, 0.12) 0%, rgba(10, 35, 62, 0) 70%);
-}
-
-.blob-bg__blob {
-  position: absolute;
-  border-radius: 50%;
-}
-
-.blob-bg__blob--top-right {
-  top: -80px;
-  right: -80px;
-  width: 260px;
-  height: 260px;
-  animation: blob-bg-pulse 8s ease-in-out infinite;
-}
-
-.blob-bg__blob--bottom-left {
-  bottom: -100px;
-  left: -100px;
-  width: 320px;
-  height: 320px;
-  animation: blob-bg-pulse 10s ease-in-out infinite;
-  animation-delay: -3s;
-}
-
-.blob-bg__blob--drift {
-  top: 40%;
-  right: 10%;
-  width: 180px;
-  height: 180px;
-  animation: blob-bg-drift 14s ease-in-out infinite;
-}
-
-@keyframes blob-bg-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.15); opacity: 1; }
-}
-
-@keyframes blob-bg-drift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-20px, 20px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .blob-bg__blob {
-    animation: none;
-  }
-}
-.wave-transition__dot {
-  fill: rgba(255, 255, 255, 0.5);
-}
-
-.wave-transition--light .wave-transition__dot {
-  fill: var(--primary);
-  opacity: 0.4;
+/* ── Surface vitree ───────────────────────────────────────────────────
+   Budget : 3 surfaces visibles simultanement au maximum, aucune au-dela
+   de 40 % de la hauteur du viewport, --glass-blur plafonne a 16 px.
+   A ne poser que sur un fond qui a de la matiere a flouter (mesh sombre).
+   ──────────────────────────────────────────────────────────────────── */
+.glass-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.15);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.15);
 }

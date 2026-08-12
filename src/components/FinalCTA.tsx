@@ -9,7 +9,7 @@ import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { pushGtmEvent } from "@/lib/gtm";
 import { useInView } from "@/hooks/useInView";
-import { BlobBackground } from "@/components/BlobBackground"
+import { SectionBackground } from "@/components/ui/SectionBackground"
 
 function EnhancedRibbonBackground() {
   const [ref, isInView] = useInView<HTMLDivElement>();
@@ -143,7 +143,7 @@ export function FinalCTA({
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[900px] h-full md:h-[900px] bg-secondary/5 blur-[160px] rounded-full pointer-events-none z-0" />
 
       <SectionFade edge="both" />
-       <BlobBackground variant="dark" />
+      <SectionBackground tone="dark" />
 
       <Container className="relative z-10 text-center">
         <div className="space-y-8 md:space-y-16">

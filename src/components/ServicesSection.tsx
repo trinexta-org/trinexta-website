@@ -8,7 +8,7 @@ import { useInView } from "@/hooks/useInView"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading } from "@/components/ui/Typography"
-import { BlobBackground } from "@/components/BlobBackground"
+import { SectionBackground } from "@/components/ui/SectionBackground"
 
 const services = [
   {
@@ -150,8 +150,8 @@ export function ServicesSection() {
   const activePositions = isMobile ? mobilePositions : positions
 
   return (
-    <Section container={false} className="relative bg-surface overflow-hidden py-16 md:py-28">
-     <BlobBackground variant="dark" />
+    <Section container={false} className="relative bg-primary overflow-hidden py-16 md:py-28">
+      <SectionBackground tone="dark" />
       <Container className="relative z-10">
         <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {

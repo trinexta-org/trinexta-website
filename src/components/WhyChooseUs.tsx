@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { BlobBackground } from "@/components/BlobBackground"
+import { SectionBackground } from "@/components/ui/SectionBackground"
 
 const reasons = [
   {
@@ -54,8 +54,8 @@ export function WhyChooseUs() {
   }, [isPaused, active])
 
   return (
-    <Section container={false} className="relative bg-surface pt-8 pb-16 md:pb-32 overflow-hidden">
-       <BlobBackground variant="dark" />
+    <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
+      <SectionBackground tone="dark" />
       <Container className="relative z-10">
 
         <div

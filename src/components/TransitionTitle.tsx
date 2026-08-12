@@ -1,73 +1,28 @@
-"use client"
-
-import { type CSSProperties } from "react"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Heading } from "@/components/ui/Typography"
 import { FadeIn } from "@/components/ui/FadeIn"
-import { useInView } from "@/hooks/useInView"
-import { WaveSectionTransition } from "@/components/WaveSectionTransition"
-function RibbonBackground() {
-  const [ref, isInView] = useInView<HTMLDivElement>()
-
-  return (
-    <div
-      ref={ref}
-      data-animate={isInView ? "true" : "false"}
-      className="absolute inset-0 z-0 flex items-center justify-center opacity-60 pointer-events-none"
-      style={{
-        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
-        maskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)"
-      }}
-    >
-      <svg className="w-full h-full" viewBox="0 0 1200 400" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="grad-ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="transparent" stopOpacity="0" />
-            <stop offset="30%" stopColor="var(--secondary)" stopOpacity="0.5" />
-            <stop offset="60%" stopColor="var(--primary)" stopOpacity="0.5" />
-            <stop offset="90%" stopColor="var(--secondary)" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        {Array.from({ length: 20 }).map((_, i) => (
-          <path
-            key={`ribbon-${i}`}
-            d={`M-200,${80 + i * 18} C 400,${350 - i * 12} 700,${200 - i * 1.5} 1400,${150 + i * 9}`}
-            fill="none"
-            stroke="url(#grad-ribbon)"
-            strokeWidth={0.5 + (i % 3) * 0.3}
-            className="ribbon-line"
-            style={{
-              opacity: 0.25 + (i % 4) * 0.12,
-              animationDelay: `${i * 0.05}s`,
-              "--dash-duration": `${15 + (i % 5)}s`
-            } as CSSProperties}
-          />
-        ))}
-      </svg>
-    </div>
-  )
-}
+import { SectionBackground } from "@/components/ui/SectionBackground"
 
 export function TransitionTitle({
   surtitle,
   line1,
   line2,
-  background = "bg-surface"
+  background = "bg-surface",
+  tone = "light"
 }: {
   surtitle?: string;
   line1: string;
   line2: string;
   background?: string;
+  tone?: "light" | "dark";
 }) {
   return (
     <Section
       container={false}
       className={`${background} relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32`}
     >
-      
+      <SectionBackground tone={tone} intensity="low" />
 
       <Container className="relative z-10 text-center px-4">
         {surtitle && (

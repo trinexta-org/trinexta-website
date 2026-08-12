@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
-import { WaveSectionTransition } from "@/components/WaveSectionTransition"
+import { SectionBackground } from "@/components/ui/SectionBackground"
 
 
 export interface Partner {
@@ -17,8 +17,8 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
   const itemsCount = partners.length || 11;
 
   return (
-    <Section container={false} className="relative pt-8 pb-16 md:pb-32 overflow-hidden">
-        <WaveSectionTransition />
+    <Section container={false} className="relative bg-surface pt-8 pb-16 md:pb-32 overflow-hidden">
+      <SectionBackground tone="light" />
 
       <style>{`
         @keyframes scroll-partners {

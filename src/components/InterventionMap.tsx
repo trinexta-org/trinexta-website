@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { SectionFade } from "@/components/ui/SectionFade"
 import { Container } from "@/components/layout/Container"
-import { BlobBackground } from "@/components/BlobBackground"
+import { SectionBackground } from "@/components/ui/SectionBackground"
 
 
 const DEPARTMENTS = [
@@ -154,7 +154,7 @@ export function InterventionMap() {
 
     return (
         <Section container={false} className="relative bg-primary overflow-hidden py-16 md:py-28">
-              <BlobBackground variant="dark" />
+            <SectionBackground tone="dark" />
 
 
             <div className="absolute inset-0 pointer-events-none" style={{
