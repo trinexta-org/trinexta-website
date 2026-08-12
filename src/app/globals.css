@@ -806,6 +806,27 @@
     display: none;
   }
 }
+
+/* Raccord vague entre deux sections de couleurs differentes */
+.wave-divider {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wave-divider__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-divider__svg animate {
+    display: none;
+  }
+}
 /* â”€â”€ BlobDotsBackground â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 .blob-dots-bg {

@@ -19,7 +19,7 @@ import { CustomerReviews } from "@/components/CustomerReviews"
 import { Section } from "@/components/layout/Section"
 import { BannerCTA } from "@/components/layout/BannerCTA"
 import { Button } from "@/components/ui/Button"
-import { WaveSectionTransition } from "@/components/WaveSectionTransition"
+import { WaveDivider } from "@/components/ui/WaveDivider"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = "Partenaire Informatique à Évry, en Essonne | Trinexta";
@@ -78,7 +78,6 @@ export default function Home() {
         line1="Nos Services"
         line2="Infogérance"
       />
-      <WaveSectionTransition variant="light" />
 
       <ServicesSection />
 
@@ -106,7 +105,11 @@ export default function Home() {
       />
       <WhyChooseUs />
 
+      <WaveDivider from="surface" to="primary" />
+
       <InterventionMap />
+
+      <WaveDivider from="primary" to="surface" />
 
       <ReassuranceSection />
 
@@ -125,6 +128,8 @@ export default function Home() {
         line2="de nous"
       />
       <CustomerReviews/>
+
+      <WaveDivider from="surface" to="primary" />
 
       <FinalCTA />
       <NewsletterCTA/>
