@@ -14,6 +14,8 @@
   --primary-foreground: #ffffff;
   --secondary: #5c92b8; 
   --secondary-strong: #356b8f;
+  /* Accent sur fond sombre : --secondary tombe sous AA une fois le mesh pose */
+  --secondary-soft: #8fbcda;
   --secondary-strong-foreground: #ffffff;
   --secondary-foreground: #0a233e;
   --accent: #f0f5f9;
@@ -52,6 +54,7 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary-strong: var(--secondary-strong);
+  --color-secondary-soft: var(--secondary-soft);
   --color-secondary-strong-foreground: var(--secondary-strong-foreground);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
@@ -823,6 +826,11 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  /* Le mesh s'eteint sur les bords : deux sections de meme ton se raccordent
+     sans couture, et un raccord clair/sombre retombe sur l'aplat exact que
+     peint le WaveDivider. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
 }
 
 /* Blocs clairs : delta volontairement imperceptible, pas de grain. */

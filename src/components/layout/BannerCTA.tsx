@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 import { Heading, Text } from "@/components/ui/Typography"
 import { ReactNode } from "react"
 
-type BannerVariant = "primary" | "secondary" | "accent"
+type BannerVariant = "primary" | "secondary" | "accent" | "surface"
 
 export interface BannerCTAProps {
   title: string
@@ -25,11 +25,14 @@ export function BannerCTA({
   const variantStyles: Record<BannerVariant, string> = {
     primary: "bg-primary text-white",
     secondary: "bg-secondary text-white",
-    accent: "bg-muted text-primary border border-border"
+    accent: "bg-muted text-primary border border-border",
+    surface: "bg-surface-strong text-primary border border-secondary/20"
   }
 
-  const textClass = variant === "primary" || variant === "secondary" ? "text-white" : ""
-  const descClass = variant === "primary" || variant === "secondary" ? "text-white/80" : ""
+  const isDark = variant === "primary" || variant === "secondary"
+
+  const textClass = isDark ? "text-white" : ""
+  const descClass = isDark ? "text-white/80" : "text-muted-foreground"
 
   return (
     <div className={cn("relative overflow-hidden rounded-2xl p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8", variantStyles[variant], className)}>
@@ -50,7 +53,7 @@ export function BannerCTA({
         {action}
       </div>
 
-      <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none w-64 h-64 translate-x-1/4 translate-y-1/4 rounded-full bg-white blur-3xl" />
+      <div className={cn("absolute right-0 bottom-0 opacity-10 pointer-events-none w-64 h-64 translate-x-1/4 translate-y-1/4 rounded-full blur-3xl", isDark ? "bg-white" : "bg-primary")} />
     </div>
   )
 }

@@ -54,8 +54,8 @@ export function WhyChooseUs() {
   }, [isPaused, active])
 
   return (
-    <Section container={false} className="relative bg-primary pt-8 pb-16 md:pb-32 overflow-hidden">
-      <SectionBackground tone="dark" />
+    <Section container={false} className="relative bg-surface pt-8 pb-16 md:pb-32 overflow-hidden">
+      <SectionBackground tone="light" />
       <Container className="relative z-10">
 
         <div

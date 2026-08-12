@@ -83,7 +83,7 @@ export default function Home() {
 
       <Section className="py-12 md:py-16">
         <BannerCTA
-          variant="primary"
+          variant="surface"
           title="Votre site est-il vraiment vu par Google ?"
           description="Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
           action={
