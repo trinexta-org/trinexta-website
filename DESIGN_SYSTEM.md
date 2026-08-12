@@ -1,4 +1,4 @@
-# Design System TRINEXTA (v4)
+# Design System TRINEXTA (v5)
 
 > Copie-colle ce fichier au debut de ta session LLM avant de coder une page ou section.
 
@@ -25,6 +25,8 @@
 | `border-border`             | Bordures                                   |
 | `text-primary-foreground` `text-secondary-strong-foreground` | Blanc - texte sur fond colore |
 | `text-white/70`             | Texte secondaire sur fond sombre (footer, dark sections) |
+| `text-secondary-soft`       | Accent sur fond sombre - `text-secondary` y tombe sous AA |
+| `bg-surface` `bg-primary`   | Les deux tons de la partition clair/sombre |
 
 ---
 
@@ -240,13 +242,51 @@ import { Reveal } from "@/components/ui/Reveal"
 </Reveal>
 ```
 
-### HaloBackground + SectionFade
+### SectionBackground + SectionFade + WaveDivider
 
-`HaloBackground` : halos lumineux de fond (Server Component, zero JS). A poser en premier enfant de toute section `bg-primary`. `intensity` : `"low"` (defaut) | `"mid"` | `"high"`.
+`SectionBackground` : fond decoratif des sections. Server Component, zero JS, mesh de degrades radiaux en CSS pur (aucun filtre SVG, rien d'anime). A poser en premier enfant de toute section a fond colore. `tone` : `"light"` | `"dark"` (obligatoire, doit s'accorder a la couleur que porte la Section). `intensity` : `"low"` | `"mid"` (defaut) | `"high"`.
+
+La primitive ne peint PAS la couleur de fond, elle module celle de la Section. Un `tone` qui ne correspond pas a la classe `bg-*` se lit comme un voile.
+
+Le mesh s'eteint sur les bords de la section : deux sections de meme ton se raccordent sans couture, et un raccord clair/sombre retombe sur l'aplat exact que peint le `WaveDivider`.
 
 `SectionFade` : fondu `bg-primary` sur le bord d'une section pour raccorder deux sections sombres sans ligne de demarcation. `edge` : `"bottom"` (defaut) | `"top"` | `"both"`.
 
-**Prerequis** : la Section doit avoir `relative overflow-hidden`. Ordre dans la Section : `HaloBackground` → `SectionFade` → contenu en `relative z-10`.
+`WaveDivider` : raccord en vague entre deux sections de couleurs differentes. A poser ENTRE les deux sections, dans le flux. `from` = couleur du dessus, `to` = couleur du dessous. `amplitude` : `"ample"` (defaut) sur les raccords structurants, `"low"` ailleurs. La courbe derive au scroll (`animation-timeline: view()`), jamais en boucle permanente, et reste statique sous `prefers-reduced-motion`.
+
+**Prerequis** : la Section doit avoir `relative overflow-hidden`. Ordre dans la Section : `SectionBackground` → `SectionFade` → contenu en `relative z-10`.
+
+```tsx
+<Section container={false} className="relative bg-primary overflow-hidden">
+  <SectionBackground tone="dark" intensity="mid" />
+  <Container className="relative z-10">...</Container>
+</Section>
+
+<WhyChooseUs />                                              {/* bg-surface */}
+<WaveDivider from="surface" to="primary" amplitude="low" />
+<InterventionMap />                                          {/* bg-primary */}
+```
+
+---
+
+### Surfaces vitrees
+
+`.glass-panel` pose une surface `backdrop-filter` reglee par les tokens `--glass-bg`, `--glass-border` et `--glass-blur`.
+
+**A ne poser que sur un fond qui a de la matiere a flouter** : le mesh d'une section sombre, ou une photo. Sur un aplat, le verre n'est que du flou decoratif, et une grille de cartes vitrees glisse tres vite vers le cliche.
+
+Budget : au plus 3 surfaces vitrees visibles en meme temps, aucune au-dela de 40 % de la hauteur du viewport, `--glass-blur` plafonne a 16 px. Jamais derriere un `h1` de haut de page, qui est candidat LCP.
+
+Ecart assume sur la landing : le bloc chiffres en compte 4 cote a cote. C'est le rendu valide par le PO ; toute surface vitree ajoutee ailleurs dans le meme ecran doit en retirer une ici.
+
+---
+
+### Contraste sur fond sombre
+
+AA (4,5:1) sans exception. Deux regles issues de la refonte des fonds :
+
+- `text-muted-foreground` est illisible sur les fonds sombres : utiliser `text-white/70`.
+- `text-secondary` et `text-secondary-strong` tombent sous AA une fois le mesh sombre pose. L'accent sur fond sombre est `text-secondary-soft`.
 
 ---
 
@@ -284,5 +324,16 @@ Un seul fichier : `src/app/globals.css`, bloc `:root`.
 :root {
   --primary: #0a233e;
   --secondary: #5c92b8;
+
+  /* Fonds de section */
+  --surface-tint: #f6fafd;
+  --primary-tint: #24507d;
+
+  /* Surfaces vitrees */
+  --glass-bg: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-blur: 16px;
 }
 ```
+
+`--glass-blur` est le premier curseur a bouger si le verre est juge trop ou pas assez marque.
