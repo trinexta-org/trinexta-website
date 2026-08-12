@@ -46,9 +46,7 @@ export function HeroSection() {
           className="absolute inset-0 w-full h-full object-cover"
         />
       }
-      overlays={
-        <div className="absolute inset-0 bg-primary/40 lg:bg-primary/70" />
-      }
+      overlays={<div className="hero-scrim" aria-hidden="true" />}
       renderSlide={(slide, index, isActive) => (
         <div>
           <Heading
@@ -92,7 +90,7 @@ export function HeroSection() {
       )}
       footer={
         <>
-          <div className="mt-6 md:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <div className="mt-6 md:mt-10 glass-panel rounded-xl p-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:w-fit">
             <Link href="/nos-offres" className="w-full sm:w-auto">
               <Button
                 variant="secondary"
@@ -107,7 +105,7 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full text-center text-white border-white hover:bg-white/10 backdrop-blur-sm cursor-pointer"
+                className="w-full text-center text-white border-white hover:bg-white/10 cursor-pointer"
               >
                 Demandez à être rappelé
               </Button>
@@ -121,7 +119,7 @@ export function HeroSection() {
               solutions simples, fiables et adaptées à votre entreprise.
             </Text>
 
-            <div className="flex items-center gap-2 mt-4 opacity-90">
+            <div className="mt-4 flex w-fit max-w-full items-center gap-2 glass-panel rounded-lg px-3 py-2">
               <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
               <Text
                 variant="small"

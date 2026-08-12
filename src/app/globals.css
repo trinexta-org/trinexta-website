@@ -853,6 +853,34 @@
 .section-bg--mid { opacity: 0.75; }
 .section-bg--high { opacity: 1; }
 
+/* ── Scrim directionnel du hero ───────────────────────────────────────
+   Remplace le voile uniforme bg-primary/40 lg:/70 : le texte garde un fond
+   sombre a gauche, la video redevient lisible a droite. C'est lui, pas le
+   verre, qui repond a la platitude du hero.
+   ──────────────────────────────────────────────────────────────────── */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  /* Mobile : le texte occupe toute la largeur, le voile reste couvrant. */
+  background: linear-gradient(
+    168deg,
+    color-mix(in srgb, var(--primary) 88%, transparent) 0%,
+    color-mix(in srgb, var(--primary) 66%, transparent) 60%,
+    color-mix(in srgb, var(--primary) 50%, transparent) 100%
+  );
+}
+
+@media (min-width: 1024px) {
+  .hero-scrim {
+    background: linear-gradient(
+      102deg,
+      color-mix(in srgb, var(--primary) 94%, transparent) 0%,
+      color-mix(in srgb, var(--primary) 74%, transparent) 46%,
+      color-mix(in srgb, var(--primary) 28%, transparent) 100%
+    );
+  }
+}
+
 /* ── Surface vitree ───────────────────────────────────────────────────
    Budget : 3 surfaces visibles simultanement au maximum, aucune au-dela
    de 40 % de la hauteur du viewport, --glass-blur plafonne a 16 px.
