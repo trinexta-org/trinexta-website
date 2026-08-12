@@ -6,7 +6,7 @@ import { Container } from "@/components/layout/Container"
 import { Heading } from "@/components/ui/Typography"
 import { FadeIn } from "@/components/ui/FadeIn"
 import { useInView } from "@/hooks/useInView"
-
+import { WaveSectionTransition } from "@/components/WaveSectionTransition"
 function RibbonBackground() {
   const [ref, isInView] = useInView<HTMLDivElement>()
 
@@ -67,7 +67,7 @@ export function TransitionTitle({
       container={false}
       className={`${background} relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32`}
     >
-      <RibbonBackground />
+      
 
       <Container className="relative z-10 text-center px-4">
         {surtitle && (
@@ -105,6 +105,7 @@ export function TransitionTitle({
         `}</style>
         <div className="bar-reveal origin-center h-1.5 md:h-2 w-20 md:w-32 bg-secondary mx-auto mt-10 md:mt-14 rounded-full shadow-[0_0_20px_rgba(92,146,184,0.5)]" />
       </Container>
+    
     </Section>
   )
 }

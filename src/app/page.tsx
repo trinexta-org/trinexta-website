@@ -19,6 +19,7 @@ import { CustomerReviews } from "@/components/CustomerReviews"
 import { Section } from "@/components/layout/Section"
 import { BannerCTA } from "@/components/layout/BannerCTA"
 import { Button } from "@/components/ui/Button"
+import { WaveSectionTransition } from "@/components/WaveSectionTransition"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = "Partenaire Informatique à Évry, en Essonne | Trinexta";
@@ -77,6 +78,8 @@ export default function Home() {
         line1="Nos Services"
         line2="Infogérance"
       />
+      <WaveSectionTransition variant="light" />
+
       <ServicesSection />
 
       <Section className="py-12 md:py-16">

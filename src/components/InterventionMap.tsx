@@ -5,6 +5,8 @@ import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { SectionFade } from "@/components/ui/SectionFade"
 import { Container } from "@/components/layout/Container"
+import { BlobBackground } from "@/components/BlobBackground"
+
 
 const DEPARTMENTS = [
     { id: "75", name: "Paris", angle: 75, radius: 0.40 },
@@ -152,6 +154,8 @@ export function InterventionMap() {
 
     return (
         <Section container={false} className="relative bg-primary overflow-hidden py-16 md:py-28">
+              <BlobBackground variant="dark" />
+
 
             <div className="absolute inset-0 pointer-events-none" style={{
                 background: "radial-gradient(ellipse 65% 75% at 72% 52%, color-mix(in srgb, var(--secondary) 10%, transparent), transparent)",

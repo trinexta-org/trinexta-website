@@ -2,6 +2,7 @@ import { Heading, Text } from "@/components/ui/Typography"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { FadeIn } from "@/components/ui/FadeIn"
+import { BlobBackground } from "@/components/BlobBackground"
 
 const steps = [
   {
@@ -29,6 +30,7 @@ const steps = [
 export function ApproachSection() {
   return (
     <Section container={false} className="relative bg-surface py-20 md:py-40 overflow-hidden">
+       <BlobBackground variant="light" />
       <div className="relative z-10">
         <Container>
 
