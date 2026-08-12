@@ -73,6 +73,8 @@ export default function Home() {
       />
       <HeroSection />
 
+      <WaveDivider from="primary" to="surface" amplitude="ample" />
+
       <TransitionTitle
         surtitle="Notre cœur de métier"
         line1="Nos Services"
@@ -94,9 +96,13 @@ export default function Home() {
         />
       </Section>
 
+      <WaveDivider from="surface" to="primary" amplitude="ample" />
+
       <ApproachSection />
 
       <KpiSection />
+
+      <WaveDivider from="primary" to="surface" amplitude="ample" />
 
       <TransitionTitle
         surtitle="Ce que nous offrons"
@@ -105,11 +111,11 @@ export default function Home() {
       />
       <WhyChooseUs />
 
-      <WaveDivider from="surface" to="primary" />
+      <WaveDivider from="surface" to="primary" amplitude="low" />
 
       <InterventionMap />
 
-      <WaveDivider from="primary" to="surface" />
+      <WaveDivider from="primary" to="surface" amplitude="low" />
 
       <ReassuranceSection />
 
@@ -129,7 +135,7 @@ export default function Home() {
       />
       <CustomerReviews/>
 
-      <WaveDivider from="surface" to="primary" />
+      <WaveDivider from="surface" to="primary" amplitude="low" />
 
       <FinalCTA />
       <NewsletterCTA/>

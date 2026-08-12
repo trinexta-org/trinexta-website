@@ -794,7 +794,9 @@
   }
 }
 
-/* Raccord vague entre deux sections de couleurs differentes */
+/* Raccord vague entre deux sections de couleurs differentes.
+   La courbe derive au scroll d'exactement une periode (1200 unites du
+   viewBox) : la boucle est invisible et rien ne tourne en permanence. */
 .wave-divider {
   position: relative;
   width: 100%;
@@ -809,9 +811,29 @@
   height: 100%;
 }
 
+/* Lueur le long de la crete : elle attrape la lumiere du mesh voisin. */
+.wave-divider__path {
+  filter: drop-shadow(0 -5px 11px color-mix(in srgb, var(--secondary) 45%, transparent));
+}
+
+@keyframes wave-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-1200px); }
+}
+
+@supports (animation-timeline: view()) {
+  .wave-divider__path {
+    animation: wave-drift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+
+/* Sans scroll-driven animations, ou si l'utilisateur a demande moins de
+   mouvement, la courbe reste strictement statique. */
 @media (prefers-reduced-motion: reduce) {
-  .wave-divider__svg animate {
-    display: none;
+  .wave-divider__path {
+    animation: none;
   }
 }
 /* ── SectionBackground ────────────────────────────────────────────────
