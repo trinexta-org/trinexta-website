@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
-
+import { BlobBackground } from "@/components/BlobBackground"
 const certifications = [
   {
     name: "CompTIA A+",
@@ -44,6 +44,7 @@ const certifications = [
 export function ReassuranceSection() {
   return (
     <Section container={false} className="py-16 md:py-24 bg-surface relative overflow-hidden">
+      <BlobBackground variant="light" />
       <Container className="relative z-10">
         <div className="flex flex-col items-center text-center gap-6 mb-16">
           <p className="text-sm md:text-base font-bold tracking-[0.25em] uppercase text-secondary-strong-strong">
