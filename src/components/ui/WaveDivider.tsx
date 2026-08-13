@@ -20,11 +20,14 @@ import { cn } from "@/lib/utils"
  * par une boucle permanente : la courbe est figée si le navigateur ne sait pas
  * faire, ou si l'utilisateur a demandé moins de mouvement.
  *
- * `crossing` fait de ce raccord le point de passage du circuit des marges
- * (`CircuitBorders`) : le courant descend la marge gauche, emprunte la crête
- * de la vague pour traverser la page, et repart dans la marge droite. Un seul
- * raccord de la page peut le porter — c'est le moment, pas un effet. Sur ce
- * raccord la vague ne dérive plus : la traversée est le mouvement.
+ * `crossing` fait de ce raccord un point de passage du circuit des marges
+ * (`CircuitBorders`) : le courant quitte une marge, emprunte la crête de la
+ * vague pour traverser la page, et repart dans l'autre. La valeur est le rang
+ * du raccord traversant dans la page, à numéroter de 1 en 1 dans l'ordre de
+ * lecture — le sens en découle : impair = vers la droite, pair = retour vers
+ * la gauche. Ces rangs doivent correspondre à ceux déclarés dans
+ * `CircuitBorders`. Sur un raccord traversant la vague ne dérive plus : la
+ * traversée est le mouvement.
  */
 
 type Tone = "surface" | "surface-strong" | "primary" | "primary-elevated" | "white"
@@ -49,10 +52,16 @@ interface WaveDividerProps {
   to: Tone
   /** Hauteur du raccord. Défaut : `"ample"`. */
   amplitude?: Amplitude
-  /** Ce raccord porte la traversée du circuit. Un seul par page. */
-  crossing?: boolean
+  /**
+   * Rang de ce raccord parmi les traversées du circuit (1, 2, 3…), dans
+   * l'ordre de la page. Absent = raccord ordinaire.
+   */
+  crossing?: CrossingIndex
   className?: string
 }
+
+/** Les rangs déclarés dans globals.css et dans `CircuitBorders`. */
+export type CrossingIndex = 1 | 2 | 3 | 4
 
 /**
  * Trois cycles identiques de période 1200, de x=-1200 à x=2400. La dérive au
@@ -99,25 +108,30 @@ const SWEEP_HALF_WIDTH = 470
 /** Débord vertical du masque : la nappe floutée sort largement de la bande. */
 const SWEEP_BLEED = 200
 
-/** Un seul raccord `crossing` par page, donc des identifiants fixes suffisent. */
-const SWEEP_FADE_ID = "wave-sweep-fade"
-const SWEEP_MASK_ID = "wave-sweep-mask"
-const SWEEP_BLOOM_ID = "wave-sweep-bloom"
-
 export function WaveDivider({
   from,
   to,
   amplitude = "ample",
-  crossing = false,
+  crossing,
   className,
 }: WaveDividerProps) {
+  /* Plusieurs raccords traversants coexistent dans le document : les défs SVG
+     sont donc suffixées par le rang, sinon les masques se confondent. */
+  const sweepFadeId = `wave-sweep-fade-${crossing}`
+  const sweepMaskId = `wave-sweep-mask-${crossing}`
+  const sweepBloomId = `wave-sweep-bloom-${crossing}`
+
   return (
     <div
       aria-hidden="true"
       className={cn(
         "wave-divider",
         AMPLITUDE_CLASSES[amplitude],
-        crossing && "wave-divider--crossing",
+        crossing && [
+          "wave-divider--crossing",
+          `wave-divider--crossing-${crossing}`,
+          crossing % 2 === 0 && "wave-divider--crossing-rtl",
+        ],
         className,
       )}
       style={{ backgroundColor: TONE_VALUES[from] }}
@@ -142,7 +156,7 @@ export function WaveDivider({
            */
           <>
             <defs>
-              <linearGradient id={SWEEP_FADE_ID} x1="0" y1="0" x2="1" y2="0">
+              <linearGradient id={sweepFadeId} x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0" stopColor="#fff" stopOpacity="0" />
                 <stop offset="0.5" stopColor="#fff" stopOpacity="1" />
                 <stop offset="1" stopColor="#fff" stopOpacity="0" />
@@ -151,7 +165,7 @@ export function WaveDivider({
                   la variable est donc directement l'abscisse du cœur de la
                   lumière, en unités de courbe. */}
               <mask
-                id={SWEEP_MASK_ID}
+                id={sweepMaskId}
                 maskUnits="userSpaceOnUse"
                 x={-SWEEP_HALF_WIDTH}
                 y={-SWEEP_BLEED}
@@ -164,7 +178,7 @@ export function WaveDivider({
                   y={-SWEEP_BLEED}
                   width={SWEEP_HALF_WIDTH * 2}
                   height={120 + SWEEP_BLEED * 2}
-                  fill={`url(#${SWEEP_FADE_ID})`}
+                  fill={`url(#${sweepFadeId})`}
                 />
               </mask>
               {/* Flou déclaré en filtre SVG et non en `filter: blur()` CSS : la
@@ -172,7 +186,7 @@ export function WaveDivider({
                   de 10 %, ce qui couperait la nappe aux crêtes et aux creux,
                   exactement là où elle touche le bord de la boîte. */}
               <filter
-                id={SWEEP_BLOOM_ID}
+                id={sweepBloomId}
                 x="-4%"
                 y="-140%"
                 width="108%"
@@ -182,11 +196,11 @@ export function WaveDivider({
                 <feGaussianBlur stdDeviation="9" />
               </filter>
             </defs>
-            <g mask={`url(#${SWEEP_MASK_ID})`}>
+            <g mask={`url(#${sweepMaskId})`}>
               <path
                 className="wave-divider__cross wave-divider__cross--halo"
                 d={WAVE_LINE}
-                filter={`url(#${SWEEP_BLOOM_ID})`}
+                filter={`url(#${sweepBloomId})`}
               />
               <path className="wave-divider__cross wave-divider__cross--core" d={WAVE_LINE} />
             </g>

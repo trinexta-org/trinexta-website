@@ -96,14 +96,17 @@ export default function Home() {
         />
       </Section>
 
-      {/* Entrée du bloc sombre central : le circuit des marges y traverse. */}
-      <WaveDivider from="surface" to="primary" amplitude="ample" crossing />
+      {/* Entrée du bloc sombre central : le circuit passe de la marge gauche
+          à la droite. Les raccords traversants se numérotent ensuite de 1 en 1
+          dans l'ordre de la page, et le courant alterne à chacun. */}
+      <WaveDivider from="surface" to="primary" amplitude="ample" crossing={1} />
 
       <ApproachSection />
 
       <KpiSection />
 
-      <WaveDivider from="primary" to="surface" amplitude="ample" />
+      {/* Sortie du bloc sombre : le courant repart vers la marge gauche. */}
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={2} />
 
       <TransitionTitle
         surtitle="Ce que nous offrons"
@@ -112,7 +115,7 @@ export default function Home() {
       />
       <WhyChooseUs />
 
-      <WaveDivider from="surface" to="primary" amplitude="low" />
+      <WaveDivider from="surface" to="primary" amplitude="low" crossing={3} />
 
       <InterventionMap />
 
@@ -136,7 +139,8 @@ export default function Home() {
       />
       <CustomerReviews/>
 
-      <WaveDivider from="surface" to="primary" amplitude="low" />
+      {/* Dernière traversée : la marge gauche tient la fin de page. */}
+      <WaveDivider from="surface" to="primary" amplitude="low" crossing={4} />
 
       <FinalCTA />
       <NewsletterCTA/>

@@ -838,9 +838,11 @@
 }
 
 /* ── Traversee du circuit ─────────────────────────────────────────────
-   Le raccord marque `crossing` est le seul endroit de la page ou le
-   circuit des marges change de cote. Le courant descend la marge gauche,
-   emprunte l'arete de la vague, ressort dans la marge droite.
+   Un raccord marque `crossing` est un endroit ou le circuit des marges
+   change de cote. Le courant descend une marge, emprunte l'arete de la
+   vague, ressort dans l'autre. Les raccords traversants se numerotent dans
+   l'ordre de la page et alternent : impair = gauche vers droite, pair =
+   droite vers gauche (meme balayage joue a l'envers).
 
    Deux consequences assumees sur ce raccord :
      - la vague ne derive plus. Une arete qui glisse pendant qu'un courant
@@ -850,9 +852,10 @@
        la page, qui declenche le relais des deux marges : le passage reste
        cale sur le raccord quel que soit le contenu au-dessus.
    ──────────────────────────────────────────────────────────────────── */
-.wave-divider--crossing {
-  view-timeline-name: --circuit-crossing;
-}
+.wave-divider--crossing-1 { view-timeline-name: --circuit-crossing-1; }
+.wave-divider--crossing-2 { view-timeline-name: --circuit-crossing-2; }
+.wave-divider--crossing-3 { view-timeline-name: --circuit-crossing-3; }
+.wave-divider--crossing-4 { view-timeline-name: --circuit-crossing-4; }
 
 .wave-divider--crossing .wave-divider__path {
   animation: none;
@@ -941,13 +944,23 @@
     animation-name: circuit-cross;
     animation-timing-function: linear;
     animation-fill-mode: both;
-    /* Le halo est pilote depuis le raccord et pas depuis le `<path>` : un
-       `<path>` SVG n'a pas de boite de mise en page, sa propre view-timeline
-       serait degeneree. `--circuit-head` etant heritee, le trait la lit. */
-    animation-timeline: --circuit-crossing;
     /* `contain` = le raccord est entierement visible. La traversee se joue
        donc pendant que le raccord tient l'ecran, jamais a moitie coupee. */
     animation-range: contain 0% contain 100%;
+  }
+
+  /* Le halo est pilote depuis le raccord et pas depuis le `<path>` : un
+     `<path>` SVG n'a pas de boite de mise en page, sa propre view-timeline
+     serait degeneree. `--circuit-head` etant heritee, le trait la lit. */
+  .wave-divider--crossing-1 { animation-timeline: --circuit-crossing-1; }
+  .wave-divider--crossing-2 { animation-timeline: --circuit-crossing-2; }
+  .wave-divider--crossing-3 { animation-timeline: --circuit-crossing-3; }
+  .wave-divider--crossing-4 { animation-timeline: --circuit-crossing-4; }
+
+  /* Retour vers la gauche : meme balayage joue a l'envers. Le coeur part de
+     1680 et descend vers -480, donc il croise d'abord la piste de droite. */
+  .wave-divider--crossing-rtl {
+    animation-direction: reverse;
   }
 }
 
@@ -1056,21 +1069,69 @@
 
    Les deux marges ne sont pas une paire, et ne sont jamais allumees en meme
    temps. Il n'y a qu'un courant : il descend a gauche, traverse la page en
-   empruntant l'arete du WaveDivider marque `crossing`, et repart a droite.
-   Le relais est donc pilote par le raccord lui-meme (`--circuit-crossing`,
-   publiee par `.wave-divider--crossing` et rendue visible ici par le
-   `timeline-scope` pose sur `body`), pas par un pourcentage de scroll : il
-   reste cale sur la vague quoi qu'on ajoute au-dessus.
+   empruntant l'arete d'un WaveDivider marque `crossing`, repart a droite,
+   retraverse au raccord suivant, et ainsi de suite jusqu'au bas de page. Les
+   relais sont donc pilotes par les raccords eux-memes (`--circuit-crossing-N`,
+   publiees par `.wave-divider--crossing-N` et rendues visibles ici par le
+   `timeline-scope` pose sur `body`), pas par des pourcentages de scroll : ils
+   restent cales sur les vagues quoi qu'on ajoute au-dessus.
 
-   Chaque marge porte donc deux animations sur deux timelines :
+   La presence ne peut pas etre une seule animation par marge : une marge
+   s'allume ET s'eteint plusieurs fois, sur des timelines differentes, et deux
+   animations d'`opacity` sur un meme element ne se composent pas — la derniere
+   gagne. On decoupe donc le courant en segments, un par passage sur une marge,
+   et chaque segment porte deux vannes : `--circuit-gate-in` (son relais
+   d'entree) et `--circuit-gate-out` (son relais de sortie). Ce sont deux
+   proprietes distinctes, donc deux animations sur deux timelines differentes
+   les pilotent sans se marcher dessus, et l'opacite est leur produit. Un
+   segment n'est visible qu'entre ses deux relais.
+
+   Surtout : les vannes vivent sur le trace lui-meme, jamais sur un parent.
+   Un ancetre qui anime `opacity` ouvre un backdrop root — le
+   `backdrop-filter: invert` n'echantillonne alors plus la page qui defile
+   mais le contenu du groupe, et le trace perd tout son contraste. C'est la
+   raison d'etre de ce montage en custom properties : il n'ajoute aucune boite
+   entre la page et le trace.
+
+   Les segments d'une meme marge sont superposes et partagent le meme trace
+   anime : le courant qui revient reprend exactement la cadence de celui qui
+   etait parti.
+
+   Chaque marge porte donc :
      - le trace et l'impulsion, sur le scroll de la page ;
-     - la presence, sur la traversee.
+     - ses vannes, sur les traversees qui l'encadrent.
    ──────────────────────────────────────────────────────────────────────── */
 body {
-  timeline-scope: --circuit-crossing;
+  timeline-scope:
+    --circuit-crossing-1,
+    --circuit-crossing-2,
+    --circuit-crossing-3,
+    --circuit-crossing-4;
+}
+
+/* Les deux vannes. Ouvertes par defaut : c'est l'etat du segment de tete, le
+   seul qui n'a pas de relais d'entree. Tous les autres segments referment leur
+   vanne d'entree dans leur propre regle — sans timeline de scroll (Firefox) ou
+   sans raccord traversant sur la page, il ne reste donc que la marge gauche,
+   et jamais deux segments empiles : deux `backdrop-filter: invert` superposes
+   s'annuleraient. */
+@property --circuit-gate-in {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --circuit-gate-out {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
 }
 
 .circuit-border {
+  opacity: calc(var(--circuit-gate-in) * var(--circuit-gate-out));
+  position: absolute;
+  top: 0;
+  left: 0;
   --circuit-tile: url("/images/circuit-trace.svg");
   /* Fenetre de trace : opaque jusqu'a la tete, puis plus rien. Le pic a 46%
      est la pointe qui dessine, legerement plus dense que le corps du trace. */
@@ -1139,6 +1200,8 @@ body {
   mask-size: 96px 720px, 100% 200%, 100% 300px;
   -webkit-mask-position: 100% 0, 0 0, 0 0;
   mask-position: 100% 0, 0 0, 0 0;
+  left: auto;
+  right: 0;
 }
 
 /* Trace et impulsion, sur le scroll de la page. Le trace se boucle en ~900px
@@ -1158,17 +1221,23 @@ body {
   to   { mask-position: 100% 0, 0 0%, 0 2350px; }
 }
 
-/* Presence, sur la traversee — calee sur les deux intersections, pas sur des
+/* Presence, sur une traversee — calee sur les deux intersections, pas sur des
    pourcentages choisis a l'oeil.
 
    Le coeur de la lumiere parcourt `--circuit-head` de -480 a 1680 en unites de
    courbe, ou 1200 unites couvrent la largeur du viewport, soit 2160 unites de
    course. Les deux pistes sont a 32px du bord gauche et 24px du bord droit,
-   soit x = 25 et x = 1181 :
-     - la marge gauche lache quand le coeur depasse sa piste,
+   soit x = 25 et x = 1181. Sur une traversee vers la droite :
+     - la marge de depart lache quand le coeur depasse sa piste,
        t = (25 + 480) / 2160 = 23,4 % ;
-     - la marge droite s'allume quand le coeur atteint la sienne,
+     - la marge d'arrivee s'allume quand le coeur atteint la sienne,
        t = (1181 + 480) / 2160 = 76,9 %.
+   Sur une traversee vers la gauche le balayage est joue a l'envers : le coeur
+   croise la piste de droite a (1680 - 1181) / 2160 = 23,1 %, celle de gauche a
+   (1680 - 25) / 2160 = 76,6 %. A un tiers de pourcent pres, ce sont les memes
+   instants — les deux keyframes servent donc dans les deux sens, seul le cote
+   auquel on les attache change.
+
    Ce sont bien deux passages du coeur, pas des bords de bande : la bande est
    large et degradee, elle n'a pas d'arete a laquelle accrocher un instant.
    Entre les deux, aucune marge n'est tracee : le courant est en transit sur
@@ -1177,38 +1246,75 @@ body {
    Ces deux abscisses ne bougent pas avec la largeur du viewport (la gouttiere
    est plafonnee a 8rem), la derive residuelle est inferieure au pourcent. */
 @keyframes circuit-handoff-out {
-  0%, 23.4% { opacity: 1; }
-  32%, 100% { opacity: 0; }
+  0%, 23.4% { --circuit-gate-out: 1; }
+  32%, 100% { --circuit-gate-out: 0; }
 }
 
 @keyframes circuit-handoff-in {
-  0%, 76.9% { opacity: 0; }
-  85%, 100% { opacity: 1; }
+  0%, 76.9% { --circuit-gate-in: 0; }
+  85%, 100% { --circuit-gate-in: 1; }
+}
+
+/* Les segments, dans l'ordre de la page. Chacun declare la liste complete de
+   ses animations : le trace sur le scroll, puis ses vannes sur les raccords
+   qui l'encadrent. Le premier n'a pas de relais d'entree, le dernier pas de
+   sortie. Cette liste doit rester alignee sur `SEGMENTS` (CircuitBorders).
+
+   Les segments qui ont un relais d'entree ferment leur vanne dans la regle :
+   c'est leur etat quand la traversee correspondante n'existe pas (autre page)
+   ou n'est pas animable. Une animation active la reouvre. */
+.circuit-border--seg-2,
+.circuit-border--seg-3,
+.circuit-border--seg-4,
+.circuit-border--seg-5 {
+  --circuit-gate-in: 0;
 }
 
 @supports (animation-timeline: scroll()) {
   .circuit-border {
-    animation-name: circuit-run-left, circuit-handoff-out;
     animation-timing-function: linear;
     animation-fill-mode: both;
-    animation-timeline: scroll(root block), --circuit-crossing;
-    /* Depart cale sur la hauteur du hero : marges vides tant qu'on y est. */
+  }
+
+  /* Depart du trace cale sur la hauteur du hero : marges vides tant qu'on y
+     est. Les vannes courent sur `contain` : la traversee se joue pendant que
+     le raccord tient l'ecran. */
+  .circuit-border--seg-1 {
+    animation-name: circuit-run-left, circuit-handoff-out;
+    animation-timeline: scroll(root block), --circuit-crossing-1;
     animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%;
   }
 
-  .circuit-border--right {
-    animation-name: circuit-run-right, circuit-handoff-in;
+  .circuit-border--seg-2 {
+    animation-name: circuit-run-right, circuit-handoff-in, circuit-handoff-out;
+    animation-timeline: scroll(root block), --circuit-crossing-1, --circuit-crossing-2;
+    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%, contain 0% contain 100%;
+  }
+
+  .circuit-border--seg-3 {
+    animation-name: circuit-run-left, circuit-handoff-in, circuit-handoff-out;
+    animation-timeline: scroll(root block), --circuit-crossing-2, --circuit-crossing-3;
+    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%, contain 0% contain 100%;
+  }
+
+  .circuit-border--seg-4 {
+    animation-name: circuit-run-right, circuit-handoff-in, circuit-handoff-out;
+    animation-timeline: scroll(root block), --circuit-crossing-3, --circuit-crossing-4;
+    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%, contain 0% contain 100%;
+  }
+
+  .circuit-border--seg-5 {
+    animation-name: circuit-run-left, circuit-handoff-in;
+    animation-timeline: scroll(root block), --circuit-crossing-4;
+    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%;
   }
 }
 
 /* Sans timeline de scroll (Firefox), sans raccord `crossing` sur la page, ou
    si l'utilisateur a demande moins de mouvement : pas de relais possible. On
-   garde alors la seule marge gauche, figee et entierement tracee. Une marge
-   tenue vaut mieux que la paire symetrique que tout ce dessin evite. */
-.circuit-border--right {
-  opacity: 0;
-}
-
+   garde alors le seul segment de tete — la marge gauche, figee et entierement
+   tracee. Une marge tenue vaut mieux que la paire symetrique que tout ce
+   dessin evite. */
 @media (prefers-reduced-motion: reduce) {
   .circuit-border {
     animation: none;
