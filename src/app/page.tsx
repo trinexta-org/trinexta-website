@@ -96,7 +96,8 @@ export default function Home() {
         />
       </Section>
 
-      <WaveDivider from="surface" to="primary" amplitude="ample" />
+      {/* Entrée du bloc sombre central : le circuit des marges y traverse. */}
+      <WaveDivider from="surface" to="primary" amplitude="ample" crossing />
 
       <ApproachSection />
 

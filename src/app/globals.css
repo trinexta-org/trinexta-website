@@ -836,6 +836,126 @@
     animation: none;
   }
 }
+
+/* ── Traversee du circuit ─────────────────────────────────────────────
+   Le raccord marque `crossing` est le seul endroit de la page ou le
+   circuit des marges change de cote. Le courant descend la marge gauche,
+   emprunte l'arete de la vague, ressort dans la marge droite.
+
+   Deux consequences assumees sur ce raccord :
+     - la vague ne derive plus. Une arete qui glisse pendant qu'un courant
+       la parcourt donne deux vitesses pour un seul trait ; la traversee est
+       le mouvement de ce raccord.
+     - il publie sa propre `view-timeline`. C'est elle, et pas le scroll de
+       la page, qui declenche le relais des deux marges : le passage reste
+       cale sur le raccord quel que soit le contenu au-dessus.
+   ──────────────────────────────────────────────────────────────────── */
+.wave-divider--crossing {
+  view-timeline-name: --circuit-crossing;
+}
+
+.wave-divider--crossing .wave-divider__path {
+  animation: none;
+}
+
+/* Le halo est plus large que la bande du raccord : sans cette levee du rognage,
+   sa nappe serait coupee net en haut et en bas et dessinerait un rectangle.
+   C'est possible ici et seulement ici : le raccord traverse porte la version
+   courte du remplissage, qui tient dans la boite du SVG (voir WaveDivider). */
+.wave-divider--crossing,
+.wave-divider--crossing .wave-divider__svg {
+  overflow: visible;
+}
+
+/* Le fond de la section suivante est peint apres dans le flux : sans ce plan,
+   il recouvrirait la moitie basse du halo. */
+.wave-divider--crossing {
+  z-index: 1;
+}
+
+/* Le halo est decrit par un seul nombre : `--circuit-head`, sa position sur la
+   courbe, en unites de courbe (0 → 1200 couvre la largeur du viewport,
+   `pathLength: 1200` ramenant l'abscisse curviligne sur x).
+
+   Valeur initiale hors courbe : sans animation (Firefox, mouvement reduit,
+   raccord non traverse) le halo n'existe simplement pas. */
+@property --circuit-head {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: -600;
+}
+
+/* La bande de revelation. C'est le seul element qui bouge : elle est centree
+   sur x=0 dans le SVG et translatee par `--circuit-head`, qui est donc
+   directement l'abscisse du coeur de la lumiere. Ses deux bords sont degrades
+   (voir le `linearGradient` dans WaveDivider), donc la ligne s'allume et
+   s'eteint en fondu au lieu d'etre revelee par une arete franche. */
+.wave-divider__sweep {
+  transform: translateX(calc(var(--circuit-head) * 1px));
+}
+
+/* Les deux lignes de lumiere doublent l'arete sur toute sa longueur : elles ne
+   se deplacent pas, elles sont allumees ou non par le masque. */
+.wave-divider__cross {
+  fill: none;
+  stroke-linecap: round;
+  /* Le raccord est etire en largeur (`preserveAspectRatio: none`) : sans ceci
+     le trait serait plus epais horizontalement que verticalement. */
+  vector-effect: non-scaling-stroke;
+}
+
+/* La nappe : large, entierement fondue par le filtre SVG, elle deborde des deux
+   cotes de l'arete et eclaire les deux couleurs du raccord. */
+.wave-divider__cross--halo {
+  /* `--secondary-soft` et non `--secondary` : la moitie basse de la nappe tombe
+     sur le bleu nuit, ou `--secondary` ne se detache plus. */
+  stroke: var(--secondary-soft);
+  /* Large avant d'etre floue : c'est l'epaisseur qui donne au halo sa matiere,
+     le flou ne fait qu'en fondre le bord. Un trait fin tres floute ne produit
+     qu'une brume. */
+  stroke-width: 20;
+}
+
+/* Le coeur : l'arete elle-meme portee au blanc. Fin et a peine adouci — la
+   progressivite vient entierement du masque, plus du tout du trait. */
+.wave-divider__cross--core {
+  stroke: var(--primary-foreground);
+  stroke-width: 2.5;
+  filter: blur(1.5px);
+}
+
+/* La course va d'un bout a l'autre en comptant la demi-largeur de la bande (470
+   unites, cote WaveDivider) : au depart comme a l'arrivee, la lumiere est
+   entierement hors de l'ecran. Course totale 2160 unites — c'est d'elle que
+   dependent les relais des marges (`circuit-handoff-*`, plus bas), ne pas la
+   changer sans recalculer les pourcentages la-bas. */
+@keyframes circuit-cross {
+  from { --circuit-head: -480; }
+  to   { --circuit-head: 1680; }
+}
+
+@supports (animation-timeline: view()) {
+  .wave-divider--crossing {
+    /* Longhands et pas le raccourci `animation` : Lightning CSS recompose le
+       raccourci et remplace alors la timeline nommee par `view()`. */
+    animation-name: circuit-cross;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    /* Le halo est pilote depuis le raccord et pas depuis le `<path>` : un
+       `<path>` SVG n'a pas de boite de mise en page, sa propre view-timeline
+       serait degeneree. `--circuit-head` etant heritee, le trait la lit. */
+    animation-timeline: --circuit-crossing;
+    /* `contain` = le raccord est entierement visible. La traversee se joue
+       donc pendant que le raccord tient l'ecran, jamais a moitie coupee. */
+    animation-range: contain 0% contain 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-divider--crossing {
+    animation: none;
+  }
+}
 /* ── SectionBackground ────────────────────────────────────────────────
    Fond de section unique : mesh de degrades radiaux en CSS pur. Zero JS,
    aucun filtre SVG plein ecran. A poser en premier enfant absolu d'une
@@ -913,4 +1033,191 @@
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(var(--glass-blur)) saturate(1.15);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.15);
+}
+
+/* ── Circuit des marges de page (>= 2xl) ──────────────────────────────────
+   Le trace n'a pas de couleur propre : c'est un masque pose sur un
+   `backdrop-filter: invert grayscale`. Chaque pixel est donc l'inverse
+   neutralise de ce qui defile derriere, clair sur `bg-primary`, sombre sur
+   `bg-surface`, y compris au milieu d'un WaveDivider.
+
+   Un seul element porte l'effet. Empiler deux calques a backdrop-filter
+   inverserait deux fois et annulerait le contraste ; l'intensite est donc
+   modulee par l'alpha du masque, pas par des couches successives.
+
+   Trois calques de masque multiplies (`mask-composite: intersect`) :
+     1. la piste          — ou l'effet peut s'appliquer
+     2. la fenetre de trace — jusqu'ou le circuit est deja construit
+     3. le niveau d'energie — 34% au repos, 100% sous l'impulsion
+
+   Les deux seules valeurs animees sont des positions de masque, pilotees par
+   le scroll de la page. Rien ne tourne en boucle : le circuit ne vit que
+   pendant que l'utilisateur avance.
+
+   Les deux marges ne sont pas une paire, et ne sont jamais allumees en meme
+   temps. Il n'y a qu'un courant : il descend a gauche, traverse la page en
+   empruntant l'arete du WaveDivider marque `crossing`, et repart a droite.
+   Le relais est donc pilote par le raccord lui-meme (`--circuit-crossing`,
+   publiee par `.wave-divider--crossing` et rendue visible ici par le
+   `timeline-scope` pose sur `body`), pas par un pourcentage de scroll : il
+   reste cale sur la vague quoi qu'on ajoute au-dessus.
+
+   Chaque marge porte donc deux animations sur deux timelines :
+     - le trace et l'impulsion, sur le scroll de la page ;
+     - la presence, sur la traversee.
+   ──────────────────────────────────────────────────────────────────────── */
+body {
+  timeline-scope: --circuit-crossing;
+}
+
+.circuit-border {
+  --circuit-tile: url("/images/circuit-trace.svg");
+  /* Fenetre de trace : opaque jusqu'a la tete, puis plus rien. Le pic a 46%
+     est la pointe qui dessine, legerement plus dense que le corps du trace. */
+  --circuit-draw: linear-gradient(
+    to bottom,
+    #000 0 42%,
+    #000 46%,
+    rgba(0, 0, 0, 0.35) 50%,
+    rgba(0, 0, 0, 0) 53%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  /* Impulsion : ligne de fond a 34%, cretes a 100%, retombee longue derriere
+     pour la trainee de comete. */
+  /* Impulsion : repos a 50%, creux a 32% juste derriere la crete puis crete a
+     100%. C'est le creux qui rend le passage lisible sur un trait fin, plus
+     que la crete elle-meme. */
+  --circuit-pulse: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0 40%,
+    rgba(0, 0, 0, 0.32) 58%,
+    rgba(0, 0, 0, 0.42) 66%,
+    #000 74%,
+    rgba(0, 0, 0, 0.66) 80%,
+    rgba(0, 0, 0, 0.5) 88% 100%
+  );
+
+  /* 8rem = la gouttiere disponible a 1536px (viewport - Container 1280px) / 2.
+     Au-dela, la bande reste collee au bord. */
+  width: 8rem;
+  height: 100%;
+  /* Teinte de marque posee par-dessus le noyau inverse : le trace reste bleu
+     Trinexta sur les deux fonds au lieu d'un gris neutre. */
+  background-color: color-mix(in srgb, var(--secondary) 26%, transparent);
+  -webkit-backdrop-filter: invert(1) grayscale(1) contrast(1.4);
+  backdrop-filter: invert(1) grayscale(1) contrast(1.4);
+
+  -webkit-mask-image: var(--circuit-tile), var(--circuit-draw), var(--circuit-pulse);
+  mask-image: var(--circuit-tile), var(--circuit-draw), var(--circuit-pulse);
+  -webkit-mask-size: 128px 960px, 100% 200%, 100% 420px;
+  mask-size: 128px 960px, 100% 200%, 100% 420px;
+  -webkit-mask-repeat: repeat-y, no-repeat, repeat-y;
+  mask-repeat: repeat-y, no-repeat, repeat-y;
+  -webkit-mask-position: 0 0, 0 0, 0 0;
+  mask-position: 0 0, 0 0, 0 0;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* Rail secondaire : dessin propre (pas un miroir), tuile plus courte — 720px
+   contre 960 a gauche, les deux rythmes verticaux ne retombent donc jamais en
+   phase. Piste calee a 24px du bord droit la ou la gauche est a 32px du bord
+   gauche : aucune ligne d'axe ne relie les deux marges. */
+.circuit-border--right {
+  --circuit-tile: url("/images/circuit-trace-right.svg");
+  /* Impulsion plus courte et plus seche : le relais se lit comme un autre
+     courant, pas comme le meme paquet renvoye de l'autre cote. */
+  --circuit-pulse: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.42) 0 44%,
+    rgba(0, 0, 0, 0.26) 62%,
+    #000 76%,
+    rgba(0, 0, 0, 0.52) 84%,
+    rgba(0, 0, 0, 0.42) 92% 100%
+  );
+  -webkit-mask-size: 96px 720px, 100% 200%, 100% 300px;
+  mask-size: 96px 720px, 100% 200%, 100% 300px;
+  -webkit-mask-position: 100% 0, 0 0, 0 0;
+  mask-position: 100% 0, 0 0, 0 0;
+}
+
+/* Trace et impulsion, sur le scroll de la page. Le trace se boucle en ~900px
+   apres le hero, l'impulsion prend le relais et descend ensuite de bout en
+   bout — a droite aussi : le courant a traverse, il continue sa route, il ne
+   remonte pas. Les deux cadences different pour que les deux marges ne se
+   lisent jamais comme un aller-retour. */
+@keyframes circuit-run-left {
+  from { mask-position: 0 0, 0 100%, 0 0; }
+  8%   { mask-position: 0 0, 0 0%, 0 240px; }
+  to   { mask-position: 0 0, 0 0%, 0 3000px; }
+}
+
+@keyframes circuit-run-right {
+  from { mask-position: 100% 0, 0 100%, 0 0; }
+  8%   { mask-position: 100% 0, 0 0%, 0 180px; }
+  to   { mask-position: 100% 0, 0 0%, 0 2350px; }
+}
+
+/* Presence, sur la traversee — calee sur les deux intersections, pas sur des
+   pourcentages choisis a l'oeil.
+
+   Le coeur de la lumiere parcourt `--circuit-head` de -480 a 1680 en unites de
+   courbe, ou 1200 unites couvrent la largeur du viewport, soit 2160 unites de
+   course. Les deux pistes sont a 32px du bord gauche et 24px du bord droit,
+   soit x = 25 et x = 1181 :
+     - la marge gauche lache quand le coeur depasse sa piste,
+       t = (25 + 480) / 2160 = 23,4 % ;
+     - la marge droite s'allume quand le coeur atteint la sienne,
+       t = (1181 + 480) / 2160 = 76,9 %.
+   Ce sont bien deux passages du coeur, pas des bords de bande : la bande est
+   large et degradee, elle n'a pas d'arete a laquelle accrocher un instant.
+   Entre les deux, aucune marge n'est tracee : le courant est en transit sur
+   la vague, et c'est la seule chose que la page montre.
+
+   Ces deux abscisses ne bougent pas avec la largeur du viewport (la gouttiere
+   est plafonnee a 8rem), la derive residuelle est inferieure au pourcent. */
+@keyframes circuit-handoff-out {
+  0%, 23.4% { opacity: 1; }
+  32%, 100% { opacity: 0; }
+}
+
+@keyframes circuit-handoff-in {
+  0%, 76.9% { opacity: 0; }
+  85%, 100% { opacity: 1; }
+}
+
+@supports (animation-timeline: scroll()) {
+  .circuit-border {
+    animation-name: circuit-run-left, circuit-handoff-out;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block), --circuit-crossing;
+    /* Depart cale sur la hauteur du hero : marges vides tant qu'on y est. */
+    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%;
+  }
+
+  .circuit-border--right {
+    animation-name: circuit-run-right, circuit-handoff-in;
+  }
+}
+
+/* Sans timeline de scroll (Firefox), sans raccord `crossing` sur la page, ou
+   si l'utilisateur a demande moins de mouvement : pas de relais possible. On
+   garde alors la seule marge gauche, figee et entierement tracee. Une marge
+   tenue vaut mieux que la paire symetrique que tout ce dessin evite. */
+.circuit-border--right {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circuit-border {
+    animation: none;
+  }
+}
+
+/* Navigateur sans backdrop-filter : trace teinte fixe, meme dessin. */
+@supports not ((backdrop-filter: invert(1)) or (-webkit-backdrop-filter: invert(1))) {
+  .circuit-border {
+    background-color: var(--secondary-strong);
+  }
 }

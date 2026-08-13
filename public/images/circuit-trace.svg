@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="1200" viewBox="0 0 160 1200">
+  <!-- Tuile de trace utilisee comme masque par .circuit-border (globals.css).
+       Le blanc = zone ou l'effet s'applique, l'opacite du trait = intensite.
+
+       Deux lignes, pas une de plus : une ligne maitresse qui descend toute la
+       page en deux deports en S, et une compagne qui s'en detache puis la
+       rejoint. Les noeuds sont la ponctuation, pas du decor.
+
+       La ligne maitresse est a x=40 en y=0 comme en y=1200 : le raccord entre
+       deux tuiles est invisible. Hauteur 1200 : la repetition depasse largement
+       un ecran, le motif ne se lit jamais comme une boucle.
+
+       Deux vocabulaires de noeud, un par role :
+         - la pastille (`#circuit-pads`) marque un point de la ligne. Le trace
+           est evide en anneau autour d'elle, si bien qu'on lit ligne / anneau /
+           vide / noyau, comme une pastille traversante degagee de son cuivre.
+           C'est ce vide qui fait le noeud : sans lui l'anneau n'etait qu'un
+           cercle pose sur un trait qui continuait derriere.
+         - la soudure marque une jonction. Elle ne coupe rien — deux pistes s'y
+           rejoignent — c'est une goutte pleine cerclee d'un halo fin.
+
+       L'evidement est porte par un masque interne au SVG et non par un aplat
+       de fond : ce fichier est lui-meme un masque, son canal alpha est la seule
+       chose que le CSS echantillonne. Un disque noir y serait aussi opaque
+       qu'un disque blanc. -->
+
+  <defs>
+    <!-- Blanc = trace conservee, noir = trace evidee. Le degagement est un
+         disque plein de rayon 4.9, pas un anneau : un anneau laissait le trait
+         ressortir de part et d'autre du noyau, deux ergots de 0.9 qui faisaient
+         du noeud une croix. Le disque va jusqu'au bord interieur de l'anneau
+         visible (4.85), le raccord est donc invisible. -->
+    <mask id="circuit-pads" maskUnits="userSpaceOnUse" x="0" y="0" width="160" height="1200">
+      <rect width="160" height="1200" fill="#fff" />
+      <g fill="#000">
+        <circle cx="40" cy="120" r="4.9" />
+        <circle cx="108" cy="600" r="4.9" />
+        <circle cx="40" cy="1040" r="4.9" />
+      </g>
+    </mask>
+  </defs>
+
+  <g mask="url(#circuit-pads)">
+    <!-- Halo latent : trait large et tres faible, invisible au repos (0.22 x le
+         niveau de repos du masque) et revele quand la crete d'impulsion passe.
+         C'est lui qui donne son epaisseur au passage du courant. -->
+    <g fill="none" stroke="#fff" stroke-opacity="0.22" stroke-width="7" stroke-linecap="round">
+      <path d="M40 0V240C40 288 76 288 76 336V620C76 668 40 668 40 716V1200" />
+      <path d="M76 380C76 424 108 424 108 464V760C108 800 40 800 40 840" />
+    </g>
+
+    <g fill="none" stroke="#fff" stroke-linecap="round">
+      <path d="M40 0V240C40 288 76 288 76 336V620C76 668 40 668 40 716V1200" stroke-width="1.6" />
+      <path d="M76 380C76 424 108 424 108 464V760C108 800 40 800 40 840" stroke-width="1.3" stroke-opacity="0.55" />
+    </g>
+  </g>
+
+  <!-- Pastilles : anneau franc, puis noyau plein au centre du vide. -->
+  <g fill="none" stroke="#fff" stroke-width="1.1">
+    <circle cx="40" cy="120" r="5.4" />
+    <circle cx="108" cy="600" r="5.4" />
+    <circle cx="40" cy="1040" r="5.4" />
+  </g>
+  <g fill="#fff">
+    <circle cx="40" cy="120" r="2.1" />
+    <circle cx="108" cy="600" r="2.1" />
+    <circle cx="40" cy="1040" r="2.1" />
+  </g>
+
+  <!-- Soudures : goutte pleine et cercle de report franc, pose plus loin que le
+       halo latent de la piste (rayon 7 / 2 = 3.5) pour ne pas s'y noyer. -->
+  <g fill="#fff">
+    <circle cx="76" cy="380" r="2.8" />
+    <circle cx="40" cy="840" r="2.8" />
+  </g>
+  <g fill="none" stroke="#fff" stroke-width="0.9" stroke-opacity="0.45">
+    <circle cx="76" cy="380" r="5.2" />
+    <circle cx="40" cy="840" r="5.2" />
+  </g>
+</svg>

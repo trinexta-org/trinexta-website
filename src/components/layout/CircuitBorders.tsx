@@ -1,35 +1,29 @@
+/**
+ * CircuitBorders — circuit des marges de page (>= 2xl).
+ *
+ * Server Component, zero JS. Il n'y a qu'un courant et il change de cote : la
+ * marge gauche mene, se retire, la droite prend le relais, la gauche revient
+ * pour la fin de page. Les deux ne sont allumees ensemble que sur les passages
+ * de relais. Trace, retrait et impulsion sont tous pilotes par
+ * `animation-timeline: scroll(root)`.
+ *
+ * Les deux dessins sont distincts (pas un miroir) et leurs tuiles ont des
+ * hauteurs differentes : les rythmes verticaux ne retombent jamais en phase.
+ *
+ * Le contraste avec la section traversee est automatique : le motif est un
+ * masque sur un `backdrop-filter`, il n'a pas de couleur propre.
+ *
+ * Toute la mecanique vit dans `.circuit-border` (globals.css) — commentaires
+ * detailles la-bas.
+ */
 export function CircuitBorders() {
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-20 hidden 2xl:flex justify-between overflow-hidden"
     >
-      <div className="w-40 h-full text-secondary-strong opacity-50 mix-blend-screen">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="circuit-pattern-left" x="0" y="0" width="100%" height="400" patternUnits="userSpaceOnUse">
-              <path d="M 30 0 V 90 M 30 110 V 150 L 75 195 V 220 L 30 265 V 400" stroke="currentColor" strokeWidth="1" fill="none" />
-              <circle cx="30" cy="100" r="10" stroke="currentColor" strokeWidth="1" fill="none" />
-              <path d="M 45 40 H 115 V 55 H 90 V 170 L 70 150 V 55 H 45 Z" stroke="currentColor" strokeWidth="1" fill="none" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#circuit-pattern-left)" />
-        </svg>
-      </div>
-
-      <div className="w-40 h-full text-secondary-strong opacity-50 mix-blend-screen scale-x-[-1]">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="circuit-pattern-right" x="0" y="0" width="100%" height="400" patternUnits="userSpaceOnUse">
-              <path d="M 30 0 V 90 M 30 110 V 150 L 75 195 V 220 L 30 265 V 400" stroke="currentColor" strokeWidth="1" fill="none" />
-              <circle cx="30" cy="100" r="10" stroke="currentColor" strokeWidth="1" fill="none" />
-              <path d="M 45 40 H 115 V 55 H 90 V 170 L 70 150 V 55 H 45 Z" stroke="currentColor" strokeWidth="1" fill="none" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#circuit-pattern-right)" />
-        </svg>
-      </div>
-
+      <div className="circuit-border circuit-border--left" />
+      <div className="circuit-border circuit-border--right" />
     </div>
   )
 }

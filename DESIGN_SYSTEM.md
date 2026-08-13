@@ -252,7 +252,7 @@ Le mesh s'eteint sur les bords de la section : deux sections de meme ton se racc
 
 `SectionFade` : fondu `bg-primary` sur le bord d'une section pour raccorder deux sections sombres sans ligne de demarcation. `edge` : `"bottom"` (defaut) | `"top"` | `"both"`.
 
-`WaveDivider` : raccord en vague entre deux sections de couleurs differentes. A poser ENTRE les deux sections, dans le flux. `from` = couleur du dessus, `to` = couleur du dessous. `amplitude` : `"ample"` (defaut) sur les raccords structurants, `"low"` ailleurs. La courbe derive au scroll (`animation-timeline: view()`), jamais en boucle permanente, et reste statique sous `prefers-reduced-motion`.
+`WaveDivider` : raccord en vague entre deux sections de couleurs differentes. A poser ENTRE les deux sections, dans le flux. `from` = couleur du dessus, `to` = couleur du dessous. `amplitude` : `"ample"` (defaut) sur les raccords structurants, `"low"` ailleurs. La courbe derive au scroll (`animation-timeline: view()`), jamais en boucle permanente, et reste statique sous `prefers-reduced-motion`. `crossing` designe le raccord ou le circuit des marges traverse la page : un seul par page, et sa vague ne derive plus (voir CircuitBorders).
 
 **Prerequis** : la Section doit avoir `relative overflow-hidden`. Ordre dans la Section : `SectionBackground` → `SectionFade` → contenu en `relative z-10`.
 
@@ -266,6 +266,38 @@ Le mesh s'eteint sur les bords de la section : deux sections de meme ton se racc
 <WaveDivider from="surface" to="primary" amplitude="low" />
 <InterventionMap />                                          {/* bg-primary */}
 ```
+
+---
+
+### CircuitBorders (marges de page)
+
+`CircuitBorders` est monte une fois dans `src/app/layout.tsx`. Server Component, zero JS : deux bandes fixes de `8rem` dans les gouttieres, visibles a partir de `2xl` seulement (en dessous, la gouttiere n'existe pas).
+
+Le trace n'a pas de couleur propre. C'est un masque pose sur un `backdrop-filter: invert grayscale`, donc il prend en continu le contraste inverse de ce qui defile derriere : clair sur `bg-primary`, sombre sur `bg-surface`, et il bascule au milieu d'un `WaveDivider` en suivant la courbe. Ne pas lui donner de classe de couleur.
+
+Un seul element porte l'effet : empiler deux calques a `backdrop-filter` inverserait deux fois et annulerait le contraste. L'intensite se module donc par l'alpha du masque, jamais par des couches successives.
+
+**Les deux marges ne sont jamais allumees en meme temps.** Il n'y a qu'un courant : il descend la marge gauche, traverse la page en empruntant l'arete d'un `WaveDivider`, et repart dans la marge droite. C'est le seul moment anime fort de la page.
+
+Le raccord qui porte la traversee est marque `crossing` (un seul par page, sur la landing c'est l'entree du bloc sombre central). Il publie une `view-timeline` nommee `--circuit-crossing`, rendue visible aux marges par le `timeline-scope` pose sur `body`. Le relais est donc cale sur la vague elle-meme, pas sur un pourcentage de scroll : on peut ajouter ou retirer des sections au-dessus sans le decaler. Sur ce raccord la vague ne derive plus — une arete qui glisse pendant qu'un courant la parcourt donne deux vitesses pour un seul trait.
+
+Chaque marge porte donc deux animations sur deux timelines : le trace et l'impulsion sur `scroll(root)`, la presence sur `--circuit-crossing`.
+
+**L'arete s'allume, rien ne la parcourt.** C'est le point de doctrine du raccord : aucun objet ne se deplace le long de la courbe. L'arete est doublee sur toute sa longueur par deux lignes de lumiere immobiles — la nappe (`halo`, large, floutee) et le coeur (`core`, un filament blanc fin) — et c'est un masque qui decide de ce qui est allume. Le masque est une bande large, degradee sur ses deux bords, translatee par `--circuit-head` (une variable enregistree en `@property`, heritee depuis le raccord, qui vaut donc directement l'abscisse du coeur de la lumiere en unites de courbe).
+
+Consequence recherchee : la transition s'illumine progressivement d'un bout a l'autre, comme un eclairage qui balaie. Tout ce qui redonne a la lumiere une tete, une queue ou un contour la fait retomber en objet qui glisse — c'est l'echec a eviter, et la seule chose qui l'empeche est la largeur de la bande et le fondu de ses bords. La demi-largeur (470 unites, cote `WaveDivider`) est donc un reglage structurel, pas un detail : elle fixe la course et les deux relais de marges.
+
+Le flou de la nappe est declare en filtre SVG et non en `filter: blur()` CSS : la region d'un filtre CSS sur un element SVG est sa boite elargie de 10 %, ce qui couperait la nappe aux cretes et aux creux, exactement la ou elle touche le bord de la boite. Le raccord `crossing` est le seul a lever le rognage (`overflow: visible`), sans quoi la nappe serait coupee net en haut et en bas : c'est possible parce qu'il porte la version courte du remplissage, qui tient dans la boite du SVG.
+
+**Le relais est calcule, pas regle a l'oeil.** Le coeur de la lumiere va de -480 a 1680, soit 2160 unites de course. Les deux pistes sont a 32px du bord gauche et 24px du bord droit, soit x = 25 et x = 1181 en unites de courbe. La marge gauche lache quand le coeur depasse sa piste (23,4 %), la droite s'allume quand il atteint la sienne (76,9 %). Ce sont deux passages du coeur et non des bords de bande : la bande est degradee, elle n'a pas d'arete a laquelle accrocher un instant. Entre les deux, aucune marge n'est tracee : le courant est en transit. Toute retouche de la course (`circuit-cross`) impose de recalculer `circuit-handoff-out` et `circuit-handoff-in`.
+
+Sans raccord `crossing` sur la page, sans scroll-driven animations (Firefox) ou en `prefers-reduced-motion`, seule la marge gauche subsiste, figee et entierement tracee. La paire symetrique n'existe dans aucun etat.
+
+Les deux dessins sont distincts, jamais un miroir : `circuit-trace.svg` (gauche, deux pistes tressees, tuile de 960px) et `circuit-trace-right.svg` (droite, une piste et une antenne morte, tuile de 720px). Les hauteurs de tuile different pour que les deux rythmes verticaux ne retombent jamais en phase. Deux lignes maximum par dessin, un halo latent revele par la crete d'impulsion. Toute retouche du dessin se fait dans le SVG, jamais dans le CSS.
+
+Piege outil : dans les regles qui utilisent une timeline nommee, ecrire les longhands (`animation-name`, `animation-timing-function`...) et pas le raccourci `animation`. Lightning CSS recompose le raccourci et remplace alors `--circuit-crossing` par `view()`.
+
+Deux vocabulaires de noeud, un par role. La **pastille** marque un point de la ligne : le trace est evide en disque autour d'elle, si bien qu'on lit ligne / anneau / vide / noyau. La **soudure** marque une jonction de deux pistes : elle ne coupe rien, goutte pleine et cercle de report. L'evidement est porte par un `<mask>` interne au SVG, jamais par un aplat de fond : le fichier est lui-meme un masque, seul son canal alpha est echantillonne, un disque noir y serait aussi opaque qu'un disque blanc.
 
 ---
 
