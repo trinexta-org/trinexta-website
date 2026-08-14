@@ -1,233 +1,272 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { ArrowRight } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useInView } from "@/hooks/useInView"
-import { Section } from "@/components/layout/Section"
-import { Container } from "@/components/layout/Container"
-import { Heading } from "@/components/ui/Typography"
-import { SectionBackground } from "@/components/ui/SectionBackground"
+import Image from "next/image";
+import Link from "next/link";
+import { Section } from "@/components/layout/Section";
+import { Heading } from "@/components/ui/Typography";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const services = [
   {
     id: 1,
     title: "Infogérance",
-    description: "**Pilotez** votre croissance, on gère le reste. **Maintenance proactive**, supervision 24/7 et gestion complète de votre parc matériel et logiciel.",
+    description:
+      "**Pilotez** votre croissance, on gère le reste. Notre équipe assure une **maintenance proactive**, une supervision **24/7** de votre parc informatique et une gestion complète de votre matériel et de vos logiciels, pour que les pannes n'interrompent plus jamais votre activité.",
     image: "/images/services/infogerance.avif",
     fillDir: "ltr",
-    alt: "Techniciennes IT Trinexta inspectant une baie de serveurs pour assurer la supervision et l'infogérance d'une PME."
+    alt: "Techniciennes IT Trinexta inspectant une baie de serveurs pour assurer la supervision et l'infogérance d'une PME.",
   },
   {
     id: 2,
     title: "Support",
-    description: "Une **assistance illimitée** pour vos équipes. Résolution instantanée de vos incidents à **distance** ou intervention rapide **sur site**.",
+    description:
+      "Une **assistance illimitée** pour vos équipes, disponible quand vous en avez besoin. Nos techniciens résolvent vos incidents **à distance** en quelques minutes ou interviennent rapidement **sur site** lorsque la situation l'exige, sans facturation surprise.",
     image: "/images/services/support.avif",
     fillDir: "rtl",
-    alt: "Téléphone classique symbolisant l'assistance informatique illimitée et le support technique réactif proposés par Trinexta."
+    alt: "Téléphone classique symbolisant l'assistance informatique illimitée et le support technique réactif proposés par Trinexta.",
   },
   {
     id: 3,
     title: "Cybersécurité",
-    description: "**Blindez** vos systèmes. **Audits de sécurité**, EDR nouvelle génération, protection anti-ransomware et **sauvegardes immuables**.",
+    description:
+      "**Blindez** vos systèmes face aux menaces actuelles grâce à des **audits de sécurité** réguliers, un EDR nouvelle génération et une protection anti-ransomware éprouvée. Vos données restent protégées par des **sauvegardes immuables**, même en cas d'attaque.",
     image: "/images/services/cybersecurite.avif",
     fillDir: "ltr",
-    alt: "Expert en cybersécurité analysant les données sur un ordinateur portable pour protéger le réseau informatique d'une entreprise."
+    alt: "Expert en cybersécurité analysant les données sur un ordinateur portable pour protéger le réseau informatique d'une entreprise.",
   },
   {
     id: 4,
     title: "Cloud",
-    description: "**Modernisez** votre infrastructure. Hébergement souverain, serveurs dédiés et **Plan de Reprise d'Activité (PRA)** hautement disponible.",
+    description:
+      "**Modernisez** votre infrastructure sans les contraintes du matériel physique. Nous mettons en place un hébergement souverain, des serveurs dédiés et un **Plan de Reprise d'Activité (PRA)** hautement disponible pour garantir la continuité de votre activité en toutes circonstances.",
     image: "/images/services/cloud.avif",
     fillDir: "rtl",
-    alt: ""
+    alt: "",
   },
   {
     id: 5,
     title: "Microsoft 365",
-    description: "**Collaborez** sans limite. Migration sans coupure, sécurisation des tenants et **optimisation de vos licences** d'entreprise.",
+    description:
+      "**Collaborez** sans limite avec une suite Microsoft parfaitement configurée. Nous assurons une migration sans coupure, la sécurisation complète de vos tenants et une **optimisation de vos licences** pour ne payer que ce dont vos équipes ont réellement besoin.",
     image: "/images/services/microsoft.avif",
     fillDir: "ltr",
-    alt: ""
+    alt: "",
   },
   {
     id: 6,
     title: "Solutions Métier",
-    description: "Des outils qui épousent vos **processus**. Téléphonie VoIP, réseaux multisites et intégration de **logiciels spécialisés**.",
+    description:
+      "Des outils qui épousent vos **processus** plutôt que l'inverse. Téléphonie VoIP, réseaux multisites, intégration de **logiciels spécialisés** : nous adaptons chaque solution à la réalité de votre métier pour gagner en efficacité au quotidien.",
     image: "/images/services/solutions.avif",
     fillDir: "rtl",
-    alt: ""
+    alt: "",
   },
-]
+];
 
-const positions = [
-  { top: "0%", left: "0%", scale: 1, rotateY: -5, zIndex: 30 },
-  { top: "8%", left: "33.33%", scale: 0.95, rotateY: 0, zIndex: 25 },
-  { top: "0%", left: "66.66%", scale: 1, rotateY: 5, zIndex: 20 },
-  { top: "48%", left: "66.66%", scale: 0.95, rotateY: 3, zIndex: 15 },
-  { top: "56%", left: "33.33%", scale: 1, rotateY: 0, zIndex: 10 },
-  { top: "48%", left: "0%", scale: 0.95, rotateY: -3, zIndex: 5 },
-]
-
-const mobilePositions = [
-  { top: "0%", left: "5%", scale: 1, rotateY: 0, zIndex: 30 },
-  { top: "16.5%", left: "5%", scale: 1, rotateY: 0, zIndex: 25 },
-  { top: "33%", left: "5%", scale: 1, rotateY: 0, zIndex: 20 },
-  { top: "49.5%", left: "5%", scale: 1, rotateY: 0, zIndex: 15 },
-  { top: "66%", left: "5%", scale: 1, rotateY: 0, zIndex: 10 },
-  { top: "82.5%", left: "5%", scale: 1, rotateY: 0, zIndex: 5 },
-]
+const getServiceUrl = (title: string) => {
+  const map: Record<string, string> = {
+    Infogérance: "/infogerance",
+    Support: "/support-informatique",
+    Cybersécurité: "/cybersecurite",
+    Cloud: "/cloud-sauvegarde",
+    "Microsoft 365": "/microsoft-365",
+    "Solutions Métier": "/solutions-metier",
+  };
+  return map[title] || "/nos-offres";
+};
 
 function CharteFormattedText({ children }: { children: string }) {
-  const parts = children.split(/(\*\*.*?\*\*)/g)
+  const parts = children.split(/(\*\*.*?\*\*)/g);
   return (
-    <p className="text-white/70 text-xs md:text-sm lg:text-base leading-relaxed mb-6 md:mb-8 line-clamp-3">
+    <p className="text-foreground/70 text-sm md:text-base leading-relaxed mb-6 md:mb-8">
       {parts.map((part, index) => {
         if (part.startsWith("**") && part.endsWith("**")) {
-          return <strong key={index} className="text-secondary-strong font-bold">{part.slice(2, -2)}</strong>
+          return (
+            <strong key={index} className="text-secondary-strong font-bold">
+              {part.slice(2, -2)}
+            </strong>
+          );
         }
-        return part
+        return part;
       })}
     </p>
-  )
+  );
 }
 
 function AnimatedArrow({ direction }: { direction: string }) {
   return (
-    <div className="relative w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 flex-shrink-0">
-      <ArrowRight className="w-full h-full text-white/20 absolute inset-0" />
+    <div className="relative w-4 h-4 md:w-5 md:h-5 ml-3 flex-shrink-0">
+      <ArrowRight className="w-full h-full text-foreground/15 absolute inset-0" />
       <div
         className={`absolute inset-0 text-secondary-strong ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
       >
         <ArrowRight className="w-full h-full" />
       </div>
     </div>
-  )
+  );
 }
-
-const getServiceUrl = (title: string) => {
-  const map: Record<string, string> = {
-    "Infogérance": "/infogerance",
-    "Support": "/support-informatique",
-    "Cybersécurité": "/cybersecurite",
-    "Cloud": "/cloud-sauvegarde",
-    "Microsoft 365": "/microsoft-365",
-    "Solutions Métier": "/solutions-metier"
-  };
-  return map[title] || "/nos-offres";
-};
-
-export function ServicesSection() {
-  const [sectionRef, isInView] = useInView<HTMLDivElement>({ once: true, rootMargin: "-100px" })
-  const [order, setOrder] = useState([0, 1, 2, 3, 4, 5])
-  const [isCarouselActive, setIsCarouselActive] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
-  useEffect(() => {
-    if (!isInView) return
-    const startCarouselTimer = setTimeout(() => {
-      if (!isMobile) setIsCarouselActive(true)
-    }, 3000)
-    return () => clearTimeout(startCarouselTimer)
-  }, [isInView, isMobile])
-
-  useEffect(() => {
-    if (!isCarouselActive || isMobile) return
-    const interval = setInterval(() => {
-      setOrder(prev => prev.map(pos => (pos + 1) % 6))
-    }, 6000)
-    return () => clearInterval(interval)
-  }, [isCarouselActive, isMobile])
-
-  const activePositions = isMobile ? mobilePositions : positions
+function ServiceSlide({
+  service,
+  index,
+  onPrev,
+  onNext,
+}: {
+  service: (typeof services)[number];
+  index: number;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  const imageFirst = service.fillDir === "ltr";
 
   return (
-    <Section container={false} className="relative bg-surface overflow-hidden py-16 md:py-28">
-      <SectionBackground tone="light" />
-      <Container className="relative z-10">
-        <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
-          {services.map((service, index) => {
-            const currentSlot = activePositions[isMobile ? index : order[index]]
+    <div
+      className="h-screen w-screen flex-shrink-0 snap-start flex items-start justify-center pt-12 md:pt-20 px-4 md:px-8"
+      style={{ scrollSnapAlign: "start" }}
+    >
+      <div className="relative w-full max-w-[1500px] mx-auto">
+        <div
+          className={`relative z-10 p-6 md:p-10 pt-24 md:pt-32 bg-surface-strong rounded-[48px] shadow-2xl flex flex-col ${imageFirst ? "md:flex-row" : "md:flex-row-reverse"} items-center md:items-start gap-6 md:gap-12`}
+        >
+          <div className="relative z-20 w-full md:w-[55%] -mt-32 md:-mt-48 rounded-[32px] overflow-hidden shadow-xl flex-shrink-0">
+            <div className="relative w-full h-[340px] md:h-[520px]">
+              <Image
+                src={service.image}
+                alt={service.alt}
+                fill
+                sizes="(min-width: 768px) 55vw, 90vw"
+                className="object-cover"
+                priority={index === 0}
+              />
+            </div>
+          </div>
 
-            const target = isInView
-              ? {
-                  opacity: 1,
-                  scale: currentSlot.scale,
-                  rotateY: currentSlot.rotateY,
-                  top: currentSlot.top,
-                  left: currentSlot.left,
-                  zIndex: currentSlot.zIndex,
-                }
-              : {
-                  opacity: 0,
-                  scale: 0.1,
-                  rotateY: 180,
-                  top: "20%",
-                  left: "50%",
-                  zIndex: 0,
-                }
+          <div className="relative z-10 w-full p-6 md:p-8 self-stretch flex flex-col justify-center">
+            <span className="text-secondary text-xs md:text-sm font-bold tracking-widest uppercase mb-3 block">
+              0{index + 1} / 0{services.length}
+            </span>
 
-            return (
-              <Link
-                key={service.id}
-                href={getServiceUrl(service.title)}
-                style={{
-                  position: "absolute",
-                  width: isMobile ? "90%" : "31%",
-                  transformStyle: "preserve-3d",
-                  top: target.top,
-                  left: target.left,
-                  zIndex: target.zIndex,
-                  opacity: target.opacity,
-                  transform: `scale(${target.scale}) rotateY(${target.rotateY}deg)`,
-                  transitionProperty: "opacity, transform, top, left",
-                  transitionDuration: "1.2s",
-                  transitionTimingFunction: "ease-in-out",
-                  transitionDelay: `${isCarouselActive ? 0 : index * 0.1}s`,
-                }}
-                className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-primary/10 cursor-pointer bg-primary block"
-              >
-                <div className="absolute inset-0">
-                  <Image
-                    src={service.image}
-                    alt={service.alt}
-                    fill
-                    sizes="(min-width: 768px) 31vw, 90vw"
-                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
-                </div>
+            <Heading
+              as="h3"
+              className="text-2xl md:text-3xl xl:text-5xl text-foreground mb-4 tracking-tight font-extrabold"
+            >
+              {service.title}
+            </Heading>
 
-                <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-8 xl:p-10">
-                  <div className="mt-auto">
-                    <Heading
-                      as="h3"
-                      className="text-xl md:text-2xl xl:text-4xl text-white mb-2 md:mb-4 break-words"
-                    >
-                      {service.title}
-                    </Heading>
+            <CharteFormattedText>{service.description}</CharteFormattedText>
 
-                    <CharteFormattedText>{service.description}</CharteFormattedText>
-
-                    <div className="flex items-center transition-transform duration-300 hover:translate-x-[5px]">
-                      <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">Découvrir</span>
-                      <AnimatedArrow direction={service.fillDir} />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            )
-          })}
+            <Link
+              href={getServiceUrl(service.title)}
+              className="flex items-center w-fit group mt-auto hover:gap-4 transition-all duration-300"
+            >
+              <span className="text-sm font-bold text-foreground uppercase tracking-wider">
+                Découvrir
+              </span>
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
-      </Container>
+
+        {/* Flèches sous la carte : mobile uniquement */}
+        <div className="flex md:hidden justify-center items-center gap-4 mt-6">
+          <button
+            onClick={onPrev}
+            aria-label="Service précédent"
+            className="w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-secondary transition-all duration-300 group"
+          >
+            <ChevronLeft className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
+          </button>
+          <button
+            onClick={onNext}
+            aria-label="Service suivant"
+            className="w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-secondary transition-all duration-300 group"
+          >
+            <ChevronRight className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+export function ServicesSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const goToSlide = (index: number) => {
+    if (!scrollContainerRef.current) return;
+    const newIndex = (index + services.length) % services.length;
+    setCurrentIndex(newIndex);
+
+    const scrollWidth = scrollContainerRef.current.clientWidth;
+    scrollContainerRef.current.scrollTo({
+      left: newIndex * scrollWidth,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      goToSlide(currentIndex + 1);
+    }, 5000);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [currentIndex]);
+
+  const handleManualNav = (direction: "prev" | "next") => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    goToSlide(direction === "prev" ? currentIndex - 1 : currentIndex + 1);
+  };
+
+  return (
+    <Section
+      container={false}
+      className="relative bg-surface overflow-hidden py-0"
+    >
+      <div
+        ref={scrollContainerRef}
+        className="relative h-screen overflow-x-scroll overflow-y-hidden snap-x snap-mandatory scroll-smooth flex no-scrollbar"
+        style={{
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        {services.map((service, index) => (
+          <ServiceSlide
+            key={service.id}
+            service={service}
+            index={index}
+            onPrev={() => handleManualNav("prev")}
+            onNext={() => handleManualNav("next")}
+          />
+        ))}
+      </div>
+
+      {/* Flèches flottantes : desktop uniquement */}
+      <button
+        onClick={() => handleManualNav("prev")}
+        aria-label="Service précédent"
+        className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full bg-background/90 backdrop-blur-sm shadow-xl items-center justify-center hover:bg-secondary hover:scale-105 transition-all duration-300 group"
+      >
+        <ChevronLeft className="w-6 h-6 text-foreground group-hover:text-white transition-colors" />
+      </button>
+
+      <button
+        onClick={() => handleManualNav("next")}
+        aria-label="Service suivant"
+        className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full bg-background/90 backdrop-blur-sm shadow-xl items-center justify-center hover:bg-secondary hover:scale-105 transition-all duration-300 group"
+      >
+        <ChevronRight className="w-6 h-6 text-foreground group-hover:text-white transition-colors" />
+      </button>
+
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </Section>
-  )
+  );
 }

@@ -36,9 +36,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const desktopHover =
-    "inline-block py-2 text-white/70 hover:text-secondary-strong text-[14px] transition-colors duration-300";
+    "inline-block py-2 text-white/70 hover:text-secondary-strong text-[15px] transition-colors duration-300";
   const desktopTitle =
-    "text-white font-black uppercase tracking-[0.2em] text-[12px] mb-6 block";
+    "text-white font-black uppercase tracking-[0.2em] text-[13px] mb-6 block";
 
   const mobileHover =
     "inline-block py-2 text-white/80 hover:text-secondary-strong text-[11px] sm:text-[12px] block transition-colors leading-snug break-words";
@@ -71,7 +71,7 @@ export function Footer() {
                 </span>
               </Link>
               <div className="space-y-5">
-                <p className="text-white/70 text-[14px] leading-relaxed">
+                <p className="text-white/70 text-[15px] leading-relaxed">
                   Votre informatique simplifiée, en toute sérénité. <br />
                   Expertise, Proximité, Réactivité.
                 </p>
@@ -123,31 +123,31 @@ export function Footer() {
                 <span className={desktopTitle}>Contact</span>
                 <div className="space-y-5">
                   <div className="group">
-                    <span className="block text-[10px] text-secondary-strong font-bold uppercase mb-1.5">
+                    <span className="block text-[11px] text-secondary-strong font-bold uppercase mb-1.5">
                       Bureau d&apos;activité
                     </span>
-                    <span className="text-white/70 text-[14px]">
+                    <span className="text-white/70 text-[15px]">
                       7 Rue Montespan, 91000 EVRY COURCOURONNES
                     </span>
                   </div>
                   <div className="group">
-                    <span className="block text-[10px] text-secondary-strong font-bold uppercase mb-1.5">
+                    <span className="block text-[11px] text-secondary-strong font-bold uppercase mb-1.5">
                       Assistance
                     </span>
                     <a
                       href="tel:0978250746"
-                      className="text-white/70 hover:text-secondary-strong text-[14px] block transition-colors"
+                      className="text-white/70 hover:text-secondary-strong text-[15px] block transition-colors"
                     >
                       09 78 25 07 46
                     </a>
                   </div>
                   <div className="group">
-                    <span className="block text-[10px] text-secondary-strong font-bold uppercase mb-1.5">
+                    <span className="block text-[11px] text-secondary-strong font-bold uppercase mb-1.5">
                       Email
                     </span>
                     <a
                       href="mailto:contact@trinexta.fr"
-                      className="text-white/70 hover:text-secondary-strong text-[14px] block transition-colors"
+                      className="text-white/70 hover:text-secondary-strong text-[15px] block transition-colors"
                     >
                       contact@trinexta.fr
                     </a>
@@ -248,7 +248,7 @@ export function Footer() {
 
         {/* MENTIONS LÉGALES / COPYRIGHT */}
         <div className="py-4 border-t border-white/5 flex items-center justify-between gap-4 mt-4 lg:mt-0">
-          <p className="text-[10px] md:text-[11px] text-white/50 font-bold uppercase tracking-widest">
+          <p className="text-[11px] md:text-[12px] text-white/50 font-bold uppercase tracking-widest">
             © {currentYear} TrusTech IT Support – Tous droits réservés
           </p>
           <div className="flex items-center gap-4 shrink-0">

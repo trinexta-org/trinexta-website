@@ -95,7 +95,7 @@ export function HeroSection() {
               <Button
                 variant="secondary"
                 size="lg"
-                className="w-full text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all bg-secondary-strong hover:bg-secondary-strong/90"
+                className="w-full text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all bg-secondary hover:bg-secondary/90"
               >
                 Découvrir l&apos;offre Sérénité
               </Button>

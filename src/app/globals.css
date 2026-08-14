@@ -13,7 +13,7 @@
   --phone-camera: #111111;
   --primary-foreground: #ffffff;
   --secondary: #5c92b8; 
-  --secondary-strong: #356b8f;
+  --secondary-strong:#5c92b8;
   /* Accent sur fond sombre : --secondary tombe sous AA une fois le mesh pose */
   --secondary-soft: #8fbcda;
   --secondary-strong-foreground: #ffffff;

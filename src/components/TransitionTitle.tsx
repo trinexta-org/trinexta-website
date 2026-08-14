@@ -20,7 +20,7 @@ export function TransitionTitle({
   return (
     <Section
       container={false}
-      className={`${background} relative overflow-hidden flex flex-col items-center justify-center py-16 md:py-32`}
+      className={`${background} relative overflow-hidden flex flex-col items-center justify-center py-12 md:py-20`}
     >
       <SectionBackground tone={tone} intensity="low" />
 
