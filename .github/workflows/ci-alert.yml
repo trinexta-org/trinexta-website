@@ -1,0 +1,81 @@
+name: Alerte CI
+
+on:
+  workflow_run:
+    workflows: ["CI", "Deploy Staging", "Deploy Production"]
+    types: [completed]
+
+permissions:
+  actions: read
+
+jobs:
+  alert:
+    name: Notifier Teams
+    if: >
+      github.event.workflow_run.conclusion == 'failure' &&
+      contains(fromJSON('["dev","main"]'), github.event.workflow_run.head_branch)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Envoyer la notification Teams
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          WF: ${{ github.event.workflow_run.name }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          ACTOR: ${{ github.event.workflow_run.actor.login }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          REPO: ${{ github.repository }}
+        run: |
+          node -e "
+            const card = {
+              '\$schema': 'http://adaptivecards.io/schemas/adaptive-card.json',
+              type: 'AdaptiveCard',
+              version: '1.2',
+              body: [
+                {
+                  type: 'TextBlock',
+                  text: '🔴 Branche partagée cassée',
+                  weight: 'Bolder',
+                  size: 'Medium',
+                  color: 'Attention'
+                },
+                {
+                  type: 'TextBlock',
+                  text: 'Le workflow ' + process.env.WF + ' a échoué sur ' + process.env.BRANCH + '.',
+                  wrap: true
+                },
+                {
+                  type: 'FactSet',
+                  facts: [
+                    { title: 'Repo', value: process.env.REPO },
+                    { title: 'Workflow', value: process.env.WF },
+                    { title: 'Branche', value: process.env.BRANCH },
+                    { title: 'Auteur', value: process.env.ACTOR },
+                    { title: 'Commit', value: process.env.SHA.substring(0, 7) }
+                  ]
+                }
+              ],
+              actions: [{
+                type: 'Action.OpenUrl',
+                title: 'Voir le run',
+                url: process.env.RUN_URL
+              }]
+            };
+            const https = require('https');
+            const url = new URL(process.env.WEBHOOK_URL);
+            const body = JSON.stringify(card);
+            const req = https.request({
+              hostname: url.hostname,
+              port: url.port || 443,
+              path: url.pathname + url.search,
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
+            }, res => {
+              console.log('Status:', res.statusCode);
+              if (res.statusCode >= 400) process.exitCode = 1;
+              res.on('data', d => process.stdout.write(d));
+            });
+            req.on('error', e => { console.error(e); process.exit(1); });
+            req.write(body);
+            req.end();
+          "
