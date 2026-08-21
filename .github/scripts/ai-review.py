@@ -20,6 +20,7 @@ import os
 import sys
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 API_URL = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-sonnet-5"
@@ -239,16 +240,38 @@ def appeler_claude(systeme: str, contenu: str, schema: dict, effort: str) -> dic
     return json.loads(texte)
 
 
+def resoudre_dans_le_depot(chemin: str) -> Path | None:
+    """Le champ `fichier` d'un candidat vient du modele, donc indirectement du diff et
+    du titre de la PR, qui sont des donnees non fiables. Sans cette garde, une chaine
+    d'injection pourrait faire lire un fichier hors du depot (cle SSH du runner,
+    identifiants git), dont le contenu partirait dans le prompt de la passe 2 puis
+    potentiellement dans le commentaire public.
+
+    Ne renvoie un chemin que s'il designe un fichier regulier situe sous la racine.
+    """
+    racine = Path.cwd().resolve()
+    try:
+        resolu = (racine / chemin).resolve()
+    except (OSError, ValueError):
+        return None
+    if not resolu.is_relative_to(racine) or not resolu.is_file():
+        return None
+    return resolu
+
+
 def lire_fichiers_cites(candidats: list[dict]) -> str:
     """Le contexte complet des fichiers cites, pour que la passe 2 puisse refuter sur
     autre chose que la seule ligne extraite du diff."""
     morceaux = []
     for chemin in dict.fromkeys(c["fichier"] for c in candidats):
+        resolu = resoudre_dans_le_depot(chemin)
+        if resolu is None:
+            morceaux.append(f"### {chemin}\n(hors depot ou introuvable - non lu)")
+            continue
         try:
-            with open(chemin, encoding="utf-8") as fichier:
-                lignes = fichier.read().split("\n")
-        except OSError:
-            morceaux.append(f"### {chemin}\n(illisible - fichier supprime ou renomme)")
+            lignes = resolu.read_text(encoding="utf-8").split("\n")
+        except (OSError, UnicodeDecodeError):
+            morceaux.append(f"### {chemin}\n(illisible)")
             continue
         numerotees = "\n".join(f"{i}: {ligne}" for i, ligne in enumerate(lignes, 1))
         morceaux.append(f"### {chemin}\n```\n{numerotees}\n```")
@@ -322,6 +345,13 @@ def main() -> None:
         SCHEMA_ADJUDICATION,
         EFFORT_ADJUDICATION,
     )["verdicts"]
+
+    for i, candidat in enumerate(candidats):
+        verdict = next((v for v in verdicts if v["index"] == i), None)
+        etat = verdict["verdict"] if verdict else "SANS VERDICT"
+        motif = (verdict or {}).get("motif", "")
+        print(f"[{etat}] {candidat['fichier']}:{candidat['ligne']} — "
+              f"{candidat['affirmation']} | {motif}", file=sys.stderr)
 
     par_index = {v["index"]: v for v in verdicts}
     retenus = [
