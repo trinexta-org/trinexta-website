@@ -346,14 +346,16 @@ def main() -> None:
         EFFORT_ADJUDICATION,
     )["verdicts"]
 
+    # Un seul index de reference pour le log ET pour la decision : si la passe 2
+    # renvoie deux verdicts pour le meme candidat, les deux doivent refleter le meme.
+    par_index = {v["index"]: v for v in verdicts}
+
     for i, candidat in enumerate(candidats):
-        verdict = next((v for v in verdicts if v["index"] == i), None)
+        verdict = par_index.get(i)
         etat = verdict["verdict"] if verdict else "SANS VERDICT"
         motif = (verdict or {}).get("motif", "")
         print(f"[{etat}] {candidat['fichier']}:{candidat['ligne']} — "
               f"{candidat['affirmation']} | {motif}", file=sys.stderr)
-
-    par_index = {v["index"]: v for v in verdicts}
     retenus = [
         (candidat, par_index[i])
         for i, candidat in enumerate(candidats)

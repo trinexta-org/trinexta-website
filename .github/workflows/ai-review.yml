@@ -30,11 +30,11 @@ jobs:
             > /tmp/full_diff.txt
 
           TOTAL=$(wc -l < /tmp/full_diff.txt)
-          head -n 1500 /tmp/full_diff.txt > /tmp/diff.txt
+          head -n 800 /tmp/full_diff.txt > /tmp/diff.txt
           git show origin/${{ github.base_ref }}:AGENTS.md > /tmp/agents.md
 
           echo "total=$TOTAL" >> $GITHUB_OUTPUT
-          [ "$TOTAL" -gt 1500 ] && echo "truncated=true" >> $GITHUB_OUTPUT || echo "truncated=false" >> $GITHUB_OUTPUT
+          [ "$TOTAL" -gt 800 ] && echo "truncated=true" >> $GITHUB_OUTPUT || echo "truncated=false" >> $GITHUB_OUTPUT
 
       - name: PR trop grande - notifier
         if: steps.diff.outputs.truncated == 'true'

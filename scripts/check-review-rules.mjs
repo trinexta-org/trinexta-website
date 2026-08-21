@@ -26,14 +26,19 @@ const PREFIXES_COMMIT = /^(feat|fix|chore|docs|style|refactor|perf|test|build|ci
 const NOM_BRANCHE = /^(feat|fix|chore|docs|refactor)\/.+/;
 
 // Violations pre-existantes de HEX_TAILWIND sur dev, anterieures a l'introduction du
-// check (5 occurrences de #0a1128 et #F8FAFC). A corriger separement : #0a1128 n'a pas
-// d'equivalent exact parmi les tokens, le remplacer est un arbitrage design.
-// La regle reste active pour tout code nouveau. Retirer une entree des qu'elle est
-// corrigee - cette liste ne doit jamais grandir.
-const DETTE_HEX = new Set([
-  "src/components/blog/BlogInteractiveCarousel.tsx",
-  "src/components/services-annexes/ServicesApproach.tsx",
-  "src/components/technicien-sous-regie/TechnicienConcret.tsx",
+// check. A corriger separement : #0a1128 n'a pas d'equivalent exact parmi les tokens,
+// le remplacer est un arbitrage design.
+//
+// La dette est comptee, pas exemptee : chaque fichier a droit a EXACTEMENT ce nombre
+// d'occurrences. Une occurrence de plus est signalee, y compris dans un fichier deja
+// endette. Exempter le fichier entier aurait desactive la regle pour tout code futur
+// dans ces trois fichiers.
+//
+// Ces compteurs ne doivent que descendre. Retirer l'entree quand elle atteint 0.
+const DETTE_HEX = new Map([
+  ["src/components/blog/BlogInteractiveCarousel.tsx", 1],
+  ["src/components/services-annexes/ServicesApproach.tsx", 2],
+  ["src/components/technicien-sous-regie/TechnicienConcret.tsx", 2],
 ]);
 
 // Deux niveaux. Bloquant : la violation se corrige en editant un fichier, la CI doit
@@ -60,7 +65,7 @@ const REGLES = [
   },
   {
     nom: "HEX_TAILWIND",
-    exempt: (f) => DETTE_HEX.has(f),
+    dette: (f) => DETTE_HEX.get(f) ?? 0,
     motif: /\b(bg|text|border|fill|stroke|from|to|via|ring|shadow|outline|decoration|accent)-\[#[0-9a-fA-F]{3,8}\]/,
     message: "Couleur HEX en dur dans une classe Tailwind. Utiliser un token (text-primary, bg-secondary...).",
   },
@@ -95,9 +100,15 @@ function verifierStatique() {
     const lignes = readFileSync(fichier, "utf8").split("\n");
     for (const regle of REGLES) {
       if (regle.exempt?.(fichier)) continue;
+      const touches = [];
       lignes.forEach((ligne, i) => {
-        if (regle.motif.test(ligne)) signaler(fichier, i + 1, regle.nom, regle.message);
+        if (regle.motif.test(ligne)) touches.push(i + 1);
       });
+      // Les occurrences au-dela de la dette connue sont signalees : un fichier endette
+      // ne devient pas une zone franche.
+      for (const numero of touches.slice(regle.dette?.(fichier) ?? 0)) {
+        signaler(fichier, numero, regle.nom, regle.message);
+      }
     }
   }
 }
