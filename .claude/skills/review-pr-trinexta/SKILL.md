@@ -67,7 +67,11 @@ la revue ne regarde plus »).
 - Un candidat = `fichier:ligne` + une phrase. **Aucun correctif, aucune justification
   développée, aucun extrait de code réécrit.** Écrire le patch d'un candidat qui sera
   écarté est du travail perdu et ancre le raisonnement sur un défaut supposé.
-- **Budget : 5 candidats maximum.** Au-delà, classer par gravité et jeter le reste.
+- **Budget : 10 candidats maximum.** Ce plafond est une sécurité, pas un quota - ne pas
+  le remplir. Ce qui compte est de classer par gravité et de jeter tout ce dont on n'est
+  pas convaincu. C'est la porte de falsifiabilité qui décide ce qui passe, sur preuve et
+  non sur rang : un budget qui mord est le seul endroit du protocole où un défaut réel
+  peut disparaître pour une raison étrangère à sa validité.
 - **Une liste vide est un résultat valide et attendu.**
 
 Où regarder :

@@ -24,7 +24,15 @@ from pathlib import Path
 
 API_URL = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-sonnet-5"
-MAX_CANDIDATS = 5
+# Le budget sert a forcer le classement, pas a plafonner la sortie : c'est la porte de
+# falsifiabilite qui decide ce qui passe, sur preuve et non sur rang. Un budget trop bas
+# est le seul endroit du protocole ou un defaut reel peut disparaitre pour une raison
+# etrangere a sa validite. Sur le premier diff volumineux mesure, la passe 1 a rendu
+# exactement 5 candidats - le plafond mordait. Releve a 10 : assez haut pour ne pas
+# mordre en usage normal, assez bas pour attraper un run pathologique.
+# Cout quasi nul : l'entree de la passe 2 est dominee par le contenu des fichiers cites,
+# qui sont dedoublonnes - plus de candidats sur les memes fichiers ne coute presque rien.
+MAX_CANDIDATS = 10
 # La passe 1 tourne sur toutes les PR et son travail est volontairement peu profond :
 # lister des candidats sans les justifier. Elle a le droit de sur-produire, la passe 2
 # filtre. La passe 2 tourne moins souvent et decide de ce qui atteint l'auteur : une
@@ -60,9 +68,10 @@ et une affirmation d'une seule phrase. Tu n'ecris AUCUNE justification, AUCUN
 correctif, AUCUN extrait de code reecrit. Une autre passe adjugera. Justifier
 maintenant t'engagerait sur un verdict que tu chercherais ensuite a rendre coherent.
 
-BUDGET. {MAX_CANDIDATS} candidats maximum. Au-dela, tu classes par gravite et tu jettes
-le reste. Une liste VIDE est un resultat valide et frequent : sur un changement qui
-passe la CI, zero candidat est le cas normal.
+BUDGET. {MAX_CANDIDATS} candidats maximum. Ce plafond est une securite, pas un quota :
+ne le remplis pas. Ce qui compte est que tu classes par gravite et que tu jettes tout ce
+dont tu n'es pas convaincu. Une liste VIDE est un resultat valide et frequent : sur un
+changement qui passe la CI, zero candidat est le cas normal.
 
 CE QUE TU CHERCHES. Uniquement des defauts capables de produire un echec observable :
 bug fonctionnel, logique inversee, cas limite non gere menant a une exception, faille
