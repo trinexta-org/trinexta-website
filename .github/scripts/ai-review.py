@@ -90,8 +90,10 @@ SCHEMA_DETECTION = {
         "type": "object",
         "properties": {
             "candidats": {
+                # Pas de maxItems : l'API le rejette dans un schema de sortie
+                # structuree. Le budget est porte par le prompt et par le decoupage
+                # a MAX_CANDIDATS cote Python.
                 "type": "array",
-                "maxItems": MAX_CANDIDATS,
                 "items": {
                     "type": "object",
                     "properties": {
