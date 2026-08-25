@@ -9,10 +9,11 @@
     "lint": "eslint src next.config.ts eslint.config.mjs",
     "prisma:generate": "prisma generate",
     "typecheck": "tsc --noEmit",
+    "check:review-rules": "node scripts/check-review-rules.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "purge:estimates": "node scripts/purge-estimates.mjs",
-    "ci": "npm run lint && npm run prisma:generate && npm run typecheck && npm run test && npm run build",
+    "ci": "npm run lint && npm run check:review-rules && npm run prisma:generate && npm run typecheck && npm run test && npm run build",
     "prewarm:images": "node scripts/prewarm-images.mjs"
   },
   "dependencies": {
