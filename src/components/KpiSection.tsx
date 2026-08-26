@@ -84,7 +84,7 @@ export function KpiSection() {
                   <span className="md:hidden">{kpi.title}</span>
                   <span className="hidden md:inline">{kpi.fullTitle}</span>
                 </h3>
-                <Text className="hidden md:block text-white/70 text-sm xl:text-base leading-relaxed font-medium">
+                <Text className="hidden md:block text-white/80 text-sm xl:text-base leading-relaxed font-medium">
                   {kpi.description}
                 </Text>
               </div>

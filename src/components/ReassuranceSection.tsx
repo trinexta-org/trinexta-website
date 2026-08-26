@@ -47,7 +47,7 @@ export function ReassuranceSection() {
       <SectionBackground tone="light" />
       <Container className="relative z-10">
         <div className="flex flex-col items-center text-center gap-6 mb-16">
-          <p className="text-sm md:text-base font-bold tracking-[0.25em] uppercase text-secondary-strong-strong">
+          <p className="text-sm md:text-base font-bold tracking-[0.25em] uppercase text-secondary-strong">
             Certifications &amp; accréditations
           </p>
           <Heading

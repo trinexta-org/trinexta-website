@@ -16,6 +16,7 @@ import { Container } from "@/components/layout/Container";
 import { generateSlug } from "@/lib/utils";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { JsonLd, trinextaOrganization } from "@/components/seo/JsonLd";
+import { WaveDivider } from "@/components/ui/WaveDivider";
 import {
   getArticleBySlug,
   getArticlesPopulaires,
@@ -139,10 +140,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           { name: article.titre, url: `/blog/${slug}` }
         ]} 
       />
-      <main className="bg-primary min-h-screen text-white">
+      <main className="bg-surface min-h-screen">
         <ProgressBar />
 
-        <header className="relative w-full min-h-[40vh] md:min-h-[60vh] flex flex-col justify-center pt-24 pb-8 overflow-hidden">
+        {/* =========================================================
+            HERO (sombre)
+            ========================================================= */}
+        <header className="relative w-full min-h-[40vh] md:min-h-[60vh] flex flex-col justify-center pt-24 pb-8 overflow-hidden bg-primary">
           {article.imageUne && (
             <Image
               src={urlForImage(article.imageUne).width(1200).url()}
@@ -162,7 +166,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.15] mb-8 text-balance drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.15] mb-8 text-balance drop-shadow-lg text-white">
               {article.titre}
             </h1>
 
@@ -171,7 +175,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               {/* Badge Auteur */}
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/30 shadow-inner">
-                  <span className="text-secondary-strong font-black text-sm">
+                  <span className="text-secondary-soft font-black text-sm">
                     {article.auteur ? article.auteur.charAt(0).toUpperCase() : "T"}
                   </span>
                 </div>
@@ -192,7 +196,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </Container>
         </header>
 
-        <Section className="py-10 md:py-20">
+        {/* =========================================================
+            TRANSITION SOMBRE → CLAIR
+            ========================================================= */}
+        <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
+
+        {/* =========================================================
+            CONTENU (clair)
+            ========================================================= */}
+        <Section className="bg-surface py-10 md:py-20">
           <Container>
             <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 md:gap-16">
               <aside className="hidden lg:block w-[240px]">
@@ -201,7 +213,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   <SearchInput />
 
                   <div className="px-4">
-                    <h4 className="text-[10px] font-bold uppercase text-white/40 tracking-widest mb-4">
+                    <h4 className="text-[10px] font-bold uppercase text-muted-foreground tracking-widest mb-4">
                       Articles populaires
                     </h4>
                     <div className="space-y-4">
@@ -211,10 +223,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                           href={`/blog/${post.slug.current}`}
                           className="block group"
                         >
-                          <p className="text-sm font-medium text-white/70 group-hover:text-secondary-strong transition-colors leading-snug">
+                          <p className="text-sm font-medium text-foreground/80 group-hover:text-secondary-strong transition-colors leading-snug">
                             {post.titre}
                           </p>
-                          <span className="text-[10px] text-white/30 uppercase mt-1 block">
+                          <span className="text-[10px] text-muted-foreground uppercase mt-1 block">
                             {formatDatePublication(post.datePublication)}
                           </span>
                         </Link>
@@ -226,7 +238,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               
               <article className="w-full min-w-0">
                 <SommaireMobile titres={headings} />
-                <div className="prose prose-invert prose-lg max-w-full">
+                <div className="prose prose-lg max-w-full">
                   <PortableTextArticle value={article.contenu} />
                 </div>
                 <ShareButtons title={article.titre} url={`/blog/${article.slug.current}`} />
@@ -237,10 +249,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </Section>
 
         {article.related && article.related.length > 0 && (
-          <Section className="border-t border-white/5 py-20">
+          <Section className="bg-surface border-t border-border py-20">
             <Container>
               <div className="flex justify-between items-end mb-12">
-                <h2 className="text-3xl font-bold tracking-normal">Articles similaires</h2>
+                <h2 className="text-3xl font-bold tracking-normal text-foreground">Articles similaires</h2>
                 <Link href="/blog" className="text-secondary-strong font-bold hover:underline">Voir tout le blog</Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -252,6 +264,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </Section>
 
         )}
+
+        {/* =========================================================
+            TRANSITION CLAIR → SOMBRE
+            ========================================================= */}
+        <WaveDivider from="surface" to="primary" amplitude="ample" crossing={2} />
+
         <NewsletterCTA/>
         <ScrollToTop />
       </main>

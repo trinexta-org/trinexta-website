@@ -1,19 +1,19 @@
 @import "tailwindcss";
- 
+
 :root {
   --background: #ffffff;
   --foreground: #0a233e;
   --primary: #0a233e;
   --primary-elevated: #1a3a5c;
-  --surface: #eef3f9;  
+  --surface: #eef3f9;
   --surface-strong: #dce7f2;
   --phone-body: #0a0f1d;
   --phone-frame: #1e293b;
   --phone-button: #0f172a;
   --phone-camera: #111111;
   --primary-foreground: #ffffff;
-  --secondary: #5c92b8; 
-  --secondary-strong:#5c92b8;
+  --secondary: #5c92b8;
+  --secondary-strong: #3d6f96;
   /* Accent sur fond sombre : --secondary tombe sous AA une fois le mesh pose */
   --secondary-soft: #8fbcda;
   --secondary-strong-foreground: #ffffff;
@@ -60,29 +60,37 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-input: var(--input);
-  
+
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui;
   --font-serif: var(--font-playfair), Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular;
-  
+
   --radius-xl: calc(var(--radius) + 4px);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
- 
+
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
- 
+
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -90,17 +98,27 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-playfair), Georgia, serif !important;
     font-weight: 700;
     letter-spacing: normal;
   }
   /* force italic sur les <em> dans les titres Playfair — sans !important le navigateur peut ignorer font-style sur une font-family forcee */
-  h1 em, h2 em, h3 em, h4 em, h5 em, h6 em {
+  h1 em,
+  h2 em,
+  h3 em,
+  h4 em,
+  h5 em,
+  h6 em {
     font-style: italic;
   }
 }
- 
+
 @layer utilities {
   @keyframes fade-in-scroll {
     to {
@@ -108,7 +126,7 @@
       transform: translate(0, 0);
     }
   }
- 
+
   @supports (animation-timeline: view()) {
     .animate-fade-in-scroll {
       animation: fade-in-scroll linear both;
@@ -116,18 +134,22 @@
       animation-range: entry 5% cover 25%;
     }
   }
- 
+
   @supports not (animation-timeline: view()) {
     .animate-fade-in-scroll {
       animation: fade-in-scroll 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   }
- 
+
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
- 
+
   @keyframes fade-in-up {
     from {
       opacity: 0;
@@ -182,7 +204,7 @@
       transform: translateX(0);
     }
   }
- 
+
   .animate-fade-in {
     opacity: 0;
     animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -204,73 +226,133 @@
     animation: fade-in-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   @keyframes badge-pop {
-    from { opacity: 0; transform: scale(0.85); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   .animate-badge-pop {
     opacity: 0;
     animation: badge-pop 0.25s ease-out both;
   }
- 
+
   @keyframes slide-up {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(calc(-50% - 0.75rem)); }
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(calc(-50% - 0.75rem));
+    }
   }
- 
+
   @keyframes slide-down {
-    0% { transform: translateY(calc(-50% - 0.75rem)); }
-    100% { transform: translateY(0); }
+    0% {
+      transform: translateY(calc(-50% - 0.75rem));
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
- 
+
   .animate-slide-up {
     animation: slide-up 35s linear infinite;
   }
- 
+
   .animate-slide-down {
     animation: slide-down 40s linear infinite;
   }
 }
- 
+
 /* ── MetricRow animations (CasClientCard) ──────────────────────────────
    Total cycle ≈ 6.8s | Stagger 1.3s per row via --metric-delay CSS var
    ──────────────────────────────────────────────────────────────────── */
 @keyframes metric-show-avant {
-  0%   { opacity: 0; transform: translateY(-8px);  }
-  6%   { opacity: 1; transform: translateY(0);     }
-  38%  { opacity: 1; transform: translateY(0);     }
-  43%  { opacity: 0; transform: translateY(-12px); }
-  100% { opacity: 0; transform: translateY(-8px);  }
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  6% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  38% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  43% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
 }
 @keyframes metric-show-apres {
-  0%   { opacity: 0; transform: translateY(10px); }
-  49%  { opacity: 0; transform: translateY(10px); }
-  55%  { opacity: 1; transform: translateY(0);    }
-  96%  { opacity: 1; transform: translateY(0);    }
-  100% { opacity: 0; transform: translateY(10px); }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  49% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  96% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 @keyframes metric-sweep {
-  0%   { clip-path: inset(0 100% 0 0%);   }
-  42%  { clip-path: inset(0 100% 0 0%);   }
-  45%  { clip-path: inset(0 0%   0 0%);   }
-  49%  { clip-path: inset(0 0%   0 100%); }
-  100% { clip-path: inset(0 100% 0 0%);   }
+  0% {
+    clip-path: inset(0 100% 0 0%);
+  }
+  42% {
+    clip-path: inset(0 100% 0 0%);
+  }
+  45% {
+    clip-path: inset(0 0% 0 0%);
+  }
+  49% {
+    clip-path: inset(0 0% 0 100%);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0%);
+  }
 }
 .metric-avant {
-  animation: metric-show-avant 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+  animation: metric-show-avant 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    infinite both;
   animation-delay: var(--metric-delay, 0s);
 }
 .metric-apres {
-  animation: metric-show-apres 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+  animation: metric-show-apres 6.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    infinite both;
   animation-delay: var(--metric-delay, 0s);
 }
 .metric-sweep {
   animation: metric-sweep 6.8s linear infinite;
   animation-delay: var(--metric-delay, 0s);
 }
- 
+
 @keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 .animate-marquee {
   animation: marquee 28s linear infinite;
@@ -278,13 +360,17 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
- 
+
 /* ── FinalCTA animations (ribbon background + heading color cycle) ────
    Ribbon path duration set per-path via --dash-duration inline style
    ──────────────────────────────────────────────────────────────────── */
 @keyframes ribbon-dash {
-  from { stroke-dashoffset: 3000; }
-  to   { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 3000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 .ribbon-fiber {
   stroke-dasharray: 3000;
@@ -300,27 +386,55 @@
 [data-animate="true"] .ribbon-line {
   animation-play-state: running;
 }
- 
+
 @keyframes cta-word-1 {
-  0%, 50%, 75% { color: var(--secondary); }
-  100%         { color: var(--primary-foreground); }
+  0%,
+  50%,
+  75% {
+    color: var(--secondary);
+  }
+  100% {
+    color: var(--primary-foreground);
+  }
 }
 @keyframes cta-word-2 {
-  0%, 100% { color: var(--primary-foreground); }
-  25%, 75% { color: var(--secondary); }
+  0%,
+  100% {
+    color: var(--primary-foreground);
+  }
+  25%,
+  75% {
+    color: var(--secondary);
+  }
 }
 @keyframes cta-word-3 {
-  0%, 50%, 100% { color: var(--primary-foreground); }
-  75%           { color: var(--secondary); }
+  0%,
+  50%,
+  100% {
+    color: var(--primary-foreground);
+  }
+  75% {
+    color: var(--secondary);
+  }
 }
-.cta-word-1 { animation: cta-word-1 8s linear infinite; }
-.cta-word-2 { animation: cta-word-2 8s linear infinite; }
-.cta-word-3 { animation: cta-word-3 8s linear infinite; }
- 
+.cta-word-1 {
+  animation: cta-word-1 8s linear infinite;
+}
+.cta-word-2 {
+  animation: cta-word-2 8s linear infinite;
+}
+.cta-word-3 {
+  animation: cta-word-3 8s linear infinite;
+}
+
 /* ── Stat bar reveal (KpiSection, SereniteStats): width 12px → 48px ──── */
 @keyframes bar-grow {
-  from { width: 12px; }
-  to   { width: 48px; }
+  from {
+    width: 12px;
+  }
+  to {
+    width: 48px;
+  }
 }
 @supports (animation-timeline: view()) {
   .animate-bar-grow {
@@ -336,13 +450,17 @@
     animation: bar-grow 1s ease-out 0.5s forwards;
   }
 }
- 
+
 /* ── Scroll progress line (ApproachSection, ServicesProcess, TechnicienSteps)
    Fills as the step list scrolls through the viewport
    ──────────────────────────────────────────────────────────────────── */
 @keyframes grow-line {
-  from { height: 0%; }
-  to   { height: 100%; }
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
 }
 @supports (animation-timeline: view()) {
   .scroll-progress-line {
@@ -357,25 +475,34 @@
     height: 100%;
   }
 }
- 
+
 /* ── Decorative float loop (phone mockups, hero cards) ────────────────
    Configure amplitude/duration via --float-from / --float-to / --float-duration
    ──────────────────────────────────────────────────────────────────── */
 @keyframes float-y {
-  0%, 100% { transform: translateY(var(--float-from, -15px)); }
-  50%      { transform: translateY(var(--float-to, 15px)); }
+  0%,
+  100% {
+    transform: translateY(var(--float-from, -15px));
+  }
+  50% {
+    transform: translateY(var(--float-to, 15px));
+  }
 }
 .animate-float-y {
   animation: float-y var(--float-duration, 6s) ease-in-out infinite;
 }
- 
+
 /* ── Blog reading progress bar (ProgressBar) ──────────────────────────
    No JS fallback: hidden on browsers without scroll-driven animations,
    it's a nice-to-have indicator, not required to read the article.
    ──────────────────────────────────────────────────────────────────── */
 @keyframes progress-scale {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 .scroll-progress-bar {
   display: none;
@@ -388,23 +515,43 @@
     animation-timeline: scroll(root);
   }
 }
- 
+
 /* ── Service card "Découvrir" arrow fill (ServicesSection) ────────────
    Fills left-to-right or right-to-left depending on card direction
    ──────────────────────────────────────────────────────────────────── */
 @keyframes arrow-fill-ltr {
-  0%   { clip-path: inset(0 100% 0 0); }
-  40%  { clip-path: inset(0 0 0 0); }
-  50%  { clip-path: inset(0 0 0 0); }
-  90%  { clip-path: inset(0 0 0 100%); }
-  100% { clip-path: inset(0 100% 0 0); }
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  40% {
+    clip-path: inset(0 0 0 0);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  90% {
+    clip-path: inset(0 0 0 100%);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
 }
 @keyframes arrow-fill-rtl {
-  0%   { clip-path: inset(0 0 0 100%); }
-  40%  { clip-path: inset(0 0 0 0); }
-  50%  { clip-path: inset(0 0 0 0); }
-  90%  { clip-path: inset(0 100% 0 0); }
-  100% { clip-path: inset(0 0 0 100%); }
+  0% {
+    clip-path: inset(0 0 0 100%);
+  }
+  40% {
+    clip-path: inset(0 0 0 0);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  90% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
 }
 .animate-arrow-fill-ltr {
   animation: arrow-fill-ltr 3s ease-in-out infinite;
@@ -412,7 +559,7 @@
 .animate-arrow-fill-rtl {
   animation: arrow-fill-rtl 3s ease-in-out infinite;
 }
- 
+
 /* ── Animations decoratives en boucle infinie : coupees si l'utilisateur
    a demande moins de mouvement au niveau OS/navigateur (WCAG 2.3.3) ──── */
 @media (prefers-reduced-motion: reduce) {
@@ -427,73 +574,101 @@
     animation: none;
   }
 }
- 
+
 /* ── Values carousel progress bar (OurValues) ──────────────────────────
    Redémarre à chaque changement d'onglet actif (remount via key React)
    ──────────────────────────────────────────────────────────────────── */
 @keyframes progress-fill {
-  from { width: 0%; }
-  to   { width: 100%; }
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 .animate-progress-fill {
   width: 0%;
   animation: progress-fill linear both;
   animation-duration: var(--progress-duration, 4s);
 }
- 
+
 /* ── Generic entrance animations (key-remount replay) ──────────────────
    Replayed by changing the element's React `key`, no JS state needed.
    ──────────────────────────────────────────────────────────────────── */
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(var(--y-from, 14px)); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(var(--y-from, 14px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fade-in-up {
   animation: fade-in-up 0.35s ease-out both;
 }
- 
+
 @keyframes fade-in-scale {
-  from { opacity: 0; transform: scale(var(--scale-from, 0.9)); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(var(--scale-from, 0.9));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 .animate-fade-in-scale {
   animation: fade-in-scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
- 
+
 /* ── InterventionMap radar pulses (lock/flash on department crossing) ──
    Replayed via key remount on each crossing (see InterventionMap.tsx).
    ──────────────────────────────────────────────────────────────────── */
 @keyframes radar-lock-draw {
-  from { stroke-dashoffset: var(--circ); stroke-opacity: 0.95; }
-  to   { stroke-dashoffset: 0; stroke-opacity: 0.30; }
+  from {
+    stroke-dashoffset: var(--circ);
+    stroke-opacity: 0.95;
+  }
+  to {
+    stroke-dashoffset: 0;
+    stroke-opacity: 0.3;
+  }
 }
 .animate-radar-lock {
   animation: radar-lock-draw 0.4s ease-out both;
 }
- 
+
 @keyframes radar-flash {
-  from { opacity: 1; transform: scale(2.8) rotate(45deg); }
-  to   { opacity: 0; transform: scale(0.4) rotate(45deg); }
+  from {
+    opacity: 1;
+    transform: scale(2.8) rotate(45deg);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.4) rotate(45deg);
+  }
 }
 .animate-radar-flash {
   animation: radar-flash 0.3s ease-out both;
 }
- 
+
 .prose h2 {
   transition: all 0.5s ease;
   padding-left: 0;
 }
- 
+
 .prose h2:hover {
   padding-left: 10px;
   color: var(--color-secondary);
 }
- 
+
 #tarteaucitronRoot *,
 #tarteaucitron * {
   font-family: var(--font-sans) !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronAlertBig,
 #tarteaucitron,
 #tarteaucitronServices,
@@ -518,42 +693,42 @@
   color: var(--primary-foreground) !important;
   box-shadow: none !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronAlertBig {
   border: 1px solid var(--secondary) !important;
   border-radius: var(--radius-xl) !important;
   padding: 30px !important;
 }
- 
+
 #tarteaucitron {
   border: 1px solid var(--secondary) !important;
   border-radius: var(--radius-xl) !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronDisclaimerAlert,
 #tarteaucitron span,
 #tarteaucitronRoot #tarteaucitronPrivacyUrl {
   color: var(--primary-foreground) !important;
   background: transparent !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronPrivacyUrl {
   text-decoration: underline !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronPrivacyUrl:hover,
 #tarteaucitron a:hover {
   color: var(--secondary) !important;
 }
- 
+
 #tarteaucitron a {
   color: var(--secondary) !important;
 }
- 
+
 #tarteaucitron .tarteaucitronBorder {
   border-top: 1px solid var(--secondary) !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronPersonalize2,
 #tarteaucitron #tarteaucitronAllAllowed,
 #tarteaucitron .tarteaucitronAllow,
@@ -570,7 +745,7 @@
   text-transform: uppercase !important;
   display: inline-block !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronAllDenied2,
 #tarteaucitron #tarteaucitronAllDenied,
 #tarteaucitron .tarteaucitronDeny,
@@ -586,7 +761,7 @@
   text-transform: uppercase !important;
   display: inline-block !important;
 }
- 
+
 #tarteaucitronRoot #tarteaucitronPersonalize2:hover,
 #tarteaucitron #tarteaucitronAllAllowed:hover,
 #tarteaucitron .tarteaucitronAllow:hover,
@@ -599,20 +774,20 @@
   color: var(--secondary-foreground) !important;
   opacity: 0.9 !important;
 }
- 
+
 #tarteaucitron .tarteaucitronTitle {
   background-color: transparent !important;
 }
- 
+
 #tarteaucitron #tarteaucitronClosePanel:hover {
   background-color: transparent !important;
   background: transparent !important;
 }
- 
+
 #tarteaucitron #tarteaucitronClosePanel:hover::after {
   color: var(--secondary) !important;
 }
- 
+
 #tarteaucitronManager {
   width: 48px !important;
   height: 48px !important;
@@ -620,89 +795,89 @@
   clip-path: circle(50%) !important;
   -webkit-clip-path: circle(50%) !important;
   overflow: hidden !important;
-  
+
   position: fixed !important;
   bottom: 24px !important;
   left: 24px !important;
   z-index: 9999 !important;
- 
+
   background-color: var(--primary) !important;
   background: var(--primary) !important;
   border: 2px solid var(--secondary) !important;
-  
+
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E") !important;
   background-size: 22px 22px !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  
+
   transition: all 0.3s ease !important;
   cursor: pointer !important;
 }
- 
+
 #tarteaucitronManager:hover {
   background-color: var(--secondary) !important;
   background: var(--secondary) !important;
   transform: scale(1.1) !important;
 }
- 
+
 #tarteaucitronManager * {
   display: none !important;
 }
- 
+
 #tarteaucitronManager:hover {
   background-color: var(--secondary) !important;
   background: var(--secondary) !important;
   transform: scale(1.1) !important;
-} 
- 
-#tarteaucitronAlertBig::before {
-    content: none !important;
-    display: none !important;
 }
- 
+
+#tarteaucitronAlertBig::before {
+  content: none !important;
+  display: none !important;
+}
+
 #tarteaucitronServices button,
 .tarteaucitronTitle button,
 #tarteaucitronServicesTitle_mandatory button,
 #tarteaucitronServicesTitle_api button {
-    background-color: var(--secondary) !important;
-    background: var(--secondary) !important;
-    color: var(--secondary-foreground) !important;
-    border: none !important;
+  background-color: var(--secondary) !important;
+  background: var(--secondary) !important;
+  color: var(--secondary-foreground) !important;
+  border: none !important;
 }
- 
+
 #tarteaucitronAlertBig {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 90% !important;
-    max-width: 600px !important;
-    padding: 30px !important; 
-    z-index: 20000 !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 90% !important;
+  max-width: 600px !important;
+  padding: 30px !important;
+  z-index: 20000 !important;
 }
- 
+
 #tarteaucitron #tarteaucitronClosePanel {
-    position: absolute !important;
-    top: 10px !important;
-    right: 10px !important;
-    z-index: 20001 !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 10px !important;
-    cursor: pointer !important;
-    display: block !important;
-    font-size: 0 !important; 
-    color: transparent !important;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  z-index: 20001 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 10px !important;
+  cursor: pointer !important;
+  display: block !important;
+  font-size: 0 !important;
+  color: transparent !important;
 }
- 
+
 #tarteaucitron #tarteaucitronClosePanel::after {
-    content: "Fermer" !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    color: var(--primary-foreground) !important;
-    text-decoration: underline !important;
+  content: "Fermer" !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--primary-foreground) !important;
+  text-decoration: underline !important;
 }
- /* â”€â”€ AnimatedTechnicalBackground â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â”€â”€ AnimatedTechnicalBackground â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 .technical-background {
   position: absolute;
@@ -772,18 +947,34 @@
 }
 
 @keyframes tb-dash-flow {
-  from { stroke-dashoffset: 400; }
-  to { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes tb-pulse-subtle {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes tb-node-pulse {
-  0%, 100% { r: 3; fill-opacity: 0.2; }
-  50% { r: 4.5; fill-opacity: 0.5; }
+  0%,
+  100% {
+    r: 3;
+    fill-opacity: 0.2;
+  }
+  50% {
+    r: 4.5;
+    fill-opacity: 0.5;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -813,14 +1004,20 @@
 
 /* Lueur le long de la crete : elle attrape la lumiere du mesh voisin. */
 .wave-divider__path {
-  filter: drop-shadow(0 -5px 11px color-mix(in srgb, var(--secondary) 45%, transparent));
+  filter: drop-shadow(
+    0 -5px 11px color-mix(in srgb, var(--secondary) 45%, transparent)
+  );
 }
 .wave-divider--crossing-1 .wave-divider__path {
   filter: none;
 }
 @keyframes wave-drift {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-1200px); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-1200px);
+  }
 }
 
 @supports (animation-timeline: view()) {
@@ -854,10 +1051,18 @@
        la page, qui declenche le relais des deux marges : le passage reste
        cale sur le raccord quel que soit le contenu au-dessus.
    ──────────────────────────────────────────────────────────────────── */
-.wave-divider--crossing-1 { view-timeline-name: --circuit-crossing-1; }
-.wave-divider--crossing-2 { view-timeline-name: --circuit-crossing-2; }
-.wave-divider--crossing-3 { view-timeline-name: --circuit-crossing-3; }
-.wave-divider--crossing-4 { view-timeline-name: --circuit-crossing-4; }
+.wave-divider--crossing-1 {
+  view-timeline-name: --circuit-crossing-1;
+}
+.wave-divider--crossing-2 {
+  view-timeline-name: --circuit-crossing-2;
+}
+.wave-divider--crossing-3 {
+  view-timeline-name: --circuit-crossing-3;
+}
+.wave-divider--crossing-4 {
+  view-timeline-name: --circuit-crossing-4;
+}
 
 .wave-divider--crossing .wave-divider__path {
   animation: none;
@@ -935,8 +1140,12 @@
    dependent les relais des marges (`circuit-handoff-*`, plus bas), ne pas la
    changer sans recalculer les pourcentages la-bas. */
 @keyframes circuit-cross {
-  from { --circuit-head: -480; }
-  to   { --circuit-head: 1680; }
+  from {
+    --circuit-head: -480;
+  }
+  to {
+    --circuit-head: 1680;
+  }
 }
 
 @supports (animation-timeline: view()) {
@@ -954,10 +1163,18 @@
   /* Le halo est pilote depuis le raccord et pas depuis le `<path>` : un
      `<path>` SVG n'a pas de boite de mise en page, sa propre view-timeline
      serait degeneree. `--circuit-head` etant heritee, le trait la lit. */
-  .wave-divider--crossing-1 { animation-timeline: --circuit-crossing-1; }
-  .wave-divider--crossing-2 { animation-timeline: --circuit-crossing-2; }
-  .wave-divider--crossing-3 { animation-timeline: --circuit-crossing-3; }
-  .wave-divider--crossing-4 { animation-timeline: --circuit-crossing-4; }
+  .wave-divider--crossing-1 {
+    animation-timeline: --circuit-crossing-1;
+  }
+  .wave-divider--crossing-2 {
+    animation-timeline: --circuit-crossing-2;
+  }
+  .wave-divider--crossing-3 {
+    animation-timeline: --circuit-crossing-3;
+  }
+  .wave-divider--crossing-4 {
+    animation-timeline: --circuit-crossing-4;
+  }
 
   /* Retour vers la gauche : meme balayage joue a l'envers. Le coeur part de
      1680 et descend vers -480, donc il croise d'abord la piste de droite. */
@@ -986,29 +1203,67 @@
   /* Le mesh s'eteint sur les bords : deux sections de meme ton se raccordent
      sans couture, et un raccord clair/sombre retombe sur l'aplat exact que
      peint le WaveDivider. */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
 }
 
 /* Blocs clairs : delta volontairement imperceptible, pas de grain. */
 .section-bg--light {
   background:
-    radial-gradient(120% 90% at 12% -10%, var(--surface-tint) 0%, transparent 62%),
-    radial-gradient(90% 80% at 100% 110%, var(--surface-strong) 0%, transparent 64%);
+    radial-gradient(
+      120% 90% at 12% -10%,
+      var(--surface-tint) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      90% 80% at 100% 110%,
+      var(--surface-strong) 0%,
+      transparent 64%
+    );
 }
 
 /* Blocs sombres : mesh de 3 halos. C'est lui qui donne au verre
    quelque chose a flouter — sans lui, le verre n'est que du flou decoratif. */
 .section-bg--dark {
   background:
-    radial-gradient(58% 62% at 78% 8%, color-mix(in srgb, var(--secondary) 28%, transparent) 0%, transparent 68%),
-    radial-gradient(52% 58% at 8% 34%, color-mix(in srgb, var(--primary-tint) 85%, transparent) 0%, transparent 70%),
-    radial-gradient(70% 70% at 46% 118%, color-mix(in srgb, var(--secondary-strong) 30%, transparent) 0%, transparent 66%);
+    radial-gradient(
+      58% 62% at 78% 8%,
+      color-mix(in srgb, var(--secondary) 28%, transparent) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      52% 58% at 8% 34%,
+      color-mix(in srgb, var(--primary-tint) 85%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      70% 70% at 46% 118%,
+      color-mix(in srgb, var(--secondary-strong) 30%, transparent) 0%,
+      transparent 66%
+    );
 }
 
-.section-bg--low { opacity: 0.5; }
-.section-bg--mid { opacity: 0.75; }
-.section-bg--high { opacity: 1; }
+.section-bg--low {
+  opacity: 0.5;
+}
+.section-bg--mid {
+  opacity: 0.75;
+}
+.section-bg--high {
+  opacity: 1;
+}
 
 /* ── Scrim directionnel du hero ───────────────────────────────────────
    Remplace le voile uniforme bg-primary/40 lg:/70 : le texte garde un fond
@@ -1105,9 +1360,7 @@
    ──────────────────────────────────────────────────────────────────────── */
 body {
   timeline-scope:
-    --circuit-crossing-1,
-    --circuit-crossing-2,
-    --circuit-crossing-3,
+    --circuit-crossing-1, --circuit-crossing-2, --circuit-crossing-3,
     --circuit-crossing-4;
 }
 
@@ -1170,14 +1423,27 @@ body {
   -webkit-backdrop-filter: invert(1) grayscale(1) contrast(1.4);
   backdrop-filter: invert(1) grayscale(1) contrast(1.4);
 
-  -webkit-mask-image: var(--circuit-tile), var(--circuit-draw), var(--circuit-pulse);
+  -webkit-mask-image:
+    var(--circuit-tile), var(--circuit-draw), var(--circuit-pulse);
   mask-image: var(--circuit-tile), var(--circuit-draw), var(--circuit-pulse);
-  -webkit-mask-size: 128px 960px, 100% 200%, 100% 420px;
-  mask-size: 128px 960px, 100% 200%, 100% 420px;
+  -webkit-mask-size:
+    128px 960px,
+    100% 200%,
+    100% 420px;
+  mask-size:
+    128px 960px,
+    100% 200%,
+    100% 420px;
   -webkit-mask-repeat: repeat-y, no-repeat, repeat-y;
   mask-repeat: repeat-y, no-repeat, repeat-y;
-  -webkit-mask-position: 0 0, 0 0, 0 0;
-  mask-position: 0 0, 0 0, 0 0;
+  -webkit-mask-position:
+    0 0,
+    0 0,
+    0 0;
+  mask-position:
+    0 0,
+    0 0,
+    0 0;
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
@@ -1198,10 +1464,22 @@ body {
     rgba(0, 0, 0, 0.52) 84%,
     rgba(0, 0, 0, 0.42) 92% 100%
   );
-  -webkit-mask-size: 96px 720px, 100% 200%, 100% 300px;
-  mask-size: 96px 720px, 100% 200%, 100% 300px;
-  -webkit-mask-position: 100% 0, 0 0, 0 0;
-  mask-position: 100% 0, 0 0, 0 0;
+  -webkit-mask-size:
+    96px 720px,
+    100% 200%,
+    100% 300px;
+  mask-size:
+    96px 720px,
+    100% 200%,
+    100% 300px;
+  -webkit-mask-position:
+    100% 0,
+    0 0,
+    0 0;
+  mask-position:
+    100% 0,
+    0 0,
+    0 0;
   left: auto;
   right: 0;
 }
@@ -1212,15 +1490,45 @@ body {
    remonte pas. Les deux cadences different pour que les deux marges ne se
    lisent jamais comme un aller-retour. */
 @keyframes circuit-run-left {
-  from { mask-position: 0 0, 0 100%, 0 0; }
-  8%   { mask-position: 0 0, 0 0%, 0 240px; }
-  to   { mask-position: 0 0, 0 0%, 0 3000px; }
+  from {
+    mask-position:
+      0 0,
+      0 100%,
+      0 0;
+  }
+  8% {
+    mask-position:
+      0 0,
+      0 0%,
+      0 240px;
+  }
+  to {
+    mask-position:
+      0 0,
+      0 0%,
+      0 3000px;
+  }
 }
 
 @keyframes circuit-run-right {
-  from { mask-position: 100% 0, 0 100%, 0 0; }
-  8%   { mask-position: 100% 0, 0 0%, 0 180px; }
-  to   { mask-position: 100% 0, 0 0%, 0 2350px; }
+  from {
+    mask-position:
+      100% 0,
+      0 100%,
+      0 0;
+  }
+  8% {
+    mask-position:
+      100% 0,
+      0 0%,
+      0 180px;
+  }
+  to {
+    mask-position:
+      100% 0,
+      0 0%,
+      0 2350px;
+  }
 }
 
 /* Presence, sur une traversee — calee sur les deux intersections, pas sur des
@@ -1248,13 +1556,25 @@ body {
    Ces deux abscisses ne bougent pas avec la largeur du viewport (la gouttiere
    est plafonnee a 8rem), la derive residuelle est inferieure au pourcent. */
 @keyframes circuit-handoff-out {
-  0%, 23.4% { --circuit-gate-out: 1; }
-  32%, 100% { --circuit-gate-out: 0; }
+  0%,
+  23.4% {
+    --circuit-gate-out: 1;
+  }
+  32%,
+  100% {
+    --circuit-gate-out: 0;
+  }
 }
 
 @keyframes circuit-handoff-in {
-  0%, 76.9% { --circuit-gate-in: 0; }
-  85%, 100% { --circuit-gate-in: 1; }
+  0%,
+  76.9% {
+    --circuit-gate-in: 0;
+  }
+  85%,
+  100% {
+    --circuit-gate-in: 1;
+  }
 }
 
 /* Les segments, dans l'ordre de la page. Chacun declare la liste complete de
@@ -1284,31 +1604,47 @@ body {
   .circuit-border--seg-1 {
     animation-name: circuit-run-left, circuit-handoff-out;
     animation-timeline: scroll(root block), --circuit-crossing-1;
-    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%;
+    animation-range:
+      calc(100dvh - 7.5rem) 100%,
+      contain 0% contain 100%;
   }
 
   .circuit-border--seg-2 {
     animation-name: circuit-run-right, circuit-handoff-in, circuit-handoff-out;
-    animation-timeline: scroll(root block), --circuit-crossing-1, --circuit-crossing-2;
-    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%, contain 0% contain 100%;
+    animation-timeline:
+      scroll(root block), --circuit-crossing-1, --circuit-crossing-2;
+    animation-range:
+      calc(100dvh - 7.5rem) 100%,
+      contain 0% contain 100%,
+      contain 0% contain 100%;
   }
 
   .circuit-border--seg-3 {
     animation-name: circuit-run-left, circuit-handoff-in, circuit-handoff-out;
-    animation-timeline: scroll(root block), --circuit-crossing-2, --circuit-crossing-3;
-    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%, contain 0% contain 100%;
+    animation-timeline:
+      scroll(root block), --circuit-crossing-2, --circuit-crossing-3;
+    animation-range:
+      calc(100dvh - 7.5rem) 100%,
+      contain 0% contain 100%,
+      contain 0% contain 100%;
   }
 
   .circuit-border--seg-4 {
     animation-name: circuit-run-right, circuit-handoff-in, circuit-handoff-out;
-    animation-timeline: scroll(root block), --circuit-crossing-3, --circuit-crossing-4;
-    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%, contain 0% contain 100%;
+    animation-timeline:
+      scroll(root block), --circuit-crossing-3, --circuit-crossing-4;
+    animation-range:
+      calc(100dvh - 7.5rem) 100%,
+      contain 0% contain 100%,
+      contain 0% contain 100%;
   }
 
   .circuit-border--seg-5 {
     animation-name: circuit-run-left, circuit-handoff-in;
     animation-timeline: scroll(root block), --circuit-crossing-4;
-    animation-range: calc(100dvh - 7.5rem) 100%, contain 0% contain 100%;
+    animation-range:
+      calc(100dvh - 7.5rem) 100%,
+      contain 0% contain 100%;
   }
 }
 
@@ -1324,7 +1660,9 @@ body {
 }
 
 /* Navigateur sans backdrop-filter : trace teinte fixe, meme dessin. */
-@supports not ((backdrop-filter: invert(1)) or (-webkit-backdrop-filter: invert(1))) {
+@supports not (
+  (backdrop-filter: invert(1)) or (-webkit-backdrop-filter: invert(1))
+) {
   .circuit-border {
     background-color: var(--secondary-strong);
   }

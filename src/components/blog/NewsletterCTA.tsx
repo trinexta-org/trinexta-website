@@ -70,7 +70,7 @@ export function NewsletterCTA() {
                   placeholder="votre.email@entreprise.fr"
                   required
                   disabled={status === "loading" || status === "success"}
-                  className="w-full bg-primary border border-white/10 text-white text-base md:text-lg placeholder:text-white/40 rounded-2xl px-6 py-4 pr-16 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all disabled:opacity-50 shadow-inner"
+                  className="w-full bg-primary border border-white/10 text-white text-base md:text-lg placeholder:text-white/70 rounded-2xl px-6 py-4 pr-16 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all disabled:opacity-50 shadow-inner"
                 />
                 <button
                   type="submit"
@@ -100,8 +100,7 @@ export function NewsletterCTA() {
                 </div>
               )}
             </form>
-            <p className="text-white/40 text-xs mt-4 text-center lg:text-left leading-relaxed">
-              En renseignant votre adresse e-mail, vous acceptez de recevoir nos communications. Vous pourrez vous désabonner à tout moment.
+            <p className="text-white/70 text-xs mt-4 text-center lg:text-left leading-relaxed">              En renseignant votre adresse e-mail, vous acceptez de recevoir nos communications. Vous pourrez vous désabonner à tout moment.
             </p>
           </div>
 

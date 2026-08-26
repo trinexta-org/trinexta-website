@@ -130,10 +130,10 @@ function BentoCell({
   imageIndex,
   onClick,
 }: BentoCellProps) {
-  const {
-    displayValue: displayDataIndex,
-    isVisible,
-  } = useCrossfade(currentDataIndex, 400);
+  const { displayValue: displayDataIndex, isVisible } = useCrossfade(
+    currentDataIndex,
+    400,
+  );
 
   const feat = features[displayDataIndex];
 
@@ -158,11 +158,7 @@ function BentoCell({
         className={`
           absolute inset-0 w-full h-full
           transition-all duration-[400ms]
-          ${
-            isVisible
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-[0.98]"
-          }
+          ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"}
         `}
       >
         {hasImage && (
@@ -218,11 +214,7 @@ function BentoCell({
               <p
                 className={`
                   text-sm md:text-base leading-relaxed
-                  ${
-                    hasImage
-                      ? "text-white/80"
-                      : "text-muted-foreground"
-                  }
+                  ${hasImage ? "text-white/80" : "text-muted-foreground"}
                 `}
               >
                 {feat.desc}
@@ -233,11 +225,7 @@ function BentoCell({
               <p
                 className={`
                   text-sm md:text-base leading-relaxed line-clamp-3
-                  ${
-                    hasImage
-                      ? "text-white/80"
-                      : "text-muted-foreground"
-                  }
+                  ${hasImage ? "text-white/80" : "text-muted-foreground"}
                 `}
               >
                 {feat.desc}
@@ -296,10 +284,8 @@ export function ServicePage({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalDataIndex, setModalDataIndex] = useState(0);
 
-  const {
-    shouldRender: modalShouldRender,
-    isVisible: modalVisible,
-  } = usePresence(isModalOpen, 300);
+  const { shouldRender: modalShouldRender, isVisible: modalVisible } =
+    usePresence(isModalOpen, 300);
 
   const isMobile = useMediaQuery("(max-width: 767px)");
 
@@ -378,7 +364,6 @@ export function ServicePage({
 
   return (
     <div className="bg-surface min-h-screen text-foreground">
-
       {/* SEO */}
       <JsonLd data={faqSchema} />
       <JsonLd data={serviceSchema} />
@@ -417,18 +402,13 @@ export function ServicePage({
 
         <Container className="relative z-10 py-12 md:py-16 lg:py-20">
           <div className="max-w-4xl">
-
             <div className="animate-service-hero">
               <Heading
                 as="h1"
                 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-balance"
               >
-                <span className="text-white">
-                  {hero.titlePart1}
-                </span>{" "}
-                <span className="text-secondary-strong">
-                  {hero.titlePart2}
-                </span>
+                <span className="text-white">{hero.titlePart1}</span>{" "}
+                <span className="text-secondary-soft">{hero.titlePart2}</span>
               </Heading>
 
               <div className="mt-4 md:mt-6 max-w-2xl">
@@ -439,10 +419,7 @@ export function ServicePage({
             </div>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link
-                href={hero.ctaHref}
-                className="w-full sm:w-auto"
-              >
+              <Link href={hero.ctaHref} className="w-full sm:w-auto">
                 <Button
                   variant="secondary"
                   className="w-full sm:w-auto text-white h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center"
@@ -451,7 +428,6 @@ export function ServicePage({
                 </Button>
               </Link>
             </div>
-
           </div>
         </Container>
       </ViewportHero>
@@ -459,11 +435,7 @@ export function ServicePage({
       {/* =========================================================
           WAVE - SORTIE DU HERO
       ========================================================= */}
-      <WaveDivider
-        from="primary"
-        to="surface"
-        amplitude="ample"
-      />
+      <WaveDivider from="primary" to="surface" amplitude="ample" />
 
       {/* =========================================================
           TRANSITION - PROBLEM
@@ -477,19 +449,11 @@ export function ServicePage({
       {/* =========================================================
           2. PROBLÈMES
       ========================================================= */}
-      <Section
-        id="probleme"
-        className="bg-surface pb-16 md:pb-24"
-      >
+      <Section id="probleme" className="bg-surface pb-16 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
           <div className="space-y-6 md:space-y-10">
-
             <div className="space-y-3 md:space-y-4">
-              <Heading
-                as="h2"
-                className="text-foreground text-3xl md:text-4xl"
-              >
+              <Heading as="h2" className="text-foreground text-3xl md:text-4xl">
                 {problem.title}
               </Heading>
 
@@ -498,33 +462,23 @@ export function ServicePage({
               </Text>
             </div>
 
-            <GridCards
-              columns={2}
-              gap="gap-2 md:gap-5"
-            >
+            <GridCards columns={2} gap="gap-2 md:gap-5">
               {problem.painPoints.map((point, index) => (
-                <FadeIn
-                  key={index}
-                  delay={index * 0.1}
-                >
+                <FadeIn key={index} delay={index * 0.1}>
                   <div className="group relative p-3 md:p-6 rounded-xl md:rounded-2xl bg-secondary/10 border border-secondary/20 hover:bg-secondary/15 hover:border-secondary/30 transition-all duration-300 h-full flex flex-col justify-center items-center text-center overflow-hidden">
-
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     <Text className="text-foreground font-medium text-[10px] md:text-sm leading-tight md:leading-snug">
                       {point}
                     </Text>
-
                   </div>
                 </FadeIn>
               ))}
             </GridCards>
-
           </div>
 
           {/* Images problème */}
           <div className="relative w-full h-[300px] sm:h-[400px] lg:h-auto lg:aspect-square max-w-[500px] mx-auto lg:max-w-none mt-4 lg:mt-0">
-
             <div
               className={`
                 absolute top-0 right-0
@@ -580,7 +534,6 @@ export function ServicePage({
 
               <div className="absolute inset-0 bg-secondary/20" />
             </div>
-
           </div>
         </div>
       </Section>
@@ -588,10 +541,7 @@ export function ServicePage({
       {/* =========================================================
           AUDIT SEO
       ========================================================= */}
-      <Section
-        id="audit-seo-cta"
-        className="bg-surface pb-16 md:pb-24"
-      >
+      <Section id="audit-seo-cta" className="bg-surface pb-16 md:pb-24">
         <BannerCTA
           variant="surface"
           title="Votre site est-il vraiment vu par Google ?"
@@ -621,16 +571,9 @@ export function ServicePage({
       {/* =========================================================
           3. OFFRE
       ========================================================= */}
-      <Section
-        id="offre"
-        className="bg-surface pb-16 md:pb-24"
-      >
+      <Section id="offre" className="bg-surface pb-16 md:pb-24">
         <div className="text-center max-w-3xl mx-auto space-y-3 md:space-y-4 mb-10 md:mb-16">
-
-          <Heading
-            as="h2"
-            className="text-foreground text-3xl md:text-4xl"
-          >
+          <Heading as="h2" className="text-foreground text-3xl md:text-4xl">
             {offer.title}
           </Heading>
 
@@ -640,69 +583,48 @@ export function ServicePage({
           >
             {offer.description}
           </Text>
-
         </div>
 
         {/* DESKTOP */}
         {!isMobile ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[minmax(180px,auto)] md:auto-rows-[minmax(220px,auto)]">
+            {bentoOrder.map((currentDataIndex, gridPositionIndex) => {
+              const isMainFocus = gridPositionIndex === 0;
 
-            {bentoOrder.map(
-              (currentDataIndex, gridPositionIndex) => {
+              const isSecondaryWithImage = gridPositionIndex === 4;
 
-                const isMainFocus =
-                  gridPositionIndex === 0;
+              const hasImage = isMainFocus || isSecondaryWithImage;
 
-                const isSecondaryWithImage =
-                  gridPositionIndex === 4;
+              const bentoClass = isMainFocus
+                ? "md:col-span-2 md:row-span-2"
+                : isSecondaryWithImage
+                  ? "md:col-span-2 md:row-span-1"
+                  : "md:col-span-1 md:row-span-1";
 
-                const hasImage =
-                  isMainFocus ||
-                  isSecondaryWithImage;
+              const imageIndex = isMainFocus ? 1 : 2;
 
-                const bentoClass =
-                  isMainFocus
-                    ? "md:col-span-2 md:row-span-2"
-                    : isSecondaryWithImage
-                      ? "md:col-span-2 md:row-span-1"
-                      : "md:col-span-1 md:row-span-1";
-
-                const imageIndex =
-                  isMainFocus ? 1 : 2;
-
-                return (
-                  <BentoCell
-                    key={`bento-slot-${gridPositionIndex}`}
-                    serviceSlug={serviceSlug}
-                    features={offer.features}
-                    currentDataIndex={currentDataIndex}
-                    isMainFocus={isMainFocus}
-                    hasImage={hasImage}
-                    bentoClass={bentoClass}
-                    imageIndex={imageIndex}
-                    onClick={() =>
-                      handleDesktopClick(
-                        gridPositionIndex,
-                      )
-                    }
-                  />
-                );
-              },
-            )}
-
+              return (
+                <BentoCell
+                  key={`bento-slot-${gridPositionIndex}`}
+                  serviceSlug={serviceSlug}
+                  features={offer.features}
+                  currentDataIndex={currentDataIndex}
+                  isMainFocus={isMainFocus}
+                  hasImage={hasImage}
+                  bentoClass={bentoClass}
+                  imageIndex={imageIndex}
+                  onClick={() => handleDesktopClick(gridPositionIndex)}
+                />
+              );
+            })}
           </div>
         ) : (
-
           /* MOBILE */
           <div className="grid grid-cols-1 gap-4">
-
             {offer.features.map((feat, idx) => {
+              const hasImage = idx === 0 || idx === 4;
 
-              const hasImage =
-                idx === 0 || idx === 4;
-
-              const imageIndex =
-                idx === 0 ? 1 : 2;
+              const imageIndex = idx === 0 ? 1 : 2;
 
               return (
                 <button
@@ -715,14 +637,9 @@ export function ServicePage({
                     relative p-6 rounded-xl
                     border border-border text-left
                     flex flex-col group overflow-hidden
-                    ${
-                      !hasImage
-                        ? "bg-background"
-                        : "min-h-[200px] justify-end"
-                    }
+                    ${!hasImage ? "bg-background" : "min-h-[200px] justify-end"}
                   `}
                 >
-
                   {hasImage && (
                     <>
                       <Image
@@ -737,16 +654,11 @@ export function ServicePage({
                   )}
 
                   <div className="relative z-10">
-
                     <Heading
                       as="h3"
                       className={`
                         text-lg font-bold mb-2 pr-10
-                        ${
-                          hasImage
-                            ? "text-white"
-                            : "text-foreground"
-                        }
+                        ${hasImage ? "text-white" : "text-foreground"}
                       `}
                     >
                       {feat.title}
@@ -755,20 +667,14 @@ export function ServicePage({
                     <p
                       className={`
                         text-sm leading-relaxed line-clamp-3
-                        ${
-                          hasImage
-                            ? "text-white/80"
-                            : "text-muted-foreground"
-                        }
+                        ${hasImage ? "text-white/80" : "text-muted-foreground"}
                       `}
                     >
                       {feat.desc}
                     </p>
-
                   </div>
 
                   <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-10 group-hover:bg-secondary/20 transition-colors">
-
                     <svg
                       width="14"
                       height="14"
@@ -782,30 +688,22 @@ export function ServicePage({
                     >
                       <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                     </svg>
-
                   </div>
-
                 </button>
               );
             })}
-
           </div>
         )}
 
         {/* MOBILE MODAL */}
         {modalShouldRender && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:hidden">
-
             <div
               onClick={() => setIsModalOpen(false)}
               className={`
                 absolute inset-0 bg-black/90 backdrop-blur-sm
                 transition-opacity duration-300
-                ${
-                  modalVisible
-                    ? "opacity-100"
-                    : "opacity-0"
-                }
+                ${modalVisible ? "opacity-100" : "opacity-0"}
               `}
             />
 
@@ -824,22 +722,15 @@ export function ServicePage({
                 }
               `}
             >
-
               <div className="absolute inset-0 z-0">
-
                 <Image
                   src={`/images/services/${serviceSlug}/bento-1.jpg`}
-                  alt={
-                    offer.features[
-                      modalDataIndex
-                    ]?.title ?? ""
-                  }
+                  alt={offer.features[modalDataIndex]?.title ?? ""}
                   fill
                   className="object-cover opacity-30"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/95 to-primary/40" />
-
               </div>
 
               <button
@@ -851,32 +742,17 @@ export function ServicePage({
               </button>
 
               <div className="relative z-10 p-6 flex flex-col h-full justify-end overflow-y-auto pt-20">
-
-                <Heading
-                  as="h3"
-                  className="text-2xl text-white font-bold mb-4"
-                >
-                  {
-                    offer.features[
-                      modalDataIndex
-                    ]?.title
-                  }
+                <Heading as="h3" className="text-2xl text-white font-bold mb-4">
+                  {offer.features[modalDataIndex]?.title}
                 </Heading>
 
                 <p className="text-white/90 text-base leading-relaxed">
-                  {
-                    offer.features[
-                      modalDataIndex
-                    ]?.desc
-                  }
+                  {offer.features[modalDataIndex]?.desc}
                 </p>
-
               </div>
-
             </div>
           </div>
         )}
-
       </Section>
 
       {/* =========================================================
@@ -884,28 +760,16 @@ export function ServicePage({
       ========================================================= */}
       {localSeo && (
         <>
-          <WaveDivider
-            from="surface"
-            to="primary"
-            amplitude="low"
-          />
+          <WaveDivider from="surface" to="primary" amplitude="low" />
 
-          <Section
-            id="zone-intervention"
-            className="bg-primary pb-16 md:pb-24"
-          >
+          <Section id="zone-intervention" className="bg-primary pb-16 md:pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
-
               <div className="space-y-4">
-
-                <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block">
+                <span className="text-secondary-soft text-xs font-mono font-bold uppercase tracking-widest block">
                   {localSeo.subtitle}
                 </span>
 
-                <Heading
-                  as="h2"
-                  className="text-white text-3xl md:text-4xl"
-                >
+                <Heading as="h2" className="text-white text-3xl md:text-4xl">
                   {localSeo.title}
                 </Heading>
 
@@ -913,10 +777,7 @@ export function ServicePage({
                   {localSeo.description}
                 </Text>
 
-                <Link
-                  href={localSeo.ctaHref}
-                  className="inline-flex"
-                >
+                <Link href={localSeo.ctaHref} className="inline-flex">
                   <Button
                     variant="secondary"
                     className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
@@ -924,17 +785,14 @@ export function ServicePage({
                     {localSeo.ctaText}
                   </Button>
                 </Link>
-
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
                 {localSeo.items.map((item) => (
                   <div
                     key={item.title}
                     className="h-full rounded-xl border border-white/20 bg-white/10 p-5 md:p-6"
                   >
-
                     <Heading
                       as="h3"
                       className="text-white text-lg font-bold mb-2"
@@ -945,20 +803,13 @@ export function ServicePage({
                     <Text className="text-white/80 text-sm leading-relaxed">
                       {item.desc}
                     </Text>
-
                   </div>
                 ))}
-
               </div>
-
             </div>
           </Section>
 
-          <WaveDivider
-            from="primary"
-            to="surface-strong"
-            amplitude="low"
-          />
+          <WaveDivider from="primary" to="surface-strong" amplitude="low" />
         </>
       )}
 
@@ -974,40 +825,25 @@ export function ServicePage({
       {/* =========================================================
           4. BENEFICES
       ========================================================= */}
-      <Section
-        id="benefices"
-        className="bg-surface pb-16 md:pb-32"
-      >
-
+      <Section id="benefices" className="bg-surface pb-16 md:pb-32">
         <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
-
-          <Heading
-            as="h2"
-            className="text-foreground text-3xl md:text-4xl"
-          >
+          <Heading as="h2" className="text-foreground text-3xl md:text-4xl">
             {benefits.title}
           </Heading>
-
         </div>
 
         <div className="flex flex-col md:flex-row h-[500px] md:h-[600px] w-full gap-2 md:gap-4">
+          {benefits.items.map((benefit, index) => {
+            const isActive = activeBenefit === index;
 
-          {benefits.items.map(
-            (benefit, index) => {
-
-              const isActive =
-                activeBenefit === index;
-
-              return (
-                <div
-                  key={index}
-                  onClick={() =>
-                    setActiveBenefit(index)
-                  }
-                  style={{
-                    flex: isActive ? 12 : 1,
-                  }}
-                  className={`
+            return (
+              <div
+                key={index}
+                onClick={() => setActiveBenefit(index)}
+                style={{
+                  flex: isActive ? 12 : 1,
+                }}
+                className={`
                     relative overflow-hidden
                     cursor-pointer
                     rounded-xl md:rounded-3xl
@@ -1021,63 +857,48 @@ export function ServicePage({
                         : "border border-border opacity-70 md:opacity-100"
                     }
                   `}
-                >
+              >
+                <div className="absolute inset-0 w-full h-full">
+                  <Image
+                    src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`}
+                    alt={benefit.title}
+                    fill
+                    sizes="(min-width: 768px) 20vw, 100vw"
+                    className="object-cover"
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                  />
 
-                  <div className="absolute inset-0 w-full h-full">
-
-                    <Image
-                      src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`}
-                      alt={benefit.title}
-                      fill
-                      sizes="(min-width: 768px) 20vw, 100vw"
-                      className="object-cover"
-                      fetchPriority={
-                        index === 0
-                          ? "high"
-                          : "auto"
-                      }
-                    />
-
-                    <div
-                      className={`
+                  <div
+                    className={`
                         absolute inset-0
                         bg-gradient-to-t
                         from-primary
                         via-primary/60
                         to-transparent
                         transition-opacity duration-500
-                        ${
-                          isActive
-                            ? "opacity-70"
-                            : "opacity-30"
-                        }
+                        ${isActive ? "opacity-70" : "opacity-30"}
                       `}
-                    />
+                  />
+                </div>
 
-                  </div>
-
-                  {/* Numéro vertical */}
-                  <div
-                    className={`
+                {/* Numéro vertical */}
+                <div
+                  className={`
                       absolute inset-0
                       flex items-center justify-center
                       pointer-events-none
                       transition-opacity duration-300
-                      ${
-                        isActive
-                          ? "opacity-0"
-                          : "opacity-100"
-                      }
+                      ${isActive ? "opacity-0" : "opacity-100"}
                     `}
-                  >
-                    <span className="text-white/60 font-bold text-lg md:text-3xl md:-rotate-90 whitespace-nowrap tracking-widest">
-                      0{index + 1}
-                    </span>
-                  </div>
+                >
+                  <span className="text-white/60 font-bold text-lg md:text-3xl md:-rotate-90 whitespace-nowrap tracking-widest">
+                    0{index + 1}
+                  </span>
+                </div>
 
-                  {/* Contenu actif */}
-                  <div
-                    className={`
+                {/* Contenu actif */}
+                <div
+                  className={`
                       absolute bottom-3 md:bottom-10
                       left-3 right-3
                       md:left-10 md:right-10
@@ -1089,39 +910,30 @@ export function ServicePage({
                           : "opacity-0 scale-95 pointer-events-none"
                       }
                     `}
-                    aria-hidden={!isActive}
-                  >
+                  aria-hidden={!isActive}
+                >
+                  <div className="backdrop-blur-xl bg-primary/40 md:bg-white/10 border border-white/20 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-2xl max-w-2xl">
+                    <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
+                      <span className="flex items-center justify-center w-6 h-6 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-xs md:text-xl shrink-0">
+                        0{index + 1}
+                      </span>
 
-                    <div className="backdrop-blur-xl bg-primary/40 md:bg-white/10 border border-white/20 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-2xl max-w-2xl">
-
-                      <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
-
-                        <span className="flex items-center justify-center w-6 h-6 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-xs md:text-xl shrink-0">
-                          0{index + 1}
-                        </span>
-
-                        <Heading
-                          as="h3"
-                          className="text-lg md:text-3xl font-black text-white tracking-normal line-clamp-1 md:line-clamp-none"
-                        >
-                          {benefit.title}
-                        </Heading>
-
-                      </div>
-
-                      <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-2 md:line-clamp-none">
-                        {benefit.desc}
-                      </Text>
-
+                      <Heading
+                        as="h3"
+                        className="text-lg md:text-3xl font-black text-white tracking-normal line-clamp-1 md:line-clamp-none"
+                      >
+                        {benefit.title}
+                      </Heading>
                     </div>
 
+                    <Text className="text-white/90 text-xs md:text-base leading-relaxed line-clamp-2 md:line-clamp-none">
+                      {benefit.desc}
+                    </Text>
                   </div>
-
                 </div>
-              );
-            },
-          )}
-
+              </div>
+            );
+          })}
         </div>
       </Section>
 
@@ -1136,69 +948,44 @@ export function ServicePage({
             line2="incident"
           />
 
-          <Section
-            id="incident-response"
-            className="bg-surface pb-16 md:pb-24"
-          >
-
+          <Section id="incident-response" className="bg-surface pb-16 md:pb-24">
             <div className="max-w-3xl mx-auto text-center mb-10 md:mb-16 space-y-4">
-
-              <Heading
-                as="h2"
-                className="text-foreground text-3xl md:text-4xl"
-              >
+              <Heading as="h2" className="text-foreground text-3xl md:text-4xl">
                 {incidentResponse.title}
               </Heading>
 
               <Text className="text-muted-foreground text-base md:text-lg leading-relaxed">
                 {incidentResponse.intro}
               </Text>
-
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-14">
+              {incidentResponse.items.map((item, idx) => (
+                <FadeIn key={idx} delay={idx * 0.08}>
+                  <div className="h-full flex flex-col gap-3 p-5 md:p-7 rounded-2xl bg-background border border-border hover:border-secondary/40 hover:bg-surface-strong transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <span className="shrink-0 w-7 h-7 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center text-secondary-strong font-bold text-xs">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
 
-              {incidentResponse.items.map(
-                (item, idx) => (
-                  <FadeIn
-                    key={idx}
-                    delay={idx * 0.08}
-                  >
-                    <div className="h-full flex flex-col gap-3 p-5 md:p-7 rounded-2xl bg-background border border-border hover:border-secondary/40 hover:bg-surface-strong transition-all duration-300">
-
-                      <div className="flex items-center gap-3">
-
-                        <span className="shrink-0 w-7 h-7 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center text-secondary-strong font-bold text-xs">
-                          {String(
-                            idx + 1,
-                          ).padStart(2, "0")}
-                        </span>
-
-                        <Heading
-                          as="h3"
-                          className="text-foreground text-base md:text-lg font-bold leading-tight"
-                        >
-                          {item.title}
-                        </Heading>
-
-                      </div>
-
-                      <Text className="text-muted-foreground text-sm leading-relaxed">
-                        {item.desc}
-                      </Text>
-
+                      <Heading
+                        as="h3"
+                        className="text-foreground text-base md:text-lg font-bold leading-tight"
+                      >
+                        {item.title}
+                      </Heading>
                     </div>
-                  </FadeIn>
-                ),
-              )}
 
+                    <Text className="text-muted-foreground text-sm leading-relaxed">
+                      {item.desc}
+                    </Text>
+                  </div>
+                </FadeIn>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-
-              <Link
-                href={incidentResponse.ctaHref}
-              >
+              <Link href={incidentResponse.ctaHref}>
                 <Button
                   variant="secondary"
                   className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
@@ -1213,9 +1000,7 @@ export function ServicePage({
               >
                 Voir notre méthodologie complète en 8 étapes
               </Link>
-
             </div>
-
           </Section>
         </>
       )}
@@ -1229,22 +1014,15 @@ export function ServicePage({
           container={false}
           className="relative overflow-hidden bg-surface pb-16 md:pb-24 pt-12 md:pt-16"
         >
-
           <Container className="relative z-10 max-w-3xl mx-auto">
-
             <div className="text-center mb-8 md:mb-10">
-
               <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block mb-2">
                 {expertise.surtitle}
               </span>
 
-              <Heading
-                as="h2"
-                className="text-foreground text-3xl md:text-4xl"
-              >
+              <Heading as="h2" className="text-foreground text-3xl md:text-4xl">
                 {expertise.title}
               </Heading>
-
             </div>
 
             <Text className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 text-center">
@@ -1252,42 +1030,33 @@ export function ServicePage({
             </Text>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {expertise.items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-3 p-5 rounded-2xl bg-background border border-border hover:border-secondary/40 hover:bg-surface-strong transition-all duration-300"
+                >
+                  <span className="shrink-0 w-6 h-6 mt-0.5 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-secondary-strong"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </span>
 
-              {expertise.items.map(
-                (item, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-start gap-3 p-5 rounded-2xl bg-background border border-border hover:border-secondary/40 hover:bg-surface-strong transition-all duration-300"
-                  >
-
-                    <span className="shrink-0 w-6 h-6 mt-0.5 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center">
-
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-secondary-strong"
-                      >
-                        <path d="M20 6 9 17l-5-5" />
-                      </svg>
-
-                    </span>
-
-                    <Text className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                      {item}
-                    </Text>
-
-                  </div>
-                ),
-              )}
-
+                  <Text className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                    {item}
+                  </Text>
+                </div>
+              ))}
             </div>
-
           </Container>
         </Section>
       )}
@@ -1312,53 +1081,34 @@ export function ServicePage({
         container={false}
         className="relative overflow-hidden bg-primary pb-16 md:pb-24 pt-12 md:pt-16"
       >
-
         <SectionFade edge="both" />
 
         <Container className="relative z-10">
-
           <div className="max-w-4xl mx-auto">
-
             <div className="mb-8 md:mb-10 text-center">
-
-              <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block mb-2">
+              <span className="text-secondary-soft text-xs font-mono font-bold uppercase tracking-widest block mb-2">
                 Des réponses à vos interrogations
               </span>
 
-              <Heading
-                as="h2"
-                className="text-white text-3xl md:text-4xl"
-              >
+              <Heading as="h2" className="text-white text-3xl md:text-4xl">
                 Questions Fréquentes
               </Heading>
-
             </div>
 
             <div className="space-y-2 md:space-y-3">
-
               {faq.map((item, index) => {
-
-                const isOpen =
-                  openFaqIndex === index;
+                const isOpen = openFaqIndex === index;
 
                 return (
                   <div
                     key={index}
                     className="bg-white/[0.02] border border-white/10 rounded-lg md:rounded-xl overflow-hidden transition-colors hover:border-white/20"
                   >
-
                     <button
-                      onClick={() =>
-                        setOpenFaqIndex(
-                          isOpen
-                            ? null
-                            : index,
-                        )
-                      }
+                      onClick={() => setOpenFaqIndex(isOpen ? null : index)}
                       className="w-full px-4 md:px-6 py-4 md:py-5 text-left flex justify-between items-center gap-3 md:gap-4 group"
                       aria-expanded={isOpen}
                     >
-
                       <span className="font-bold text-white/90 text-sm md:text-base group-hover:text-white transition-colors">
                         {item.question}
                       </span>
@@ -1375,42 +1125,24 @@ export function ServicePage({
                       >
                         +
                       </span>
-
                     </button>
 
                     <div
-                      className={`
-                        transition-all duration-300
-                        ease-in-out overflow-hidden
-                        ${
-                          isOpen
-                            ? "max-h-[500px] opacity-100"
-                            : "max-h-0 opacity-0"
-                        }
-                      `}
+                      className={`text-secondary-soft font-mono font-black text-lg md:text-xl transition-transform duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}
                     >
-
                       <div className="px-4 md:px-6 pb-4 md:pb-5 pt-0">
-
                         <p className="text-white/70 text-sm md:text-base leading-relaxed border-t border-white/5 pt-3 md:pt-4">
                           {item.answer}
                         </p>
-
                       </div>
-
                     </div>
-
                   </div>
                 );
               })}
-
             </div>
-
           </div>
-
         </Container>
       </Section>
-
     </div>
   );
 }

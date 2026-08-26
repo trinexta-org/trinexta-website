@@ -23,7 +23,7 @@ export function TableOfContents({ headings }: { headings: HeadingTOC[] }) {
 
   return (
     <nav className="space-y-1">
-      <h4 className="text-[10px] font-bold uppercase text-primary/50 tracking-widest px-4 mb-6">
+      <h4 className="text-[10px] font-bold uppercase text-muted-foreground tracking-widest px-4 mb-6">
         Sommaire
       </h4>
       
