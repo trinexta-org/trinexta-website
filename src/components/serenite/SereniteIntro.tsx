@@ -43,11 +43,11 @@ export function SereniteIntro() {
           `}
           style={{ transitionDelay: "100ms" }}
         >
-          <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">OFFRE SÉRÉNITÉ</span>
+          <span className="text-secondary font-mono text-xs tracking-widest uppercase">OFFRE SÉRÉNITÉ</span>
           <Heading as="h2" className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            Votre informatique doit <em className="not-italic text-secondary-strong">soutenir</em> votre activité. 
+            Votre informatique doit <em className="not-italic text-secondary">soutenir</em> votre activité. 
             <br />
-            Pas la <em className="not-italic text-secondary-strong">freiner</em>.
+            Pas la <em className="not-italic text-secondary">freiner</em>.
           </Heading>
 
           <div className="w-10 h-px bg-secondary/50" />

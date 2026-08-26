@@ -83,7 +83,7 @@ function CharteFormattedText({ children }: { children: string }) {
       {parts.map((part, index) => {
         if (part.startsWith("**") && part.endsWith("**")) {
           return (
-            <strong key={index} className="text-secondary-strong font-bold">
+            <strong key={index} className="text-secondary font-bold">
               {part.slice(2, -2)}
             </strong>
           );
@@ -99,7 +99,7 @@ function AnimatedArrow({ direction }: { direction: string }) {
     <div className="relative w-4 h-4 md:w-5 md:h-5 ml-3 flex-shrink-0">
       <ArrowRight className="w-full h-full text-foreground/15 absolute inset-0" />
       <div
-        className={`absolute inset-0 text-secondary-strong ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
+        className={`absolute inset-0 text-secondary ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
       >
         <ArrowRight className="w-full h-full" />
       </div>

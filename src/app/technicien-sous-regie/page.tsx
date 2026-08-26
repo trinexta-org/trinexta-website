@@ -6,6 +6,7 @@ import { officialFaqs } from "@/components/shared/faqData";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { TransitionTitle } from "@/components/TransitionTitle";
+import { WaveDivider } from "@/components/ui/WaveDivider";
 import { TechnicienIntro } from "@/components/technicien-sous-regie/TechnicienIntro";
 import { TechnicienConcret } from "@/components/technicien-sous-regie/TechnicienConcret";
 import { TechnicienSteps } from "@/components/technicien-sous-regie/TechnicienSteps";
@@ -14,7 +15,7 @@ import { TechnicienProfiles } from "@/components/technicien-sous-regie/Technicie
 import { TechnicienPricing } from "@/components/technicien-sous-regie/TechnicienPricing";
 import { TechnicienAssurances } from "@/components/technicien-sous-regie/TechnicienAssurances";
 import { FinalCTA } from "@/components/FinalCTA";
- 
+
 export const metadata: Metadata = {
   title: "Technicien sous régie - Régie & Renfort IT | Trinexta",
   description:
@@ -23,14 +24,14 @@ export const metadata: Metadata = {
     canonical: "/technicien-sous-regie",
   },
 };
- 
+
 export default function TechnicienSousRegiePage() {
   const filteredFaqs = officialFaqs.filter(
     (faq) =>
       faq.tags?.includes("technicien-sous-regie") ||
       faq.tags?.includes("general"),
   );
- 
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -40,32 +41,51 @@ export default function TechnicienSousRegiePage() {
       acceptedAnswer: { "@type": "Answer", text: faq.answer },
     })),
   };
- 
+
   return (
-    <main className="bg-surface min-h-screen relative">
+    <main className="bg-primary min-h-screen relative pb-24">
       <JsonLd data={faqJsonLd} />
- 
-      <OfferHero
-        part1="Technicien"
-        part2="Sous régie"
-        subtitles={[
-          "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
-          "Pas de frais cachés, pas de lourdeur inutile. La collaboration démarre simplement et s'adapte à votre budget réel.",
-          "Une réponse rapide et concrète en Île-de-France : des profils qualifiés présentés dans les meilleurs délais.",
-        ]}
-        imageSrc="/images/nos-offres/hero-impulsion.jpg"
-      />
- 
-      <div className="w-full relative z-10">
-        <div id="technicien" className="space-y-24 pb-24">
-          <Section container={false} className="pt-0 md:pt-0 lg:pt-0">
-            <Container className="max-w-[1400px] space-y-24">
-              <TechnicienIntro />
-              <TechnicienConcret />
-              <TechnicienSteps />
-            </Container>
-          </Section>
- 
+
+      {/* =========================================================
+          BLOC SOMBRE
+          Hero + Intro
+          ========================================================= */}
+      <section className="relative bg-primary">
+        <OfferHero
+          part1="Technicien"
+          part2="Sous régie"
+          subtitles={[
+            "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
+            "Pas de frais cachés, pas de lourdeur inutile. La collaboration démarre simplement et s'adapte à votre budget réel.",
+            "Une réponse rapide et concrète en Île-de-France : des profils qualifiés présentés dans les meilleurs délais.",
+          ]}
+          imageSrc="/images/nos-offres/hero-impulsion.jpg"
+        />
+
+        <div className="w-full relative z-10 pt-12">
+          <div className="space-y-24 pb-24">
+            <Section container={false} className="pt-0">
+              <Container className="max-w-[1400px] space-y-24">
+                <TechnicienIntro />
+              </Container>
+            </Section>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          TRANSITION SOMBRE → CLAIR
+          ========================================================= */}
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
+
+      {/* =========================================================
+          CONCRET + PÉRIMÈTRE D'INTERVENTION (clair)
+          ========================================================= */}
+      <section className="relative bg-surface">
+        <div className="space-y-24 py-12">
+
+          <TechnicienConcret />
+
           <div className="space-y-12">
             <TransitionTitle
               surtitle="Périmètre d'intervention"
@@ -78,7 +98,30 @@ export default function TechnicienSousRegiePage() {
               </Container>
             </Section>
           </div>
- 
+        </div>
+      </section>
+
+      {/* =========================================================
+          TRANSITION CLAIR → SOMBRE
+          ========================================================= */}
+      <WaveDivider from="surface" to="primary" amplitude="low" crossing={2} />
+
+      {/* =========================================================
+          PROCESSUS (sombre)
+          ========================================================= */}
+      <TechnicienSteps />
+
+      {/* =========================================================
+          TRANSITION SOMBRE → CLAIR
+          ========================================================= */}
+      <WaveDivider from="primary" to="surface" amplitude="low" crossing={3} />
+
+      {/* =========================================================
+          PROFILS, TARIFS, ENGAGEMENTS (clair)
+          ========================================================= */}
+      <section className="relative bg-surface">
+        <div className="space-y-24 py-12">
+
           <div className="space-y-12">
             <TransitionTitle
               surtitle="Profils mobilisés"
@@ -91,11 +134,11 @@ export default function TechnicienSousRegiePage() {
               </Container>
             </Section>
           </div>
- 
+
           <Section container={false} className="py-0">
             <TechnicienPricing />
           </Section>
- 
+
           <div className="space-y-12">
             <TransitionTitle
               surtitle="Nos engagements"
@@ -108,9 +151,13 @@ export default function TechnicienSousRegiePage() {
               </Container>
             </Section>
           </div>
+
         </div>
-      </div>
- 
+      </section>
+
+      {/* =========================================================
+          CTA FINAL
+          ========================================================= */}
       <FinalCTA
         line1="Prêt à trouver"
         line2="le technicien qui"
@@ -119,7 +166,10 @@ export default function TechnicienSousRegiePage() {
         ctaLabel="Trouver mon technicien"
         ctaHref="/contact"
       />
- 
+
+      {/* =========================================================
+          FAQ
+          ========================================================= */}
       <FaqSection faqs={filteredFaqs} />
     </main>
   );

@@ -26,10 +26,11 @@ export function BannerCTA({
     primary: "bg-primary text-white",
     secondary: "bg-secondary text-white",
     accent: "bg-muted text-primary border border-border",
-    surface: "bg-surface-strong text-primary border border-secondary/20"
+    surface: "bg-primary text-white border border-white/10"
+  
   }
 
-  const isDark = variant === "primary" || variant === "secondary"
+ const isDark = variant === "primary" || variant === "secondary" || variant === "surface"
 
   const textClass = isDark ? "text-white" : ""
   const descClass = isDark ? "text-white/80" : "text-muted-foreground"

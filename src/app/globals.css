@@ -815,7 +815,9 @@
 .wave-divider__path {
   filter: drop-shadow(0 -5px 11px color-mix(in srgb, var(--secondary) 45%, transparent));
 }
-
+.wave-divider--crossing-1 .wave-divider__path {
+  filter: none;
+}
 @keyframes wave-drift {
   from { transform: translateX(0); }
   to   { transform: translateX(-1200px); }

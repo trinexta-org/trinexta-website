@@ -47,7 +47,7 @@ export function SerenitePillars() {
       {pillars.map((p, i) => (
         <article 
           key={i} 
-          className="group flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.09] bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:border-secondary/35 hover:shadow-xl hover:shadow-secondary/5"
+          className="group flex flex-col h-full overflow-hidden rounded-2xl border border-secondary/20 bg-[#dce7f2] backdrop-blur-sm transition-all duration-300 hover:border-secondary/35 hover:shadow-xl hover:shadow-secondary/5"
         >
           <div className="relative h-48 overflow-hidden">
             <Image
@@ -59,24 +59,24 @@ export function SerenitePillars() {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/40 to-primary" />
 
-            <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-secondary/30">
+            <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-primary shadow-lg shadow-secondary/30">
               {p.num}
             </span>
           </div>
 
           <div className="flex flex-1 flex-col gap-4 px-6 pb-6 pt-4">
-            <h3 className="text-lg font-bold leading-snug text-white">
+            <h3 className="text-xl font-bold leading-snug text-primary">
               {p.title}
             </h3>
             
-            <p className="text-sm text-white/60 leading-relaxed">
+            <p className="text-[15px] text-primary/60 leading-relaxed">
               {p.desc}
             </p>
 
             <div className="flex flex-1 flex-col gap-4 mt-auto pt-4">
               <div className="flex items-center gap-2.5">
                 <div className="h-px flex-1 bg-gradient-to-r from-secondary/40 to-transparent" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-secondary-strong/80 whitespace-nowrap">
+                <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary/75 whitespace-nowrap">
                   Ce qui est inclus
                 </span>
                 <div className="h-px flex-1 bg-gradient-to-l from-secondary/40 to-transparent" />
@@ -84,7 +84,7 @@ export function SerenitePillars() {
 
               <ul className="space-y-2.5">
                 {p.inclusions.map((inc, k) => (
-                  <li key={k} className="flex items-start gap-3 text-xs text-white/80">
+                  <li key={k} className="flex items-start gap-3 text-sm text-primary/80">
                     <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0 mt-1.5 shadow-[0_0_8px_rgba(var(--color-secondary),0.5)]" />
                     <span>{inc}</span>
                   </li>

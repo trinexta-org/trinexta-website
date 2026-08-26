@@ -58,9 +58,9 @@ export function TrinextaMeaning() {
   const visible = isInView || reducedMotion
 
   return (
-    <Section id="signification" className="py-16 md:py-32 bg-primary overflow-hidden relative">
+    <Section id="signification" className="py-16 md:py-32 bg-surface overflow-hidden relative">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <Text variant="lead" className="text-white/90 text-lg md:text-xl leading-relaxed drop-shadow-md">
+        <Text variant="lead" className="text-primary/80 text-lg md:text-xl leading-relaxed">
           Le nom Trinexta n&apos;a pas été choisi au hasard. Il traduit notre vision profonde :
           une synergie parfaite entre l&apos;expertise, l&apos;humain et l&apos;avenir de votre entreprise.
         </Text>
@@ -72,9 +72,9 @@ export function TrinextaMeaning() {
             <div
               key={item.syllable}
               style={getCardStyle(index, visible, reducedMotion)}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] min-h-[420px] flex flex-col p-8 group shadow-2xl"
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-primary min-h-[420px] flex flex-col p-8 group shadow-lg"
             >
-              <div className="absolute inset-0 z-0 mix-blend-screen opacity-40">
+              <div className="absolute inset-0 z-0 opacity-20">
                 <Image
                   src={item.image}
                   alt={`Illustration ${item.syllable} Trinexta`}
@@ -82,19 +82,19 @@ export function TrinextaMeaning() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
               </div>
 
               <div className="relative z-10 flex flex-col h-full items-center text-center">
-                <span className="text-5xl md:text-6xl font-black text-secondary-strong tracking-normal drop-shadow-lg inline-block origin-center w-full">
+                <span className="text-5xl md:text-6xl font-black text-secondary-strong tracking-normal inline-block origin-center w-full">
                   {item.syllable}
                 </span>
 
                 <div className="mt-6 space-y-4 flex-grow flex flex-col justify-start w-full text-left">
-                  <Heading as="h3" className="text-xl md:text-2xl text-white font-bold leading-tight drop-shadow-md">
+                  <Heading as="h3" className="text-xl md:text-2xl text-white font-bold leading-tight">
                     {item.title}
                   </Heading>
-                  <Text className="text-white/80 leading-relaxed text-sm md:text-base font-medium">
+                  <Text className="text-white/70 leading-relaxed text-sm md:text-base font-medium">
                     {item.desc}
                   </Text>
                 </div>

@@ -34,7 +34,7 @@ export function TechnicienConcret() {
   }
 
   return (
-    <section className="py-12 lg:py-24">
+    <section className="py-12 lg:py-24 bg-surface">
       <div className="max-w-[1400px] mx-auto px-6">
         
         <div className="relative rounded-[2.5rem] lg:rounded-[3.5rem] overflow-hidden shadow-2xl bg-primary min-h-[700px] flex items-center">

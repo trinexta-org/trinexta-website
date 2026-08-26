@@ -45,20 +45,20 @@ export function StudioGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {studioServices.map((service, index) => (
-        <Card key={index} className="p-5 bg-white/[0.01] border-white/5 flex flex-col justify-between hover:border-secondary/20 transition-all space-y-4 rounded-xl">
-          <div className="space-y-2.5">
-            <h4 className="text-base font-bold text-white leading-snug">{service.title}</h4>
-            <p className="text-xs text-white/50 leading-relaxed">{service.desc}</p>
-            <ul className="space-y-1.5 pt-2 border-t border-white/5">
+        <Card key={index} className="p-6 bg-surface-strong border-secondary/20 flex flex-col justify-between hover:border-secondary/40 hover:shadow-lg transition-all space-y-4 rounded-xl">
+          <div className="space-y-3">
+            <h4 className="text-lg font-bold text-primary leading-snug">{service.title}</h4>
+            <p className="text-sm text-primary/70 leading-relaxed">{service.desc}</p>
+            <ul className="space-y-2 pt-3 border-t border-secondary/20">
               {service.points.map((pt, k) => (
-                <li key={k} className="text-xs text-white/80 flex items-start gap-2">
+                <li key={k} className="text-sm text-primary/90 flex items-start gap-2">
                   <span className="text-secondary-strong shrink-0 mt-0.5">✓</span>
                   <span>{pt}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="text-[10px] font-bold text-secondary-strong uppercase tracking-wider border-t border-white/5 pt-3">
+          <div className="text-xs font-bold text-secondary-strong uppercase tracking-wider border-t border-secondary/20 pt-3">
             {service.stack}
           </div>
         </Card>

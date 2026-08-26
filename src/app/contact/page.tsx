@@ -9,6 +9,7 @@ import { ContactFaq } from "@/components/contact/ContactFaq";
 import { SectionFade } from "@/components/ui/SectionFade";
 import { ContactMap } from "@/components/contact/ContactMap";
 import { FinalCTA } from "@/components/FinalCTA";
+import { WaveDivider } from "@/components/ui/WaveDivider";
 import { contactFaqs } from "@/components/contact/contactFaqData";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
@@ -22,47 +23,73 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Contact — Trinexta · Infogérance & Support informatique",
-    description: "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+    description:
+      "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
     url: "/contact",
     type: "website",
-    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+    images: [
+      {
+        url: "/images/og-default.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact — Trinexta · Infogérance & Support informatique",
-    description: "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+    description:
+      "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
     images: ["/images/og-default.png"],
   },
 };
 
 export default function ContactPage() {
   const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": contactFaqs.map((faq) => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer,
-        },
-      })),
-    }
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: contactFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
   return (
     <main className="bg-primary min-h-screen relative">
+      {/* SEO */}
       <JsonLd data={jsonLd} />
-      <BreadcrumbJsonLd 
+
+      <BreadcrumbJsonLd
         items={[
-          { name: "Accueil", url: "/" },
-          { name: "Contact", url: "/contact" }
-        ]} 
+          {
+            name: "Accueil",
+            url: "/",
+          },
+          {
+            name: "Contact",
+            url: "/contact",
+          },
+        ]}
       />
 
+      {/* HERO */}
       <ContactHero />
-      
+
+      {/* COORDONNÉES */}
       <ContactCards />
 
+      {/* VAGUE APRÈS LES CONTACT CARDS */}
+      <WaveDivider
+        from="primary"
+        to="surface"
+        amplitude="low"
+      />
+
+      {/* FORMULAIRE */}
       <TransitionTitle
         surtitle="Un projet en tête ?"
         line1="Laissez-nous"
@@ -70,14 +97,10 @@ export default function ContactPage() {
       />
 
       <ContactFormSection />
-      
-      <Section container={false} className="relative overflow-hidden bg-primary pb-32 pt-24">
-        <SectionFade edge="both" />
-        <Container className="relative z-10">
-          <ContactFaq />
-        </Container>
-      </Section>
 
+     
+
+      {/* CARTE */}
       <TransitionTitle
         surtitle="Rencontrons-nous"
         line1="Où nous"
@@ -86,6 +109,7 @@ export default function ContactPage() {
 
       <ContactMap />
 
+      {/* CTA FINAL */}
       <FinalCTA
         line1="Vous aider à"
         line2="surmonter vos"
@@ -94,6 +118,17 @@ export default function ContactPage() {
         ctaLabel="En savoir plus"
         ctaHref="/nos-offres"
       />
+       {/* FAQ */}
+      <Section
+        container={false}
+        className="relative overflow-hidden bg-primary pb-32 pt-24"
+      >
+        <SectionFade edge="both" />
+
+        <Container className="relative z-10">
+          <ContactFaq />
+        </Container>
+      </Section>
     </main>
   );
 }

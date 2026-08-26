@@ -16,35 +16,35 @@ interface PricingCardProps {
 
 export function SerenitePricingCard({ name, price, target, description, features, isFeatured, slug }: PricingCardProps) {
   return (
-    <Card className={`flex flex-col h-full p-6 bg-white/[0.03] backdrop-blur-sm border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-white/10'}`}>
+    <Card className={`flex flex-col h-full p-6 bg-[#dce7f2] border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-white/10'}`}>
       
       <div className="min-h-[32px] flex items-center">
         {isFeatured && <Badge className="bg-secondary text-primary border-none w-fit text-[11px] font-bold">Recommandé</Badge>}
       </div>
       
       <div className="min-h-[64px] flex items-center mb-2">
-        <Heading as="h3" className="text-2xl font-bold text-white leading-tight">{name}</Heading>
+        <Heading as="h3" className="text-3xl font-bold text-primary leading-tight">{name}</Heading>
       </div>
       
       <div className="min-h-[44px] flex items-baseline gap-1 mb-4">
-        <span className="text-3xl font-black text-white tracking-normal">{price}</span>
-        {price === "79€" && <span className="text-white/70 text-sm font-medium"> / mois</span>}
+        <span className="text-4xl font-black text-primary tracking-normal">{price}</span>
+        {price === "79€" && <span className="text-primary/70 text-base font-medium"> / mois</span>}
       </div>
       
       <div className="min-h-[36px] flex items-center mb-3">
-        <Text className="text-xs font-bold text-secondary-strong uppercase tracking-wider">{target}</Text>
+        <Text className="text-sm font-bold text-secondary uppercase tracking-wider">{target}</Text>
       </div>
 
       <div className="min-h-[76px] flex items-start mb-6">
-        <p className="text-sm text-white/80 leading-relaxed text-balance">{description}</p>
+        <p className="text-base text-primary/80 leading-relaxed text-balance">{description}</p>
       </div>
       
       <div className="w-full h-px bg-white/10 mb-6" />
       
       <ul className="flex-grow space-y-4 mb-8">
         {features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-3 text-sm text-white/80 leading-snug">
-            <span className="text-secondary-strong shrink-0 mt-0.5">✓</span>
+          <li key={i} className="flex items-start gap-3 text-base text-primary/80 leading-snug">
+            <span className="text-secondary shrink-0 mt-0.5">✓</span>
             <span>{feature}</span>
           </li>
         ))}
@@ -57,7 +57,7 @@ export function SerenitePricingCard({ name, price, target, description, features
             className={`w-full font-bold transition-all py-3 ${
               isFeatured 
                 ? "bg-secondary text-primary hover:bg-secondary/90 border-none shadow-lg shadow-secondary/20" 
-                : "border-white/30 text-white hover:bg-white/10 hover:border-white"
+                : "text-primary/60 hover:text-secondary"
             }`}
           >
             {price === "Sur devis" || price.includes("TJM") ? "Demander un devis" : "Recevoir un devis"}
@@ -66,7 +66,7 @@ export function SerenitePricingCard({ name, price, target, description, features
         {slug && (
           <Link 
             href={`/nos-offres/${slug}`} 
-            className="text-center text-xs text-white/60 hover:text-secondary-strong font-medium transition-colors underline underline-offset-4"
+            className="text-center text-xs text-primary/60 hover:text-secondary font-medium transition-colors underline underline-offset-4"
           >
             Voir le détail de l&apos;offre
           </Link>

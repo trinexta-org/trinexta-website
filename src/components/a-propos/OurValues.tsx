@@ -109,18 +109,18 @@ export function OurValues() {
         }, PAUSE_AFTER_CLICK) as unknown as ReturnType<typeof setInterval>
     }
 
-    return (
-        <Section id="valeurs-approfondies" className="py-16 md:py-24 bg-primary relative overflow-hidden">
+       return (
+        <Section id="valeurs-approfondies" className="py-16 md:py-24 bg-surface relative overflow-hidden">
             <Container>
 
-                <div className="bg-white/[0.02] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+                <div className="bg-primary border border-secondary/20 rounded-3xl overflow-hidden shadow-xl flex flex-col">
 
-                    <div className="p-4 md:p-6 bg-black/30 border-b border-white/10">
-                        <Text className="text-white/50 text-xs md:text-sm uppercase tracking-widest font-bold mb-4 ml-2">
+                    <div className="p-4 md:p-6 bg-white/5 border-b border-white/10">
+                        <Text className="text-white/60 text-xs md:text-sm uppercase tracking-widest font-bold mb-4 ml-2">
                             Découvrez nos engagements
                         </Text>
 
-                        <div className="h-0.5 bg-white/10 rounded-full mb-4 overflow-hidden">
+                        <div className="h-0.5 bg-white/15 rounded-full mb-4 overflow-hidden">
                             <div
                                 key={safeActive}
                                 className="h-full bg-secondary rounded-full animate-progress-fill"
@@ -130,7 +130,7 @@ export function OurValues() {
 
                         <div
                             ref={scrollRef}
-                            className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
+                            className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-secondary/30 scrollbar-track-transparent"
                         >
                             {values.map((val, idx) => (
                                 <button
@@ -138,7 +138,7 @@ export function OurValues() {
                                     onClick={() => handleClick(idx)}
                                     className={`group relative shrink-0 w-[160px] md:w-[200px] h-[90px] md:h-[110px] rounded-xl overflow-hidden transition-all duration-300 ${safeActive === idx
                                         ? "ring-2 ring-secondary opacity-100 scale-95"
-                                        : "border border-white/10 opacity-60 hover:opacity-100 hover:border-white/30"
+                                        : "border border-white/10 opacity-70 hover:opacity-100 hover:border-white/30"
                                         }`}
                                 >
                                     <Image
@@ -178,8 +178,8 @@ export function OurValues() {
                             </div>
                         </div>
 
-                        <div className="p-6 md:p-12 min-h-[180px] bg-primary/30">
-                            <Text className="text-lg md:text-xl text-white/90 leading-relaxed max-w-4xl font-medium">
+                        <div className="p-6 md:p-12 min-h-[180px] bg-primary">
+                            <Text className="text-lg md:text-xl text-white/80 leading-relaxed max-w-4xl font-medium">
                                 {values[displayActive].desc}
                             </Text>
                         </div>

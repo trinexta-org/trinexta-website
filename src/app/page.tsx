@@ -138,10 +138,6 @@ export default function Home() {
         line2="de nous"
       />
       <CustomerReviews/>
-
-      {/* Dernière traversée : la marge gauche tient la fin de page. */}
-      <WaveDivider from="surface" to="primary" amplitude="low" crossing={4} />
-
       <FinalCTA />
       <NewsletterCTA/>
 

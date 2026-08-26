@@ -38,43 +38,43 @@ export function TechnicienPillars() {
   }, [])
 
   return (
-    <div ref={ref} className="relative py-24 overflow-hidden bg-surface">
+    <div ref={ref} className="relative pt-12 pb-0 overflow-hidden bg-surface">
       <div
-  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.14] pointer-events-none text-primary"
-  style={{ filter: "drop-shadow(0 0 50px var(--secondary))" }}
->
-  <div className="animate-[spin_30s_linear_infinite]">
-    <TrinextaGear size={800} />
-  </div>
-</div>
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.14] pointer-events-none text-primary"
+        style={{ filter: "drop-shadow(0 0 50px var(--secondary))" }}
+      >
+        <div className="animate-[spin_30s_linear_infinite]">
+          <TrinextaGear size={800} />
+        </div>
+      </div>
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto pb-12">
         {pillars.map((pillar, i) => (
           <div
             key={i}
             className={`
-              group relative flex flex-col p-8 rounded-3xl border border-border bg-background 
-              hover:bg-surface-strong hover:border-secondary/40 transition-all duration-500 ease-out
+              group relative flex flex-col p-8 rounded-3xl border border-border bg-surface-strong
+              hover:border-secondary/40 transition-all duration-500 ease-out
               ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
               ${i === 2 ? "md:col-span-2" : ""} 
             `}
             style={{ transitionDelay: `${100 + i * 150}ms` }}
           >
             <div className="mb-6">
-              <h4 className="font-bold text-2xl text-foreground mb-2 group-hover:text-secondary-strong transition-colors">
+              <h4 className="font-bold text-3xl text-foreground mb-2 group-hover:text-secondary-strong transition-colors">
                 {pillar.title}
               </h4>
-              <span className="text-secondary-strong text-sm font-medium uppercase tracking-wider">
+              <span className="text-secondary-strong text-base font-medium uppercase tracking-wider">
                 {pillar.subtitle}
               </span>
             </div>
 
-            <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8 flex-grow">
               {pillar.desc}
             </p>
 
             <div className="pt-6 border-t border-border">
-              <p className="text-muted-foreground/70 text-xs leading-relaxed italic">
+              <p className="text-muted-foreground/70 text-sm leading-relaxed italic">
                 {pillar.detail}
               </p>
             </div>

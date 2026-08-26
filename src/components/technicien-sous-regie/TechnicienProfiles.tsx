@@ -41,7 +41,7 @@ export function TechnicienProfiles() {
 
 function ChainLink({ role, spec, image }: { role: string; spec: string; image: string }) {
     return (
-        <div className="w-72 shrink-0 rounded-2xl border border-white/10 bg-primary/90 backdrop-blur-sm overflow-hidden shadow-xl">
+        <div className="w-72 shrink-0 rounded-2xl border border-border bg-surface-strong overflow-hidden shadow-xl">
             <div className="h-40 w-full relative">
                 <Image
                     src={image}
@@ -51,7 +51,7 @@ function ChainLink({ role, spec, image }: { role: string; spec: string; image: s
                 />
             </div>
             <div className="p-6">
-                <h4 className="font-bold text-white text-lg mb-1">{role}</h4>
+                <h4 className="font-bold text-foreground text-lg mb-1">{role}</h4>
                 <p className="text-secondary-strong text-sm font-medium">{spec}</p>
             </div>
         </div>

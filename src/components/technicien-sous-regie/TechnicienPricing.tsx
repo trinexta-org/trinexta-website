@@ -8,11 +8,11 @@ export function TechnicienPricing() {
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
           <FadeIn direction="right" className="w-full lg:w-1/2">
-            <h2 className="text-[36px] md:text-[44px] text-foreground mb-6 leading-tight font-black">
+            <h2 className="text-[42px] md:text-[52px] text-foreground mb-6 leading-tight font-black">
               Notre modèle : la transparence <br />
               <em className="italic font-light font-serif text-secondary-strong">absolue</em>
             </h2>
-            <p className="text-muted-foreground text-[16px] leading-[1.8] max-w-lg">
+             <p className="text-muted-foreground text-[19px] leading-[1.8] max-w-lg">
               Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d&apos;intégration.
             </p>
           </FadeIn>

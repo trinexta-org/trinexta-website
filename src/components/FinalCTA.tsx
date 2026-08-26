@@ -10,7 +10,7 @@ import { Heading, Text } from "@/components/ui/Typography";
 import { pushGtmEvent } from "@/lib/gtm";
 import { useInView } from "@/hooks/useInView";
 import { SectionBackground } from "@/components/ui/SectionBackground"
-
+import { WaveDivider } from "@/components/ui/WaveDivider"
 function EnhancedRibbonBackground() {
   const [ref, isInView] = useInView<HTMLDivElement>();
 
@@ -133,6 +133,8 @@ export function FinalCTA({
   ctaHref = "/contact",
 }: FinalCTAProps) {
   return (
+     <>
+      <WaveDivider from="surface" to="primary" amplitude="ample" />
     <Section
       container={false}
       className="relative bg-primary overflow-hidden py-24 md:py-48"
@@ -185,5 +187,6 @@ export function FinalCTA({
         </div>
       </Container>
     </Section>
+    </>
   );
 }
