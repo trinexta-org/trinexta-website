@@ -27,7 +27,7 @@ export const confidentialiteData: LegalData = {
     {
       title: "Article 2 - Données collectées",
       content: (
-        <div className="space-y-4 text-sm text-white/70">
+        <div className="space-y-4 text-sm text-primary/70">
           <p>Selon les services utilisés, TRINEXTA peut collecter les catégories de données suivantes :</p>
           {[
             { cat: "Données d'identification", items: ["Nom, prénom, fonction", "Société, numéro SIRET, numéro de TVA intracommunautaire"] },
@@ -37,7 +37,7 @@ export const confidentialiteData: LegalData = {
             { cat: "Données de navigation", items: ["Pages consultées, durée de visite, sources de trafic, interactions avec le site"] },
           ].map(({ cat, items }) => (
             <div key={cat}>
-              <p className="text-white font-semibold text-xs uppercase tracking-wider mb-1">{cat}</p>
+              <p className="text-primary font-semibold text-xs uppercase tracking-wider mb-1">{cat}</p>
               <ul className="space-y-1">
                 {items.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
@@ -64,9 +64,9 @@ export const confidentialiteData: LegalData = {
             ["Amélioration des services", "analyse statistique, optimisation de l'expérience utilisateur, amélioration des performances."],
             ["Communication", "informations commerciales, actualités, invitations professionnelles."],
           ].map(([label, desc], i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
+            <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
               <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
-              <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
+              <span><span className="text-primary font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
         </ul>
@@ -82,9 +82,9 @@ export const confidentialiteData: LegalData = {
             ["Intérêt légitime", "pour assurer la sécurité, améliorer les services et gérer la relation client."],
             ["Consentement", "pour certaines opérations marketing ou l'utilisation de cookies non essentiels."],
           ].map(([label, desc], i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
+            <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
               <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
-              <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
+              <span><span className="text-primary font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
         </ul>
@@ -120,9 +120,9 @@ export const confidentialiteData: LegalData = {
             ["Estimations en ligne anonymes", "12 mois maximum, puis suppression automatique."],
             ["Cookies", "13 mois maximum."],
           ].map(([label, desc], i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
+            <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
               <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
-              <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
+              <span><span className="text-primary font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
         </ul>
@@ -147,9 +147,9 @@ export const confidentialiteData: LegalData = {
             ["Droit à la portabilité", "recevoir vos données dans un format exploitable."],
             ["Droit de retrait du consentement", "à tout moment lorsque le traitement repose sur celui-ci."],
           ].map(([label, desc], i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
+            <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
               <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
-              <span><span className="text-white font-semibold">{label} :</span> {desc}</span>
+              <span><span className="text-primary font-semibold">{label} :</span> {desc}</span>
             </li>
           ))}
         </ul>

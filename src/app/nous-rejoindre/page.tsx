@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/Container"
 import { FinalCTA } from "@/components/FinalCTA"
 import { Heading, Text } from "@/components/ui/Typography"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
-
+import { WaveDivider } from "@/components/ui/WaveDivider"
 export const metadata: Metadata = {
   title: "Nous rejoindre",
   description: "Rejoignez une équipe d'experts IT. Découvrez pourquoi travailler chez TRINEXTA et consultez nos offres sur Talentero.",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function NousRejoindrePage() {
   return (
-    <main className="bg-primary min-h-screen relative text-white">
+    <main className="bg-surface min-h-screen relative text-primary">
       <BreadcrumbJsonLd 
         items={[
           { name: "Accueil", url: "/" },
@@ -40,7 +40,7 @@ export default function NousRejoindrePage() {
         title="Nous rejoindre" 
         imageSrc="/images/nous-rejoindre/heroNousRejoindre.webp" 
       />
-
+      <WaveDivider from="primary" to="surface" amplitude="ample" />
       <Container className="py-20 md:py-32">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 items-center">
           
@@ -48,11 +48,11 @@ export default function NousRejoindrePage() {
             <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">
               Pourquoi nous rejoindre
             </span>
-            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight text-white">
+            <Heading as="h2" className="text-3xl md:text-5xl font-black leading-tight text-primary">
               Votre expertise mérite le bon environnement
             </Heading>
             
-            <div className="space-y-6 text-white/80 text-base md:text-lg leading-relaxed">
+            <div className="space-y-6 text-primary/70 text-base md:text-lg leading-relaxed">
               <Text>
                 Vous cherchez un cadre où votre maîtrise technique fait la différence. Chez TRINEXTA, nous recrutons des techniciens et ingénieurs passionnés par le support et l&apos;infrastructure. 
               </Text>
@@ -73,7 +73,7 @@ export default function NousRejoindrePage() {
               sizes="(max-width: 1280px) 100vw, 50vw"
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent pointer-events-none" />
           </div>
 
         </div>

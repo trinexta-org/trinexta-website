@@ -3,6 +3,7 @@ import { Container } from "@/components/layout/Container"
 import { ViewportHero } from "@/components/layout/ViewportHero"
 import { Heading } from "@/components/ui/Typography"
 
+
 interface PageHeroProps {
   title: string
   imageSrc: string

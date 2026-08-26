@@ -33,7 +33,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 3 - Catégories de cookies utilisés",
       content: (
-        <div className="space-y-5 text-sm text-white/70">
+        <div className="space-y-5 text-sm text-primary/70">
           {[
             {
               cat: "3.1 Cookies strictement nécessaires",
@@ -57,7 +57,7 @@ export const cookiesData: LegalData = {
             },
           ].map(({ cat, desc }) => (
             <div key={cat}>
-              <p className="text-white font-semibold mb-1">{cat}</p>
+              <p className="text-primary font-semibold mb-1">{cat}</p>
               <p>{desc}</p>
             </div>
           ))}
@@ -79,7 +79,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 6 - Gestion des cookies",
       content: (
-        <div className="space-y-3 text-sm text-white/70">
+        <div className="space-y-3 text-sm text-primary/70">
           <p>Vous pouvez à tout moment supprimer les cookies, bloquer certains cookies ou modifier vos préférences. Ces paramètres peuvent être configurés directement depuis votre navigateur :</p>
           <ul className="space-y-1.5">
             {[

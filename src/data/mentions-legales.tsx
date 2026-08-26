@@ -88,7 +88,7 @@ export const mentionsLegalesData: LegalData = {
             "Accompagnement au référencement naturel (SEO)",
             "Accompagnement à la visibilité sur les moteurs conversationnels (GEO)",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
+            <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
               <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span>{item}</span>
             </li>
