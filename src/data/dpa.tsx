@@ -39,8 +39,13 @@ export const dpaData: LegalData = {
             "Développement applicatif",
             "Portails clients et solutions métiers hébergées",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0 mt-0.5">
+                -
+              </span>
               <span>{item}</span>
             </li>
           ))}
@@ -71,8 +76,13 @@ export const dpaData: LegalData = {
             "Assister le Client dans le respect du RGPD",
             "Notifier les violations de données lorsqu'elles sont constatées",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0 mt-0.5">
+                -
+              </span>
               <span>{item}</span>
             </li>
           ))}
@@ -93,8 +103,13 @@ export const dpaData: LegalData = {
             "Protection contre les intrusions",
             "Mises à jour de sécurité",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0 mt-0.5">
+                -
+              </span>
               <span>{item}</span>
             </li>
           ))}

@@ -17,10 +17,36 @@ export const planReponseIncidentsData: LegalData = {
     {
       title: "Signaler un incident",
       content: (
-        <div className="space-y-2 text-sm text-white/70">
-          <p><span className="text-white font-semibold">Téléphone :</span> <a href="tel:0978250746" className="text-secondary-strong hover:underline transition-colors">09 78 25 07 46</a></p>
-          <p><span className="text-white font-semibold">Support :</span> <a href="mailto:support@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">support@trinexta.fr</a></p>
-          <p><span className="text-white font-semibold">Contact :</span> <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></p>
+        <div className="space-y-2 text-sm text-primary/70">
+          <p>
+            <span className="text-primary font-semibold">Téléphone :</span>{" "}
+            <a
+              href="tel:0978250746"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              09 78 25 07 46
+            </a>
+          </p>
+
+          <p>
+            <span className="text-primary font-semibold">Support :</span>{" "}
+            <a
+              href="mailto:support@trinexta.fr"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              support@trinexta.fr
+            </a>
+          </p>
+
+          <p>
+            <span className="text-primary font-semibold">Contact :</span>{" "}
+            <a
+              href="mailto:contact@trinexta.fr"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              contact@trinexta.fr
+            </a>
+          </p>
         </div>
       ),
     },
@@ -35,27 +61,45 @@ export const planReponseIncidentsData: LegalData = {
       title: "Étape 2 - Qualification",
       content: (
         <div className="space-y-4">
-          <p className="text-sm text-white/70">Les équipes TRINEXTA évaluent la nature de l&apos;incident, les systèmes concernés, les données concernées, les risques métier et le niveau de criticité.</p>
+          <p className="text-sm text-primary/70">
+            Les équipes TRINEXTA évaluent la nature de l&apos;incident, les
+            systèmes concernés, les données concernées, les risques métier et
+            le niveau de criticité.
+          </p>
+
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse min-w-[360px]">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-left py-2 pr-6 text-white font-bold text-xs uppercase tracking-wider">Criticité</th>
-                  <th className="text-left py-2 text-white font-bold text-xs uppercase tracking-wider">Caractérisation</th>
+                <tr className="border-b border-primary/15">
+                  <th className="text-left py-2 pr-6 text-primary font-bold text-xs uppercase tracking-wider">
+                    Criticité
+                  </th>
+                  <th className="text-left py-2 text-primary font-bold text-xs uppercase tracking-wider">
+                    Caractérisation
+                  </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+
+              <tbody className="divide-y divide-primary/10">
                 {[
                   ["Faible", "Incident isolé, aucun impact majeur."],
                   ["Moyenne", "Plusieurs utilisateurs impactés."],
                   ["Élevée", "Service métier dégradé."],
-                  ["Critique", "Arrêt de production, ransomware, fuite de données, compromission généralisée."],
+                  [
+                    "Critique",
+                    "Arrêt de production, ransomware, fuite de données, compromission généralisée.",
+                  ],
                 ].map(([crit, desc]) => (
                   <tr key={crit}>
                     <td className="py-3 pr-6 align-top">
-                      <span className="text-secondary-strong font-bold text-xs">{crit}</span>
+                      <span className="text-secondary-strong font-bold text-xs">
+                        {crit}
+                      </span>
                     </td>
-                    <td className="py-3 text-white/70 text-sm align-top">{desc}</td>
+
+                    <td className="py-3 text-primary/70 text-sm align-top">
+                      {desc}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -73,8 +117,13 @@ export const planReponseIncidentsData: LegalData = {
     {
       title: "Étape 4 - Préservation de la preuve",
       content: (
-        <div className="space-y-3 text-sm text-white/70">
-          <p>Avant toute manipulation d&apos;un disque ou d&apos;une machine virtuelle, TRINEXTA garantit l&apos;intégrité et la recevabilité des preuves :</p>
+        <div className="space-y-3 text-sm text-primary/70">
+          <p>
+            Avant toute manipulation d&apos;un disque ou d&apos;une machine
+            virtuelle, TRINEXTA garantit l&apos;intégrité et la recevabilité
+            des preuves :
+          </p>
+
           <ul className="space-y-2">
             {[
               "Aucune action directe sur le système d'origine : nous réalisons d'abord une copie bit à bit (image forensique) du disque, ou un snapshot pour les environnements virtualisés.",
@@ -84,7 +133,9 @@ export const planReponseIncidentsData: LegalData = {
               "Chaque opération est horodatée et journalisée, et une chaîne de conservation (chain of custody) est documentée pour assurer la recevabilité des éléments.",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
+                <span className="text-secondary-strong shrink-0 mt-0.5">
+                  -
+                </span>
                 <span>{item}</span>
               </li>
             ))}
@@ -119,31 +170,91 @@ export const planReponseIncidentsData: LegalData = {
     {
       title: "Obligations réglementaires",
       content: (
-        <div className="space-y-4 text-sm text-white/70">
+        <div className="space-y-4 text-sm text-primary/70">
           <div>
-            <p className="text-white font-semibold mb-1">Déclarer l&apos;incident à la CNIL</p>
-            <p className="mb-1">En cas de violation de données personnelles (sous 72 heures lorsque cela s&apos;applique).</p>
-            <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">cnil.fr</a>
+            <p className="text-primary font-semibold mb-1">
+              Déclarer l&apos;incident à la CNIL
+            </p>
+            <p className="mb-1">
+              En cas de violation de données personnelles (sous 72 heures
+              lorsque cela s&apos;applique).
+            </p>
+            <a
+              href="https://www.cnil.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              cnil.fr
+            </a>
           </div>
+
           <div>
-            <p className="text-white font-semibold mb-1">Consulter l&apos;ANSSI</p>
-            <p className="mb-1">Recommandations et guides de sécurité.</p>
-            <a href="https://www.ssi.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">ssi.gouv.fr</a>
+            <p className="text-primary font-semibold mb-1">
+              Consulter l&apos;ANSSI
+            </p>
+            <p className="mb-1">
+              Recommandations et guides de sécurité.
+            </p>
+            <a
+              href="https://www.ssi.gouv.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              ssi.gouv.fr
+            </a>
           </div>
+
           <div>
-            <p className="text-white font-semibold mb-1">Consulter le CERT-FR</p>
-            <p className="mb-1">Veille, alertes et réponse aux attaques.</p>
-            <a href="https://www.cert.ssi.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">cert.ssi.gouv.fr</a>
+            <p className="text-primary font-semibold mb-1">
+              Consulter le CERT-FR
+            </p>
+            <p className="mb-1">
+              Veille, alertes et réponse aux attaques.
+            </p>
+            <a
+              href="https://www.cert.ssi.gouv.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              cert.ssi.gouv.fr
+            </a>
           </div>
+
           <div>
-            <p className="text-white font-semibold mb-1">Signaler via PHAROS</p>
-            <p className="mb-1">Signalement des contenus frauduleux ou illicites.</p>
-            <a href="https://www.internet-signalement.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">internet-signalement.gouv.fr</a>
+            <p className="text-primary font-semibold mb-1">
+              Signaler via PHAROS
+            </p>
+            <p className="mb-1">
+              Signalement des contenus frauduleux ou illicites.
+            </p>
+            <a
+              href="https://www.internet-signalement.gouv.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              internet-signalement.gouv.fr
+            </a>
           </div>
+
           <div>
-            <p className="text-white font-semibold mb-1">Cybermalveillance.gouv.fr</p>
-            <p className="mb-1">Assistance nationale aux victimes.</p>
-            <a href="https://www.cybermalveillance.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">cybermalveillance.gouv.fr</a>
+            <p className="text-primary font-semibold mb-1">
+              Cybermalveillance.gouv.fr
+            </p>
+            <p className="mb-1">
+              Assistance nationale aux victimes.
+            </p>
+            <a
+              href="https://www.cybermalveillance.gouv.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              cybermalveillance.gouv.fr
+            </a>
           </div>
         </div>
       ),
@@ -164,8 +275,13 @@ export const planReponseIncidentsData: LegalData = {
             "Réponse aux incidents",
             "Sensibilisation cybersécurité",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0 mt-0.5">
+                -
+              </span>
               <span>{item}</span>
             </li>
           ))}
@@ -176,16 +292,36 @@ export const planReponseIncidentsData: LegalData = {
       title: "Zone d'intervention",
       content: (
         <div className="space-y-3">
-          <p className="text-sm text-white/70">TRINEXTA accompagne les organisations situées en Île-de-France :</p>
+          <p className="text-sm text-primary/70">
+            TRINEXTA accompagne les organisations situées en Île-de-France :
+          </p>
+
           <ul className="space-y-1.5">
-            {["Essonne (91)", "Paris (75)", "Hauts-de-Seine (92)", "Seine-Saint-Denis (93)", "Val-de-Marne (94)", "Yvelines (78)", "Val-d'Oise (95)", "Seine-et-Marne (77)"].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
+            {[
+              "Essonne (91)",
+              "Paris (75)",
+              "Hauts-de-Seine (92)",
+              "Seine-Saint-Denis (93)",
+              "Val-de-Marne (94)",
+              "Yvelines (78)",
+              "Val-d'Oise (95)",
+              "Seine-et-Marne (77)",
+            ].map((item, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-2 text-sm text-primary/70"
+              >
+                <span className="text-secondary-strong shrink-0 mt-0.5">
+                  -
+                </span>
                 <span>{item}</span>
               </li>
             ))}
           </ul>
-          <p className="text-sm text-white/70">Interventions sur site et à distance selon le niveau d&apos;urgence.</p>
+
+          <p className="text-sm text-primary/70">
+            Interventions sur site et à distance selon le niveau d&apos;urgence.
+          </p>
         </div>
       ),
     },

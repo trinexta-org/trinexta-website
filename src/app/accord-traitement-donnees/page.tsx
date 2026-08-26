@@ -2,28 +2,33 @@ import type { Metadata } from "next"
 import { Section } from "@/components/layout/Section"
 import { LegalContent } from "@/components/legal/LegalContent"
 import { FinalCTA } from "@/components/FinalCTA"
-import { dpaData } from "@/data/dpa"
+import { dpaData as accordTraitementDonneesData } from "@/data/dpa"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: `${dpaData.hero.title}`,
-  description: "Accord de traitement des données personnelles (DPA) - cadre contractuel RGPD encadrant les traitements réalisés par TRINEXTA pour le compte de ses clients.",
+  title: accordTraitementDonneesData.hero.title,
+  description:
+    "Accord de traitement des données de TRINEXTA conformément au RGPD.",
   alternates: {
     canonical: "/accord-traitement-donnees",
-  }
+  },
 }
 
 export default function AccordTraitementDonneesPage() {
   return (
-    <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      <BreadcrumbJsonLd 
+    <main className="min-h-screen bg-[#EEF4FB]">
+      <BreadcrumbJsonLd
         items={[
           { name: "Accueil", url: "/" },
-          { name: "accord-traitement-donnees", url: "/accord-traitement-donnees" }
-        ]} 
+          {
+            name: "Accord de traitement des données",
+            url: "/accord-traitement-donnees",
+          },
+        ]}
       />
-      <Section className="bg-primary pt-24 pb-24">
-        <LegalContent data={dpaData} />
+
+      <Section className="bg-[#EEF4FB] pt-24 pb-24">
+        <LegalContent data={accordTraitementDonneesData} />
       </Section>
 
       <FinalCTA

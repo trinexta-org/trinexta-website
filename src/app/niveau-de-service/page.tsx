@@ -15,14 +15,15 @@ export const metadata: Metadata = {
 
 export default function NiveauDeServicePage() {
   return (
-    <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      <BreadcrumbJsonLd 
+    <main className="min-h-screen bg-[#EEF4FB]">
+      <BreadcrumbJsonLd
         items={[
           { name: "Accueil", url: "/" },
-          { name: "niveau-de-service", url: "/niveau-de-service" }
-        ]} 
+          { name: "Niveaux de service", url: "/niveau-de-service" },
+        ]}
       />
-      <Section className="bg-primary pt-24 pb-24">
+
+      <Section className="bg-[#EEF4FB] pt-24 pb-24">
         <LegalContent data={slaData} />
       </Section>
 

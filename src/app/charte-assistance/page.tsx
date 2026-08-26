@@ -6,8 +6,9 @@ import { charteAssistanceData } from "@/data/charte-assistance"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: `${charteAssistanceData.hero.title}`,
-  description: "Assistance cybersécurité TRINEXTA - procédures d'urgence, conseils pratiques et ressources officielles en cas d'incident de sécurité informatique.",
+  title: charteAssistanceData.hero.title,
+  description:
+    "Assistance cybersécurité TRINEXTA - procédures d'urgence, conseils pratiques et ressources officielles en cas d'incident de sécurité informatique.",
   alternates: {
     canonical: "/charte-assistance",
   },
@@ -15,14 +16,18 @@ export const metadata: Metadata = {
 
 export default function CharteAssistancePage() {
   return (
-    <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      <BreadcrumbJsonLd 
+    <main className="min-h-screen bg-[#EEF4FB]">
+      <BreadcrumbJsonLd
         items={[
-        { name: "Accueil", url: "/" },
-        { name: "charte-assistance", url: "/charte-assistance" }
-        ]} 
+          { name: "Accueil", url: "/" },
+          {
+            name: "Charte assistance",
+            url: "/charte-assistance",
+          },
+        ]}
       />
-      <Section className="bg-primary pt-24 pb-24">
+
+      <Section className="bg-[#EEF4FB] pt-24 pb-24">
         <LegalContent data={charteAssistanceData} />
       </Section>
 

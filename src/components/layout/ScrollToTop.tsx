@@ -24,7 +24,7 @@ export function ScrollToTop() {
       onClick={scrollToTop}
       aria-label="Retour en haut"
       className={`fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full 
-        bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-xl
+        bg-[#0a2333] border border-white/20 text-white shadow-xl
         transition-all duration-300 hover:scale-110 hover:bg-secondary hover:text-white
         ${isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"}`}
     >
