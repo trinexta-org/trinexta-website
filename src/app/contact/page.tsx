@@ -22,9 +22,8 @@ export const metadata: Metadata = {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact — Trinexta · Infogérance & Support informatique",
-    description:
-      "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+    title: "Contact - Trinexta · Infogérance & Support informatique",
+    description: "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
     url: "/contact",
     type: "website",
     images: [
@@ -37,9 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact — Trinexta · Infogérance & Support informatique",
-    description:
-      "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+    title: "Contact - Trinexta · Infogérance & Support informatique",
+    description: "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
     images: ["/images/og-default.png"],
   },
 };

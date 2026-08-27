@@ -3,6 +3,7 @@ import {
   AUDIT_BLIND_SPOTS,
   AUDIT_ORDER_OFFER_LABEL,
   buildAuditUpsellUrl,
+  isAuditExpertEnabled,
   getScoreBand,
   SCORE_BAND_NARRATIVE,
   type ScoreBand,
@@ -46,6 +47,9 @@ const bandLabel: Record<ScoreBand, string> = {
 export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
   const band = getScoreBand(teaser.scoreGlobal);
   const narrative = SCORE_BAND_NARRATIVE[band];
+  // Offre payante hors ligne tant que Stripe n'est pas en place : on garde la
+  // conclusion mais on renvoie vers le contact plutot que vers la commande.
+  const expertEnabled = isAuditExpertEnabled();
   const upsellUrl = buildAuditUpsellUrl("", teaser.id);
 
   return (
@@ -143,13 +147,15 @@ export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
           Et maintenant ?
         </p>
         <p className="mt-3 text-sm leading-relaxed text-white/80">{narrative.conclusion}</p>
-        <p className="mt-4 text-sm text-white/60">{AUDIT_ORDER_OFFER_LABEL}.</p>
+        {expertEnabled && (
+          <p className="mt-4 text-sm text-white/60">{AUDIT_ORDER_OFFER_LABEL}.</p>
+        )}
         <p className="mt-4 font-bold text-white">{narrative.ctaHook}</p>
 
-        <a href={upsellUrl}
+        <a href={expertEnabled ? upsellUrl : "/contact"}
           className="mt-5 inline-flex items-center justify-center rounded-xl bg-secondary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-secondary/90"
         >
-          Commander mon audit expert
+          {expertEnabled ? "Commander mon audit expert" : "Parler à un expert"}
         </a>
       </div>
     </div >

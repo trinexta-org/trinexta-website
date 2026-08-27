@@ -23,7 +23,7 @@ const STEPS = [
         id: "CMD_HQ",
         label: "01",
         title: "Centre de commandement",
-        subtitle: "Essonne — 91",
+        subtitle: "Essonne - 91",
         text: "Notre QG est ancré en Essonne, au carrefour des axes stratégiques d'Île-de-France. Chaque mission part d'ici.",
     },
     {

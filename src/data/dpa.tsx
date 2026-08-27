@@ -16,7 +16,7 @@ export const dpaData: LegalData = {
     {
       title: "Article 1 - Parties",
       paragraphs: [
-        "TRUSTECH IT SUPPORT - marque commerciale TRINEXTA, SASU au capital de 15 000 €, SIREN : 942 020 082 — ci-après désignée « le Sous-traitant ».",
+        "TRUSTECH IT SUPPORT - marque commerciale TRINEXTA, SASU au capital de 15 000 €, SIREN : 942 020 082 - ci-après désignée « le Sous-traitant ».",
         "Et : le Client utilisant les services de TRINEXTA, ci-après désigné « le Responsable de Traitement ».",
       ],
     },

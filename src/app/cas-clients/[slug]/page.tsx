@@ -170,7 +170,7 @@ export default async function CaseClientDetailPage({
                     <div className="relative overflow-hidden rounded-2xl">
                       <Image
                         src={item.cardImage}
-                        alt={`Illustration — ${item.title}`}
+                        alt={`Illustration - ${item.title}`}
                         width={400}
                         height={280}
                         className="w-full object-cover"

@@ -162,7 +162,7 @@ export const cgvData: LegalData = {
       ],
     },
     {
-      title: "CGU — Article 1 - Identification de l'éditeur",
+      title: "CGU - Article 1 - Identification de l'éditeur",
       paragraphs: [
         "TRUSTECH IT SUPPORT, exploitant la marque commerciale TRINEXTA.",
         "SASU au capital de 15 000 €",
@@ -173,65 +173,65 @@ export const cgvData: LegalData = {
       ],
     },
     {
-      title: "CGU — Article 2 - Objet du site",
+      title: "CGU - Article 2 - Objet du site",
       paragraphs: [
         "Le site a pour objet de présenter les activités de TRINEXTA, de permettre la prise de contact, de présenter les offres commerciales, de permettre l'accès aux espaces clients, de permettre l'accès aux plateformes hébergées, de permettre l'accès aux applications SaaS éditées ou exploitées par TRINEXTA, et de diffuser des contenus techniques, commerciaux ou informatifs.",
       ],
     },
     {
-      title: "CGU — Article 3 - Accès au site",
+      title: "CGU - Article 3 - Accès au site",
       paragraphs: [
         "L'accès au site est libre et gratuit pour tout utilisateur disposant d'un accès Internet. Les frais de connexion, d'équipement informatique ou de télécommunication demeurent à la charge exclusive de l'utilisateur. TRINEXTA se réserve le droit de suspendre ou de limiter l'accès à tout ou partie du site à tout moment pour des raisons techniques, sécuritaires ou de maintenance.",
       ],
     },
     {
-      title: "CGU — Article 4 - Comptes utilisateurs",
+      title: "CGU - Article 4 - Comptes utilisateurs",
       paragraphs: [
         "Certains services peuvent nécessiter la création d'un compte utilisateur. L'utilisateur s'engage à fournir des informations exactes, à les maintenir à jour, à préserver la confidentialité de ses identifiants et à signaler toute utilisation frauduleuse.",
         "L'utilisateur demeure responsable de toute activité réalisée depuis son compte. TRINEXTA se réserve le droit de suspendre ou de supprimer tout compte en cas de non-respect des présentes CGU.",
       ],
     },
     {
-      title: "CGU — Article 5 - Espaces clients et applications SaaS",
+      title: "CGU - Article 5 - Espaces clients et applications SaaS",
       paragraphs: [
         "TRINEXTA peut proposer des espaces sécurisés permettant la gestion des prestations, l'accès aux contrats, la consultation de documents, l'utilisation d'applications métier et l'accès à des services SaaS.",
         "Les utilisateurs s'interdisent toute tentative d'accès non autorisé, toute extraction massive de données, toute reproduction du logiciel, toute décompilation et tout détournement d'usage. Les droits accordés sont strictement limités à l'utilisation normale du service.",
       ],
     },
     {
-      title: "CGU — Article 6 - Hébergement et services numériques",
+      title: "CGU - Article 6 - Hébergement et services numériques",
       paragraphs: [
         "TRINEXTA peut fournir des prestations d'hébergement web, d'hébergement applicatif, d'hébergement SaaS, d'hébergement de bases de données et de services cloud.",
         "L'utilisateur s'engage à ne pas utiliser les infrastructures pour des activités illégales, du spam, du phishing, la diffusion de logiciels malveillants ou des contenus portant atteinte aux droits de tiers. TRINEXTA pourra suspendre immédiatement tout service utilisé à des fins illicites.",
       ],
     },
     {
-      title: "CGU — Article 7 - Propriété intellectuelle",
+      title: "CGU - Article 7 - Propriété intellectuelle",
       paragraphs: [
         "L'ensemble des éléments du site est protégé par les lois françaises et internationales relatives à la propriété intellectuelle. Sont notamment protégés la marque TRINEXTA, les logos, les contenus, les logiciels, les bases de données, les développements spécifiques et les interfaces utilisateurs.",
         "Toute reproduction ou exploitation sans autorisation écrite préalable est interdite.",
       ],
     },
     {
-      title: "CGU — Article 8 - Responsabilité",
+      title: "CGU - Article 8 - Responsabilité",
       paragraphs: [
         "TRINEXTA ne pourra être tenue responsable des interruptions de service, des pertes de données, des dommages indirects, des pertes d'exploitation, des pertes financières, des cyberattaques, des défaillances de fournisseurs tiers ni des problèmes liés au réseau Internet. L'utilisateur demeure seul responsable de l'utilisation qu'il fait des services.",
       ],
     },
     {
-      title: "CGU — Article 9 - Données personnelles",
+      title: "CGU - Article 9 - Données personnelles",
       paragraphs: [
         <span key="dp">Les traitements de données personnelles sont réalisés conformément au RGPD, à la Loi Informatique et Libertés et à la <a href="/confidentialite" className="text-secondary-strong hover:underline transition-colors">Politique de Confidentialité</a> publiée sur le site.</span>,
       ],
     },
     {
-      title: "CGU — Article 10 - Modification des CGU",
+      title: "CGU - Article 10 - Modification des CGU",
       paragraphs: [
         "TRINEXTA se réserve le droit de modifier les présentes CGU à tout moment. Les nouvelles versions deviennent applicables dès leur publication sur le site.",
       ],
     },
     {
-      title: "CGU — Article 11 - Droit applicable",
+      title: "CGU - Article 11 - Droit applicable",
       paragraphs: [
         "Les présentes CGU sont soumises au droit français. Tout litige relatif à leur interprétation ou à leur exécution relèvera des juridictions compétentes du ressort du siège social de TRINEXTA, sauf disposition légale impérative contraire.",
       ],

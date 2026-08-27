@@ -337,6 +337,15 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    formats: ["image/avif", "image/webp"],
+    // Par défaut 4h : sur un site à faible trafic, presque chaque visite
+    // retombait sur un cache froid et payait le ré-encodage AVIF (~2,7 s).
+    minimumCacheTTL: 2678400, // 31 jours
+    // Les sources sont plafonnées à 2560px : demander 3840 ne gagne rien
+    // et multiplie les variantes à encoder à froid.
+    deviceSizes: [640, 828, 1080, 1920, 2560],
+    // q=50 pour les fonds de hero, masqués par un voile primary à 70-90%.
+    qualities: [50, 75],
     remotePatterns: [
       {
         protocol: "https",

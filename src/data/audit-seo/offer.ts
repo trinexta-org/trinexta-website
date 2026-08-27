@@ -7,6 +7,19 @@
 // et le montant débité.
 export const AUDIT_ORDER_PRICE_EUR = 490;
 
+/**
+ * Interrupteur de mise en vente de l'Audit SEO Expert. Tant que le compte Stripe
+ * n'est pas operationnel, tout le parcours payant (pages, API, upsell teaser et
+ * email) reste hors ligne. Actif uniquement si NEXT_PUBLIC_AUDIT_EXPERT_ENABLED
+ * vaut exactement "true" : par defaut, hors ligne.
+ *
+ * Prefixe NEXT_PUBLIC_ car le flag est aussi lu cote client (teaser d'audit) ;
+ * la valeur est inlinee au build, l'acces statique a process.env est obligatoire.
+ */
+export function isAuditExpertEnabled(): boolean {
+    return process.env.NEXT_PUBLIC_AUDIT_EXPERT_ENABLED === "true";
+}
+
 /** Libellé de l'offre, source de vérité unique (page, teaser, email). */
 export const AUDIT_ORDER_OFFER_LABEL = `Audit SEO Expert (${AUDIT_ORDER_PRICE_EUR}€ TTC, entièrement déduit si vous nous confiez la refonte)`;
 

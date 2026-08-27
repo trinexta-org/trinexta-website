@@ -21,6 +21,16 @@ import { usePresence } from "@/hooks/usePresence";
 import { useCrossfade } from "@/hooks/useCrossfade";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
+const bentoImageExtOverrides: Record<string, string> = {
+    "infogerance/1": "webp",
+    "infogerance/2": "webp",
+}
+
+function bentoImageSrc(serviceSlug: string, imageIndex: number) {
+    const ext = bentoImageExtOverrides[`${serviceSlug}/${imageIndex}`] ?? "jpg"
+    return `/images/services/${serviceSlug}/bento-${imageIndex}.${ext}`
+}
+
 export interface ServicePageProps {
   serviceSlug: string;
   canonicalPath?: string;
@@ -390,9 +400,8 @@ export function ServicePage({
             src={`/images/services/${serviceSlug}/hero.avif`}
             alt={`${hero.titlePart1} ${hero.titlePart2}`}
             fill
-            quality={75}
-            priority
-            fetchPriority="high"
+            quality={50}
+            preload
             className="object-cover object-center"
             sizes="100vw"
           />

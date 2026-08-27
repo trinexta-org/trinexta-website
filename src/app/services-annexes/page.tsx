@@ -52,7 +52,7 @@ export default function ServicesAnnexesPage() {
             "Des interventions ponctuelles ou projets spécifiques, pilotés de bout en bout par nos experts.",
             "Une approche « Fondations » : nous sécurisons et stabilisons vos infrastructures avec des solutions fiables et évolutives.",
           ]}
-          imageSrc="/images/nos-offres/hero-services.jpg"
+          imageSrc="/images/nos-offres/hero-services.webp"
         />
 
         <div className="w-full relative z-10 pt-12">

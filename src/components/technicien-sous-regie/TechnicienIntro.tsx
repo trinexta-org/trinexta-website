@@ -132,7 +132,7 @@ export function TechnicienIntro() {
               src={img1}
               alt="Technicien support sous régie"
               fill
-              priority
+              sizes="(max-width: 1024px) 100vw, 45vw"
               className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`}
             />
             <Image

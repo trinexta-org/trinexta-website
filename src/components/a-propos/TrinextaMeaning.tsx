@@ -12,14 +12,14 @@ const meanings = [
     syllable: "Tri",
     title: "Trois piliers au cœur de notre approche",
     desc: "Une expertise technique solide, une proximité humaine fondée sur l'écoute, et une souplesse d'intervention pour s'adapter à votre structure. Ces trois dimensions avancent ensemble pour un service fiable et accessible.",
-    image: "/images/a-propos/tri.jpg",
+    image: "/images/a-propos/tri.webp",
     alt: "",
   },
   {
     syllable: "Next",
     title: "Une informatique pensée pour évoluer",
     desc: "Nous ne nous contentons pas de gérer l'existant. « Next », c'est préparer l'avenir : faire les bons choix, anticiper les besoins et sécuriser l'environnement de travail. Votre informatique suit votre développement.",
-    image: "/images/a-propos/next.avif",
+    image: "/images/a-propos/next.webp",
     alt: ""
   },
   {

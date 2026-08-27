@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { AUDIT_ORDER_PRICE_EUR } from "@/data/audit-seo/offer";
+import { isAuditExpertEnabled, AUDIT_ORDER_PRICE_EUR } from "@/data/audit-seo/offer";
 import { CGV_VENTE_EN_LIGNE_VERSION } from "@/data/cgv-audit-expert";
 import { auditOrderRequestSchema } from "@/lib/validations/audit-order";
 import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
@@ -14,6 +14,11 @@ const RATE_LIMITED = NextResponse.json(
 );
 
 export async function POST(request: Request) {
+    // Offre hors ligne tant que Stripe n'est pas operationnel : aucune commande enregistree.
+    if (!isAuditExpertEnabled()) {
+        return NextResponse.json({ error: "Ressource introuvable." }, { status: 404 });
+    }
+
     try {
         const ipHash = hashIp(getClientIp(request));
         if (!checkRateLimit(`audit-order:${ipHash}`, AUDIT_ORDER_MAX_PER_IP)) return RATE_LIMITED;

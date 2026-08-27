@@ -18,7 +18,8 @@ export function PageHero({ title, imageSrc }: PageHeroProps) {
           alt={`Fond de la page ${title}`}
           fill
           className="object-cover object-center"
-          priority
+          preload
+          quality={50}
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-primary/90" />

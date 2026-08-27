@@ -77,6 +77,22 @@ Toujours vérifier `.env.example` pour la liste complète. Ne jamais committer `
 - Pas de résumés en fin de réponse
 - Pas de longs blocs introductifs ou explicatifs inutiles
 
+## Revue de code
+
+`npm run check:review-rules` tranche mécaniquement les interdictions ci-dessous et les
+conventions git. **Une règle décidable par une machine vit dans
+`scripts/check-review-rules.mjs`, jamais dans une checklist de revue** : un modèle de
+revue produit du bruit là où un regex donne une réponse certaine. Ajouter une
+interdiction ici = ajouter la règle correspondante dans le script, ou dire explicitement
+pourquoi elle demande du jugement.
+
+Deux niveaux : bloquant pour ce qui se corrige en éditant un fichier, indicatif pour les
+conventions git, qui ne se corrigent qu'en réécrivant l'historique.
+
+Le protocole de revue (deux passes, budget, porte de falsifiabilité) est dans
+`.claude/skills/review-pr-trinexta/SKILL.md`, et la revue automatique de CI l'applique
+via `.github/scripts/ai-review.py`.
+
 ## Interdictions
 
 - Ne pas modifier `src/generated/prisma/` manuellement

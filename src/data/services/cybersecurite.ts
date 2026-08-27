@@ -15,7 +15,7 @@ export const cybersecuriteData: ServicePageProps = {
   problem: {
     subtitle: "Une menace bien réelle et évolutive",
     title: "Les cyberattaques ne concernent plus seulement les grandes entreprises.",
-    description: "Il est temps de déconstruire le mythe selon lequel les petites structures sont 'trop petites pour être ciblées'. Au contraire, les TPE et PME sont devenues les cibles privilégiées des cybercriminels, précisément parce qu'elles disposent souvent de moins de ressources de protection. Une seule attaque, un seul ransomware, peut suffire à paralyser votre activité, détruire des années de travail et mettre en péril la pérennité financière de votre société. Les menaces actuelles — ransomwares, phishing sophistiqué, vol d'identités — évoluent à une vitesse fulgurante. Les antivirus classiques, basés sur des signatures connues, sont désormais dépassés. Si vous n'êtes pas préparés, vous n'êtes pas protégés.",
+    description: "Il est temps de déconstruire le mythe selon lequel les petites structures sont 'trop petites pour être ciblées'. Au contraire, les TPE et PME sont devenues les cibles privilégiées des cybercriminels, précisément parce qu'elles disposent souvent de moins de ressources de protection. Une seule attaque, un seul ransomware, peut suffire à paralyser votre activité, détruire des années de travail et mettre en péril la pérennité financière de votre société. Les menaces actuelles (ransomwares, phishing sophistiqué, vol d'identités) évoluent à une vitesse fulgurante. Les antivirus classiques, basés sur des signatures connues, sont désormais dépassés. Si vous n'êtes pas préparés, vous n'êtes pas protégés.",
     painPoints: [
       "Ransomwares capables de chiffrer l'intégralité de vos fichiers et de bloquer votre production en quelques minutes.",
       "Campagnes de phishing ultra-réalistes qui piègent vos collaborateurs les plus vigilants.",
@@ -139,7 +139,7 @@ export const cybersecuriteData: ServicePageProps = {
   incidentResponse: {
     surtitle: "Quand l'attaque a déjà eu lieu",
     title: "Réponse à incident & remédiation",
-    intro: "Une cyberattaque ne s'arrête pas à la prévention. Lorsqu'un incident survient — ransomware, intrusion, compte compromis, site piraté — notre équipe intervient pour reprendre le contrôle, par une intervention sur site ou à distance selon l'urgence. Toutes les opérations de remédiation sont réalisées en interne par les équipes TRINEXTA, sans sous-traitance.",
+    intro: "Une cyberattaque ne s'arrête pas à la prévention. Lorsqu'un incident survient (ransomware, intrusion, compte compromis, site piraté), notre équipe intervient pour reprendre le contrôle, par une intervention sur site ou à distance selon l'urgence. TRINEXTA pilote l'ensemble des opérations de remédiation et reste votre interlocuteur unique jusqu'au retour à la normale.",
     items: [
       {
         title: "Intervention d'urgence sur site",

@@ -5,6 +5,8 @@ import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { getStripe } from "@/lib/stripe";
+import { notFound } from "next/navigation";
+import { isAuditExpertEnabled } from "@/data/audit-seo/offer";
 
 export const metadata: Metadata = {
     title: "Commande confirmée · Audit SEO Expert",
@@ -34,6 +36,8 @@ export default async function AuditSeoExpertSuccesPage({
 }: {
     searchParams: Promise<{ session_id?: string }>;
 }) {
+    if (!isAuditExpertEnabled()) notFound();
+
     const { session_id } = await searchParams;
     const paidSession = await getPaidSession(session_id);
     const bookingsUrl = process.env.NEXT_PUBLIC_BOOKINGS_URL;
