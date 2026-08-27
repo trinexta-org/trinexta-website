@@ -14,7 +14,6 @@ import { PortableTextBlock } from "@portabletext/types";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { generateSlug } from "@/lib/utils";
-import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { JsonLd, trinextaOrganization } from "@/components/seo/JsonLd";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import {
@@ -271,7 +270,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <WaveDivider from="surface" to="primary" amplitude="ample" crossing={2} />
 
         <NewsletterCTA/>
-        <ScrollToTop />
       </main>
     </>
   );
