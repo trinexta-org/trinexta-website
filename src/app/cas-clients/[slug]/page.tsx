@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { ViewportHero } from "@/components/layout/ViewportHero"
+ import { WaveDivider } from "@/components/ui/WaveDivider"
 import { Badge } from "@/components/ui/Badge"
 import { Entrance } from "@/components/ui/Entrance"
 import { FinalCTA } from "@/components/FinalCTA"
@@ -55,10 +56,10 @@ export async function generateMetadata({
 function PhaseLabel({ number, label }: { number: string; label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="font-mono text-xl font-bold text-secondary-soft tracking-widest md:text-2xl">
+      <span className="font-mono text-xl font-bold text-secondary-strong tracking-widest md:text-2xl">
         {number}
       </span>
-      <span className="text-xl font-bold uppercase tracking-[0.12em] text-primary/80 md:text-2xl">
+      <span className="text-xl font-bold uppercase tracking-[0.12em] text-primary md:text-2xl">
         {label}
       </span>
     </div>
@@ -76,7 +77,7 @@ export default async function CaseClientDetailPage({
   if (!item) notFound()
 
   return (
-    <main className="min-h-screen bg-[#EEF4FB]">
+    <main className="min-h-screen bg-surface">
       {/* Hero */}
       <ViewportHero>
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.heroImage}')` }} />
@@ -117,23 +118,10 @@ export default async function CaseClientDetailPage({
         </Container>
       </ViewportHero>
 
-      {/* Vague de transition Hero (sombre) → contenu (clair) */}
-      <div className="relative -mt-1 leading-[0]">
-        <svg
-          viewBox="0 0 1440 80"
-          preserveAspectRatio="none"
-          className="block w-full h-[50px] md:h-[80px]"
-          aria-hidden="true"
-        >
-          <path
-            d="M0,32 C240,80 480,0 720,24 C960,48 1200,8 1440,32 L1440,0 L0,0 Z"
-            className="fill-primary"
-          />
-        </svg>
-      </div>
+      <WaveDivider from="primary" to="surface" amplitude="ample" />
 
       {/* Timeline */}
-      <Section className="bg-[#EEF4FB] pb-16 pt-4 md:pt-6">
+      <Section className="bg-surface pb-16 pt-4 md:pt-6">
         <div className="space-y-0">
 
           {/* Phase 01 — Situation initiale */}
@@ -154,19 +142,19 @@ export default async function CaseClientDetailPage({
                   <div className="space-y-4">
                     {item.context.map((paragraph, i) => (
                       <FadeIn key={paragraph} delay={i * 0.09}>
-                        <Text className="text-primary/70 leading-relaxed">{paragraph}</Text>
+                        <Text className="text-muted-foreground leading-relaxed">{paragraph}</Text>
                       </FadeIn>
                     ))}
                   </div>
 
                   <div className="mt-8">
-                    <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/50">
+                    <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Points de friction
                     </Text>
                     <FadeIn delay={0.2}>
                       <ul className="space-y-3">
                         {item.challenges.map((challenge) => (
-                          <li key={challenge} className="flex gap-3 text-sm text-primary/70 leading-relaxed md:text-base">
+                          <li key={challenge} className="flex gap-3 text-sm text-muted-foreground leading-relaxed md:text-base">
                             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary/60" />
                             <span>{challenge}</span>
                           </li>
@@ -190,8 +178,8 @@ export default async function CaseClientDetailPage({
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
                     </div>
-                    <blockquote className="rounded-2xl border border-primary/10 bg-white p-5 shadow-sm">
-                      <Text className="text-sm italic leading-relaxed text-primary/65 md:text-base">
+                    <blockquote className="rounded-2xl border border-border bg-background p-5 shadow-sm">
+                      <Text className="text-sm italic leading-relaxed text-muted-foreground md:text-base">
                         &ldquo;{item.cardChallenge}&rdquo;
                       </Text>
                     </blockquote>
@@ -216,18 +204,18 @@ export default async function CaseClientDetailPage({
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                 {/* Solutions */}
                 <div className="space-y-4">
-                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/50">
+                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     Solutions déployées
                   </Text>
                   {item.solutions.map((solution, i) => (
                     <FadeIn key={solution.label} delay={i * 0.1}>
-                      <div className="rounded-2xl border border-primary/10 bg-white p-5 shadow-sm">
+                      <div className="rounded-2xl border border-border bg-background p-5 shadow-sm">
                         <Link href={solution.href} className="inline-flex">
                           <Badge className="border-secondary/30 bg-secondary/15 text-primary hover:bg-secondary/25">
                             {solution.label}
                           </Badge>
                         </Link>
-                        <Text className="mt-3 text-sm text-primary/70 leading-relaxed md:text-base">
+                        <Text className="mt-3 text-sm text-muted-foreground leading-relaxed md:text-base">
                           {solution.content}
                         </Text>
                       </div>
@@ -238,12 +226,12 @@ export default async function CaseClientDetailPage({
                 {/* Benefits */}
                 <FadeIn delay={0.25}>
                   <div>
-                    <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/50">
+                    <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Bénéfices concrets
                     </Text>
                     <ul className="mt-4 space-y-4">
                       {item.benefits.map((benefit) => (
-                        <li key={benefit} className="flex gap-3 text-sm text-primary/70 leading-relaxed md:text-base">
+                        <li key={benefit} className="flex gap-3 text-sm text-muted-foreground leading-relaxed md:text-base">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" />
                           <span>{benefit}</span>
                         </li>
@@ -281,7 +269,7 @@ export default async function CaseClientDetailPage({
                     <Text className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary-strong">
                       En résumé
                     </Text>
-                    <Text className="text-sm italic leading-relaxed text-primary/80 md:text-base">
+                    <Text className="text-sm italic leading-relaxed text-primary md:text-base">
                       &ldquo;{item.cardResult}&rdquo;
                     </Text>
                   </div>
@@ -291,7 +279,7 @@ export default async function CaseClientDetailPage({
                 <div className="mt-8 flex flex-wrap gap-3">
                   {item.solutions.map((solution) => (
                     <Link key={solution.label} href={solution.href}>
-                      <Badge className="border-primary/10 bg-white text-primary hover:bg-primary/5">
+                      <Badge className="border-border bg-background text-primary hover:bg-accent">
                         {solution.label}
                       </Badge>
                     </Link>

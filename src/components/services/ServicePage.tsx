@@ -1126,14 +1126,16 @@ export function ServicePage({
                         +
                       </span>
                     </button>
-
                     <div
-                      className={`text-secondary-soft font-mono font-black text-lg md:text-xl transition-transform duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}
+                      className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                      style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
-                      <div className="px-4 md:px-6 pb-4 md:pb-5 pt-0">
-                        <p className="text-white/70 text-sm md:text-base leading-relaxed border-t border-white/5 pt-3 md:pt-4">
-                          {item.answer}
-                        </p>
+                      <div className={`overflow-hidden transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}>
+                        <div className="px-4 md:px-6 pb-4 md:pb-5 pt-0">
+                          <p className="text-white/70 text-sm md:text-base leading-relaxed border-t border-white/5 pt-3 md:pt-4">
+                            {item.answer}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>

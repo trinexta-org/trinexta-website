@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PlanReponseIncidentsPage() {
   return (
-    <main className="min-h-screen bg-[#EEF4FB]">
+     <main className="min-h-screen bg-surface">
       <BreadcrumbJsonLd
         items={[
           { name: "Accueil", url: "/" },
@@ -23,7 +23,7 @@ export default function PlanReponseIncidentsPage() {
         ]}
       />
 
-      <Section className="bg-[#EEF4FB] pt-24 pb-24">
+      <Section className="bg-surface pt-24 pb-24">
         <LegalContent data={planReponseIncidentsData} />
       </Section>
 

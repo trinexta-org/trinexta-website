@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Container } from "./Container";
-import { SectionFade } from "@/components/ui/SectionFade";
 import { FooterNewsletter } from "@/components/shared/FooterNewsletter";
 import { SOCIAL_LINKS } from "@/data/social-links";
 

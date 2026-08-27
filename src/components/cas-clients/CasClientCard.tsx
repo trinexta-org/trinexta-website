@@ -7,7 +7,7 @@ import { MetricRow } from "@/components/cas-clients/MetricRow";
 
 export function CasClientCard({ item }: { item: CaseClient }) {
   return (
-    <article className="group flex flex-col h-full overflow-hidden rounded-2xl border border-secondary/20 bg-[#dce7f2] backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:shadow-xl hover:shadow-secondary/10">
+    <article className="group flex flex-col h-full overflow-hidden rounded-2xl border border-secondary/20 bg-surface-strong transition-all duration-300 hover:border-secondary/40 hover:shadow-xl hover:shadow-secondary/10">
       <div className="relative h-40 overflow-hidden">
         <Image
           src={item.cardImage}
@@ -54,7 +54,7 @@ export function CasClientCard({ item }: { item: CaseClient }) {
             ))}
           </div>
 
-          <div className="rounded-r-xl border-l-2 border-secondary/60 bg-white/60 py-2.5 pl-3.5 pr-3">
+          <div className="rounded-r-xl border-l-2 border-secondary/60 bg-background py-2.5 pl-3.5 pr-3">
             <p className="line-clamp-2 text-xs italic leading-relaxed text-primary/85">
               &ldquo;{item.cardResult}&rdquo;
             </p>

@@ -47,7 +47,7 @@ export function SerenitePillars() {
       {pillars.map((p, i) => (
         <article 
           key={i} 
-          className="group flex flex-col h-full overflow-hidden rounded-2xl border border-secondary/20 bg-[#dce7f2] backdrop-blur-sm transition-all duration-300 hover:border-secondary/35 hover:shadow-xl hover:shadow-secondary/5"
+          className="group flex flex-col h-full overflow-hidden rounded-2xl border border-secondary/20 bg-surface-strong transition-all duration-300 hover:border-secondary/35 hover:shadow-xl hover:shadow-secondary/5"
         >
           <div className="relative h-48 overflow-hidden">
             <Image
@@ -69,7 +69,7 @@ export function SerenitePillars() {
               {p.title}
             </h3>
             
-            <p className="text-[15px] text-primary/60 leading-relaxed">
+            <p className="text-[15px] text-muted-foreground leading-relaxed">
               {p.desc}
             </p>
 

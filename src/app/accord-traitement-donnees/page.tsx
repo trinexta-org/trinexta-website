@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function AccordTraitementDonneesPage() {
   return (
-    <main className="min-h-screen bg-[#EEF4FB]">
+     <main className="min-h-screen bg-surface">
       <BreadcrumbJsonLd
         items={[
           { name: "Accueil", url: "/" },
@@ -27,7 +27,7 @@ export default function AccordTraitementDonneesPage() {
         ]}
       />
 
-      <Section className="bg-[#EEF4FB] pt-24 pb-24">
+      <Section className="bg-surface pt-24 pb-24">
         <LegalContent data={accordTraitementDonneesData} />
       </Section>
 

@@ -44,7 +44,7 @@ export function SereniteTargets() {
             </div>
 
             <div className="mt-16 text-center px-6">
-                <p className="text-primary/60 text-lg">
+                <p className="text-muted-foreground text-lg">
                     Vous avez un doute sur l&apos;éligibilité de votre structure ?{" "}
                     <Link
                         href="/contact"
@@ -60,7 +60,7 @@ export function SereniteTargets() {
 
 function TargetCard({ role, spec, image }: { role: string; spec: string; image: string }) {
     return (
-        <div className="w-72 shrink-0 rounded-2xl border border-secondary/20 bg-[#dce7f2] backdrop-blur-sm overflow-hidden shadow-xl">
+        <div className="w-72 shrink-0 rounded-2xl border border-secondary/20 bg-surface-strong overflow-hidden shadow-xl">
             <div className="h-40 w-full relative">
                 <Image
                     src={image}
@@ -73,7 +73,7 @@ function TargetCard({ role, spec, image }: { role: string; spec: string; image: 
             </div>
             <div className="p-6 pt-4">
                 <h4 className="font-bold text-primary text-lg mb-1">{role}</h4>
-                <p className="text-secondary text-sm font-medium leading-relaxed">{spec}</p>
+                <p className="text-secondary-strong text-sm font-medium leading-relaxed">{spec}</p>
             </div>
         </div>
     )
