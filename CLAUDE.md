@@ -17,7 +17,10 @@ Refonte from scratch du site trinexta.fr. Abandon de WordPress vers Next.js 16 +
 dev (local) → staging (staging.trinexta.fr) → main (trinexta.fr)
 ```
 
-Chaque transition se fait via pull request. Le deploy est automatique via `.github/workflows/deploy.yml` sur push `staging` et `main`.
+Chaque transition se fait via pull request. Deux workflows de deploy :
+
+- `.github/workflows/deploy.yml` → staging, sur push `dev` **et** `staging`. Un merge dans `dev` déploie donc déjà sur staging.trinexta.fr.
+- `.github/workflows/deploy-prod.yml` → production, sur push `main`.
 
 ## Commandes utiles
 

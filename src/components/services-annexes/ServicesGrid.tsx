@@ -131,12 +131,12 @@ const structuralServices = [
 
 // Images provisoires réutilisées en boucle, à remplacer par des visuels dédiés plus tard
 const placeholderImages = [
-    "/images/services/infogerance.avif",
-    "/images/services/support.avif",
-    "/images/services/cybersecurite.avif",
-    "/images/services/cloud.avif",
-    "/images/services/microsoft.avif",
-    "/images/services/solutions.avif",
+    "/images/services/infogerance.webp",
+    "/images/services/support.webp",
+    "/images/services/cybersecurite.webp",
+    "/images/services/cloud.webp",
+    "/images/services/microsoft.webp",
+    "/images/services/solutions.webp",
 ]
 
 export function ServicesGrid() {
