@@ -6,23 +6,28 @@ import { cgvData } from "@/data/cgv"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: `${cgvData.hero.title}`,
-  description: "Conditions Générales d'Utilisation du site Trinexta et description de nos services informatiques.",
+  title: cgvData.hero.title,
+  description:
+    "Conditions Générales de Vente de TRINEXTA.",
   alternates: {
     canonical: "/cgv",
   },
 }
 
-export default function CgvPage() {
+export default function CGVPage() {
   return (
-    <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      <BreadcrumbJsonLd 
+     <main className="min-h-screen bg-surface">
+      <BreadcrumbJsonLd
         items={[
-        { name: "Accueil", url: "/" },
-        { name: "cgv", url: "/cgv" }
-        ]} 
+          { name: "Accueil", url: "/" },
+          {
+            name: "Conditions Générales de Vente",
+            url: "/cgv",
+          },
+        ]}
       />
-      <Section className="bg-primary pt-24 pb-24">
+
+      <Section className="bg-surface pt-24 pb-24">
         <LegalContent data={cgvData} />
       </Section>
 

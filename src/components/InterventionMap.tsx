@@ -5,6 +5,8 @@ import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { SectionFade } from "@/components/ui/SectionFade"
 import { Container } from "@/components/layout/Container"
+import { SectionBackground } from "@/components/ui/SectionBackground"
+
 
 const DEPARTMENTS = [
     { id: "75", name: "Paris", angle: 75, radius: 0.40 },
@@ -152,6 +154,8 @@ export function InterventionMap() {
 
     return (
         <Section container={false} className="relative bg-primary overflow-hidden py-16 md:py-28">
+            <SectionBackground tone="dark" />
+
 
             <div className="absolute inset-0 pointer-events-none" style={{
                 background: "radial-gradient(ellipse 65% 75% at 72% 52%, color-mix(in srgb, var(--secondary) 10%, transparent), transparent)",
@@ -168,11 +172,11 @@ export function InterventionMap() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-50" />
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary opacity-80" />
                     </span>
-                    <span className="text-[10px] font-mono text-secondary/90 font-bold uppercase tracking-[0.28em]">
+                    <span className="text-[10px] font-mono text-secondary-soft/90 font-bold uppercase tracking-[0.28em]">
                         Système opérationnel
                     </span>
                     <div className="h-px flex-1 bg-secondary/20" />
-                    <span className="hidden md:block text-[10px] font-mono text-secondary/60 font-bold uppercase tracking-[0.12em]">
+                    <span className="hidden md:block text-[10px] font-mono text-secondary-soft font-bold uppercase tracking-[0.12em]">
                         ILE-DE-FRANCE / NATIONAL
                     </span>
                 </div>
@@ -181,7 +185,7 @@ export function InterventionMap() {
 
                     <div className="w-full lg:w-[45%] shrink-0 flex flex-col gap-7 order-2 lg:order-1">
 
-                        <div className="relative min-h-[160px]">
+                        <div className="relative min-h-[200px]">
                             <span
                                 className="absolute -top-2 -left-1 font-mono font-black select-none pointer-events-none leading-none"
                                 style={{
@@ -198,18 +202,18 @@ export function InterventionMap() {
                                 style={{ borderLeft: "2px solid color-mix(in srgb, var(--secondary) 40%, transparent)" }}
                             >
                                 <div className="flex items-center gap-2">
-                                    <span className="text-[10px] font-mono font-bold text-secondary uppercase tracking-[0.22em]">
+                                    <span className="text-xs font-mono font-bold text-secondary-soft uppercase tracking-[0.22em]">
                                         {STEPS[step].label}
                                     </span>
                                     <div className="h-px w-6 bg-secondary/40" />
-                                    <span className="text-[10px] font-mono text-secondary/90 font-bold uppercase tracking-wider">
+                                    <span className="text-[10px] font-mono text-secondary-soft/90 font-bold uppercase tracking-wider">
                                         {STEPS[step].subtitle}
                                     </span>
                                 </div>
-                                <h2 className="text-white font-black text-2xl md:text-[1.75rem] leading-tight tracking-normal">
+                                <h2 className="text-white font-black text-3xl md:text-4xl leading-tight tracking-normal">
                                     {STEPS[step].title}
                                 </h2>
-                                <p className="text-white/90 text-sm md:text-[0.925rem] leading-relaxed font-light">
+                                <p className="text-white/90 text-base md:text-lg leading-relaxed font-light">
                                     {STEPS[step].text}
                                 </p>
                             </div>
@@ -233,7 +237,7 @@ export function InterventionMap() {
                                         )}
                                         {step > i && <div className="h-full w-full bg-secondary/50" />}
                                     </div>
-                                    <span className="text-[9px] font-mono text-white/40 group-hover:text-secondary/80 transition-colors">
+                                    <span className="text-[11px] font-mono text-white/40 group-hover:text-secondary-soft/80 transition-colors">
                                         {s.label}
                                     </span>
                                 </button>
@@ -251,10 +255,10 @@ export function InterventionMap() {
                             >
                                 <div className="flex items-center justify-between px-4 py-2"
                                     style={{ borderBottom: "1px solid color-mix(in srgb, var(--secondary) 15%, transparent)" }}>
-                                    <span className="text-[9px] font-mono text-secondary/60 font-bold uppercase tracking-[0.22em]">
+                                    <span className="text-sm font-mono text-secondary-soft font-bold uppercase tracking-[0.22em]">
                                         Cibles actives
                                     </span>
-                                    <span className="text-[9px] font-mono text-secondary/50 font-bold">
+                                    <span className="text-sm font-mono text-secondary-soft/80 font-bold">
                                         {DEPARTMENTS.length}&thinsp;/&thinsp;7
                                     </span>
                                 </div>
@@ -262,17 +266,17 @@ export function InterventionMap() {
                                     {DEPARTMENTS.map((d, i) => (
                                         <div
                                             key={d.id}
-                                            className="flex items-center gap-1.5 pl-2 pr-2.5 py-1 rounded-full animate-fade-in-scale"
+                                            className="flex items-center gap-2 pl-3 pr-3.5 py-1.5 rounded-full animate-fade-in-scale"
                                             style={{
                                                 border: "1px solid color-mix(in srgb, var(--secondary) 25%, transparent)",
                                                 background: "color-mix(in srgb, var(--secondary) 6%, transparent)",
                                                 animationDelay: `${0.06 * i}s`,
                                             }}
                                         >
-                                            <span className="w-1.5 h-1.5 rounded-full shrink-0"
+                                            <span className="w-2 h-2 rounded-full shrink-0"
                                                 style={{ background: "color-mix(in srgb, var(--secondary) 80%, transparent)" }} />
-                                            <span className="text-secondary font-mono text-[11px] font-bold">{d.id}</span>
-                                            <span className="text-white/70 text-[9px] font-medium">{d.name}</span>
+                                            <span className="text-secondary-soft font-mono text-base font-bold">{d.id}</span>
+                                            <span className="text-white/70 text-sm font-medium">{d.name}</span>
                                         </div>
                                     ))}
                                 </div>

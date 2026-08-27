@@ -12,7 +12,7 @@ export function Button({ className, variant = 'primary', size = 'md', asChild = 
   const Comp = asChild ? Slot : "button"
   const variants = {
     primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md",
-    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-md",
+    secondary: "bg-secondary-strong text-secondary-strong-foreground hover:bg-secondary-strong/90 shadow-md",
     outline: "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground",
     ghost: "text-primary hover:bg-accent hover:text-accent-foreground"
   }

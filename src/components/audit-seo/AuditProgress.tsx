@@ -70,8 +70,8 @@ export function AuditProgress() {
           const isActive = index === activeIndex;
           return (
             <li key={step.label} className="flex items-center gap-3">
-              {isDone && <CheckCircle2 className="h-5 w-5 shrink-0 text-secondary" />}
-              {isActive && <Loader2 className="h-5 w-5 shrink-0 animate-spin text-secondary" />}
+              {isDone && <CheckCircle2 className="h-5 w-5 shrink-0 text-secondary-strong" />}
+              {isActive && <Loader2 className="h-5 w-5 shrink-0 animate-spin text-secondary-strong" />}
               {!isDone && !isActive && <Circle className="h-5 w-5 shrink-0 text-white/20" />}
               <span
                 className={

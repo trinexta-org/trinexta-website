@@ -225,7 +225,7 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
           <span className="text-xs font-bold uppercase tracking-widest text-white/50">
             {phase === "questions" ? `Question ${stepNumber} sur ${totalSteps - 1}` : "Dernière étape"}
           </span>
-          <span className="font-serif text-sm italic text-secondary">
+          <span className="font-serif text-sm italic text-secondary-strong">
             {stepMood(stepNumber, totalSteps)}
           </span>
         </div>

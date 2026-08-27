@@ -1,11 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ResumeArticle, urlForImage } from "@/lib/sanity";
-
 export function RelatedPostCard({ article }: { article: ResumeArticle }) {
   return (
     <Link href={`/blog/${article.slug.current}`} className="group block">
-      <div className="relative h-60 w-full rounded-3xl overflow-hidden mb-6 bg-white/5">
+      <div className="relative h-60 w-full rounded-3xl overflow-hidden mb-6 bg-secondary/10">
         {article.imageUne && (
           <Image
             src={urlForImage(article.imageUne).width(600).height(400).url()}
@@ -17,10 +16,10 @@ export function RelatedPostCard({ article }: { article: ResumeArticle }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
       </div>
-      <h3 className="text-xl font-bold leading-tight group-hover:text-secondary transition-colors">
+      <h3 className="text-xl font-bold leading-tight text-primary group-hover:text-secondary-strong transition-colors">
         {article.titre}
       </h3>
-      <p className="text-white/50 text-sm mt-3 line-clamp-2">{article.extrait}</p>
+      <p className="text-primary/50 text-sm mt-3 line-clamp-2">{article.extrait}</p>
     </Link>
   );
 }

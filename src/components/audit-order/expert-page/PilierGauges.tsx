@@ -16,7 +16,7 @@ const textByBand: Record<ScoreBand, string> = {
 export function PilierGauges({ piliers }: { piliers: PilierScore[] }) {
     return (
         <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                 Scores par pilier
             </p>
             <ul className="mt-5 space-y-4">

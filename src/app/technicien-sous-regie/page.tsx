@@ -1,125 +1,176 @@
-import { Metadata } from "next"
-import { JsonLd } from "@/components/seo/JsonLd"
-import { OfferHero } from "@/components/shared/OfferHero"
-import { FaqSection } from "@/components/shared/FaqSection"
-import { officialFaqs } from "@/components/shared/faqData"
-import { Section } from "@/components/layout/Section"
-import { Container } from "@/components/layout/Container"
-import { TransitionTitle } from "@/components/TransitionTitle"
-import { TechnicienIntro } from "@/components/technicien-sous-regie/TechnicienIntro"
-import { TechnicienConcret } from "@/components/technicien-sous-regie/TechnicienConcret"
-import { TechnicienSteps } from "@/components/technicien-sous-regie/TechnicienSteps"
-import { TechnicienPillars } from "@/components/technicien-sous-regie/TechnicienPillars"
-import { TechnicienProfiles } from "@/components/technicien-sous-regie/TechnicienProfiles"
-import { TechnicienPricing } from "@/components/technicien-sous-regie/TechnicienPricing"
-import { TechnicienAssurances } from "@/components/technicien-sous-regie/TechnicienAssurances"
-import { FinalCTA } from "@/components/FinalCTA"
+import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { OfferHero } from "@/components/shared/OfferHero";
+import { FaqSection } from "@/components/shared/FaqSection";
+import { officialFaqs } from "@/components/shared/faqData";
+import { Section } from "@/components/layout/Section";
+import { Container } from "@/components/layout/Container";
+import { TransitionTitle } from "@/components/TransitionTitle";
+import { WaveDivider } from "@/components/ui/WaveDivider";
+import { TechnicienIntro } from "@/components/technicien-sous-regie/TechnicienIntro";
+import { TechnicienConcret } from "@/components/technicien-sous-regie/TechnicienConcret";
+import { TechnicienSteps } from "@/components/technicien-sous-regie/TechnicienSteps";
+import { TechnicienPillars } from "@/components/technicien-sous-regie/TechnicienPillars";
+import { TechnicienProfiles } from "@/components/technicien-sous-regie/TechnicienProfiles";
+import { TechnicienPricing } from "@/components/technicien-sous-regie/TechnicienPricing";
+import { TechnicienAssurances } from "@/components/technicien-sous-regie/TechnicienAssurances";
+import { FinalCTA } from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
-    title: "Technicien sous régie - Régie & Renfort IT | Trinexta",
-    description: "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
-    alternates: {
-        canonical: "/technicien-sous-regie",
-    },
-}
+  title: "Technicien sous régie - Régie & Renfort IT | Trinexta",
+  description:
+    "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
+  alternates: {
+    canonical: "/technicien-sous-regie",
+  },
+};
 
 export default function TechnicienSousRegiePage() {
-    const filteredFaqs = officialFaqs.filter(faq =>
-        faq.tags?.includes('technicien-sous-regie') || faq.tags?.includes('general')
-    )
+  const filteredFaqs = officialFaqs.filter(
+    (faq) =>
+      faq.tags?.includes("technicien-sous-regie") ||
+      faq.tags?.includes("general"),
+  );
 
-    const faqJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": filteredFaqs.map((faq) => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": { "@type": "Answer", "text": faq.answer },
-        })),
-    }
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: filteredFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
 
-    return (
-        <main className="bg-primary min-h-screen relative pb-24">
-            <JsonLd data={faqJsonLd} />
+  return (
+    <main className="bg-primary min-h-screen relative pb-24">
+      <JsonLd data={faqJsonLd} />
 
-            <OfferHero
-                part1="Technicien"
-                part2="Sous régie"
-                subtitles={[
-                    "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
-                    "Pas de frais cachés, pas de lourdeur inutile. La collaboration démarre simplement et s'adapte à votre budget réel.",
-                    "Une réponse rapide et concrète en Île-de-France : des profils qualifiés présentés dans les meilleurs délais."
-                ]}
-                imageSrc="/images/nos-offres/hero-impulsion.jpg"
+      {/* =========================================================
+          BLOC SOMBRE
+          Hero + Intro
+          ========================================================= */}
+      <section className="relative bg-primary">
+        <OfferHero
+          part1="Technicien"
+          part2="Sous régie"
+          subtitles={[
+            "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
+            "Pas de frais cachés, pas de lourdeur inutile. La collaboration démarre simplement et s'adapte à votre budget réel.",
+            "Une réponse rapide et concrète en Île-de-France : des profils qualifiés présentés dans les meilleurs délais.",
+          ]}
+          imageSrc="/images/nos-offres/hero-impulsion.jpg"
+        />
+
+        <div className="w-full relative z-10 pt-12">
+          <div className="space-y-24 pb-24">
+            <Section container={false} className="pt-0">
+              <Container className="max-w-[1400px] space-y-24">
+                <TechnicienIntro />
+              </Container>
+            </Section>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          TRANSITION SOMBRE → CLAIR
+          ========================================================= */}
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
+
+      {/* =========================================================
+          CONCRET + PÉRIMÈTRE D'INTERVENTION (clair)
+          ========================================================= */}
+      <section className="relative bg-surface">
+        <div className="space-y-24 py-12">
+
+          <TechnicienConcret />
+
+          <div className="space-y-12">
+            <TransitionTitle
+              surtitle="Périmètre d'intervention"
+              line1="Des experts du support"
+              line2="à votre service"
             />
+            <Section container={false} className="py-0">
+              <Container className="max-w-[1400px]">
+                <TechnicienPillars />
+              </Container>
+            </Section>
+          </div>
+        </div>
+      </section>
 
-            <div className="w-full relative z-10 pt-12">
-                <div id="technicien" className="space-y-24 pb-24">
-                    <Section container={false} className="pt-0">
-                        <Container className="max-w-[1400px] space-y-24">
-                            <TechnicienIntro />
-                            <TechnicienConcret />
-                            <TechnicienSteps />
-                        </Container>
-                    </Section>
+      {/* =========================================================
+          TRANSITION CLAIR → SOMBRE
+          ========================================================= */}
+      <WaveDivider from="surface" to="primary" amplitude="low" crossing={2} />
 
-                    <div className="space-y-12">
-                        <TransitionTitle
-                            surtitle="Périmètre d'intervention"
-                            line1="Des experts du support"
-                            line2="à votre service"
-                        />
-                        <Section container={false} className="py-0">
-                            <Container className="max-w-[1400px]">
-                                <TechnicienPillars />
-                            </Container>
-                        </Section>
-                    </div>
+      {/* =========================================================
+          PROCESSUS (sombre)
+          ========================================================= */}
+      <TechnicienSteps />
 
-                    <div className="space-y-12">
-                        <TransitionTitle
-                            surtitle="Profils mobilisés"
-                            line1="Les experts que"
-                            line2="nous envoyons"
-                        />
-                        <Section container={false} className="py-0">
-                            <Container className="max-w-[1400px]">
-                                <TechnicienProfiles />
-                            </Container>
-                        </Section>
-                    </div>
+      {/* =========================================================
+          TRANSITION SOMBRE → CLAIR
+          ========================================================= */}
+      <WaveDivider from="primary" to="surface" amplitude="low" crossing={3} />
 
-                    <Section container={false} className="py-0">
-                        <Container className="max-w-[1400px]">
-                            <TechnicienPricing />
-                        </Container>
-                    </Section>
+      {/* =========================================================
+          PROFILS, TARIFS, ENGAGEMENTS (clair)
+          ========================================================= */}
+      <section className="relative bg-surface">
+        <div className="space-y-24 py-12">
 
-                    <div className="space-y-12">
-                        <TransitionTitle
-                            surtitle="Nos engagements"
-                            line1="Simple, souple"
-                            line2="sans surprises"
-                        />
-                        <Section container={false} className="py-0">
-                            <Container className="max-w-[1400px]">
-                                <TechnicienAssurances />
-                            </Container>
-                        </Section>
-                    </div>
-                </div>
-            </div>
-
-            <FinalCTA
-                line1="Prêt à trouver"
-                line2="le technicien qui"
-                line3="fera la différence ?"
-                description="Donnez une nouvelle impulsion à votre support IT. Nous vous aidons à surmonter vos défis technologiques avec des profils adaptés à vos besoins réels."
-                ctaLabel="Trouver mon technicien"
-                ctaHref="/contact"
+          <div className="space-y-12">
+            <TransitionTitle
+              surtitle="Profils mobilisés"
+              line1="Les experts que"
+              line2="nous envoyons"
             />
+            <Section container={false} className="py-0">
+              <Container className="max-w-[1400px]">
+                <TechnicienProfiles />
+              </Container>
+            </Section>
+          </div>
 
-            <FaqSection faqs={filteredFaqs} />
-        </main>
-    )
+          <Section container={false} className="py-0">
+            <TechnicienPricing />
+          </Section>
+
+          <div className="space-y-12">
+            <TransitionTitle
+              surtitle="Nos engagements"
+              line1="Simple, souple"
+              line2="sans surprises"
+            />
+            <Section container={false} className="py-0">
+              <Container className="max-w-[1400px]">
+                <TechnicienAssurances />
+              </Container>
+            </Section>
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================
+          CTA FINAL
+          ========================================================= */}
+      <FinalCTA
+        line1="Prêt à trouver"
+        line2="le technicien qui"
+        line3="fera la différence ?"
+        description="Donnez une nouvelle impulsion à votre support IT. Nous vous aidons à surmonter vos défis technologiques avec des profils adaptés à vos besoins réels."
+        ctaLabel="Trouver mon technicien"
+        ctaHref="/contact"
+      />
+
+      {/* =========================================================
+          FAQ
+          ========================================================= */}
+      <FaqSection faqs={filteredFaqs} />
+    </main>
+  );
 }

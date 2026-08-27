@@ -48,7 +48,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
             />
             <button
               onClick={onClose}
-              className="p-2 -mr-2 text-muted-foreground hover:text-secondary transition-colors"
+              className="p-2 -mr-2 text-muted-foreground hover:text-secondary-strong transition-colors"
               aria-label="Fermer le menu"
             >
               <X className="h-6 w-6" />
@@ -68,7 +68,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
                       onClick={onClose}
                       className={cn(
                         "text-base font-bold w-fit transition-all",
-                        isActive ? "text-secondary border-b-2 border-secondary" : "text-primary"
+                        isActive ? "text-secondary-strong border-b-2 border-secondary" : "text-primary"
                       )}
                     >
                       {link.label}
@@ -77,7 +77,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
                     {link.subMenu && (
                       <button
                         onClick={() => onToggleSubMenu(link.label)}
-                        className="p-2 -mr-2 text-primary hover:text-secondary"
+                        className="p-2 -mr-2 text-primary hover:text-secondary-strong"
                         aria-label="Déplier le sous-menu"
                       >
                         <ChevronDown className={cn("w-5 h-5 transition-transform", isSubOpen && "rotate-180")} />
@@ -100,7 +100,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
                                 key={sub.label}
                                 href={sub.href}
                                 onClick={onClose}
-                                className="text-sm font-semibold text-muted-foreground hover:text-secondary transition-colors"
+                                className="text-sm font-semibold text-muted-foreground hover:text-secondary-strong transition-colors"
                               >
                                 {sub.label}
                               </Link>
@@ -117,7 +117,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
             <Link
               href="/estimation"
               onClick={onClose}
-              className="mt-4 inline-flex items-center justify-center rounded-xl bg-secondary px-4 py-3 text-sm font-bold text-secondary-foreground shadow-md transition-all hover:bg-secondary/90 active:scale-95"
+              className="mt-4 inline-flex items-center justify-center rounded-xl bg-secondary px-4 py-3 text-sm font-bold text-secondary-strong-foreground shadow-md transition-all hover:bg-secondary/90 active:scale-95"
             >
               Estimer mon projet
             </Link>

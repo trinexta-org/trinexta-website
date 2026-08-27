@@ -26,7 +26,7 @@ const CONTACT_CARDS = [
     image: "/images/contact/telephone.png",
     content: (
       <div className="mt-4">
-        <a href="tel:+33978250746" className="text-secondary font-black hover:underline block text-2xl drop-shadow-lg">
+        <a href="tel:+33978250746" className="text-secondary-strong font-black hover:underline block text-2xl drop-shadow-lg">
           09 78 25 07 46
         </a>
       </div>
@@ -38,7 +38,7 @@ const CONTACT_CARDS = [
     image: "/images/contact/email.png",
     content: (
       <div className="mt-4">
-        <a href="mailto:contact@trinexta.fr" className="text-secondary font-black hover:underline block text-xl drop-shadow-lg">
+        <a href="mailto:contact@trinexta.fr" className="text-secondary-strong font-black hover:underline block text-xl drop-shadow-lg">
           contact@trinexta.fr
         </a>
         <Text variant="small" className="text-white/80 font-medium mt-2 drop-shadow-md">

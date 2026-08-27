@@ -47,7 +47,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
   if (status === "success") {
     return (
       <div className={cn("border-t border-white/5 pt-4", className)}>
-        <div className="flex items-center gap-2 text-secondary">
+        <div className="flex items-center gap-2 text-secondary-strong">
           <CheckCircle2 className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} aria-hidden="true" />
           <span className={cn("font-bold", compact ? "text-[10px]" : "text-xs")}>
             {message}
@@ -59,11 +59,9 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
 
   return (
     <div className={cn("border-t border-white/5 pt-4", className)}>
-      <div className="flex items-center gap-2 text-secondary">
+      <div className="flex items-center gap-2 text-secondary-strong">
         <Mail className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} aria-hidden="true" />
-        <span className={cn("font-bold uppercase", compact ? "text-[8px] tracking-widest" : "text-[9px] tracking-[0.18em]")}>
-          Newsletter
-        </span>
+        <span className="font-bold uppercase text-[8px] tracking-widest text-[var(--secondary)]">Newsletter</span>
       </div>
 
       <p className={cn("mt-2 leading-snug text-white/55", compact ? "text-[10px]" : "text-xs")}>
@@ -93,7 +91,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
           disabled={status === "loading"}
           aria-label="S'inscrire à la newsletter"
           className={cn(
-            "inline-flex shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/90 disabled:opacity-60",
+            "inline-flex shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-strong-foreground transition-colors hover:bg-secondary/90 disabled:opacity-60",
             compact ? "h-9 w-9" : "h-10 w-10"
           )}
         >

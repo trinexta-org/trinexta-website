@@ -56,7 +56,7 @@ export default async function AuditSeoExpertSuccesPage({
                             </Text>
 
                             <div className="mt-10 text-left">
-                                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                                     Et maintenant ?
                                 </p>
                                 <ol className="mt-4 space-y-3">

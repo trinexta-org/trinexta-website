@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 
 export default function ConfidentialitePage() {
   return (
-    <main className="bg-primary min-h-screen relative space-y-12 pb-12">
+    <main className="bg-surface min-h-screen relative">
       <BreadcrumbJsonLd 
         items={[
         { name: "Accueil", url: "/" },
         { name: "confidentialite", url: "/confidentialite" }
         ]} 
       />
-      <Section className="bg-primary pt-24 pb-24">
+      <Section className="bg-surface pt-24 pb-24">
         <LegalContent data={confidentialiteData} />
       </Section>
 

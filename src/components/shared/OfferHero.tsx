@@ -44,7 +44,7 @@ export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps)
             className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl"
           >
             <span className="text-white">{slide.part1}</span>{" "}
-            <span className="text-secondary">{slide.part2}</span>
+            <span className="text-secondary-strong">{slide.part2}</span>
           </Heading>
 
           <Text className="mt-6 text-xl md:text-2xl text-white/90 max-w-2xl drop-shadow-md">

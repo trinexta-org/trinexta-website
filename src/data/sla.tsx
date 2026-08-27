@@ -32,8 +32,13 @@ export const slaData: LegalData = {
             "Cybersécurité",
             "Sauvegardes et supervision",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0 mt-0.5">
+                -
+              </span>
               <span>{item}</span>
             </li>
           ))}
@@ -52,53 +57,92 @@ export const slaData: LegalData = {
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse min-w-[480px]">
             <thead>
-              <tr className="border-b border-white/20">
-                <th className="text-left py-2 pr-4 text-white font-bold text-xs uppercase tracking-wider w-28">Priorité</th>
-                <th className="text-left py-2 pr-4 text-white font-bold text-xs uppercase tracking-wider">Impact</th>
-                <th className="text-left py-2 pr-4 text-white font-bold text-xs uppercase tracking-wider whitespace-nowrap">Prise en charge</th>
-                <th className="text-left py-2 text-white font-bold text-xs uppercase tracking-wider whitespace-nowrap">Résolution</th>
+              <tr className="border-b border-primary/15">
+                <th className="text-left py-2 pr-4 text-primary font-bold text-xs uppercase tracking-wider w-28">
+                  Priorité
+                </th>
+                <th className="text-left py-2 pr-4 text-primary font-bold text-xs uppercase tracking-wider">
+                  Impact
+                </th>
+                <th className="text-left py-2 pr-4 text-primary font-bold text-xs uppercase tracking-wider whitespace-nowrap">
+                  Prise en charge
+                </th>
+                <th className="text-left py-2 text-primary font-bold text-xs uppercase tracking-wider whitespace-nowrap">
+                  Résolution
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+
+            <tbody className="divide-y divide-primary/10">
               <tr>
                 <td className="py-3 pr-4 align-top">
-                  <span className="text-secondary font-bold text-xs">P1 - Critique</span>
+                  <span className="text-secondary-strong font-bold text-xs">
+                    P1 - Critique
+                  </span>
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top">
-                  Arrêt total de production, indisponibilité générale, incident bloquant majeur (serveur inaccessible, SaaS indisponible, messagerie hors service).
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top">
+                  Arrêt total de production, indisponibilité générale, incident
+                  bloquant majeur (serveur inaccessible, SaaS indisponible,
+                  messagerie hors service).
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top whitespace-nowrap">30 minutes</td>
-                <td className="py-3 text-white/70 text-sm align-top whitespace-nowrap">4 h ouvrées</td>
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top whitespace-nowrap">
+                  30 minutes
+                </td>
+                <td className="py-3 text-primary/70 text-sm align-top whitespace-nowrap">
+                  4 h ouvrées
+                </td>
               </tr>
+
               <tr>
                 <td className="py-3 pr-4 align-top">
-                  <span className="text-secondary font-bold text-xs">P2 - Haute</span>
+                  <span className="text-secondary-strong font-bold text-xs">
+                    P2 - Haute
+                  </span>
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top">
-                  Forte dégradation du service, plusieurs utilisateurs impactés.
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top">
+                  Forte dégradation du service, plusieurs utilisateurs
+                  impactés.
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top whitespace-nowrap">1 h ouvrée</td>
-                <td className="py-3 text-white/70 text-sm align-top whitespace-nowrap">8 h ouvrées</td>
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top whitespace-nowrap">
+                  1 h ouvrée
+                </td>
+                <td className="py-3 text-primary/70 text-sm align-top whitespace-nowrap">
+                  8 h ouvrées
+                </td>
               </tr>
+
               <tr>
                 <td className="py-3 pr-4 align-top">
-                  <span className="text-secondary font-bold text-xs">P3 - Moyenne</span>
+                  <span className="text-secondary-strong font-bold text-xs">
+                    P3 - Moyenne
+                  </span>
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top">
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top">
                   Dysfonctionnement isolé, impact limité.
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top whitespace-nowrap">4 h ouvrées</td>
-                <td className="py-3 text-white/70 text-sm align-top whitespace-nowrap">24 h ouvrées</td>
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top whitespace-nowrap">
+                  4 h ouvrées
+                </td>
+                <td className="py-3 text-primary/70 text-sm align-top whitespace-nowrap">
+                  24 h ouvrées
+                </td>
               </tr>
+
               <tr>
                 <td className="py-3 pr-4 align-top">
-                  <span className="text-secondary font-bold text-xs">P4 - Faible</span>
+                  <span className="text-secondary-strong font-bold text-xs">
+                    P4 - Faible
+                  </span>
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top">
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top">
                   Demande de conseil, d&apos;évolution ou assistance non urgente.
                 </td>
-                <td className="py-3 pr-4 text-white/70 text-sm align-top whitespace-nowrap">1 jour ouvré</td>
-                <td className="py-3 text-white/70 text-sm align-top whitespace-nowrap">Selon planification</td>
+                <td className="py-3 pr-4 text-primary/70 text-sm align-top whitespace-nowrap">
+                  1 jour ouvré
+                </td>
+                <td className="py-3 text-primary/70 text-sm align-top whitespace-nowrap">
+                  Selon planification
+                </td>
               </tr>
             </tbody>
           </table>
@@ -151,8 +195,13 @@ export const slaData: LegalData = {
             "Niveau 3 : expert infrastructure ou développement.",
             "Niveau 4 : direction technique.",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0 mt-0.5">
+                -
+              </span>
               <span>{item}</span>
             </li>
           ))}
@@ -170,8 +219,13 @@ export const slaData: LegalData = {
             "Respecter les recommandations de sécurité",
             "Disposer des licences nécessaires",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0 mt-0.5">
+                -
+              </span>
               <span>{item}</span>
             </li>
           ))}
@@ -194,8 +248,22 @@ export const slaData: LegalData = {
       title: "Article 15 - Contact support",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
-        <span key="support"><a href="mailto:support@trinexta.fr" className="text-secondary hover:underline transition-colors">support@trinexta.fr</a></span>,
-        <span key="contact"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="support">
+          <a
+            href="mailto:support@trinexta.fr"
+            className="text-secondary-strong hover:underline transition-colors"
+          >
+            support@trinexta.fr
+          </a>
+        </span>,
+        <span key="contact">
+          <a
+            href="mailto:contact@trinexta.fr"
+            className="text-secondary-strong hover:underline transition-colors"
+          >
+            contact@trinexta.fr
+          </a>
+        </span>,
       ],
     },
   ],

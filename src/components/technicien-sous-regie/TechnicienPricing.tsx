@@ -3,16 +3,16 @@ import { FadeIn } from "@/components/ui/FadeIn"
 
 export function TechnicienPricing() {
   return (
-    <div className="py-24 bg-primary overflow-hidden">
+   <div className="py-24 bg-surface overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
           <FadeIn direction="right" className="w-full lg:w-1/2">
-            <h2 className="text-[36px] md:text-[44px] text-white mb-6 leading-tight font-black">
+            <h2 className="text-[42px] md:text-[52px] text-foreground mb-6 leading-tight font-black">
               Notre modèle : la transparence <br />
-              <em className="italic font-light font-serif text-secondary">absolue</em>
+              <em className="italic font-light font-serif text-secondary-strong">absolue</em>
             </h2>
-            <p className="text-white/60 text-[16px] leading-[1.8] max-w-lg">
+             <p className="text-muted-foreground text-[19px] leading-[1.8] max-w-lg">
               Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d&apos;intégration.
             </p>
           </FadeIn>
@@ -66,13 +66,13 @@ export function TechnicienPricing() {
                   
                   <div className="text-center mt-2 mb-2">
                     <h3 className="text-white text-[28px] font-black font-serif leading-none">Nos Tarifs</h3>
-                    <p className="text-secondary text-[26px] font-serif italic font-light mt-1">Transparence</p>
+                    <p className="text-secondary-strong text-[26px] font-serif italic font-light mt-1">Transparence</p>
                     <div className="w-12 h-1 bg-secondary mx-auto mt-5 rounded-full" />
                   </div>
 
                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10 relative shadow-lg">
                     <h4 className="text-white font-bold text-xl mb-1">TJM</h4>
-                    <p className="text-secondary text-xs mb-3 font-medium">Taux Journalier Moyen</p>
+                    <p className="text-secondary-strong text-xs mb-3 font-medium">Taux Journalier Moyen</p>
                     <p className="text-white/70 text-sm leading-relaxed">
                       Missions courtes ou ponctuelles. Vous payez uniquement les jours travaillés. Idéal pour les remplacements.
                     </p>
@@ -80,7 +80,7 @@ export function TechnicienPricing() {
 
                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10 relative shadow-lg">
                     <h4 className="text-white font-bold text-xl mb-1">Forfait</h4>
-                    <p className="text-secondary text-xs mb-3 font-medium">Mensuel fixe</p>
+                    <p className="text-secondary-strong text-xs mb-3 font-medium">Mensuel fixe</p>
                     <p className="text-white/70 text-sm leading-relaxed">
                       Missions longue durée. Budget lissé et prévisible. Simplicité administrative.
                     </p>

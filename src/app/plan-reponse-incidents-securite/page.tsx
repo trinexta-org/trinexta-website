@@ -15,14 +15,15 @@ export const metadata: Metadata = {
 
 export default function PlanReponseIncidentsPage() {
   return (
-    <main className="bg-primary min-h-screen relative space-y-12 pb-12">
-      <BreadcrumbJsonLd 
+     <main className="min-h-screen bg-surface">
+      <BreadcrumbJsonLd
         items={[
           { name: "Accueil", url: "/" },
-          { name: "plan-reponse-incidents-securite", url: "/plan-reponse-incidents-securite" }
-        ]} 
+          { name: "Plan de réponse aux incidents", url: "/plan-reponse-incidents-securite" },
+        ]}
       />
-      <Section className="bg-primary pt-24 pb-24">
+
+      <Section className="bg-surface pt-24 pb-24">
         <LegalContent data={planReponseIncidentsData} />
       </Section>
 

@@ -18,9 +18,6 @@ export default function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({ resolver: zodResolver(contactFormSchema) });
 
-  // Pré-remplissage depuis la query (CTA de l'audit SEO : URL auditée + score).
-  // Lu après hydratation (window.location) pour garder le formulaire rendu côté
-  // serveur, sans forcer le rendu client de la page. L'utilisateur reste libre.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const type = params.get("type");
@@ -67,49 +64,49 @@ export default function ContactForm() {
     return (
       <div className="py-12 text-center space-y-4">
         <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
-          <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 text-secondary-strong" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <p className="text-white font-semibold text-lg">{serverMessage}</p>
+        <p className="text-foreground font-semibold text-xl">{serverMessage}</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-left">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
 
       {/* Prénom / Nom */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label htmlFor="prenom" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+          <label htmlFor="prenom" className="text-sm font-bold uppercase tracking-widest text-foreground block">
             Prénom
           </label>
           <Input
             id="prenom"
             {...register("prenom")}
             placeholder="Jean"
-            className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 rounded-lg"
+            className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 rounded-lg"
           />
-          {errors.prenom && <p className="text-red-400 text-xs">{errors.prenom.message}</p>}
+          {errors.prenom && <p className="text-red-600 text-sm">{errors.prenom.message}</p>}
         </div>
         <div className="space-y-2">
-          <label htmlFor="nom" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+          <label htmlFor="nom" className="text-sm font-bold uppercase tracking-widest text-foreground block">
             Nom
           </label>
           <Input
             id="nom"
             {...register("nom")}
             placeholder="Dupont"
-            className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 rounded-lg"
+            className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 rounded-lg"
           />
-          {errors.nom && <p className="text-red-400 text-xs">{errors.nom.message}</p>}
+          {errors.nom && <p className="text-red-600 text-sm">{errors.nom.message}</p>}
         </div>
       </div>
 
       {/* Email */}
       <div className="space-y-2">
-        <label htmlFor="email" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+        <label htmlFor="email" className="text-sm font-bold uppercase tracking-widest text-foreground block">
           Email professionnel
         </label>
         <Input
@@ -117,14 +114,14 @@ export default function ContactForm() {
           type="email"
           {...register("email")}
           placeholder="j.dupont@entreprise.fr"
-          className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg"
+          className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg"
         />
-        {errors.email && <p className="text-red-400 text-xs">{errors.email.message}</p>}
+        {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label htmlFor="telephone" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+          <label htmlFor="telephone" className="text-sm font-bold uppercase tracking-widest text-foreground block">
             Téléphone
           </label>
           <Input
@@ -132,34 +129,34 @@ export default function ContactForm() {
             type="tel"
             {...register("telephone")}
             placeholder="06 00 00 00 00"
-            className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg"
+            className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg"
           />
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="type" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+          <label htmlFor="type" className="text-sm font-bold uppercase tracking-widest text-foreground block">
             Motif de contact
           </label>
           <div className="relative">
             <select
               id="type"
               {...register("type")}
-              className="w-full h-12 px-4 pr-10 rounded-lg bg-black/20 border border-white/20 text-white appearance-none cursor-pointer focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
+              className="w-full h-14 px-4 pr-10 rounded-lg bg-background border border-border text-foreground text-base appearance-none cursor-pointer focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
             >
-              <option value="" disabled className="bg-primary text-white/50">Sélectionnez...</option>
+              <option value="" disabled className="bg-background text-muted-foreground">Sélectionnez...</option>
               {CONTACT_TYPES.map((t) => (
-                <option key={t} value={t} className="bg-primary text-white">
+                <option key={t} value={t} className="bg-background text-foreground">
                   {{ devis: "Demande de devis", support: "Support technique", autre: "Autre" }[t]}
                 </option>
               ))}
             </select>
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             </div>
           </div>
-          {errors.type && <p className="text-red-400 text-xs">{errors.type.message}</p>}
+          {errors.type && <p className="text-red-600 text-sm">{errors.type.message}</p>}
         </div>
       </div>
 
@@ -168,35 +165,35 @@ export default function ContactForm() {
         <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="entreprise" className="text-[11px] font-bold uppercase tracking-widest text-white block">Entreprise</label>
-              <Input id="entreprise" {...register("entreprise")} placeholder="Nom de votre société" className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg" />
-              {errors.entreprise && <p className="text-red-400 text-xs">{errors.entreprise.message}</p>}
+              <label htmlFor="entreprise" className="text-sm font-bold uppercase tracking-widest text-foreground block">Entreprise</label>
+              <Input id="entreprise" {...register("entreprise")} placeholder="Nom de votre société" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              {errors.entreprise && <p className="text-red-600 text-sm">{errors.entreprise.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="siret" className="text-[11px] font-bold uppercase tracking-widest text-white block">Numéro SIRET</label>
-              <Input id="siret" {...register("siret")} placeholder="12345678901234" className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary h-12 w-full rounded-lg" />
-              {errors.siret && <p className="text-red-400 text-xs">{errors.siret.message}</p>}
+              <label htmlFor="siret" className="text-sm font-bold uppercase tracking-widest text-foreground block">Numéro SIRET</label>
+              <Input id="siret" {...register("siret")} placeholder="12345678901234" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              {errors.siret && <p className="text-red-600 text-sm">{errors.siret.message}</p>}
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="secteur" className="text-[11px] font-bold uppercase tracking-widest text-white block">Secteur d&apos;activité</label>
-              <select id="secteur" {...register("secteur")} className="w-full h-12 px-4 rounded-lg bg-black/20 border border-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-                <option value="" className="bg-primary text-white/50">Sélectionnez...</option>
-                {SECTEURS.map((s) => <option key={s} value={s} className="bg-primary text-white">{s}</option>)}
+              <label htmlFor="secteur" className="text-sm font-bold uppercase tracking-widest text-foreground block">Secteur d&apos;activité</label>
+              <select id="secteur" {...register("secteur")} className="w-full h-14 px-4 rounded-lg bg-background border border-border text-foreground text-base focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
+                <option value="" className="bg-background text-muted-foreground">Sélectionnez...</option>
+                {SECTEURS.map((s) => <option key={s} value={s} className="bg-background text-foreground">{s}</option>)}
               </select>
-              {errors.secteur && <p className="text-red-400 text-xs">{errors.secteur.message}</p>}
+              {errors.secteur && <p className="text-red-600 text-sm">{errors.secteur.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="taille" className="text-[11px] font-bold uppercase tracking-widest text-white block">Taille de l&apos;entreprise</label>
-              <select id="taille" {...register("taille")} className="w-full h-12 px-4 rounded-lg bg-black/20 border border-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-                <option value="" className="bg-primary text-white/50">Sélectionnez...</option>
-                {TAILLES.map((t) => <option key={t} value={t} className="bg-primary text-white">{t} salariés</option>)}
+              <label htmlFor="taille" className="text-sm font-bold uppercase tracking-widest text-foreground block">Taille de l&apos;entreprise</label>
+              <select id="taille" {...register("taille")} className="w-full h-14 px-4 rounded-lg bg-background border border-border text-foreground text-base focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
+                <option value="" className="bg-background text-muted-foreground">Sélectionnez...</option>
+                {TAILLES.map((t) => <option key={t} value={t} className="bg-background text-foreground">{t} salariés</option>)}
               </select>
-              {errors.taille && <p className="text-red-400 text-xs">{errors.taille.message}</p>}
+              {errors.taille && <p className="text-red-600 text-sm">{errors.taille.message}</p>}
             </div>
           </div>
         </div>
@@ -205,18 +202,18 @@ export default function ContactForm() {
       {/* Champ conditionnel — support */}
       {type === "support" && (
         <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <label htmlFor="urgence" className="text-[11px] font-bold uppercase tracking-widest text-white block">Niveau d&apos;urgence</label>
-          <select id="urgence" {...register("urgence")} className="w-full h-12 px-4 rounded-lg bg-black/20 border border-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-            <option value="" className="bg-primary text-white/50">Sélectionnez...</option>
-            {URGENCES.map((u) => <option key={u} value={u} className="bg-primary text-white">{u}</option>)}
+          <label htmlFor="urgence" className="text-sm font-bold uppercase tracking-widest text-foreground block">Niveau d&apos;urgence</label>
+          <select id="urgence" {...register("urgence")} className="w-full h-14 px-4 rounded-lg bg-background border border-border text-foreground text-base focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
+            <option value="" className="bg-background text-muted-foreground">Sélectionnez...</option>
+            {URGENCES.map((u) => <option key={u} value={u} className="bg-background text-foreground">{u}</option>)}
           </select>
-          {errors.urgence && <p className="text-red-400 text-xs">{errors.urgence.message}</p>}
+          {errors.urgence && <p className="text-red-600 text-sm">{errors.urgence.message}</p>}
         </div>
       )}
 
       {/* Message */}
       <div className="space-y-2">
-        <label htmlFor="message" className="text-[11px] font-bold uppercase tracking-widest text-white block">
+        <label htmlFor="message" className="text-sm font-bold uppercase tracking-widest text-foreground block">
           Votre message
         </label>
         <Textarea
@@ -224,25 +221,25 @@ export default function ContactForm() {
           {...register("message")}
           placeholder={type === "support" ? "Décrivez votre incident technique..." : "Comment pouvons-nous vous aider ?"}
           rows={4}
-          className="bg-black/20 border-white/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary w-full rounded-lg"
+          className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary w-full rounded-lg"
         />
-        {errors.message && <p className="text-red-400 text-xs">{errors.message.message}</p>}
+        {errors.message && <p className="text-red-600 text-sm">{errors.message.message}</p>}
       </div>
 
-      {serverError && <p className="text-red-400 text-sm text-center">{serverError}</p>}
+      {serverError && <p className="text-red-600 text-sm text-center">{serverError}</p>}
 
       <Button
         variant="secondary"
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 text-sm font-bold uppercase tracking-wider rounded-xl shadow-xl transition-all mt-4"
+        className="w-full py-4 text-base font-bold uppercase tracking-wider rounded-xl shadow-xl transition-all mt-4"
       >
         {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
       </Button>
 
-      <p className="text-center text-white/60 text-xs mt-4 block">
+      <p className="text-center text-muted-foreground text-sm mt-4 block">
         En soumettant ce formulaire, vous acceptez notre{" "}
-        <a href="/confidentialite" className="text-secondary underline hover:text-white transition-colors">
+        <a href="/confidentialite" className="text-secondary-strong underline hover:text-foreground transition-colors">
           politique de confidentialité
         </a>.
       </p>

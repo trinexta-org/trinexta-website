@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { ViewportHero } from "@/components/layout/ViewportHero"
+ import { WaveDivider } from "@/components/ui/WaveDivider"
 import { Badge } from "@/components/ui/Badge"
 import { Entrance } from "@/components/ui/Entrance"
 import { FinalCTA } from "@/components/FinalCTA"
@@ -55,10 +56,10 @@ export async function generateMetadata({
 function PhaseLabel({ number, label }: { number: string; label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="font-mono text-xl font-bold text-secondary tracking-widest md:text-2xl">
+      <span className="font-mono text-xl font-bold text-secondary-strong tracking-widest md:text-2xl">
         {number}
       </span>
-      <span className="text-xl font-bold uppercase tracking-[0.12em] text-white/80 md:text-2xl">
+      <span className="text-xl font-bold uppercase tracking-[0.12em] text-primary md:text-2xl">
         {label}
       </span>
     </div>
@@ -76,7 +77,7 @@ export default async function CaseClientDetailPage({
   if (!item) notFound()
 
   return (
-    <main className="min-h-screen bg-primary text-white">
+    <main className="min-h-screen bg-surface">
       {/* Hero */}
       <ViewportHero>
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.heroImage}')` }} />
@@ -87,7 +88,7 @@ export default async function CaseClientDetailPage({
             <Entrance delay={0} duration={0.6}>
               <Link
                 href="/cas-clients"
-                className="inline-flex text-sm font-semibold text-secondary hover:text-white"
+                className="inline-flex text-sm font-semibold text-secondary-soft hover:text-white"
               >
                 Retour aux cas clients
               </Link>
@@ -117,8 +118,10 @@ export default async function CaseClientDetailPage({
         </Container>
       </ViewportHero>
 
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
+
       {/* Timeline */}
-      <Section className="pb-16 pt-4 md:pt-6">
+      <Section className="bg-surface pb-16 pt-4 md:pt-6">
         <div className="space-y-0">
 
           {/* Phase 01 — Situation initiale */}
@@ -139,19 +142,19 @@ export default async function CaseClientDetailPage({
                   <div className="space-y-4">
                     {item.context.map((paragraph, i) => (
                       <FadeIn key={paragraph} delay={i * 0.09}>
-                        <Text className="text-white/80 leading-relaxed">{paragraph}</Text>
+                        <Text className="text-primary/70 leading-relaxed">{paragraph}</Text>
                       </FadeIn>
                     ))}
                   </div>
 
                   <div className="mt-8">
-                    <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
+                    <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/70">
                       Points de friction
                     </Text>
                     <FadeIn delay={0.2}>
                       <ul className="space-y-3">
                         {item.challenges.map((challenge) => (
-                          <li key={challenge} className="flex gap-3 text-sm text-white/80 leading-relaxed md:text-base">
+                          <li key={challenge} className="flex gap-3 text-sm text-primary/70 leading-relaxed md:text-base">
                             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary/60" />
                             <span>{challenge}</span>
                           </li>
@@ -173,10 +176,10 @@ export default async function CaseClientDetailPage({
                         className="w-full object-cover"
                         sizes="(max-width: 1024px) 100vw, 340px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
                     </div>
-                    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                      <Text className="text-sm italic leading-relaxed text-white/65 md:text-base">
+                    <blockquote className="rounded-2xl border border-border bg-background p-5 shadow-sm">
+                      <Text className="text-sm italic leading-relaxed text-muted-foreground md:text-base">
                         &ldquo;{item.cardChallenge}&rdquo;
                       </Text>
                     </blockquote>
@@ -201,18 +204,18 @@ export default async function CaseClientDetailPage({
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                 {/* Solutions */}
                 <div className="space-y-4">
-                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
+                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/70">
                     Solutions déployées
                   </Text>
                   {item.solutions.map((solution, i) => (
                     <FadeIn key={solution.label} delay={i * 0.1}>
-                      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                      <div className="rounded-2xl border border-border bg-background p-5 shadow-sm">
                         <Link href={solution.href} className="inline-flex">
-                          <Badge className="border-secondary/30 bg-secondary/15 text-white hover:bg-secondary/25">
+                          <Badge className="border-secondary/30 bg-secondary/15 text-primary hover:bg-secondary/25">
                             {solution.label}
                           </Badge>
                         </Link>
-                        <Text className="mt-3 text-sm text-white/80 leading-relaxed md:text-base">
+                        <Text className="mt-3 text-sm text-muted-foreground leading-relaxed md:text-base">
                           {solution.content}
                         </Text>
                       </div>
@@ -223,12 +226,12 @@ export default async function CaseClientDetailPage({
                 {/* Benefits */}
                 <FadeIn delay={0.25}>
                   <div>
-                    <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
+                    <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/70">
                       Bénéfices concrets
                     </Text>
                     <ul className="mt-4 space-y-4">
                       {item.benefits.map((benefit) => (
-                        <li key={benefit} className="flex gap-3 text-sm text-white/80 leading-relaxed md:text-base">
+                        <li key={benefit} className="flex gap-3 text-sm text-primary/70 leading-relaxed md:text-base">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" />
                           <span>{benefit}</span>
                         </li>
@@ -262,11 +265,11 @@ export default async function CaseClientDetailPage({
 
                 {/* Result pull-quote */}
                 <FadeIn delay={0.3}>
-                  <div className="mt-8 rounded-2xl border border-secondary/30 bg-secondary/[0.07] p-6">
-                    <Text className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary">
+                  <div className="mt-8 rounded-2xl border border-secondary/30 bg-secondary/[0.06] p-6">
+                    <Text className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary-strong">
                       En résumé
                     </Text>
-                    <Text className="text-sm italic leading-relaxed text-white/80 md:text-base">
+                    <Text className="text-sm italic leading-relaxed text-primary md:text-base">
                       &ldquo;{item.cardResult}&rdquo;
                     </Text>
                   </div>
@@ -276,7 +279,7 @@ export default async function CaseClientDetailPage({
                 <div className="mt-8 flex flex-wrap gap-3">
                   {item.solutions.map((solution) => (
                     <Link key={solution.label} href={solution.href}>
-                      <Badge className="border-white/10 bg-white/10 text-white hover:bg-white/15">
+                      <Badge className="border-border bg-background text-primary hover:bg-accent">
                         {solution.label}
                       </Badge>
                     </Link>

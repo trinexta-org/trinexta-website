@@ -26,7 +26,7 @@ export function ChatBubble({ side, avatar, children, className }: ChatBubbleProp
         ) : (
           <span
             aria-hidden="true"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-secondary/40 bg-secondary/15 font-serif text-sm italic text-secondary"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-secondary/40 bg-secondary/15 font-serif text-sm italic text-secondary-strong"
           >
             T
           </span>

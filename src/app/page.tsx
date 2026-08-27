@@ -19,6 +19,7 @@ import { CustomerReviews } from "@/components/CustomerReviews"
 import { Section } from "@/components/layout/Section"
 import { BannerCTA } from "@/components/layout/BannerCTA"
 import { Button } from "@/components/ui/Button"
+import { WaveDivider } from "@/components/ui/WaveDivider"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = "Partenaire Informatique à Évry, en Essonne | Trinexta";
@@ -63,7 +64,7 @@ async function PartnersData() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-primary relative">
+    <main className="min-h-screen bg-surface relative">
       <JsonLd data={trinextaLocalBusiness} />
       <BreadcrumbJsonLd
         items={[
@@ -71,18 +72,20 @@ export default function Home() {
         ]} 
       />
       <HeroSection />
-      <ReassuranceSection />
+
+      <WaveDivider from="primary" to="surface" amplitude="ample" />
 
       <TransitionTitle
         surtitle="Notre cœur de métier"
         line1="Nos Services"
         line2="Infogérance"
       />
+
       <ServicesSection />
 
       <Section className="py-12 md:py-16">
         <BannerCTA
-          variant="primary"
+          variant="surface"
           title="Votre site est-il vraiment vu par Google ?"
           description="Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
           action={
@@ -93,9 +96,17 @@ export default function Home() {
         />
       </Section>
 
+      {/* Entrée du bloc sombre central : le circuit passe de la marge gauche
+          à la droite. Les raccords traversants se numérotent ensuite de 1 en 1
+          dans l'ordre de la page, et le courant alterne à chacun. */}
+      <WaveDivider from="surface" to="primary" amplitude="ample" crossing={1} />
+
       <ApproachSection />
 
       <KpiSection />
+
+      {/* Sortie du bloc sombre : le courant repart vers la marge gauche. */}
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={2} />
 
       <TransitionTitle
         surtitle="Ce que nous offrons"
@@ -103,6 +114,14 @@ export default function Home() {
         line2="Trinexta ?"
       />
       <WhyChooseUs />
+
+      <WaveDivider from="surface" to="primary" amplitude="low" crossing={3} />
+
+      <InterventionMap />
+
+      <WaveDivider from="primary" to="surface" amplitude="low" crossing={4} />
+
+      <ReassuranceSection />
 
       <TransitionTitle
         surtitle="Écosystème"
@@ -113,16 +132,12 @@ export default function Home() {
         <PartnersData />
       </Suspense>
 
-      <InterventionMap />
-
       <TransitionTitle
         surtitle="Expérience"
         line1="Ce qu'ils disent"
         line2="de nous"
       />
-
       <CustomerReviews/>
-
       <FinalCTA />
       <NewsletterCTA/>
 

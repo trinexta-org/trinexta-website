@@ -7,10 +7,14 @@ import { NewsletterModal } from "@/components/blog/NewsletterModal";
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA";
 
 const title = "Blog informatique TPE PME - Conseils IT";
-const description = "Découvrez nos articles, conseils et guides en infogérance, cybersécurité et maintenance informatique pour les entreprises en Île-de-France.";
+
+const description =
+  "Découvrez nos articles, conseils et guides en infogérance, cybersécurité et maintenance informatique pour les entreprises en Île-de-France.";
 
 type BlogPageProps = {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{
+    q?: string;
+  }>;
 };
 
 export const metadata: Metadata = {
@@ -24,7 +28,13 @@ export const metadata: Metadata = {
     description,
     type: "website",
     url: "/blog",
-    images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
+    images: [
+      {
+        url: "/images/og-default.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -34,22 +44,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage({ searchParams }: BlogPageProps) {
+export default async function BlogPage({
+  searchParams,
+}: BlogPageProps) {
   const { q } = await searchParams;
-  const { articles } = await getArticles({ query: q });
+
+  const { articles } = await getArticles({
+    query: q,
+  });
 
   return (
-    <main className="bg-primary min-h-screen relative text-white">
-      <BreadcrumbJsonLd 
+    <main className="bg-surface min-h-screen relative text-primary">
+      <BreadcrumbJsonLd
         items={[
           { name: "Accueil", url: "/" },
-          { name: "blog", url: "/blog" }
-        ]} 
+          { name: "Blog", url: "/blog" },
+        ]}
       />
 
-      <BlogList initialArticles={articles} categories={CATEGORIES} />
-      <NewsletterModal/>
-      <NewsletterCTA/>
+      {/* BLOG */}
+      <BlogList
+        initialArticles={articles}
+        categories={CATEGORIES}
+      />
+
+      {/* NEWSLETTER */}
+      <NewsletterModal />
+      <NewsletterCTA />
     </main>
   );
 }

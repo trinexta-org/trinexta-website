@@ -34,8 +34,8 @@ export const mentionsLegalesData: LegalData = {
         "TVA intracommunautaire : FR81 942 020 082",
         "Immatriculation : Registre du Commerce et des Sociétés d'Évry",
         "Téléphone : 09 78 25 07 46",
-        <span key="email">E-mail : <a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
-        <span key="site">Site internet : <a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">https://www.trinexta.fr</a></span>,
+        <span key="email">E-mail : <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="site">Site internet : <a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.trinexta.fr</a></span>,
         "TRINEXTA accompagne les entreprises, collectivités, associations et professionnels dans leur informatique au quotidien. La société intervient principalement en Île-de-France dans les domaines du support informatique, de l'infogérance, de la maintenance, de la cybersécurité, des infrastructures systèmes et réseaux, des solutions cloud, de Microsoft 365, du développement web, de l'hébergement web et applicatif, des solutions SaaS, du conseil numérique, ainsi que de l'accompagnement au référencement naturel (SEO) et à la visibilité sur les moteurs conversationnels (GEO).",
       ],
     },
@@ -43,7 +43,7 @@ export const mentionsLegalesData: LegalData = {
       title: "Directeur de la publication",
       paragraphs: [
         "Le directeur de la publication est le représentant légal de TRUSTECH IT SUPPORT en exercice.",
-        <span key="contact-dir">Pour toute question relative au contenu du site : <a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="contact-dir">Pour toute question relative au contenu du site : <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
     },
     {
@@ -53,7 +53,7 @@ export const mentionsLegalesData: LegalData = {
         "Siège social : 2 rue Kellermann, 59100 Roubaix, France",
         "Immatriculée au RCS de Lille Métropole sous le numéro 424 761 419",
         "Téléphone : 1007",
-        <span key="ovh">Site web : <a href="https://www.ovhcloud.com" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">https://www.ovhcloud.com</a></span>,
+        <span key="ovh">Site web : <a href="https://www.ovhcloud.com" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.ovhcloud.com</a></span>,
       ],
     },
     {
@@ -88,8 +88,8 @@ export const mentionsLegalesData: LegalData = {
             "Accompagnement au référencement naturel (SEO)",
             "Accompagnement à la visibilité sur les moteurs conversationnels (GEO)",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+            <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
+              <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
               <span>{item}</span>
             </li>
           ))}
@@ -138,13 +138,13 @@ export const mentionsLegalesData: LegalData = {
     {
       title: "Protection des données personnelles",
       paragraphs: [
-        <span key="rgpd">TRINEXTA s&apos;engage à respecter la réglementation applicable en matière de protection des données personnelles, notamment le Règlement Général sur la Protection des Données (RGPD) et la Loi Informatique et Libertés. Les modalités de collecte, d&apos;utilisation, de conservation et de protection des données personnelles sont détaillées dans la <a href="/confidentialite" className="text-secondary hover:underline transition-colors">Politique de Confidentialité</a> du site.</span>,
+        <span key="rgpd">TRINEXTA s&apos;engage à respecter la réglementation applicable en matière de protection des données personnelles, notamment le Règlement Général sur la Protection des Données (RGPD) et la Loi Informatique et Libertés. Les modalités de collecte, d&apos;utilisation, de conservation et de protection des données personnelles sont détaillées dans la <a href="/confidentialite" className="text-secondary-strong hover:underline transition-colors">Politique de Confidentialité</a> du site.</span>,
       ],
     },
     {
       title: "Cookies",
       paragraphs: [
-        <span key="cookies">Le site utilise des cookies et technologies similaires afin d&apos;améliorer l&apos;expérience utilisateur, de mesurer l&apos;audience et d&apos;assurer certaines fonctionnalités. Les modalités de gestion des cookies sont détaillées dans la <a href="/cookies" className="text-secondary hover:underline transition-colors">Politique de Cookies</a>.</span>,
+        <span key="cookies">Le site utilise des cookies et technologies similaires afin d&apos;améliorer l&apos;expérience utilisateur, de mesurer l&apos;audience et d&apos;assurer certaines fonctionnalités. Les modalités de gestion des cookies sont détaillées dans la <a href="/cookies" className="text-secondary-strong hover:underline transition-colors">Politique de Cookies</a>.</span>,
       ],
     },
     {
@@ -165,7 +165,7 @@ export const mentionsLegalesData: LegalData = {
         "TRINEXTA BY TRUSTECH IT SUPPORT",
         "74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
         "Téléphone : 09 78 25 07 46",
-        <span key="email-c"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="email-c"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
     },
   ],

@@ -1,14 +1,29 @@
 import React from "react"
 import type { LegalData } from "./mentions-legales"
 
-function ListSection({ title, items }: { title: string; items: string[] }) {
+function ListSection({
+  title,
+  items,
+}: {
+  title: string
+  items: string[]
+}) {
   return (
     <div>
-      <p className="text-white font-semibold text-sm mb-2">{title}</p>
+      <p className="text-primary font-semibold text-sm mb-2">
+        {title}
+      </p>
+
       <ul className="space-y-1.5">
         {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-            <span className="text-secondary shrink-0 mt-0.5">-</span>
+          <li
+            key={i}
+            className="flex items-start gap-2 text-sm text-primary/70"
+          >
+            <span className="text-secondary-strong shrink-0 mt-0.5">
+              -
+            </span>
+
             <span>{item}</span>
           </li>
         ))}
@@ -22,27 +37,77 @@ export const charteAssistanceData: LegalData = {
     title: "Assistance cybersécurité",
     imageSrc: "/images/legal/hero-mentions.jpg",
   },
+
   sections: [
     {
       title: "Présentation",
+
       paragraphs: [
         "TRINEXTA accompagne les entreprises, TPE, PME, professions libérales, associations et collectivités dans la prévention, la détection et la gestion des incidents de cybersécurité. Une réaction rapide permet souvent de limiter les impacts financiers, opérationnels et techniques d'une cyberattaque.",
       ],
     },
+
     {
       title: "Contact d'urgence",
+
       content: (
-        <div className="space-y-2 text-sm text-white/70">
-          <p><span className="text-white font-semibold">Téléphone :</span> <a href="tel:0978250746" className="text-secondary hover:underline transition-colors">09 78 25 07 46</a></p>
-          <p><span className="text-white font-semibold">Support :</span> <a href="mailto:support@trinexta.fr" className="text-secondary hover:underline transition-colors">support@trinexta.fr</a></p>
-          <p><span className="text-white font-semibold">Contact :</span> <a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></p>
-          <p><span className="text-white font-semibold">Bureau :</span> 7 rue Montespan, 91000 Évry-Courcouronnes</p>
-          <p><span className="text-white font-semibold">Horaires :</span> du lundi au vendredi, 08h00 - 19h00</p>
+        <div className="space-y-2 text-sm text-primary/70">
+          <p>
+            <span className="text-primary font-semibold">
+              Téléphone :
+            </span>{" "}
+            <a
+              href="tel:0978250746"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              09 78 25 07 46
+            </a>
+          </p>
+
+          <p>
+            <span className="text-primary font-semibold">
+              Support :
+            </span>{" "}
+            <a
+              href="mailto:support@trinexta.fr"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              support@trinexta.fr
+            </a>
+          </p>
+
+          <p>
+            <span className="text-primary font-semibold">
+              Contact :
+            </span>{" "}
+            <a
+              href="mailto:contact@trinexta.fr"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              contact@trinexta.fr
+            </a>
+          </p>
+
+          <p>
+            <span className="text-primary font-semibold">
+              Bureau :
+            </span>{" "}
+            7 rue Montespan, 91000 Évry-Courcouronnes
+          </p>
+
+          <p>
+            <span className="text-primary font-semibold">
+              Horaires :
+            </span>{" "}
+            du lundi au vendredi, 08h00 - 19h00
+          </p>
         </div>
       ),
     },
+
     {
       title: "Mon ordinateur a été piraté",
+
       content: (
         <div className="space-y-5">
           <ListSection
@@ -55,6 +120,7 @@ export const charteAssistanceData: LegalData = {
               "Activité réseau inhabituelle",
             ]}
           />
+
           <ListSection
             title="À faire immédiatement"
             items={[
@@ -68,8 +134,10 @@ export const charteAssistanceData: LegalData = {
         </div>
       ),
     },
+
     {
       title: "Mon compte Microsoft 365 a été compromis",
+
       content: (
         <div className="space-y-5">
           <ListSection
@@ -81,34 +149,36 @@ export const charteAssistanceData: LegalData = {
               "Connexions depuis un pays étranger",
             ]}
           />
-          <div>
-            <p className="text-white font-semibold text-sm mb-2">À faire immédiatement</p>
-            <ul className="space-y-1.5">
-              {[
-                "Modifier le mot de passe.",
-                "Activer l'authentification multifacteur (MFA).",
-                "Révoquer toutes les sessions actives.",
-                "Vérifier les règles de messagerie.",
-                "Contrôler les applications autorisées.",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                  <span className="text-secondary shrink-0 mt-0.5">-</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-sm text-white/70 mt-3">
-              Centre de sécurité Microsoft :{" "}
-              <a href="https://security.microsoft.com" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">
-                security.microsoft.com
-              </a>
-            </p>
-          </div>
+
+          <ListSection
+            title="À faire immédiatement"
+            items={[
+              "Modifier le mot de passe.",
+              "Activer l'authentification multifacteur (MFA).",
+              "Révoquer toutes les sessions actives.",
+              "Vérifier les règles de messagerie.",
+              "Contrôler les applications autorisées.",
+            ]}
+          />
+
+          <p className="text-sm text-primary/70 mt-3">
+            Centre de sécurité Microsoft :{" "}
+            <a
+              href="https://security.microsoft.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary-strong hover:underline transition-colors"
+            >
+              security.microsoft.com
+            </a>
+          </p>
         </div>
       ),
     },
+
     {
       title: "Je suis victime d'un ransomware",
+
       content: (
         <div className="space-y-5">
           <ListSection
@@ -120,6 +190,7 @@ export const charteAssistanceData: LegalData = {
               "Identifier les sauvegardes disponibles.",
             ]}
           />
+
           <ListSection
             title="À ne pas faire"
             items={[
@@ -130,11 +201,16 @@ export const charteAssistanceData: LegalData = {
         </div>
       ),
     },
+
     {
       title: "J'ai reçu un e-mail suspect",
+
       content: (
         <div className="space-y-3">
-          <p className="text-sm text-white/70">Avant de cliquer :</p>
+          <p className="text-sm text-primary/70">
+            Avant de cliquer :
+          </p>
+
           <ul className="space-y-1.5">
             {[
               "Vérifiez l'adresse réelle de l'expéditeur.",
@@ -143,18 +219,29 @@ export const charteAssistanceData: LegalData = {
               "Méfiez-vous des demandes urgentes ou inhabituelles.",
               "Ne communiquez jamais vos identifiants.",
             ].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <li
+                key={i}
+                className="flex items-start gap-2 text-sm text-primary/70"
+              >
+                <span className="text-secondary-strong shrink-0 mt-0.5">
+                  -
+                </span>
+
                 <span>{item}</span>
               </li>
             ))}
           </ul>
-          <p className="text-sm text-white/70">En cas de doute, contactez TRINEXTA avant toute action.</p>
+
+          <p className="text-sm text-primary/70">
+            En cas de doute, contactez TRINEXTA avant toute action.
+          </p>
         </div>
       ),
     },
+
     {
       title: "Fuite de données personnelles",
+
       content: (
         <ul className="space-y-2">
           {[
@@ -165,16 +252,24 @@ export const charteAssistanceData: LegalData = {
             "Contactez votre responsable informatique.",
             "Vérifiez vos obligations de notification auprès de la CNIL (sous 72 heures lorsqu'elles s'appliquent).",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0">
+                -
+              </span>
+
               <span>{item}</span>
             </li>
           ))}
         </ul>
       ),
     },
+
     {
       title: "Bonnes pratiques de cybersécurité",
+
       content: (
         <ul className="space-y-2">
           {[
@@ -186,18 +281,26 @@ export const charteAssistanceData: LegalData = {
             "Contrôle des accès administrateurs",
             "Surveillance des connexions",
           ].map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-              <span className="text-secondary shrink-0 mt-0.5">-</span>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-primary/70"
+            >
+              <span className="text-secondary-strong shrink-0">
+                -
+              </span>
+
               <span>{item}</span>
             </li>
           ))}
         </ul>
       ),
     },
+
     {
       title: "Ressources officielles",
+
       content: (
-        <div className="space-y-4 text-sm text-white/70">
+        <div className="space-y-4 text-sm text-primary/70">
           {[
             {
               name: "Cybermalveillance.gouv.fr",
@@ -237,9 +340,20 @@ export const charteAssistanceData: LegalData = {
             },
           ].map(({ name, desc, href, label }) => (
             <div key={name}>
-              <p className="text-white font-semibold">{name}</p>
-              <p className="mb-1">{desc}</p>
-              <a href={href} target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">
+              <p className="text-primary font-semibold">
+                {name}
+              </p>
+
+              <p className="mb-1">
+                {desc}
+              </p>
+
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-secondary-strong hover:underline transition-colors"
+              >
                 {label}
               </a>
             </div>
@@ -247,11 +361,16 @@ export const charteAssistanceData: LegalData = {
         </div>
       ),
     },
+
     {
       title: "Zone d'intervention",
+
       content: (
         <div className="space-y-3">
-          <p className="text-sm text-white/70">TRINEXTA intervient auprès des entreprises situées en Île-de-France :</p>
+          <p className="text-sm text-primary/70">
+            TRINEXTA intervient auprès des entreprises situées en Île-de-France :
+          </p>
+
           <ul className="space-y-1.5">
             {[
               "Essonne (91)",
@@ -263,13 +382,22 @@ export const charteAssistanceData: LegalData = {
               "Val-d'Oise (95)",
               "Seine-et-Marne (77)",
             ].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-                <span className="text-secondary shrink-0 mt-0.5">-</span>
+              <li
+                key={i}
+                className="flex items-start gap-2 text-sm text-primary/70"
+              >
+                <span className="text-secondary-strong shrink-0">
+                  -
+                </span>
+
                 <span>{item}</span>
               </li>
             ))}
           </ul>
-          <p className="text-sm text-white/70">Interventions sur site et assistance à distance.</p>
+
+          <p className="text-sm text-primary/70">
+            Interventions sur site et assistance à distance.
+          </p>
         </div>
       ),
     },

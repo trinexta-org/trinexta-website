@@ -20,7 +20,7 @@ export const cookiesData: LegalData = {
         "SASU au capital de 15 000 €",
         "SIREN : 942 020 082",
         "Adresse : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
-        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
         "Téléphone : 09 78 25 07 46",
       ],
     },
@@ -33,7 +33,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 3 - Catégories de cookies utilisés",
       content: (
-        <div className="space-y-5 text-sm text-white/70">
+        <div className="space-y-5 text-sm text-primary/70">
           {[
             {
               cat: "3.1 Cookies strictement nécessaires",
@@ -57,7 +57,7 @@ export const cookiesData: LegalData = {
             },
           ].map(({ cat, desc }) => (
             <div key={cat}>
-              <p className="text-white font-semibold mb-1">{cat}</p>
+              <p className="text-primary font-semibold mb-1">{cat}</p>
               <p>{desc}</p>
             </div>
           ))}
@@ -79,7 +79,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 6 - Gestion des cookies",
       content: (
-        <div className="space-y-3 text-sm text-white/70">
+        <div className="space-y-3 text-sm text-primary/70">
           <p>Vous pouvez à tout moment supprimer les cookies, bloquer certains cookies ou modifier vos préférences. Ces paramètres peuvent être configurés directement depuis votre navigateur :</p>
           <ul className="space-y-1.5">
             {[
@@ -89,8 +89,8 @@ export const cookiesData: LegalData = {
               ["Safari", "https://support.apple.com", "support.apple.com"],
             ].map(([browser, href, label]) => (
               <li key={browser} className="flex items-start gap-2">
-                <span className="text-secondary shrink-0">-</span>
-                <span>{browser} : <a href={href} target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline transition-colors">{label}</a></span>
+                <span className="text-secondary-strong shrink-0">-</span>
+                <span>{browser} : <a href={href} target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">{label}</a></span>
               </li>
             ))}
           </ul>
@@ -106,7 +106,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 8 - Protection des données personnelles",
       paragraphs: [
-        <span key="rgpd">Certaines données collectées via les cookies peuvent constituer des données personnelles. Leur traitement est réalisé conformément à notre <a href="/confidentialite" className="text-secondary hover:underline transition-colors">Politique de Confidentialité</a>.</span>,
+        <span key="rgpd">Certaines données collectées via les cookies peuvent constituer des données personnelles. Leur traitement est réalisé conformément à notre <a href="/confidentialite" className="text-secondary-strong hover:underline transition-colors">Politique de Confidentialité</a>.</span>,
       ],
     },
     {
@@ -119,7 +119,7 @@ export const cookiesData: LegalData = {
       title: "Article 10 - Contact",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
-        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary hover:underline transition-colors">contact@trinexta.fr</a></span>,
+        <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
     },
   ],
