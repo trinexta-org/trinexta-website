@@ -25,7 +25,7 @@ const comparisonPoints = [
 export function SereniteDifferentiator() {
   return (
     <div className="w-full">
-      <div className="border border-secondary/20 rounded-2xl overflow-hidden bg-[#dce7f2] shadow-xl">
+      <div className="border border-secondary/20 rounded-2xl overflow-hidden bg-surface-strong shadow-xl">
         <div className="hidden md:grid grid-cols-3 bg-secondary/10 border-b border-secondary/20 p-6 text-base font-bold tracking-wider uppercase text-primary/70">
 
           <div>Critère</div>
