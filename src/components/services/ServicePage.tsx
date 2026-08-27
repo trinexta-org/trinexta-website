@@ -174,7 +174,7 @@ function BentoCell({
         {hasImage && (
           <>
             <Image
-              src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`}
+              src={bentoImageSrc(serviceSlug, imageIndex)}
               alt={feat.title}
               fill
               sizes="(min-width: 768px) 44vw, 100vw"
@@ -652,7 +652,7 @@ export function ServicePage({
                   {hasImage && (
                     <>
                       <Image
-                        src={`/images/services/${serviceSlug}/bento-${imageIndex}.jpg`}
+                        src={bentoImageSrc(serviceSlug, imageIndex)}
                         alt={feat.title}
                         fill
                         className="object-cover"
@@ -733,7 +733,7 @@ export function ServicePage({
             >
               <div className="absolute inset-0 z-0">
                 <Image
-                  src={`/images/services/${serviceSlug}/bento-1.jpg`}
+                  src={bentoImageSrc(serviceSlug, 1)}
                   alt={offer.features[modalDataIndex]?.title ?? ""}
                   fill
                   className="object-cover opacity-30"
@@ -872,7 +872,7 @@ export function ServicePage({
                     src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`}
                     alt={benefit.title}
                     fill
-                    sizes="(min-width: 768px) 20vw, 100vw"
+                    sizes="(min-width: 768px) 80vw, 100vw"
                     className="object-cover"
                     fetchPriority={index === 0 ? "high" : "auto"}
                   />
