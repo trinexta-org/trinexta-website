@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { TrinextaGear } from "@/components/ui/TrinextaGear"
 
 const pillars = [
   {
@@ -39,15 +38,6 @@ export function TechnicienPillars() {
 
   return (
     <div ref={ref} className="relative pt-12 pb-0 overflow-hidden bg-surface">
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.14] pointer-events-none text-primary"
-        style={{ filter: "drop-shadow(0 0 50px var(--secondary))" }}
-      >
-        <div className="animate-[spin_30s_linear_infinite]">
-          <TrinextaGear size={800} />
-        </div>
-      </div>
-
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto pb-12">
         {pillars.map((pillar, i) => (
           <div
