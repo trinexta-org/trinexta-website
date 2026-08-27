@@ -73,7 +73,7 @@ export default function Home() {
       />
       <HeroSection />
 
-      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
+      <WaveDivider from="primary" to="surface" amplitude="ample" />
 
       <TransitionTitle
         surtitle="Notre cœur de métier"

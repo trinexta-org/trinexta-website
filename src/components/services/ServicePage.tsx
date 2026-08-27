@@ -760,7 +760,7 @@ export function ServicePage({
       ========================================================= */}
       {localSeo && (
         <>
-          <WaveDivider from="surface" to="primary" amplitude="low" />
+          <WaveDivider from="surface" to="primary" amplitude="low" crossing={2} />
 
           <Section id="zone-intervention" className="bg-primary pb-16 md:pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
@@ -809,7 +809,7 @@ export function ServicePage({
             </div>
           </Section>
 
-          <WaveDivider from="primary" to="surface" amplitude="low" crossing={4} />
+          <WaveDivider from="primary" to="surface" amplitude="low" crossing={3} />
         </>
       )}
 
