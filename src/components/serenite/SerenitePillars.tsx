@@ -69,7 +69,7 @@ export function SerenitePillars() {
               {p.title}
             </h3>
             
-            <p className="text-[15px] text-muted-foreground leading-relaxed">
+            <p className="text-[15px] text-primary/70 leading-relaxed">
               {p.desc}
             </p>
 

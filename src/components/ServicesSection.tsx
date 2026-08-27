@@ -80,7 +80,7 @@ const mobilePositions = [
 function CharteFormattedText({ children }: { children: string }) {
   const parts = children.split(/(\*\*.*?\*\*)/g)
   return (
-    <p className="text-foreground/70 text-xs md:text-sm lg:text-base leading-relaxed mb-6 md:mb-8 line-clamp-3">
+    <p className="text-white/80 text-xs md:text-sm lg:text-base leading-relaxed mb-6 md:mb-8 line-clamp-3">
       {parts.map((part, index) => {
         if (part.startsWith("**") && part.endsWith("**")) {
           return <strong key={index} className="text-secondary-strong font-bold">{part.slice(2, -2)}</strong>
@@ -94,7 +94,7 @@ function CharteFormattedText({ children }: { children: string }) {
 function AnimatedArrow({ direction }: { direction: string }) {
   return (
     <div className="relative w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 flex-shrink-0">
-      <ArrowRight className="w-full h-full text-foreground/20 absolute inset-0" />
+      <ArrowRight className="w-full h-full text-white/20 absolute inset-0" />
       <div
         className={`absolute inset-0 text-secondary-strong ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
       >
@@ -190,7 +190,7 @@ export function ServicesSection() {
                   transitionTimingFunction: "ease-in-out",
                   transitionDelay: `${isCarouselActive ? 0 : index * 0.1}s`,
                 }}
-                className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-xl border border-secondary/15 cursor-pointer bg-background block"
+                className="group h-[360px] md:h-[480px] rounded-[30px] md:rounded-[50px] overflow-hidden shadow-2xl border border-white/10 cursor-pointer bg-primary block"
               >
                 <div className="absolute inset-0">
                   <Image
@@ -200,19 +200,19 @@ export function ServicesSection() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface-strong via-surface-strong/85 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/85 to-transparent" />
                 </div>
 
                 <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-8 xl:p-10">
                   <div className="mt-auto">
-                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-foreground mb-2 md:mb-4 tracking-normal break-words">
+                    <h3 className="text-xl md:text-2xl xl:text-4xl font-black text-white mb-2 md:mb-4 tracking-normal break-words">
                       {service.title}
                     </h3>
 
                     <CharteFormattedText>{service.description}</CharteFormattedText>
 
                     <div className="flex items-center transition-transform duration-300 hover:translate-x-[5px]">
-                      <span className="text-[10px] md:text-xs font-bold text-foreground uppercase tracking-wider">Découvrir</span>
+                      <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">Découvrir</span>
                       <AnimatedArrow direction={service.fillDir} />
                     </div>
                   </div>

@@ -44,7 +44,7 @@ export function SereniteTargets() {
             </div>
 
             <div className="mt-16 text-center px-6">
-                <p className="text-muted-foreground text-lg">
+                <p className="text-primary/70 text-lg">
                     Vous avez un doute sur l&apos;éligibilité de votre structure ?{" "}
                     <Link
                         href="/contact"

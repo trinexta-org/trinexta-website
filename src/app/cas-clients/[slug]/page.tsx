@@ -118,7 +118,7 @@ export default async function CaseClientDetailPage({
         </Container>
       </ViewportHero>
 
-      <WaveDivider from="primary" to="surface" amplitude="ample" />
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
 
       {/* Timeline */}
       <Section className="bg-surface pb-16 pt-4 md:pt-6">

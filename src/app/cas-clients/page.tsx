@@ -54,7 +54,7 @@ export default function CaseClientsPage() {
       <CasClientsHero />
 
       {/* WAVE - SORTIE DU HERO */}
-      <WaveDivider from="primary" to="surface" amplitude="ample" />
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
 
       {/* TRANSITION TITLE */}
       <TransitionTitle

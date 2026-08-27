@@ -16,7 +16,7 @@ interface PricingCardProps {
 
 export function SerenitePricingCard({ name, price, target, description, features, isFeatured, slug }: PricingCardProps) {
   return (
-    <Card className={`flex flex-col h-full p-6 bg-surface-strong border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-border'}`}>
+    <Card className={`flex flex-col h-full p-6 bg-surface-strong border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-secondary/20'}`}>
       
       <div className="min-h-[32px] flex items-center">
         {isFeatured && <Badge className="bg-secondary text-primary border-none w-fit text-[11px] font-bold">Recommandé</Badge>}
@@ -39,7 +39,7 @@ export function SerenitePricingCard({ name, price, target, description, features
         <p className="text-base text-primary/80 leading-relaxed text-balance">{description}</p>
       </div>
       
-      <div className="w-full h-px bg-border mb-6" />
+       <div className="w-full h-px bg-secondary/20 mb-6" />
       
       <ul className="flex-grow space-y-4 mb-8">
         {features.map((feature, i) => (
@@ -66,7 +66,7 @@ export function SerenitePricingCard({ name, price, target, description, features
         {slug && (
           <Link 
             href={`/nos-offres/${slug}`} 
-            className="text-center text-xs text-muted-foreground hover:text-secondary-strong font-medium transition-colors underline underline-offset-4"
+            className="text-center text-xs text-primary/70 hover:text-secondary-strong font-medium transition-colors underline underline-offset-4"
           >
             Voir le détail de l&apos;offre
           </Link>

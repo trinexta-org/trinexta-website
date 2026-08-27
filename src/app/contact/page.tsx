@@ -83,11 +83,12 @@ export default function ContactPage() {
       <ContactCards />
 
       {/* VAGUE APRÈS LES CONTACT CARDS */}
-      <WaveDivider
-        from="primary"
-        to="surface"
-        amplitude="low"
-      />
+     <WaveDivider
+  from="primary"
+  to="surface"
+  amplitude="low"
+  crossing={1}
+/>
 
       {/* FORMULAIRE */}
       <TransitionTitle

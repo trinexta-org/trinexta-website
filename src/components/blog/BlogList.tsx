@@ -60,7 +60,7 @@ export function BlogList({ initialArticles, categories }: { initialArticles: Res
    <main className="relative bg-surface">
       <BlogHero />
 
-      <WaveDivider from="primary" to="surface" amplitude="ample" />
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
 
       <div className="mt-12 mb-8">
         <TransitionTitle

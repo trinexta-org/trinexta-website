@@ -35,16 +35,16 @@ export function SereniteStats() {
           delay={index * 0.1}
           className="group flex flex-col items-center text-center"
         >
-          <div className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-normal mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary">
+          <div className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-normal mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary-soft">
             <Counter value={stat.value} suffix={stat.suffix} />
           </div>
 
           <div className="space-y-1 md:space-y-3 w-full flex flex-col items-center">
             <div className="animate-bar-grow h-[1px] md:h-1 bg-secondary" />
-            <h3 className="text-[9px] sm:text-xs md:text-base font-bold text-secondary uppercase tracking-[0.05em] md:tracking-[0.2em] leading-tight mt-2">
+            <h3 className="text-[9px] sm:text-xs md:text-base font-bold text-secondary-soft uppercasetracking-[0.05em] md:tracking-[0.2em] leading-tight mt-2">
               {stat.title}
             </h3>
-            <Text className="hidden md:block text-primary/60 text-sm xl:text-base leading-relaxed font-medium max-w-[280px]">
+            <Text className="hidden md:block text-white/70 text-sm xl:text-base leading-relaxed font-medium max-w-[280px]">
               {stat.description}
             </Text>
           </div>

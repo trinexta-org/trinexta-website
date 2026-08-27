@@ -220,7 +220,7 @@ export function ServicesGrid() {
                                 </div>
 
                                 <div className="relative z-10 w-full p-2 md:p-4 self-stretch flex flex-col">
-                                    <span className="text-secondary text-xs md:text-sm font-bold tracking-widest uppercase mb-3 block">
+                                    <span className="text-secondary-strong text-xs md:text-sm font-bold tracking-widest uppercase mb-3 block">
                                         {String(index + 1).padStart(2, "0")} / {String(structuralServices.length).padStart(2, "0")}
                                     </span>
 

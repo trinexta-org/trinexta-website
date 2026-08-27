@@ -176,7 +176,7 @@ function BentoCell({
         )}
 
         {!isMainFocus && (
-          <div className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-20 group-hover:bg-secondary/40 transition-colors">
+          <div className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm border border-white/20 flex items-center justify-center z-20 group-hover:bg-secondary/40 transition-colors">
             <svg
               width="14"
               height="14"
@@ -186,7 +186,7 @@ function BentoCell({
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-white"
+              className="text-primary"
             >
               <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
             </svg>
@@ -435,7 +435,7 @@ export function ServicePage({
       {/* =========================================================
           WAVE - SORTIE DU HERO
       ========================================================= */}
-      <WaveDivider from="primary" to="surface" amplitude="ample" />
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
 
       {/* =========================================================
           TRANSITION - PROBLEM
@@ -674,7 +674,7 @@ export function ServicePage({
                     </p>
                   </div>
 
-                  <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center z-10 group-hover:bg-secondary/20 transition-colors">
+                  <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm border border-white/20 flex items-center justify-center z-10 group-hover:bg-secondary/20 transition-colors">
                     <svg
                       width="14"
                       height="14"
@@ -684,7 +684,7 @@ export function ServicePage({
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-white"
+                      className="text-primary"
                     >
                       <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                     </svg>
@@ -809,7 +809,7 @@ export function ServicePage({
             </div>
           </Section>
 
-          <WaveDivider from="primary" to="surface-strong" amplitude="low" />
+          <WaveDivider from="primary" to="surface" amplitude="low" crossing={4} />
         </>
       )}
 

@@ -1008,7 +1008,7 @@
     0 -5px 11px color-mix(in srgb, var(--secondary) 45%, transparent)
   );
 }
-.wave-divider--crossing-1 .wave-divider__path {
+.wave-divider--crossing .wave-divider__path {
   filter: none;
 }
 @keyframes wave-drift {

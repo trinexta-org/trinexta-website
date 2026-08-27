@@ -73,7 +73,7 @@ export default function Home() {
       />
       <HeroSection />
 
-      <WaveDivider from="primary" to="surface" amplitude="ample" />
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
 
       <TransitionTitle
         surtitle="Notre cœur de métier"
@@ -119,7 +119,7 @@ export default function Home() {
 
       <InterventionMap />
 
-      <WaveDivider from="primary" to="surface" amplitude="low" />
+      <WaveDivider from="primary" to="surface" amplitude="low" crossing={4} />
 
       <ReassuranceSection />
 

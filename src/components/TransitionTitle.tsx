@@ -74,7 +74,7 @@ export function TransitionTitle({
             from {
               opacity: 0;
               transform: scaleX(0);
-            }
+            } 
 
             to {
               opacity: 1;

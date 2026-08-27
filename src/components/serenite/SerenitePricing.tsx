@@ -6,9 +6,9 @@ export function SerenitePricing() {
       <div className="p-8 rounded-2xl bg-surface-strong border border-secondary/20 space-y-6">
         <div className="flex justify-between items-baseline">
           <span className="text-lg font-bold text-primary">Mensuel</span>
-          <span className="text-2xl font-black text-secondary-strong">79€ HT <span className="text-sm font-normal text-muted-foreground">/ poste / mois</span></span>
+          <span className="text-2xl font-black text-secondary-strong">79€ HT <span className="text-sm font-normal text-primary/70">/ poste / mois</span></span>
         </div>
-        <ul className="text-base text-muted-foreground space-y-3">
+        <ul className="text-base text-primary/70 space-y-3">
           <li className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
             <span>Sans aucun engagement</span>
@@ -29,7 +29,7 @@ export function SerenitePricing() {
           <span className="text-lg font-bold text-primary">Annuel</span>
           <span className="text-2xl font-black text-secondary-strong">869€ HT <span className="text-sm font-normal text-muted-foreground">/ poste / an</span></span>
         </div>
-        <ul className="text-base text-muted-foreground space-y-3">
+        <ul className="text-base text-primary/70 space-y-3">
           <li className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
             <span>1 mois offert par poste</span>

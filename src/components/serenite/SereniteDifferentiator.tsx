@@ -26,10 +26,11 @@ export function SereniteDifferentiator() {
   return (
     <div className="w-full">
       <div className="border border-secondary/20 rounded-2xl overflow-hidden bg-[#dce7f2] shadow-xl">
-        <div className="hidden md:grid grid-cols-3 bg-secondary/10 border-b border-secondary/20 p-6 text-base font-bold tracking-wider uppercase text-primary/60">
+        <div className="hidden md:grid grid-cols-3 bg-secondary/10 border-b border-secondary/20 p-6 text-base font-bold tracking-wider uppercase text-primary/70">
+
           <div>Critère</div>
           <div>Une ESN classique</div>
-          <div className="text-secondary">L&apos;approche Trinexta</div>
+          <div className="text-secondary-strong">L&apos;approche Trinexta</div>
         </div>
 
         <div className="divide-y divide-secondary/15">
@@ -43,15 +44,16 @@ export function SereniteDifferentiator() {
               </div>
 
               <div className="space-y-1 md:space-y-0">
-                <span className="inline-block md:hidden text-sm font-bold uppercase text-secondary mr-2">Marché :</span>
-                <span className="text-base text-primary/60 leading-relaxed">{point.market}</span>
+                <span className="inline-block md:hidden text-sm font-bold uppercase text-secondary-strong mr-2">Marché :</span>
+
+                <span className="text-base text-primary/70 leading-relaxed">{point.market}</span>
               </div>
 
               <div className="space-y-1 md:space-y-0 bg-white/40 md:bg-transparent p-3 md:p-0 rounded-xl border border-secondary/15 md:border-none">
-                <span className="inline-block md:hidden text-sm font-bold uppercase text-secondary mr-2">Trinexta :</span>
+                <span className="inline-block md:hidden text-sm font-bold uppercase text-secondary-strong mr-2">Trinexta :</span>
+
                 <span className="text-base font-medium text-primary/80 flex items-start gap-2 leading-relaxed">
-                  <span className="text-secondary shrink-0 hidden md:inline">→</span>
-                  {point.trinexta}
+                  <span className="text-secondary-strong shrink-0 hidden md:inline">→</span>                  {point.trinexta}
                 </span>
               </div>
             </div>

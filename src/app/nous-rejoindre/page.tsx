@@ -40,7 +40,7 @@ export default function NousRejoindrePage() {
         title="Nous rejoindre" 
         imageSrc="/images/nous-rejoindre/heroNousRejoindre.webp" 
       />
-      <WaveDivider from="primary" to="surface" amplitude="ample" />
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
       <Container className="py-20 md:py-32">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 items-center">
           

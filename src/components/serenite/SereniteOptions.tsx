@@ -29,7 +29,7 @@ export function SereniteOptions() {
           <h4 className="text-primary font-bold text-2xl md:text-3xl leading-snug">
             {options[0].title}
           </h4>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+          <p className="text-primary/70 text-base md:text-lg leading-relaxed">
             {options[0].desc}
           </p>
         </div>
@@ -43,7 +43,7 @@ export function SereniteOptions() {
           <h4 className="text-primary font-bold text-xl leading-snug">
             {options[1].title}
           </h4>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p className="text-primary/70 text-sm leading-relaxed">
             {options[1].desc}
           </p>
         </div>
@@ -57,7 +57,7 @@ export function SereniteOptions() {
           <h4 className="text-primary font-bold text-xl leading-snug">
             {options[2].title}
           </h4>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p className="text-primary/70 text-sm leading-relaxed">
             {options[2].desc}
           </p>
         </div>
