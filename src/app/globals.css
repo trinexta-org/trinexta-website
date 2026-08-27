@@ -58,6 +58,7 @@
   --color-secondary-strong-foreground: var(--secondary-strong-foreground);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
 

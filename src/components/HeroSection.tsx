@@ -73,7 +73,7 @@ export function HeroSection() {
                   <span
                     className={
                       isHighlighted
-                        ? "text-white inline-block mr-2 sm:mr-3"
+                        ? "text-secondary-soft inline-block mr-2 sm:mr-3"
                         : "text-white inline-block mr-2 sm:mr-3"
                     }
                   >

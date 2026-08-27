@@ -35,12 +35,12 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const desktopHover =
-    "inline-block py-2 text-white/70 hover:text-secondary-strong text-[15px] transition-colors duration-300";
+    "inline-block py-2 text-white/70 hover:text-secondary-soft text-[15px] transition-colors duration-300";
   const desktopTitle =
     "text-white font-black uppercase tracking-[0.2em] text-[13px] mb-6 block";
 
   const mobileHover =
-    "inline-block py-2 text-white/80 hover:text-secondary-strong text-[11px] sm:text-[12px] block transition-colors leading-snug break-words";
+    "inline-block py-2 text-white/80 hover:text-secondary-soft text-[11px] sm:text-[12px] block transition-colors leading-snug break-words";
   const mobileTitle =
     "text-white font-bold uppercase text-[11px] sm:text-[12px] mb-2 block";
 
@@ -65,7 +65,7 @@ export function Footer() {
                 <span className="text-white font-black uppercase tracking-normal text-4xl block leading-none">
                   Trinexta
                 </span>
-                <span className="text-secondary-strong text-[10px] font-bold uppercase tracking-[0.4em] block mt-1">
+                <span className="text-secondary-soft text-[10px] font-bold uppercase tracking-[0.4em] block mt-1">
                   By Trustech IT Support
                 </span>
               </Link>
@@ -122,7 +122,7 @@ export function Footer() {
                 <span className={desktopTitle}>Contact</span>
                 <div className="space-y-5">
                   <div className="group">
-                    <span className="block text-[11px] text-secondary-strong font-bold uppercase mb-1.5">
+                    <span className="block text-[11px] text-secondary-soft font-bold uppercase mb-1.5">
                       Bureau d&apos;activité
                     </span>
                     <span className="text-white/70 text-[15px]">
@@ -130,23 +130,23 @@ export function Footer() {
                     </span>
                   </div>
                   <div className="group">
-                    <span className="block text-[11px] text-secondary-strong font-bold uppercase mb-1.5">
+                    <span className="block text-[11px] text-secondary-soft font-bold uppercase mb-1.5">
                       Assistance
                     </span>
                     <a
                       href="tel:0978250746"
-                      className="text-white/70 hover:text-secondary-strong text-[15px] block transition-colors"
+                      className="text-white/70 hover:text-secondary-soft text-[15px] block transition-colors"
                     >
                       09 78 25 07 46
                     </a>
                   </div>
                   <div className="group">
-                    <span className="block text-[11px] text-secondary-strong font-bold uppercase mb-1.5">
+                    <span className="block text-[11px] text-secondary-soft font-bold uppercase mb-1.5">
                       Email
                     </span>
                     <a
                       href="mailto:contact@trinexta.fr"
-                      className="text-white/70 hover:text-secondary-strong text-[15px] block transition-colors"
+                      className="text-white/70 hover:text-secondary-soft text-[15px] block transition-colors"
                     >
                       contact@trinexta.fr
                     </a>
@@ -164,7 +164,7 @@ export function Footer() {
               <span className="text-white font-black uppercase text-xl leading-none block">
                 Trinexta
               </span>
-              <span className="text-secondary-strong text-[8px] font-bold uppercase block tracking-widest">
+              <span className="text-secondary-soft text-[8px] font-bold uppercase block tracking-widest">
                 By Trustech IT
               </span>
             </div>
@@ -258,7 +258,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={name}
-                className="text-white/20 hover:text-secondary-strong transition-all transform hover:-translate-y-1"
+                className="text-white/20 hover:text-secondary-soft transition-all transform hover:-translate-y-1"
               >
                 <Icon className="w-4 h-4" />
               </a>
