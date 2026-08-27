@@ -142,19 +142,19 @@ export default async function CaseClientDetailPage({
                   <div className="space-y-4">
                     {item.context.map((paragraph, i) => (
                       <FadeIn key={paragraph} delay={i * 0.09}>
-                        <Text className="text-muted-foreground leading-relaxed">{paragraph}</Text>
+                        <Text className="text-primary/70 leading-relaxed">{paragraph}</Text>
                       </FadeIn>
                     ))}
                   </div>
 
                   <div className="mt-8">
-                    <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    <Text className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/70">
                       Points de friction
                     </Text>
                     <FadeIn delay={0.2}>
                       <ul className="space-y-3">
                         {item.challenges.map((challenge) => (
-                          <li key={challenge} className="flex gap-3 text-sm text-muted-foreground leading-relaxed md:text-base">
+                          <li key={challenge} className="flex gap-3 text-sm text-primary/70 leading-relaxed md:text-base">
                             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary/60" />
                             <span>{challenge}</span>
                           </li>
@@ -204,7 +204,7 @@ export default async function CaseClientDetailPage({
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                 {/* Solutions */}
                 <div className="space-y-4">
-                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/70">
                     Solutions déployées
                   </Text>
                   {item.solutions.map((solution, i) => (
@@ -226,12 +226,12 @@ export default async function CaseClientDetailPage({
                 {/* Benefits */}
                 <FadeIn delay={0.25}>
                   <div>
-                    <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    <Text className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary/70">
                       Bénéfices concrets
                     </Text>
                     <ul className="mt-4 space-y-4">
                       {item.benefits.map((benefit) => (
-                        <li key={benefit} className="flex gap-3 text-sm text-muted-foreground leading-relaxed md:text-base">
+                        <li key={benefit} className="flex gap-3 text-sm text-primary/70 leading-relaxed md:text-base">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" />
                           <span>{benefit}</span>
                         </li>

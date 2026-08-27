@@ -16,7 +16,7 @@ interface PricingCardProps {
 
 export function SerenitePricingCard({ name, price, target, description, features, isFeatured, slug }: PricingCardProps) {
   return (
-    <Card className={`flex flex-col h-full p-6 bg-surface-strong border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-secondary/20'}`}>
+    <Card className={`flex flex-col h-full p-6 bg-surface-strong border transition-all duration-300 ${isFeatured ? 'border-secondary ring-2 ring-secondary/20' : 'border-primary/25'}`}>
       
       <div className="min-h-[32px] flex items-center">
         {isFeatured && <Badge className="bg-secondary text-primary border-none w-fit text-[11px] font-bold">Recommandé</Badge>}
