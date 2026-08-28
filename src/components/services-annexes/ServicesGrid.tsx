@@ -10,6 +10,7 @@ const structuralServices = [
         title: "Migration de messagerie vers Microsoft 365",
         desc: "Vous utilisez encore une messagerie hébergée chez OVH, Orange, Free ou un autre prestataire ? Nous prenons en charge votre migration vers Microsoft 365 pour vous faire gagner en fiabilité, en confort d'usage et en professionnalisme. Une migration bien préparée, sans coupure de service ni perte de données, pour repartir sur des bases saines et professionnelles.",
         meta: "Sur devis - Généralement réalisé en 1 journée",
+        image: "/images/services-annexes/migration-messagerie-365.webp",
         points: [
             "Création de votre environnement Microsoft 365",
             "Transfert de vos e-mails, contacts et calendriers",
@@ -24,6 +25,7 @@ const structuralServices = [
         title: "Création et configuration d'un environnement Microsoft 365",
         desc: "Vous souhaitez structurer votre entreprise avec des outils professionnels comme Outlook, Teams, OneDrive ou SharePoint ? Nous créons et configurons votre environnement Microsoft 365 de A à Z. Un socle solide et évolutif, pensé pour accompagner la croissance de votre activité sans repartir de zéro plus tard.",
         meta: "Sur devis - Partenaire Microsoft certifié",
+        image: "/images/services-annexes/environnement-365.webp",
         points: [
             "Création du tenant Microsoft 365 au nom de votre entreprise",
             "Création des comptes utilisateurs et attribution des licences",
@@ -37,6 +39,7 @@ const structuralServices = [
         title: "Conseil et accompagnement à l'achat de matériel",
         desc: "Besoin d'un nouvel ordinateur, d'un écran ou d'une imprimante ? Nous vous accompagnons pour choisir un équipement réellement adapté à votre activité, sans surdimensionnement inutile. Vous investissez juste, ni trop ni trop peu, dans du matériel qui tiendra dans la durée.",
         meta: "Sur devis - On optimise avant de remplacer",
+        image: "/images/services-annexes/conseil-materiel.webp",
         points: [
             "Audit de votre matériel actuel",
             "Recommandation sur mesure selon vos usages et votre budget",
@@ -49,6 +52,7 @@ const structuralServices = [
         title: "Mise à niveau Windows Famille vers Windows Professionnel",
         desc: "Votre ordinateur fonctionne sous Windows Family ? Pour un usage professionnel, certaines fonctions importantes peuvent vous manquer. Nous réalisons la mise à niveau vers Windows Professionnel, en toute simplicité et sans interrompre votre activité.",
         meta: "Sur devis - Intervention en 2 à 3 heures",
+        image: "/images/services-annexes/windows-pro.webp",
         points: [
             "Licence officielle Windows 11 Professionnel",
             "Mise à niveau sur place sans perte de données",
@@ -61,6 +65,7 @@ const structuralServices = [
         title: "Optimisation et remise à niveau de poste existant",
         desc: "Votre ordinateur est lent ? Avant d'envisager un achat neuf, nous pouvons souvent améliorer sensiblement ses performances pour un budget bien plus raisonnable. Un diagnostic précis avant toute intervention, pour ne payer que ce qui est réellement utile.",
         meta: "Sur devis - Souvent plus économique qu'un neuf",
+        image: "/images/services-annexes/optimisation-poste.webp",
         points: [
             "Diagnostic complet du poste",
             "Ajout de mémoire RAM si nécessaire",
@@ -74,6 +79,7 @@ const structuralServices = [
         title: "Installation et configuration réseau",
         desc: "Vous avez besoin d'un WiFi plus fiable, d'un partage de fichiers entre vos postes ou d'un accès à distance sécurisé ? Nous concevons et configurons un réseau adapté à la taille et aux usages réels de votre entreprise, sans complexité superflue.",
         meta: "Sur devis - Adapté à la taille de votre entreprise",
+        image: "/images/services-annexes/reseau-entreprise.webp",
         points: [
             "Installation et configuration de votre box ou routeur professionnel",
             "Mise en place d'un WiFi sécurisé (séparation Invités / Entreprise)",
@@ -86,6 +92,7 @@ const structuralServices = [
         title: "Arrivée ou départ d'un collaborateur",
         desc: "L'arrivée ou le départ d'un salarié demande une gestion informatique rigoureuse. Nous prenons en charge ces étapes pour que tout soit prêt, sécurisé et bien organisé, sans risque d'oubli ni de faille de sécurité au moment du changement.",
         meta: "Sur devis - Pour que rien ne se perde",
+        image: "/images/services-annexes/arrivee-depart.webp",
         points: [
             "Arrivée : création du compte, configuration du poste, accès messagerie, logiciels",
             "Départ : sauvegarde des données, transfert des e-mails, suppression sécurisée du compte",
@@ -97,6 +104,7 @@ const structuralServices = [
         title: "Mise en place de sauvegarde professionnelle",
         desc: "Vos données ne doivent pas dépendre du hasard. Une panne, un vol ou une erreur peuvent avoir des conséquences lourdes. Nous mettons en place une stratégie de sauvegarde fiable, automatisée et régulièrement vérifiée pour votre tranquillité d'esprit.",
         meta: "Sur devis - Parce que vos données sont essentielles",
+        image: "/images/services-annexes/sauvegarde-pro.webp",
         points: [
             "Sauvegarde automatique dans le cloud",
             "Sauvegarde locale sur NAS ou disque externe",
@@ -109,6 +117,7 @@ const structuralServices = [
         title: "Sécurisation de la messagerie professionnelle",
         desc: "La messagerie reste l'une des principales portes d'entrée des cyberattaques. Nous renforçons la sécurité de vos comptes e-mail pour réduire drastiquement le risque de phishing, d'usurpation et de fuite de données.",
         meta: "Sur devis - La sécurité commence par les e-mails",
+        image: "/images/services-annexes/securisation-messagerie.webp",
         points: [
             "Activation de la double authentification sur tous les comptes",
             "Configuration anti-spam et anti-phishing avancée",
@@ -121,22 +130,13 @@ const structuralServices = [
         title: "Formation et accompagnement utilisateurs",
         desc: "Des outils bien choisis ne suffisent pas toujours. Nous proposons des formations simples, concrètes et accessibles, pour que vos équipes gagnent en autonomie et en efficacité au quotidien sur leurs outils de travail.",
         meta: "Sur devis - Adapté au niveau de chaque équipe",
+        image: "/images/services-annexes/formation-utilisateurs.webp",
         points: [
             "Prise en main de Microsoft 365 : Outlook, Teams, OneDrive, SharePoint",
             "Bonnes pratiques de sécurité : mots de passe, phishing, sauvegardes",
             "Utilisation plus efficace du poste de travail au quotidien",
         ],
     },
-]
-
-// Images provisoires réutilisées en boucle, à remplacer par des visuels dédiés plus tard
-const placeholderImages = [
-    "/images/services/infogerance.webp",
-    "/images/services/support.webp",
-    "/images/services/cybersecurite.webp",
-    "/images/services/cloud.webp",
-    "/images/services/microsoft.webp",
-    "/images/services/solutions.webp",
 ]
 
 export function ServicesGrid() {
@@ -190,7 +190,6 @@ export function ServicesGrid() {
                 }}
             >
                 {structuralServices.map((service, index) => {
-                    const image = placeholderImages[index % placeholderImages.length]
                     const imageFirst = index % 2 === 0
 
                     return (
@@ -205,7 +204,7 @@ export function ServicesGrid() {
                                 <div className="relative z-20 w-full md:w-[50%] -mt-32 md:-mt-48 flex-shrink-0 flex flex-col">
                                     <div className="relative w-full h-[280px] md:h-[480px] rounded-[32px] overflow-hidden">
                                         <Image
-                                            src={image}
+                                            src={service.image}
                                             alt={service.title}
                                             fill
                                             sizes="(min-width: 768px) 50vw, 90vw"
