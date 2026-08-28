@@ -105,7 +105,7 @@ export function BlogPaginatedGrid({
                 {post.imageUne ? (
                   <Image
                     src={urlForImage(post.imageUne).width(600).url()}
-                    alt={post.titre}
+                    alt={post.imageUne.alt || post.titre}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
