@@ -122,7 +122,7 @@ export function PortableTextArticle({ value }: PortableTextArticleProps) {
             <div className="relative w-full rounded-2xl overflow-hidden border border-border shadow-md">
               <Image
                 src={urlForImage(value).width(900).fit("max").auto("format").url()}
-                alt={value.alt ?? "Illustration"}
+                alt={value.alt || value.legende || "Illustration"}
                 width={900}
                 height={600}
                 className="w-full object-cover hover:scale-[1.02] transition-transform duration-700"

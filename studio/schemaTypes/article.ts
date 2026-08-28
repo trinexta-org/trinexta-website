@@ -1,8 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { CATEGORIES_BLOG } from '../../src/data/categories'
-
 const CATEGORIES = CATEGORIES_BLOG.map((c) => ({ title: c.label, value: c.id }))
-
 export const article = defineType({
   name: 'article',
   title: 'Article',
@@ -50,8 +48,15 @@ export const article = defineType({
       type: 'image',
       options: { hotspot: true },
       fields: [
-        defineField({ name: 'alt', title: 'Texte alternatif', type: 'string' }),
+        defineField({
+          name: 'alt',
+          title: 'Texte alternatif',
+          type: 'string',
+          description: "Décrit l'image pour l'accessibilité et le SEO. Obligatoire.",
+          validation: (r) => r.required(),
+        }),
       ],
+      validation: (r) => r.required(),
     }),
     defineField({
       name: 'extrait',
@@ -70,7 +75,13 @@ export const article = defineType({
           type: 'image',
           options: { hotspot: true },
           fields: [
-            defineField({ name: 'alt', title: 'Texte alternatif', type: 'string' }),
+            defineField({
+              name: 'alt',
+              title: 'Texte alternatif',
+              type: 'string',
+              description: "Décrit l'image pour l'accessibilité et le SEO. Obligatoire.",
+              validation: (r) => r.required(),
+            }),
             defineField({ name: 'legende', title: 'Légende', type: 'string' }),
           ],
         },

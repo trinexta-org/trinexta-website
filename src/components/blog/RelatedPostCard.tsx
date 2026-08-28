@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ResumeArticle, urlForImage } from "@/lib/sanity";
+
 export function RelatedPostCard({ article }: { article: ResumeArticle }) {
   return (
     <Link href={`/blog/${article.slug.current}`} className="group block">
@@ -8,7 +9,7 @@ export function RelatedPostCard({ article }: { article: ResumeArticle }) {
         {article.imageUne && (
           <Image
             src={urlForImage(article.imageUne).width(600).height(400).url()}
-            alt={article.titre}
+            alt={article.imageUne.alt || article.titre}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
