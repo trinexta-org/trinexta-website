@@ -11,7 +11,7 @@ import { AuditProgress } from "./AuditProgress";
 type Phase = "form" | "loading" | "result";
 
 const fieldClass =
-  "h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary";
+  "h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary";
 const labelClass = "mb-2 block text-[11px] font-bold uppercase tracking-widest text-white";
 
 export function AuditForm() {

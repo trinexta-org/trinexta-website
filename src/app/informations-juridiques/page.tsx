@@ -17,19 +17,19 @@ export const metadata: Metadata = {
 
 export default function InformationsJuridiquesPage() {
   return (
-    <main className="bg-primary min-h-screen relative space-y-12 pb-12">
+    <main className="bg-surface min-h-screen relative">
       <BreadcrumbJsonLd 
         items={[
           { name: "Accueil", url: "/" },
           { name: "informations-juridiques", url: "/informations-juridiques" }
         ]} 
       />
-      <Section className="bg-primary pt-12 lg:pt-8 pb-6 lg:pb-8">
+      <Section className="bg-surface pt-12 lg:pt-8 pb-6 lg:pb-8">
         <div className="max-w-4xl mb-6 lg:mb-8">
-          <Heading as="h1" className="text-4xl md:text-5xl font-extrabold text-white mb-4" emphasis={false}>
+          <Heading as="h1" className="text-4xl md:text-5xl font-extrabold text-primary mb-4" emphasis={false}>
             Informations juridiques
           </Heading>
-          <p className="text-white/60 text-base md:text-lg leading-relaxed">
+          <p className="text-primary/60 text-base md:text-lg leading-relaxed">
             L&apos;ensemble de nos documents légaux, contractuels et de sécurité.
           </p>
         </div>

@@ -57,13 +57,12 @@ export function SommaireMobile({ titres }: Props) {
     }
   };
 
-  return (
+   return (
     <div className="lg:hidden">
       
-      {/* BOUTON FLOTTANT (Effet Transparent / Glassmorphism) */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-primary/60 backdrop-blur-xl border border-white/10 text-primary-foreground px-5 py-2.5 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center gap-2 hover:bg-primary/80 active:scale-95 ${
+        className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-primary/80 backdrop-blur-xl border border-white/10 text-white px-5 py-2.5 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center gap-2 hover:bg-primary active:scale-95 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
         }`}
         aria-label="Ouvrir le sommaire"
@@ -72,28 +71,26 @@ export function SommaireMobile({ titres }: Props) {
         <span className="text-sm font-medium tracking-wide">Sommaire</span>
       </button>
 
-      {/* VOILE SOMBRE */}
       <div 
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 bg-primary/80 backdrop-blur-sm z-[70] transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-primary/70 backdrop-blur-sm z-[70] transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
 
-      {/* PANNEAU GLISSANT (Inchangé) */}
       <div 
-        className={`fixed bottom-0 left-0 right-0 bg-primary border-t border-white/10 rounded-t-[32px] z-[80] transition-transform duration-500 ease-out transform shadow-2xl ${
+        className={`fixed bottom-0 left-0 right-0 bg-surface-strong border-t border-secondary/20 rounded-t-[32px] z-[80] transition-transform duration-500 ease-out transform shadow-2xl ${
           isOpen ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className="flex items-center justify-between p-6 border-b border-white/5">
-          <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <List className="w-5 h-5 text-secondary" />
+        <div className="flex items-center justify-between p-6 border-b border-secondary/20">
+          <h3 className="text-lg font-bold text-primary flex items-center gap-2">
+            <List className="w-5 h-5 text-secondary-strong" />
             Sommaire
           </h3>
           <button 
             onClick={() => setIsOpen(false)}
-            className="p-2 text-white/50 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors"
+            className="p-2 text-primary/50 hover:text-primary bg-secondary/10 hover:bg-secondary/20 rounded-full transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -106,8 +103,8 @@ export function SommaireMobile({ titres }: Props) {
               onClick={() => handleClick(titre.id)}
               className={`text-left transition-colors ${
                 titre.level === "h3" 
-                  ? "ml-4 text-sm text-white/50 hover:text-secondary" 
-                  : "text-base text-white/90 font-medium hover:text-white"
+                  ? "ml-4 text-sm text-primary/60 hover:text-secondary-strong" 
+                  : "text-base text-primary/90 font-medium hover:text-primary"
               }`}
             >
               {titre.text}

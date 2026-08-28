@@ -95,7 +95,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
             placeholder="Jean"
-            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
           />
         </div>
 
@@ -110,7 +110,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
             value={nom}
             onChange={(e) => setNom(e.target.value)}
             placeholder="Dupont"
-            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
           />
         </div>
       </div>
@@ -126,7 +126,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="j.dupont@entreprise.fr"
-          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
         />
       </div>
 
@@ -141,7 +141,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
           value={entreprise}
           onChange={(e) => setEntreprise(e.target.value)}
           placeholder="Nom de votre entreprise"
-          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
         />
       </div>
 
@@ -156,7 +156,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
           value={telephone}
           onChange={(e) => setTelephone(e.target.value)}
           placeholder="06 12 34 56 78"
-          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
         />
       </div>
 

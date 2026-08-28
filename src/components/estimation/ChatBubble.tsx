@@ -18,15 +18,16 @@ export function ChatBubble({ side, avatar, children, className }: ChatBubbleProp
         {avatar ? (
           <Image
             src={avatar}
-            alt=""
+            alt="Nexi, l'assistant Trinexta"
             width={48}
             height={48}
             className="h-12 w-12 shrink-0 rounded-full border border-secondary/40 object-cover"
           />
         ) : (
           <span
-            aria-hidden="true"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-secondary/40 bg-secondary/15 font-serif text-sm italic text-secondary"
+            role="img"
+            aria-label="Nexi, l'assistant Trinexta"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-secondary/40 bg-secondary/15 font-serif text-sm italic text-secondary-strong"
           >
             T
           </span>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="900" viewBox="0 0 120 900">
+  <!-- Rail droit — dessin propre, ce n'est PAS le miroir de circuit-trace.svg.
+       Les deux marges ne doivent jamais se lire comme une paire : la gauche est
+       la ligne maitresse (deux pistes qui se tressent, tuile de 1200), la droite
+       est un rail secondaire, plus etroit, plus court, une seule piste avec une
+       antenne morte. La tuile fait 900 de haut contre 1200 a gauche : les deux
+       rythmes verticaux ne retombent jamais en phase, meme sur une page longue.
+
+       Meme grammaire de noeuds que la gauche (voir circuit-trace.svg pour le
+       detail) : la pastille evide le trace autour d'elle, la soudure marque une
+       jonction sans rien couper. Le fichier est un masque, seul son alpha est
+       echantillonne — un aplat noir de fond serait aussi opaque qu'un blanc.
+
+       La piste est a x=90 en y=0 comme en y=900 : raccord de tuile invisible. -->
+
+  <defs>
+    <mask id="circuit-pads-right" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="900">
+      <rect width="120" height="900" fill="#fff" />
+      <g fill="#000">
+        <circle cx="90" cy="72" r="4.9" />
+        <circle cx="22" cy="470" r="4.9" />
+      </g>
+    </mask>
+  </defs>
+
+  <g mask="url(#circuit-pads-right)">
+    <!-- Halo latent : invisible au repos, revele au passage de la crete. Plus
+         fin qu'a gauche (6 contre 7), le rail droit doit rester le second. -->
+    <g fill="none" stroke="#fff" stroke-opacity="0.2" stroke-width="6" stroke-linecap="round">
+      <path d="M90 0V140C90 180 54 180 54 210V560C54 596 90 596 90 630V900" />
+      <path d="M54 300C54 340 22 348 22 400V470" />
+    </g>
+
+    <g fill="none" stroke="#fff" stroke-linecap="round">
+      <path d="M90 0V140C90 180 54 180 54 210V560C54 596 90 596 90 630V900" stroke-width="1.4" />
+      <path d="M54 300C54 340 22 348 22 400V470" stroke-width="1.1" stroke-opacity="0.5" />
+    </g>
+  </g>
+
+  <!-- Pastilles : une sur la piste, une en terminaison d'antenne. -->
+  <g fill="none" stroke="#fff" stroke-width="1.1">
+    <circle cx="90" cy="72" r="5.4" />
+    <circle cx="22" cy="470" r="5.4" />
+  </g>
+  <g fill="#fff">
+    <circle cx="90" cy="72" r="2.1" />
+    <circle cx="22" cy="470" r="2.1" />
+  </g>
+
+  <!-- Soudure : depart de l'antenne, la piste principale continue derriere. -->
+  <g fill="#fff">
+    <circle cx="54" cy="300" r="2.8" />
+  </g>
+  <g fill="none" stroke="#fff" stroke-width="0.9" stroke-opacity="0.45">
+    <circle cx="54" cy="300" r="5.2" />
+  </g>
+</svg>

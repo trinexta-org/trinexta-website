@@ -27,19 +27,17 @@ export function ServicesApproach() {
   }
 
   return (
-    <section className="py-12 lg:py-24">
+    <section className="py-12 lg:py-24 bg-surface">
       <div className="max-w-[1400px] mx-auto px-6">
-        
-        <div className="relative rounded-[2.5rem] lg:rounded-[3.5rem] overflow-hidden shadow-2xl bg-[#0a1128] min-h-[600px] flex items-center">
-          
+        <div className="relative rounded-[2.5rem] lg:rounded-[3.5rem] overflow-hidden shadow-2xl bg-primary min-h-[600px] flex items-center">
           <div className="md:hidden absolute inset-0 z-0">
-             <Image 
-                src="/images/nos-offres/max-scaling.jpg" 
-                alt="Approche conseil Trinexta"
-                fill
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-black/70 z-0"></div>
+            <Image 
+              src="/images/nos-offres/max-scaling.jpg" 
+              alt="Approche conseil Trinexta"
+              fill
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-black/70 z-0"></div>
           </div>
 
           <Image 
@@ -50,13 +48,12 @@ export function ServicesApproach() {
           />
 
           <div className="hidden md:block absolute inset-0 bg-black/40 z-0"></div>
-          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#0a1128]/95 via-[#0a1128]/80 to-transparent z-0"></div>
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent z-0"></div>
 
           <div className="relative z-10 w-full lg:w-[55%] p-10 lg:p-20 h-full flex flex-col justify-center">
-            
             <div className="space-y-6 mb-12">
               <Heading as="h3" className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                Notre approche : <br/> <span className="text-secondary">conseiller avant de vendre</span>
+                Notre approche : <br/> <span className="text-secondary-strong">conseiller avant de vendre</span>
               </Heading>
               <div className="text-base md:text-lg text-white/80 leading-relaxed">
                 <p>
@@ -68,7 +65,6 @@ export function ServicesApproach() {
             <div className="space-y-2">
               {approachItems.map((item, index) => {
                 const isActive = activeIndex === index
-                
                 return (
                   <div 
                     key={index} 
@@ -81,9 +77,8 @@ export function ServicesApproach() {
                       <span className={`text-xl font-bold transition-colors duration-300 ${isActive ? "text-white" : "text-white/60 group-hover:text-white/90"}`}>
                         {item.label}
                       </span>
-                      
                       <svg 
-                        className={`w-6 h-6 transform transition-transform duration-500 ${isActive ? "rotate-180 text-secondary" : "text-white/40"}`} 
+                        className={`w-6 h-6 transform transition-transform duration-500 ${isActive ? "rotate-180 text-secondary-strong" : "text-white/40"}`} 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"

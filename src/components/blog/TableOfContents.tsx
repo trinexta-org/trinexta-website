@@ -15,10 +15,7 @@ export function TableOfContents({ headings }: { headings: HeadingTOC[] }) {
 
     const activeElement = document.getElementById(`toc-link-${activeId}`);
     if (activeElement) {
-      activeElement.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
+      activeElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }, [activeId]);
 
@@ -26,7 +23,7 @@ export function TableOfContents({ headings }: { headings: HeadingTOC[] }) {
 
   return (
     <nav className="space-y-1">
-      <h4 className="text-[10px] font-bold uppercase text-white/40 tracking-widest px-4 mb-6">
+      <h4 className="text-[10px] font-bold uppercase text-muted-foreground tracking-widest px-4 mb-6">
         Sommaire
       </h4>
       
@@ -46,18 +43,18 @@ export function TableOfContents({ headings }: { headings: HeadingTOC[] }) {
             }}
             className={`group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 border-l-2
               ${isActive 
-                ? "bg-white/5 border-secondary" 
-                : "border-transparent opacity-60 hover:opacity-100 hover:bg-white/5"
+                ? "bg-secondary/10 border-secondary" 
+                : "border-transparent opacity-60 hover:opacity-100 hover:bg-secondary/10"
               }
               ${isSub ? "ml-6" : ""}
             `}
           >
             <div className={`mt-1.5 w-1.5 h-1.5 rounded-full transition-colors duration-300
-              ${isActive ? "bg-secondary" : "bg-white/20 group-hover:bg-white/50"}`} 
+              ${isActive ? "bg-secondary" : "bg-primary/20 group-hover:bg-primary/40"}`} 
             />
             
             <span className={`text-sm font-medium transition-colors duration-300 
-              ${isActive ? "text-white" : "text-white/70"}`}>
+              ${isActive ? "text-primary" : "text-primary/70"}`}>
               {h.text}
             </span>
           </Link>

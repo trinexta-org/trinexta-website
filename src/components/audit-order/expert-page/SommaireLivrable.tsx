@@ -10,13 +10,13 @@ const SOMMAIRE_ITEMS = [
 export function SommaireLivrable() {
     return (
         <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                 Ce que contient votre livrable
             </p>
             <ol className="mt-5 space-y-3">
                 {SOMMAIRE_ITEMS.map((item, index) => (
                     <li key={item} className="flex gap-3 text-sm text-white/70">
-                        <span className="font-black text-secondary">{index + 1}.</span>
+                        <span className="font-black text-secondary-strong">{index + 1}.</span>
                         <span>{item}</span>
                     </li>
                 ))}

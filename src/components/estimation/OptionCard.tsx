@@ -71,7 +71,7 @@ export function OptionCard({ label, description, selected, multiple, onClick }: 
         <svg
           aria-hidden="true"
           className={cn(
-            "mt-1 h-3.5 w-3.5 shrink-0 text-secondary",
+            "mt-1 h-3.5 w-3.5 shrink-0 text-secondary-strong",
             "opacity-0 -translate-x-1 transition-all duration-200",
             "group-hover:opacity-100 motion-safe:group-hover:translate-x-0"
           )}

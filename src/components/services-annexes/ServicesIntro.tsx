@@ -30,7 +30,8 @@ export function ServicesIntro() {
   const img2 = "/images/nos-offres/services-projets.jpg"
 
   return (
-    <div ref={ref} className="py-10 lg:py-16 overflow-visible">
+    <div ref={ref} className="relative py-10 lg:py-16 overflow-visible">
+      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-screen bg-primary -z-10" />
       <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center w-full">
 
         <div
@@ -43,9 +44,9 @@ export function ServicesIntro() {
           `}
           style={{ transitionDelay: "100ms" }}
         >
-          <span className="text-secondary font-mono text-xs tracking-widest uppercase">SERVICES ANNEXES</span>
+          <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">SERVICES ANNEXES</span>
           <Heading as="h2" className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            Un accompagnement IT sur mesure, au-delà du <em className="not-italic text-secondary">support</em>
+            Un accompagnement IT sur mesure, au-delà du <em className="not-italic text-secondary-strong">support</em>
           </Heading>
 
           <div className="w-10 h-px bg-secondary/50" />
@@ -54,7 +55,7 @@ export function ServicesIntro() {
             Changement de messagerie, ajout de nouveaux postes, évolution de votre environnement Microsoft 365, amélioration de votre réseau ou sécurisation de vos données... Nous intervenons sur les projets informatiques du quotidien comme sur les sujets plus structurants.
           </Text>
 
-          <p className="py-6 px-6 italic text-white/90 text-sm md:text-base leading-relaxed bg-white/[0.02] rounded-2xl">
+          <p className="py-6 px-6 italic text-white/90 text-sm md:text-base leading-relaxed bg-white/[0.05] rounded-2xl">
             Chaque entreprise a ses contraintes. C&apos;est pour cela que ces services sont proposés sur devis : nous analysons votre besoin, nous vous recommandons une solution adaptée et nous vous annonçons un prix fixe avant toute intervention.
           </p>
         </div>

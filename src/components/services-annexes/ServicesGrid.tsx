@@ -1,11 +1,14 @@
 "use client"
 
-import { Card } from "@/components/ui/Card"
+import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
+import { Heading } from "@/components/ui/Typography"
+import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react"
 
 const structuralServices = [
     {
         title: "Migration de messagerie vers Microsoft 365",
-        desc: "Vous utilisez encore une messagerie hébergée chez OVH, Orange, Free ou un autre prestataire ? Nous prenons en charge votre migration vers Microsoft 365 pour vous faire gagner en fiabilité, en confort d'usage et en professionnalisme.",
+        desc: "Vous utilisez encore une messagerie hébergée chez OVH, Orange, Free ou un autre prestataire ? Nous prenons en charge votre migration vers Microsoft 365 pour vous faire gagner en fiabilité, en confort d'usage et en professionnalisme. Une migration bien préparée, sans coupure de service ni perte de données, pour repartir sur des bases saines et professionnelles.",
         meta: "Sur devis - Généralement réalisé en 1 journée",
         points: [
             "Création de votre environnement Microsoft 365",
@@ -19,7 +22,7 @@ const structuralServices = [
     },
     {
         title: "Création et configuration d'un environnement Microsoft 365",
-        desc: "Vous souhaitez structurer votre entreprise avec des outils professionnels comme Outlook, Teams, OneDrive ou SharePoint ? Nous créons et configurons votre environnement Microsoft 365 de A à Z.",
+        desc: "Vous souhaitez structurer votre entreprise avec des outils professionnels comme Outlook, Teams, OneDrive ou SharePoint ? Nous créons et configurons votre environnement Microsoft 365 de A à Z. Un socle solide et évolutif, pensé pour accompagner la croissance de votre activité sans repartir de zéro plus tard.",
         meta: "Sur devis - Partenaire Microsoft certifié",
         points: [
             "Création du tenant Microsoft 365 au nom de votre entreprise",
@@ -32,7 +35,7 @@ const structuralServices = [
     },
     {
         title: "Conseil et accompagnement à l'achat de matériel",
-        desc: "Besoin d'un nouvel ordinateur, d'un écran ou d'une imprimante ? Nous vous accompagnons pour choisir un équipement réellement adapté à votre activité, sans surdimensionnement inutile.",
+        desc: "Besoin d'un nouvel ordinateur, d'un écran ou d'une imprimante ? Nous vous accompagnons pour choisir un équipement réellement adapté à votre activité, sans surdimensionnement inutile. Vous investissez juste, ni trop ni trop peu, dans du matériel qui tiendra dans la durée.",
         meta: "Sur devis - On optimise avant de remplacer",
         points: [
             "Audit de votre matériel actuel",
@@ -44,7 +47,7 @@ const structuralServices = [
     },
     {
         title: "Mise à niveau Windows Famille vers Windows Professionnel",
-        desc: "Votre ordinateur fonctionne sous Windows Family ? Pour un usage professionnel, certaines fonctions importantes peuvent vous manquer. Nous réalisons la mise à niveau vers Windows Professionnel.",
+        desc: "Votre ordinateur fonctionne sous Windows Family ? Pour un usage professionnel, certaines fonctions importantes peuvent vous manquer. Nous réalisons la mise à niveau vers Windows Professionnel, en toute simplicité et sans interrompre votre activité.",
         meta: "Sur devis - Intervention en 2 à 3 heures",
         points: [
             "Licence officielle Windows 11 Professionnel",
@@ -56,7 +59,7 @@ const structuralServices = [
     },
     {
         title: "Optimisation et remise à niveau de poste existant",
-        desc: "Votre ordinateur est lent ? Avant d'envisager un achat neuf, nous pouvons souvent améliorer sensiblement ses performances pour un budget bien plus raisonnable.",
+        desc: "Votre ordinateur est lent ? Avant d'envisager un achat neuf, nous pouvons souvent améliorer sensiblement ses performances pour un budget bien plus raisonnable. Un diagnostic précis avant toute intervention, pour ne payer que ce qui est réellement utile.",
         meta: "Sur devis - Souvent plus économique qu'un neuf",
         points: [
             "Diagnostic complet du poste",
@@ -69,7 +72,7 @@ const structuralServices = [
     },
     {
         title: "Installation et configuration réseau",
-        desc: "Vous avez besoin d'un WiFi plus fiable, d'un partage de fichiers entre vos postes ou d'un accès à distance sécurisé ? Nous concevons et configurons un réseau adapté.",
+        desc: "Vous avez besoin d'un WiFi plus fiable, d'un partage de fichiers entre vos postes ou d'un accès à distance sécurisé ? Nous concevons et configurons un réseau adapté à la taille et aux usages réels de votre entreprise, sans complexité superflue.",
         meta: "Sur devis - Adapté à la taille de votre entreprise",
         points: [
             "Installation et configuration de votre box ou routeur professionnel",
@@ -81,7 +84,7 @@ const structuralServices = [
     },
     {
         title: "Arrivée ou départ d'un collaborateur",
-        desc: "L'arrivée ou le départ d'un salarié demande une gestion informatique rigoureuse. Nous prenons en charge ces étapes pour que tout soit prêt, sécurisé et bien organisé.",
+        desc: "L'arrivée ou le départ d'un salarié demande une gestion informatique rigoureuse. Nous prenons en charge ces étapes pour que tout soit prêt, sécurisé et bien organisé, sans risque d'oubli ni de faille de sécurité au moment du changement.",
         meta: "Sur devis - Pour que rien ne se perde",
         points: [
             "Arrivée : création du compte, configuration du poste, accès messagerie, logiciels",
@@ -92,7 +95,7 @@ const structuralServices = [
     },
     {
         title: "Mise en place de sauvegarde professionnelle",
-        desc: "Vos données ne doivent pas dépendre du hasard. Une panne, un vol ou une erreur peuvent avoir des conséquences lourdes.",
+        desc: "Vos données ne doivent pas dépendre du hasard. Une panne, un vol ou une erreur peuvent avoir des conséquences lourdes. Nous mettons en place une stratégie de sauvegarde fiable, automatisée et régulièrement vérifiée pour votre tranquillité d'esprit.",
         meta: "Sur devis - Parce que vos données sont essentielles",
         points: [
             "Sauvegarde automatique dans le cloud",
@@ -104,7 +107,7 @@ const structuralServices = [
     },
     {
         title: "Sécurisation de la messagerie professionnelle",
-        desc: "La messagerie reste l'une des principales portes d'entrée des cyberattaques. Nous renforçons la sécurité de vos comptes e-mail.",
+        desc: "La messagerie reste l'une des principales portes d'entrée des cyberattaques. Nous renforçons la sécurité de vos comptes e-mail pour réduire drastiquement le risque de phishing, d'usurpation et de fuite de données.",
         meta: "Sur devis - La sécurité commence par les e-mails",
         points: [
             "Activation de la double authentification sur tous les comptes",
@@ -116,7 +119,7 @@ const structuralServices = [
     },
     {
         title: "Formation et accompagnement utilisateurs",
-        desc: "Des outils bien choisis ne suffisent pas toujours. Nous proposons des formations simples, concrètes et accessibles.",
+        desc: "Des outils bien choisis ne suffisent pas toujours. Nous proposons des formations simples, concrètes et accessibles, pour que vos équipes gagnent en autonomie et en efficacité au quotidien sur leurs outils de travail.",
         meta: "Sur devis - Adapté au niveau de chaque équipe",
         points: [
             "Prise en main de Microsoft 365 : Outlook, Teams, OneDrive, SharePoint",
@@ -124,32 +127,180 @@ const structuralServices = [
             "Utilisation plus efficace du poste de travail au quotidien",
         ],
     },
-];
+]
+
+// Images provisoires réutilisées en boucle, à remplacer par des visuels dédiés plus tard
+const placeholderImages = [
+    "/images/services/infogerance.webp",
+    "/images/services/support.webp",
+    "/images/services/cybersecurite.webp",
+    "/images/services/cloud.webp",
+    "/images/services/microsoft.webp",
+    "/images/services/solutions.webp",
+]
 
 export function ServicesGrid() {
+    const scrollContainerRef = useRef<HTMLDivElement>(null)
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [isPaused, setIsPaused] = useState(false)
+    const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+    const goToSlide = (index: number) => {
+        if (!scrollContainerRef.current) return
+        const newIndex = (index + structuralServices.length) % structuralServices.length
+        setCurrentIndex(newIndex)
+
+        const slideWidth = scrollContainerRef.current.clientWidth
+        scrollContainerRef.current.scrollTo({
+            left: newIndex * slideWidth,
+            behavior: "smooth",
+        })
+    }
+
+    useEffect(() => {
+        if (isPaused) return
+
+        intervalRef.current = setInterval(() => {
+            goToSlide(currentIndex + 1)
+        }, 6000)
+
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current)
+        }
+    }, [currentIndex, isPaused])
+
+    const handleManualNav = (direction: "prev" | "next") => {
+        if (intervalRef.current) clearInterval(intervalRef.current)
+        goToSlide(direction === "prev" ? currentIndex - 1 : currentIndex + 1)
+    }
+
+    const togglePause = () => {
+        setIsPaused((prev) => !prev)
+    }
+
     return (
-        <div className="space-y-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {structuralServices.map((service, index) => (
-                    <Card key={index} className="p-5 bg-white/[0.01] border-white/5 flex flex-col justify-between hover:border-secondary/20 transition-all space-y-4 rounded-xl">
-                        <div className="space-y-2.5">
-                            <h4 className="text-base font-bold text-white leading-snug">{service.title}</h4>
-                            <p className="text-xs text-white/50 leading-relaxed">{service.desc}</p>
-                            <ul className="space-y-1.5 pt-2 border-t border-white/5">
-                                {service.points.map((pt, k) => (
-                                    <li key={k} className="text-xs text-white/80 flex items-start gap-2">
-                                        <span className="text-secondary shrink-0 mt-0.5">✓</span>
-                                        <span>{pt}</span>
-                                    </li>
-                                ))}
-                            </ul>
+        <div className="relative px-0 md:px-20">
+            <div
+                ref={scrollContainerRef}
+                className="relative overflow-x-scroll overflow-y-hidden snap-x snap-mandatory scroll-smooth flex no-scrollbar"
+                style={{
+                    scrollSnapType: "x mandatory",
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                }}
+            >
+                {structuralServices.map((service, index) => {
+                    const image = placeholderImages[index % placeholderImages.length]
+                    const imageFirst = index % 2 === 0
+
+                    return (
+                        <div
+                            key={index}
+                            className="w-full flex-shrink-0 snap-start pt-20 md:pt-28"
+                            style={{ scrollSnapAlign: "start" }}
+                        >
+                            <div
+                                className={`relative bg-surface-strong rounded-[48px] flex flex-col ${imageFirst ? "md:flex-row" : "md:flex-row-reverse"} items-center md:items-start gap-6 md:gap-12 p-6 md:p-10 pt-24 md:pt-32 md:min-h-[720px]`}
+                            >
+                                <div className="relative z-20 w-full md:w-[50%] -mt-32 md:-mt-48 flex-shrink-0 flex flex-col">
+                                    <div className="relative w-full h-[280px] md:h-[480px] rounded-[32px] overflow-hidden">
+                                        <Image
+                                            src={image}
+                                            alt={service.title}
+                                            fill
+                                            sizes="(min-width: 768px) 50vw, 90vw"
+                                            className="object-cover"
+                                            priority={index === 0}
+                                        />
+                                    </div>
+
+                                    <div className="mt-6 pt-4 border-t border-secondary/20 text-xs font-bold text-secondary-strong uppercase tracking-wider">
+                                        {service.meta}
+                                    </div>
+                                </div>
+
+                                <div className="relative z-10 w-full p-2 md:p-4 self-stretch flex flex-col">
+                                    <span className="text-secondary-strong text-xs md:text-sm font-bold tracking-widest uppercase mb-3 block">
+                                        {String(index + 1).padStart(2, "0")} / {String(structuralServices.length).padStart(2, "0")}
+                                    </span>
+
+                                    <Heading
+                                        as="h3"
+                                        className="text-2xl md:text-3xl xl:text-4xl text-foreground mb-4 tracking-tight font-extrabold"
+                                    >
+                                        {service.title}
+                                    </Heading>
+
+                                    <p className="text-foreground/70 text-sm md:text-base leading-relaxed mb-6">
+                                        {service.desc}
+                                    </p>
+
+                                    <ul className="space-y-2.5 pt-4 border-t border-secondary/20">
+                                        {service.points.map((pt, k) => (
+                                            <li key={k} className="text-sm text-foreground/80 flex items-start gap-2">
+                                                <span className="text-secondary-strong shrink-0 mt-0.5">✓</span>
+                                                <span>{pt}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-[10px] font-bold text-secondary uppercase tracking-wider border-t border-white/5 pt-3">
-                            {service.meta}
-                        </div>
-                    </Card>
-                ))}
+                    )
+                })}
             </div>
+
+            {/* Flèches mobile : sous la carte, jamais collées */}
+            <div className="flex md:hidden justify-center items-center gap-4 mt-8">
+                <button
+                    onClick={() => handleManualNav("prev")}
+                    aria-label="Service précédent"
+                    className="w-12 h-12 rounded-full bg-background flex items-center justify-center hover:bg-secondary transition-all duration-300 group"
+                >
+                    <ChevronLeft className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
+                </button>
+                <button
+                    onClick={togglePause}
+                    aria-label={isPaused ? "Reprendre le défilement" : "Mettre en pause le défilement"}
+                    className="w-12 h-12 rounded-full bg-background flex items-center justify-center hover:bg-secondary transition-all duration-300 group"
+                >
+                    {isPaused ? (
+                        <Play className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
+                    ) : (
+                        <Pause className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
+                    )}
+                </button>
+                <button
+                    onClick={() => handleManualNav("next")}
+                    aria-label="Service suivant"
+                    className="w-12 h-12 rounded-full bg-background flex items-center justify-center hover:bg-secondary transition-all duration-300 group"
+                >
+                    <ChevronRight className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
+                </button>
+            </div>
+
+            {/* Flèches desktop : à l'extérieur de la carte, avec marge dédiée */}
+            <button
+                onClick={() => handleManualNav("prev")}
+                aria-label="Service précédent"
+                className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-30 w-14 h-14 rounded-full bg-background items-center justify-center hover:bg-secondary hover:scale-105 transition-all duration-300 group"
+            >
+                <ChevronLeft className="w-6 h-6 text-foreground group-hover:text-white transition-colors" />
+            </button>
+
+            <button
+                onClick={() => handleManualNav("next")}
+                aria-label="Service suivant"
+                className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-30 w-14 h-14 rounded-full bg-background items-center justify-center hover:bg-secondary hover:scale-105 transition-all duration-300 group"
+            >
+                <ChevronRight className="w-6 h-6 text-foreground group-hover:text-white transition-colors" />
+            </button>
+
+            <style jsx>{`
+                div::-webkit-scrollbar {
+                    display: none;
+                }
+            `}</style>
         </div>
     )
 }

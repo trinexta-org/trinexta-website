@@ -10,6 +10,7 @@ import { BlogPaginatedGrid } from "./BlogPaginatedGrid";
 import { FinalCTA } from "../FinalCTA";
 import { BlogCasClientPromo } from "./BlogCasClientPromo";
 import { BlogInteractiveCarousel } from "./BlogInteractiveCarousel";
+import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export { CATEGORIES_FILTRE as CATEGORIES };
 
@@ -56,9 +57,10 @@ export function BlogList({ initialArticles, categories }: { initialArticles: Res
   };
 
   return (
-    <main className="relative bg-primary pb-32">
+   <main className="relative bg-surface">
       <BlogHero />
 
+      <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
 
       <div className="mt-12 mb-8">
         <TransitionTitle

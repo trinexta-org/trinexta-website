@@ -2,7 +2,6 @@ import Image from "next/image"
 import { Section } from "@/components/layout/Section"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Container } from "@/components/layout/Container"
-import { SectionFade } from "@/components/ui/SectionFade"
 import { FadeIn } from "@/components/ui/FadeIn"
 
 const networkFeatures = [
@@ -25,9 +24,8 @@ const networkFeatures = [
 ]
 
 export function OurNetwork() {
-    return (
-        <Section id="equipe" container={false} className="relative py-12 md:py-24 bg-primary overflow-hidden">
-            <SectionFade edge="top" />
+       return (
+        <Section id="equipe" container={false} className="relative py-12 md:py-24 bg-surface overflow-hidden">
             <Container className="relative z-10">
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center mb-12 md:mb-24">
@@ -50,16 +48,16 @@ export function OurNetwork() {
                         direction="left"
                         className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6"
                     >
-                        <Heading as="h3" className="text-3xl md:text-5xl text-white font-black leading-tight">
+                        <Heading as="h3" className="text-3xl md:text-5xl text-primary font-black leading-tight">
                             Les bonnes compétences <br className="hidden md:block" />
-                            <span className="text-secondary">au bon moment</span>
+                            <span className="text-secondary-strong">au bon moment</span>
                         </Heading>
 
-                        <Text className="text-white/90 text-base md:text-xl leading-relaxed font-light">
+                        <Text className="text-primary/80 text-base md:text-xl leading-relaxed font-light">
                             Pour vous garantir une réactivité maximale et une expertise adaptée à chaque situation, nous avons fait le choix d&apos;un modèle agile.
                         </Text>
 
-                        <Text className="text-white/80 text-sm md:text-lg leading-relaxed">
+                        <Text className="text-primary/70 text-sm md:text-lg leading-relaxed">
                             Selon la nature de la mission, nous mobilisons nos équipes ou des techniciens partenaires sélectionnés pour leur savoir-faire terrain. Contrairement aux agences traditionnelles souvent freinées par des lourdeurs administratives, cette organisation nous permet d&apos;envoyer la bonne compétence, au bon endroit, et au bon moment.
                         </Text>
                     </FadeIn>
@@ -71,18 +69,18 @@ export function OurNetwork() {
                             key={idx}
                             direction="up"
                             delay={idx * 0.1}
-                            className="relative overflow-hidden flex flex-col gap-4 p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] hover:border-secondary/40 transition-all duration-500 group shadow-lg"
+                            className="relative overflow-hidden flex flex-col gap-4 p-6 md:p-8 rounded-2xl bg-surface-strong border border-secondary/20 hover:border-secondary/40 transition-all duration-500 group shadow-lg"
                         >
-                            <span className="absolute -right-4 -top-6 text-[100px] md:text-[140px] font-black text-white/[0.02] group-hover:text-secondary/[0.04] transition-colors duration-500 pointer-events-none select-none">
+                            <span className="absolute -right-4 -top-6 text-[100px] md:text-[140px] font-black text-primary/[0.05] group-hover:text-secondary-strong/[0.10] transition-colors duration-500 pointer-events-none select-none">
                                 0{idx + 1}
                             </span>
 
-                            <Heading as="h4" className="text-white text-lg md:text-2xl font-bold tracking-normal relative z-10 flex items-center gap-3">
+                            <Heading as="h4" className="text-primary text-lg md:text-2xl font-bold tracking-normal relative z-10 flex items-center gap-3">
                                 <span className="w-4 md:w-6 h-1 bg-secondary rounded-full transition-all duration-300 group-hover:w-8 md:group-hover:w-10"></span>
                                 {feature.title}
                             </Heading>
 
-                            <Text className="text-sm md:text-base text-white/70 leading-relaxed font-light relative z-10">
+                            <Text className="text-sm md:text-base text-primary/70 leading-relaxed font-light relative z-10">
                                 {feature.desc}
                             </Text>
                         </FadeIn>

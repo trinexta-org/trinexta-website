@@ -31,7 +31,8 @@ export function TechnicienIntro() {
   const img2 = "/images/nos-offres/impulsion_2.jpg"
 
   return (
-    <div ref={ref} className="py-10 lg:py-16 overflow-visible">
+    <div ref={ref} className="relative py-10 lg:py-16 overflow-visible">
+  <div className="absolute -top-12 bottom-0 left-1/2 -translate-x-1/2 w-screen bg-primary -z-10" />
       <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center w-full">
 
         <div
@@ -47,7 +48,7 @@ export function TechnicienIntro() {
           <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
             Votre technicien
             <br />
-            <em className="not-italic text-secondary">support</em> sous régie
+            <em className="not-italic text-secondary-strong">support</em> sous régie
           </h2>
 
           <div className="w-10 h-px bg-secondary/50" />

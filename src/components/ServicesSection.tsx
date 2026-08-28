@@ -83,7 +83,7 @@ function CharteFormattedText({ children }: { children: string }) {
     <p className="text-white/80 text-xs md:text-sm lg:text-base leading-relaxed mb-6 md:mb-8 line-clamp-3">
       {parts.map((part, index) => {
         if (part.startsWith("**") && part.endsWith("**")) {
-          return <strong key={index} className="text-secondary font-bold">{part.slice(2, -2)}</strong>
+          return <strong key={index} className="text-secondary-strong font-bold">{part.slice(2, -2)}</strong>
         }
         return part
       })}
@@ -96,7 +96,7 @@ function AnimatedArrow({ direction }: { direction: string }) {
     <div className="relative w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 flex-shrink-0">
       <ArrowRight className="w-full h-full text-white/20 absolute inset-0" />
       <div
-        className={`absolute inset-0 text-secondary ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
+        className={`absolute inset-0 text-secondary-strong ${direction === "ltr" ? "animate-arrow-fill-ltr" : "animate-arrow-fill-rtl"}`}
       >
         <ArrowRight className="w-full h-full" />
       </div>
@@ -148,7 +148,7 @@ export function ServicesSection() {
   const activePositions = isMobile ? mobilePositions : positions
 
   return (
-    <Section container={false} className="relative min-h-screen bg-primary pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
+    <Section container={false} className="relative min-h-screen bg-surface pt-8 pb-16 md:pb-32 overflow-hidden perspective-[2000px]">
       <Container className="relative z-10">
         <div ref={sectionRef} className="relative w-full h-[2400px] md:h-[1100px]">
           {services.map((service, index) => {
@@ -200,7 +200,7 @@ export function ServicesSection() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/85 to-transparent" />
                 </div>
 
                 <div className="relative h-full z-10 flex flex-col justify-end p-6 md:p-8 xl:p-10">

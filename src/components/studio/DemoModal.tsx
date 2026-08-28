@@ -82,7 +82,7 @@ export function DemoModal({ isOpen, onClose, url, title }: DemoModalProps) {
               </span>
               <button
                 onClick={onClose}
-                className="text-white hover:text-secondary transition-colors flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10 ml-auto shadow-lg"
+                className="text-white hover:text-secondary-strong transition-colors flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10 ml-auto shadow-lg"
               >
                 Fermer ✕
               </button>

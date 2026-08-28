@@ -72,7 +72,7 @@ export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
           className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/3 rounded-full bg-secondary/15 blur-[90px]"
         />
         <div className="relative">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
             Score SEO de votre page
           </p>
           <div className="mt-5 flex justify-center">
@@ -87,7 +87,7 @@ export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
 
       {teaser.aiSummary && (
         <div className="rounded-2xl border border-secondary/30 bg-secondary/[0.07] p-6">
-          <p className="inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-secondary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-secondary">
+          <p className="inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-secondary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
             Analyse IA
           </p>
@@ -143,7 +143,7 @@ export function AuditTeaser({ teaser }: { teaser: TeaserResponse }) {
       </div>
 
       <div className="rounded-2xl border border-secondary/30 bg-secondary/10 p-6 sm:p-8">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
           Et maintenant ?
         </p>
         <p className="mt-3 text-sm leading-relaxed text-white/80">{narrative.conclusion}</p>

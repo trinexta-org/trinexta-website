@@ -43,7 +43,7 @@ export default async function DesabonnementPage({ searchParams }: Props) {
           <p className="text-white/60 text-sm leading-relaxed mb-8">{content.message}</p>
           <Link
             href="/"
-            className="inline-flex items-center justify-center h-10 px-6 rounded-lg bg-secondary text-secondary-foreground text-sm font-semibold hover:bg-secondary/90 transition-colors"
+            className="inline-flex items-center justify-center h-10 px-6 rounded-lg bg-secondary text-secondary-strong-foreground text-sm font-semibold hover:bg-secondary/90 transition-colors"
           >
             Retour au site
           </Link>

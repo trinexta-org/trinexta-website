@@ -6,6 +6,7 @@ import { officialFaqs } from "@/components/shared/faqData"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { TransitionTitle } from "@/components/TransitionTitle"
+import { WaveDivider } from "@/components/ui/WaveDivider"
 import { StudioIntro } from "@/components/studio/StudioIntro"
 import { StudioDifferentiator } from "@/components/studio/StudioDifferentiator"
 import { StudioGrid } from "@/components/studio/StudioGrid"
@@ -39,24 +40,42 @@ export default function TrinextaStudioPage() {
         <main className="bg-primary min-h-screen relative pb-24">
             <JsonLd data={faqJsonLd} />
 
-            <OfferHero
-                part1="Trinexta"
-                part2="Studio"
-                subtitles={[
-                    "Développement de sites internet sur mesure. Plateformes et solutions web performantes conçues par notre entreprise.",
-                    "Un accompagnement technique complet pour la création de vos outils métiers, portails clients ou vitrines digitales.",
-                    "Hébergement en France et conception sécurisée par design (Secure by Design) pour protéger vos utilisateurs."
-                ]}
-                imageSrc="/images/nos-offres/hero-studio.jpg"
-            />
+            {/* =========================================================
+                BLOC SOMBRE
+                Hero + Intro
+                ========================================================= */}
+            <section className="relative bg-primary">
+                <OfferHero
+                    part1="Trinexta"
+                    part2="Studio"
+                    subtitles={[
+                        "Développement de sites internet sur mesure. Plateformes et solutions web performantes conçues par notre entreprise.",
+                        "Un accompagnement technique complet pour la création de vos outils métiers, portails clients ou vitrines digitales.",
+                        "Hébergement en France et conception sécurisée par design (Secure by Design) pour protéger vos utilisateurs."
+                    ]}
+                    imageSrc="/images/nos-offres/hero-studio.jpg"
+                />
 
-            <div className="w-full relative z-10 pt-12">
-                <div id="studio" className="space-y-32 pb-16">
+                <div className="w-full relative z-10 pt-12 pb-16">
                     <Section container={false} className="pt-0">
                         <Container className="max-w-[1400px]">
                             <StudioIntro />
                         </Container>
                     </Section>
+                </div>
+            </section>
+
+            {/* =========================================================
+                TRANSITION SOMBRE → CLAIR
+                ========================================================= */}
+            <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
+
+            {/* =========================================================
+                BLOC CLAIR
+                Différenciateur + Grille + Démos
+                ========================================================= */}
+            <section className="relative bg-surface">
+                <div className="space-y-32 py-16">
 
                     <div className="space-y-12">
                         <TransitionTitle
@@ -96,8 +115,9 @@ export default function TrinextaStudioPage() {
                             </Container>
                         </Section>
                     </div>
+
                 </div>
-            </div>
+            </section>
 
             <FinalCTA
                 line1="Un projet web complexe ?"

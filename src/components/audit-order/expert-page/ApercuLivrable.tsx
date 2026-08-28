@@ -25,7 +25,7 @@ export function ApercuLivrable() {
     return (
         <div className="space-y-8">
             <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                     Couverture
                 </p>
                 <Heading as="h3" className="mt-2 text-white">
@@ -49,7 +49,7 @@ export function ApercuLivrable() {
                     />
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-                    <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                         Synthèse exécutive
                     </p>
                     <ul className="mt-4 space-y-2">
@@ -75,7 +75,7 @@ export function ApercuLivrable() {
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                     Constats secondaires
                 </p>
                 <ul className="mt-4 space-y-2">
@@ -90,7 +90,7 @@ export function ApercuLivrable() {
             <div className="grid gap-4 md:grid-cols-3">
                 {data.recommandations.map((reco) => (
                     <div key={reco.palier} className="rounded-2xl border border-white/10 bg-black/20 p-6">
-                        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary">
+                        <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
                             {palierLabels[reco.palier]}
                         </p>
                         <ul className="mt-3 space-y-2">
