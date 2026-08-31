@@ -13,7 +13,7 @@ export function CookieBanner() {
   return (
     <Script
       src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js"
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       onLoad={() => {
         if (typeof window !== "undefined" && window.tarteaucitron) {
           window.tarteaucitron.init({
