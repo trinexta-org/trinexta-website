@@ -133,7 +133,7 @@ function verifierDiff(base, branche) {
       "schema.prisma modifie sans migration dans prisma/migrations/. Lancer npx prisma migrate dev --name <nom>.");
   }
 
-  for (const fichier of modifies.filter((f) => basename(f).startsWith(".env"))) {
+  for (const fichier of modifies.filter((f) => basename(f).startsWith(".env") && basename(f) !== ".env.example")) {
     signaler(fichier, 0, "ENV_COMMITTED", "Fichier d'environnement committe. Seul .env.example doit l'etre.");
   }
 
