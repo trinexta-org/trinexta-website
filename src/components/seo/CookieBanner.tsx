@@ -51,6 +51,14 @@ export function CookieBanner() {
             window.tarteaucitron.user.gtagUa = adsId;
             window.tarteaucitron.job.push('gtag');
           }
+
+          // next/script charge tarteaucitron apres l'evenement window "load".
+          // init() attache alors son listener "load" a une cible qui ne se
+          // declenchera plus : sans ce rappel, aucun bandeau ni icone n'est
+          // construit et les jobs Google ne sont jamais executes.
+          if (document.readyState === "complete") {
+            window.dispatchEvent(new Event("load"));
+          }
         }
       }}
     />
