@@ -4,8 +4,9 @@ import Script from "next/script";
 
 export function CookieBanner() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
-  if (process.env.NODE_ENV !== "production" || !gtmId) {
+  if (process.env.NODE_ENV !== "production" || (!gtmId && !adsId)) {
     return null;
   }
 
@@ -39,9 +40,17 @@ export function CookieBanner() {
             "useExternalCss": false,
           });
 
-          window.tarteaucitron.user.googletagmanagerId = gtmId;
           window.tarteaucitron.job = window.tarteaucitron.job || [];
-          window.tarteaucitron.job.push('googletagmanager');
+
+          if (gtmId) {
+            window.tarteaucitron.user.googletagmanagerId = gtmId;
+            window.tarteaucitron.job.push('googletagmanager');
+          }
+
+          if (adsId) {
+            window.tarteaucitron.user.gtagUa = adsId;
+            window.tarteaucitron.job.push('gtag');
+          }
         }
       }}
     />
