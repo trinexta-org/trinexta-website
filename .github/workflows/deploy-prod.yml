@@ -15,11 +15,12 @@ jobs:
         uses: appleboy/ssh-action@v1
         env:
           NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID || secrets.NEXT_PUBLIC_GTM_ID }}
+          NEXT_PUBLIC_GOOGLE_ADS_ID: ${{ vars.NEXT_PUBLIC_GOOGLE_ADS_ID || secrets.NEXT_PUBLIC_GOOGLE_ADS_ID }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: NEXT_PUBLIC_GTM_ID
+          envs: NEXT_PUBLIC_GTM_ID,NEXT_PUBLIC_GOOGLE_ADS_ID
           script: |
             set -e
             cd /var/www/trinexta-prod
@@ -28,6 +29,7 @@ jobs:
             npx prisma migrate deploy
             npx prisma generate
             : "${NEXT_PUBLIC_GTM_ID:?NEXT_PUBLIC_GTM_ID is missing in GitHub Actions variables or secrets}"
+            : "${NEXT_PUBLIC_GOOGLE_ADS_ID:?NEXT_PUBLIC_GOOGLE_ADS_ID is missing in GitHub Actions variables or secrets}"
             npm run build
             # minimumCacheTTL=31j : sans purge, les images remplacees sous le
             # meme chemin resteraient servies depuis l'ancien cache jusqu'a 31j.
