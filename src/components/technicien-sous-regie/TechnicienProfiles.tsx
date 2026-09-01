@@ -2,12 +2,12 @@ import Image from "next/image"
 import Link from "next/link"
 
 const profiles = [
-    { role: "Support utilisateur", spec: "Helpdesk N1/N2", image: "/images/nos-offres/profiles/profile-support.jpg" },
-    { role: "Gestion de parc", spec: "De proximité", image: "/images/nos-offres/profiles/profile-parc.jpg" },
+    { role: "Support utilisateur", spec: "Helpdesk N1/N2", image: "/images/nos-offres/profiles/profile-support-v2.jpg" },
+    { role: "Gestion de parc", spec: "De proximité", image: "/images/nos-offres/profiles/profile-parc-v2.jpg" },
     { role: "Systèmes et réseaux", spec: "Architecture & maintenance", image: "/images/nos-offres/profiles/profile-reseau.jpg" },
-    { role: "Microsoft 365", spec: "Azure · Intune", image: "/images/nos-offres/profiles/profile-m365.jpg" },
-    { role: "Déploiement", spec: "Postes, logiciels, matériel", image: "/images/nos-offres/profiles/profile-deploiement.jpg" },
-    { role: "Cybersécurité", spec: "Sensibilisation, audit, remédiation", image: "/images/nos-offres/profiles/profile-cyber.jpg" },
+    { role: "Microsoft 365", spec: "Azure · Intune", image: "/images/nos-offres/profiles/profile-m365-v2.jpg" },
+    { role: "Déploiement", spec: "Postes, logiciels, matériel", image: "/images/nos-offres/profiles/profile-deploiement-v2.jpg" },
+    { role: "Cybersécurité", spec: "Sensibilisation, audit, remédiation", image: "/images/nos-offres/profiles/profile-cyber-v2.jpg" },
 ]
 
 export function TechnicienProfiles() {

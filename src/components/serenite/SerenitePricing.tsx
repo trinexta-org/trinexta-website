@@ -6,7 +6,7 @@ export function SerenitePricing() {
       <div className="p-8 rounded-2xl bg-surface-strong border border-secondary/20 space-y-6">
         <div className="flex justify-between items-baseline">
           <span className="text-lg font-bold text-primary">Mensuel</span>
-          <span className="text-2xl font-black text-secondary-strong">79€ HT <span className="text-sm font-normal text-primary/70">/ poste / mois</span></span>
+          <span className="text-2xl font-black text-secondary-strong"><span className="text-sm font-normal text-primary/70">à partir de </span>79€ HT <span className="text-sm font-normal text-primary/70">/ poste / mois</span></span>
         </div>
         <ul className="text-base text-primary/70 space-y-3">
           <li className="flex items-center gap-3">
@@ -27,12 +27,12 @@ export function SerenitePricing() {
         <div className="absolute top-0 right-0 bg-secondary text-primary text-xs font-black uppercase px-4 py-1 rounded-bl-xl">Économique</div>
         <div className="flex justify-between items-baseline">
           <span className="text-lg font-bold text-primary">Annuel</span>
-          <span className="text-2xl font-black text-secondary-strong">869€ HT <span className="text-sm font-normal text-muted-foreground">/ poste / an</span></span>
+          <span className="text-2xl font-black text-secondary-strong"><span className="text-sm font-normal text-muted-foreground">à partir de </span>901€ HT <span className="text-sm font-normal text-muted-foreground">/ poste / an</span></span>
         </div>
         <ul className="text-base text-primary/70 space-y-3">
           <li className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
-            <span>1 mois offert par poste</span>
+            <span>5&nbsp;% de remise sur l&apos;offre</span>
           </li>
           <li className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />

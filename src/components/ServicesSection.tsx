@@ -29,33 +29,33 @@ const services = [
     id: 3,
     title: "Cybersécurité",
     description: "**Blindez** vos systèmes. **Audits de sécurité**, EDR nouvelle génération, protection anti-ransomware et **sauvegardes immuables**.",
-    image: "/images/services/cybersecurite.webp",
+    image: "/images/services/cybersecurite-v2.webp",
     fillDir: "ltr",
-    alt: "Expert en cybersécurité analysant les données sur un ordinateur portable pour protéger le réseau informatique d'une entreprise."
+    alt: "Analyste en cybersécurité supervisant des tableaux de bord de détection de menaces dans un centre opérationnel de sécurité."
   },
   {
     id: 4,
     title: "Cloud",
     description: "**Modernisez** votre infrastructure. Hébergement souverain, serveurs dédiés et **Plan de Reprise d'Activité (PRA)** hautement disponible.",
-    image: "/images/services/cloud.webp",
+    image: "/images/services/cloud-v2.webp",
     fillDir: "rtl",
-    alt: ""
+    alt: "Allée déserte entre deux rangées de baies de serveurs dans un datacenter moderne, illustrant l'hébergement cloud souverain et la haute disponibilité."
   },
   {
     id: 5,
     title: "Microsoft 365",
     description: "**Collaborez** sans limite. Migration sans coupure, sécurisation des tenants et **optimisation de vos licences** d'entreprise.",
-    image: "/images/services/microsoft.webp",
+    image: "/images/services/microsoft-v2.webp",
     fillDir: "ltr",
-    alt: ""
+    alt: "Ordinateur portable affichant la messagerie, l'agenda et une visioconférence de la suite Microsoft 365."
   },
   {
     id: 6,
     title: "Solutions Métier",
     description: "Des outils qui épousent vos **processus**. Téléphonie VoIP, réseaux multisites et intégration de **logiciels spécialisés**.",
-    image: "/images/services/solutions.webp",
+    image: "/images/services/solutions-v2.webp",
     fillDir: "rtl",
-    alt: ""
+    alt: "Téléphone IP professionnel raccordé à un switch réseau, illustrant la téléphonie VoIP et les réseaux multisites."
   },
 ]
 
