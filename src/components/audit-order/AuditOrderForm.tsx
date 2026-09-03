@@ -79,7 +79,12 @@ export function AuditOrderForm({
       const { id } = await res.json();
       // Les coordonnees sont enregistrees cote serveur : le lead existe des ici,
       // independamment de l'issue du paiement Stripe qui suit.
-      trackLeadConversion({ form_id: "audit_seo_expert" });
+      // await obligatoire : le hachage est asynchrone et le redirect Stripe
+      // qui suit perdrait la conversion.
+      await trackLeadConversion(
+        { form_id: "audit_seo_expert" },
+        { email: parsed.data.email },
+      );
 
       const checkoutRes = await fetch(`/api/audit-order/${id}/checkout`, {
         method: "POST",

@@ -5,6 +5,8 @@ import Script from "next/script";
 export function CookieBanner() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
   const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
+  const enhancedConversions =
+    process.env.NEXT_PUBLIC_ADS_ENHANCED_CONVERSIONS === "true";
 
   if (process.env.NODE_ENV !== "production" || (!gtmId && !adsId)) {
     return null;
@@ -24,7 +26,13 @@ export function CookieBanner() {
             "orientation": "middle",
             "groupServices": false,
             "showDetailsOnClick": true,
-            "serviceDefaultState": "wait", 
+            "serviceDefaultState": "wait",
+            // Consent Mode avance : les 4 signaux Google partent a "denied" des
+            // le chargement, et chaque service Google recoit un fallback qui
+            // charge le tag malgre le refus. Sans cookie, en pings anonymes :
+            // Google peut alors modeliser les conversions des visiteurs qui ont
+            // refuse, invisibles autrement.
+            "googleConsentMode": true,
             "showAlertSmall": false,
             "cookieslist": false,
             "closePopup": false,
@@ -48,8 +56,22 @@ export function CookieBanner() {
           }
 
           if (adsId) {
-            window.tarteaucitron.user.gtagUa = adsId;
-            window.tarteaucitron.job.push('gtag');
+            // Service "googleads" et non "gtag" : dans tarteaucitron, "gtag" est
+            // le service Google Analytics (type "analytic") et n'accorde que
+            // analytics_storage. Seul "googleads" (type "ads") accorde
+            // ad_storage sur l'evenement googleads_allowed, sans lequel aucune
+            // conversion ne serait attribuee sous Consent Mode.
+            window.tarteaucitron.user.googleadsId = adsId;
+
+            if (enhancedConversions) {
+              window.tarteaucitron.user.googleadsMore = () => {
+                window.gtag?.('config', adsId, {
+                  allow_enhanced_conversions: true,
+                });
+              };
+            }
+
+            window.tarteaucitron.job.push('googleads');
           }
 
           // next/script charge tarteaucitron apres l'evenement window "load".

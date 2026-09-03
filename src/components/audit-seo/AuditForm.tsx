@@ -60,7 +60,10 @@ export function AuditForm() {
       if (!res.ok) {
         throw new Error(json?.error ?? "L'analyse a échoué.");
       }
-      trackLeadConversion({ form_id: "audit_seo_gratuit" });
+      await trackLeadConversion(
+        { form_id: "audit_seo_gratuit" },
+        { email: parsed.data.email, telephone: parsed.data.telephone },
+      );
       setTeaser(json as TeaserResponse);
       setPhase("result");
     } catch (err) {

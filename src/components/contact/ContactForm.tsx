@@ -53,7 +53,10 @@ export default function ContactForm() {
       pushGtmEvent('form_submit', {
         form_id: 'contact_principal'
       });
-      trackLeadConversion({ form_id: 'contact_principal' });
+      await trackLeadConversion(
+        { form_id: 'contact_principal' },
+        { email: data.email, telephone: data.telephone },
+      );
 
       setServerMessage(json.message);
     } else {

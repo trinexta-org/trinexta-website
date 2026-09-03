@@ -56,7 +56,10 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
         throw new Error(json?.error ?? "L'envoi a échoué.");
       }
       const json = await res.json().catch(() => null);
-      trackLeadConversion({ form_id: "estimation_lead" });
+      await trackLeadConversion(
+        { form_id: "estimation_lead" },
+        { email: email.trim(), telephone: telephone.trim() },
+      );
       setEmailSent(json?.emailSent !== false);
       setSent(true);
     } catch (err) {
