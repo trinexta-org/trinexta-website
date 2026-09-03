@@ -80,7 +80,7 @@ export const confidentialiteData: LegalData = {
             ["Exécution d'un contrat", "lorsque le traitement est nécessaire à l'exécution d'une prestation ou d'un contrat."],
             ["Obligations légales", "lorsque TRINEXTA doit respecter une obligation légale ou réglementaire."],
             ["Intérêt légitime", "pour assurer la sécurité, améliorer les services et gérer la relation client."],
-            ["Consentement", "pour certaines opérations marketing ou l'utilisation de cookies non essentiels."],
+            ["Consentement", "pour certaines opérations marketing, l'utilisation de cookies non essentiels et la mesure des campagnes publicitaires décrite à l'article 15."],
           ].map(([label, desc], i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
               <span className="text-secondary-strong shrink-0 mt-0.5">-</span>
@@ -93,7 +93,7 @@ export const confidentialiteData: LegalData = {
     {
       title: "Article 5 - Destinataires des données",
       paragraphs: [
-        "Les données peuvent être accessibles aux collaborateurs habilités de TRINEXTA, aux prestataires techniques, aux partenaires contractuels, aux fournisseurs cloud, ainsi qu'aux autorités administratives ou judiciaires lorsque la loi l'impose. TRINEXTA ne vend jamais les données personnelles à des tiers.",
+        "Les données peuvent être accessibles aux collaborateurs habilités de TRINEXTA, aux prestataires techniques, aux partenaires contractuels, aux fournisseurs cloud, à Google LLC dans le cadre strict de la mesure publicitaire décrite à l'article 15, ainsi qu'aux autorités administratives ou judiciaires lorsque la loi l'impose. TRINEXTA ne vend jamais les données personnelles à des tiers.",
       ],
     },
     {
@@ -106,6 +106,7 @@ export const confidentialiteData: LegalData = {
       title: "Article 7 - Transferts hors Union Européenne",
       paragraphs: [
         "Certains services utilisés peuvent entraîner des transferts de données hors de l'Union Européenne. Lorsque cela est nécessaire, TRINEXTA veille à ce que ces transferts soient encadrés par les Clauses Contractuelles Types de la Commission Européenne, une décision d'adéquation ou tout autre mécanisme reconnu par le RGPD.",
+        "C'est notamment le cas des données transmises à Google LLC dans le cadre de la mesure des campagnes publicitaires décrite à l'article 15. Ces transferts vers les États-Unis reposent sur la décision d'adéquation adoptée par la Commission Européenne le 10 juillet 2023 au titre du cadre de protection des données UE - États-Unis (Data Privacy Framework), auquel Google LLC est certifié, complétée par les Clauses Contractuelles Types.",
       ],
     },
     {
@@ -182,13 +183,22 @@ export const confidentialiteData: LegalData = {
       ],
     },
     {
-      title: "Article 15 - Modification de la politique",
+      title: "Article 15 - Mesure des campagnes publicitaires",
+      paragraphs: [
+        "TRINEXTA diffuse des campagnes publicitaires via Google Ads. Pour savoir quelles annonces génèrent réellement des demandes, un identifiant de clic publicitaire fourni par Google est associé, si vous y avez consenti, à la validation d'un de nos formulaires. Ce traitement repose exclusivement sur votre consentement, recueilli via le bandeau de gestion des cookies, et peut être retiré à tout moment sans affecter la licéité du traitement déjà effectué.",
+        "Lorsque vous refusez le dépôt de cookies, aucun cookie publicitaire n'est déposé sur votre terminal et aucun identifiant de clic n'est associé à votre demande. Des informations techniques limitées et sans cookie (horodatage, type de navigateur, page de référence, état de votre choix de consentement) peuvent néanmoins être transmises à Google, qui les utilise pour produire des estimations statistiques agrégées. Ce fonctionnement, appelé mode consentement avancé, est décrit dans notre Politique de Cookies.",
+        "Si la fonctionnalité de conversions améliorées est activée, votre adresse email et, le cas échéant, votre numéro de téléphone sont transformés dans votre navigateur en une empreinte irréversible (algorithme SHA-256) avant d'être transmis à Google. Google ne reçoit jamais ces informations en clair et TRINEXTA ne lui transmet ni votre nom, ni votre message, ni le contenu de votre demande. Cette empreinte sert uniquement à rattacher une demande à une annonce lorsqu'un même internaute a utilisé plusieurs appareils. Elle n'est jamais utilisée par TRINEXTA à des fins de profilage individuel.",
+        <span key="ads-optout">Vous pouvez à tout moment modifier vos choix via le bandeau de gestion des cookies, consulter notre <a href="/cookies" className="text-secondary-strong hover:underline transition-colors">Politique de Cookies</a>, ou paramétrer la personnalisation publicitaire directement depuis votre compte Google.</span>,
+      ],
+    },
+    {
+      title: "Article 16 - Modification de la politique",
       paragraphs: [
         "TRINEXTA peut modifier la présente Politique de Confidentialité à tout moment afin de tenir compte des évolutions légales, réglementaires, techniques ou des nouveaux services proposés. Toute nouvelle version sera publiée sur le site.",
       ],
     },
     {
-      title: "Article 16 - Contact",
+      title: "Article 17 - Contact",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
