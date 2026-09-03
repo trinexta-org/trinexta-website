@@ -1445,8 +1445,12 @@ body {
     0 0,
     0 0,
     0 0;
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
+  /* Un operateur par calque. WebKit (Safari) n'etend pas un operateur unique a
+     toute la liste : avec une seule valeur, le 3e calque (`--circuit-pulse`,
+     jamais sous ~0.26 d'alpha) retombe en `source-over` et repeint toute la
+     gouttiere — d'ou les barres grises pleine hauteur sur Safari. */
+  -webkit-mask-composite: source-in, source-in, source-in;
+  mask-composite: intersect, intersect, intersect;
 }
 
 /* Rail secondaire : dessin propre (pas un miroir), tuile plus courte — 720px
