@@ -25,7 +25,7 @@ const installments = [
   { month: "12", x: 190, y: 62 },
 ] as const
 
-function PaymentOrbit() {
+export function PaymentOrbit({ rate = "0 %", label = "INTÉRÊTS" }: { rate?: string, label?: string } = {}) {
   const sceneRef = useRef<HTMLDivElement>(null)
   const timelineRef = useRef<gsap.core.Timeline | null>(null)
 
@@ -147,8 +147,8 @@ function PaymentOrbit() {
         <g className="payment-core-complete" filter="url(#payment-soft-shadow)">
           <circle cx="300" cy="195" r="92" fill="var(--secondary-strong)" />
           <circle cx="300" cy="195" r="76" fill="none" stroke="var(--secondary-strong-foreground)" strokeOpacity="0.28" />
-          <text x="300" y="176" textAnchor="middle" fill="var(--secondary-strong-foreground)" fillOpacity="0.72" fontSize="11" fontWeight="700" letterSpacing="2">INTÉRÊTS</text>
-          <text x="300" y="226" textAnchor="middle" fill="var(--secondary-strong-foreground)" fontSize="52" fontWeight="800">0 %</text>
+          <text x="300" y="176" textAnchor="middle" fill="var(--secondary-strong-foreground)" fillOpacity="0.72" fontSize="11" fontWeight="700" letterSpacing="2">{label}</text>
+          <text x="300" y="226" textAnchor="middle" fill="var(--secondary-strong-foreground)" fontSize="52" fontWeight="800">{rate}</text>
         </g>
 
         {installments.map((installment) => (
