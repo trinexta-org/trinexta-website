@@ -72,9 +72,9 @@ export function KpiSection() {
               key={kpi.id}
               direction="up"
               delay={index * 0.1}
-              className="group glass-panel rounded-lg md:rounded-xl p-2.5 md:p-6 flex flex-col items-center md:items-start text-center md:text-left"
+              className="group glass-panel rounded-lg md:rounded-xl p-2.5 md:p-6 flex flex-col items-center md:items-start text-center md:text-left min-w-0"
             >
-              <div className="text-[1.35rem] sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-normal mb-2 md:mb-6 transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary-soft">
+              <div className="max-w-full text-[1.35rem] sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight tabular-nums leading-none mb-2 md:mb-6 origin-left transition-transform duration-500 group-hover:scale-105 group-hover:text-secondary-soft">
                 <Counter value={kpi.value} suffix={kpi.suffix} />
               </div>
 

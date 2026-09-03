@@ -10,6 +10,7 @@ import { WaveDivider } from "@/components/ui/WaveDivider"
 import { StudioIntro } from "@/components/studio/StudioIntro"
 import { StudioDifferentiator } from "@/components/studio/StudioDifferentiator"
 import { StudioGrid } from "@/components/studio/StudioGrid"
+import { StudioPaymentPlan } from "@/components/studio/StudioPaymentPlan"
 import StudioDemos from "@/components/studio/StudioDemos"
 import { FinalCTA } from "@/components/FinalCTA"
 
@@ -102,6 +103,8 @@ export default function TrinextaStudioPage() {
                             </Container>
                         </Section>
                     </div>
+
+                    <StudioPaymentPlan />
 
                     <div className="space-y-12">
                         <TransitionTitle
