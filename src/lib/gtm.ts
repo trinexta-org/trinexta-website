@@ -41,18 +41,26 @@ export const trackAdsConversion = (
   sendTo: string,
   params: GtmEventData = {},
 ): void => {
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    window.gtag("event", "conversion", { send_to: sendTo, ...params });
+  try {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "conversion", { send_to: sendTo, ...params });
+    }
+  } catch {
+    // Voir la note sur trackLeadConversion : la mesure ne casse jamais le parcours.
   }
 };
 
 export const pushGtmEvent = (event: string, data: GtmEventData = {}): void => {
-  if (typeof window !== "undefined") {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: event,
-      ...data,
-    });
+  try {
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: event,
+        ...data,
+      });
+    }
+  } catch {
+    // Voir la note sur trackLeadConversion : la mesure ne casse jamais le parcours.
   }
 };
 
@@ -157,19 +165,32 @@ export const trackLeadConversion = async (
   params: GtmEventData = {},
   identity?: LeadIdentity,
 ): Promise<void> => {
-  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
-
-  if (ENHANCED_CONVERSIONS_ENABLED && identity) {
-    try {
-      const userData = await buildHashedUserData(identity);
-      if (userData) window.gtag("set", "user_data", userData);
-    } catch {
-      // Un echec de hachage ne doit jamais empecher la conversion de partir.
+  // Ne rejette jamais. Les appelants attendent cette promesse au milieu de leur
+  // parcours de succes : un rejet interromprait le handler avant l'affichage de
+  // la confirmation, alors que le lead est deja enregistre cote serveur.
+  // L'utilisateur croirait a un echec et resoumettrait, creant un doublon.
+  // window.gtag est un objet tiers, remplacable par une extension ou un
+  // bloqueur : on ne fait aucune hypothese sur son comportement.
+  try {
+    if (typeof window === "undefined" || typeof window.gtag !== "function") {
+      return;
     }
-  }
 
-  window.gtag("event", "conversion", {
-    send_to: ADS_LEAD_CONVERSION,
-    ...params,
-  });
+    if (ENHANCED_CONVERSIONS_ENABLED && identity) {
+      try {
+        const userData = await buildHashedUserData(identity);
+        if (userData) window.gtag("set", "user_data", userData);
+      } catch {
+        // Un echec de hachage ne doit pas empecher la conversion de partir :
+        // ce catch interne est distinct pour que l'evenement suive quand meme.
+      }
+    }
+
+    window.gtag("event", "conversion", {
+      send_to: ADS_LEAD_CONVERSION,
+      ...params,
+    });
+  } catch {
+    // Mesure perdue, parcours utilisateur preserve. C'est le bon arbitrage.
+  }
 };

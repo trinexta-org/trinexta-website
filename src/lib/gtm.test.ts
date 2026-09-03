@@ -2,7 +2,9 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   ADS_LEAD_CONVERSION,
   buildHashedUserData,
+  pushGtmEvent,
   sha256Hex,
+  trackAdsConversion,
   trackLeadConversion,
 } from "./gtm";
 
@@ -53,6 +55,41 @@ describe("trackLeadConversion", () => {
 
     expect(gtag).toHaveBeenCalledTimes(1);
     expect(gtag).not.toHaveBeenCalledWith("set", "user_data", expect.anything());
+  });
+
+  // Un bloqueur ou une extension peut remplacer window.gtag par une fonction
+  // qui leve. Le parcours de succes du formulaire ne doit pas en dependre.
+  it("ne rejette pas si gtag leve une exception", async () => {
+    const gtag = vi.fn(() => {
+      throw new Error("gtag remplace par une extension");
+    });
+    stubWindow(gtag);
+
+    await expect(
+      trackLeadConversion(
+        { form_id: "contact_principal" },
+        { email: "jean.dupont@example.com" },
+      ),
+    ).resolves.toBeUndefined();
+    expect(gtag).toHaveBeenCalled();
+  });
+
+  it("ne rejette pas si dataLayer est inaccessible", () => {
+    vi.stubGlobal("window", {
+      get dataLayer() {
+        throw new Error("acces refuse");
+      },
+    });
+
+    expect(() => pushGtmEvent("form_submit")).not.toThrow();
+  });
+
+  it("ne rejette pas si trackAdsConversion rencontre un gtag defaillant", () => {
+    stubWindow(() => {
+      throw new Error("boom");
+    });
+
+    expect(() => trackAdsConversion("AW-000/label")).not.toThrow();
   });
 
   it("cible bien l'ID et le label fournis par Google Ads", () => {
