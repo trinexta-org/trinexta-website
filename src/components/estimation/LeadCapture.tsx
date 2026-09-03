@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { trackLeadConversion } from "@/lib/gtm";
 
 interface LeadCaptureProps {
   estimateId: string | null;
@@ -55,6 +56,10 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
         throw new Error(json?.error ?? "L'envoi a échoué.");
       }
       const json = await res.json().catch(() => null);
+      await trackLeadConversion(
+        { form_id: "estimation_lead" },
+        { email: email.trim(), telephone: telephone.trim() },
+      );
       setEmailSent(json?.emailSent !== false);
       setSent(true);
     } catch (err) {
