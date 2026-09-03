@@ -104,7 +104,9 @@ describe("POST /api/webhooks/stripe", () => {
             where: { id: "order_1" },
             data: expect.objectContaining({ status: "paid", stripePaymentIntentId: "pi_test_1" }),
         });
-        expect(sendMailMock).toHaveBeenCalledTimes(1);
+        expect(sendMailMock).toHaveBeenCalledTimes(2);
+        expect(sendMailMock).toHaveBeenCalledWith(expect.objectContaining({ to: "support@trinexta.fr" }));
+        expect(sendMailMock).toHaveBeenCalledWith(expect.objectContaining({ to: pendingOrder.email }));
     });
 
     it("ne fait rien si l'AuditOrder est déjà paid (idempotence)", async () => {
