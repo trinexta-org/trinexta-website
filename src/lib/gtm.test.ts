@@ -16,6 +16,9 @@ const HASH_EMAIL =
   "8500be602b35b0df3c7b2847434591e01669c0c93a10b9b070d28a51843ee71a";
 const HASH_PHONE =
   "42d573cfc315801d4cd8eddd5416b416a0bf298b9b9e12d6b07442c91db42bd8";
+// sha256("janedoe@gmail.com") : points et suffixe + retires du local-part.
+const HASH_GMAIL =
+  "d6117306485ed0e50afab3ac871e98f81699151f30281527d63ff5f233656c69";
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -58,6 +61,24 @@ describe("trackLeadConversion", () => {
 });
 
 describe("buildHashedUserData — normalisation Google", () => {
+  it.each([
+    ["Jane.Doe@Gmail.com"],
+    ["janedoe@gmail.com"],
+    ["jane.doe+devis@gmail.com"],
+    ["  Jane.Doe+Devis@GMAIL.COM  "],
+  ])(
+    "retire points et suffixe + du local-part Gmail : %s",
+    async (email) => {
+      const data = await buildHashedUserData({ email });
+      expect(data).toEqual({ sha256_email_address: HASH_GMAIL });
+    },
+  );
+
+  it("ne touche ni aux points ni au + hors Gmail", async () => {
+    const data = await buildHashedUserData({ email: "jean.dupont@example.com" });
+    expect(data).toEqual({ sha256_email_address: HASH_EMAIL });
+  });
+
   it("met l'email en minuscules et le trim avant hachage", async () => {
     const data = await buildHashedUserData({
       email: "  Jean.Dupont@Example.COM ",

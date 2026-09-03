@@ -53,7 +53,7 @@ export const cookiesData: LegalData = {
             },
             {
               cat: "3.5 Cookies marketing",
-              desc: "Ils permettent la diffusion de publicités, le suivi des campagnes marketing, la mesure des conversions et le remarketing. Les partenaires concernés peuvent notamment inclure Google Ads, Microsoft Advertising, LinkedIn Ads, Meta Ads ou d'autres plateformes publicitaires. Aucun cookie marketing n'est déposé sans votre consentement préalable.",
+              desc: "Ils permettent la diffusion de publicités, le suivi des campagnes marketing, la mesure des conversions et le remarketing. Les partenaires concernés peuvent notamment inclure Google Ads, Microsoft Advertising, LinkedIn Ads, Meta Ads ou d'autres plateformes publicitaires. Aucun cookie marketing n'est déposé sans votre consentement préalable. Le fonctionnement précis de la mesure Google Ads, y compris en cas de refus, est détaillé à l'article 4.",
             },
           ].map(({ cat, desc }) => (
             <div key={cat}>
@@ -65,19 +65,68 @@ export const cookiesData: LegalData = {
       ),
     },
     {
-      title: "Article 4 - Durée de conservation",
+      title: "Article 4 - Mode consentement Google et mesure des conversions",
+      content: (
+        <div className="space-y-3 text-sm text-primary/70">
+          <p>
+            Le site utilise le mécanisme de gestion du consentement de Google
+            (Consent Mode), dans sa version dite avancée. Ce fonctionnement
+            mérite d&apos;être décrit précisément, car il diffère d&apos;un simple
+            blocage.
+          </p>
+          <p>
+            <span className="text-primary font-semibold">Si vous acceptez</span>{" "}
+            les cookies publicitaires : un cookie Google Ads est déposé sur votre
+            terminal et permet de rattacher votre éventuelle demande de contact à
+            l&apos;annonce sur laquelle vous avez cliqué. Cette mesure est
+            strictement destinée à évaluer l&apos;efficacité de nos campagnes.
+          </p>
+          <p>
+            <span className="text-primary font-semibold">Si vous refusez</span> :
+            aucun cookie publicitaire n&apos;est déposé et aucune information n&apos;est
+            lue sur votre terminal. Le script de mesure de Google reste toutefois
+            chargé et transmet à Google des informations techniques limitées,
+            sans cookie ni identifiant : horodatage, type de navigateur, page de
+            référence et état de votre choix de consentement. Votre adresse IP
+            est traitée par Google pour cet acheminement. Ces éléments servent
+            uniquement à produire des estimations statistiques agrégées et ne
+            permettent pas de vous identifier individuellement.
+          </p>
+          <p>
+            <span className="text-primary font-semibold">Conversions
+            améliorées</span> : lorsque cette fonctionnalité est activée et que
+            vous avez consenti, l&apos;adresse email et le numéro de téléphone que
+            vous avez saisis dans un formulaire sont transformés dans votre
+            navigateur en une empreinte irréversible (SHA-256) avant transmission
+            à Google. Google ne reçoit jamais ces données en clair. Cette
+            empreinte permet de rattacher une demande à une annonce lorsqu&apos;un
+            même internaute a consulté le site depuis plusieurs appareils.
+          </p>
+          <p>
+            Ces traitements impliquent un transfert de données vers Google LLC
+            aux États-Unis, encadré par la décision d&apos;adéquation du 10 juillet
+            2023 relative au cadre de protection des données UE - États-Unis
+            (Data Privacy Framework), auquel Google LLC est certifié. Vous pouvez
+            modifier votre choix à tout moment depuis le bandeau de gestion des
+            cookies.
+          </p>
+        </div>
+      ),
+    },
+    {
+      title: "Article 5 - Durée de conservation",
       paragraphs: [
         "Les cookies sont conservés pour une durée maximale de treize (13) mois, conformément aux recommandations de la CNIL. À l'expiration de cette période, votre consentement sera de nouveau sollicité.",
       ],
     },
     {
-      title: "Article 5 - Consentement",
+      title: "Article 6 - Consentement",
       paragraphs: [
         "Lors de votre première visite, un bandeau de gestion des cookies vous permet d'accepter tous les cookies, de refuser les cookies non essentiels ou de personnaliser vos préférences. Votre choix est conservé pendant la durée légale autorisée et peut être modifié à tout moment.",
       ],
     },
     {
-      title: "Article 6 - Gestion des cookies",
+      title: "Article 7 - Gestion des cookies",
       content: (
         <div className="space-y-3 text-sm text-primary/70">
           <p>Vous pouvez à tout moment supprimer les cookies, bloquer certains cookies ou modifier vos préférences. Ces paramètres peuvent être configurés directement depuis votre navigateur :</p>
@@ -98,25 +147,25 @@ export const cookiesData: LegalData = {
       ),
     },
     {
-      title: "Article 7 - Cookies de tiers",
+      title: "Article 8 - Cookies de tiers",
       paragraphs: [
         "Le site peut intégrer des services fournis par des tiers, notamment Google, Microsoft, LinkedIn, YouTube, Vimeo, Calendly, Stripe et divers partenaires techniques. Ces services peuvent déposer leurs propres cookies. TRINEXTA ne contrôle pas directement les cookies déposés par ces tiers ; nous vous invitons à consulter leurs politiques respectives.",
       ],
     },
     {
-      title: "Article 8 - Protection des données personnelles",
+      title: "Article 9 - Protection des données personnelles",
       paragraphs: [
         <span key="rgpd">Certaines données collectées via les cookies peuvent constituer des données personnelles. Leur traitement est réalisé conformément à notre <a href="/confidentialite" className="text-secondary-strong hover:underline transition-colors">Politique de Confidentialité</a>.</span>,
       ],
     },
     {
-      title: "Article 9 - Modification de la politique",
+      title: "Article 10 - Modification de la politique",
       paragraphs: [
         "TRINEXTA se réserve le droit de modifier la présente Politique de Cookies à tout moment afin de tenir compte des évolutions légales, des recommandations de la CNIL, des évolutions techniques ou des nouveaux services proposés. Toute nouvelle version sera publiée sur le site.",
       ],
     },
     {
-      title: "Article 10 - Contact",
+      title: "Article 11 - Contact",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,

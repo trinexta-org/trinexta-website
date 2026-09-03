@@ -71,8 +71,27 @@ export interface LeadIdentity {
   telephone?: string;
 }
 
-/** Normalisation Google : minuscules, sans espaces autour. */
-const normalizeEmail = (raw: string): string => raw.trim().toLowerCase();
+/**
+ * Normalisation Google : minuscules, sans espaces autour. Pour gmail.com et
+ * googlemail.com uniquement, Google retire aussi les points et le suffixe "+"
+ * du local-part avant de hacher. Ne pas le faire ferait echouer le
+ * rapprochement pour tous les leads en Gmail, qui sont nombreux chez les TPE.
+ * Cette regle ne s'applique a aucun autre domaine.
+ */
+const GOOGLE_MAIL_DOMAINS = new Set(["gmail.com", "googlemail.com"]);
+
+const normalizeEmail = (raw: string): string => {
+  const email = raw.trim().toLowerCase();
+  const at = email.lastIndexOf("@");
+  if (at < 1) return email;
+
+  const local = email.slice(0, at);
+  const domain = email.slice(at + 1);
+  if (!GOOGLE_MAIL_DOMAINS.has(domain)) return email;
+
+  const withoutPlusSuffix = local.split("+")[0];
+  return `${withoutPlusSuffix.replace(/\./g, "")}@${domain}`;
+};
 
 /**
  * Normalisation Google : E.164. Les formats acceptes par nos formulaires
