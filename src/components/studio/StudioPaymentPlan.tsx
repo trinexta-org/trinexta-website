@@ -172,7 +172,7 @@ export function PaymentOrbit({ rate = "0 %", label = "INTÉRÊTS" }: { rate?: st
   )
 }
 
-export function StudioPaymentPlan({ isEstimationVariant = false }: { isEstimationVariant?: boolean } = {}) {
+export function StudioPaymentPlan() {
   return (
     <Section id="paiement-studio" container={false} className="py-4 md:py-8">
       <Container className="max-w-[1400px]">
@@ -205,11 +205,7 @@ export function StudioPaymentPlan({ isEstimationVariant = false }: { isEstimatio
                 <div className="px-2 pt-5"><strong className="block text-base text-primary">0 %</strong><span className="text-xs text-primary/55">d’intérêt</span></div>
               </div>
 
-              <p className="mt-6 text-center text-xs leading-relaxed text-primary/55">
-                {isEstimationVariant 
-                  ? "Le taux d'intérêt de 2,5 % est intégralement pris en charge par Trinexta." 
-                  : studioPaymentPlan.note}
-              </p>
+              <p className="mt-6 text-center text-xs leading-relaxed text-primary/55">{studioPaymentPlan.note}</p>
             </div>
           </div>
         </div>
