@@ -71,7 +71,7 @@ export function ResultScreen({ result, estimateId, bookingsUrl, onRestart }: Res
             <div className="mb-6 text-center">
               <p className="text-lg font-bold text-primary">Le financement en mouvement</p>
               <p className="mt-1 text-sm text-primary/70">
-                Échelonnable sur 12 mois sans frais. Le taux d'intérêt de 2,5 % est intégralement pris en charge par Trinexta.
+                Échelonnable sur 12 mois sans frais. Le taux d&apos;intérêt de 2,5 % est intégralement pris en charge par Trinexta.
               </p>
             </div>
             <PaymentOrbit />
