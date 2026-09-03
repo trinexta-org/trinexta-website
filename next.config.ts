@@ -3,6 +3,17 @@ import type { NextConfig } from "next";
 const sanityProjectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "93ztl6y7";
 
+/**
+ * Origines vers lesquelles Google Ads emet les conversions. Verifie
+ * empiriquement : sans elles, la CSP bloque les trois canaux d'envoi.
+ */
+const GOOGLE_ADS_ORIGINS = [
+  "www.googleadservices.com",
+  "googleads.g.doubleclick.net",
+  "pagead2.googlesyndication.com",
+  "www.google.com",
+] as const;
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
@@ -13,12 +24,28 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "img-src 'self' cdn.sanity.io data:",
-              "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net www.googletagmanager.com",
+              // Google Ads envoie la conversion sur trois canaux selon le
+              // navigateur : fetch vers googleadservices.com et
+              // www.google.com, et un pixel de repli sur googleadservices.com.
+              // Les trois doivent etre autorises, sinon la conversion est
+              // rejetee par la CSP sans erreur visible cote utilisateur : le
+              // tag se charge, le page_view passe par googletagmanager.com qui
+              // est autorise, et seules les conversions disparaissent.
+              GOOGLE_ADS_ORIGINS.reduce(
+                (directive, origin) => `${directive} ${origin}`,
+                "img-src 'self' cdn.sanity.io data:",
+              ),
+              GOOGLE_ADS_ORIGINS.reduce(
+                (directive, origin) => `${directive} ${origin}`,
+                "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net www.googletagmanager.com",
+              ),
               "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net",
               "font-src 'self'",
               "frame-src 'self' www.google.com www.googletagmanager.com",
-              "connect-src 'self' www.google-analytics.com analytics.google.com www.googletagmanager.com",
+              GOOGLE_ADS_ORIGINS.reduce(
+                (directive, origin) => `${directive} ${origin}`,
+                "connect-src 'self' www.google-analytics.com analytics.google.com www.googletagmanager.com",
+              ),
             ].join("; "),
           },
           {
