@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { contactFormSchema, ContactFormData, CONTACT_TYPES, SECTEURS, TAILLES, URGENCES } from "@/lib/validations/contact";
-import { pushGtmEvent } from "@/lib/gtm";
+import { pushGtmEvent, trackLeadConversion } from "@/lib/gtm";
 
 export default function ContactForm() {
   const {
@@ -53,6 +53,7 @@ export default function ContactForm() {
       pushGtmEvent('form_submit', {
         form_id: 'contact_principal'
       });
+      trackLeadConversion({ form_id: 'contact_principal' });
 
       setServerMessage(json.message);
     } else {

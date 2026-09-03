@@ -23,6 +23,14 @@ declare global {
 export const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
 /**
+ * Action de conversion "lead" du compte Ads (send_to complet, ID + label).
+ * Valeur publique (visible dans le tag cote navigateur) : volontairement en dur
+ * plutot qu'en variable d'env, une variable absente en prod ferait disparaitre
+ * la conversion en silence, exactement le bug qu'on corrige ici.
+ */
+export const ADS_LEAD_CONVERSION = "AW-16975609254/T_j8CLGw9rQaEKb7zJ4_";
+
+/**
  * Déclenche une conversion Google Ads.
  * `sendTo` = "AW-XXXXXXXXXX/label" fourni par Google Ads pour chaque action.
  * Silencieux si gtag absent (consentement refusé, hors production).
@@ -44,4 +52,13 @@ export const pushGtmEvent = (event: string, data: GtmEventData = {}): void => {
       ...data,
     });
   }
+};
+
+/**
+ * Conversion "lead" : un formulaire de prise de contact a ete accepte par l'API.
+ * A n'appeler qu'apres une reponse serveur OK, jamais au clic sur un CTA :
+ * un clic n'est pas un lead et gonflerait la mesure d'envois echoues.
+ */
+export const trackLeadConversion = (params: GtmEventData = {}): void => {
+  trackAdsConversion(ADS_LEAD_CONVERSION, params);
 };

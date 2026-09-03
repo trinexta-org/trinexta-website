@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Typography";
 import { auditOrderRequestSchema } from "@/lib/validations/audit-order";
 import { AUDIT_ORDER_CONSENT_LABEL } from "@/data/cgv-audit-expert";
+import { trackLeadConversion } from "@/lib/gtm";
 
 type Phase = "form" | "loading";
 
@@ -76,6 +77,9 @@ export function AuditOrderForm({
         throw new Error(json?.error ?? "La demande a échoué.");
       }
       const { id } = await res.json();
+      // Les coordonnees sont enregistrees cote serveur : le lead existe des ici,
+      // independamment de l'issue du paiement Stripe qui suit.
+      trackLeadConversion({ form_id: "audit_seo_expert" });
 
       const checkoutRes = await fetch(`/api/audit-order/${id}/checkout`, {
         method: "POST",

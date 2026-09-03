@@ -7,6 +7,7 @@ import { auditSeoRequestSchema } from "@/lib/validations/audit-seo";
 import type { TeaserResponse } from "@/lib/audit-seo/types";
 import { AuditTeaser } from "./AuditTeaser";
 import { AuditProgress } from "./AuditProgress";
+import { trackLeadConversion } from "@/lib/gtm";
 
 type Phase = "form" | "loading" | "result";
 
@@ -59,6 +60,7 @@ export function AuditForm() {
       if (!res.ok) {
         throw new Error(json?.error ?? "L'analyse a échoué.");
       }
+      trackLeadConversion({ form_id: "audit_seo_gratuit" });
       setTeaser(json as TeaserResponse);
       setPhase("result");
     } catch (err) {
