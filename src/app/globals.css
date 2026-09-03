@@ -1485,6 +1485,11 @@ body {
     100% 0,
     0 0,
     0 0;
+  /* Repete apres les longhands de masque : Safari reinitialise `mask-composite`
+     a `source-over` quand une regle posterieure touche `mask-size`/`-position`,
+     ce qui laissait une barre grise sur le rail droit. */
+  -webkit-mask-composite: source-in, source-in, source-in;
+  mask-composite: intersect, intersect, intersect;
   left: auto;
   right: 0;
 }
