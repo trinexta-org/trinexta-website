@@ -32,7 +32,7 @@ export function ChatBubble({ side, avatar, children, className }: ChatBubbleProp
             T
           </span>
         )}
-        <div className="max-w-[85%] rounded-2xl rounded-tl-md border border-white/15 bg-white/5 px-4 py-3 sm:max-w-[75%]">
+        <div className="max-w-[85%] rounded-2xl rounded-tl-md border border-border bg-white px-4 py-3 shadow-sm sm:max-w-[75%]">
           {children}
         </div>
       </div>
@@ -41,7 +41,7 @@ export function ChatBubble({ side, avatar, children, className }: ChatBubbleProp
 
   return (
     <div className={cn("flex justify-end", className)}>
-      <div className="max-w-[85%] rounded-2xl rounded-tr-md border border-secondary/40 bg-secondary/15 px-4 py-3 sm:max-w-[75%]">
+      <div className="max-w-[85%] rounded-2xl rounded-tr-md border border-secondary-soft bg-secondary-soft/20 px-4 py-3 sm:max-w-[75%]">
         {children}
       </div>
     </div>

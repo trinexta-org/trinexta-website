@@ -22,7 +22,7 @@ export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextSt
       <div className="space-y-4">
         {text.trim().length > 0 && (
           <ChatBubble side="user">
-            <p className="whitespace-pre-wrap text-sm text-white">{text.trim()}</p>
+            <p className="whitespace-pre-wrap text-sm text-primary">{text.trim()}</p>
           </ChatBubble>
         )}
         <Entrance direction="none">
@@ -37,7 +37,7 @@ export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextSt
                 />
               ))}
             </span>
-            <p className="mt-2 text-sm text-white/60">
+            <p className="mt-2 text-sm text-muted-foreground">
               On lit ce que vous venez d&apos;écrire, le temps d&apos;ajuster la fourchette
               à votre situation...
             </p>
@@ -50,10 +50,10 @@ export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextSt
   return (
     <Entrance key="freetext" direction="up" duration={0.5}>
       <ChatBubble side="trinexta" avatar={avatar}>
-        <p className="font-serif text-lg font-bold text-white md:text-xl">
+        <p className="font-serif text-lg font-bold text-primary md:text-xl">
           Dernière chose : dites-le avec vos mots
         </p>
-        <p className="mt-1 text-sm text-white/60">
+        <p className="mt-1 text-sm text-muted-foreground">
           Facultatif. Votre activité, vos outils, ce qui coince au quotidien : deux ou
           trois phrases suffisent à resserrer la fourchette.
         </p>
@@ -66,10 +66,10 @@ export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextSt
           maxLength={ESTIMATION_FREETEXT_MAX_LENGTH}
           rows={5}
           placeholder="Exemple : nous sommes un cabinet de 12 personnes sur deux sites, avec un vieux serveur de fichiers et beaucoup de télétravail..."
-          className="border-white/20 bg-black/20 text-white placeholder:text-white/40 focus:border-secondary focus:ring-secondary"
+          className="border-border bg-white text-primary placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary"
           aria-label="Description libre de votre contexte"
         />
-        <p className="mt-2 text-right font-mono text-xs text-white/40">
+        <p className="mt-2 text-right font-mono text-xs text-muted-foreground">
           {text.length}/{ESTIMATION_FREETEXT_MAX_LENGTH} caractères
         </p>
 
@@ -85,7 +85,7 @@ export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextSt
           <Button
             variant="ghost"
             size="lg"
-            className="text-white hover:bg-white/10 hover:text-white"
+            className="text-muted-foreground hover:bg-secondary/10 hover:text-primary"
             onClick={onSkip}
           >
             Passer cette étape

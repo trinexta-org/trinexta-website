@@ -76,8 +76,8 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
   if (sent) {
     return (
       <div className="rounded-2xl border border-secondary/40 bg-secondary/10 p-6 text-center">
-        <p className="font-bold text-white">C&apos;est envoyé.</p>
-        <p className="mt-1 text-sm text-white/70">
+        <p className="font-bold text-primary">C&apos;est envoyé.</p>
+        <p className="mt-1 text-sm text-muted-foreground">
           {emailSent
             ? "Le détail de votre estimation arrive dans votre boîte mail d'ici quelques minutes, et un expert Trinexta va vous appeler pour l'affiner."
             : "Un expert Trinexta va vous appeler pour affiner votre estimation. L'envoi de l'email de détail a rencontré un souci, il pourra vous le renvoyer directement."}
@@ -90,7 +90,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="estimation-prenom" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
+          <label htmlFor="estimation-prenom" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-primary">
             Prénom
           </label>
           <Input
@@ -100,12 +100,12 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
             placeholder="Jean"
-            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
+            className="h-12 w-full rounded-lg border-border bg-white text-primary placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary"
           />
         </div>
 
         <div>
-          <label htmlFor="estimation-nom" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
+          <label htmlFor="estimation-nom" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-primary">
             Nom
           </label>
           <Input
@@ -115,13 +115,13 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
             value={nom}
             onChange={(e) => setNom(e.target.value)}
             placeholder="Dupont"
-            className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
+            className="h-12 w-full rounded-lg border-border bg-white text-primary placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="estimation-email" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
+        <label htmlFor="estimation-email" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-primary">
           Email professionnel
         </label>
         <Input
@@ -131,12 +131,12 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="j.dupont@entreprise.fr"
-          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
+          className="h-12 w-full rounded-lg border-border bg-white text-primary placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary"
         />
       </div>
 
       <div>
-        <label htmlFor="estimation-entreprise" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
+        <label htmlFor="estimation-entreprise" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-primary">
           Entreprise
         </label>
         <Input
@@ -146,12 +146,12 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
           value={entreprise}
           onChange={(e) => setEntreprise(e.target.value)}
           placeholder="Nom de votre entreprise"
-          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
+          className="h-12 w-full rounded-lg border-border bg-white text-primary placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary"
         />
       </div>
 
       <div>
-        <label htmlFor="estimation-telephone" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-white">
+        <label htmlFor="estimation-telephone" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-primary">
           Téléphone
         </label>
         <Input
@@ -161,11 +161,11 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
           value={telephone}
           onChange={(e) => setTelephone(e.target.value)}
           placeholder="06 12 34 56 78"
-          className="h-12 w-full rounded-lg border-white/20 bg-black/20 text-white placeholder:text-white/70 focus:border-secondary focus:ring-secondary"
+          className="h-12 w-full rounded-lg border-border bg-white text-primary placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary"
         />
       </div>
 
-      <label className="flex cursor-pointer items-start gap-3 text-sm text-white/70">
+      <label className="flex cursor-pointer items-start gap-3 text-sm text-muted-foreground">
         <input
           type="checkbox"
           checked={consent}
@@ -175,14 +175,14 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
         <span>
           J&apos;accepte que Trinexta utilise mon email et mon téléphone pour m&apos;envoyer cette
           estimation et me recontacter (par téléphone et/ou email) à son sujet. Détails dans la{" "}
-          <a href="/confidentialite" className="underline hover:text-white" target="_blank">
+          <a href="/confidentialite" className="underline hover:text-primary" target="_blank">
             politique de confidentialité
           </a>
           .
         </span>
       </label>
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
 
       <Button type="submit" variant="secondary" size="lg" disabled={sending || !consent} className="w-full sm:w-auto">
         {sending ? "Envoi en cours..." : "Recevoir mon estimation détaillée"}
