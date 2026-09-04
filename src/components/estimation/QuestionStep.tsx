@@ -23,8 +23,8 @@ export function QuestionStep({ question, value, avatar, onSelect, onContinue }: 
         <legend className="sr-only">{question.title}</legend>
 
         <ChatBubble side="trinexta" avatar={avatar}>
-          <p className="font-serif text-lg font-bold text-white md:text-xl">{question.title}</p>
-          {question.subtitle && <p className="mt-1 text-sm text-white/60">{question.subtitle}</p>}
+          <p className="font-serif text-lg font-bold text-primary md:text-xl">{question.title}</p>
+          {question.subtitle && <p className="mt-1 text-sm text-muted-foreground">{question.subtitle}</p>}
         </ChatBubble>
 
         {/* Réponses rapides, alignées sous le texte de la bulle */}
