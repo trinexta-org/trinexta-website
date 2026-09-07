@@ -222,7 +222,7 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
       {/* Progression : un segment par étape, une phrase plutôt qu'un pourcentage */}
       <div className="mb-8">
         <div className="mb-3 flex items-baseline justify-between gap-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-white/50">
+          <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
             {phase === "questions" ? `Question ${stepNumber} sur ${totalSteps - 1}` : "Dernière étape"}
           </span>
           <span className="font-serif text-sm italic text-secondary-strong">
@@ -235,7 +235,7 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
               key={i}
               className={cn(
                 "h-1 flex-1 rounded-full transition-colors duration-500",
-                i < stepNumber ? "bg-secondary" : "bg-white/10"
+                i < stepNumber ? "bg-secondary" : "bg-secondary/15"
               )}
             />
           ))}
@@ -251,18 +251,18 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
             return (
               <div key={questionId} className="space-y-2">
                 <ChatBubble side="trinexta" avatar={nexiAvatar(index)}>
-                  <p className="font-serif font-bold text-white">
+                  <p className="font-serif font-bold text-primary">
                     {ESTIMATION_QUESTIONS_BY_ID[questionId].title}
                   </p>
                 </ChatBubble>
                 <div className="flex flex-col items-end">
-                  <div className="max-w-[85%] rounded-2xl rounded-tr-md border border-secondary/40 bg-secondary/15 px-4 py-2.5 sm:max-w-[75%]">
-                    <p className="text-sm font-bold text-white">{label}</p>
+                  <div className="max-w-[85%] rounded-2xl rounded-tr-md border border-secondary-soft bg-secondary-soft/20 px-4 py-2.5 sm:max-w-[75%]">
+                    <p className="text-sm font-bold text-primary">{label}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => handleEdit(questionId)}
-                    className="mt-1 text-xs text-white/40 underline-offset-2 transition-colors hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+                    className="mt-1 text-xs text-muted-foreground underline-offset-2 transition-colors hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
                   >
                     Modifier
                   </button>
