@@ -37,7 +37,7 @@ export function ResultScreen({
       <div className="text-center">
         <Image
           src="/images/nexi/nexi3-avatar.png"
-          alt="Nexi, la mascotte Trinexta, pouces leves"
+          alt="Nexi, la mascotte Trinexta, pouces levés"
           width={80}
           height={80}
           className="mx-auto mb-4 h-16 w-16 rounded-full border-2 border-secondary/40 object-cover md:h-20 md:w-20"
@@ -93,8 +93,8 @@ export function ResultScreen({
               </p>
 
               <p className="mt-1 text-sm text-primary/70">
-                Echelonnable sur 12 mois sans frais. Le taux d&apos;interet de
-                2,5 % est integralement pris en charge par Trinexta.
+                Échelonnable sur 12 mois sans frais. Le taux d&apos;intérêt de
+                2,5 % est intégralement pris en charge par Trinexta.
               </p>
             </div>
 
@@ -103,13 +103,13 @@ export function ResultScreen({
         )}
 
         <p className="mt-4 text-sm text-muted-foreground">
-          Estimation indicative, non contractuelle. Le devis final depend
-          d&apos;un echange avec votre interlocuteur Trinexta.
+          Estimation indicative, non contractuelle. Le devis final dépend
+          d&apos;un échange avec votre interlocuteur Trinexta.
         </p>
 
         {result.widened && (
           <p className="mt-1 text-sm text-muted-foreground">
-            Fourchette elargie : sans description de votre contexte, nous
+            Fourchette élargie : sans description de votre contexte, nous
             restons prudents.
           </p>
         )}
@@ -117,7 +117,7 @@ export function ResultScreen({
 
       <div className="mt-10 space-y-4">
         <h3 className="text-lg font-bold text-primary">
-          Le detail par service
+          Le détail par service
         </h3>
 
         {result.services.map((service) => (
@@ -183,7 +183,7 @@ export function ResultScreen({
         </h3>
 
         <p className="mb-6 mt-1 text-sm text-muted-foreground">
-          Vous recevez aussi le detail complet par email, avec la decomposition
+          Vous recevez aussi le détail complet par email, avec la décomposition
           par service.
         </p>
 
