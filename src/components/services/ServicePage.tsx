@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, type CSSProperties } from "react";
+import { useState, useEffect, type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { JsonLd } from "@/components/seo/JsonLd";
+import type { JsonLdValue } from "@/components/seo/JsonLd";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { SectionFade } from "@/components/ui/SectionFade";
@@ -20,6 +21,7 @@ import { BannerCTA } from "@/components/layout/BannerCTA";
 import { usePresence } from "@/hooks/usePresence";
 import { useCrossfade } from "@/hooks/useCrossfade";
 import { WaveDivider } from "@/components/ui/WaveDivider";
+import { CheckCircle2 } from "lucide-react";
 
 const bentoImageExtOverrides: Record<string, string> = {
     "infogerance/1": "webp",
@@ -29,6 +31,70 @@ const bentoImageExtOverrides: Record<string, string> = {
 function bentoImageSrc(serviceSlug: string, imageIndex: number) {
     const ext = bentoImageExtOverrides[`${serviceSlug}/${imageIndex}`] ?? "jpg"
     return `/images/services/${serviceSlug}/bento-${imageIndex}.${ext}`
+}
+
+/*
+ * Mini-format de liens inline dans les textes de src/data/ : [ancre](/route).
+ * Rendu en <Link> a l'affichage, nettoye (texte brut) pour le JSON-LD.
+ */
+function parseInlineLinks(text: string, keyPrefix: string): ReactNode[] {
+  const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const nodes: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let idx = 0;
+
+  while ((match = linkPattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+
+    nodes.push(
+      <Link
+        key={`${keyPrefix}-link-${idx++}`}
+        href={match[2]}
+        className="underline decoration-secondary/50 underline-offset-2 hover:decoration-secondary transition-colors"
+      >
+        {match[1]}
+      </Link>,
+    );
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
+  return nodes;
+}
+
+/*
+ * Texte multi-paragraphes (separes par une ligne vide) avec liens inline.
+ * Un texte a un seul paragraphe sans lien produit un rendu strictement
+ * identique a l'ancien <Text>{description}</Text>.
+ */
+function renderRichText(text: string, keyPrefix: string, className: string) {
+  return text
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter((paragraph) => paragraph.length > 0)
+    .map((paragraph, i) => (
+      <Text key={`${keyPrefix}-p-${i}`} className={className}>
+        {parseInlineLinks(paragraph, `${keyPrefix}-${i}`)}
+      </Text>
+    ));
+}
+
+/*
+ * Version texte brut (sans markdown ni sauts de paragraphe) pour le JSON-LD.
+ */
+function stripRichText(text: string): string {
+  return text
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1")
+    .replace(/\n\s*\n/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export interface ServicePageProps {
@@ -47,18 +113,44 @@ export interface ServicePageProps {
     subtitle: string;
     title: string;
     description: string;
-    painPoints: string[];
+    painPoints?: string[];
+    hideTransition?: boolean;
   };
 
   offer: {
     subtitle: string;
     title: string;
-    description: string;
+    description?: string;
     features: Array<{
       title: string;
       desc: string;
     }>;
+    hideTransition?: boolean;
   };
+
+  /*
+   * Banniere affichee juste apres la section probleme.
+   * - omis (defaut) : bannière audit SEO actuelle
+   * - false : aucune banniere
+   * - objet : banniere personnalisee
+   */
+  banner?:
+    | false
+    | {
+        title: string;
+        description?: string;
+        ctaText: string;
+        ctaHref: string;
+      };
+
+  /*
+   * Bloc factuel "En bref" optionnel, affiche apres la section offre.
+   * Rendu HTML semantique (dl/dt/dd).
+   */
+  keyFacts?: Array<{
+    label: string;
+    value: string;
+  }>;
 
   localSeo?: {
     subtitle: string;
@@ -113,6 +205,18 @@ export interface ServicePageProps {
     description: string;
     buttonText: string;
     buttonHref: string;
+  };
+
+  /*
+   * Override optionnel du schema JSON-LD Service. Quand fourni, le
+   * provider reference l'entite locale existante (trinextaLocalBusiness,
+   * @id https://trinexta.fr) pour rester coherent avec la home.
+   * Omis (defaut) : comportement actuel inchange (provider = { name: "Trinexta" }).
+   */
+  schemaOverride?: {
+    name?: string;
+    serviceType?: string;
+    areaServed?: string[];
   };
 }
 
@@ -276,12 +380,15 @@ export function ServicePage({
   hero,
   problem,
   offer,
+  banner,
+  keyFacts,
   localSeo,
   benefits,
   incidentResponse,
   expertise,
   faq,
   cta,
+  schemaOverride,
 }: ServicePageProps) {
   const breadcrumbPath = canonicalPath ?? `/${serviceSlug}`;
 
@@ -360,17 +467,28 @@ export function ServicePage({
 
   /*
    * Service JSON-LD
+   * schemaOverride absent (defaut) -> comportement identique a l'origine.
+   * schemaOverride fourni -> provider reference trinextaLocalBusiness par @id.
    */
-  const serviceSchema = {
+  const serviceSchema: Record<string, JsonLdValue> = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `${hero.titlePart1} ${hero.titlePart2}`,
-    description: hero.description,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Trinexta",
-    },
+    name: schemaOverride?.name ?? `${hero.titlePart1} ${hero.titlePart2}`,
+    description: schemaOverride
+      ? stripRichText(hero.description)
+      : hero.description,
+    provider: schemaOverride
+      ? { "@type": "LocalBusiness", "@id": "https://trinexta.fr" }
+      : { "@type": "LocalBusiness", name: "Trinexta" },
   };
+
+  if (schemaOverride?.serviceType) {
+    serviceSchema.serviceType = schemaOverride.serviceType;
+  }
+
+  if (schemaOverride?.areaServed) {
+    serviceSchema.areaServed = schemaOverride.areaServed;
+  }
 
   return (
     <div className="bg-surface min-h-screen text-foreground">
@@ -449,11 +567,13 @@ export function ServicePage({
       {/* =========================================================
           TRANSITION - PROBLEM
       ========================================================= */}
-      <TransitionTitle
-        surtitle={problem.subtitle}
-        line1="Ce qui freine"
-        line2="votre activité"
-      />
+      {!problem.hideTransition && (
+        <TransitionTitle
+          surtitle={problem.subtitle}
+          line1="Ce qui freine"
+          line2="votre activité"
+        />
+      )}
 
       {/* =========================================================
           2. PROBLÈMES
@@ -466,24 +586,30 @@ export function ServicePage({
                 {problem.title}
               </Heading>
 
-              <Text className="text-muted-foreground text-base md:text-lg leading-relaxed">
-                {problem.description}
-              </Text>
+              <div className="space-y-3 md:space-y-4">
+                {renderRichText(
+                  problem.description,
+                  "problem-desc",
+                  "text-muted-foreground text-base md:text-lg leading-relaxed",
+                )}
+              </div>
             </div>
 
-            <GridCards columns={2} gap="gap-2 md:gap-5">
-              {problem.painPoints.map((point, index) => (
-                <FadeIn key={index} delay={index * 0.1}>
-                  <div className="group relative p-3 md:p-6 rounded-xl md:rounded-2xl bg-secondary/10 border border-secondary/20 hover:bg-secondary/15 hover:border-secondary/30 transition-all duration-300 h-full flex flex-col justify-center items-center text-center overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {problem.painPoints && problem.painPoints.length > 0 && (
+              <GridCards columns={2} gap="gap-2 md:gap-5">
+                {problem.painPoints.map((point, index) => (
+                  <FadeIn key={index} delay={index * 0.1}>
+                    <div className="group relative p-3 md:p-6 rounded-xl md:rounded-2xl bg-secondary/10 border border-secondary/20 hover:bg-secondary/15 hover:border-secondary/30 transition-all duration-300 h-full flex flex-col justify-center items-center text-center overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                    <Text className="text-foreground font-medium text-[10px] md:text-sm leading-tight md:leading-snug">
-                      {point}
-                    </Text>
-                  </div>
-                </FadeIn>
-              ))}
-            </GridCards>
+                      <Text className="text-foreground font-medium text-[10px] md:text-sm leading-tight md:leading-snug">
+                        {point}
+                      </Text>
+                    </div>
+                  </FadeIn>
+                ))}
+              </GridCards>
+            )}
           </div>
 
           {/* Images problème */}
@@ -548,34 +674,41 @@ export function ServicePage({
       </Section>
 
       {/* =========================================================
-          AUDIT SEO
+          BANNIERE (audit SEO par defaut, personnalisable, ou masquee)
       ========================================================= */}
-      <Section id="audit-seo-cta" className="bg-surface pb-16 md:pb-24">
-        <BannerCTA
-          variant="surface"
-          title="Votre site est-il vraiment vu par Google ?"
-          description="Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
-          action={
-            <Link href="/audit-seo">
-              <Button
-                variant="secondary"
-                className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
-              >
-                Lancer mon audit gratuit
-              </Button>
-            </Link>
-          }
-        />
-      </Section>
+      {banner !== false && (
+        <Section id="audit-seo-cta" className="bg-surface pb-16 md:pb-24">
+          <BannerCTA
+            variant="surface"
+            title={banner?.title ?? "Votre site est-il vraiment vu par Google ?"}
+            description={
+              banner?.description ??
+              "Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
+            }
+            action={
+              <Link href={banner?.ctaHref ?? "/audit-seo"}>
+                <Button
+                  variant="secondary"
+                  className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+                >
+                  {banner?.ctaText ?? "Lancer mon audit gratuit"}
+                </Button>
+              </Link>
+            }
+          />
+        </Section>
+      )}
 
       {/* =========================================================
           TRANSITION - OFFRE
       ========================================================= */}
-      <TransitionTitle
-        surtitle={offer.subtitle}
-        line1="Notre"
-        line2="Périmètre"
-      />
+      {!offer.hideTransition && (
+        <TransitionTitle
+          surtitle={offer.subtitle}
+          line1="Notre"
+          line2="Périmètre"
+        />
+      )}
 
       {/* =========================================================
           3. OFFRE
@@ -586,12 +719,14 @@ export function ServicePage({
             {offer.title}
           </Heading>
 
-          <Text
-            variant="lead"
-            className="text-muted-foreground text-base md:text-lg"
-          >
-            {offer.description}
-          </Text>
+          {offer.description && (
+            <Text
+              variant="lead"
+              className="text-muted-foreground text-base md:text-lg"
+            >
+              {parseInlineLinks(offer.description, "offer-desc")}
+            </Text>
+          )}
         </div>
 
         {/* DESKTOP */}
@@ -765,6 +900,42 @@ export function ServicePage({
       </Section>
 
       {/* =========================================================
+          BLOC "EN BREF" (optionnel) — timeline verticale
+      ========================================================= */}
+      {keyFacts && keyFacts.length > 0 && (
+        <Section id="en-bref" className="bg-surface pb-16 md:pb-24">
+          <div className="rounded-2xl md:rounded-3xl border border-border bg-background p-6 md:p-10">
+            <Heading as="h3" className="text-foreground text-xl md:text-2xl mb-8 md:mb-10">
+              En bref
+            </Heading>
+
+            <dl className="relative max-w-2xl">
+              <div className="absolute left-[11px] top-2 bottom-2 w-px bg-border" aria-hidden="true" />
+
+              <div className="space-y-6 md:space-y-8">
+                {keyFacts.map((fact, index) => (
+                  <div key={index} className="relative flex gap-4 md:gap-5">
+                    <span className="relative z-10 shrink-0 w-6 h-6 rounded-full bg-secondary/10 border border-secondary/40 flex items-center justify-center">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-secondary-strong" />
+                    </span>
+
+                    <div className="space-y-1 pb-1">
+                      <dt className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest">
+                        {fact.label}
+                      </dt>
+                      <dd className="text-foreground text-sm md:text-base leading-relaxed">
+                        {fact.value}
+                      </dd>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </dl>
+          </div>
+        </Section>
+      )}
+
+      {/* =========================================================
           LOCAL SEO
       ========================================================= */}
       {localSeo && (
@@ -782,9 +953,13 @@ export function ServicePage({
                   {localSeo.title}
                 </Heading>
 
-                <Text className="text-white/80 text-base md:text-lg leading-relaxed">
-                  {localSeo.description}
-                </Text>
+                <div className="space-y-3 md:space-y-4">
+                  {renderRichText(
+                    localSeo.description,
+                    "localseo-desc",
+                    "text-white/80 text-base md:text-lg leading-relaxed",
+                  )}
+                </div>
 
                 <Link href={localSeo.ctaHref} className="inline-flex">
                   <Button
@@ -1077,7 +1252,7 @@ export function ServicePage({
         line1={cta.line1}
         line2={cta.line2}
         line3={cta.line3}
-        description={cta.description}
+        description={renderRichText(cta.description, "cta-desc", "")}
         ctaLabel={cta.buttonText}
         ctaHref={cta.buttonHref}
       />
