@@ -24,13 +24,13 @@ import { WaveDivider } from "@/components/ui/WaveDivider";
 import { CheckCircle2 } from "lucide-react";
 
 const bentoImageExtOverrides: Record<string, string> = {
-    "infogerance/1": "webp",
-    "infogerance/2": "webp",
-}
+  "infogerance/1": "webp",
+  "infogerance/2": "webp",
+};
 
 function bentoImageSrc(serviceSlug: string, imageIndex: number) {
-    const ext = bentoImageExtOverrides[`${serviceSlug}/${imageIndex}`] ?? "jpg"
-    return `/images/services/${serviceSlug}/bento-${imageIndex}.${ext}`
+  const ext = bentoImageExtOverrides[`${serviceSlug}/${imageIndex}`] ?? "jpg";
+  return `/images/services/${serviceSlug}/bento-${imageIndex}.${ext}`;
 }
 
 /*
@@ -478,7 +478,11 @@ export function ServicePage({
       ? stripRichText(hero.description)
       : hero.description,
     provider: schemaOverride
-      ? { "@type": "LocalBusiness", "@id": "https://trinexta.fr" }
+      ? {
+          "@type": "LocalBusiness",
+          "@id": "https://trinexta.fr",
+          name: "Trinexta",
+        }
       : { "@type": "LocalBusiness", name: "Trinexta" },
   };
 
@@ -539,9 +543,13 @@ export function ServicePage({
               </Heading>
 
               <div className="mt-4 md:mt-6 max-w-2xl">
-                <Text className="text-base sm:text-lg md:text-xl text-white/90 drop-shadow-md leading-relaxed text-balance">
-                  {hero.description}
-                </Text>
+                <div className="text-base sm:text-lg md:text-xl text-white/90 drop-shadow-md leading-relaxed text-balance space-y-3">
+                  {renderRichText(
+                    hero.description,
+                    "hero-desc",
+                    "text-base sm:text-lg md:text-xl text-white/90 drop-shadow-md leading-relaxed text-balance",
+                  )}
+                </div>
               </div>
             </div>
 
@@ -680,10 +688,13 @@ export function ServicePage({
         <Section id="audit-seo-cta" className="bg-surface pb-16 md:pb-24">
           <BannerCTA
             variant="surface"
-            title={banner?.title ?? "Votre site est-il vraiment vu par Google ?"}
+            title={
+              banner?.title ?? "Votre site est-il vraiment vu par Google ?"
+            }
             description={
-              banner?.description ??
-              "Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
+              banner
+                ? banner.description
+                : "Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
             }
             action={
               <Link href={banner?.ctaHref ?? "/audit-seo"}>
@@ -905,31 +916,27 @@ export function ServicePage({
       {keyFacts && keyFacts.length > 0 && (
         <Section id="en-bref" className="bg-surface pb-16 md:pb-24">
           <div className="rounded-2xl md:rounded-3xl border border-border bg-background p-6 md:p-10">
-            <Heading as="h3" className="text-foreground text-xl md:text-2xl mb-8 md:mb-10">
+            <Heading
+              as="h3"
+              className="text-foreground text-xl md:text-2xl mb-8 md:mb-10"
+            >
               En bref
             </Heading>
 
-            <dl className="relative max-w-2xl">
-              <div className="absolute left-[11px] top-2 bottom-2 w-px bg-border" aria-hidden="true" />
-
-              <div className="space-y-6 md:space-y-8">
-                {keyFacts.map((fact, index) => (
-                  <div key={index} className="relative flex gap-4 md:gap-5">
-                    <span className="relative z-10 shrink-0 w-6 h-6 rounded-full bg-secondary/10 border border-secondary/40 flex items-center justify-center">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-secondary-strong" />
-                    </span>
-
-                    <div className="space-y-1 pb-1">
-                      <dt className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest">
-                        {fact.label}
-                      </dt>
-                      <dd className="text-foreground text-sm md:text-base leading-relaxed">
-                        {fact.value}
-                      </dd>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <dl className="relative max-w-2xl space-y-6 md:space-y-8">
+              {keyFacts.map((fact, index) => (
+                <div
+                  key={index}
+                  className="relative pl-10 before:content-[''] before:absolute before:left-0 before:top-0 before:w-6 before:h-6 before:rounded-full before:bg-secondary/10 before:border before:border-secondary/40 after:content-[''] after:absolute after:left-[11px] after:top-6 after:bottom-[-1.5rem] after:w-px after:bg-border last:after:hidden"
+                >
+                  <dt className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest">
+                    {fact.label}
+                  </dt>
+                  <dd className="text-foreground text-sm md:text-base leading-relaxed">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
             </dl>
           </div>
         </Section>
@@ -940,7 +947,12 @@ export function ServicePage({
       ========================================================= */}
       {localSeo && (
         <>
-          <WaveDivider from="surface" to="primary" amplitude="low" crossing={2} />
+          <WaveDivider
+            from="surface"
+            to="primary"
+            amplitude="low"
+            crossing={2}
+          />
 
           <Section id="zone-intervention" className="bg-primary pb-16 md:pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
@@ -993,7 +1005,12 @@ export function ServicePage({
             </div>
           </Section>
 
-          <WaveDivider from="primary" to="surface" amplitude="low" crossing={3} />
+          <WaveDivider
+            from="primary"
+            to="surface"
+            amplitude="low"
+            crossing={3}
+          />
         </>
       )}
 
@@ -1252,7 +1269,11 @@ export function ServicePage({
         line1={cta.line1}
         line2={cta.line2}
         line3={cta.line3}
-        description={renderRichText(cta.description, "cta-desc", "")}
+        description={renderRichText(
+          cta.description,
+          "cta-desc",
+          "text-white/70 text-base md:text-xl font-light",
+        )}
         ctaLabel={cta.buttonText}
         ctaHref={cta.buttonHref}
       />
@@ -1314,7 +1335,9 @@ export function ServicePage({
                       className="grid transition-[grid-template-rows] duration-300 ease-in-out"
                       style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
-                      <div className={`overflow-hidden transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}>
+                      <div
+                        className={`overflow-hidden transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
+                      >
                         <div className="px-4 md:px-6 pb-4 md:pb-5 pt-0">
                           <p className="text-white/70 text-sm md:text-base leading-relaxed border-t border-white/5 pt-3 md:pt-4">
                             {item.answer}
