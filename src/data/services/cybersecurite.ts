@@ -55,7 +55,7 @@ export const cybersecuriteData: ServicePageProps = {
   localSeo: {
     subtitle: "Protection locale",
     title: "Cybersécurité pour PME en Essonne",
-    description: "Nous aidons les entreprises locales à réduire les risques les plus concrets : ransomware, compte Microsoft 365 compromis, phishing crédible, postes non protégés et sauvegardes insuffisantes.",
+    description: "Nous aidons les entreprises locales à réduire les risques les plus concrets : ransomware, compte Microsoft 365 compromis, phishing crédible, postes non protégés et sauvegardes insuffisantes. Notre [assistance informatique](/support-informatique) prend en charge le reste de votre quotidien technique, au-delà de la sécurité.",
     items: [
       {
         title: "Zone couverte",
