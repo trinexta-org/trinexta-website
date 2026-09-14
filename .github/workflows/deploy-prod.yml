@@ -38,6 +38,10 @@ jobs:
             # avant le reload et laisserait le process sur l'ancien build.
             rm -rf .next/cache/images \
               || echo "ATTENTION: purge du cache images incomplete (droits), images potentiellement perimees"
+            # Data Cache des fetch (Sanity) : survit a `next build`, une entree avec un long
+            # TTL (ex. sitemap) serait resservie telle quelle apres deploiement.
+            rm -rf .next/cache/fetch-cache \
+              || echo "ATTENTION: purge du fetch-cache incomplete (droits), donnees Sanity potentiellement perimees"
             pm2 startOrReload ecosystem.config.js --only trinexta-prod --update-env
             pm2 save
             # Encode les images LCP maintenant plutot que de faire attendre

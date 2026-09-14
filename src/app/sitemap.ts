@@ -5,10 +5,11 @@ import { caseClients } from "@/data/cas-clients";
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
 
-// 2 592 000 s = 30 jours. Valeur litterale requise (Next n'accepte pas d'expression ici).
-// Publication urgente : redeployer, ou demander l'indexation de l'URL directement dans GSC
-// sans attendre la mise a jour du sitemap.
-export const revalidate = 2592000;
+// 3600 s = 1 h. Valeur litterale requise (Next n'accepte pas d'expression ici).
+// La requete Sanity ci-dessous herite de ce TTL dans le Data Cache (.next/cache/fetch-cache),
+// qui survit a `next build` : les workflows de deploy purgent ce dossier pour eviter
+// qu'une ancienne entree ne soit resservie apres mise en prod.
+export const revalidate = 3600;
 
 const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}`, changeFrequency: "monthly", priority: 1 },
