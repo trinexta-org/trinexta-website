@@ -46,7 +46,7 @@ export const cloudData: ServicePageProps = {
       },
       {
         title: "Hébergement et Cloud Souverain",
-        desc: "Nous privilégions des solutions d'hébergement respectueuses de vos données. Nous évitons la dépendance totale aux solutions étrangères quand cela est possible, en favorisant des infrastructures robustes et conformes aux exigences de sécurité européennes.",
+        desc: "Nous privilégions des solutions d'hébergement respectueuses de vos données. Nous évitons la dépendance totale aux solutions étrangères quand cela est possible, en favorisant des infrastructures robustes et conformes aux exigences de sécurité européennes. Cette infrastructure s'inscrit dans notre [assistance informatique de proximité](/support-informatique) au quotidien.",
       },
     ],
   },
