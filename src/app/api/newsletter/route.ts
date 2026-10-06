@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     const tenantId = process.env.AZURE_TENANT_ID;
     const clientId = process.env.AZURE_CLIENT_ID;
     const clientSecret = process.env.AZURE_CLIENT_SECRET;
-    const senderEmail = process.env.AZURE_FROM_EMAIL;
+    const senderEmail = process.env.NEWSLETTER_FROM_EMAIL;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://trinexta.fr";
 
     if (!tenantId || !clientId || !clientSecret || !senderEmail) {
