@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
@@ -15,6 +15,7 @@ export default function ContactForm() {
     handleSubmit,
     watch,
     setValue,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({ resolver: zodResolver(contactFormSchema) });
 
@@ -39,6 +40,45 @@ export default function ContactForm() {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const type = watch("type");
+
+  // Pré-remplit entreprise et ville via l'API publique recherche-entreprises (sans écraser la saisie)
+  const lookupController = useRef<AbortController | null>(null);
+  const lastLookup = useRef<string | null>(null);
+  const autofilled = useRef<{ entreprise?: string; ville?: string }>({});
+
+  const lookupSiret = async (siret: string) => {
+    lookupController.current?.abort();
+    if (!/^\d{14}$/.test(siret) || siret === lastLookup.current) return;
+    lastLookup.current = siret;
+    const controller = new AbortController();
+    lookupController.current = controller;
+    try {
+      const res = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siret}&per_page=1`, {
+        signal: controller.signal,
+      });
+      if (!res.ok) {
+        lastLookup.current = null;
+        return;
+      }
+      const json = await res.json();
+      const result = json.results?.[0];
+      const etab = [result?.siege, ...(result?.matching_etablissements ?? [])].find((e) => e?.siret === siret);
+      if (!result || !etab) return;
+      // N'écrase que les champs vides ou issus d'un précédent pré-remplissage
+      const fill = (field: "entreprise" | "ville", value: string) => {
+        const current = getValues(field);
+        if (!current || current === autofilled.current[field]) {
+          setValue(field, value);
+          autofilled.current[field] = value;
+        }
+      };
+      fill("entreprise", result.nom_complet);
+      fill("ville", etab.libelle_commune ?? "");
+    } catch {
+      // saisie manuelle en repli (ou requête annulée)
+      if (lookupController.current === controller) lastLookup.current = null;
+    }
+  };
 
   const onSubmit = async (data: ContactFormData) => {
     setServerError(null);
@@ -176,8 +216,22 @@ export default function ContactForm() {
 
             <div className="space-y-2">
               <label htmlFor="siret" className="text-sm font-bold uppercase tracking-widest text-foreground block">Numéro SIRET</label>
-              <Input id="siret" {...register("siret")} placeholder="12345678901234" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              <Input id="siret" inputMode="numeric" maxLength={14} {...register("siret", { onChange: (e) => lookupSiret(e.target.value.trim()) })} placeholder="12345678901234" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
               {errors.siret && <p className="text-red-600 text-sm">{errors.siret.message}</p>}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="ville" className="text-sm font-bold uppercase tracking-widest text-foreground block">Ville</label>
+              <Input id="ville" {...register("ville")} placeholder="Évry-Courcouronnes" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              {errors.ville && <p className="text-red-600 text-sm">{errors.ville.message}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="siteWeb" className="text-sm font-bold uppercase tracking-widest text-foreground block">Site internet <span className="font-normal normal-case tracking-normal text-muted-foreground">(facultatif)</span></label>
+              <Input id="siteWeb" type="text" inputMode="url" {...register("siteWeb")} placeholder="https://www.entreprise.fr" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              {errors.siteWeb && <p className="text-red-600 text-sm">{errors.siteWeb.message}</p>}
             </div>
           </div>
 

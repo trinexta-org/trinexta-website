@@ -21,6 +21,8 @@ model ContactForm {
   telephone  String?
   entreprise String?
   siret      String?
+  ville      String?
+  siteWeb    String?
   secteur    String?
   taille     String?
   urgence    String?
