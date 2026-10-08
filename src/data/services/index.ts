@@ -4,6 +4,7 @@ const registry: Record<string, () => Promise<ServicePageProps>> = {
   cybersecurite: () => import("./cybersecurite").then((m) => m.cybersecuriteData),
   infogerance: () => import("./infogerance").then((m) => m.infogeranceData),
   "cloud-sauvegarde": () => import("./cloud-sauvegarde").then((m) => m.cloudData),
+  "support-informatique": () => import("./support-informatique").then((m) => m.supportInformatiqueData),
 };
 
 export async function getServiceData(slug: string): Promise<ServicePageProps> {
