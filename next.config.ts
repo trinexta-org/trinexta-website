@@ -37,14 +37,14 @@ const nextConfig: NextConfig = {
               ),
               GOOGLE_ADS_ORIGINS.reduce(
                 (directive, origin) => `${directive} ${origin}`,
-                "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net www.googletagmanager.com",
+                "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net www.googletagmanager.com leadsynch-api.onrender.com",
               ),
               "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net",
               "font-src 'self'",
-              "frame-src 'self' www.google.com www.googletagmanager.com",
+              "frame-src 'self' www.google.com www.googletagmanager.com leadsynch-api.onrender.com",
               GOOGLE_ADS_ORIGINS.reduce(
                 (directive, origin) => `${directive} ${origin}`,
-                "connect-src 'self' www.google-analytics.com analytics.google.com www.googletagmanager.com",
+                "connect-src 'self' www.google-analytics.com analytics.google.com www.googletagmanager.com leadsynch-api.onrender.com",
               ),
             ].join("; "),
           },
