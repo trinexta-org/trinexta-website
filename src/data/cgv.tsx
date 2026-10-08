@@ -72,6 +72,7 @@ export const cgvData: LegalData = {
       title: "Article 9 - Infogérance",
       paragraphs: [
         "Les prestations d'infogérance peuvent inclure la supervision, la maintenance préventive et corrective, l'administration des serveurs, l'administration Microsoft 365, la gestion des sauvegardes et la gestion du parc informatique. Le Client demeure propriétaire de ses équipements et responsable des décisions stratégiques concernant son système d'information.",
+        "Pour l'offre Sérénité souscrite en formule mensuelle, le premier mois est satisfait ou remboursé. Si le Client n'est pas satisfait, il en informe TRINEXTA par écrit avant la fin du premier mois de prestation et obtient le remboursement des sommes versées au titre de ce premier mois. Cette garantie ne s'applique pas à la formule annuelle.",
       ],
     },
     {

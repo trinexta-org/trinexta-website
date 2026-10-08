@@ -19,6 +19,10 @@ export function SerenitePricing() {
           </li>
           <li className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+            <span>Premier mois satisfait ou remboursé</span>
+          </li>
+          <li className="flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
             <span>Mise en place rapide dès le démarrage</span>
           </li>
         </ul>

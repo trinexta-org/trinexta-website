@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -65,6 +66,11 @@ export default function RootLayout({
         <Footer />
         <CookieBanner />
         <ScrollToTop />
+        <Script
+          src="https://leadsynch-api.onrender.com/api/public/forms/chat.js"
+          data-key="wf_JRKT_23gN_cml44IQ_CVEg"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

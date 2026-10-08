@@ -11,6 +11,22 @@ const optionalTrimmedText = z
   .transform((value) => value || undefined)
   .optional();
 
+function isValidWebsite(value: string) {
+  if (/^[a-z][a-z0-9+.-]*:/i.test(value) && !/^https?:\/\//i.test(value)) return false;
+  try {
+    const url = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
+    return (
+      ["http:", "https:"].includes(url.protocol) &&
+      !url.username &&
+      !url.password &&
+      /^([a-z0-9-]+\.)+[a-z]{2,}$/i.test(url.hostname) &&
+      !/\s/.test(value)
+    );
+  } catch {
+    return false;
+  }
+}
+
 export const contactFormSchema = z.object({
   type: z.enum(["devis", "support", "autre"]),
   prenom: z.string().trim().min(1, "Le prénom est requis"),
@@ -23,6 +39,14 @@ export const contactFormSchema = z.object({
   urgence: z.string().trim().optional(),
   message: z.string().trim().min(1, "Le message est requis"),
   siret: z.string().trim().optional(),
+  ville: z.string().trim().optional(),
+  siteWeb: z
+    .string()
+    .trim()
+    .optional()
+    .refine((v) => !v || isValidWebsite(v), "L'adresse du site est invalide")
+    .transform((v) => (v && !/^https?:\/\//i.test(v) ? `https://${v}` : v))
+    .optional()
 }).superRefine((data, ctx) => {
 
   if (data.type === "devis") {
@@ -34,6 +58,10 @@ export const contactFormSchema = z.object({
     }
     if (!data.taille || data.taille === "") {
       ctx.addIssue({ code: "custom", message: "La taille est requise", path: ["taille"] });
+    }
+
+    if (!data.ville || data.ville === "") {
+      ctx.addIssue({ code: "custom", message: "La ville est requise", path: ["ville"] });
     }
 
     const siretRegex = /^\d{14}$/;
