@@ -15,6 +15,7 @@ export default function ContactForm() {
     handleSubmit,
     watch,
     setValue,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({ resolver: zodResolver(contactFormSchema) });
 
@@ -39,6 +40,23 @@ export default function ContactForm() {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const type = watch("type");
+
+  // Pré-remplit entreprise et ville via l'API publique recherche-entreprises (sans écraser la saisie)
+  const lookupSiret = async (siret: string) => {
+    if (!/^\d{14}$/.test(siret)) return;
+    try {
+      const res = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siret}&per_page=1`);
+      if (!res.ok) return;
+      const json = await res.json();
+      const result = json.results?.[0];
+      const etab = [result?.siege, ...(result?.matching_etablissements ?? [])].find((e) => e?.siret === siret);
+      if (!result || !etab) return;
+      if (!getValues("entreprise")) setValue("entreprise", result.nom_complet);
+      if (!getValues("ville")) setValue("ville", etab.libelle_commune ?? "");
+    } catch {
+      // saisie manuelle en repli
+    }
+  };
 
   const onSubmit = async (data: ContactFormData) => {
     setServerError(null);
@@ -176,8 +194,22 @@ export default function ContactForm() {
 
             <div className="space-y-2">
               <label htmlFor="siret" className="text-sm font-bold uppercase tracking-widest text-foreground block">Numéro SIRET</label>
-              <Input id="siret" {...register("siret")} placeholder="12345678901234" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              <Input id="siret" inputMode="numeric" maxLength={14} {...register("siret", { onChange: (e) => lookupSiret(e.target.value.trim()) })} placeholder="12345678901234" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
               {errors.siret && <p className="text-red-600 text-sm">{errors.siret.message}</p>}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="ville" className="text-sm font-bold uppercase tracking-widest text-foreground block">Ville</label>
+              <Input id="ville" {...register("ville")} placeholder="Évry-Courcouronnes" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              {errors.ville && <p className="text-red-600 text-sm">{errors.ville.message}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="siteWeb" className="text-sm font-bold uppercase tracking-widest text-foreground block">Site internet <span className="font-normal normal-case tracking-normal text-muted-foreground">(facultatif)</span></label>
+              <Input id="siteWeb" type="text" inputMode="url" {...register("siteWeb")} placeholder="https://www.entreprise.fr" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
+              {errors.siteWeb && <p className="text-red-600 text-sm">{errors.siteWeb.message}</p>}
             </div>
           </div>
 

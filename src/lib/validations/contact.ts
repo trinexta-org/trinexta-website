@@ -23,6 +23,12 @@ export const contactFormSchema = z.object({
   urgence: z.string().trim().optional(),
   message: z.string().trim().min(1, "Le message est requis"),
   siret: z.string().trim().optional(),
+  ville: z.string().trim().optional(),
+  siteWeb: z
+    .string()
+    .trim()
+    .optional()
+    .refine((v) => !v || /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(v), "L'adresse du site est invalide"),
 }).superRefine((data, ctx) => {
 
   if (data.type === "devis") {
@@ -34,6 +40,10 @@ export const contactFormSchema = z.object({
     }
     if (!data.taille || data.taille === "") {
       ctx.addIssue({ code: "custom", message: "La taille est requise", path: ["taille"] });
+    }
+
+    if (!data.ville || data.ville === "") {
+      ctx.addIssue({ code: "custom", message: "La ville est requise", path: ["ville"] });
     }
 
     const siretRegex = /^\d{14}$/;
