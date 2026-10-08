@@ -11,6 +11,15 @@ const optionalTrimmedText = z
   .transform((value) => value || undefined)
   .optional();
 
+function isValidWebsite(value: string) {
+  try {
+    const url = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
+    return ["http:", "https:"].includes(url.protocol) && url.hostname.includes(".") && !/\s/.test(value);
+  } catch {
+    return false;
+  }
+}
+
 export const contactFormSchema = z.object({
   type: z.enum(["devis", "support", "autre"]),
   prenom: z.string().trim().min(1, "Le prénom est requis"),
@@ -28,7 +37,7 @@ export const contactFormSchema = z.object({
     .string()
     .trim()
     .optional()
-    .refine((v) => !v || /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(v), "L'adresse du site est invalide"),
+    .refine((v) => !v || isValidWebsite(v), "L'adresse du site est invalide")
 }).superRefine((data, ctx) => {
 
   if (data.type === "devis") {

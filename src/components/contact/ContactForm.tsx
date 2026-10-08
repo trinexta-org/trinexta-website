@@ -43,18 +43,23 @@ export default function ContactForm() {
 
   // Pré-remplit entreprise et ville via l'API publique recherche-entreprises (sans écraser la saisie)
   const lookupController = useRef<AbortController | null>(null);
+  const lastLookup = useRef<string | null>(null);
   const autofilled = useRef<{ entreprise?: string; ville?: string }>({});
 
   const lookupSiret = async (siret: string) => {
     lookupController.current?.abort();
-    if (!/^\d{14}$/.test(siret)) return;
+    if (!/^\d{14}$/.test(siret) || siret === lastLookup.current) return;
+    lastLookup.current = siret;
     const controller = new AbortController();
     lookupController.current = controller;
     try {
       const res = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siret}&per_page=1`, {
         signal: controller.signal,
       });
-      if (!res.ok) return;
+      if (!res.ok) {
+        lastLookup.current = null;
+        return;
+      }
       const json = await res.json();
       const result = json.results?.[0];
       const etab = [result?.siege, ...(result?.matching_etablissements ?? [])].find((e) => e?.siret === siret);
@@ -71,6 +76,7 @@ export default function ContactForm() {
       fill("ville", etab.libelle_commune ?? "");
     } catch {
       // saisie manuelle en repli (ou requête annulée)
+      if (lookupController.current === controller) lastLookup.current = null;
     }
   };
 
