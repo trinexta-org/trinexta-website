@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
@@ -42,19 +42,35 @@ export default function ContactForm() {
   const type = watch("type");
 
   // Pré-remplit entreprise et ville via l'API publique recherche-entreprises (sans écraser la saisie)
+  const lookupController = useRef<AbortController | null>(null);
+  const autofilled = useRef<{ entreprise?: string; ville?: string }>({});
+
   const lookupSiret = async (siret: string) => {
+    lookupController.current?.abort();
     if (!/^\d{14}$/.test(siret)) return;
+    const controller = new AbortController();
+    lookupController.current = controller;
     try {
-      const res = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siret}&per_page=1`);
+      const res = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siret}&per_page=1`, {
+        signal: controller.signal,
+      });
       if (!res.ok) return;
       const json = await res.json();
       const result = json.results?.[0];
       const etab = [result?.siege, ...(result?.matching_etablissements ?? [])].find((e) => e?.siret === siret);
       if (!result || !etab) return;
-      if (!getValues("entreprise")) setValue("entreprise", result.nom_complet);
-      if (!getValues("ville")) setValue("ville", etab.libelle_commune ?? "");
+      // N'écrase que les champs vides ou issus d'un précédent pré-remplissage
+      const fill = (field: "entreprise" | "ville", value: string) => {
+        const current = getValues(field);
+        if (!current || current === autofilled.current[field]) {
+          setValue(field, value);
+          autofilled.current[field] = value;
+        }
+      };
+      fill("entreprise", result.nom_complet);
+      fill("ville", etab.libelle_commune ?? "");
     } catch {
-      // saisie manuelle en repli
+      // saisie manuelle en repli (ou requête annulée)
     }
   };
 
