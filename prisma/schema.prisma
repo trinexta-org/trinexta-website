@@ -27,6 +27,7 @@ model ContactForm {
   taille     String?
   urgence    String?
   message    String
+  offre      String?
   createdAt  DateTime @default(now())
 }
 

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { OFFRE_SLUGS } from "@/data/offres";
 
 export const CONTACT_TYPES = ["devis", "support", "autre"] as const
 export const SECTEURS = ["Commerce", "Sante", "BTP", "Finance", "IT", "Industrie", "Autre"] as const
@@ -46,7 +47,8 @@ export const contactFormSchema = z.object({
     .optional()
     .refine((v) => !v || isValidWebsite(v), "L'adresse du site est invalide")
     .transform((v) => (v && !/^https?:\/\//i.test(v) ? `https://${v}` : v))
-    .optional()
+    .optional(),
+  offre: z.enum(OFFRE_SLUGS).optional(),
 }).superRefine((data, ctx) => {
 
   if (data.type === "devis") {
