@@ -14,6 +14,7 @@ import { SereniteTargets } from "@/components/serenite/SereniteTargets";
 import { SerenitePricing } from "@/components/serenite/SerenitePricing";
 import { SereniteOptions } from "@/components/serenite/SereniteOptions";
 import { SereniteDifferentiator } from "@/components/serenite/SereniteDifferentiator";
+import { SereniteEssentielle } from "@/components/serenite/SereniteEssentielle";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { FinalCTA } from "@/components/FinalCTA";
 
@@ -126,6 +127,20 @@ export default function NotreOffrePage() {
             <Section container={false} className="py-0">
               <Container className="max-w-[1400px]">
                 <SereniteTargets />
+              </Container>
+            </Section>
+          </div>
+
+          <div id="essentielle" className="space-y-12 scroll-mt-32">
+            <TransitionTitle
+              surtitle="Offre d'entrée"
+              line1="Commencer par"
+              line2="l'essentiel"
+            />
+
+            <Section container={false} className="py-0">
+              <Container className="max-w-[1400px]">
+                <SereniteEssentielle />
               </Container>
             </Section>
           </div>

@@ -1,3 +1,5 @@
+import { FAQ_ESSENTIELLE } from "@/data/serenite-essentielle";
+
 export type OfferTag = 'technicien-sous-regie' | 'serenite' | 'services-annexes' | 'studio' | 'general';
 
 export const officialFaqs = [
@@ -15,6 +17,10 @@ export const officialFaqs = [
     question: "Combien ça coûte ?",
     answer: "Nos offres démarrent à 79€ HT par poste et par mois, sans engagement de durée, et le premier mois est satisfait ou remboursé.\n\nLe tarif final dépend du périmètre : nombre de postes, niveau de support souhaité, services additionnels (sauvegarde, hébergement, etc.). Nous établissons toujours un devis clair et détaillé après une phase d'audit gratuite de votre environnement.",
     tags: ['serenite', 'services-annexes'] as OfferTag[] 
+  },
+  {
+    ...FAQ_ESSENTIELLE,
+    tags: ['serenite'] as OfferTag[]
   },
   {
     question: "Pourquoi pas d'engagement ? Où est le piège ?",
