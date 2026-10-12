@@ -10,10 +10,12 @@ interface OfferHeroProps {
   part1: string
   part2: string
   subtitles: string[]
-  imageSrc: string 
+  imageSrc: string
+  // Lien d'annonce sous les slides (ex. offre d'entrée plus bas dans la page)
+  announcement?: { label: string; href: string }
 }
 
-export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps) {
+export function OfferHero({ part1, part2, subtitles, imageSrc, announcement }: OfferHeroProps) {
   const slides = subtitles.map((sub) => ({
     part1,
     part2,
@@ -53,6 +55,16 @@ export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps)
         </div>
       )}
       footer={
+        <>
+        {announcement && (
+          <Link
+            href={announcement.href}
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-bold text-primary transition-colors hover:bg-white"
+          >
+            {announcement.label}
+            <span aria-hidden="true">→</span>
+          </Link>
+        )}
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
           <Link href="/contact" className="w-full sm:w-auto">
             <Button variant="secondary" size="lg" className="w-full text-white">
@@ -60,6 +72,7 @@ export function OfferHero({ part1, part2, subtitles, imageSrc }: OfferHeroProps)
             </Button>
           </Link>
         </div>
+        </>
       }
     />
   )
