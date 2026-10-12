@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { contactFormSchema, ContactFormData, CONTACT_TYPES, SECTEURS, TAILLES, URGENCES } from "@/lib/validations/contact";
 import { pushGtmEvent, trackLeadConversion } from "@/lib/gtm";
+import { isOffreSlug, LIBELLES_OFFRES } from "@/data/offres";
 
 export default function ContactForm() {
   const {
@@ -23,8 +24,14 @@ export default function ContactForm() {
     const params = new URLSearchParams(window.location.search);
     const type = params.get("type");
     const auditUrl = params.get("audit_url");
+    const offre = params.get("offre");
     if (type && (CONTACT_TYPES as readonly string[]).includes(type)) {
       setValue("type", type as ContactFormData["type"]);
+    }
+    // Une offre promue est toujours une demande de devis, quel que soit `?type=`
+    if (isOffreSlug(offre)) {
+      setValue("offre", offre);
+      setValue("type", "devis");
     }
     if (auditUrl) {
       const auditScore = params.get("audit_score");
@@ -40,6 +47,7 @@ export default function ContactForm() {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const type = watch("type");
+  const offre = watch("offre");
 
   // Pré-remplit entreprise et ville via l'API publique recherche-entreprises (sans écraser la saisie)
   const lookupController = useRef<AbortController | null>(null);
@@ -91,7 +99,8 @@ export default function ContactForm() {
 
     if (res.ok) {
       pushGtmEvent('form_submit', {
-        form_id: 'contact_principal'
+        form_id: 'contact_principal',
+        offre: data.offre,
       });
       await trackLeadConversion(
         { form_id: 'contact_principal' },
@@ -119,6 +128,23 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
+
+      {/* Offre promue transmise par un CTA (?offre=), valeur hors DOM via setValue */}
+      {offre && (
+        <div className="flex items-center justify-between gap-4 rounded-lg border border-secondary bg-secondary/10 px-4 py-3">
+          <p className="text-foreground text-base">
+            Votre demande concerne l&apos;offre{" "}
+            <strong className="text-secondary-strong">{LIBELLES_OFFRES[offre]}</strong>
+          </p>
+          <button
+            type="button"
+            onClick={() => setValue("offre", undefined)}
+            className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground transition-colors"
+          >
+            Retirer
+          </button>
+        </div>
+      )}
 
       {/* Prénom / Nom */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

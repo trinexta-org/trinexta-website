@@ -1,4 +1,5 @@
 import { ContactFormData } from "@/lib/validations/contact";
+import { LIBELLES_OFFRES } from "@/data/offres";
 
 export function escapeHtml(value: string) {
   return value
@@ -91,10 +92,11 @@ export async function sendNotificationEmail(data: ContactFormData) {
 
   return sendMail({
     to: data.type === "support" ? supportEmail : fromEmail,
-    subject: `Nouvelle demande de contact : ${escapeHtml(data.type.toUpperCase())}`,
+    subject: `Nouvelle demande de contact : ${escapeHtml(data.type.toUpperCase())}${data.offre ? ` - ${escapeHtml(LIBELLES_OFFRES[data.offre])}` : ""}`,
     html: `
       <h2>Nouveau message depuis le site Trinexta</h2>
       <p><strong>Type :</strong> ${escapeHtml(data.type)}</p>
+      <p><strong>Offre :</strong> ${data.offre ? escapeHtml(LIBELLES_OFFRES[data.offre]) : "Aucune"}</p>
       <p><strong>Nom :</strong> ${escapeHtml(data.prenom)} ${escapeHtml(data.nom)}</p>
       <p><strong>Email :</strong> ${escapeHtml(data.email)}</p>
       <p><strong>Téléphone :</strong> ${formatField(data.telephone)}</p>
