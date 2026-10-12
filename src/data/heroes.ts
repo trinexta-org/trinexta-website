@@ -13,15 +13,16 @@ export type HomeHeroSlide = {
 
 export const homeHeroSlides: HomeHeroSlide[] = [
   {
+    title: "*Simplifiez* votre informatique au quotidien",
+    subtitle: "Support illimité, maintenance proactive et cybersécurité incluse pour travailler avec plus de sérénité."
+  },
+  // Slide 2 et non 1 : la slide active au rendu serveur porte le h1 de l'accueil
+  {
     title: SERENITE_ESSENTIELLE.heroTitle,
     subtitle: SERENITE_ESSENTIELLE.heroSubtitle,
     badge: SERENITE_ESSENTIELLE.badge,
     cta: { label: SERENITE_ESSENTIELLE.ctaLabel, href: SERENITE_ESSENTIELLE.ctaHref },
     visual: "coffee-shield",
-  },
-  {
-    title: "*Simplifiez* votre informatique au quotidien",
-    subtitle: "Support illimité, maintenance proactive et cybersécurité incluse pour travailler avec plus de sérénité."
   },
   {
     title: "*Renforcez* votre support avec souplesse",
