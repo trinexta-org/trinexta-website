@@ -1,11 +1,28 @@
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import Image from "next/image"
 import React from "react"
+import { SERENITE_ESSENTIELLE } from "@/data/serenite-essentielle"
 
-export const homeHeroSlides = [
+export type HomeHeroSlide = {
+  title: string
+  subtitle: string
+  badge?: string
+  cta?: { label: string; href: string }
+  visual?: "coffee-shield"
+}
+
+export const homeHeroSlides: HomeHeroSlide[] = [
   {
     title: "*Simplifiez* votre informatique au quotidien",
     subtitle: "Support illimité, maintenance proactive et cybersécurité incluse pour travailler avec plus de sérénité."
+  },
+  // Slide 2 et non 1 : la slide active au rendu serveur porte le h1 de l'accueil
+  {
+    title: SERENITE_ESSENTIELLE.heroTitle,
+    subtitle: SERENITE_ESSENTIELLE.heroSubtitle,
+    badge: SERENITE_ESSENTIELLE.badge,
+    cta: { label: SERENITE_ESSENTIELLE.ctaLabel, href: SERENITE_ESSENTIELLE.ctaHref },
+    visual: "coffee-shield",
   },
   {
     title: "*Renforcez* votre support avec souplesse",

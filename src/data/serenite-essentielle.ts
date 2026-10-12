@@ -6,6 +6,9 @@ import { getOffreContactHref } from "@/data/offres";
 export const SERENITE_ESSENTIELLE = {
   badge: "Nouveau : offre d'entrée",
   title: "La sécurité de vos postes, pour le prix d'un *café* par jour.",
+  // Version courte pour la slide d'accueil (titre en très gros caractères)
+  heroTitle: "La sécurité au prix d'un *café*",
+  heroSubtitle: "Sérénité Essentielle : surveillance antivirus et EDR de vos postes, sans engagement.",
   subtitle: "Surveillance antivirus et EDR, sans engagement.",
   priceNote: "Par poste. Le tarif exact est établi par un conseiller selon votre parc.",
   inclus: [
@@ -15,6 +18,9 @@ export const SERENITE_ESSENTIELLE = {
     "Un rapport de sécurité chaque mois",
   ],
   horsForfait: "Assistance et interventions chiffrées à la demande.",
+  // Lien d'annonce dans le hero de /serenite vers la section, placée après les tarifs
+  heroTeaser: "Nouveau : Sérénité Essentielle, l'offre d'entrée sans engagement",
+  anchorHref: "/serenite#essentielle",
   ctaLabel: "Être rappelé par un conseiller",
   ctaHref: getOffreContactHref("serenite-essentielle"),
   engagement: "Sans engagement, résiliable chaque mois.",
