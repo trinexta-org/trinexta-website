@@ -7,6 +7,7 @@ import { HeroCarousel } from "@/components/ui/HeroCarousel";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { homeHeroSlides } from "@/data/heroes";
+import { CoffeeShield } from "@/components/serenite/CoffeeShield";
 
 export function HeroSection() {
   preload("/hero-poster.webp", {
@@ -33,7 +34,7 @@ export function HeroSection() {
     <HeroCarousel
       slides={homeHeroSlides}
       containerPadding="py-8 pb-16 md:py-12"
-      slideMinHeight="min-h-[220px] sm:min-h-[180px] md:min-h-[240px] lg:min-h-[260px]"
+      slideMinHeight="min-h-[270px] md:min-h-[260px] lg:min-h-[340px]"
       staticBackground={
         <video
           autoPlay
@@ -48,7 +49,13 @@ export function HeroSection() {
       }
       overlays={<div className="hero-scrim" aria-hidden="true" />}
       renderSlide={(slide, index, isActive) => (
-        <div>
+        <div className="flex items-center gap-8 lg:gap-12">
+        <div className="min-w-0 flex-1">
+          {slide.badge && (
+            <span className="mb-4 inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-black uppercase tracking-widest text-primary">
+              {slide.badge}
+            </span>
+          )}
           <Heading
             as={isActive ? "h1" : "h2"}
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-white text-balance"
@@ -61,6 +68,7 @@ export function HeroSection() {
                 "quotidien",
                 "souplesse",
                 "suivie",
+                "café",
               ];
               const isItalic =
                 word.startsWith("*") && word.endsWith("*") && word.length > 2;
@@ -86,6 +94,20 @@ export function HeroSection() {
           <Text className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-md text-white/90 text-balance">
             {slide.subtitle}
           </Text>
+          {slide.cta && (
+            <Link
+              href={slide.cta.href}
+              tabIndex={isActive ? undefined : -1}
+              className="mt-4 inline-flex items-center gap-2 font-bold text-secondary-soft underline underline-offset-4 drop-shadow-md hover:text-white transition-colors"
+            >
+              {slide.cta.label}
+              <span aria-hidden="true">→</span>
+            </Link>
+          )}
+        </div>
+        {slide.visual === "coffee-shield" && (
+          <CoffeeShield className="hidden md:block w-44 lg:w-56 xl:w-64 shrink-0 drop-shadow-2xl" />
+        )}
         </div>
       )}
       footer={
