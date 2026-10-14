@@ -16,7 +16,6 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { TransitionTitle } from "@/components/TransitionTitle";
 import { GridCards } from "@/components/layout/GridCards";
 import { BreadcrumbJsonLd } from "../seo/BreadcrumbJsonLd";
-import { BannerCTA } from "@/components/layout/BannerCTA";
 import { usePresence } from "@/hooks/usePresence";
 import { useCrossfade } from "@/hooks/useCrossfade";
 import { WaveDivider } from "@/components/ui/WaveDivider";
@@ -545,27 +544,6 @@ export function ServicePage({
             </div>
           </div>
         </div>
-      </Section>
-
-      {/* =========================================================
-          AUDIT SEO
-      ========================================================= */}
-      <Section id="audit-seo-cta" className="bg-surface pb-16 md:pb-24">
-        <BannerCTA
-          variant="surface"
-          title="Votre site est-il vraiment vu par Google ?"
-          description="Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
-          action={
-            <Link href="/audit-seo">
-              <Button
-                variant="secondary"
-                className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
-              >
-                Lancer mon audit gratuit
-              </Button>
-            </Link>
-          }
-        />
       </Section>
 
       {/* =========================================================

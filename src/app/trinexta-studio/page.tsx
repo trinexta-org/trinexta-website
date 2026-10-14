@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Link from "next/link"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { OfferHero } from "@/components/shared/OfferHero"
 import { FaqSection } from "@/components/shared/FaqSection"
@@ -12,6 +13,8 @@ import { StudioDifferentiator } from "@/components/studio/StudioDifferentiator"
 import { StudioGrid } from "@/components/studio/StudioGrid"
 import { StudioPaymentPlan } from "@/components/studio/StudioPaymentPlan"
 import StudioDemos from "@/components/studio/StudioDemos"
+import { BannerCTA } from "@/components/layout/BannerCTA"
+import { Button } from "@/components/ui/Button"
 import { FinalCTA } from "@/components/FinalCTA"
 
 export const metadata: Metadata = {
@@ -118,6 +121,21 @@ export default function TrinextaStudioPage() {
                             </Container>
                         </Section>
                     </div>
+
+                    <Section container={false}>
+                        <Container className="max-w-[1400px]">
+                            <BannerCTA
+                                variant="surface"
+                                title="Votre site est-il vraiment vu par Google ?"
+                                description="Obtenez votre score SEO en 30 secondes, gratuitement et sans engagement."
+                                action={
+                                    <Button asChild variant="secondary" size="lg">
+                                        <Link href="/audit-seo">Lancer mon audit gratuit</Link>
+                                    </Button>
+                                }
+                            />
+                        </Container>
+                    </Section>
 
                 </div>
             </section>
