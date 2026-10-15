@@ -23,7 +23,7 @@ const steps = [
   {
     num: "04",
     title: "Suivi continu",
-    description: "Supervision proactive 24/7, maintenance préventive et support technique ultra-réactif pour vous assurer une sérénité numérique totale.",
+    description: "Supervision proactive, maintenance préventive et support technique réactif pour une informatique qui reste sous contrôle.",
   },
 ]
 
