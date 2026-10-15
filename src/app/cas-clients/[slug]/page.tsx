@@ -13,6 +13,8 @@ import { FadeIn } from "@/components/ui/FadeIn"
 import { Heading, Text } from "@/components/ui/Typography"
 import { TrinextaGear } from "@/components/ui/TrinextaGear"
 import { MetricRow } from "@/components/cas-clients/MetricRow"
+import { JsonLd } from "@/components/seo/JsonLd"
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 import { caseClients, getCaseClientBySlug } from "@/data/cas-clients"
 
 export function generateStaticParams() {
@@ -31,14 +33,16 @@ export async function generateMetadata({
     return { title: "Cas client introuvable | TRINEXTA" }
   }
 
+  const seoTitle = item.seoTitle ?? item.title
+
   return {
-    title: `${item.title}`,
+    title: seoTitle,
     description: item.metaDescription,
     alternates: {
       canonical: `/cas-clients/${slug}`,
     },
     openGraph: {
-      title: `${item.title} | TRINEXTA`,
+      title: `${seoTitle} | TRINEXTA`,
       description: item.metaDescription,
       url: `/cas-clients/${slug}`,
       type: "website",
@@ -46,7 +50,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${item.title} | TRINEXTA`,
+      title: `${seoTitle} | TRINEXTA`,
       description: item.metaDescription,
       images: ["/images/og-default.png"],
     },
@@ -76,8 +80,27 @@ export default async function CaseClientDetailPage({
 
   if (!item) notFound()
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: item.title,
+    description: item.metaDescription,
+    image: `https://trinexta.fr${item.heroImage}`,
+    mainEntityOfPage: `https://trinexta.fr/cas-clients/${item.slug}`,
+    author: { "@type": "Organization", "@id": "https://trinexta.fr", name: "TRINEXTA" },
+    publisher: { "@type": "Organization", "@id": "https://trinexta.fr", name: "TRINEXTA" },
+  }
+
   return (
     <main className="min-h-screen bg-surface">
+      <JsonLd data={articleSchema} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Accueil", url: "/" },
+          { name: "Cas clients", url: "/cas-clients" },
+          { name: item.seoTitle ?? item.title, url: `/cas-clients/${item.slug}` },
+        ]}
+      />
       {/* Hero */}
       <ViewportHero>
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.heroImage}')` }} />
