@@ -106,6 +106,7 @@ export interface ServicePageProps {
     description: string;
     ctaText: string;
     ctaHref: string;
+    secondaryCta?: CtaLink;
   };
 
   problem: {
@@ -114,17 +115,74 @@ export interface ServicePageProps {
     description: string;
     painPoints?: string[];
     hideTransition?: boolean;
+    transition?: TransitionLines;
   };
 
+  /*
+   * features : bento a 5 cases avec images (cybersecurite, cloud).
+   * details : onglets services, chaque onglet = intro courte + liste a puces + lien.
+   * Fournir l'un ou l'autre.
+   */
   offer: {
     subtitle: string;
     title: string;
     description?: string;
-    features: Array<{
+    features?: Array<{
       title: string;
       desc: string;
     }>;
+    details?: ServiceDetail[];
     hideTransition?: boolean;
+    transition?: TransitionLines;
+  };
+
+  /*
+   * Cartes de formules (ex. Serenite / sur mesure), affichees apres l'offre.
+   */
+  formulas?: {
+    subtitle: string;
+    title: string;
+    description?: string;
+    items: Array<{
+      badge?: string;
+      title: string;
+      desc: string;
+      points?: string[];
+      cta: CtaLink;
+      highlighted?: boolean;
+    }>;
+    note?: string;
+  };
+
+  /*
+   * Etapes numerotees (reprise de parc, traitement d'un incident...).
+   */
+  process?: {
+    subtitle: string;
+    title: string;
+    description?: string;
+    steps: Array<{
+      title: string;
+      desc: string;
+    }>;
+    cta?: CtaLink;
+  };
+
+  /*
+   * Encart cas client : chiffres cles + resultats + lien vers l'etude complete.
+   */
+  caseStudy?: {
+    surtitle: string;
+    title: string;
+    context: string;
+    stats: Array<{
+      value: string;
+      label: string;
+    }>;
+    results: string[];
+    conclusion?: string;
+    cta: CtaLink;
+    note?: string;
   };
 
   /*
@@ -162,6 +220,7 @@ export interface ServicePageProps {
   benefits: {
     subtitle: string;
     title: string;
+    transition?: TransitionLines;
     items: Array<{
       title: string;
       desc: string;
@@ -213,6 +272,169 @@ export interface ServicePageProps {
     serviceType?: string;
     areaServed?: string[];
   };
+}
+
+interface CtaLink {
+  text: string;
+  href: string;
+}
+
+interface TransitionLines {
+  line1: string;
+  line2: string;
+}
+
+interface ServiceDetail {
+  title: string;
+  intro: string;
+  items: string[];
+  note?: string;
+  link?: CtaLink;
+}
+
+/*
+ * Onglets services : liste a gauche, panneau a droite (empile sur mobile).
+ * Tous les panneaux restent dans le HTML (attribut hidden) pour le SEO.
+ */
+function ServiceTabs({
+  serviceSlug,
+  details,
+}: {
+  serviceSlug: string;
+  details: ServiceDetail[];
+}) {
+  const [active, setActive] = useState(0);
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-[minmax(240px,320px)_1fr] gap-4 lg:gap-8">
+      <div
+        role="tablist"
+        aria-orientation="vertical"
+        className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 -mx-1 px-1 snap-x"
+      >
+        {details.map((detail, idx) => {
+          const isActive = idx === active;
+          return (
+            <button
+              key={detail.title}
+              role="tab"
+              id={`service-tab-${idx}`}
+              aria-selected={isActive}
+              aria-controls={`service-panel-${idx}`}
+              onClick={() => setActive(idx)}
+              className={`
+                snap-start shrink-0 lg:shrink text-left rounded-xl border px-4 py-3 md:px-5 md:py-4
+                flex items-center gap-3 transition-all duration-300
+                ${
+                  isActive
+                    ? "bg-primary border-primary text-white shadow-lg"
+                    : "bg-background border-border text-foreground hover:border-secondary/50"
+                }
+              `}
+            >
+              <span
+                className={`
+                  shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold
+                  ${isActive ? "bg-secondary text-white" : "bg-secondary/15 text-secondary-strong"}
+                `}
+              >
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              <span className="text-sm md:text-base font-bold leading-snug whitespace-nowrap lg:whitespace-normal">
+                {detail.title}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {details.map((detail, idx) => (
+        <div
+          key={detail.title}
+          role="tabpanel"
+          id={`service-panel-${idx}`}
+          aria-labelledby={`service-tab-${idx}`}
+          hidden={idx !== active}
+          className="rounded-2xl md:rounded-3xl border border-border bg-background overflow-hidden"
+        >
+          <div className="grid grid-cols-1 xl:grid-cols-[1fr_280px]">
+            <div className="p-6 md:p-10 space-y-5 md:space-y-6">
+              <Heading as="h3" className="text-foreground text-2xl md:text-3xl">
+                {detail.title}
+              </Heading>
+
+              <div className="space-y-3">
+                {renderRichText(
+                  detail.intro,
+                  `detail-${idx}-intro`,
+                  "text-muted-foreground text-base md:text-lg leading-relaxed",
+                )}
+              </div>
+
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+                {detail.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckIcon />
+                    <span className="text-foreground text-sm md:text-base leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {detail.note && (
+                <Text className="text-muted-foreground text-sm leading-relaxed border-l-2 border-secondary/40 pl-4">
+                  {parseInlineLinks(detail.note, `detail-${idx}-note`)}
+                </Text>
+              )}
+
+              {detail.link && (
+                <Link
+                  href={detail.link.href}
+                  className="inline-flex items-center gap-2 text-secondary-strong font-bold text-sm md:text-base hover:underline"
+                >
+                  {detail.link.text}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              )}
+            </div>
+
+            <div className="relative hidden xl:block min-h-[280px]">
+              <Image
+                src={bentoImageSrc(serviceSlug, (idx % 2) + 1)}
+                alt=""
+                fill
+                sizes="280px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-primary/10 to-primary/60" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <span className="shrink-0 w-5 h-5 mt-0.5 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center">
+      <svg
+        width="10"
+        height="10"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="text-secondary-strong"
+        aria-hidden="true"
+      >
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
+    </span>
+  );
 }
 
 interface BentoCellProps {
@@ -377,15 +599,19 @@ export function ServicePage({
   offer,
   banner,
   keyFacts,
+  formulas,
+  process,
   localSeo,
   benefits,
   incidentResponse,
   expertise,
+  caseStudy,
   faq,
   cta,
   schemaOverride,
 }: ServicePageProps) {
   const breadcrumbPath = canonicalPath ?? `/${serviceSlug}`;
+  const offerFeatures = offer.features ?? [];
 
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [activeBenefit, setActiveBenefit] = useState(0);
@@ -455,7 +681,7 @@ export function ServicePage({
       name: item.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer,
+        text: stripRichText(item.answer),
       },
     })),
   };
@@ -557,6 +783,17 @@ export function ServicePage({
                   {hero.ctaText}
                 </Button>
               </Link>
+
+              {hero.secondaryCta && (
+                <Link href={hero.secondaryCta.href} className="w-full sm:w-auto">
+                  <Button
+                    variant="outline"
+                    className="w-full sm:w-auto h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center border-white/40 text-white hover:bg-white/10"
+                  >
+                    {hero.secondaryCta.text}
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </Container>
@@ -573,8 +810,8 @@ export function ServicePage({
       {!problem.hideTransition && (
         <TransitionTitle
           surtitle={problem.subtitle}
-          line1="Ce qui freine"
-          line2="votre activité"
+          line1={problem.transition?.line1 ?? "Ce qui freine"}
+          line2={problem.transition?.line2 ?? "votre activité"}
         />
       )}
 
@@ -705,8 +942,8 @@ export function ServicePage({
       {!offer.hideTransition && (
         <TransitionTitle
           surtitle={offer.subtitle}
-          line1="Notre"
-          line2="Périmètre"
+          line1={offer.transition?.line1 ?? "Notre"}
+          line2={offer.transition?.line2 ?? "Périmètre"}
         />
       )}
 
@@ -729,8 +966,11 @@ export function ServicePage({
           )}
         </div>
 
-        {/* DESKTOP */}
-        {!isMobile ? (
+        {offer.details && offer.details.length > 0 && (
+          <ServiceTabs serviceSlug={serviceSlug} details={offer.details} />
+        )}
+
+        {offerFeatures.length > 0 && (!isMobile ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[minmax(180px,auto)] md:auto-rows-[minmax(220px,auto)]">
             {bentoOrder.map((currentDataIndex, gridPositionIndex) => {
               const isMainFocus = gridPositionIndex === 0;
@@ -751,7 +991,7 @@ export function ServicePage({
                 <BentoCell
                   key={`bento-slot-${gridPositionIndex}`}
                   serviceSlug={serviceSlug}
-                  features={offer.features}
+                  features={offerFeatures}
                   currentDataIndex={currentDataIndex}
                   isMainFocus={isMainFocus}
                   hasImage={hasImage}
@@ -765,7 +1005,7 @@ export function ServicePage({
         ) : (
           /* MOBILE */
           <div className="grid grid-cols-1 gap-4">
-            {offer.features.map((feat, idx) => {
+            {offerFeatures.map((feat, idx) => {
               const hasImage = idx === 0 || idx === 4;
 
               const imageIndex = idx === 0 ? 1 : 2;
@@ -837,7 +1077,7 @@ export function ServicePage({
               );
             })}
           </div>
-        )}
+        ))}
 
         {/* MOBILE MODAL */}
         {modalShouldRender && (
@@ -869,7 +1109,7 @@ export function ServicePage({
               <div className="absolute inset-0 z-0">
                 <Image
                   src={bentoImageSrc(serviceSlug, 1)}
-                  alt={offer.features[modalDataIndex]?.title ?? ""}
+                  alt={offerFeatures[modalDataIndex]?.title ?? ""}
                   fill
                   className="object-cover opacity-30"
                 />
@@ -887,11 +1127,11 @@ export function ServicePage({
 
               <div className="relative z-10 p-6 flex flex-col h-full justify-end overflow-y-auto pt-20">
                 <Heading as="h3" className="text-2xl text-white font-bold mb-4">
-                  {offer.features[modalDataIndex]?.title}
+                  {offerFeatures[modalDataIndex]?.title}
                 </Heading>
 
                 <p className="text-white/90 text-base leading-relaxed">
-                  {offer.features[modalDataIndex]?.desc}
+                  {offerFeatures[modalDataIndex]?.desc}
                 </p>
               </div>
             </div>
@@ -928,6 +1168,145 @@ export function ServicePage({
               ))}
             </dl>
           </div>
+        </Section>
+      )}
+
+      {/* =========================================================
+          FORMULES (optionnel)
+      ========================================================= */}
+      {formulas && (
+        <Section id="formules" className="bg-surface pb-16 md:pb-24">
+          <div className="text-center max-w-3xl mx-auto space-y-3 md:space-y-4 mb-10 md:mb-14">
+            <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block">
+              {formulas.subtitle}
+            </span>
+            <Heading as="h2" className="text-foreground text-3xl md:text-4xl">
+              {formulas.title}
+            </Heading>
+            {formulas.description && (
+              <Text className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                {parseInlineLinks(formulas.description, "formulas-desc")}
+              </Text>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
+            {formulas.items.map((item, idx) => (
+              <FadeIn key={item.title} delay={idx * 0.1}>
+                <div
+                  className={`
+                    h-full flex flex-col gap-5 p-6 md:p-8 rounded-2xl md:rounded-3xl border
+                    ${item.highlighted ? "bg-primary border-primary text-white shadow-2xl" : "bg-background border-border"}
+                  `}
+                >
+                  {item.badge && (
+                    <span
+                      className={`
+                        self-start text-xs font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full
+                        ${item.highlighted ? "bg-secondary text-white" : "bg-secondary/15 text-secondary-strong"}
+                      `}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+                  <Heading
+                    as="h3"
+                    className={`text-2xl md:text-3xl ${item.highlighted ? "text-white" : "text-foreground"}`}
+                  >
+                    {item.title}
+                  </Heading>
+                  <Text
+                    className={`text-base leading-relaxed ${item.highlighted ? "text-white/80" : "text-muted-foreground"}`}
+                  >
+                    {item.desc}
+                  </Text>
+                  {item.points && (
+                    <ul className="space-y-2.5">
+                      {item.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <CheckIcon />
+                          <span
+                            className={`text-sm md:text-base leading-relaxed ${item.highlighted ? "text-white/90" : "text-foreground"}`}
+                          >
+                            {point}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Link href={item.cta.href} className="mt-auto pt-2">
+                    <Button
+                      variant={item.highlighted ? "secondary" : "outline"}
+                      className={`w-full h-auto py-3.5 px-6 text-sm md:text-base font-bold whitespace-normal ${item.highlighted ? "text-white" : ""}`}
+                    >
+                      {item.cta.text}
+                    </Button>
+                  </Link>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          {formulas.note && (
+            <Text className="text-muted-foreground text-sm text-center max-w-3xl mx-auto mt-6 md:mt-8">
+              {parseInlineLinks(formulas.note, "formulas-note")}
+            </Text>
+          )}
+        </Section>
+      )}
+
+      {/* =========================================================
+          ETAPES (optionnel)
+      ========================================================= */}
+      {process && (
+        <Section id="etapes" className="bg-surface pb-16 md:pb-24">
+          <div className="text-center max-w-3xl mx-auto space-y-3 md:space-y-4 mb-10 md:mb-14">
+            <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block">
+              {process.subtitle}
+            </span>
+            <Heading as="h2" className="text-foreground text-3xl md:text-4xl">
+              {process.title}
+            </Heading>
+            {process.description && (
+              <Text className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                {parseInlineLinks(process.description, "process-desc")}
+              </Text>
+            )}
+          </div>
+
+          <ol
+            className={`
+              grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6
+              ${process.steps.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-4"}
+            `}
+          >
+            {process.steps.map((step, idx) => (
+              <li key={step.title} className="relative h-full flex flex-col gap-3 p-5 md:p-7 rounded-2xl bg-background border border-border">
+                  <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest">
+                    Étape {idx + 1}
+                  </span>
+                  <Heading as="h3" className="text-foreground text-lg md:text-xl font-bold leading-tight">
+                    {step.title}
+                  </Heading>
+                  <Text className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                    {step.desc}
+                  </Text>
+              </li>
+            ))}
+          </ol>
+
+          {process.cta && (
+            <div className="flex justify-center mt-10 md:mt-14">
+              <Link href={process.cta.href}>
+                <Button
+                  variant="secondary"
+                  className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+                >
+                  {process.cta.text}
+                </Button>
+              </Link>
+            </div>
+          )}
         </Section>
       )}
 
@@ -1008,8 +1387,8 @@ export function ServicePage({
       ========================================================= */}
       <TransitionTitle
         surtitle={benefits.subtitle}
-        line1="Vos"
-        line2="Bénéfices"
+        line1={benefits.transition?.line1 ?? "Vos"}
+        line2={benefits.transition?.line2 ?? "Bénéfices"}
       />
 
       {/* =========================================================
@@ -1252,6 +1631,77 @@ export function ServicePage({
       )}
 
       {/* =========================================================
+          CAS CLIENT (optionnel)
+      ========================================================= */}
+      {caseStudy && (
+        <Section id="cas-client" className="bg-surface pb-16 md:pb-24">
+          <div className="rounded-2xl md:rounded-3xl bg-primary text-white overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="p-6 md:p-10 lg:p-12 space-y-5">
+                <span className="text-secondary-soft text-xs font-mono font-bold uppercase tracking-widest block">
+                  {caseStudy.surtitle}
+                </span>
+                <Heading as="h2" className="text-white text-2xl md:text-4xl">
+                  {caseStudy.title}
+                </Heading>
+                <div className="space-y-3">
+                  {renderRichText(
+                    caseStudy.context,
+                    "case-context",
+                    "text-white/80 text-base md:text-lg leading-relaxed",
+                  )}
+                </div>
+                <ul className="space-y-2.5">
+                  {caseStudy.results.map((result) => (
+                    <li key={result} className="flex items-start gap-3">
+                      <span className="shrink-0 w-1.5 h-1.5 mt-2.5 rounded-full bg-secondary-soft" />
+                      <span className="text-white/90 text-sm md:text-base leading-relaxed">
+                        {result}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                {caseStudy.conclusion && (
+                  <Text className="text-white/80 text-sm md:text-base leading-relaxed">
+                    {caseStudy.conclusion}
+                  </Text>
+                )}
+                <Link href={caseStudy.cta.href} className="inline-flex">
+                  <Button
+                    variant="secondary"
+                    className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+                  >
+                    {caseStudy.cta.text}
+                  </Button>
+                </Link>
+                {caseStudy.note && (
+                  <Text className="text-white/60 text-xs md:text-sm">
+                    {caseStudy.note}
+                  </Text>
+                )}
+              </div>
+
+              <dl className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-px bg-white/10 border-t lg:border-t-0 lg:border-l border-white/10">
+                {caseStudy.stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-primary p-6 md:p-8 flex flex-col justify-center gap-1"
+                  >
+                    <dt className="order-2 text-white/70 text-sm md:text-base">
+                      {stat.label}
+                    </dt>
+                    <dd className="order-1 text-secondary-soft text-3xl md:text-5xl font-black">
+                      {stat.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </Section>
+      )}
+
+      {/* =========================================================
           5. CTA FINAL
       ========================================================= */}
       <FinalCTA
@@ -1328,9 +1778,13 @@ export function ServicePage({
                         className={`overflow-hidden transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
                       >
                         <div className="px-4 md:px-6 pb-4 md:pb-5 pt-0">
-                          <p className="text-white/70 text-sm md:text-base leading-relaxed border-t border-white/5 pt-3 md:pt-4">
-                            {item.answer}
-                          </p>
+                          <div className="border-t border-white/5 pt-3 md:pt-4 space-y-3 [&_a]:text-secondary-soft">
+                            {renderRichText(
+                              item.answer,
+                              `faq-${index}`,
+                              "text-white/70 text-sm md:text-base leading-relaxed",
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
