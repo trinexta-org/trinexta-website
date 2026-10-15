@@ -99,6 +99,9 @@ function stripRichText(text: string): string {
 export interface ServicePageProps {
   serviceSlug: string;
   canonicalPath?: string;
+  // Dossier d'images sous /images/services/ ; par defaut serviceSlug.
+  // Permet a une page de reprendre les visuels d'une autre page service.
+  imageSlug?: string;
 
   hero: {
     titlePart1: string;
@@ -622,6 +625,7 @@ function useMediaQuery(query: string) {
 export function ServicePage({
   serviceSlug,
   canonicalPath,
+  imageSlug,
   hero,
   problem,
   offer,
@@ -639,6 +643,7 @@ export function ServicePage({
   schemaOverride,
 }: ServicePageProps) {
   const breadcrumbPath = canonicalPath ?? `/${serviceSlug}`;
+  const mediaSlug = imageSlug ?? serviceSlug;
   const offerFeatures = offer.features ?? [];
 
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -768,7 +773,7 @@ export function ServicePage({
       <ViewportHero>
         <div className="absolute inset-0 z-0">
           <Image
-            src={`/images/services/${serviceSlug}/hero.avif`}
+            src={`/images/services/${mediaSlug}/hero.avif`}
             alt={`${hero.titlePart1} ${hero.titlePart2}`}
             fill
             quality={50}
@@ -898,7 +903,7 @@ export function ServicePage({
               }
             >
               <Image
-                src={`/images/services/${serviceSlug}/problem-1.jpg`}
+                src={`/images/services/${mediaSlug}/problem-1.jpg`}
                 alt="Problème informatique"
                 fill
                 sizes="(min-width: 1024px) 38vw, (min-width: 640px) 56vw, 75vw"
@@ -926,7 +931,7 @@ export function ServicePage({
               }
             >
               <Image
-                src={`/images/services/${serviceSlug}/problem-2.jpg`}
+                src={`/images/services/${mediaSlug}/problem-2.jpg`}
                 alt="Frustration informatique"
                 fill
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 60vw"
@@ -992,7 +997,7 @@ export function ServicePage({
         </div>
 
         {offer.details && offer.details.length > 0 && (
-          <ServiceTabs serviceSlug={serviceSlug} details={offer.details} />
+          <ServiceTabs serviceSlug={mediaSlug} details={offer.details} />
         )}
 
         {offerFeatures.length > 0 && (!isMobile ? (
@@ -1015,7 +1020,7 @@ export function ServicePage({
               return (
                 <BentoCell
                   key={`bento-slot-${gridPositionIndex}`}
-                  serviceSlug={serviceSlug}
+                  serviceSlug={mediaSlug}
                   features={offerFeatures}
                   currentDataIndex={currentDataIndex}
                   isMainFocus={isMainFocus}
@@ -1052,7 +1057,7 @@ export function ServicePage({
                   {hasImage && (
                     <>
                       <Image
-                        src={bentoImageSrc(serviceSlug, imageIndex)}
+                        src={bentoImageSrc(mediaSlug, imageIndex)}
                         alt={feat.title}
                         fill
                         className="object-cover"
@@ -1133,7 +1138,7 @@ export function ServicePage({
             >
               <div className="absolute inset-0 z-0">
                 <Image
-                  src={bentoImageSrc(serviceSlug, 1)}
+                  src={bentoImageSrc(mediaSlug, 1)}
                   alt={offerFeatures[modalDataIndex]?.title ?? ""}
                   fill
                   className="object-cover opacity-30"
@@ -1452,7 +1457,7 @@ export function ServicePage({
               >
                 <div className="absolute inset-0 w-full h-full">
                   <Image
-                    src={`/images/services/${serviceSlug}/benefit-${index + 1}.jpg`}
+                    src={`/images/services/${mediaSlug}/benefit-${index + 1}.jpg`}
                     alt={benefit.title}
                     fill
                     sizes="(min-width: 768px) 80vw, 100vw"
