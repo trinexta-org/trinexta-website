@@ -26,7 +26,7 @@ export const cybersecuriteData: ServicePageProps = {
 
   offer: {
     subtitle: "EDR + Intelligence Artificielle : Le bouclier moderne",
-    title: "Une protection automatisée, intelligente et infaillible",
+    title: "Une protection automatisée et surveillée en continu",
     description: "Notre solution ne se contente pas de 'chercher des virus'. Nous déployons une solution d'EDR (Endpoint Detection & Response) enrichie par l'Intelligence Artificielle. Contrairement à un antivirus classique qui attend qu'une menace soit identifiée pour agir, notre système surveille en permanence le comportement réel de vos machines pour détecter les anomalies en temps réel, même s'il s'agit d'une attaque totalement inédite.",
     features: [
       {

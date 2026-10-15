@@ -18,8 +18,8 @@ import { Button } from "@/components/ui/Button"
 import { FinalCTA } from "@/components/FinalCTA"
 
 export const metadata: Metadata = {
-    title: "Trinexta Studio - Création Web & SaaS",
-    description: "Développement de sites internet sur mesure. Plateformes et solutions web performantes conçues par notre entreprise.",
+    title: "Création de site web et application pour PME",
+    description: "TRINEXTA Studio conçoit des sites internet et des applications web sur mesure pour les TPE et PME : site vitrine, refonte, outil métier et référencement.",
     alternates: {
         canonical: "/trinexta-studio",
     },

@@ -44,6 +44,18 @@ export function PortableTextArticle({ value }: PortableTextArticleProps) {
         <p className="text-lg leading-relaxed text-foreground/80 mb-6 font-light">{children}</p>
       ),
 
+      // Le titre de l'article porte deja le h1 de la page : un h1 saisi dans Sanity descend en h2
+      h1: ({ children, value }) => {
+        const text = extractTextFromBlock(value);
+        return (
+          <h2
+            id={generateSlug(text)}
+            className="clear-both scroll-mt-32 pt-14 pb-4 text-3xl md:text-4xl font-black text-foreground border-b border-border mb-8 mt-4"
+          >
+            {children}
+          </h2>
+        );
+      },
       h2: ({ children, value }) => {
         const text = extractTextFromBlock(value);
         return (

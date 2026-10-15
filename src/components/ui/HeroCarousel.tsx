@@ -11,6 +11,8 @@ interface HeroCarouselProps<T> {
   staticBackground?: ReactNode
   overlays?: ReactNode
   renderSlide: (slide: T, index: number, isActive: boolean) => ReactNode
+  // Contenu fixe au-dessus des slides (ex. le h1 de la page, qui ne doit pas tourner avec elles)
+  header?: ReactNode
   footer?: ReactNode
   containerPadding?: string
   slideMinHeight?: string
@@ -23,6 +25,7 @@ export function HeroCarousel<T>({
   staticBackground,
   overlays,
   renderSlide,
+  header,
   footer,
   containerPadding = "py-10 md:py-14 lg:py-16",
   slideMinHeight = "min-h-[280px] sm:min-h-[260px] md:min-h-[300px]",
@@ -60,6 +63,7 @@ export function HeroCarousel<T>({
 
       <Container className={`relative z-10 w-full ${containerPadding}`}>
         <div className="max-w-5xl">
+          {header}
           <div className={`${slideMinHeight} relative w-full`}>
             {slides.map((slide, i) => {
               const isActive = i === current;
