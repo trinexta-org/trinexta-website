@@ -1,5 +1,3 @@
-import { FAQ_ESSENTIELLE } from "@/data/serenite-essentielle";
-
 export type OfferTag = 'technicien-sous-regie' | 'serenite' | 'services-annexes' | 'studio' | 'general';
 
 export const officialFaqs = [
@@ -15,17 +13,8 @@ export const officialFaqs = [
   },
   {
     question: "Combien ça coûte ?",
-    answer: "Nos offres démarrent à 79€ HT par poste et par mois, sans engagement de durée, et le premier mois est satisfait ou remboursé.\n\nLe tarif final dépend du périmètre : nombre de postes, niveau de support souhaité, services additionnels (sauvegarde, hébergement, etc.). Nous établissons toujours un devis clair et détaillé après une phase d'audit gratuite de votre environnement.",
+    answer: "Notre offre Sérénité se décline en deux formules : Sérénité Essentiel à 39,99 € HT par poste et par mois (engagement 12 mois) et Sérénité Complète à 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service.\n\nLe tarif final dépend du périmètre : nombre de postes, niveau de support souhaité, services additionnels (sauvegarde, hébergement, etc.). Nous établissons toujours un devis clair et détaillé après une étude de votre environnement.",
     tags: ['serenite', 'services-annexes'] as OfferTag[] 
-  },
-  {
-    ...FAQ_ESSENTIELLE,
-    tags: ['serenite'] as OfferTag[]
-  },
-  {
-    question: "Pourquoi pas d'engagement ? Où est le piège ?",
-    answer: "Il n'y a pas de piège. C'est un choix assumé.\n\nNous pensons que la fidélité d'un client doit se gagner chaque mois par la qualité du service, pas s'imposer par contrat. Si nous ne sommes pas à la hauteur, vous partez. C'est la meilleure garantie d'engagement que nous puissions vous donner du nôtre.",
-    tags: ['serenite'] as OfferTag[] 
   },
   {
     question: "Vous utilisez de l'IA pour répondre aux clients ?",

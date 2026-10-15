@@ -4,8 +4,8 @@ export const cloudData: ServicePageProps = {
   serviceSlug: "cloud-sauvegarde",
 
   hero: {
-    titlePart1: "Cloud &",
-    titlePart2: "Sauvegarde",
+    titlePart1: "Cloud & sauvegarde",
+    titlePart2: "pour TPE et PME en Essonne",
     description: "La donnée est le moteur de votre entreprise : si elle s'arrête, vous vous arrêtez. Trinexta modernise votre infrastructure pour vous offrir une disponibilité totale et une résilience à toute épreuve. Que ce soit via des solutions de stockage sécurisées, des accès distants optimisés ou des stratégies de sauvegarde avancées, nous construisons un socle numérique sur lequel vous pouvez bâtir votre croissance en toute confiance.",
     ctaText: "Sécuriser mes données",
     ctaHref: "/contact",
@@ -56,7 +56,7 @@ export const cloudData: ServicePageProps = {
     title: "Une infrastructure qui vous rend plus agile",
     items: [
       {
-        title: "Disponibilité garantie",
+        title: "Haute disponibilité",
         desc: "Vos données sont accessibles quand vous en avez besoin. Nos architectures sont conçues pour éliminer les points de défaillance uniques et assurer une continuité permanente.",
       },
       {

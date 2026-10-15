@@ -6,21 +6,22 @@ import { CasClientsHero } from "@/components/cas-clients/CasClientsHero";
 import { TransitionTitle } from "@/components/TransitionTitle";
 import { Reveal } from "@/components/ui/Reveal";
 import { FinalCTA } from "@/components/FinalCTA";
-import { caseClients } from "@/data/cas-clients";
+import { caseClients, featuredCaseClient } from "@/data/cas-clients";
+import { CasClientFeatured } from "@/components/cas-clients/CasClientFeatured";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export const metadata: Metadata = {
   title: "Cas clients",
   description:
-    "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
+    "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers des cas clients concrets : cybersécurité, modernisation, cloud et réponse à incident.",
   alternates: {
     canonical: "/cas-clients",
   },
   openGraph: {
     title: "Cas clients | TRINEXTA",
     description:
-      "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
+      "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers des cas clients concrets : cybersécurité, modernisation, cloud et réponse à incident.",
     url: "/cas-clients",
     type: "website",
     images: [
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cas clients | TRINEXTA",
     description:
-      "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers trois cas clients concrets.",
+      "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers des cas clients concrets : cybersécurité, modernisation, cloud et réponse à incident.",
     images: ["/images/og-default.png"],
   },
 };
@@ -65,12 +66,17 @@ export default function CaseClientsPage() {
 
       {/* CAS CLIENTS */}
       <Section className="pt-0 md:pt-0 lg:pt-0">
+        {featuredCaseClient && (
+          <Reveal className="mb-10 md:mb-14">
+            <CasClientFeatured item={featuredCaseClient} />
+          </Reveal>
+        )}
         <GridCards
           columns={3}
           mobileColumns={1}
           gap="gap-6 md:gap-8"
         >
-          {caseClients.map((item, i) => (
+          {caseClients.filter((item) => item !== featuredCaseClient).map((item, i) => (
             <Reveal
               key={item.slug}
               delay={i * 0.1}

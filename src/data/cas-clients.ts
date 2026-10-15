@@ -22,6 +22,8 @@ export interface CaseClient {
   heroImage: string
   cardImage: string
   metaDescription: string
+  /** Title SEO quand il differe du H1 (title). Le template ajoute " | TRINEXTA". */
+  seoTitle?: string
   cardChallenge: string
   cardResult: string
   title: string
@@ -30,6 +32,8 @@ export interface CaseClient {
   solutions: CaseClientService[]
   benefits: string[]
   metrics: CaseClientMetric[]
+  // Cas mis en vedette (accueil, haut de /cas-clients, première slide du hero)
+  featured?: { badge: string; teaser: string }
 }
 
 export const caseClientSectors = [
@@ -205,7 +209,7 @@ export const caseClients: CaseClient[] = [
         label: "Infogérance",
         href: "/infogerance",
         content:
-          "Mise à niveau des postes vers Windows 11 Pro pour activer BitLocker et la jonction Azure AD, puis adoption de l'Offre Essentielle pour la maintenance proactive et le prêt de PC en cas de panne.",
+          "Mise à niveau des postes vers Windows 11 Pro pour activer BitLocker et la jonction Azure AD, puis mise en place d'une maintenance proactive avec prêt de PC en cas de panne.",
       },
     ],
     benefits: [
@@ -219,7 +223,80 @@ export const caseClients: CaseClient[] = [
       { indicator: "Postes", before: "Windows Famille", after: "Windows 11 Pro" },
     ],
   },
+  {
+    slug: "piratage-sites-wordpress-ecommerce",
+    label: "Cas n°4",
+    featured: {
+      badge: "Nouveau · Réponse à incident",
+      teaser:
+        "Plusieurs sites piratés, dont une boutique en ligne, une compromission installée depuis des semaines : voici comment TRINEXTA a contenu l'attaque sans couper l'activité.",
+    },
+    clientName: "Entreprise francilienne",
+    sector: "commerce",
+    sectorLabel: "E-commerce",
+    size: "Plusieurs sites web",
+    heroImage: "/images/services/cybersecurite/hero.avif",
+    cardImage: "/images/services/cybersecurite/bento-1.jpg",
+    seoTitle: "Site WordPress piraté : cas client cybersécurité",
+    metaDescription:
+      "Découvrez comment TRINEXTA a analysé une compromission WordPress et e-commerce, isolé 63 fichiers malveillants et engagé la sécurisation des sites.",
+    cardChallenge:
+      "Plusieurs sites en dysfonctionnement, dont une boutique en ligne. Derrière les symptômes, une compromission installée depuis plusieurs semaines.",
+    cardResult:
+      "63 fichiers malveillants isolés, accès renforcés, principaux sites maintenus accessibles. La remédiation complète est en préparation.",
+    title:
+      "Cas client : intervention après le piratage de plusieurs sites WordPress et e-commerce",
+    context: [
+      "Une entreprise francilienne a constaté des dysfonctionnements sur plusieurs de ses sites internet, dont une boutique e-commerce. TRINEXTA a été sollicitée pour rechercher l'origine de l'incident et engager les premières mesures de sécurisation.",
+      "L'investigation a mis au jour des activités malveillantes remontant au 23 septembre 2026, des portes dérobées et des mécanismes de manipulation du référencement naturel.",
+      "L'enjeu : contenir la compromission sans couper les sites dont l'activité dépend, tout en conservant les éléments utiles à l'analyse.",
+    ],
+    challenges: [
+      "Dysfonctionnements sur plusieurs sites, dont une boutique en ligne.",
+      "Activités malveillantes présentes depuis plusieurs semaines.",
+      "Portes dérobées permettant un retour de l'attaquant.",
+      "Mécanismes de manipulation du référencement naturel installés sur les sites.",
+    ],
+    solutions: [
+      {
+        label: "Cybersécurité",
+        href: "/cybersecurite",
+        content:
+          "Recherche de l'origine de l'incident, mise en quarantaine de 63 fichiers malveillants avec conservation des éléments nécessaires à l'investigation, puis neutralisation des mécanismes malveillants identifiés.",
+      },
+      {
+        label: "Sécurisation des accès",
+        href: "/cybersecurite",
+        content:
+          "Renforcement des accès administratifs et renouvellement des identifiants sensibles pour fermer les portes d'entrée connues.",
+      },
+      {
+        label: "Sites web",
+        href: "/trinexta-studio",
+        content:
+          "Opérations initiales menées en maintenant les principaux sites accessibles, et préparation des vérifications nécessaires à une remédiation complète.",
+      },
+    ],
+    benefits: [
+      "Compromission contenue : les fichiers malveillants sont isolés et les mécanismes identifiés neutralisés.",
+      "Activité préservée : les principaux sites sont restés accessibles pendant les opérations initiales.",
+      "Base d'investigation conservée : les éléments utiles à l'analyse ont été préservés.",
+      "Étape suivante cadrée : les vérifications nécessaires à une remédiation complète sont en préparation.",
+    ],
+    metrics: [
+      { indicator: "Fichiers malveillants", before: "63 identifiés", after: "En quarantaine" },
+      { indicator: "Accès administratifs", before: "À sécuriser", after: "Renforcés" },
+      { indicator: "Principaux sites", before: "Dysfonctionnements", after: "Accessibles" },
+    ],
+  },
 ]
+
+export const featuredCaseClient = caseClients.find((item) => item.featured)
+
+// Ordre d'affichage : le cas en vedette d'abord
+export const caseClientsOrdered = featuredCaseClient
+  ? [featuredCaseClient, ...caseClients.filter((item) => item !== featuredCaseClient)]
+  : caseClients
 
 export function getCaseClientBySlug(slug: string) {
   return caseClients.find((item) => item.slug === slug)

@@ -53,11 +53,11 @@ export function SereniteIntro() {
           <div className="w-10 h-px bg-secondary/50" />
 
           <Text className="text-lg text-white/80 leading-relaxed">
-            Un logiciel de caisse qui bloque en plein service. Une messagerie inaccessible. Un poste lent. Ce ne sont pas de simples soucis. Ce sont des blocages concrets qui ralentissent votre entreprise.
+            Un ordinateur en panne, un virus, un logiciel bloqué ou une messagerie inaccessible : chaque incident freine votre entreprise.
           </Text>
 
           <p className="py-6 px-6 italic text-white/90 text-sm leading-relaxed bg-white/[0.02] rounded-2xl">
-            Avec l&apos;offre Sérénité, bénéficiez d&apos;un accompagnement informatique complet : support illimité, maintenance proactive et cybersécurité. Un seul interlocuteur pour centraliser vos besoins.
+            Avec TRINEXTA Sérénité, vos ordinateurs sont protégés, supervisés et entretenus. Pour déléguer davantage, la formule Complète prend aussi en charge l&apos;assistance quotidienne de vos collaborateurs.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export function SereniteIntro() {
           <div
             className={`
               absolute rounded-2xl overflow-hidden shadow-xl
-              transition-all duration-700 ease-[cubic-bezier(0.34,1.3,0.64,1)]
+              transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
               ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}
             `}
             style={{
@@ -91,7 +91,7 @@ export function SereniteIntro() {
           <div
             className={`
               absolute rounded-2xl overflow-hidden shadow-2xl
-              transition-all duration-700 ease-[cubic-bezier(0.34,1.3,0.64,1)]
+              transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
               pointer-events-none
               ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-12"}
             `}

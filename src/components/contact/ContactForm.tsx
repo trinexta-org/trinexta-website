@@ -10,6 +10,13 @@ import { contactFormSchema, ContactFormData, CONTACT_TYPES, SECTEURS, TAILLES, U
 import { pushGtmEvent, trackLeadConversion } from "@/lib/gtm";
 import { isOffreSlug, LIBELLES_OFFRES } from "@/data/offres";
 
+function taillePourPostes(postes: number): (typeof TAILLES)[number] {
+  if (postes < 10) return "1-9";
+  if (postes < 50) return "10-49";
+  if (postes < 250) return "50-249";
+  return "250+";
+}
+
 export default function ContactForm() {
   const {
     register,
@@ -33,6 +40,18 @@ export default function ContactForm() {
       setValue("offre", offre);
       setValue("type", "devis");
     }
+    // Calculateur Sérénité : nombre de postes transmis par `?postes=`
+    const postes = Number(params.get("postes"));
+    if (Number.isInteger(postes) && postes > 0 && postes < 10000) {
+      setValue("taille", taillePourPostes(postes));
+      if (!getValues("message")) {
+        const offreLibelle = isOffreSlug(offre) ? LIBELLES_OFFRES[offre] : "Sérénité";
+        setValue(
+          "message",
+          `Bonjour, je souhaite un devis ${offreLibelle} pour ${postes} poste${postes > 1 ? "s" : ""}.`
+        );
+      }
+    }
     if (auditUrl) {
       const auditScore = params.get("audit_score");
       const score = auditScore ? ` (score ${auditScore}/100)` : "";
@@ -41,7 +60,7 @@ export default function ContactForm() {
         `Bonjour, j'ai réalisé l'audit SEO gratuit de la page ${auditUrl}${score}. Je souhaite en discuter, notamment l'audit approfondi et les pistes pour améliorer ma visibilité.`
       );
     }
-  }, [setValue]);
+  }, [setValue, getValues]);
 
   const [serverMessage, setServerMessage] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);

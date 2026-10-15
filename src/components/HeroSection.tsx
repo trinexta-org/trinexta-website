@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import { preload } from "react-dom";
 import Link from "next/link";
 import { HeroCarousel } from "@/components/ui/HeroCarousel";
-import { Heading, Text } from "@/components/ui/Typography";
+import { Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
-import { homeHeroSlides } from "@/data/heroes";
+import { homeHeroH1, homeHeroSlides } from "@/data/heroes";
 import { CoffeeShield } from "@/components/serenite/CoffeeShield";
 
 export function HeroSection() {
@@ -48,6 +48,11 @@ export function HeroSection() {
         />
       }
       overlays={<div className="hero-scrim" aria-hidden="true" />}
+      header={
+        <h1 className="mb-4 text-sm md:text-base font-bold uppercase tracking-widest text-secondary-soft drop-shadow-md text-balance">
+          {homeHeroH1}
+        </h1>
+      }
       renderSlide={(slide, index, isActive) => (
         <div className="flex items-center gap-8 lg:gap-12">
         <div className="min-w-0 flex-1">
@@ -56,9 +61,8 @@ export function HeroSection() {
               {slide.badge}
             </span>
           )}
-          <Heading
-            as={isActive ? "h1" : "h2"}
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-white text-balance"
+          <p
+            className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-white text-balance"
           >
             {slide.title.split(" ").map((word, i) => {
               const targetKeywords = [
@@ -90,7 +94,7 @@ export function HeroSection() {
                 </React.Fragment>
               );
             })}
-          </Heading>
+          </p>
           <Text className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-md text-white/90 text-balance">
             {slide.subtitle}
           </Text>

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { SERENITE_DEVIS_HREF, SERENITE_POUR_QUI } from "@/data/serenite"
 
 const targets = [
     {
@@ -31,26 +32,35 @@ const targets = [
 
 export function SereniteTargets() {
     return (
-        <div className="relative w-full overflow-hidden py-12">
-            <div className="flex w-full overflow-hidden">
-                <div
-                    className="flex gap-6 animate-marquee"
+        <div className="relative w-full overflow-hidden">
+            <div className="flex w-full overflow-hidden py-4">
+                <ul
+                    className="flex gap-6 animate-marquee motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:w-full"
                     style={{ animationDuration: "30s" }}
                 >
-                    {[...targets, ...targets].map((target, i) => (
-                        <TargetCard key={i} {...target} />
+                    {targets.map((target) => (
+                        <TargetCard key={target.role} {...target} />
                     ))}
-                </div>
+                    {/* Copie pour la boucle du défilant : masquée aux lecteurs d'écran et sans animation */}
+                    {targets.map((target) => (
+                        <TargetCard key={`${target.role}-copie`} {...target} duplicate />
+                    ))}
+                </ul>
             </div>
 
-            <div className="mt-16 text-center px-6">
-                <p className="text-primary/70 text-lg">
-                    Vous avez un doute sur l&apos;éligibilité de votre structure ?{" "}
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+                <p className="rounded-2xl border border-secondary/20 bg-surface-strong p-5 text-primary/80 leading-relaxed">{SERENITE_POUR_QUI.essentiel}</p>
+                <p className="rounded-2xl border border-secondary/20 bg-surface-strong p-5 text-primary/80 leading-relaxed">{SERENITE_POUR_QUI.complete}</p>
+            </div>
+
+            <div className="mt-8 text-center">
+                <p className="text-primary/75 text-lg">
+                    Un doute sur l&apos;éligibilité de votre structure ?{" "}
                     <Link
-                        href="/contact"
-                        className="text-secondary-strong font-bold hover:underline transition-all"
+                        href={SERENITE_DEVIS_HREF}
+                        className="text-primary font-bold underline decoration-secondary underline-offset-4 hover:decoration-primary transition-colors"
                     >
-                        Contactez-nous pour une étude personnalisée.
+                        Demander mon devis Sérénité
                     </Link>
                 </p>
             </div>
@@ -58,13 +68,16 @@ export function SereniteTargets() {
     )
 }
 
-function TargetCard({ role, spec, image }: { role: string; spec: string; image: string }) {
+function TargetCard({ role, spec, image, duplicate = false }: { role: string; spec: string; image: string; duplicate?: boolean }) {
     return (
-        <div className="w-72 shrink-0 rounded-2xl border border-secondary/20 bg-surface-strong overflow-hidden shadow-xl">
+        <li
+            aria-hidden={duplicate || undefined}
+            className={`w-72 shrink-0 rounded-2xl border border-secondary/20 bg-surface-strong overflow-hidden shadow-lg ${duplicate ? "motion-reduce:hidden" : ""}`}
+        >
             <div className="h-40 w-full relative">
                 <Image
                     src={image}
-                    alt={role}
+                    alt={duplicate ? "" : role}
                     fill
                     className="object-cover grayscale-[20%] brightness-90 contrast-110"
                     sizes="(max-width: 768px) 100vw, 288px"
@@ -72,9 +85,9 @@ function TargetCard({ role, spec, image }: { role: string; spec: string; image: 
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
             </div>
             <div className="p-6 pt-4">
-                <h4 className="font-bold text-primary text-lg mb-1">{role}</h4>
-                <p className="text-secondary-strong text-sm font-medium leading-relaxed">{spec}</p>
+                <h3 className="font-bold text-primary text-lg mb-1">{role}</h3>
+                <p className="text-primary/75 text-sm font-medium leading-relaxed">{spec}</p>
             </div>
-        </div>
+        </li>
     )
 }

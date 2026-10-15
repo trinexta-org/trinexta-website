@@ -6,142 +6,335 @@ export const infogeranceData: ServicePageProps = {
 
   hero: {
     titlePart1: "Infogérance informatique",
-    titlePart2: "à Évry-Courcouronnes",
-    description: "Pour les TPE et PME d'Évry-Courcouronnes et de l'Essonne, l'informatique ne doit plus être une contrainte quotidienne. Trinexta assure une infogérance complète et réactive : supervision, maintenance, support et sécurité du parc, avec un cadre clair pour éliminer les surprises budgétaires et techniques.",
-    ctaText: "Être rappelé pour l'infogérance",
+    titlePart2: "pour TPE et PME en Essonne",
+    description:
+      "Votre informatique fonctionne. Votre entreprise avance. Basée à Évry-Courcouronnes, TRINEXTA gère, maintient et sécurise le parc informatique des TPE et PME de l'Essonne et d'Île-de-France, avec un interlocuteur qui connaît votre entreprise.\n\nL'humain avant les tickets.",
+    ctaText: "Demander une étude de mon parc informatique",
     ctaHref: "/contact",
+    secondaryCta: {
+      text: "Découvrir l'offre Sérénité",
+      href: "/serenite",
+    },
   },
 
   problem: {
-    subtitle: "Fini les pertes de temps et d'énergie",
-    title: "Quand on dirige une entreprise, on n'a ni le temps ni l'envie de gérer les problèmes informatiques.",
-    description: "Postes qui ralentissent, mises à jour repoussées, conflits logiciels, périphériques capricieux ou incidents qui surviennent au pire moment (souvent juste avant une échéance importante)… ces petits dysfonctionnements accumulés finissent par coûter une fortune en temps de travail, en énergie mentale et en productivité réelle. Si vous passez plus de temps à dépanner votre outil informatique qu'à développer votre chiffre d'affaires, c'est que votre infrastructure actuelle est devenue un poids plutôt qu'un moteur. L'informatique doit être transparente : elle doit fonctionner sans que vous ayez à y penser.",
+    subtitle: "Pourquoi externaliser votre informatique",
+    transition: {
+      line1: "Une informatique",
+      line2: "qui ne freine plus",
+    },
+    title: "Votre informatique ne doit pas ralentir votre activité",
+    description:
+      "Un poste qui refuse de démarrer, une messagerie inaccessible, un logiciel métier bloqué : derrière chaque panne, des collaborateurs ralentis et parfois des clients qui attendent.\n\nPour une TPE ou une PME, un service informatique interne n'est pas toujours justifié. L'infogérance informatique permet d'externaliser tout ou partie de cette gestion auprès d'un prestataire spécialisé, dans un cadre de services défini avec vous.\n\nVous gardez la maîtrise de vos outils et de vos décisions. Nous prenons en charge leur gestion quotidienne.",
     painPoints: [
-      "Interruptions d'activité constantes liées à des pannes imprévisibles et récurrentes.",
-      "Perte de rentabilité due à des équipements obsolètes, lents ou mal configurés qui brident vos équipes.",
-      "Stress permanent lié à la gestion des sauvegardes, à la sécurité des données et à la conformité.",
-      "Temps précieux perdu à essayer de 'bricoler' une solution soi-même au lieu de se concentrer sur son métier.",
+      "Pannes et lenteurs qui interrompent le travail des équipes",
+      "Un salarié qui dépanne ses collègues au lieu de faire son métier",
+      "Mises à jour et sauvegardes suivies sans méthode",
+      "Aucune visibilité sur l'état du parc et les risques",
     ],
   },
 
   offer: {
-    subtitle: "Une plateforme puissante et discrète",
-    title: "Ce que l'on fait concrètement pour votre sérénité",
-    description: "Notre approche ne repose pas sur le hasard, mais sur une surveillance constante. Nous installons un agent de supervision de pointe sur chaque poste. Cet outil discret mais redoutablement efficace nous transmet en temps réel l'état de santé de vos machines (processeur, mémoire, disque, température, santé du système) pour nous permettre d'agir préventivement, souvent avant même que vous ne perceviez le moindre ralentissement.",
-    features: [
+    subtitle: "Nos services d'infogérance",
+    transition: {
+      line1: "Ce que nous",
+      line2: "prenons en charge",
+    },
+    title: "Nos services d'infogérance informatique pour les entreprises",
+    description:
+      "Support, maintenance informatique d'entreprise, sécurité, gestion de parc informatique : chaque service s'intègre au périmètre défini avec vous.",
+    details: [
       {
-        title: "Mises à jour automatisées et sécurisées",
-        desc: "L'oubli des mises à jour est la porte ouverte aux vulnérabilités. Nous prenons en charge la gestion complète des correctifs Windows, de vos applications métier et de vos pilotes matériels. Tout se déroule en arrière-plan, sans dépendre d'une action manuelle de vos collaborateurs. Le résultat est mathématique : un parc informatique systématiquement à jour, plus sécurisé, plus performant et plus stable dans la durée.",
+        title: "Support et assistance utilisateurs",
+        intro:
+          "Vos collaborateurs doivent pouvoir travailler sans devenir techniciens. Selon votre contrat, nous prenons en charge les incidents du quotidien et suivons chaque demande jusqu'à sa résolution.",
+        items: [
+          "Assistance par téléphone, e-mail et prise en main à distance",
+          "Diagnostic des incidents Windows et applications courantes",
+          "Installation et configuration des logiciels professionnels",
+          "Préparation du poste des nouveaux collaborateurs",
+          "Suivi des demandes jusqu'à résolution ou transmission",
+          "Coordination avec les éditeurs de logiciels, selon le périmètre",
+        ],
+        link: {
+          text: "Découvrir notre support informatique",
+          href: "/support-informatique",
+        },
       },
       {
-        title: "Maintenance préventive intelligente",
-        desc: "Réparer une panne est toujours plus coûteux et perturbant que de l'éviter. Nous effectuons un nettoyage régulier, une vérification des processus critiques et une optimisation proactive de vos postes. Nous entretenons vos machines en amont pour limiter drastiquement les dysfonctionnements, les bugs, les ralentissements liés à l'usure logicielle et les pannes évitables qui paralysent votre quotidien professionnel.",
+        title: "Supervision et maintenance préventive",
+        intro:
+          "Une informatique bien entretenue demande moins d'interventions d'urgence. Nous suivons l'état des équipements couverts avec NinjaOne, notre outil professionnel de supervision et de gestion à distance.",
+        items: [
+          "Surveillance des indicateurs de santé des postes",
+          "Détection des alertes et anomalies système",
+          "Suivi des mises à jour Windows et logiciels compatibles",
+          "Contrôle de la mémoire, du processeur et du stockage",
+          "Repérage des équipements qui se dégradent",
+          "Déploiement à distance de correctifs validés",
+        ],
+        note:
+          "La supervision permet de repérer certaines anomalies en amont. Elle réduit les interruptions évitables, sans supprimer tout risque de panne.",
       },
       {
-        title: "Gestion proactive des alertes techniques",
-        desc: "Notre plateforme ne dort jamais. Dès qu'un composant montre un signe de faiblesse, qu'un comportement anormal est détecté ou qu'un disque dur commence à saturer, une alerte est immédiatement générée dans nos outils. Cela nous permet d'intervenir à distance avec précision, bien avant qu'une panne ne vienne bloquer réellement votre activité. Vous passez d'une gestion subie à une gestion maîtrisée.",
+        title: "Cybersécurité et protection des postes",
+        intro:
+          "Les TPE et PME sont aussi exposées à l'hameçonnage, aux logiciels malveillants et aux rançongiciels. Selon l'offre souscrite, nous intégrons la protection de vos postes à la gestion informatique.",
+        items: [
+          "Déploiement et administration de l'EDR SentinelOne",
+          "Surveillance des alertes de sécurité des postes couverts",
+          "Gestion des correctifs de sécurité",
+          "Renforcement de la configuration des postes",
+          "Sécurisation des accès professionnels",
+          "Suivi des incidents de sécurité dans le périmètre prévu",
+        ],
+        link: {
+          text: "Découvrir nos solutions de cybersécurité",
+          href: "/cybersecurite",
+        },
       },
       {
-        title: "Inventaire complet et suivi du parc",
-        desc: "Comment prendre les bonnes décisions d'équipement si vous ne savez pas exactement ce que vous avez ? Nous tenons un inventaire vivant de votre parc : matériel, logiciels, versions installées, dates d'achat et licences. Cette cartographie précise facilite vos prises de décision, vous permet d'anticiper le renouvellement du matériel et garantit la conformité logicielle de votre entreprise à tout moment.",
+        title: "Gestion du parc informatique",
+        intro:
+          "Combien d'ordinateurs, quelles licences actives, quels équipements à remplacer ? Une bonne gestion de parc informatique commence par un inventaire fiable, qui facilite vos arbitrages budgétaires.",
+        items: [
+          "Inventaire des ordinateurs et de leurs caractéristiques",
+          "Suivi des systèmes et logiciels installés",
+          "Identification des équipements vieillissants",
+          "Préparation et configuration des nouveaux postes",
+          "Accompagnement des arrivées et départs",
+          "Conseil sur le renouvellement du matériel",
+        ],
       },
       {
-        title: "Déploiement et support à distance",
-        desc: "Besoin d'installer un logiciel sur cinq postes différents ou de modifier un paramètre de sécurité global ? Nous le faisons à distance, sans aucun déplacement physique et sans immobiliser vos équipes. C'est plus rapide, beaucoup plus fluide pour vos collaborateurs, et cela garantit une homogénéité de configuration sur l'ensemble de votre flotte informatique, assurant ainsi une meilleure performance globale.",
+        title: "Microsoft 365 et messagerie",
+        intro:
+          "Exchange Online, Teams, OneDrive, SharePoint : un défaut de configuration peut perturber la collaboration et exposer des données. Nous administrons et sécurisons votre environnement Microsoft 365.",
+        items: [
+          "Création, modification et suppression des comptes",
+          "Attribution et suivi des licences",
+          "Configuration des messageries professionnelles",
+          "Mise en place de l'authentification multifacteur",
+          "Gestion des accès et autorisations",
+          "Gestion des appareils avec Microsoft Intune, selon le besoin",
+        ],
+        note: "Ces prestations sont intégrées ou proposées en complément selon les services retenus.",
+        link: {
+          text: "Découvrir notre accompagnement Microsoft 365",
+          href: "/microsoft-365",
+        },
+      },
+      {
+        title: "Sauvegarde et continuité",
+        intro:
+          "Avoir une sauvegarde ne suffit pas : il faut savoir ce qui est protégé, à quelle fréquence et comment restaurer. Nous évaluons, mettons en place et suivons votre stratégie de sauvegarde.",
+        items: [
+          "Identification des données critiques",
+          "Choix des solutions adaptées",
+          "Définition des objectifs de restauration",
+          "Contrôles réguliers des sauvegardes",
+        ],
+        note: "Capacité et modalités de restauration sont définies selon votre environnement et votre contrat.",
+        link: {
+          text: "Découvrir nos solutions Cloud et Sauvegarde",
+          href: "/cloud-sauvegarde",
+        },
       },
     ],
   },
 
-  localSeo: {
-    subtitle: "Ancrage local",
-    title: "Infogérance pour les PME d'Évry-Courcouronnes et de l'Essonne",
-    description: "Nous intervenons auprès des dirigeants qui veulent un parc stable, des postes suivis et un partenaire joignable quand l'activité ne peut pas attendre. Pour les incidents du quotidien, notre [support informatique](/support-informatique) complète naturellement votre contrat d'infogérance.",
+  formulas: {
+    subtitle: "Une offre à votre taille",
+    title: "Une infogérance adaptée à la taille de votre entreprise",
     items: [
       {
-        title: "Zone d'intervention",
-        desc: "Évry-Courcouronnes, Corbeil-Essonnes, Ris-Orangis, le centre Essonne et les sites franciliens suivis à distance.",
+        badge: "Offre packagée",
+        title: "TRINEXTA Sérénité",
+        desc: "Supervision, maintenance préventive, protection des postes et, selon la formule, assistance aux utilisateurs. Deux formules par poste, dès 39,99 € HT/poste/mois.",
+        points: [
+          "Prestations et conditions précisées avant souscription",
+          "Formule choisie selon votre nombre de collaborateurs",
+          "Aucun frais de mise en service",
+        ],
+        cta: {
+          text: "Comparer les offres TRINEXTA Sérénité",
+          href: "/serenite",
+        },
+        highlighted: true,
       },
       {
-        title: "Profils accompagnés",
-        desc: "TPE, PME, commerces, cabinets et équipes de bureau qui n'ont pas toujours un responsable informatique interne.",
-      },
-      {
-        title: "Sujets récurrents",
-        desc: "Postes lents, mises à jour repoussées, sauvegardes mal suivies, incidents utilisateurs et manque de visibilité sur le parc.",
-      },
-      {
-        title: "Démarrage",
-        desc: "On cartographie vos postes, vos logiciels critiques et vos risques avant de définir un périmètre d'infogérance utile.",
+        badge: "Sur mesure",
+        title: "Environnements plus complexes",
+        desc: "Plusieurs sites, serveurs, applications spécifiques ou contraintes métier : nous étudions un accompagnement personnalisé.",
+        points: [
+          "Gestion du parc et administration des systèmes",
+          "Coordination de vos prestataires",
+          "Cybersécurité et pilotage informatique",
+          "Périmètre défini après analyse de vos besoins",
+        ],
+        cta: {
+          text: "Obtenir une proposition personnalisée",
+          href: "/contact",
+        },
       },
     ],
-    ctaText: "Évaluer mon parc",
+    note: "Les tarifs, prestations incluses et conditions d'engagement sont détaillés sur la page [de l'offre Sérénité](/serenite).",
+  },
+
+  process: {
+    subtitle: "Reprise de votre parc",
+    title: "Comment se déroule la reprise de votre parc informatique ?",
+    description:
+      "Changer de prestataire ou démarrer une première infogérance demande de la méthode. Nous organisons la transition progressivement, selon vos contraintes.",
+    steps: [
+      {
+        title: "Comprendre votre environnement",
+        desc: "Nous échangeons avec votre direction ou votre référent pour identifier équipements, applications essentielles et difficultés.",
+      },
+      {
+        title: "Réaliser l'état des lieux",
+        desc: "Inventaire, versions des systèmes, accès administratifs, protections et sauvegardes : les anomalies sont documentées et priorisées.",
+      },
+      {
+        title: "Déployer et organiser la transition",
+        desc: "Après validation, nous déployons les outils de gestion et de sécurité, puis fixons canaux de support et interlocuteurs.",
+      },
+      {
+        title: "Assurer le suivi",
+        desc: "Supervision, maintenance, assistance et suivi des actions : la stabilité de votre environnement progresse, avec plus de visibilité.",
+      },
+    ],
+    cta: {
+      text: "Organiser un premier échange avec TRINEXTA",
+      href: "/contact",
+    },
+  },
+
+  localSeo: {
+    subtitle: "Proximité en Essonne",
+    title: "Votre prestataire informatique à Évry-Courcouronnes",
+    description:
+      "TRINEXTA dispose d'un bureau au 7 rue Montespan, 91000 Évry-Courcouronnes, au cœur de l'Essonne. Nous accompagnons les entreprises du Grand Paris Sud et, plus largement, l'infogérance en Île-de-France.\n\nPour les incidents du quotidien, notre [support informatique](/support-informatique) complète votre contrat d'infogérance.",
+    items: [
+      {
+        title: "Communes couvertes",
+        desc: "Évry-Courcouronnes, Corbeil-Essonnes, Ris-Orangis, Bondoufle, Lisses, Grigny et communes voisines, puis le reste de l'Essonne et de l'Île-de-France.",
+      },
+      {
+        title: "À distance et sur site",
+        desc: "L'essentiel du support et de la supervision se fait à distance. Les déplacements sont organisés selon les besoins et le contrat.",
+      },
+      {
+        title: "Des PME aux réalités différentes",
+        desc: "Un cabinet comptable, un commerce ou une entreprise du bâtiment n'ont pas les mêmes contraintes. Nous adaptons l'accompagnement.",
+      },
+      {
+        title: "Un interlocuteur proche",
+        desc: "La proximité facilite les échanges avec les dirigeants et la préparation des interventions sur site.",
+      },
+    ],
+    ctaText: "Demander une étude de mon parc",
     ctaHref: "/contact",
   },
 
   benefits: {
-    subtitle: "La différence Trinexta",
-    title: "De la réaction à l'anticipation proactive",
+    subtitle: "Pourquoi choisir TRINEXTA",
+    transition: {
+      line1: "Pourquoi",
+      line2: "TRINEXTA",
+    },
+    title: "Pourquoi choisir TRINEXTA pour votre infogérance ?",
     items: [
       {
-        title: "Surveillance continue 24/7",
-        desc: "Fini l'intervention uniquement quand la panne est là et que tout le monde est bloqué. Nous surveillons vos systèmes en permanence et de façon totalement automatisée. Nos experts ont une vision d'ensemble de votre santé informatique, permettant une réactivité que seul un partenaire dédié peut offrir.",
+        title: "Un accompagnement humain",
+        desc: "Des échanges directs, des explications compréhensibles et un suivi clair. Vos collaborateurs expliquent leur problème sans vocabulaire technique. L'humain avant les tickets guide notre relation client.",
       },
       {
-        title: "Gestion experte des mises à jour",
-        desc: "Les mises à jour système sont complexes et sources de conflits. Elles ne sont plus laissées au hasard ni à la responsabilité des utilisateurs. Elles sont rigoureusement suivies, testées et gérées par nos experts pour garantir la compatibilité totale avec vos outils métier.",
+        title: "Une approche préventive",
+        desc: "Grâce à la supervision et au suivi du parc, nous identifions les anomalies récurrentes, anticipons la maintenance et vous conseillons sur les améliorations utiles.",
       },
       {
-        title: "Intervention en amont (Anticipation)",
-        desc: "Nous ne courons pas après les problèmes, nous les stoppons avant qu'ils ne surviennent. Nous agissons dès les premiers signaux faibles, avant même que la panne ne vienne interrompre vos services. C'est la clé pour maintenir un niveau de productivité constant sans stress technique.",
+        title: "Des responsabilités claires",
+        desc: "Prestations incluses, demandes hors contrat, modalités de support et d'engagement : chaque élément est compréhensible avant le démarrage.",
       },
       {
-        title: "Coûts lissés et maîtrisés",
-        desc: "Le dépannage à l'acte est par nature imprévisible et souvent très coûteux au moment où vous en avez le plus besoin. Avec l'infogérance Trinexta, votre coût informatique devient clair, lisse et prévisible sur l'année. Vous transformez une charge variable dangereuse en un investissement fixe et maîtrisé, sans aucune mauvaise surprise budgétaire.",
+        title: "Un partenaire qui suit votre évolution",
+        desc: "Recrutements, renouvellement du parc, Microsoft 365, sécurité : nous vous accompagnons quand vos besoins changent.",
       },
     ],
   },
 
   faq: [
     {
-      question: "Est-ce que je garde le contrôle sur mes ordinateurs ?",
-      answer: "Oui, absolument. Nous ne prenons pas le contrôle sans raison. L'agent de supervision est conçu pour être invisible. Trinexta intervient en arrière-plan et nous ne vous sollicitons que pour ce qui est réellement critique ou si une action nécessite votre validation. Vous restez le propriétaire et le maître de votre infrastructure.",
+      question: "Qu'est-ce que l'infogérance informatique ?",
+      answer:
+        "C'est confier à un prestataire externe tout ou partie de la gestion de votre système informatique : maintenance des postes, assistance aux utilisateurs, supervision, cybersécurité, administration de certains services. Le périmètre dépend du contrat et de vos besoins.",
     },
     {
-      question: "Est-ce que ça fonctionne aussi pour les postes en télétravail ?",
-      answer: "Oui. Aujourd'hui, le télétravail est la norme. Dès lors qu'un poste est connecté à Internet, il est intégré à notre périmètre de supervision. Nous pouvons superviser, maintenir et sécuriser le poste de votre collaborateur, qu'il soit au bureau, à domicile ou en déplacement.",
+      question: "Quelle est la différence entre maintenance informatique et infogérance ?",
+      answer:
+        "La maintenance vise surtout à entretenir et réparer des équipements. L'infogérance organise dans la durée la gestion de votre environnement informatique, en associant support, supervision, maintenance, sécurité et conseil.",
     },
     {
-      question: "Combien de postes peut-on gérer avec Trinexta ?",
-      answer: "Nous accompagnons les structures dès 1 poste jusqu'aux PME de plus grande taille. Notre force est l'adaptabilité : nous avons conçu nos processus pour offrir une qualité de service de haut niveau, que vous soyez un indépendant ou une structure en forte croissance.",
+      question: "Combien coûte une prestation d'infogérance pour une PME ?",
+      answer:
+        "Le tarif dépend du nombre de postes, des services inclus, du niveau de support et de la complexité de l'environnement. Les tarifs et prestations de nos offres standardisées sont détaillés sur notre page Sérénité. Pour un environnement spécifique, nous établissons une proposition personnalisée.\n\n[Consulter les offres Sérénité](/serenite)",
     },
     {
-      question: "En combien de temps intervenez-vous en cas de problème critique ?",
-      answer: "La réactivité est gravée dans notre ADN. Les incidents sont classés par criticité et pris en charge en priorité via notre support à distance. Dans l'immense majorité des cas, les problèmes sont résolus en quelques minutes, sans aucune interruption notable de votre activité.",
+      question: "Faut-il s'engager sur une durée minimale ?",
+      answer:
+        "Cela dépend de l'offre et des prestations choisies : certaines formules prévoient une durée minimale, d'autres non. Durée, renouvellement et résiliation sont communiqués avant la signature.",
     },
     {
-      question: "Y a-t-il un engagement de durée contraignant ?",
-      answer: "Non. Notre approche est basée sur la satisfaction client et la confiance mutuelle. Nos contrats sont conçus pour être flexibles, car nous savons que la vie d'une TPE/PME peut évoluer rapidement. Nous préférons vous garder parce que le service est excellent, pas parce qu'un contrat vous y oblige.",
+      question: "L'infogérance est-elle adaptée à une entreprise de moins de 10 salariés ?",
+      answer:
+        "Oui. Une petite entreprise a besoin d'un support fiable et d'une protection adaptée, même sans service informatique interne. Nous adaptons le niveau de service à votre organisation.",
     },
     {
-      question: "Est-ce que l'infogérance est incluse dans l'offre Sérénité ?",
-      answer: "Oui, c'est l'essence même de notre offre Sérénité, proposée à partir de 79 € HT/mois par poste. Tout est inclus : surveillance 24/7, maintenance proactive, gestion des mises à jour et support illimité. C'est le pack complet pour transformer votre informatique en un support fiable et performant.",
+      question: "Pouvez-vous intervenir sur des ordinateurs en télétravail ?",
+      answer:
+        "Oui, si les équipements sont compatibles avec nos outils de gestion et disposent des accès nécessaires. Une grande partie du support, de la supervision et de la maintenance se fait à distance.",
     },
     {
-      question: "Comment gérez-vous la sécurité des données sensibles ?",
-      answer: "La sécurité est au cœur de notre approche. Toutes nos interventions, qu'elles soient de maintenance ou de support, respectent les normes les plus strictes. Nous appliquons des protocoles de chiffrement et de contrôle d'accès rigoureux pour garantir que vos données restent confidentielles et protégées en toute circonstance.",
+      question: "Intervenez-vous directement dans les locaux des entreprises ?",
+      answer:
+        "Oui, nous organisons des interventions sur site en Essonne et en Île-de-France. Leur disponibilité, leur facturation éventuelle et leurs modalités dépendent de l'offre souscrite et de votre localisation.",
     },
     {
-      question: "Pouvez-vous gérer le renouvellement de mon matériel ?",
-      answer: "Oui, grâce à l'inventaire que nous tenons, nous sommes en mesure de vous conseiller sur le renouvellement de votre parc. Nous vous aidons à choisir le matériel le plus adapté à vos besoins réels, évitant ainsi les surcoûts inutiles tout en garantissant la performance.",
+      question: "Pouvez-vous reprendre un parc déjà géré par un autre prestataire ?",
+      answer:
+        "Oui. Nous étudions d'abord l'existant : équipements, services essentiels, accès administratifs et responsabilités de chaque intervenant. L'objectif est une reprise maîtrisée qui limite les perturbations.",
+    },
+    {
+      question: "Est-ce que TRINEXTA peut gérer Microsoft 365 ?",
+      answer:
+        "Oui. Nous administrons et sécurisons Microsoft 365 : comptes utilisateurs, licences, messagerie et accès. Les prestations précises dépendent du périmètre convenu.",
+    },
+    {
+      question: "Mes données restent-elles la propriété de mon entreprise ?",
+      answer:
+        "Oui. Faire appel à un prestataire ne transfère pas la propriété de vos données. Les accès et opérations techniques sont encadrés contractuellement, avec des règles de confidentialité adaptées.",
+    },
+    {
+      question: "Comment contacter le support informatique TRINEXTA ?",
+      answer:
+        "Nos clients contactent le support par les canaux définis dans leur contrat. Pour une première demande commerciale, appelez le 09 78 25 07 46 ou écrivez à contact@trinexta.fr.",
     },
   ],
 
   cta: {
-    line1: "Prêt à transformer",
-    line2: "votre informatique",
-    line3: "en atout ?",
-    description: "Votre informatique ne doit plus être un sujet subi, mais un support fiable et performant de votre activité. Nos experts sont prêts à auditer vos besoins et à construire un cadre d'intervention clair et sur mesure pour votre entreprise.",
-    buttonText: "Échanger avec un conseiller",
+    line1: "Confiez votre",
+    line2: "informatique à un",
+    line3: "partenaire proche",
+    description:
+      "Quelques postes ou un parc plus important : échangeons sur votre environnement, vos difficultés et vos priorités pour définir une solution adaptée. L'humain avant les tickets.",
+    buttonText: "Demander une étude de mon parc",
     buttonHref: "/contact",
+  },
+
+  schemaOverride: {
+    name: "Infogérance informatique pour TPE et PME en Essonne",
+    serviceType: "Infogérance informatique",
+    areaServed: ["Évry-Courcouronnes", "Corbeil-Essonnes", "Essonne", "Île-de-France"],
   },
 };

@@ -26,12 +26,12 @@ export const cybersecuriteData: ServicePageProps = {
 
   offer: {
     subtitle: "EDR + Intelligence Artificielle : Le bouclier moderne",
-    title: "Une protection automatisée, intelligente et infaillible",
+    title: "Une protection automatisée et surveillée en continu",
     description: "Notre solution ne se contente pas de 'chercher des virus'. Nous déployons une solution d'EDR (Endpoint Detection & Response) enrichie par l'Intelligence Artificielle. Contrairement à un antivirus classique qui attend qu'une menace soit identifiée pour agir, notre système surveille en permanence le comportement réel de vos machines pour détecter les anomalies en temps réel, même s'il s'agit d'une attaque totalement inédite.",
     features: [
       {
-        title: "Surveillance temps réel 24/7",
-        desc: "L'activité de chaque poste de travail est analysée en continu, sans interruption. Notre plateforme de surveillance identifie les moindres écarts dans le fonctionnement normal de vos ordinateurs : processus suspects, connexions réseau anormales ou tentatives d'exécution de fichiers illégitimes. Vous bénéficiez d'une veille permanente qui ne dort jamais, garantissant une réactivité immédiate face aux signaux faibles.",
+        title: "Surveillance comportementale en continu",
+        desc: "L'activité de chaque poste de travail est analysée en continu, sans interruption. Notre plateforme de surveillance identifie les moindres écarts dans le fonctionnement normal de vos ordinateurs : processus suspects, connexions réseau anormales ou tentatives d'exécution de fichiers illégitimes. L'EDR remonte les signaux faibles dès leur détection, pour une prise en charge selon le périmètre de votre contrat.",
       },
       {
         title: "Détection comportementale par IA",
@@ -84,7 +84,7 @@ export const cybersecuriteData: ServicePageProps = {
     items: [
       {
         title: "Protection continue et totale",
-        desc: "Vos postes ne sont pas protégés seulement lors des analyses planifiées. Ils sont sous surveillance 24h/24 et 7j/7. Nous allons bien au-delà de la simple analyse de fichiers statiques pour monitorer l'activité réelle de votre infrastructure.",
+        desc: "Vos postes ne sont pas protégés seulement lors des analyses planifiées. L'agent EDR analyse leur comportement en continu. Nous allons bien au-delà de la simple analyse de fichiers statiques pour monitorer l'activité réelle de votre infrastructure.",
       },
       {
         title: "Réactivité immédiate et automatisée",
@@ -99,6 +99,28 @@ export const cybersecuriteData: ServicePageProps = {
         desc: "La protection EDR est incluse directement dans nos offres de maintenance. Il n'y a pas d'option cachée, pas de surcoût surprise. Vous bénéficiez d'une cybersécurité cohérente, robuste et pleinement intégrée à votre accompagnement informatique global.",
       },
     ],
+  },
+
+  caseStudy: {
+    surtitle: "Cas client",
+    title: "Intervention après le piratage de plusieurs sites web",
+    context: "Une entreprise francilienne confrontée à une compromission de son infrastructure web.\n\nAprès des dysfonctionnements affectant plusieurs sites internet, dont une boutique e-commerce, TRINEXTA a été sollicitée pour rechercher l'origine de l'incident et engager les premières mesures de sécurisation. L'investigation a permis d'identifier des activités malveillantes remontant à plusieurs semaines, des portes dérobées et des mécanismes de manipulation du référencement naturel.",
+    stats: [
+      { value: "63", label: "fichiers malveillants isolés et conservés pour l'investigation" },
+    ],
+    results: [
+      "63 fichiers malveillants placés en quarantaine, avec conservation des éléments nécessaires à l'investigation.",
+      "Identification d'activités suspectes remontant au 23 septembre 2026.",
+      "Neutralisation des mécanismes malveillants identifiés.",
+      "Renforcement des accès administratifs et renouvellement d'identifiants sensibles.",
+      "Maintien de l'accessibilité des principaux sites lors des opérations initiales.",
+    ],
+    conclusion: "L'intervention a permis d'engager la sécurisation de l'environnement tout en préparant les vérifications nécessaires à une remédiation complète.",
+    cta: {
+      text: "Découvrir cette intervention de cybersécurité",
+      href: "/cas-clients/piratage-sites-wordpress-ecommerce",
+    },
+    note: "Cas client anonymisé. Résultats intermédiaires au 14 octobre 2026.",
   },
 
   faq: [
@@ -124,7 +146,7 @@ export const cybersecuriteData: ServicePageProps = {
     },
     {
       question: "La solution est-elle conforme aux réglementations comme le RGPD ?",
-      answer: "Oui, utiliser une solution de cybersécurité moderne comme la nôtre est un excellent moyen de répondre à vos obligations de protection des données imposées par le RGPD. Vous garantissez ainsi la sécurité des données personnelles que vous manipulez, ce qui est un point de contrôle majeur lors d'audits.",
+      answer: "Oui, utiliser une solution de cybersécurité moderne comme la nôtre est un excellent moyen de répondre à vos obligations de protection des données imposées par le RGPD. Vous renforcez ainsi la protection des données personnelles que vous manipulez, un point de contrôle majeur lors d'audits.",
     },
     {
       question: "Comment gérez-vous les alertes ? Dois-je faire quelque chose ?",

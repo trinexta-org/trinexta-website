@@ -3,13 +3,13 @@ import { ServicePage } from "@/components/services/ServicePage";
 import { getServiceData } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "Cloud & Sauvegarde pour TPE/PME",
+  title: "Cloud et sauvegarde pour TPE et PME en Essonne",
   description: "Modernisez votre infrastructure avec le Cloud Trinexta. Sauvegardes immuables, serveurs dédiés, accès distants sécurisés et plan de reprise d'activité (PRA).",
   alternates: {
     canonical: "/cloud-sauvegarde",
   },
   openGraph: {
-    title: "Cloud & Sauvegarde pour TPE/PME | Trinexta",
+    title: "Cloud et sauvegarde pour TPE et PME en Essonne | TRINEXTA",
     description: "Modernisez votre infrastructure avec le Cloud Trinexta. Sauvegardes immuables, serveurs dédiés, accès distants sécurisés et plan de reprise d'activité (PRA).",
     url: "/cloud-sauvegarde",
     type: "website",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cloud & Sauvegarde pour TPE/PME | Trinexta",
+    title: "Cloud et sauvegarde pour TPE et PME en Essonne | TRINEXTA",
     description: "Modernisez votre infrastructure avec le Cloud Trinexta. Sauvegardes immuables, serveurs dédiés, accès distants sécurisés et plan de reprise d'activité (PRA).",
     images: ["/images/og-default.png"],
   },

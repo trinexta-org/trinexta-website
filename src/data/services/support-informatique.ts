@@ -8,201 +8,286 @@ export const supportInformatiqueData: ServicePageProps = {
     titlePart1: "Support informatique",
     titlePart2: "pour TPE et PME à Évry-Courcouronnes",
     description:
-      "TRINEXTA accompagne les TPE et PME d'Évry-Courcouronnes et de l'Essonne avec un support informatique réactif : helpdesk, assistance à distance et prise en charge de vos logiciels métier.\n\nL'objectif : permettre à vos collaborateurs de rester concentrés sur leur activité, avec un interlocuteur unique pour chaque incident.",
-    ctaText: "Obtenir une assistance réactive",
+      "Ordinateur bloqué, messagerie inaccessible, logiciel qui ne répond plus : vos collaborateurs ont besoin d'une solution, pas d'un parcours du combattant.\n\nTRINEXTA accompagne les TPE et PME d'Évry-Courcouronnes, de l'Essonne et d'Île-de-France avec un support informatique humain et structuré, du premier appel au suivi de l'incident.",
+    ctaText: "Demander un accompagnement informatique",
     ctaHref: "/contact",
+    secondaryCta: {
+      text: "Découvrir nos offres Sérénité",
+      href: "/serenite",
+    },
   },
 
   problem: {
-    subtitle: "Un support informatique pensé pour les TPE et PME",
-    title: "Un support informatique pensé pour les TPE et PME",
-    hideTransition: true,
+    subtitle: "Le quotidien des TPE et PME",
+    title: "Vos équipes doivent travailler, pas résoudre des pannes",
+    transition: {
+      line1: "Ce qui ralentit",
+      line2: "vos équipes",
+    },
     description:
-      "Un poste bloqué, une messagerie qui ne répond plus, une imprimante déconnectée en plein rush : pour une TPE ou une PME sans service informatique interne, ces incidents interrompent directement l'activité. Trinexta prend en charge votre support informatique au quotidien, avec un interlocuteur unique du premier contact jusqu'à la résolution.\n\nNotre approche s'appuie sur trois piliers complémentaires à votre [infogérance informatique](/infogerance) existante ou à mettre en place : un helpdesk réactif, une assistance à distance sécurisée et une prise en charge complète de vos logiciels métier, y compris la relation avec vos éditeurs tiers.\n\nAu-delà du dépannage ponctuel, nous documentons chaque intervention pour construire une base de connaissance sur votre parc, réduire le temps de résolution des incidents récurrents et renforcer, en lien avec notre offre [cybersécurité](/cybersecurite), la fiabilité globale de votre environnement de travail. Pour toute question sur votre situation, vous pouvez [contacter TRINEXTA](/contact) directement.",
-  },
-
-  banner: {
-    title: "Besoin d'un support informatique pour votre entreprise ?",
-    description:
-      "Un interlocuteur unique pour vos incidents du quotidien, sans compteur de temps ni jargon technique inutile.",
-    ctaText: "Parler avec TRINEXTA",
-    ctaHref: "/contact",
+      "Dans beaucoup de PME, les incidents informatiques retombent sur un salarié qui s'y connaît un peu, mais dont ce n'est pas le métier. Ça tient pour les problèmes simples, beaucoup moins quand l'équipe grandit ou que les pannes se répètent.\n\nAvec un support externalisé, vos collaborateurs ont un point de contact pour signaler leurs difficultés. TRINEXTA traite les demandes du périmètre convenu, documente chaque intervention et explique simplement ce qui a été fait.\n\nVous cherchez une gestion complète de votre système (supervision, maintenance, sécurité du parc) ? C'est le rôle de notre [infogérance informatique](/infogerance).",
+    painPoints: [
+      "Un collaborateur bloqué sans messagerie pendant une matinée.",
+      "Un logiciel métier qui plante sans qu'on sache pourquoi.",
+      "Des pannes qui reviennent faute d'historique.",
+      "Le salarié « qui s'y connaît » détourné de son vrai travail.",
+    ],
   },
 
   offer: {
-    subtitle: "Une assistance pensée pour l'humain et la performance",
-    title: "Nos services de support informatique",
-    hideTransition: true,
+    subtitle: "Les incidents que nous prenons en charge",
+    title: "Quels problèmes notre support informatique peut-il résoudre ?",
+    transition: {
+      line1: "Notre",
+      line2: "assistance",
+    },
     description:
-      "Nous ne sommes pas de simples techniciens, nous sommes vos alliés. Du dépannage d'urgence à la gestion complexe de vos logiciels métier, nous prenons le sujet en main jusqu'à la résolution complète, pour vous garantir une tranquillité d'esprit totale.",
-    features: [
+      "Pas besoin de recruter un technicien à temps plein pour quelques dizaines de collaborateurs. TRINEXTA intervient comme support externalisé ou en renfort de votre équipe informatique existante.",
+    details: [
       {
-        title: "Helpdesk et assistance utilisateurs",
-        desc: "Un point d'entrée unique par téléphone, email ou portail de ticketing pour toutes les demandes de vos collaborateurs. Chaque ticket est suivi de bout en bout, avec une traçabilité complète des échanges et des actions menées.",
+        title: "Dépannage des postes de travail",
+        intro:
+          "Un poste Windows qui ne démarre plus, un ralentissement inhabituel, une application qui se bloque : nos techniciens diagnostiquent l'incident et cherchent l'action adaptée.",
+        items: [
+          "Lenteurs et blocages Windows",
+          "Problèmes logiciels courants",
+          "Installation et configuration d'applications",
+          "Périphériques, imprimantes et scanners",
+          "Accès aux ressources de l'entreprise",
+          "Préparation ou remplacement d'un poste",
+        ],
+        note: "Défaillance matérielle suspectée ? Nous vous aidons à identifier les vérifications utiles et la prise en charge possible par le constructeur.",
       },
       {
-        title: "Assistance informatique à distance",
-        desc: "Grâce à des outils de prise en main sécurisés, nous diagnostiquons et résolvons la majorité des blocages en temps réel, sans déplacement ni immobilisation de vos équipes au bureau.",
+        title: "Microsoft 365, Outlook et Teams",
+        intro:
+          "La messagerie et les outils collaboratifs sont au centre du travail quotidien. Nous accompagnons vos utilisateurs quand leur environnement Microsoft 365 leur résiste.",
+        items: [
+          "Connexion à Outlook",
+          "Configuration de la messagerie professionnelle",
+          "Difficultés d'authentification",
+          "Accès à Microsoft Teams",
+          "Synchronisation OneDrive",
+          "Autorisations SharePoint",
+        ],
+        note: "Les opérations d'administration avancée sont réalisées selon les droits accordés et le périmètre contractuel.",
+        link: {
+          text: "Accompagnement Microsoft 365 pour entreprises",
+          href: "/microsoft-365",
+        },
       },
       {
-        title: "Support des logiciels métier",
-        desc: "Comptabilité, caisse, facturation : nous analysons le problème avec vous et, si le sujet dépasse le cadre informatique pur, nous contactons l'éditeur à votre place pour devenir votre point d'entrée unique.",
+        title: "Logiciels métier et éditeurs",
+        intro:
+          "Comptabilité, ERP, facturation, gestion commerciale : quand l'outil dysfonctionne, la cause peut venir du poste, du réseau, de la configuration ou de l'application elle-même.",
+        items: [
+          "Analyse de l'origine probable de l'incident",
+          "Vérification du poste, des accès et de la configuration",
+          "Coordination technique avec l'éditeur selon votre contrat",
+          "Suivi des échanges jusqu'à la clôture",
+        ],
+        note: "Vous gardez un seul interlocuteur entre vos utilisateurs, votre infrastructure et vos prestataires logiciels.",
       },
       {
-        title: "Gestion et suivi des incidents",
-        desc: "Chaque incident est qualifié, priorisé et suivi jusqu'à sa résolution complète. Vous gardez une visibilité claire sur l'avancement, sans porter la charge administrative du problème.",
-      },
-      {
-        title: "Historique et documentation technique",
-        desc: "Chaque intervention est documentée dans votre dossier technique. En cas de récidive, nous disposons déjà de l'historique de résolution, ce qui accélère considérablement le traitement.",
+        title: "Réseau et ressources partagées",
+        intro:
+          "Connexion instable, dossier partagé inaccessible, imprimante réseau muette : ces incidents touchent souvent plusieurs collaborateurs à la fois.",
+        items: [
+          "Premiers diagnostics réseau",
+          "Dépannage des connexions locales",
+          "Analyse des accès aux dossiers partagés",
+          "Coordination avec les intervenants de l'infrastructure",
+        ],
+        note: "Le périmètre d'intervention réseau dépend de la formule souscrite.",
       },
     ],
   },
 
-  keyFacts: [
-    {
-      label: "Pour qui ?",
-      value: "TPE, PME, commerces et cabinets sans service informatique interne dédié.",
-    },
-    {
-      label: "Zone d'intervention",
-      value: "Évry-Courcouronnes, Corbeil-Essonnes, le centre Essonne et l'Île-de-France à distance.",
-    },
-    {
-      label: "Types d'intervention",
-      value: "Assistance à distance en priorité, intervention sur site selon le contrat.",
-    },
-    {
-      label: "Environnements pris en charge",
-      value: "Postes Windows, messagerie, Microsoft 365, logiciels métier et périphériques bureautiques.",
-    },
-    {
-      label: "Mode de contact",
-      value: "Téléphone, email et portail de ticketing dédié.",
-    },
-  ],
-
-  localSeo: {
-    subtitle: "Zone d'intervention",
-    title: "Support informatique à Évry-Courcouronnes et en Essonne",
+  process: {
+    subtitle: "Comment nous contacter",
+    title: "Un traitement structuré de chaque incident",
     description:
-      "Implantée à Évry-Courcouronnes, notre équipe intervient au quotidien auprès des TPE et PME du centre Essonne qui ont besoin d'un interlocuteur informatique clair, disponible et capable de prendre les sujets jusqu'au bout.\n\nNous accompagnons aussi bien des structures de 1 à 50 postes sans service IT interne que des équipes qui souhaitent renforcer un support existant, avec la même exigence de réactivité.\n\nPour toute demande hors de notre zone de déplacement, l'assistance à distance et le support des logiciels métier restent accessibles dans les mêmes conditions.",
-    items: [
+      "Selon votre contrat, vos collaborateurs nous joignent par téléphone, par e-mail ou via notre système de ticketing. Notre standard répond au 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h.",
+    steps: [
       {
-        title: "Secteur couvert",
-        desc: "Évry-Courcouronnes, Corbeil-Essonnes, le centre Essonne et les sites franciliens suivis à distance.",
+        title: "Réception et qualification",
+        desc: "Nous enregistrons la demande et les informations utiles au diagnostic.",
       },
       {
-        title: "Entreprises accompagnées",
-        desc: "Structures de 1 à 50 postes, équipes sans service IT interne ou entreprises qui veulent renforcer leur support existant.",
+        title: "Analyse de l'urgence",
+        desc: "Nous évaluons l'impact sur votre activité pour prioriser.",
       },
       {
-        title: "Problèmes traités",
-        desc: "Postes bloqués, messagerie, imprimantes, logiciels métier, accès Microsoft 365 et incidents utilisateurs récurrents.",
+        title: "Diagnostic technique",
+        desc: "Nous identifions l'origine probable du problème.",
       },
       {
-        title: "Premier échange",
-        desc: "On qualifie le parc, les outils critiques et les urgences pour mettre en place un support utile dès les premières demandes.",
+        title: "Intervention",
+        desc: "À distance, ou organisation d'une action complémentaire si nécessaire.",
+      },
+      {
+        title: "Suivi jusqu'à la clôture",
+        desc: "Le dossier reste ouvert jusqu'à sa résolution ou sa transmission au bon intervenant.",
+      },
+      {
+        title: "Documentation",
+        desc: "Nous conservons les informations utiles pour les prochains incidents.",
       },
     ],
-    ctaText: "Parler de mon support",
+    cta: {
+      text: "Échanger sur les besoins de mon entreprise",
+      href: "/contact",
+    },
+  },
+
+  formulas: {
+    subtitle: "Récurrent ou ponctuel",
+    title: "Support illimité ou assistance ponctuelle : quelle solution choisir ?",
+    items: [
+      {
+        badge: "Sérénité Complète",
+        title: "Support récurrent",
+        desc: "Un accompagnement régulier de vos collaborateurs, avec un périmètre défini au contrat.",
+        points: [
+          "Support utilisateurs illimité pour les demandes couvertes",
+          "Assistance par téléphone, e-mail et prise en main à distance",
+          "Suivi des demandes et rapport trimestriel",
+          "79 € HT par poste et par mois, sans engagement de durée",
+        ],
+        cta: {
+          text: "Découvrir les offres TRINEXTA Sérénité",
+          href: "/serenite",
+        },
+        highlighted: true,
+      },
+      {
+        badge: "Sur demande",
+        title: "Intervention ponctuelle",
+        desc: "Un besoin technique précis, sans externaliser toute votre informatique.",
+        points: [
+          "Étude de la demande et de sa faisabilité",
+          "Périmètre et conditions précisés dans un devis",
+          "Intervention à distance ou sur site selon le besoin",
+        ],
+        cta: {
+          text: "Demander un devis d'intervention informatique",
+          href: "/contact",
+        },
+      },
+    ],
+    note: "Le caractère illimité concerne les demandes couvertes par la formule souscrite. Exclusions, horaires et modalités sont précisés au contrat.",
+  },
+
+  localSeo: {
+    subtitle: "Ancrage local",
+    title: "Votre prestataire de support informatique en Essonne",
+    description:
+      "TRINEXTA dispose d'un bureau au 7 rue Montespan, 91000 Évry-Courcouronnes. La plupart des incidents se traitent à distance avec des outils sécurisés, y compris pour vos collaborateurs en télétravail.\n\nQuand une présence physique est nécessaire, nous organisons une intervention dans vos locaux. Délai, déplacement et facturation éventuelle dépendent de votre offre.",
+    items: [
+      {
+        title: "Zone d'intervention",
+        desc: "Évry-Courcouronnes, Corbeil-Essonnes, Ris-Orangis, Lisses, Bondoufle et communes voisines. Le reste de l'Île-de-France à distance.",
+      },
+      {
+        title: "Dépannage à distance",
+        desc: "Diagnostic avec l'utilisateur, opérations autorisées et vérification du résultat, sans déplacement.",
+      },
+      {
+        title: "Intervention sur site",
+        desc: "Remplacement ou vérification d'un équipement, incident matériel, problème impossible à traiter à distance.",
+      },
+      {
+        title: "Secteurs accompagnés",
+        desc: "PME de services, cabinets comptables, BTP et bureaux d'études, commerces, entreprises multi-sites.",
+      },
+    ],
+    ctaText: "Parler de mon entreprise",
     ctaHref: "/contact",
   },
 
   benefits: {
-    subtitle: "La différence Trinexta",
-    title: "Pourquoi externaliser votre support informatique avec TRINEXTA ?",
+    subtitle: "La différence TRINEXTA",
+    title: "Un support qui connaît votre environnement",
+    transition: {
+      line1: "Pourquoi",
+      line2: "TRINEXTA",
+    },
     items: [
       {
-        title: "Assistance illimitée",
-        desc: "Nous avons banni les compteurs de temps. Le support est illimité sur le périmètre couvert pour vous permettre de travailler sereinement, sans avoir peur de 'dépasser votre forfait' à chaque question.",
+        title: "L'historique de vos incidents",
+        desc: "Chaque demande est documentée. Nous retrouvons les actions passées, repérons les incidents récurrents et orientons mieux les prochains diagnostics.",
       },
       {
-        title: "Intermédiation avec vos éditeurs",
-        desc: "Nous faisons l'interface avec vos éditeurs de logiciels métier. Nous parlons technique pour vous, traduisons les besoins et exigeons des solutions, vous libérant ainsi de cette contrainte chronophage.",
+        title: "Un coordinateur entre vos prestataires",
+        desc: "Fournisseur d'accès, éditeur, opérateur, constructeur : quand un incident implique plusieurs intervenants, nous aidons à trouver le bon interlocuteur et suivons les actions.",
       },
       {
-        title: "Réactivité et clarté",
-        desc: "Obtenez un diagnostic rapide avec un interlocuteur compétent. Nous communiquons sans jargon inutile et nous nous engageons sur une résolution efficace pour maintenir votre productivité.",
+        title: "L'humain avant les tickets",
+        desc: "Un utilisateur n'est pas un numéro de ticket. Nous privilégions des explications compréhensibles et la connaissance de votre contexte.",
       },
       {
-        title: "Suivi rigoureux et proactif",
-        desc: "Nous conservons l'historique de chaque incident pour accélérer les interventions futures et surtout, pour identifier les causes racines et prévenir les récidives.",
+        title: "À distance et sur site",
+        desc: "La plupart des demandes se traitent à distance. Pour le reste, nous nous déplaçons en Essonne et en Île-de-France selon les modalités convenues.",
       },
     ],
   },
 
   faq: [
     {
-      question: "Quel support informatique proposez-vous aux TPE et PME ?",
+      question: "Quelle est la différence entre support informatique et infogérance ?",
       answer:
-        "Un support complet et illimité : helpdesk par téléphone, email et portail de ticketing, assistance à distance sécurisée, et prise en charge de vos logiciels métier jusqu'à la résolution complète, y compris la relation avec vos éditeurs.",
+        "Le support accompagne vos utilisateurs et résout leurs incidents du quotidien. L'[infogérance](/infogerance) couvre une gestion plus large et continue : maintenance, supervision, sécurité et suivi du parc.",
     },
     {
-      question: "Intervenez-vous à Évry-Courcouronnes et en Essonne ?",
+      question: "Le support informatique TRINEXTA est-il illimité ?",
       answer:
-        "Oui. Nous sommes implantés à Évry-Courcouronnes et intervenons sur l'ensemble du centre Essonne, avec une assistance à distance disponible pour les sites franciliens plus éloignés.",
+        "Certaines offres, comme [Sérénité Complète](/serenite), prévoient un support illimité pour les demandes couvertes par le contrat. Exclusions, horaires, équipements et modalités sont précisés dans la formule souscrite.",
     },
     {
-      question: "Une TPE peut-elle externaliser complètement son support informatique ?",
+      question: "Intervenez-vous sur les ordinateurs des télétravailleurs ?",
       answer:
-        "Oui, c'est l'un des cas d'usage les plus fréquents. Nous devenons votre point d'entrée unique pour tous les incidents utilisateurs, sans que vous ayez besoin d'un service informatique interne.",
+        "Oui, s'ils font partie du périmètre couvert et que les conditions techniques d'accès sont réunies. De nombreux problèmes logiciels et de configuration se traitent à distance.",
     },
     {
-      question: "Le support est-il vraiment illimité ?",
+      question: "Pouvez-vous intervenir sur un logiciel de comptabilité ou de facturation ?",
       answer:
-        "Oui. Vous pouvez nous contacter autant de fois que nécessaire par téléphone, e-mail ou via notre portail de ticketing, dans le cadre du périmètre informatique défini. Notre modèle est basé sur la tranquillité de nos clients, et non sur la facturation à l'acte.",
+        "Nous analysons les problèmes liés au poste, aux accès, à la configuration et à l'environnement informatique. Si l'incident relève de l'éditeur, nous assurons la coordination selon les conditions prévues.",
     },
     {
-      question: "Gérez-vous vraiment les problèmes liés aux logiciels métier ?",
+      question: "Peut-on vous solliciter sans contrat d'infogérance ?",
       answer:
-        "C'est une spécialité de Trinexta. Nous comprenons que pour vous, le problème est global. Si un logiciel métier ne fonctionne pas, nous analysons le dysfonctionnement. Si cela concerne un éditeur tiers, nous prenons en charge la communication et le suivi technique avec eux pour vous.",
-    },
-    {
-      question: "Quels types de logiciels métier prenez-vous en charge ?",
-      answer:
-        "Nous accompagnons tout type d'outil quotidien : logiciel de comptabilité (Sage, EBP, etc.), outil de point de vente et caisse, logiciel de planning, outil de facturation, outils de messagerie spécialisés, et bien d'autres.",
-    },
-    {
-      question: "Intervenez-vous sur site si besoin ?",
-      answer:
-        "Le support est principalement distant pour garantir une réactivité immédiate et une résolution rapide. Si une intervention physique sur site s'avère nécessaire pour résoudre une panne matérielle majeure, nous planifions l'intervention avec vous selon les modalités de votre contrat.",
+        "Oui, une intervention ponctuelle peut être étudiée selon la demande et nos disponibilités. Elle fait l'objet d'un devis.",
     },
     {
       question: "Quels sont les horaires du support ?",
       answer:
-        "Nos équipes sont disponibles pendant vos heures d'ouverture habituelles pour assurer une continuité de service alignée avec votre activité. Nous avons mis en place des processus pour que vos urgences soient traitées avec la priorité nécessaire.",
+        "Les horaires et modalités de prise en charge sont précisés dans votre contrat. Pour une première demande, notre standard répond au 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h.",
     },
     {
-      question: "Comment est assurée la sécurité de la prise en main à distance ?",
+      question: "Proposez-vous un support informatique sur site en Essonne ?",
       answer:
-        "La sécurité est notre priorité. Nos outils de prise en main à distance sont hautement sécurisés, cryptés et ne permettent une connexion qu'avec votre autorisation explicite et ponctuelle pour chaque intervention.",
+        "Oui. Des interventions sur site peuvent être organisées en Essonne et en Île-de-France, selon la nature de l'incident et les modalités convenues.",
     },
     {
-      question: "Puis-je suivre l'état d'avancement de mes tickets ?",
+      question: "Comment mettre en place le support TRINEXTA ?",
       answer:
-        "Oui, notre portail de ticketing vous offre une visibilité totale sur l'historique de vos demandes et leur statut actuel. Vous savez en temps réel qui travaille sur votre dossier et quelle est la prochaine étape.",
-    },
-    {
-      question: "Comment se passe la transition avec mon prestataire actuel ?",
-      answer:
-        "La transition est gérée en douceur. Nous effectuons un audit de votre parc et de vos accès pour prendre le relais sans coupure. Nous nous assurons que tous les paramètres critiques sont récupérés pour garantir un service immédiat.",
+        "Nous échangeons d'abord sur le nombre de collaborateurs, les équipements, les logiciels essentiels et les difficultés rencontrées. Nous vous orientons ensuite vers une [formule Sérénité](/serenite) ou une prestation adaptée.",
     },
   ],
 
   cta: {
-    line1: "Un problème",
-    line2: "informatique",
-    line3: "récurrent ?",
+    line1: "Vos collaborateurs",
+    line2: "méritent un support",
+    line3: "fiable et humain",
     description:
-      "Libérez-vous définitivement de la gestion technique et des pannes stressantes. Confiez votre support informatique à Trinexta, transformez votre quotidien, et retrouvez enfin la sérénité nécessaire pour diriger votre entreprise. Pour compléter votre protection, découvrez aussi notre offre de [sauvegarde informatique](/cloud-sauvegarde) et notre accompagnement [Microsoft 365](/microsoft-365).",
-    buttonText: "Démarrer votre support",
+      "Vous cherchez un prestataire de support informatique à Évry-Courcouronnes, en Essonne ou en Île-de-France ? Parlons de vos besoins et trouvons ensemble l'accompagnement adapté.",
+    buttonText: "Contacter TRINEXTA",
     buttonHref: "/contact",
   },
 
   schemaOverride: {
     name: "Support informatique pour TPE et PME",
-    serviceType: "Support informatique / assistance informatique",
-    areaServed: ["Évry-Courcouronnes", "Essonne", "Île-de-France"],
+    serviceType: "Support informatique",
+    areaServed: ["Évry-Courcouronnes", "Corbeil-Essonnes", "Essonne", "Île-de-France"],
   },
 };

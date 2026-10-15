@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { sanityClient } from "@/lib/sanity";
 import { caseClients } from "@/data/cas-clients";
+import { isIndexable } from "@/lib/site";
+import { ARTICLES_REDIRIGES } from "@/data/articles-rediriges";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
@@ -47,18 +49,23 @@ type ArticleSlug = {
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (!isIndexable) return [];
+
   const articles = await sanityClient
     .fetch<ArticleSlug[]>(
       `*[_type == "article" && (!defined(datePublication) || datePublication <= now())]{ slug, _updatedAt }`
     )
     .catch(() => [] as ArticleSlug[]);
 
-  const articleRoutes: MetadataRoute.Sitemap = articles.map((a) => ({
-    url: `${BASE_URL}/blog/${a.slug.current}`,
-    lastModified: new Date(a._updatedAt),
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  const slugsRediriges = new Set(ARTICLES_REDIRIGES.map((a) => a.slug));
+  const articleRoutes: MetadataRoute.Sitemap = articles
+    .filter((a) => !slugsRediriges.has(a.slug.current))
+    .map((a) => ({
+      url: `${BASE_URL}/blog/${a.slug.current}`,
+      lastModified: new Date(a._updatedAt),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
 
   const caseClientRoutes: MetadataRoute.Sitemap = caseClients.map((c) => ({
     url: `${BASE_URL}/cas-clients/${c.slug}`,

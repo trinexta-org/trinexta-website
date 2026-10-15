@@ -17,9 +17,9 @@ import { TechnicienAssurances } from "@/components/technicien-sous-regie/Technic
 import { FinalCTA } from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
-  title: "Technicien sous régie - Régie & Renfort IT | Trinexta",
+  title: "Technicien informatique en régie en Île-de-France",
   description:
-    "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
+    "Un technicien support ou réseau en régie pour renforcer votre équipe IT en Île-de-France, absorber un pic d'activité ou couvrir une absence, sans recruter en CDI.",
   alternates: {
     canonical: "/technicien-sous-regie",
   },
@@ -52,8 +52,8 @@ export default function TechnicienSousRegiePage() {
           ========================================================= */}
       <section className="relative bg-primary">
         <OfferHero
-          part1="Technicien"
-          part2="Sous régie"
+          part1="Technicien informatique"
+          part2="en régie"
           subtitles={[
             "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
             "Pas de frais cachés, pas de lourdeur inutile. La collaboration démarre simplement et s'adapte à votre budget réel.",

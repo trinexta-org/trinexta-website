@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { ARTICLES_REDIRIGES } from "./src/data/articles-rediriges";
 
 const sanityProjectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "93ztl6y7";
@@ -131,6 +132,12 @@ const nextConfig: NextConfig = {
       { source: "/nos-clients", destination: "/cas-clients", statusCode: 301 },
       // --- Typo ---
       { source: "/contac", destination: "/contact", statusCode: 301 },
+      // --- Articles de blog retirés -> page service ---
+      ...ARTICLES_REDIRIGES.map(({ slug, destination }) => ({
+        source: `/blog/${slug}`,
+        destination,
+        statusCode: 301 as const,
+      })),
       // --- Articles de blog publiés (slug WP -> /blog/slug/) ---
       {
         source: "/cybersecurite-7-habitudes-strategiques-pour-proteger-votre-pme",
@@ -147,8 +154,7 @@ const nextConfig: NextConfig = {
       {
         source:
           "/infogerance-et-support-informatique-pour-pme-a-evry-courcouronnes",
-        destination:
-          "/blog/infogerance-et-support-informatique-pour-pme-a-evry-courcouronnes",
+        destination: "/infogerance",
         statusCode: 301,
       },
       {

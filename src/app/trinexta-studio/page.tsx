@@ -18,8 +18,8 @@ import { Button } from "@/components/ui/Button"
 import { FinalCTA } from "@/components/FinalCTA"
 
 export const metadata: Metadata = {
-    title: "Trinexta Studio - Création Web & SaaS | Trinexta",
-    description: "Développement de sites internet sur mesure. Plateformes et solutions web performantes conçues par notre entreprise.",
+    title: "Création de site web et application pour PME",
+    description: "TRINEXTA Studio conçoit des sites internet et des applications web sur mesure pour les TPE et PME : site vitrine, refonte, outil métier et référencement.",
     alternates: {
         canonical: "/trinexta-studio",
     },
@@ -106,6 +106,23 @@ export default function TrinextaStudioPage() {
                             </Container>
                         </Section>
                     </div>
+
+                    <Section container={false}>
+                        <Container className="max-w-[1400px]">
+                            <BannerCTA
+                                variant="surface"
+                                title="Site WordPress piraté ? Nous savons intervenir."
+                                description="Analyse de la compromission, isolement des fichiers malveillants, sécurisation des accès : découvrez notre intervention sur plusieurs sites WordPress et e-commerce."
+                                action={
+                                    <Link href="/cas-clients/piratage-sites-wordpress-ecommerce">
+                                        <Button variant="secondary" className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold">
+                                            Voir le cas client
+                                        </Button>
+                                    </Link>
+                                }
+                            />
+                        </Container>
+                    </Section>
 
                     <StudioPaymentPlan />
 
