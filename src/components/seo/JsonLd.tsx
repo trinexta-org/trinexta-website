@@ -1,6 +1,6 @@
 import { FALLBACK_DATA } from "@/lib/google-places"
 
-type JsonLdValue = string | number | boolean | null | JsonLdValue[] | { [key: string]: JsonLdValue }
+export type JsonLdValue = string | number | boolean | null | JsonLdValue[] | { [key: string]: JsonLdValue }
 
 export function JsonLd({ data }: { data: { [key: string]: JsonLdValue } }) {
   return (
