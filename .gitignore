@@ -61,3 +61,4 @@ scripts/raw-reviews.json
 # local SEO audit exports and working plans
 /docs/audit-seo/
 /plans/audit-seo-*.md
+/generations/

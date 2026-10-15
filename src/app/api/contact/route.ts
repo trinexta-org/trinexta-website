@@ -35,6 +35,7 @@ export async function POST(request: Request) {
         taille: data.taille,
         urgence: data.urgence,
         message: data.message,
+        offre: data.offre,
       },
     });
 

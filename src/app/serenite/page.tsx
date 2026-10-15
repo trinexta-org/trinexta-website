@@ -14,8 +14,10 @@ import { SereniteTargets } from "@/components/serenite/SereniteTargets";
 import { SerenitePricing } from "@/components/serenite/SerenitePricing";
 import { SereniteOptions } from "@/components/serenite/SereniteOptions";
 import { SereniteDifferentiator } from "@/components/serenite/SereniteDifferentiator";
+import { SereniteEssentielle } from "@/components/serenite/SereniteEssentielle";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { FinalCTA } from "@/components/FinalCTA";
+import { SERENITE_ESSENTIELLE } from "@/data/serenite-essentielle";
 
 export const metadata: Metadata = {
   title: "Offre Sérénité - Infogérance complète | Trinexta",
@@ -60,6 +62,7 @@ export default function NotreOffrePage() {
             "Sécurisation systématique de vos données : sauvegardes, accès, et hébergement en France conforme RGPD.",
           ]}
           imageSrc="/images/nos-offres/hero-serenite.jpg"
+          announcement={{ label: SERENITE_ESSENTIELLE.heroTeaser, href: SERENITE_ESSENTIELLE.anchorHref }}
         />
 
         <div className="w-full relative z-10 pt-12">
@@ -140,6 +143,20 @@ export default function NotreOffrePage() {
             <Section container={false} className="py-0">
               <Container className="max-w-[1400px]">
                 <SerenitePricing />
+              </Container>
+            </Section>
+          </div>
+
+          <div id="essentielle" className="space-y-12 scroll-mt-32">
+            <TransitionTitle
+              surtitle="Offre d'entrée"
+              line1="Envie de commencer"
+              line2="en douceur ?"
+            />
+
+            <Section container={false} className="py-0">
+              <Container className="max-w-[1400px]">
+                <SereniteEssentielle />
               </Container>
             </Section>
           </div>
