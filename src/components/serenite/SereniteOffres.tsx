@@ -28,7 +28,13 @@ export function SereniteOffres() {
                 }`}
               >
                 {offre.id === "essentiel" && (
-                  <CoffeeShield className="pointer-events-none absolute -right-6 -top-4 w-28 md:w-36 opacity-90" />
+                  // Visuel pensé pour fond sombre : pastille navy pour qu'il reste lisible sur la carte claire.
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute right-5 top-5 md:right-8 md:top-8 flex size-20 md:size-24 items-center justify-center rounded-full bg-primary shadow-lg"
+                  >
+                    <CoffeeShield className="w-14 md:w-16" />
+                  </div>
                 )}
 
                 <div className="space-y-3 pr-20 md:pr-28">

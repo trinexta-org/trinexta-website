@@ -13,7 +13,7 @@ export const officialFaqs = [
   },
   {
     question: "Combien ça coûte ?",
-    answer: "Notre offre Sérénité se décline en deux formules : Sérénité Essentiel à 29,99 € HT par poste et par mois (engagement 12 mois) et Sérénité Complète à 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service.\n\nLe tarif final dépend du périmètre : nombre de postes, niveau de support souhaité, services additionnels (sauvegarde, hébergement, etc.). Nous établissons toujours un devis clair et détaillé après une étude de votre environnement.",
+    answer: "Notre offre Sérénité se décline en deux formules : Sérénité Essentiel à 39,99 € HT par poste et par mois (engagement 12 mois) et Sérénité Complète à 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service.\n\nLe tarif final dépend du périmètre : nombre de postes, niveau de support souhaité, services additionnels (sauvegarde, hébergement, etc.). Nous établissons toujours un devis clair et détaillé après une étude de votre environnement.",
     tags: ['serenite', 'services-annexes'] as OfferTag[] 
   },
   {

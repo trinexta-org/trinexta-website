@@ -29,9 +29,9 @@ import {
   SERENITE_OFFRES,
 } from "@/data/serenite";
 
-const TITLE = "Maintenance informatique PME dès 29,99 € | TRINEXTA Sérénité";
+const TITLE = "Maintenance informatique PME dès 39,99 € | TRINEXTA Sérénité";
 const DESCRIPTION =
-  "TRINEXTA Sérénité : protection EDR, supervision et maintenance informatique dès 29,99 € HT/poste/mois. Deux offres pour les TPE et PME en Essonne.";
+  "TRINEXTA Sérénité : protection EDR, supervision et maintenance informatique dès 39,99 € HT/poste/mois. Deux offres pour les TPE et PME en Essonne.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

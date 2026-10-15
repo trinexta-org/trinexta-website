@@ -6,7 +6,8 @@ import { getOffreContactHref } from "@/data/offres";
 export const SERENITE_DEVIS_HREF = "/contact?type=devis";
 
 export const SERENITE_HERO = {
-  title: "TRINEXTA Sérénité\u00a0: maintenance, cybersécurité et support informatique pour PME",
+  titlePart1: "TRINEXTA Sérénité\u00a0:",
+  titlePart2: "maintenance, cybersécurité et support informatique pour PME",
   accroche: "Votre informatique protégée, vos équipes accompagnées, votre activité préservée.",
   description:
     "Deux formules par poste, sans frais de mise en service : Essentiel pour protéger vos ordinateurs, Complète pour déléguer aussi l'assistance de vos collaborateurs. Depuis Évry-Courcouronnes, pour les entreprises de l'Essonne et d'Île-de-France.",
@@ -36,8 +37,8 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
     id: "essentiel",
     nom: "Sérénité Essentiel",
     accroche: "La sécurité de vos postes, pour le prix d'un café par jour.",
-    prix: "29,99 €",
-    prixSchema: "29.99",
+    prix: "39,99 €",
+    prixSchema: "39.99",
     unite: "HT / poste / mois",
     pitch: "Les fondations de la sécurité informatique : protection EDR, supervision et maintenance préventive automatisée.",
     points: [
@@ -47,7 +48,7 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
       "Mises à jour de sécurité Windows suivies",
       "Maintenance préventive automatisée de base",
       "Inventaire des postes couverts",
-      "Rapport trimestriel d'activité et de sécurité",
+      "Rapport annuel d'activité et de sécurité",
     ],
     conditions: [
       "Engagement minimum de 12 mois",
@@ -73,7 +74,7 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
       "Accompagnement Microsoft 365, Outlook et Teams",
       "Arrivées et départs de collaborateurs",
       "Coordination avec les éditeurs de logiciels",
-      "Rapport mensuel d'activité et de sécurité",
+      "Rapport trimestriel d'activité et de sécurité",
     ],
     conditions: [
       "Sans engagement de durée",
@@ -101,7 +102,7 @@ export const SERENITE_SOCLE = [
 
 // Seules les différences entre Essentiel et Complète.
 export const SERENITE_COMPARATIF: { critere: string; detail?: string; essentiel: string; complete: string }[] = [
-  { critere: "Prix mensuel par poste", essentiel: "29,99 € HT", complete: "79 € HT" },
+  { critere: "Prix mensuel par poste", essentiel: "39,99 € HT", complete: "79 € HT" },
   { critere: "Engagement minimum", essentiel: "12 mois", complete: "Aucun" },
   { critere: "Support utilisateurs", essentiel: "sur-devis", complete: "Illimité*" },
   {
@@ -112,7 +113,7 @@ export const SERENITE_COMPARATIF: { critere: string; detail?: string; essentiel:
   },
   { critere: "Maintenance préventive", essentiel: "Basique", complete: "Avancée" },
   { critere: "Correctifs Windows", essentiel: "Sécurité", complete: "Sécurité et courants" },
-  { critere: "Rapport d'activité et de sécurité", essentiel: "Trimestriel", complete: "Mensuel" },
+  { critere: "Rapport d'activité et de sécurité", essentiel: "Annuel", complete: "Trimestriel" },
   { critere: "Conseils sur le parc", essentiel: "Sur demande", complete: "inclus" },
   { critere: "Intervention sur site", essentiel: "sur-devis", complete: "Selon contrat" },
 ];
@@ -177,13 +178,13 @@ export const SERENITE_SUPPORT = {
 export const SERENITE_RAPPORTS = [
   {
     formule: "Sérénité Essentiel",
-    frequence: "Rapport trimestriel",
-    desc: "Tous les trois mois, une synthèse de l'état du parc supervisé, des alertes significatives, des mises à jour suivies et des recommandations prioritaires.",
+    frequence: "Rapport annuel",
+    desc: "Une fois par an, une synthèse de l'état du parc supervisé, des alertes significatives, des mises à jour suivies et des recommandations prioritaires.",
   },
   {
     formule: "Sérénité Complète",
-    frequence: "Rapport mensuel",
-    desc: "Chaque mois, les indicateurs de supervision, les incidents traités, les interventions réalisées et les recommandations. Un support clair pour vos décisions.",
+    frequence: "Rapport trimestriel",
+    desc: "Tous les trois mois, les indicateurs de supervision, les incidents traités, les interventions réalisées et les recommandations. Un support clair pour vos décisions.",
   },
 ] as const;
 
@@ -200,7 +201,7 @@ export const SERENITE_ETAPES = [
   { title: "Validation de la formule", desc: "Une proposition précise le nombre de postes, le prix, les options et les conditions." },
   { title: "Installation des outils", desc: "Après accord, nous déployons les agents de supervision et de sécurité sur les postes compatibles." },
   { title: "Démarrage", desc: "Les outils remontent leurs informations. Pour Complète, vos utilisateurs reçoivent les canaux de support." },
-  { title: "Rapports et suivi", desc: "Trimestriels pour Essentiel, mensuels pour Complète." },
+  { title: "Rapports et suivi", desc: "Annuel pour Essentiel, trimestriel pour Complète." },
 ];
 
 export const SERENITE_OPTIONS = [
@@ -226,7 +227,7 @@ export const SERENITE_CTA = {
   line2: "mérite une protection",
   line3: "professionnelle.",
   description:
-    "Protégez vos postes dès 29,99 € HT par mois ou confiez votre informatique quotidienne à TRINEXTA pour 79 € HT par poste et par mois. Sans frais standard de mise en service.",
+    "Protégez vos postes dès 39,99 € HT par mois ou confiez votre informatique quotidienne à TRINEXTA pour 79 € HT par poste et par mois. Sans frais standard de mise en service.",
   ctaLabel: "Demander mon devis Sérénité",
   ctaHref: SERENITE_DEVIS_HREF,
 } as const;
@@ -235,17 +236,17 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
     question: "Quel est le prix de TRINEXTA Sérénité ?",
     answer:
-      "Sérénité Essentiel coûte 29,99 € HT par poste et par mois, avec un engagement minimum de 12 mois. Sérénité Complète coûte 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service. Les options et prestations hors périmètre font l'objet d'un devis.",
+      "Sérénité Essentiel coûte 39,99 € HT par poste et par mois, avec un engagement minimum de 12 mois. Sérénité Complète coûte 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service. Les options et prestations hors périmètre font l'objet d'un devis.",
   },
   {
     question: "Quelle est la différence entre Sérénité Essentiel et Complète ?",
     answer:
-      "Essentiel couvre la protection EDR, la supervision et la maintenance préventive automatisée, avec un rapport trimestriel. Les interventions humaines de support sont facturées à part.\n\nComplète ajoute le support illimité pour les demandes couvertes, l'assistance à distance, le dépannage logiciel courant, une maintenance renforcée et un rapport mensuel.",
+      "Essentiel couvre la protection EDR, la supervision et la maintenance préventive automatisée, avec un rapport annuel. Les interventions humaines de support sont facturées à part.\n\nComplète ajoute le support illimité pour les demandes couvertes, l'assistance à distance, le dépannage logiciel courant, une maintenance renforcée et un rapport trimestriel.",
   },
   {
     question: "Pourquoi parler du prix d'un café ?",
     answer:
-      "Sérénité Essentiel coûte 29,99 € HT par poste et par mois. Rapporté à une journée, c'est l'ordre de grandeur d'un café. La facturation reste mensuelle.",
+      "Sérénité Essentiel coûte 39,99 € HT par poste et par mois. Rapporté à une journée, c'est l'ordre de grandeur d'un café. La facturation reste mensuelle.",
   },
   {
     question: "Pourquoi Essentiel demande-t-il un engagement de 12 mois ?",
@@ -274,7 +275,7 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   },
   {
     question: "Les rapports sont-ils inclus dans les deux formules ?",
-    answer: "Oui : un rapport trimestriel avec Essentiel, un rapport mensuel avec Complète.",
+    answer: "Oui : un rapport annuel avec Essentiel, un rapport trimestriel avec Complète.",
   },
   {
     question: "Les licences Microsoft 365 sont-elles incluses ?",

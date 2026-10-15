@@ -151,7 +151,7 @@ export const supportInformatiqueData: ServicePageProps = {
         points: [
           "Support utilisateurs illimité pour les demandes couvertes",
           "Assistance par téléphone, e-mail et prise en main à distance",
-          "Suivi des demandes et rapport mensuel",
+          "Suivi des demandes et rapport trimestriel",
           "79 € HT par poste et par mois, sans engagement de durée",
         ],
         cta: {

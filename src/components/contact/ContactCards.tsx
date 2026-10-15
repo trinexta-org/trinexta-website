@@ -41,9 +41,6 @@ const CONTACT_CARDS = [
         <a href="mailto:contact@trinexta.fr" className="text-secondary-strong font-black hover:underline block text-xl drop-shadow-lg">
           contact@trinexta.fr
         </a>
-        <Text variant="small" className="text-white/80 font-medium mt-2 drop-shadow-md">
-          support@trinexta.fr
-        </Text>
       </div>
     )
   }

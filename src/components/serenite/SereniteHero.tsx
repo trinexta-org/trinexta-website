@@ -27,9 +27,10 @@ export function SereniteHero() {
           <Heading
             as="h1"
             emphasis={false}
-            className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.1] text-white text-balance drop-shadow-xl"
+            className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.1] text-balance drop-shadow-xl"
           >
-            {hero.title}
+            <span className="text-white">{hero.titlePart1}</span>{" "}
+            <span className="text-secondary-soft">{hero.titlePart2}</span>
           </Heading>
 
           <Text className="mt-5 text-lg md:text-2xl font-semibold text-secondary-soft">
