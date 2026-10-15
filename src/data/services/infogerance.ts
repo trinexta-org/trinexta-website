@@ -150,7 +150,7 @@ export const infogeranceData: ServicePageProps = {
       {
         badge: "Offre packagée",
         title: "TRINEXTA Sérénité",
-        desc: "Supervision, maintenance préventive, protection des postes et, selon la formule, assistance aux utilisateurs. Deux formules par poste, dès 29,99 € HT/poste/mois.",
+        desc: "Supervision, maintenance préventive, protection des postes et, selon la formule, assistance aux utilisateurs. Deux formules par poste, dès 39,99 € HT/poste/mois.",
         points: [
           "Prestations et conditions précisées avant souscription",
           "Formule choisie selon votre nombre de collaborateurs",

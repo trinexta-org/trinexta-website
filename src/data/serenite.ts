@@ -37,8 +37,8 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
     id: "essentiel",
     nom: "Sérénité Essentiel",
     accroche: "La sécurité de vos postes, pour le prix d'un café par jour.",
-    prix: "29,99 €",
-    prixSchema: "29.99",
+    prix: "39,99 €",
+    prixSchema: "39.99",
     unite: "HT / poste / mois",
     pitch: "Les fondations de la sécurité informatique : protection EDR, supervision et maintenance préventive automatisée.",
     points: [
@@ -102,7 +102,7 @@ export const SERENITE_SOCLE = [
 
 // Seules les différences entre Essentiel et Complète.
 export const SERENITE_COMPARATIF: { critere: string; detail?: string; essentiel: string; complete: string }[] = [
-  { critere: "Prix mensuel par poste", essentiel: "29,99 € HT", complete: "79 € HT" },
+  { critere: "Prix mensuel par poste", essentiel: "39,99 € HT", complete: "79 € HT" },
   { critere: "Engagement minimum", essentiel: "12 mois", complete: "Aucun" },
   { critere: "Support utilisateurs", essentiel: "sur-devis", complete: "Illimité*" },
   {
@@ -227,7 +227,7 @@ export const SERENITE_CTA = {
   line2: "mérite une protection",
   line3: "professionnelle.",
   description:
-    "Protégez vos postes dès 29,99 € HT par mois ou confiez votre informatique quotidienne à TRINEXTA pour 79 € HT par poste et par mois. Sans frais standard de mise en service.",
+    "Protégez vos postes dès 39,99 € HT par mois ou confiez votre informatique quotidienne à TRINEXTA pour 79 € HT par poste et par mois. Sans frais standard de mise en service.",
   ctaLabel: "Demander mon devis Sérénité",
   ctaHref: SERENITE_DEVIS_HREF,
 } as const;
@@ -236,7 +236,7 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
     question: "Quel est le prix de TRINEXTA Sérénité ?",
     answer:
-      "Sérénité Essentiel coûte 29,99 € HT par poste et par mois, avec un engagement minimum de 12 mois. Sérénité Complète coûte 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service. Les options et prestations hors périmètre font l'objet d'un devis.",
+      "Sérénité Essentiel coûte 39,99 € HT par poste et par mois, avec un engagement minimum de 12 mois. Sérénité Complète coûte 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service. Les options et prestations hors périmètre font l'objet d'un devis.",
   },
   {
     question: "Quelle est la différence entre Sérénité Essentiel et Complète ?",
@@ -246,7 +246,7 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
     question: "Pourquoi parler du prix d'un café ?",
     answer:
-      "Sérénité Essentiel coûte 29,99 € HT par poste et par mois. Rapporté à une journée, c'est l'ordre de grandeur d'un café. La facturation reste mensuelle.",
+      "Sérénité Essentiel coûte 39,99 € HT par poste et par mois. Rapporté à une journée, c'est l'ordre de grandeur d'un café. La facturation reste mensuelle.",
   },
   {
     question: "Pourquoi Essentiel demande-t-il un engagement de 12 mois ?",
