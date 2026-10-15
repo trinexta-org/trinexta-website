@@ -6,7 +6,8 @@ import { getOffreContactHref } from "@/data/offres";
 export const SERENITE_DEVIS_HREF = "/contact?type=devis";
 
 export const SERENITE_HERO = {
-  title: "TRINEXTA Sérénité\u00a0: maintenance, cybersécurité et support informatique pour PME",
+  titlePart1: "TRINEXTA Sérénité\u00a0:",
+  titlePart2: "maintenance, cybersécurité et support informatique pour PME",
   accroche: "Votre informatique protégée, vos équipes accompagnées, votre activité préservée.",
   description:
     "Deux formules par poste, sans frais de mise en service : Essentiel pour protéger vos ordinateurs, Complète pour déléguer aussi l'assistance de vos collaborateurs. Depuis Évry-Courcouronnes, pour les entreprises de l'Essonne et d'Île-de-France.",
