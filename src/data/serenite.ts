@@ -307,3 +307,14 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
       "Appelez-nous au 09 78 25 07 46 ou écrivez à contact@trinexta.fr. Nous étudions le nombre de postes, la compatibilité technique et le niveau de service adapté.",
   },
 ];
+
+// Calculateur « nombre de postes » sous les cartes tarifaires.
+export const SERENITE_CALCULATEUR = {
+  surtitle: "Votre budget",
+  titre: "Combien de postes à équiper ?",
+  intro: "Indiquez le nombre d'ordinateurs de votre entreprise : le total mensuel s'affiche pour chaque formule.",
+  min: 1,
+  max: 100,
+  defaut: 10,
+  note: "Estimation HT hors options, licences et interventions hors périmètre. Le devis précise le tarif définitif selon votre parc.",
+} as const;
