@@ -16,11 +16,11 @@ import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { TransitionTitle } from "@/components/TransitionTitle";
 import { GridCards } from "@/components/layout/GridCards";
+import { BannerCTA } from "@/components/layout/BannerCTA";
 import { BreadcrumbJsonLd } from "../seo/BreadcrumbJsonLd";
 import { usePresence } from "@/hooks/usePresence";
 import { useCrossfade } from "@/hooks/useCrossfade";
 import { WaveDivider } from "@/components/ui/WaveDivider";
-import { CheckCircle2 } from "lucide-react";
 
 const bentoImageExtOverrides: Record<string, string> = {
   "infogerance/1": "webp",
