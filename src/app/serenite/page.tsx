@@ -20,7 +20,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 import { SERENITE_ESSENTIELLE } from "@/data/serenite-essentielle";
 
 export const metadata: Metadata = {
-  title: "Offre Sérénité - Infogérance complète | Trinexta",
+  title: "Offre Sérénité - Infogérance complète",
   description:
     "L'informatique PME clé en main. Support illimité, maintenance proactive et cybersécurité avancée.",
   alternates: {

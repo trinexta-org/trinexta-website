@@ -8,6 +8,7 @@ import { JsonLd, trinextaOrganization } from "@/components/seo/JsonLd";
 import { CookieBanner } from "@/components/seo/CookieBanner";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { CircuitBorders } from "@/components/layout/CircuitBorders";
+import { isIndexable } from "@/lib/site";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -36,6 +37,7 @@ export const metadata: Metadata = {
     default: "TRINEXTA",
     template: "%s | TRINEXTA",
   },
+  ...(!isIndexable && { robots: { index: false, follow: false } }),
   description:
     "TRINEXTA accompagne les entreprises sur l'infogérance, le cloud, la cybersécurité et la productivité.",
   openGraph: {
