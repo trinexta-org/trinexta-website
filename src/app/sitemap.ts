@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { sanityClient } from "@/lib/sanity";
 import { caseClients } from "@/data/cas-clients";
+import { isIndexable } from "@/lib/site";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
@@ -47,6 +48,8 @@ type ArticleSlug = {
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (!isIndexable) return [];
+
   const articles = await sanityClient
     .fetch<ArticleSlug[]>(
       `*[_type == "article" && (!defined(datePublication) || datePublication <= now())]{ slug, _updatedAt }`

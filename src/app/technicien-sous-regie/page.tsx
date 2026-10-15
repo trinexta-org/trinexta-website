@@ -17,7 +17,7 @@ import { TechnicienAssurances } from "@/components/technicien-sous-regie/Technic
 import { FinalCTA } from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
-  title: "Technicien sous régie - Régie & Renfort IT | Trinexta",
+  title: "Technicien sous régie - Régie & Renfort IT",
   description:
     "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
   alternates: {

@@ -15,7 +15,7 @@ import { ServicesPartners } from "@/components/services-annexes/ServicesPartners
 import { FinalCTA } from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
-  title: "Services Annexes IT & Cybersécurité | Trinexta",
+  title: "Services Annexes IT & Cybersécurité",
   description:
     "Prestations IT sur mesure et à la demande. Conseils, matériel, réseaux et sauvegardes professionnelles.",
   alternates: {
