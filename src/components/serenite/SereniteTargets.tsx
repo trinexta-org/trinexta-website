@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { SERENITE_POUR_QUI } from "@/data/serenite"
 
 const targets = [
     {
@@ -43,7 +44,12 @@ export function SereniteTargets() {
                 </div>
             </div>
 
-            <div className="mt-16 text-center px-6">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto px-6">
+                <p className="rounded-2xl border border-secondary/20 bg-surface-strong p-5 text-primary/80 leading-relaxed">{SERENITE_POUR_QUI.essentiel}</p>
+                <p className="rounded-2xl border border-secondary/20 bg-surface-strong p-5 text-primary/80 leading-relaxed">{SERENITE_POUR_QUI.complete}</p>
+            </div>
+
+            <div className="mt-8 text-center px-6">
                 <p className="text-primary/70 text-lg">
                     Vous avez un doute sur l&apos;éligibilité de votre structure ?{" "}
                     <Link
@@ -72,7 +78,7 @@ function TargetCard({ role, spec, image }: { role: string; spec: string; image: 
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
             </div>
             <div className="p-6 pt-4">
-                <h4 className="font-bold text-primary text-lg mb-1">{role}</h4>
+                <h3 className="font-bold text-primary text-lg mb-1">{role}</h3>
                 <p className="text-secondary-strong text-sm font-medium leading-relaxed">{spec}</p>
             </div>
         </div>

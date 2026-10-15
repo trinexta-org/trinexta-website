@@ -12,7 +12,7 @@ const services = [
   {
     id: 1,
     title: "Infogérance",
-    description: "**Pilotez** votre croissance, on gère le reste. **Maintenance proactive**, supervision 24/7 et gestion complète de votre parc matériel et logiciel.",
+    description: "**Pilotez** votre croissance, on gère le reste. **Maintenance proactive**, supervision continue et gestion complète de votre parc matériel et logiciel.",
     image: "/images/services/infogerance.webp",
     fillDir: "ltr",
     alt: "Techniciennes IT Trinexta inspectant une baie de serveurs pour assurer la supervision et l'infogérance d'une PME."

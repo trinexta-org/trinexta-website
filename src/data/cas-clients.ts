@@ -207,7 +207,7 @@ export const caseClients: CaseClient[] = [
         label: "Infogérance",
         href: "/infogerance",
         content:
-          "Mise à niveau des postes vers Windows 11 Pro pour activer BitLocker et la jonction Azure AD, puis adoption de l'Offre Essentielle pour la maintenance proactive et le prêt de PC en cas de panne.",
+          "Mise à niveau des postes vers Windows 11 Pro pour activer BitLocker et la jonction Azure AD, puis mise en place d'une maintenance proactive avec prêt de PC en cas de panne.",
       },
     ],
     benefits: [
