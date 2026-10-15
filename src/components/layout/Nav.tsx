@@ -28,6 +28,7 @@ export const menuItems: MenuItem[] = [
       { label: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" },
       { label: "Microsoft 365", href: "/microsoft-365" },
       { label: "Support Informatique", href: "/support-informatique" },
+      { label: "Maintenance Informatique", href: "/maintenance-informatique" },
       { label: "Solutions Métier", href: "/solutions-metier" },
       { label: "Technicien sous régie", href: "/technicien-sous-regie" },
       { label: "Services Annexes", href: "/services-annexes" },

@@ -99,7 +99,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/zone-dintervention-certifications",
-        destination: "/a-propos",
+        destination: "/zone-intervention",
         statusCode: 301,
       },
       {

@@ -9,6 +9,7 @@ const NAVIGATION = [
   { name: "Trinexta Studio", href: "/trinexta-studio" },
   { name: "Audit SEO gratuit", href: "/audit-seo" },
   { name: "Cas clients", href: "/cas-clients" },
+  { name: "Zone d'intervention", href: "/zone-intervention" },
   { name: "Blog Expertise", href: "/blog" },
   { name: "Nous rejoindre", href: "/nous-rejoindre" },
 ];
@@ -19,6 +20,7 @@ const SERVICES = [
   { name: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" },
   { name: "Microsoft 365", href: "/microsoft-365" },
   { name: "Support informatique", href: "/support-informatique" },
+  { name: "Maintenance informatique", href: "/maintenance-informatique" },
   { name: "Solutions métier", href: "/solutions-metier" },
   { name: "Technicien sous régie", href: "/technicien-sous-regie" },
   { name: "Services Annexes", href: "/services-annexes" },
