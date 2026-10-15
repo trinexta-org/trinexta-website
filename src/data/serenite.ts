@@ -47,7 +47,7 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
       "Mises à jour de sécurité Windows suivies",
       "Maintenance préventive automatisée de base",
       "Inventaire des postes couverts",
-      "Rapport trimestriel d'activité et de sécurité",
+      "Rapport annuel d'activité et de sécurité",
     ],
     conditions: [
       "Engagement minimum de 12 mois",
@@ -73,7 +73,7 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
       "Accompagnement Microsoft 365, Outlook et Teams",
       "Arrivées et départs de collaborateurs",
       "Coordination avec les éditeurs de logiciels",
-      "Rapport mensuel d'activité et de sécurité",
+      "Rapport trimestriel d'activité et de sécurité",
     ],
     conditions: [
       "Sans engagement de durée",
@@ -112,7 +112,7 @@ export const SERENITE_COMPARATIF: { critere: string; detail?: string; essentiel:
   },
   { critere: "Maintenance préventive", essentiel: "Basique", complete: "Avancée" },
   { critere: "Correctifs Windows", essentiel: "Sécurité", complete: "Sécurité et courants" },
-  { critere: "Rapport d'activité et de sécurité", essentiel: "Trimestriel", complete: "Mensuel" },
+  { critere: "Rapport d'activité et de sécurité", essentiel: "Annuel", complete: "Trimestriel" },
   { critere: "Conseils sur le parc", essentiel: "Sur demande", complete: "inclus" },
   { critere: "Intervention sur site", essentiel: "sur-devis", complete: "Selon contrat" },
 ];
@@ -177,13 +177,13 @@ export const SERENITE_SUPPORT = {
 export const SERENITE_RAPPORTS = [
   {
     formule: "Sérénité Essentiel",
-    frequence: "Rapport trimestriel",
-    desc: "Tous les trois mois, une synthèse de l'état du parc supervisé, des alertes significatives, des mises à jour suivies et des recommandations prioritaires.",
+    frequence: "Rapport annuel",
+    desc: "Une fois par an, une synthèse de l'état du parc supervisé, des alertes significatives, des mises à jour suivies et des recommandations prioritaires.",
   },
   {
     formule: "Sérénité Complète",
-    frequence: "Rapport mensuel",
-    desc: "Chaque mois, les indicateurs de supervision, les incidents traités, les interventions réalisées et les recommandations. Un support clair pour vos décisions.",
+    frequence: "Rapport trimestriel",
+    desc: "Tous les trois mois, les indicateurs de supervision, les incidents traités, les interventions réalisées et les recommandations. Un support clair pour vos décisions.",
   },
 ] as const;
 
@@ -200,7 +200,7 @@ export const SERENITE_ETAPES = [
   { title: "Validation de la formule", desc: "Une proposition précise le nombre de postes, le prix, les options et les conditions." },
   { title: "Installation des outils", desc: "Après accord, nous déployons les agents de supervision et de sécurité sur les postes compatibles." },
   { title: "Démarrage", desc: "Les outils remontent leurs informations. Pour Complète, vos utilisateurs reçoivent les canaux de support." },
-  { title: "Rapports et suivi", desc: "Trimestriels pour Essentiel, mensuels pour Complète." },
+  { title: "Rapports et suivi", desc: "Annuel pour Essentiel, trimestriel pour Complète." },
 ];
 
 export const SERENITE_OPTIONS = [
@@ -240,7 +240,7 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
     question: "Quelle est la différence entre Sérénité Essentiel et Complète ?",
     answer:
-      "Essentiel couvre la protection EDR, la supervision et la maintenance préventive automatisée, avec un rapport trimestriel. Les interventions humaines de support sont facturées à part.\n\nComplète ajoute le support illimité pour les demandes couvertes, l'assistance à distance, le dépannage logiciel courant, une maintenance renforcée et un rapport mensuel.",
+      "Essentiel couvre la protection EDR, la supervision et la maintenance préventive automatisée, avec un rapport annuel. Les interventions humaines de support sont facturées à part.\n\nComplète ajoute le support illimité pour les demandes couvertes, l'assistance à distance, le dépannage logiciel courant, une maintenance renforcée et un rapport trimestriel.",
   },
   {
     question: "Pourquoi parler du prix d'un café ?",
@@ -274,7 +274,7 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   },
   {
     question: "Les rapports sont-ils inclus dans les deux formules ?",
-    answer: "Oui : un rapport trimestriel avec Essentiel, un rapport mensuel avec Complète.",
+    answer: "Oui : un rapport annuel avec Essentiel, un rapport trimestriel avec Complète.",
   },
   {
     question: "Les licences Microsoft 365 sont-elles incluses ?",
