@@ -11,6 +11,7 @@ import { SereniteHero } from "@/components/serenite/SereniteHero";
 import { SereniteIntro } from "@/components/serenite/SereniteIntro";
 import { SereniteOffres } from "@/components/serenite/SereniteOffres";
 import { SereniteComparatif } from "@/components/serenite/SereniteComparatif";
+import { SereniteCalculateur } from "@/components/serenite/SereniteCalculateur";
 import { SerenitePillars } from "@/components/serenite/SerenitePillars";
 import { SereniteConcret } from "@/components/serenite/SereniteConcret";
 import { SereniteRapports } from "@/components/serenite/SereniteRapports";
@@ -155,6 +156,7 @@ export default function SerenitePage() {
           <Section container={false} className="pt-0 md:pt-0 lg:pt-0 pb-16 md:pb-20 lg:pb-20">
             <Container className="max-w-[1400px] space-y-12 md:space-y-16">
               <SereniteOffres />
+              <SereniteCalculateur />
               <SereniteComparatif />
               <div className="flex justify-center">
                 <Button asChild variant="secondary" size="lg" className="text-white">
