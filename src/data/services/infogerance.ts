@@ -55,7 +55,7 @@ export const infogeranceData: ServicePageProps = {
   localSeo: {
     subtitle: "Ancrage local",
     title: "Infogérance pour les PME d'Évry-Courcouronnes et de l'Essonne",
-    description: "Nous intervenons auprès des dirigeants qui veulent un parc stable, des postes suivis et un partenaire joignable quand l'activité ne peut pas attendre.",
+    description: "Nous intervenons auprès des dirigeants qui veulent un parc stable, des postes suivis et un partenaire joignable quand l'activité ne peut pas attendre. Pour les incidents du quotidien, notre [support informatique](/support-informatique) complète naturellement votre contrat d'infogérance.",
     items: [
       {
         title: "Zone d'intervention",
