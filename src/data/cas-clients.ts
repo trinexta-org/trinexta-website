@@ -32,6 +32,8 @@ export interface CaseClient {
   solutions: CaseClientService[]
   benefits: string[]
   metrics: CaseClientMetric[]
+  // Cas mis en vedette (accueil, haut de /cas-clients, première slide du hero)
+  featured?: { badge: string; teaser: string }
 }
 
 export const caseClientSectors = [
@@ -224,6 +226,11 @@ export const caseClients: CaseClient[] = [
   {
     slug: "piratage-sites-wordpress-ecommerce",
     label: "Cas n°4",
+    featured: {
+      badge: "Nouveau · Réponse à incident",
+      teaser:
+        "Plusieurs sites piratés, dont une boutique en ligne, une compromission installée depuis des semaines : voici comment TRINEXTA a contenu l'attaque sans couper l'activité.",
+    },
     clientName: "Entreprise francilienne",
     sector: "commerce",
     sectorLabel: "E-commerce",
@@ -283,6 +290,13 @@ export const caseClients: CaseClient[] = [
     ],
   },
 ]
+
+export const featuredCaseClient = caseClients.find((item) => item.featured)
+
+// Ordre d'affichage : le cas en vedette d'abord
+export const caseClientsOrdered = featuredCaseClient
+  ? [featuredCaseClient, ...caseClients.filter((item) => item !== featuredCaseClient)]
+  : caseClients
 
 export function getCaseClientBySlug(slug: string) {
   return caseClients.find((item) => item.slug === slug)

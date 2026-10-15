@@ -18,6 +18,8 @@ import { NewsletterCTA } from "@/components/blog/NewsletterCTA"
 import { CustomerReviews } from "@/components/CustomerReviews"
 import { Section } from "@/components/layout/Section"
 import { BannerCTA } from "@/components/layout/BannerCTA"
+import { CasClientFeatured } from "@/components/cas-clients/CasClientFeatured"
+import { featuredCaseClient } from "@/data/cas-clients"
 import { Button } from "@/components/ui/Button"
 import { WaveDivider } from "@/components/ui/WaveDivider"
 
@@ -82,6 +84,12 @@ export default function Home() {
       />
 
       <ServicesSection />
+
+      {featuredCaseClient && (
+        <Section className="pt-12 md:pt-16 pb-0 md:pb-0 lg:pb-0">
+          <CasClientFeatured item={featuredCaseClient} />
+        </Section>
+      )}
 
       <Section className="py-12 md:py-16">
         <BannerCTA
