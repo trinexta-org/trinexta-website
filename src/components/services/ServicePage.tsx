@@ -310,7 +310,7 @@ function ServiceTabs({
       <div
         role="tablist"
         aria-orientation="vertical"
-        className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 -mx-1 px-1 snap-x"
+        className="flex lg:flex-col gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-1 px-1 snap-x"
       >
         {details.map((detail, idx) => {
           const isActive = idx === active;
@@ -1681,16 +1681,16 @@ export function ServicePage({
                 )}
               </div>
 
-              <dl className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-px bg-white/10 border-t lg:border-t-0 lg:border-l border-white/10">
+              <dl className="order-first lg:order-none grid grid-cols-3 lg:grid-cols-1 gap-px bg-white/10 border-b lg:border-b-0 lg:border-l border-white/10">
                 {caseStudy.stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="bg-primary p-6 md:p-8 flex flex-col justify-center gap-1"
+                    className="bg-primary p-4 md:p-8 flex flex-col justify-center gap-1"
                   >
-                    <dt className="order-2 text-white/70 text-sm md:text-base">
+                    <dt className="order-2 text-white/70 text-xs md:text-base">
                       {stat.label}
                     </dt>
-                    <dd className="order-1 text-secondary-soft text-3xl md:text-5xl font-black">
+                    <dd className="order-1 text-secondary-soft text-2xl md:text-5xl font-black">
                       {stat.value}
                     </dd>
                   </div>
