@@ -26,7 +26,7 @@ export const cloudData: ServicePageProps = {
   offer: {
     subtitle: "Infrastructure résiliente et collaborative",
     title: "Ce que l'on fait concrètement",
-    description: "Nous ne nous contentons pas de louer du stockage. Nous concevons une infrastructure hybride intelligente qui combine la performance du stockage local avec la sécurité et la flexibilité du cloud. Chaque solution est pensée pour respecter la souveraineté de vos données et garantir votre agilité.",
+    description: "Nous ne nous contentons pas de louer du stockage. Nous concevons une infrastructure hybride intelligente qui combine la performance du stockage local avec la sécurité et la flexibilité du cloud. Chaque solution est pensée pour respecter la souveraineté de vos données et garantir votre agilité. Cette infrastructure s'inscrit dans notre [assistance informatique de proximité](/support-informatique) au quotidien.",
     features: [
       {
         title: "Stratégie de sauvegarde 3-2-1",
