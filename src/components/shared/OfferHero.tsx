@@ -16,17 +16,13 @@ interface OfferHeroProps {
 }
 
 export function OfferHero({ part1, part2, subtitles, imageSrc, announcement }: OfferHeroProps) {
-  const slides = subtitles.map((sub) => ({
-    part1,
-    part2,
-    subtitle: sub
-  }))
+  const slides = subtitles.map((subtitle) => ({ subtitle }))
 
   return (
     <HeroCarousel
       slides={slides}
       containerPadding="py-12 md:py-16 lg:py-20"
-      slideMinHeight="min-h-[250px]"
+      slideMinHeight="min-h-[140px] sm:min-h-[110px]"
       staticBackground={
         <Image
           src={imageSrc}
@@ -39,20 +35,20 @@ export function OfferHero({ part1, part2, subtitles, imageSrc, announcement }: O
         />
       }
       overlays={<div className="absolute inset-0 bg-primary/90" />}
-      renderSlide={(slide, _index, isActive) => (
-        <div>
-          <Heading
-            as={isActive ? "h1" : "h2"}
-            className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl"
-          >
-            <span className="text-white">{slide.part1}</span>{" "}
-            <span className="text-secondary-strong">{slide.part2}</span>
-          </Heading>
-
-          <Text className="mt-6 text-xl md:text-2xl text-white/90 max-w-2xl drop-shadow-md">
-            {slide.subtitle}
-          </Text>
-        </div>
+      // Le titre reste hors des slides : un seul h1, au lieu d'un h1 et de h2 dupliques
+      header={
+        <Heading
+          as="h1"
+          className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-xl"
+        >
+          <span className="text-white">{part1}</span>{" "}
+          <span className="text-secondary-strong">{part2}</span>
+        </Heading>
+      }
+      renderSlide={(slide) => (
+        <Text className="mt-6 text-xl md:text-2xl text-white/90 max-w-2xl drop-shadow-md">
+          {slide.subtitle}
+        </Text>
       )}
       footer={
         <>

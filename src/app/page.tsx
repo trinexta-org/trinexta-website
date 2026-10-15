@@ -24,12 +24,12 @@ import { Button } from "@/components/ui/Button"
 import { WaveDivider } from "@/components/ui/WaveDivider"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const title = "Partenaire Informatique à Évry, en Essonne | Trinexta";
+const title = "Prestataire informatique PME à Évry (91) | TRINEXTA";
 const description =
-  "Support illimité, maintenance proactive et cybersécurité pour les TPE et PME en Île-de-France. Intervention sur site et à distance depuis Évry.";
+  "Prestataire informatique des TPE et PME à Évry-Courcouronnes et en Essonne : infogérance, support, maintenance et cybersécurité, sur site ou à distance.";
 
 export const metadata: Metadata = {
-  title,
+  title: { absolute: title },
   description,
   alternates: {
     canonical: "/",

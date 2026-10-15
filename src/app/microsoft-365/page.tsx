@@ -2,13 +2,13 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation",
+  title: "Microsoft 365 pour PME : déploiement et sécurisation",
   description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",
   alternates: {
     canonical: "/microsoft-365",
   },
   openGraph: {
-    title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation | Trinexta",
+    title: "Microsoft 365 pour PME : déploiement et sécurisation | TRINEXTA",
     description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",
     url: "/microsoft-365",
     type: "website",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Microsoft 365 pour Entreprises : Déploiement & Sécurisation | Trinexta",
+    title: "Microsoft 365 pour PME : déploiement et sécurisation | TRINEXTA",
     description: "Transformez Microsoft 365 en un moteur de productivité. Trinexta gère votre migration, la sécurité de votre tenant, SharePoint, Teams et optimise vos licences pour une rentabilité maximale.",
     images: ["/images/og-default.png"],
   },
@@ -26,8 +26,8 @@ const ms365Data = {
   serviceSlug: "microsoft-365",
   
   hero: {
-    titlePart1: "Microsoft",
-    titlePart2: "365", 
+    titlePart1: "Microsoft 365",
+    titlePart2: "pour TPE et PME en Essonne",
     description: "Microsoft 365 est le moteur de votre entreprise, mais sans configuration experte, il reste sous-exploité et vulnérable. Trinexta déploie, sécurise et optimise votre environnement pour transformer cet outil en un véritable avantage concurrentiel. Libérez votre productivité tout en maîtrisant parfaitement vos coûts et votre sécurité.",
     ctaText: "Optimiser mon environnement Microsoft 365",
     ctaHref: "/contact"
