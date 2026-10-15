@@ -106,9 +106,7 @@ export const cybersecuriteData: ServicePageProps = {
     title: "Intervention après le piratage de plusieurs sites web",
     context: "Une entreprise francilienne confrontée à une compromission de son infrastructure web.\n\nAprès des dysfonctionnements affectant plusieurs sites internet, dont une boutique e-commerce, TRINEXTA a été sollicitée pour rechercher l'origine de l'incident et engager les premières mesures de sécurisation. L'investigation a permis d'identifier des activités malveillantes remontant à plusieurs semaines, des portes dérobées et des mécanismes de manipulation du référencement naturel.",
     stats: [
-      { value: "63", label: "fichiers malveillants isolés" },
-      { value: "Accès", label: "administratifs renforcés" },
-      { value: "Sites", label: "maintenus accessibles" },
+      { value: "63", label: "fichiers malveillants isolés et conservés pour l'investigation" },
     ],
     results: [
       "63 fichiers malveillants placés en quarantaine, avec conservation des éléments nécessaires à l'investigation.",

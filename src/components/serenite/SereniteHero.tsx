@@ -24,10 +24,6 @@ export function SereniteHero() {
 
       <Container className="relative z-10 py-12 md:py-16 lg:py-20">
         <div className="max-w-4xl animate-service-hero">
-          <span className="block text-secondary-soft text-xs md:text-sm font-mono font-bold uppercase tracking-widest mb-4">
-            {hero.surtitle}
-          </span>
-
           <Heading
             as="h1"
             emphasis={false}

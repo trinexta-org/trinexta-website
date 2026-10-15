@@ -18,7 +18,7 @@ export function SerenitePillars() {
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/40 to-primary" />
-            <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">
+            <span className="absolute right-4 top-4 rounded-full bg-primary px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
               {p.num}
             </span>
           </div>

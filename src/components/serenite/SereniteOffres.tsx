@@ -34,15 +34,15 @@ export function SereniteOffres() {
                 <div className="space-y-3 pr-20 md:pr-28">
                   <span
                     className={`inline-flex rounded-full px-3 py-1 text-xs font-black uppercase tracking-widest ${
-                      dark ? "bg-secondary text-white" : "bg-secondary/15 text-secondary-strong"
+                      dark ? "bg-white text-primary" : "bg-background text-primary"
                     }`}
                   >
                     {offre.id === "essentiel" ? "Protégez" : "Déléguez"}
                   </span>
-                  <Heading as="h3" className={`text-3xl md:text-4xl ${dark ? "text-white" : "text-primary"}`}>
+                  <Heading as="h3" emphasis={false} className={`text-3xl md:text-4xl ${dark ? "text-white" : "text-primary"}`}>
                     {offre.nom}
                   </Heading>
-                  <p className={`text-lg font-semibold ${dark ? "text-secondary-soft" : "text-secondary-strong"}`}>
+                  <p className={`text-lg font-semibold ${dark ? "text-secondary-soft" : "text-primary"}`}>
                     {offre.accroche}
                   </p>
                 </div>

@@ -305,12 +305,37 @@ function ServiceTabs({
 }) {
   const [active, setActive] = useState(0);
 
+  /*
+   * Fleches gauche/droite (liste horizontale en mobile) et haut/bas
+   * (colonne en desktop), Home/End : pattern ARIA tabs a activation automatique.
+   */
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const last = details.length - 1;
+    const next: Record<string, number> = {
+      ArrowRight: active === last ? 0 : active + 1,
+      ArrowDown: active === last ? 0 : active + 1,
+      ArrowLeft: active === 0 ? last : active - 1,
+      ArrowUp: active === 0 ? last : active - 1,
+      Home: 0,
+      End: last,
+    };
+    if (!(event.key in next)) return;
+    event.preventDefault();
+    const target = next[event.key];
+    setActive(target);
+    const tab = document.getElementById(`service-tab-${target}`);
+    tab?.focus();
+    tab?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(240px,320px)_1fr] gap-4 lg:gap-8">
+      <div className="relative -mx-1 lg:mx-0 after:content-[''] after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-12 after:bg-gradient-to-l after:from-surface after:to-transparent lg:after:hidden">
       <div
         role="tablist"
-        aria-orientation="vertical"
-        className="flex lg:flex-col gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-1 px-1 snap-x"
+        aria-label="Nos services"
+        onKeyDown={handleKeyDown}
+        className="flex lg:flex-col gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-1 pr-12 lg:pr-1 snap-x"
       >
         {details.map((detail, idx) => {
           const isActive = idx === active;
@@ -321,6 +346,7 @@ function ServiceTabs({
               id={`service-tab-${idx}`}
               aria-selected={isActive}
               aria-controls={`service-panel-${idx}`}
+              tabIndex={isActive ? 0 : -1}
               onClick={() => setActive(idx)}
               className={`
                 snap-start shrink-0 lg:shrink text-left rounded-xl border px-4 py-3 md:px-5 md:py-4
@@ -347,6 +373,7 @@ function ServiceTabs({
           );
         })}
       </div>
+      </div>
 
       {details.map((detail, idx) => (
         <div
@@ -355,11 +382,12 @@ function ServiceTabs({
           id={`service-panel-${idx}`}
           aria-labelledby={`service-tab-${idx}`}
           hidden={idx !== active}
+          tabIndex={0}
           className="rounded-2xl md:rounded-3xl border border-border bg-background overflow-hidden"
         >
           <div className="grid grid-cols-1 xl:grid-cols-[1fr_280px]">
             <div className="p-6 md:p-10 space-y-5 md:space-y-6">
-              <Heading as="h3" className="text-foreground text-2xl md:text-3xl">
+              <Heading as="h3" emphasis={false} className="text-foreground text-2xl md:text-3xl">
                 {detail.title}
               </Heading>
 
@@ -775,24 +803,22 @@ export function ServicePage({
             </div>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link href={hero.ctaHref} className="w-full sm:w-auto">
-                <Button
-                  variant="secondary"
-                  className="w-full sm:w-auto text-white h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center"
-                >
-                  {hero.ctaText}
-                </Button>
-              </Link>
+              <Button
+                asChild
+                variant="secondary"
+                className="w-full sm:w-auto text-white h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center"
+              >
+                <Link href={hero.ctaHref}>{hero.ctaText}</Link>
+              </Button>
 
               {hero.secondaryCta && (
-                <Link href={hero.secondaryCta.href} className="w-full sm:w-auto">
-                  <Button
-                    variant="outline"
-                    className="w-full sm:w-auto h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center border-white/40 text-white hover:bg-white/10"
-                  >
-                    {hero.secondaryCta.text}
-                  </Button>
-                </Link>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full sm:w-auto h-auto py-3.5 px-6 md:py-5 md:px-8 text-sm md:text-base font-bold whitespace-normal text-center border-white/40 text-white hover:bg-white/10"
+                >
+                  <Link href={hero.secondaryCta.href}>{hero.secondaryCta.text}</Link>
+                </Button>
               )}
             </div>
           </div>
@@ -923,14 +949,13 @@ export function ServicePage({
             title={banner.title}
             description={banner.description}
             action={
-              <Link href={banner.ctaHref}>
-                <Button
-                  variant="secondary"
-                  className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
-                >
-                  {banner.ctaText}
-                </Button>
-              </Link>
+              <Button
+                asChild
+                variant="secondary"
+                className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+              >
+                <Link href={banner.ctaHref}>{banner.ctaText}</Link>
+              </Button>
             }
           />
         </Section>
@@ -1140,7 +1165,7 @@ export function ServicePage({
       </Section>
 
       {/* =========================================================
-          BLOC "EN BREF" (optionnel) — timeline verticale
+          BLOC "EN BREF" (optionnel) - timeline verticale
       ========================================================= */}
       {keyFacts && keyFacts.length > 0 && (
         <Section id="en-bref" className="bg-surface pb-16 md:pb-24">
@@ -1211,6 +1236,7 @@ export function ServicePage({
                   )}
                   <Heading
                     as="h3"
+                    emphasis={false}
                     className={`text-2xl md:text-3xl ${item.highlighted ? "text-white" : "text-foreground"}`}
                   >
                     {item.title}
@@ -1234,14 +1260,13 @@ export function ServicePage({
                       ))}
                     </ul>
                   )}
-                  <Link href={item.cta.href} className="mt-auto pt-2">
-                    <Button
-                      variant={item.highlighted ? "secondary" : "outline"}
-                      className={`w-full h-auto py-3.5 px-6 text-sm md:text-base font-bold whitespace-normal ${item.highlighted ? "text-white" : ""}`}
-                    >
-                      {item.cta.text}
-                    </Button>
-                  </Link>
+                  <Button
+                    asChild
+                    variant={item.highlighted ? "secondary" : "outline"}
+                    className={`mt-auto w-full h-auto py-3.5 px-6 text-sm md:text-base font-bold whitespace-normal ${item.highlighted ? "text-white" : ""}`}
+                  >
+                    <Link href={item.cta.href}>{item.cta.text}</Link>
+                  </Button>
                 </div>
               </FadeIn>
             ))}
@@ -1285,7 +1310,7 @@ export function ServicePage({
                   <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest">
                     Étape {idx + 1}
                   </span>
-                  <Heading as="h3" className="text-foreground text-lg md:text-xl font-bold leading-tight">
+                  <Heading as="h3" emphasis={false} className="text-foreground text-lg md:text-xl font-bold leading-tight">
                     {step.title}
                   </Heading>
                   <Text className="text-muted-foreground text-sm md:text-base leading-relaxed">
@@ -1297,14 +1322,13 @@ export function ServicePage({
 
           {process.cta && (
             <div className="flex justify-center mt-10 md:mt-14">
-              <Link href={process.cta.href}>
-                <Button
-                  variant="secondary"
-                  className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
-                >
-                  {process.cta.text}
-                </Button>
-              </Link>
+              <Button
+                asChild
+                variant="secondary"
+                className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+              >
+                <Link href={process.cta.href}>{process.cta.text}</Link>
+              </Button>
             </div>
           )}
         </Section>
@@ -1341,14 +1365,13 @@ export function ServicePage({
                   )}
                 </div>
 
-                <Link href={localSeo.ctaHref} className="inline-flex">
-                  <Button
-                    variant="secondary"
-                    className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
-                  >
-                    {localSeo.ctaText}
-                  </Button>
-                </Link>
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+                >
+                  <Link href={localSeo.ctaHref}>{localSeo.ctaText}</Link>
+                </Button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1419,7 +1442,7 @@ export function ServicePage({
                     shadow-2xl
                     transition-[flex,border-color,opacity]
                     duration-500
-                    ease-[cubic-bezier(0.34,1.56,0.64,1)]
+                    ease-[cubic-bezier(0.22,1,0.36,1)]
                     ${
                       isActive
                         ? "border-2 border-secondary"
@@ -1554,14 +1577,13 @@ export function ServicePage({
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href={incidentResponse.ctaHref}>
-                <Button
-                  variant="secondary"
-                  className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
-                >
-                  {incidentResponse.ctaLabel}
-                </Button>
-              </Link>
+              <Button
+                asChild
+                variant="secondary"
+                className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+              >
+                <Link href={incidentResponse.ctaHref}>{incidentResponse.ctaLabel}</Link>
+              </Button>
 
               <Link
                 href={incidentResponse.planHref}
@@ -1636,8 +1658,12 @@ export function ServicePage({
       {caseStudy && (
         <Section id="cas-client" className="bg-surface pb-16 md:pb-24">
           <div className="rounded-2xl md:rounded-3xl bg-primary text-white overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="p-6 md:p-10 lg:p-12 space-y-5">
+            <div
+              className={`grid grid-cols-1 ${caseStudy.stats.length > 1 ? "lg:grid-cols-[1.1fr_0.9fr]" : ""}`}
+            >
+              <div
+                className={`p-6 md:p-10 lg:p-12 space-y-5 ${caseStudy.stats.length > 1 ? "" : "max-w-4xl"}`}
+              >
                 <span className="text-secondary-soft text-xs font-mono font-bold uppercase tracking-widest block">
                   {caseStudy.surtitle}
                 </span>
@@ -1666,14 +1692,13 @@ export function ServicePage({
                     {caseStudy.conclusion}
                   </Text>
                 )}
-                <Link href={caseStudy.cta.href} className="inline-flex">
-                  <Button
-                    variant="secondary"
-                    className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
-                  >
-                    {caseStudy.cta.text}
-                  </Button>
-                </Link>
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="text-white h-auto py-3.5 px-6 md:py-4 md:px-8 text-sm md:text-base font-bold"
+                >
+                  <Link href={caseStudy.cta.href}>{caseStudy.cta.text}</Link>
+                </Button>
                 {caseStudy.note && (
                   <Text className="text-white/60 text-xs md:text-sm">
                     {caseStudy.note}
@@ -1681,11 +1706,20 @@ export function ServicePage({
                 )}
               </div>
 
-              <dl className="order-first lg:order-none grid grid-cols-3 lg:grid-cols-1 gap-px bg-white/10 border-b lg:border-b-0 lg:border-l border-white/10">
+              <dl
+                className={`order-first grid gap-px bg-white/10 border-b border-white/10 ${
+                  caseStudy.stats.length > 1
+                    ? "grid-cols-3 lg:order-none lg:grid-cols-1 lg:border-b-0 lg:border-l"
+                    : "grid-cols-1"
+                }`}>
                 {caseStudy.stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="bg-primary p-4 md:p-8 flex flex-col justify-center gap-1"
+                    className={`bg-primary p-4 md:p-8 flex justify-center gap-1 ${
+                      caseStudy.stats.length > 1
+                        ? "flex-col"
+                        : "flex-col sm:flex-row sm:items-center sm:justify-start sm:gap-6 md:px-10 lg:px-12"
+                    }`}
                   >
                     <dt className="order-2 text-white/70 text-xs md:text-base">
                       {stat.label}

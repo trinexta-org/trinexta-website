@@ -75,7 +75,7 @@ export function SereniteIntro() {
           <div
             className={`
               absolute rounded-2xl overflow-hidden shadow-xl
-              transition-all duration-700 ease-[cubic-bezier(0.34,1.3,0.64,1)]
+              transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
               ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}
             `}
             style={{
@@ -91,7 +91,7 @@ export function SereniteIntro() {
           <div
             className={`
               absolute rounded-2xl overflow-hidden shadow-2xl
-              transition-all duration-700 ease-[cubic-bezier(0.34,1.3,0.64,1)]
+              transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
               pointer-events-none
               ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-12"}
             `}

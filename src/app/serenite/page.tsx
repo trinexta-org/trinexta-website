@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/Button";
 import { Heading, Text } from "@/components/ui/Typography";
 import { SereniteHero } from "@/components/serenite/SereniteHero";
 import { SereniteIntro } from "@/components/serenite/SereniteIntro";
-import { SereniteStats } from "@/components/serenite/SereniteStats";
 import { SereniteOffres } from "@/components/serenite/SereniteOffres";
 import { SereniteComparatif } from "@/components/serenite/SereniteComparatif";
 import { SerenitePillars } from "@/components/serenite/SerenitePillars";
@@ -93,26 +92,40 @@ const serviceJsonLd = {
   })),
 };
 
+/*
+ * Section a en-tete compact (surtitre + h2), meme grammaire que ServicePage.
+ * Le grand TransitionTitle est reserve a la section Tarifs.
+ */
 function Bloc({
   surtitle,
-  line1,
-  line2,
+  title,
+  intro,
   id,
   children,
 }: {
   surtitle: string;
-  line1: string;
-  line2: string;
+  title: string;
+  intro?: string;
   id?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div id={id} className="space-y-12 scroll-mt-32">
-      <TransitionTitle surtitle={surtitle} line1={line1} line2={line2} />
-      <Section container={false} className="py-0">
-        <Container className="max-w-[1400px]">{children}</Container>
-      </Section>
-    </div>
+    <Section id={id} container={false} className="py-0 md:py-0 lg:py-0 scroll-mt-32">
+      <Container className="max-w-[1400px]">
+        <div className="text-center max-w-3xl mx-auto space-y-3 md:space-y-4 mb-10 md:mb-12">
+          <span className="text-secondary-strong text-xs font-mono font-bold uppercase tracking-widest block">
+            {surtitle}
+          </span>
+          <Heading as="h2" className="text-primary text-3xl md:text-4xl">
+            {title}
+          </Heading>
+          {intro && (
+            <Text className="text-primary/75 text-base md:text-lg leading-relaxed">{intro}</Text>
+          )}
+        </div>
+        {children}
+      </Container>
+    </Section>
   );
 }
 
@@ -125,11 +138,10 @@ export default function SerenitePage() {
       <section className="relative bg-primary">
         <SereniteHero />
 
-        <div className="w-full relative z-10 pt-12 pb-24">
-          <Section container={false} className="pt-0">
-            <Container className="max-w-[1400px] space-y-24">
+        <div className="w-full relative z-10 pt-8 pb-8 md:pb-12">
+          <Section container={false} className="py-0 md:py-0 lg:py-0">
+            <Container className="max-w-[1400px]">
               <SereniteIntro />
-              <SereniteStats />
             </Container>
           </Section>
         </div>
@@ -138,46 +150,46 @@ export default function SerenitePage() {
       <WaveDivider from="primary" to="surface" amplitude="ample" crossing={1} />
 
       <section className="relative bg-surface">
-        <div className="space-y-24 py-12">
-          <Bloc id="offres" surtitle="Tarifs" line1="Deux formules" line2="pour votre entreprise">
-            <div className="space-y-16">
+        <div id="offres" className="scroll-mt-32 pt-4">
+          <TransitionTitle surtitle="Tarifs" line1="Deux formules" line2="pour votre entreprise" />
+          <Section container={false} className="pt-0 md:pt-0 lg:pt-0 pb-16 md:pb-20 lg:pb-20">
+            <Container className="max-w-[1400px] space-y-12 md:space-y-16">
               <SereniteOffres />
               <SereniteComparatif />
               <div className="flex justify-center">
                 <Button asChild variant="secondary" size="lg" className="text-white">
-                  <Link href={SERENITE_DEVIS_HREF}>Demander une étude pour mon entreprise</Link>
+                  <Link href={SERENITE_DEVIS_HREF}>Demander mon devis Sérénité</Link>
                 </Button>
               </div>
-            </div>
-          </Bloc>
+            </Container>
+          </Section>
+        </div>
 
-          <Bloc surtitle="Pourquoi Sérénité" line1="Pourquoi choisir" line2="TRINEXTA Sérénité ?">
+        <div className="space-y-16 md:space-y-24 pb-16 md:pb-24">
+          <Bloc surtitle="Pourquoi Sérénité" title="Pourquoi choisir TRINEXTA *Sérénité* ?">
             <SerenitePillars />
           </Bloc>
 
           <SereniteConcret />
 
-          <Bloc surtitle="Rapports" line1="Des rapports pour" line2="piloter votre informatique">
+          <Bloc surtitle="Rapports" title="Des rapports pour *piloter* votre informatique">
             <SereniteRapports />
           </Bloc>
 
-          <Bloc surtitle="Bénéficiaires" line1="Une offre pensée pour" line2="les TPE et PME en Essonne">
-            <Text className="text-center text-primary/75 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
-              {SERENITE_LOCAL}
-            </Text>
+          <Bloc surtitle="Pour qui" title="Une offre pensée pour les TPE et PME en *Essonne*" intro={SERENITE_LOCAL}>
             <SereniteTargets />
           </Bloc>
 
-          <Bloc surtitle="Mise en place" line1="Comment démarrer" line2="avec Sérénité ?">
+          <Bloc surtitle="Mise en place" title="Comment démarrer avec *Sérénité* ?">
             <SereniteEtapes />
           </Bloc>
 
-          <Bloc surtitle="Options" line1="Options pour les" line2="besoins spécifiques">
+          <Bloc surtitle="Options" title="Options pour les besoins *spécifiques*">
             <div className="space-y-10">
               <SereniteOptions />
               <div className="flex justify-center">
                 <Button asChild variant="outline" size="lg">
-                  <Link href={SERENITE_DEVIS_HREF}>Demander une offre personnalisée</Link>
+                  <Link href={SERENITE_DEVIS_HREF}>Demander mon devis Sérénité</Link>
                 </Button>
               </div>
             </div>
