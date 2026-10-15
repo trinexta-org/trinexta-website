@@ -7,14 +7,14 @@ import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import { Badge } from "@/components/ui/Badge"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
-import { caseClients } from "@/data/cas-clients"
+import { caseClientsOrdered } from "@/data/cas-clients"
 
 const highlightedWords = ["bases", "pro", "transformés", "silence", "modernisés", "vitesse", "supérieure"]
 
 export function CasClientsHero() {
   return (
     <HeroCarousel
-      slides={caseClients}
+      slides={caseClientsOrdered}
       slideMinHeight="min-h-[300px] sm:min-h-[280px] md:min-h-[320px]"
       renderBackground={(slide, i) => (
         <Image

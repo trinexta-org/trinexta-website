@@ -4,7 +4,7 @@ import { Phone, Mail, Search } from "lucide-react"
 import { Nav } from "./Nav"
 import { MobileMenu } from "./MobileMenu"
 import { Container } from "./Container"
-import { Button } from "@/components/ui/Button"
+import { HeaderCta } from "./HeaderCta"
 
 export function Header() {
   return (
@@ -54,9 +54,15 @@ export function Header() {
                 <span className="hidden sm:inline">Audit SEO gratuit</span>
               </Link>
 
-              <Button asChild variant="secondary" size="sm" className="hidden lg:inline-flex font-bold">
-                <Link href="/estimation">Estimer mon projet</Link>
-              </Button>
+              <a
+                href="tel:0978250746"
+                aria-label="Appeler TRINEXTA au 09 78 25 07 46"
+                className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors lg:hidden"
+              >
+                <Phone className="h-4 w-4 stroke-[1.75]" />
+              </a>
+
+              <HeaderCta />
 
               <MobileMenu />
             </div>
