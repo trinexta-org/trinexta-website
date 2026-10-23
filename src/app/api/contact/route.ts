@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: "Votre demande a bien été envoyée. L'équipe Trinexta vous contactera sous peu.",
+        message: "Merci, votre demande est bien arrivée. Si elle est urgente, appelez le 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h.",
         id: savedContact.id,
       },
       { status: 200 }
