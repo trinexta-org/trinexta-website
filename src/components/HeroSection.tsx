@@ -7,6 +7,7 @@ import { HeroCarousel } from "@/components/ui/HeroCarousel";
 import { Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { homeHeroH1, homeHeroSlides } from "@/data/heroes";
+import { ACCUEIL_CHAPEAU, ACCUEIL_CTA } from "@/data/accueil";
 import { CoffeeShield } from "@/components/serenite/CoffeeShield";
 
 export function HeroSection() {
@@ -72,7 +73,7 @@ export function HeroSection() {
                 "quotidien",
                 "souplesse",
                 "suivie",
-                "café",
+                "joignable",
               ];
               const isItalic =
                 word.startsWith("*") && word.endsWith("*") && word.length > 2;
@@ -117,32 +118,30 @@ export function HeroSection() {
       footer={
         <>
           <div className="mt-6 md:mt-10 glass-panel rounded-xl p-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:w-fit">
-            <Link href="/nos-offres" className="w-full sm:w-auto">
+            <Link href={ACCUEIL_CTA.ctaHref} className="w-full sm:w-auto">
               <Button
                 variant="secondary"
                 size="lg"
                 className="w-full text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all bg-secondary hover:bg-secondary/90"
               >
-                Découvrir l&apos;offre Sérénité
+                Être rappelé
               </Button>
             </Link>
 
-            <Link href="/contact" className="w-full sm:w-auto">
+            <Link href="/serenite" className="w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="lg"
                 className="w-full text-center text-white border-white hover:bg-white/10 cursor-pointer"
               >
-                Demandez à être rappelé
+                Voir les offres et les prix
               </Button>
             </Link>
           </div>
 
           <div className="mt-10 md:mt-12 pt-6">
             <Text className="text-sm md:text-base text-white/80 font-medium leading-relaxed max-w-3xl drop-shadow-md text-balance">
-              Arrêtez de perdre du temps et de l&apos;argent avec une
-              informatique mal suivie. Découvrez Trinexta et avancez avec des
-              solutions simples, fiables et adaptées à votre entreprise.
+              {ACCUEIL_CHAPEAU}
             </Text>
 
             <div className="mt-4 flex w-fit max-w-full items-center gap-2 glass-panel rounded-lg px-3 py-2">
@@ -151,7 +150,7 @@ export function HeroSection() {
                 variant="small"
                 className="font-bold tracking-wider uppercase text-white"
               >
-                Sans engagement · Réponse sous 24h
+                L&apos;humain avant les tickets.
               </Text>
             </div>
           </div>

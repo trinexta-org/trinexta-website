@@ -1,7 +1,6 @@
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
 import Image from "next/image"
 import React from "react"
-import { SERENITE_ESSENTIELLE } from "@/data/serenite-essentielle"
 
 export type HomeHeroSlide = {
   title: string
@@ -15,25 +14,20 @@ export type HomeHeroSlide = {
 // Les titres des slides tournent et ne sont que des accroches.
 export const homeHeroH1 = "Prestataire informatique pour TPE et PME à Évry-Courcouronnes"
 
+// Les sous-titres reprennent les trois repères de l'accueil. Aucun prix ici :
+// les montants restent sur /serenite.
 export const homeHeroSlides: HomeHeroSlide[] = [
   {
     title: "*Simplifiez* votre informatique au quotidien",
-    subtitle: "Support illimité, maintenance proactive et cybersécurité incluse pour travailler avec plus de sérénité."
+    subtitle: "Un technicien titulaire pour votre entreprise, qui connaît vos locaux, vos postes et vos collaborateurs."
   },
   {
-    title: SERENITE_ESSENTIELLE.heroTitle,
-    subtitle: SERENITE_ESSENTIELLE.heroSubtitle,
-    badge: SERENITE_ESSENTIELLE.badge,
-    cta: { label: SERENITE_ESSENTIELLE.ctaLabel, href: SERENITE_ESSENTIELLE.ctaHref },
-    visual: "coffee-shield",
-  },
-  {
-    title: "*Renforcez* votre support avec souplesse",
-    subtitle: "Un technicien support adapté à vos besoins, pour accompagner votre activité sans contrainte inutile."
+    title: "Une équipe *joignable* au quotidien",
+    subtitle: "Notre équipe support répond du lundi au vendredi, de 8 h 30 à 19 h, par téléphone, e-mail et prise en main à distance."
   },
   {
     title: "*Gardez* une informatique fiable et bien suivie",
-    subtitle: "Surveillance, maintenance et suivi proactif pour limiter les pannes et gagner en tranquillité."
+    subtitle: "À distance ou dans vos locaux, selon le besoin : supervision, maintenance préventive et protection de vos postes."
   }
 ]
 

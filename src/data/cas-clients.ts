@@ -301,3 +301,15 @@ export const caseClientsOrdered = featuredCaseClient
 export function getCaseClientBySlug(slug: string) {
   return caseClients.find((item) => item.slug === slug)
 }
+
+// Cas mis en avant sur l'accueil (infogérance d'une PME), distinct du cas en vedette de /cas-clients.
+const homeCase = caseClients.find((item) => item.slug === "modernisation-it-pme-essonne")
+
+export const homeCaseClient: CaseClient | undefined = homeCase && {
+  ...homeCase,
+  featured: {
+    badge: "Modernisation du parc d'une PME en Essonne",
+    teaser:
+      "Cinq postes sous Office 2007, 8 Go de RAM saturés et des sauvegardes sur clé USB : le parc a été modernisé sans tout remplacer, avec Microsoft 365, 16 Go de mémoire et des écrans Dell 27 pouces.",
+  },
+}

@@ -7,23 +7,28 @@ import { SectionBackground } from "@/components/ui/SectionBackground"
 const steps = [
   {
     num: "01",
-    title: "Audit",
-    description: "Analyse approfondie de votre infrastructure actuelle pour identifier les failles de sécurité et les opportunités d'optimisation matérielle ou logicielle.",
+    title: "Premier échange",
+    description: "Nombre de postes, logiciels utilisés, difficultés actuelles : par téléphone ou dans vos locaux.",
   },
   {
     num: "02",
-    title: "Conception",
-    description: "Élaboration d'une architecture informatique sur mesure, parfaitement alignée avec vos objectifs stratégiques, vos contraintes métiers et votre budget.",
+    title: "État des lieux du parc, offert",
+    description: "Inventaire, versions des systèmes, accès administrateurs, protections et sauvegardes existantes.",
   },
   {
     num: "03",
-    title: "Déploiement",
-    description: "Intégration fluide et sécurisée de vos nouvelles solutions, planifiée avec précision pour garantir zéro interruption de votre activité quotidienne.",
+    title: "Proposition écrite",
+    description: "Formule, nombre de postes, options et conditions, avant toute signature.",
   },
   {
     num: "04",
-    title: "Suivi continu",
-    description: "Supervision proactive, maintenance préventive et support technique réactif pour une informatique qui reste sous contrôle.",
+    title: "Mise en place",
+    description: "Installation des outils de supervision et de protection sur les postes compatibles, présentation de votre technicien titulaire.",
+  },
+  {
+    num: "05",
+    title: "Suivi",
+    description: "Demandes traitées au quotidien selon votre formule, rapport d'activité annuel ou trimestriel.",
   },
 ]
 
@@ -42,18 +47,18 @@ export function ApproachSection() {
                 direction="right"
                 className="text-white/70 text-xs md:text-sm font-bold tracking-widest mb-4 block"
               >
-                Notre Méthodologie
+                Comment ça se passe
               </FadeIn>
 
               <FadeIn direction="right" delay={0.1}>
                 <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-white tracking-normal leading-tight">
-                  Une approche <br /> en <span className="text-secondary-soft">4 étapes</span>
+                  De votre premier appel <br /> au <span className="text-secondary-soft">premier mois</span>
                 </Heading>
               </FadeIn>
 
               <FadeIn direction="right" delay={0.2}>
                 <Text className="mt-6 text-white/70 text-base md:text-lg max-w-md leading-relaxed">
-                  Nous ne nous contentons pas de résoudre des problèmes informatiques. Nous construisons une base solide pour votre croissance.
+                  Chaque étape est cadrée par écrit : vous savez ce qui est installé, ce qui est couvert et ce qui ne l&apos;est pas.
                 </Text>
               </FadeIn>
             </div>

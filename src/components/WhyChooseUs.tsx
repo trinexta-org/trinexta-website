@@ -10,31 +10,31 @@ import { SectionBackground } from "@/components/ui/SectionBackground"
 const reasons = [
   {
     id: 1,
-    title: "Équipe experte",
-    description: "Vous bénéficiez d'un accompagnement assuré par des professionnels capables de comprendre vos enjeux, de traiter vos demandes avec sérieux et de vous orienter vers des solutions adaptées.",
+    title: "Une équipe support qui connaît votre environnement",
+    description: "Vos appels et vos incidents sont traités par notre équipe interne, qui dispose de la documentation de votre parc : vous n'avez pas à tout réexpliquer à chaque appel.",
     image: "/images/why-us/equipe.webp",
-    alt: "Équipe d'experts informatiques Trinexta collaborant sur un projet IT pour une PME en Île-de-France.",
+    alt: "Équipe support TRINEXTA collaborant sur le suivi informatique d'une PME en Île-de-France.",
   },
   {
     id: 2,
-    title: "Solutions sur mesure",
-    description: "Nos prestations sont pensées pour les TPE et PME, avec une approche utile, lisible et sans complexité inutile.",
+    title: "Un technicien titulaire",
+    description: "Il connaît vos locaux, vos postes et vos collaborateurs, et se déplace quand une intervention l'exige. Pas de frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry ; le temps passé sur site est facturé selon votre contrat.",
     image: "/images/why-us/sur-mesure.webp",
-    alt: "Technicien Trinexta configurant une solution d'infogérance sur mesure sur un poste de travail.",
+    alt: "Technicien TRINEXTA configurant un poste de travail dans les locaux d'un client.",
   },
   {
     id: 3,
-    title: "Interlocuteur unique",
-    description: "Vous gagnez en simplicité avec un contact privilégié pour centraliser vos demandes et suivre plus facilement vos sujets informatiques.",
+    title: "Des outils reconnus",
+    description: "SentinelOne pour la protection des postes, NinjaOne pour la supervision et la maintenance à distance.",
     image: "/images/why-us/interlocuteur.webp",
-    alt: "Ordinateur portable affichant le tableau de bord de supervision proactive et de reporting IT Trinexta pour une PME.",
+    alt: "Ordinateur portable affichant un tableau de bord de supervision des postes.",
   },
   {
     id: 4,
-    title: "Transparence totale",
-    description: "Nos engagements sont clairs, nos interventions sont cadrées, et nos tarifs annoncés sans surprise.",
+    title: "Des conditions écrites",
+    description: "Horaires, périmètre, objectifs de délai et résiliation figurent dans nos niveaux de service et nos conditions générales.",
     image: "/images/why-us/transparence.webp",
-    alt: "Experte informatique de l'équipe Trinexta souriante lors d'une séance de brainstorming sur l'architecture réseau d'un client."
+    alt: "Membre de l'équipe TRINEXTA lors d'un échange avec un client."
   },
 ]
 

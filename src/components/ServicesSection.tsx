@@ -12,7 +12,7 @@ const services = [
   {
     id: 1,
     title: "Infogérance",
-    description: "**Pilotez** votre croissance, on gère le reste. **Maintenance proactive**, supervision continue et gestion complète de votre parc matériel et logiciel.",
+    description: "Nous gérons votre parc comme le ferait un **service interne** : postes, comptes, mises à jour, **maintenance préventive**, fournisseurs.",
     image: "/images/services/infogerance.webp",
     fillDir: "ltr",
     alt: "Techniciennes IT Trinexta inspectant une baie de serveurs pour assurer la supervision et l'infogérance d'une PME."
@@ -20,42 +20,42 @@ const services = [
   {
     id: 2,
     title: "Support",
-    description: "Une **assistance illimitée** pour vos équipes. Résolution instantanée de vos incidents à **distance** ou intervention rapide **sur site**.",
+    description: "Vos collaborateurs appellent ou écrivent à **notre équipe**, qui dispose de la **documentation de votre environnement**.",
     image: "/images/services/support.webp",
     fillDir: "rtl",
-    alt: "Téléphone classique symbolisant l'assistance informatique illimitée et le support technique réactif proposés par Trinexta."
+    alt: "Téléphone symbolisant l'assistance informatique proposée par TRINEXTA aux collaborateurs des TPE et PME."
   },
   {
     id: 3,
     title: "Cybersécurité",
-    description: "**Blindez** vos systèmes. **Audits de sécurité**, EDR nouvelle génération, protection anti-ransomware et **sauvegardes immuables**.",
+    description: "Protection **EDR SentinelOne** sur chaque poste couvert : elle analyse les comportements suspects et peut **bloquer ou isoler** un poste selon sa configuration.",
     image: "/images/services/cybersecurite-v2.webp",
     fillDir: "ltr",
-    alt: "Analyste en cybersécurité supervisant des tableaux de bord de détection de menaces dans un centre opérationnel de sécurité."
+    alt: "Écrans de supervision de la sécurité des postes, illustrant la protection EDR SentinelOne."
   },
   {
     id: 4,
-    title: "Cloud",
-    description: "**Modernisez** votre infrastructure. Hébergement souverain, serveurs dédiés et **Plan de Reprise d'Activité (PRA)** hautement disponible.",
+    title: "Sauvegarde",
+    description: "**En option** : une sauvegarde étudiée selon vos données et votre activité, **hébergée en France**, pour préparer leur reprise en cas d'incident.",
     image: "/images/services/cloud-v2.webp",
     fillDir: "rtl",
-    alt: "Allée déserte entre deux rangées de baies de serveurs dans un datacenter moderne, illustrant l'hébergement cloud souverain et la haute disponibilité."
+    alt: "Allée entre deux rangées de baies de serveurs dans un datacenter, illustrant la sauvegarde des données hébergée en France."
   },
   {
     id: 5,
     title: "Microsoft 365",
-    description: "**Collaborez** sans limite. Migration sans coupure, sécurisation des tenants et **optimisation de vos licences** d'entreprise.",
+    description: "Comptes, licences, messagerie, **Teams** et **OneDrive** : mise en place et gestion au quotidien.",
     image: "/images/services/microsoft-v2.webp",
     fillDir: "ltr",
     alt: "Ordinateur portable affichant la messagerie, l'agenda et une visioconférence de la suite Microsoft 365."
   },
   {
     id: 6,
-    title: "Solutions Métier",
-    description: "Des outils qui épousent vos **processus**. Téléphonie VoIP, réseaux multisites et intégration de **logiciels spécialisés**.",
+    title: "Téléphonie et réseau",
+    description: "Réseau local, **Wi-Fi**, **téléphonie** : diagnostic et mise en place selon votre site.",
     image: "/images/services/solutions-v2.webp",
     fillDir: "rtl",
-    alt: "Téléphone IP professionnel raccordé à un switch réseau, illustrant la téléphonie VoIP et les réseaux multisites."
+    alt: "Téléphone IP professionnel raccordé à un switch réseau, illustrant la téléphonie et le réseau d'entreprise."
   },
 ]
 
@@ -109,11 +109,11 @@ const getServiceUrl = (title: string) => {
     "Infogérance": "/infogerance",
     "Support": "/support-informatique",
     "Cybersécurité": "/cybersecurite",
-    "Cloud": "/cloud-sauvegarde",
+    "Sauvegarde": "/cloud-sauvegarde",
     "Microsoft 365": "/microsoft-365",
-    "Solutions Métier": "/solutions-metier"
+    "Téléphonie et réseau": "/solutions-metier"
   };
-  return map[title] || "/nos-offres";
+  return map[title] || "/serenite";
 };
 
 export function ServicesSection() {
