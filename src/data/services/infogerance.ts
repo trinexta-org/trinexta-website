@@ -6,13 +6,13 @@ export const infogeranceData: ServicePageProps = {
 
   hero: {
     titlePart1: "Infogérance informatique",
-    titlePart2: "pour TPE et PME en Essonne",
+    titlePart2: "pour TPE et PME à Évry et en Essonne",
     description:
-      "Votre informatique fonctionne. Votre entreprise avance. Basée à Évry-Courcouronnes, TRINEXTA gère, maintient et sécurise le parc informatique des TPE et PME de l'Essonne et d'Île-de-France, avec un interlocuteur qui connaît votre entreprise.\n\nL'humain avant les tickets.",
-    ctaText: "Demander une étude de mon parc informatique",
-    ctaHref: "/contact",
+      "Votre informatique fonctionne, votre entreprise avance. Depuis notre bureau d'Évry-Courcouronnes, TRINEXTA gère, maintient et sécurise le parc informatique des TPE et PME de l'agglomération Grand Paris Sud, de l'Essonne et d'Île-de-France, avec un technicien titulaire qui connaît votre entreprise.\n\nL'humain avant les tickets.",
+    ctaText: "Demander un état des lieux de mon parc",
+    ctaHref: "/contact#formulaire",
     secondaryCta: {
-      text: "Découvrir l'offre Sérénité",
+      text: "Voir les formules et les prix",
       href: "/serenite",
     },
   },
@@ -25,7 +25,7 @@ export const infogeranceData: ServicePageProps = {
     },
     title: "Votre informatique ne doit pas ralentir votre activité",
     description:
-      "Un poste qui refuse de démarrer, une messagerie inaccessible, un logiciel métier bloqué : derrière chaque panne, des collaborateurs ralentis et parfois des clients qui attendent.\n\nPour une TPE ou une PME, un service informatique interne n'est pas toujours justifié. L'infogérance informatique permet d'externaliser tout ou partie de cette gestion auprès d'un prestataire spécialisé, dans un cadre de services défini avec vous.\n\nVous gardez la maîtrise de vos outils et de vos décisions. Nous prenons en charge leur gestion quotidienne.",
+      "Un poste qui refuse de démarrer, une messagerie inaccessible, un logiciel métier bloqué : derrière chaque panne, des collaborateurs ralentis et parfois des clients qui attendent.\n\nPour une TPE ou une PME, un informaticien salarié n'est pas toujours justifié. L'infogérance permet de confier tout ou partie de cette gestion à un prestataire, dans un périmètre écrit.\n\nVous gardez la maîtrise de vos outils et de vos décisions ; nous prenons en charge leur gestion quotidienne.",
     painPoints: [
       "Pannes et lenteurs qui interrompent le travail des équipes",
       "Un salarié qui dépanne ses collègues au lieu de faire son métier",
@@ -35,14 +35,14 @@ export const infogeranceData: ServicePageProps = {
   },
 
   offer: {
-    subtitle: "Nos services d'infogérance",
+    subtitle: "Ce que nous prenons en charge",
     transition: {
       line1: "Ce que nous",
       line2: "prenons en charge",
     },
-    title: "Nos services d'infogérance informatique pour les entreprises",
+    title: "Ce que comprend notre infogérance",
     description:
-      "Support, maintenance informatique d'entreprise, sécurité, gestion de parc informatique : chaque service s'intègre au périmètre défini avec vous.",
+      "Le contenu exact dépend de la formule : le support des utilisateurs, la double authentification, la sensibilisation à l'hameçonnage et la réponse à incident cyber sont inclus dans Sérénité Complète ; avec Sérénité Essentiel, les alertes sont traitées par un technicien et l'assistance aux utilisateurs est sur devis.",
     details: [
       {
         title: "Support et assistance utilisateurs",
@@ -53,7 +53,7 @@ export const infogeranceData: ServicePageProps = {
           "Diagnostic des incidents Windows et applications courantes",
           "Installation et configuration des logiciels professionnels",
           "Préparation du poste des nouveaux collaborateurs",
-          "Suivi des demandes jusqu'à résolution ou transmission",
+          "Suivi de chaque demande jusqu'à sa clôture",
           "Coordination avec les éditeurs de logiciels, selon le périmètre",
         ],
         link: {
@@ -64,17 +64,21 @@ export const infogeranceData: ServicePageProps = {
       {
         title: "Supervision et maintenance préventive",
         intro:
-          "Une informatique bien entretenue demande moins d'interventions d'urgence. Nous suivons l'état des équipements couverts avec NinjaOne, notre outil professionnel de supervision et de gestion à distance.",
+          "Espace disque qui se réduit, mises à jour en échec, matériel instable : certains signes annoncent une panne. La maintenance préventive, réalisée avec NinjaOne, consiste à les repérer et à agir avant qu'ils n'arrêtent vos équipes. Elle est incluse dans Sérénité Essentiel et Sérénité Complète.",
         items: [
-          "Surveillance des indicateurs de santé des postes",
-          "Détection des alertes et anomalies système",
-          "Suivi des mises à jour Windows et logiciels compatibles",
-          "Contrôle de la mémoire, du processeur et du stockage",
-          "Repérage des équipements qui se dégradent",
-          "Déploiement à distance de correctifs validés",
+          "Supervision de l'état des postes : disque, mémoire, processeur, mises à jour",
+          "Correctifs Windows et logiciels compatibles déployés à distance",
+          "Inventaire du parc et alertes",
+          "Recommandations de renouvellement",
+          "En curatif : diagnostic à distance, réparation logicielle, intervention sur site si nécessaire",
+          "Remplacement de pièces, matériel, serveurs et NAS chiffrés à part",
         ],
         note:
-          "La supervision permet de repérer certaines anomalies en amont. Elle réduit les interruptions évitables, sans supprimer tout risque de panne.",
+          "Elle réduit les interruptions évitables ; elle ne supprime pas tout risque de panne. Un poste ancien peut souvent être prolongé (mémoire, disque SSD, réinstallation propre) : nous le faisons quand c'est rentable et nous vous le disons quand ça ne l'est plus.",
+        link: {
+          text: "Exemple : modernisation du parc d'une PME en Essonne",
+          href: "/cas-clients/modernisation-it-pme-essonne",
+        },
       },
       {
         title: "Cybersécurité et protection des postes",
@@ -82,11 +86,11 @@ export const infogeranceData: ServicePageProps = {
           "Les TPE et PME sont aussi exposées à l'hameçonnage, aux logiciels malveillants et aux rançongiciels. Selon l'offre souscrite, nous intégrons la protection de vos postes à la gestion informatique.",
         items: [
           "Déploiement et administration de l'EDR SentinelOne",
-          "Surveillance des alertes de sécurité des postes couverts",
+          "Alertes de sécurité des postes couverts suivies par un technicien",
           "Gestion des correctifs de sécurité",
-          "Renforcement de la configuration des postes",
           "Sécurisation des accès professionnels",
-          "Suivi des incidents de sécurité dans le périmètre prévu",
+          "Double authentification et sensibilisation à l'hameçonnage (Sérénité Complète)",
+          "Réponse à incident cyber sur les postes et comptes couverts (Sérénité Complète)",
         ],
         link: {
           text: "Découvrir nos solutions de cybersécurité",
@@ -127,14 +131,14 @@ export const infogeranceData: ServicePageProps = {
       {
         title: "Sauvegarde et continuité",
         intro:
-          "Avoir une sauvegarde ne suffit pas : il faut savoir ce qui est protégé, à quelle fréquence et comment restaurer. Nous évaluons, mettons en place et suivons votre stratégie de sauvegarde.",
+          "Avoir une sauvegarde ne suffit pas : il faut savoir ce qui est protégé, à quelle fréquence et comment restaurer. La sauvegarde est une option hors forfait, proposée après étude.",
         items: [
           "Identification des données critiques",
-          "Choix des solutions adaptées",
-          "Définition des objectifs de restauration",
-          "Contrôles réguliers des sauvegardes",
+          "Solution proposée après étude de vos données et de votre activité",
+          "Données hébergées en France",
+          "Préparation de leur reprise en cas d'incident",
         ],
-        note: "Capacité et modalités de restauration sont définies selon votre environnement et votre contrat.",
+        note: "Option hors forfait Sérénité, chiffrée selon votre environnement.",
         link: {
           text: "Découvrir nos solutions Cloud et Sauvegarde",
           href: "/cloud-sauvegarde",
@@ -143,6 +147,25 @@ export const infogeranceData: ServicePageProps = {
     ],
   },
 
+  keyFacts: [
+    {
+      label: "Définition",
+      value: "L'infogérance consiste à confier à un prestataire la gestion courante de votre informatique : postes, comptes utilisateurs, mises à jour, sécurité, fournisseurs.",
+    },
+    {
+      label: "Pour qui",
+      value: "Les TPE et PME d'Évry-Courcouronnes, de l'Essonne et d'Île-de-France, sous contrat facturé par poste et par mois.",
+    },
+    {
+      label: "Interlocuteurs",
+      value: "Un technicien titulaire pour le terrain ; les appels et incidents sont traités par l'équipe support, du lundi au vendredi de 8 h 30 à 19 h.",
+    },
+    {
+      label: "Maintenance préventive",
+      value: "Automatisée et incluse dans les deux formules Sérénité.",
+    },
+  ],
+
   formulas: {
     subtitle: "Une offre à votre taille",
     title: "Une infogérance adaptée à la taille de votre entreprise",
@@ -150,10 +173,10 @@ export const infogeranceData: ServicePageProps = {
       {
         badge: "Offre packagée",
         title: "TRINEXTA Sérénité",
-        desc: "Supervision, maintenance préventive, protection des postes et, selon la formule, assistance aux utilisateurs. Deux formules par poste, dès 39,99 € HT/poste/mois.",
+        desc: "Supervision, maintenance préventive, protection des postes et, selon la formule, assistance aux utilisateurs. Deux formules facturées par poste et par mois.",
         points: [
-          "Prestations et conditions précisées avant souscription",
-          "Formule choisie selon votre nombre de collaborateurs",
+          "Sérénité Essentiel : engagement de 12 mois, rapport annuel",
+          "Sérénité Complète : sans durée minimale, préavis de 2 mois, rapport trimestriel",
           "Aucun frais de mise en service",
         ],
         cta: {
@@ -182,84 +205,84 @@ export const infogeranceData: ServicePageProps = {
   },
 
   process: {
-    subtitle: "Reprise de votre parc",
-    title: "Comment se déroule la reprise de votre parc informatique ?",
+    subtitle: "Changer de prestataire informatique",
+    title: "Changer de prestataire informatique : une reprise préparée",
     description:
-      "Changer de prestataire ou démarrer une première infogérance demande de la méthode. Nous organisons la transition progressivement, selon vos contraintes.",
+      "Une reprise préparée limite l'impact sur le travail de vos équipes. Prévenez votre prestataire actuel en respectant votre préavis ; nous coordonnons ensuite la suite avec lui quand c'est possible. Avant de résilier, vérifiez que vous seront remis les comptes administrateurs Microsoft 365 ou Google Workspace, les accès au nom de domaine, à la messagerie, au routeur, au pare-feu et au Wi-Fi, les licences et contrats éditeurs, l'emplacement des sauvegardes et l'inventaire du parc : ils appartiennent à votre entreprise. Le calendrier de reprise est établi après inventaire des accès, des équipements et des dépendances.",
     steps: [
       {
         title: "Comprendre votre environnement",
-        desc: "Nous échangeons avec votre direction ou votre référent pour identifier équipements, applications essentielles et difficultés.",
+        desc: "Échange avec la direction ou votre référent sur les équipements, les applications essentielles et les difficultés.",
       },
       {
-        title: "Réaliser l'état des lieux",
-        desc: "Inventaire, versions des systèmes, accès administratifs, protections et sauvegardes : les anomalies sont documentées et priorisées.",
+        title: "État des lieux, offert",
+        desc: "Inventaire, versions des systèmes, accès administrateurs, protections et sauvegardes ; anomalies documentées et classées par priorité.",
       },
       {
-        title: "Déployer et organiser la transition",
-        desc: "Après validation, nous déployons les outils de gestion et de sécurité, puis fixons canaux de support et interlocuteurs.",
+        title: "Accès, documentation et outils",
+        desc: "Récupération des accès, changement des mots de passe administrateurs, documentation centralisée, agents NinjaOne et SentinelOne sur les postes compatibles.",
       },
       {
-        title: "Assurer le suivi",
-        desc: "Supervision, maintenance, assistance et suivi des actions : la stabilité de votre environnement progresse, avec plus de visibilité.",
+        title: "Transition",
+        desc: "Coordination avec votre ancien prestataire pendant son préavis quand c'est possible, puis présentation de votre technicien titulaire.",
       },
     ],
     cta: {
-      text: "Organiser un premier échange avec TRINEXTA",
-      href: "/contact",
+      text: "Préparer ma reprise de parc",
+      href: "/contact#formulaire",
     },
   },
 
   localSeo: {
     subtitle: "Proximité en Essonne",
-    title: "Votre prestataire informatique à Évry-Courcouronnes",
+    title: "Infogérance à Évry-Courcouronnes et dans l'agglomération Grand Paris Sud",
     description:
-      "TRINEXTA dispose d'un bureau au 7 rue Montespan, 91000 Évry-Courcouronnes, au cœur de l'Essonne. Nous accompagnons les entreprises du Grand Paris Sud et, plus largement, l'infogérance en Île-de-France.\n\nPour les incidents du quotidien, notre [support informatique](/support-informatique) complète votre contrat d'infogérance.",
+      "Notre bureau est au 7 rue Montespan, à Évry-Courcouronnes. Interventions sur site dans toute l'Île-de-France. Déplacement sans frais pour les interventions programmées dans un rayon de 15 km autour d'Évry ; au-delà, déplacement facturé selon le devis. Le temps passé sur site reste facturé selon le contrat.\n\nPour les incidents du quotidien, notre [support informatique](/support-informatique) complète votre contrat d'infogérance.",
     items: [
       {
         title: "Communes couvertes",
         desc: "Évry-Courcouronnes, Corbeil-Essonnes, Ris-Orangis, Bondoufle, Lisses, Grigny et communes voisines, puis le reste de l'Essonne et de l'Île-de-France.",
       },
       {
-        title: "À distance et sur site",
-        desc: "L'essentiel du support et de la supervision se fait à distance. Les déplacements sont organisés selon les besoins et le contrat.",
+        title: "À distance d'abord, sur site quand il le faut",
+        desc: "La plupart des demandes, la supervision et les mises à jour se traitent à distance. Poste qui ne démarre plus, nouveau collaborateur, matériel à vérifier : votre technicien titulaire vient dans vos locaux.",
       },
       {
         title: "Des PME aux réalités différentes",
         desc: "Un cabinet comptable, un commerce ou une entreprise du bâtiment n'ont pas les mêmes contraintes. Nous adaptons l'accompagnement.",
       },
       {
-        title: "Un interlocuteur proche",
-        desc: "La proximité facilite les échanges avec les dirigeants et la préparation des interventions sur site.",
+        title: "Un technicien titulaire",
+        desc: "Il connaît vos locaux, vos postes et vos collaborateurs ; les appels et incidents sont traités par l'équipe support, du lundi au vendredi de 8 h 30 à 19 h.",
       },
     ],
-    ctaText: "Demander une étude de mon parc",
-    ctaHref: "/contact",
+    ctaText: "Demander un état des lieux de mon parc",
+    ctaHref: "/contact#formulaire",
   },
 
   benefits: {
-    subtitle: "Pourquoi choisir TRINEXTA",
+    subtitle: "Votre contrat d'infogérance",
     transition: {
-      line1: "Pourquoi",
-      line2: "TRINEXTA",
+      line1: "Votre contrat",
+      line2: "en clair",
     },
-    title: "Pourquoi choisir TRINEXTA pour votre infogérance ?",
+    title: "Votre contrat d'infogérance, en clair",
     items: [
       {
-        title: "Un accompagnement humain",
-        desc: "Des échanges directs, des explications compréhensibles et un suivi clair. Vos collaborateurs expliquent leur problème sans vocabulaire technique. L'humain avant les tickets guide notre relation client.",
+        title: "Facturation et durée",
+        desc: "Par poste et par mois, prix détaillés sur la page Sérénité, sans frais de mise en service. Sérénité Complète sans durée minimale, préavis de 2 mois ; Sérénité Essentiel, engagement de 12 mois. Rapport annuel (Essentiel) ou trimestriel (Complète).",
       },
       {
-        title: "Une approche préventive",
-        desc: "Grâce à la supervision et au suivi du parc, nous identifions les anomalies récurrentes, anticipons la maintenance et vous conseillons sur les améliorations utiles.",
+        title: "Horaires et délais",
+        desc: "Support humain du lundi au vendredi, de 8 h 30 à 19 h ; supervision automatisée en continu. Pour un incident critique signalé pendant les heures d'ouverture, notre objectif est une prise en charge sous 30 minutes : c'est le début du traitement, pas un délai de résolution. Le périmètre figure dans nos niveaux de service.",
       },
       {
-        title: "Des responsabilités claires",
-        desc: "Prestations incluses, demandes hors contrat, modalités de support et d'engagement : chaque élément est compréhensible avant le démarrage.",
+        title: "Hors forfait",
+        desc: "Licences, sauvegarde (option, données hébergées en France), serveurs, NAS, réseau, projets et matériel, sur devis. Environnements plus complexes (plusieurs sites, serveurs, applications spécifiques) : proposition établie après analyse.",
       },
       {
-        title: "Un partenaire qui suit votre évolution",
-        desc: "Recrutements, renouvellement du parc, Microsoft 365, sécurité : nous vous accompagnons quand vos besoins changent.",
+        title: "Sur site",
+        desc: "Pas de frais de déplacement dans un rayon de 15 km autour d'Évry ; le temps passé sur site est facturé selon le contrat.",
       },
     ],
   },
@@ -268,22 +291,27 @@ export const infogeranceData: ServicePageProps = {
     {
       question: "Qu'est-ce que l'infogérance informatique ?",
       answer:
-        "C'est confier à un prestataire externe tout ou partie de la gestion de votre système informatique : maintenance des postes, assistance aux utilisateurs, supervision, cybersécurité, administration de certains services. Le périmètre dépend du contrat et de vos besoins.",
+        "C'est confier à un prestataire tout ou partie de la gestion de votre informatique : maintenance des postes, assistance aux utilisateurs, supervision, cybersécurité, administration de certains services. Le périmètre est fixé par le contrat.",
     },
     {
       question: "Quelle est la différence entre maintenance informatique et infogérance ?",
       answer:
-        "La maintenance vise surtout à entretenir et réparer des équipements. L'infogérance organise dans la durée la gestion de votre environnement informatique, en associant support, supervision, maintenance, sécurité et conseil.",
+        "La maintenance entretient et répare les équipements. L'infogérance organise dans la durée la gestion de votre environnement : support, supervision, maintenance, sécurité et conseil.",
+    },
+    {
+      question: "Infogérance, contrat de maintenance, dépannage : que choisir ?",
+      answer:
+        "Le dépannage ponctuel intervient quand quelque chose casse, à l'intervention et sur devis : ce sont nos [interventions sur devis](/services-annexes). Le contrat de maintenance suit vos postes de façon planifiée, par poste et par mois : c'est Sérénité Essentiel. L'infogérance suit en continu votre parc et vos demandes, par poste et par mois : c'est Sérénité Complète.",
     },
     {
       question: "Combien coûte une prestation d'infogérance pour une PME ?",
       answer:
-        "Le tarif dépend du nombre de postes, des services inclus, du niveau de support et de la complexité de l'environnement. Les tarifs et prestations de nos offres standardisées sont détaillés sur notre page Sérénité. Pour un environnement spécifique, nous établissons une proposition personnalisée.\n\n[Consulter les offres Sérénité](/serenite)",
+        "Le prix dépend du nombre de postes et du niveau de service. Nos deux formules sont facturées par poste et par mois ; leurs prix et ce qu'elles couvrent sont détaillés sur la page Sérénité. Pour un environnement spécifique, nous établissons une proposition.\n\n[Consulter les offres Sérénité](/serenite)",
     },
     {
       question: "Faut-il s'engager sur une durée minimale ?",
       answer:
-        "Cela dépend de l'offre et des prestations choisies : certaines formules prévoient une durée minimale, d'autres non. Durée, renouvellement et résiliation sont communiqués avant la signature.",
+        "Sérénité Complète est sans durée minimale, avec un préavis de 2 mois. Sérénité Essentiel demande un engagement de 12 mois.",
     },
     {
       question: "L'infogérance est-elle adaptée à une entreprise de moins de 10 salariés ?",
@@ -298,12 +326,17 @@ export const infogeranceData: ServicePageProps = {
     {
       question: "Intervenez-vous directement dans les locaux des entreprises ?",
       answer:
-        "Oui, nous organisons des interventions sur site en Essonne et en Île-de-France. Leur disponibilité, leur facturation éventuelle et leurs modalités dépendent de l'offre souscrite et de votre localisation.",
+        "Oui. Votre technicien titulaire se déplace quand une intervention l'exige. Pas de frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry ; le temps sur site est facturé selon votre contrat.",
     },
     {
       question: "Pouvez-vous reprendre un parc déjà géré par un autre prestataire ?",
       answer:
         "Oui. Nous étudions d'abord l'existant : équipements, services essentiels, accès administratifs et responsabilités de chaque intervenant. L'objectif est une reprise maîtrisée qui limite les perturbations.",
+    },
+    {
+      question: "Et si l'ancien prestataire tarde à transmettre les accès ?",
+      answer:
+        "Recensez les comptes, licences, données et documents nécessaires, ainsi que les modalités de restitution prévues par votre contrat. Nous vous aidons à les faire valoir auprès des éditeurs, par exemple Microsoft ou l'organisme qui gère votre nom de domaine, quand c'est possible. Nous ne donnons pas de conseil juridique.",
     },
     {
       question: "Est-ce que TRINEXTA peut gérer Microsoft 365 ?",
@@ -316,24 +349,24 @@ export const infogeranceData: ServicePageProps = {
         "Oui. Faire appel à un prestataire ne transfère pas la propriété de vos données. Les accès et opérations techniques sont encadrés contractuellement, avec des règles de confidentialité adaptées.",
     },
     {
-      question: "Comment contacter le support informatique TRINEXTA ?",
+      question: "Comment contacter TRINEXTA ?",
       answer:
-        "Nos clients contactent le support par les canaux définis dans leur contrat. Pour une première demande commerciale, appelez le 09 78 25 07 46 ou écrivez à contact@trinexta.fr.",
+        "Nos clients utilisent les canaux de support prévus à leur contrat. Pour une première demande, appelez le 09 78 25 07 46 ou écrivez à contact@trinexta.fr.",
     },
   ],
 
   cta: {
     line1: "Confiez votre",
-    line2: "informatique à un",
-    line3: "partenaire proche",
+    line2: "informatique à une",
+    line3: "équipe proche",
     description:
-      "Quelques postes ou un parc plus important : échangeons sur votre environnement, vos difficultés et vos priorités pour définir une solution adaptée. L'humain avant les tickets.",
-    buttonText: "Demander une étude de mon parc",
-    buttonHref: "/contact",
+      "Quelques postes ou un parc plus important : parlons de votre environnement, de vos difficultés et de vos priorités. Téléphone : 09 78 25 07 46, du lundi au vendredi, de 8 h 30 à 19 h.",
+    buttonText: "Demander un état des lieux de mon parc",
+    buttonHref: "/contact#formulaire",
   },
 
   schemaOverride: {
-    name: "Infogérance informatique pour TPE et PME en Essonne",
+    name: "Infogérance et maintenance informatique",
     serviceType: "Infogérance informatique",
     areaServed: ["Évry-Courcouronnes", "Corbeil-Essonnes", "Essonne", "Île-de-France"],
   },
