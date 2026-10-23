@@ -4,28 +4,33 @@ import { FooterNewsletter } from "@/components/shared/FooterNewsletter";
 import { SOCIAL_LINKS } from "@/data/social-links";
 
 const NAVIGATION = [
-  { name: "Accueil", href: "/" },
-  { name: "Sérénité", href: "/serenite" },
-  { name: "Trinexta Studio", href: "/trinexta-studio" },
-  { name: "Audit SEO gratuit", href: "/audit-seo" },
+  { name: "Offre Sérénité", href: "/serenite" },
   { name: "Cas clients", href: "/cas-clients" },
-  { name: "Blog Expertise", href: "/blog" },
+  { name: "Blog", href: "/blog" },
+  { name: "Ordinateur ou compte piraté", href: "/charte-assistance" },
+  { name: "Niveaux de service", href: "/niveau-de-service" },
+  { name: "Plan de réponse aux incidents", href: "/plan-reponse-incidents-securite" },
+  { name: "À propos", href: "/a-propos" },
   { name: "Nous rejoindre", href: "/nous-rejoindre" },
+  { name: "Contact", href: "/contact" },
+  // Seul lien Studio du site IT, tant que trinexta-studio.fr n'est pas en ligne.
+  { name: "Création de sites : TRINEXTA Studio", href: "/trinexta-studio" },
 ];
 
 const SERVICES = [
-  { name: "Infogérance PME", href: "/infogerance" },
-  { name: "Cybersécurité 360°", href: "/cybersecurite" },
-  { name: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" },
-  { name: "Microsoft 365", href: "/microsoft-365" },
+  { name: "Infogérance", href: "/infogerance" },
   { name: "Support informatique", href: "/support-informatique" },
-  { name: "Solutions métier", href: "/solutions-metier" },
-  { name: "Technicien sous régie", href: "/technicien-sous-regie" },
-  { name: "Services Annexes", href: "/services-annexes" },
+  { name: "Cybersécurité", href: "/cybersecurite" },
+  { name: "Sauvegarde", href: "/cloud-sauvegarde" },
+  { name: "Microsoft 365", href: "/microsoft-365" },
+  { name: "Téléphonie et réseau", href: "/solutions-metier" },
+  { name: "Interventions sur devis", href: "/services-annexes" },
+  { name: "Technicien en régie", href: "/technicien-sous-regie" },
 ];
 
 const LEGAL = [
   { name: "Mentions légales", href: "/mentions-legales" },
+  { name: "CGV", href: "/cgv" },
   { name: "Confidentialité", href: "/confidentialite" },
   { name: "Cookies", href: "/cookies" },
   { name: "Tous les documents", href: "/informations-juridiques" },
@@ -63,16 +68,16 @@ export function Footer() {
             <div className="space-y-8">
               <Link href="/" className="group block">
                 <span className="text-white font-black uppercase tracking-normal text-4xl block leading-none">
-                  Trinexta
+                  TRINEXTA
                 </span>
                 <span className="text-secondary-soft text-[10px] font-bold uppercase tracking-[0.4em] block mt-1">
-                  By Trustech IT Support
+                  L&apos;humain avant les tickets
                 </span>
               </Link>
               <div className="space-y-5">
                 <p className="text-white/70 text-[15px] leading-relaxed">
-                  Votre informatique simplifiée, en toute sérénité. <br />
-                  Expertise, Proximité, Réactivité.
+                  Infogérance, support et maintenance informatique des TPE et PME,
+                  depuis Évry-Courcouronnes, dans toute l&apos;Île-de-France.
                 </p>
               </div>
               <FooterNewsletter />
@@ -126,15 +131,23 @@ export function Footer() {
                       Bureau d&apos;activité
                     </span>
                     <span className="text-white/70 text-[15px]">
-                      7 Rue Montespan, 91000 EVRY COURCOURONNES
+                      7 rue Montespan, 91000 Évry-Courcouronnes
                     </span>
                   </div>
                   <div className="group">
                     <span className="block text-[11px] text-secondary-soft font-bold uppercase mb-1.5">
-                      Assistance
+                      Support
+                    </span>
+                    <span className="text-white/70 text-[15px]">
+                      Du lundi au vendredi, 8 h 30-19 h
+                    </span>
+                  </div>
+                  <div className="group">
+                    <span className="block text-[11px] text-secondary-soft font-bold uppercase mb-1.5">
+                      Téléphone
                     </span>
                     <a
-                      href="tel:0978250746"
+                      href="tel:+33978250746"
                       className="text-white/70 hover:text-secondary-soft text-[15px] block transition-colors"
                     >
                       09 78 25 07 46
@@ -151,6 +164,14 @@ export function Footer() {
                       contact@trinexta.fr
                     </a>
                   </div>
+                  <div className="group">
+                    <span className="block text-[11px] text-secondary-soft font-bold uppercase mb-1.5">
+                      Siège social
+                    </span>
+                    <span className="text-white/70 text-[15px]">
+                      74 B boulevard Henri Dunant, 91100 Corbeil-Essonnes
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -162,10 +183,10 @@ export function Footer() {
           <div className="flex items-center justify-between gap-4">
             <div className="shrink-0">
               <span className="text-white font-black uppercase text-xl leading-none block">
-                Trinexta
+                TRINEXTA
               </span>
               <span className="text-secondary-soft text-[8px] font-bold uppercase block tracking-widest">
-                By Trustech IT
+                L&apos;humain avant les tickets
               </span>
             </div>
           </div>
@@ -220,16 +241,19 @@ export function Footer() {
                     Bureau
                   </span>
                   <span className="text-white/70 text-[9.5px] sm:text-[11px] block leading-snug break-words">
-                    7 Rue Montespan, 91000 EVRY
+                    7 rue Montespan, 91000 Évry-Courcouronnes
                   </span>
                 </div>
                 <div>
                   <span className="block text-[8.5px] sm:text-[9px] text-[var(--secondary)] font-bold uppercase mb-1">
-                    Assistance
+                    Téléphone
                   </span>
-                  <a href="tel:0978250746" className={mobileHover}>
+                  <a href="tel:+33978250746" className={mobileHover}>
                     09 78 25 07 46
                   </a>
+                  <span className="text-white/70 text-[9.5px] sm:text-[11px] block leading-snug break-words">
+                    Lun.-ven., 8 h 30-19 h
+                  </span>
                 </div>
                 <div>
                   <span className="block text-[8.5px] sm:text-[9px] text-[var(--secondary)] font-bold uppercase mb-1">
@@ -248,7 +272,7 @@ export function Footer() {
         {/* MENTIONS LÉGALES / COPYRIGHT */}
         <div className="py-4 border-t border-white/5 flex items-center justify-between gap-4 mt-4 lg:mt-0">
           <p className="text-[11px] md:text-[12px] text-white/50 font-bold uppercase tracking-widest">
-            © {currentYear} TrusTech IT Support – Tous droits réservés
+            © {currentYear} TRINEXTA, marque de TrusTech IT Support · Tous droits réservés
           </p>
           <div className="flex items-center gap-4 shrink-0">
             {SOCIAL_LINKS.map(({ name, href, Icon }) => (

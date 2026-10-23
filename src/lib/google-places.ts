@@ -1,6 +1,6 @@
 export const FALLBACK_DATA = {
     rating: 5.0,
-    userRatingCount: 10,
+    userRatingCount: 12,
     reviewsUri: "https://www.google.com/maps/place/Trinexta",
 };
 

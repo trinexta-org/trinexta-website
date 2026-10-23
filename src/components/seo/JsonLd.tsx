@@ -1,5 +1,3 @@
-import { FALLBACK_DATA } from "@/lib/google-places"
-
 export type JsonLdValue = string | number | boolean | null | JsonLdValue[] | { [key: string]: JsonLdValue }
 
 export function JsonLd({ data }: { data: { [key: string]: JsonLdValue } }) {
@@ -15,6 +13,7 @@ export const trinextaOrganization = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "TRINEXTA",
+  "legalName": "TrusTech IT Support",
   "url": "https://trinexta.fr",
   "logo": "https://trinexta.fr/images/trinexta-logo.png",
   "image": "https://trinexta.fr/images/trinexta-logo.png",
@@ -36,39 +35,35 @@ export const trinextaOrganization = {
   ]
 };
 
+// Entité locale (bureau d'Évry). Pas d'aggregateRating ni de review : les avis
+// auto-attribués ne sont pas éligibles aux extraits enrichis.
 export const trinextaLocalBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Trinexta",
+  "name": "TRINEXTA",
+  "legalName": "TrusTech IT Support",
+  "slogan": "L'humain avant les tickets.",
   "image": "https://trinexta.fr/images/og-default.png",
   "@id": "https://trinexta.fr",
   "url": "https://trinexta.fr",
   "telephone": "+33978250746",
+  "email": "contact@trinexta.fr",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "7 Rue Montespan",
+    "streetAddress": "7 rue Montespan",
     "addressLocality": "Évry-Courcouronnes",
     "postalCode": "91000",
+    "addressRegion": "Essonne",
     "addressCountry": "FR"
   },
-  "areaServed": ["Île-de-France", "Essonne", "Évry-Courcouronnes", "Corbeil-Essonnes"],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": String(FALLBACK_DATA.rating),
-    "reviewCount": String(FALLBACK_DATA.userRatingCount)
-  },
+  "areaServed": ["Évry-Courcouronnes", "Essonne", "Île-de-France"],
+  "knowsAbout": ["Infogérance", "Support informatique", "Maintenance informatique", "Cybersécurité des postes", "Microsoft 365"],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       "opens": "08:30",
       "closes": "19:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Friday",
-      "opens": "08:30",
-      "closes": "18:30"
     }
   ]
 };
