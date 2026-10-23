@@ -7,14 +7,18 @@ export const SERENITE_DEVIS_HREF = "/contact?type=devis";
 
 export const SERENITE_HERO = {
   titlePart1: "TRINEXTA Sérénité\u00a0:",
-  titlePart2: "maintenance, cybersécurité et support informatique pour PME",
-  accroche: "Votre informatique protégée, vos équipes accompagnées, votre activité préservée.",
+  titlePart2: "deux formules d'infogérance par poste, prix affichés",
+  accroche: "Vous choisissez ce que vous déléguez.",
   description:
-    "Deux formules par poste, sans frais de mise en service : Essentiel pour protéger vos ordinateurs, Complète pour déléguer aussi l'assistance de vos collaborateurs. Depuis Évry-Courcouronnes, pour les entreprises de l'Essonne et d'Île-de-France.",
+    "Sérénité Essentiel protège et entretient vos postes. Sérénité Complète y ajoute l'assistance de vos collaborateurs au quotidien. Les prix sont fixes, hors taxes, par poste et par mois, sans frais de mise en service.",
   baseline: "L'humain avant les tickets.",
-  ctaPrimary: { label: "Comparer les deux offres", href: "#offres" },
-  ctaSecondary: { label: "Demander mon devis Sérénité", href: SERENITE_DEVIS_HREF },
+  ctaPrimary: { label: "Comparer les deux formules", href: "#comparatif" },
+  ctaSecondary: { label: "Demander une proposition", href: SERENITE_DEVIS_HREF },
 } as const;
+
+// Bloc « En bref » : réponse directe, reprise telle quelle par les moteurs et assistants IA.
+export const SERENITE_EN_BREF =
+  "TRINEXTA Sérénité regroupe deux formules facturées par poste et par mois. Essentiel (39,99 € HT) : protection EDR SentinelOne, supervision NinjaOne, mises à jour de sécurité, maintenance préventive automatisée, inventaire et rapport annuel ; assistance aux utilisateurs non incluse ; engagement de 12 mois. Complète (79 € HT) : le socle Essentiel, plus l'assistance aux utilisateurs pour les demandes couvertes par le contrat, du lundi au vendredi de 8 h 30 à 19 h, la double authentification, la sensibilisation à l'hameçonnage et la réponse à incident cyber ; sans durée minimale, préavis de 2 mois. Frais de mise en service : 0 €. État des lieux du parc offert. Licences, sauvegarde (option, données hébergées en France), serveurs, NAS, réseau, projets et matériel sont hors forfait.";
 
 export interface SereniteOffre {
   id: "essentiel" | "complete";
@@ -36,110 +40,113 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
   {
     id: "essentiel",
     nom: "Sérénité Essentiel",
-    accroche: "La sécurité de vos postes, pour le prix d'un café par jour.",
+    accroche: "Pour protéger et entretenir vos postes.",
     prix: "39,99 €",
     prixSchema: "39.99",
     unite: "HT / poste / mois",
-    pitch: "Les fondations de la sécurité informatique : protection EDR, supervision et maintenance préventive automatisée.",
+    pitch: "Protection EDR, supervision et maintenance préventive automatisée. Assistance aux utilisateurs et interventions non incluses, sur devis.",
     points: [
-      "Antivirus nouvelle génération et EDR",
-      "Supervision RMM des postes",
-      "Remontée des activités suspectes",
-      "Mises à jour de sécurité Windows suivies",
-      "Maintenance préventive automatisée de base",
+      "Protection EDR SentinelOne : analyse des comportements suspects, blocage ou isolement d'un poste selon sa configuration",
+      "Supervision RMM NinjaOne des postes, alertes traitées par un technicien",
+      "Suivi des mises à jour de sécurité Windows",
+      "Maintenance préventive automatisée",
       "Inventaire des postes couverts",
       "Rapport annuel d'activité et de sécurité",
     ],
     conditions: [
       "Engagement minimum de 12 mois",
       "0 € de mise en service",
-      "Support utilisateurs et dépannage sur devis",
+      "Assistance aux utilisateurs sur devis",
     ],
-    pourQui: "Indépendants, TPE et petites équipes qui veulent une protection professionnelle à budget maîtrisé.",
+    pourQui: "Un indépendant ou une petite équipe qui veut des postes protégés, supervisés et à jour, et qui gère seule les demandes du quotidien ou les fait chiffrer au cas par cas.",
     cta: { label: "Choisir Sérénité Essentiel", href: getOffreContactHref("serenite-essentielle") },
   },
   {
     id: "complete",
     nom: "Sérénité Complète",
-    accroche: "Votre service informatique externalisé.",
+    accroche: "Pour déléguer votre informatique au quotidien.",
     prix: "79 €",
     prixSchema: "79",
     unite: "HT / poste / mois",
-    pitch: "Tout Essentiel, plus l'assistance quotidienne de vos collaborateurs et une maintenance renforcée.",
+    pitch: "Le socle Essentiel et l'assistance aux utilisateurs pour les demandes couvertes par le contrat. Support du lundi au vendredi, de 8 h 30 à 19 h.",
     points: [
-      "Tous les services Essentiel",
-      "Support utilisateurs illimité*",
-      "Assistance téléphone, e-mail et à distance",
+      "Tout le socle Essentiel",
+      "Assistance illimitée aux utilisateurs dans le périmètre du contrat* : téléphone, e-mail, prise en main à distance",
       "Dépannage Windows et logiciels courants",
-      "Accompagnement Microsoft 365, Outlook et Teams",
+      "Microsoft 365 au quotidien : Outlook, Teams, OneDrive, comptes",
       "Arrivées et départs de collaborateurs",
-      "Coordination avec les éditeurs de logiciels",
+      "Coordination avec les éditeurs de vos logiciels",
+      "Double authentification (MFA) sur les comptes et sensibilisation de vos équipes à l'hameçonnage",
+      "Réponse à incident cyber sur les postes et comptes couverts par le contrat",
       "Rapport trimestriel d'activité et de sécurité",
     ],
     conditions: [
-      "Sans engagement de durée",
+      "Sans durée minimale, préavis de 2 mois",
       "0 € de mise en service",
       "Interventions sur site selon le contrat",
     ],
-    pourQui: "PME qui veulent externaliser leur informatique et accompagner leurs collaborateurs au quotidien.",
+    pourQui: "Un cabinet, une agence, une entreprise du bâtiment ou une PME de services qui veut que ses collaborateurs appellent un support, et non un collègue, quand quelque chose bloque.",
     cta: { label: "Choisir Sérénité Complète", href: getOffreContactHref("serenite-complete") },
     highlighted: true,
   },
 ];
 
 export const SERENITE_OFFRES_NOTE =
-  "* Dans le périmètre contractuel. Tarifs HT. Équipements, licences, projets, interventions matérielles et prestations non prévues au contrat peuvent être facturés en complément.";
+  "* Le nombre de demandes couvertes par le contrat n'est pas plafonné. Projets, licences, interventions matérielles et prestations non prévues au contrat sont facturés en complément. Les délais de prise en charge suivent nos niveaux de service. Licences, sauvegarde, serveurs, NAS, réseau, projets et matériel ne sont pas inclus dans le forfait standard ; les interventions hors forfait font l'objet d'un devis. Pas de frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry ; la main-d'œuvre sur site reste facturée selon le contrat. Tarifs HT.";
 
 // Éléments identiques dans les deux formules : affichés une fois, au-dessus du comparatif.
 export const SERENITE_SOCLE = [
-  "Antivirus nouvelle génération et EDR",
-  "Détection des comportements suspects",
-  "Alertes de sécurité",
-  "Supervision automatisée des équipements",
-  "Inventaire des postes",
+  "Protection EDR SentinelOne",
+  "Supervision NinjaOne, alertes traitées par un technicien",
+  "Inventaire du parc",
   "0 € de mise en service",
+  "Déplacement sans frais dans 15 km autour d'Évry (main-d'œuvre selon le contrat)",
 ] as const;
 
 // Seules les différences entre Essentiel et Complète.
 export const SERENITE_COMPARATIF: { critere: string; detail?: string; essentiel: string; complete: string }[] = [
-  { critere: "Prix mensuel par poste", essentiel: "39,99 € HT", complete: "79 € HT" },
-  { critere: "Engagement minimum", essentiel: "12 mois", complete: "Aucun" },
-  { critere: "Support utilisateurs", essentiel: "sur-devis", complete: "Illimité*" },
+  { critere: "Prix par poste et par mois", essentiel: "39,99 € HT", complete: "79 € HT" },
+  { critere: "Durée d'engagement", essentiel: "12 mois minimum", complete: "Aucune durée minimale, préavis de 2 mois" },
+  { critere: "Maintenance préventive", essentiel: "Automatisée", complete: "Socle automatisé et assistance couverte" },
+  { critere: "Correctifs", essentiel: "Sécurité Windows", complete: "Mises à jour de sécurité ; périmètre logiciel défini au contrat" },
   {
-    critere: "Assistance au quotidien",
-    detail: "Assistance à distance, diagnostic, dépannage logiciel, Microsoft 365, comptes utilisateurs, installation de logiciels, remédiation, arrivées et départs, coordination avec les éditeurs",
+    critere: "Assistance aux utilisateurs",
+    detail: "Téléphone, e-mail et prise en main à distance",
     essentiel: "sur-devis",
-    complete: "inclus",
+    complete: "Incluse, demandes couvertes par le contrat",
   },
-  { critere: "Maintenance préventive", essentiel: "Basique", complete: "Avancée" },
-  { critere: "Correctifs Windows", essentiel: "Sécurité", complete: "Sécurité et courants" },
-  { critere: "Rapport d'activité et de sécurité", essentiel: "Annuel", complete: "Trimestriel" },
+  { critere: "Microsoft 365 courant, arrivées et départs", essentiel: "sur-devis", complete: "inclus" },
+  { critere: "Coordination avec les éditeurs", essentiel: "sur-devis", complete: "inclus" },
+  { critere: "Double authentification (MFA)", essentiel: "Non incluse", complete: "inclus" },
+  { critere: "Sensibilisation à l'hameçonnage", essentiel: "Non incluse", complete: "inclus" },
+  { critere: "Réponse à incident cyber", essentiel: "Non incluse", complete: "inclus" },
   { critere: "Conseils sur le parc", essentiel: "Sur demande", complete: "inclus" },
-  { critere: "Intervention sur site", essentiel: "sur-devis", complete: "Selon contrat" },
+  { critere: "Rapport d'activité et de sécurité", essentiel: "Annuel", complete: "Trimestriel" },
+  { critere: "Intervention sur site", essentiel: "sur-devis", complete: "Selon le contrat" },
 ];
 
 export const SERENITE_PILIERS = [
   {
     num: "Protection",
     title: "EDR professionnel avec SentinelOne",
-    desc: "Vos postes compatibles sont protégés par une technologie de détection et de réponse aux menaces. Elle surveille les comportements suspects et déclenche des mécanismes de protection.",
-    inclusions: ["Antivirus nouvelle génération", "Détection comportementale", "Protection anti-ransomware", "Alertes de sécurité suivies"],
+    desc: "Vos postes compatibles sont protégés par l'EDR SentinelOne. Il analyse les comportements suspects et peut bloquer ou isoler un poste selon sa configuration ; il complète les autres mesures de sécurité.",
+    inclusions: ["Analyse des comportements suspects", "Blocage ou isolement selon la configuration", "Alertes traitées par un technicien", "Correctifs de sécurité suivis"],
     note: "Une protection qui réduit les risques, sans promettre une sécurité absolue.",
     image: "/images/nos-offres/pilier-cyber.jpg",
   },
   {
     num: "Supervision",
     title: "Supervision proactive avec NinjaOne",
-    desc: "Un ordinateur montre souvent des signes de faiblesse avant de tomber en panne. Notre outil de supervision suit les indicateurs techniques et nous remonte les alertes.",
+    desc: "Un ordinateur montre souvent des signes de faiblesse avant de tomber en panne. NinjaOne suit les indicateurs techniques et nous remonte les alertes, traitées par un technicien aux horaires du support.",
     inclusions: ["État des postes", "Suivi des mises à jour", "Alertes automatiques", "Inventaire du parc"],
-    note: "La supervision automatisée tourne en continu. Ce n'est pas une équipe humaine qui surveille chaque poste 24 h sur 24.",
+    note: "La supervision est automatisée et fonctionne en continu ; les alertes sont traitées par un technicien aux horaires du support.",
     image: "/images/nos-offres/pilier_maintenance.jpg",
   },
   {
     num: "Maintenance",
     title: "Une maintenance adaptée à votre formule",
-    desc: "Essentiel automatise la maintenance préventive. Complète ajoute le diagnostic des incidents, des opérations supplémentaires et l'assistance aux utilisateurs.",
-    inclusions: ["Opérations préventives automatisées", "Correctifs Windows", "Maintenance renforcée (Complète)", "Conseils sur le parc (Complète)"],
+    desc: "Essentiel automatise la maintenance préventive. Complète ajoute le diagnostic des incidents et l'assistance aux utilisateurs pour les demandes couvertes par le contrat.",
+    inclusions: ["Opérations préventives automatisées", "Correctifs de sécurité Windows", "Assistance aux utilisateurs (Complète)", "Conseils sur le parc (Complète)"],
     note: "Prévenir les problèmes évitables, traiter les autres avec méthode.",
     image: "/images/nos-offres/serenite.jpg",
   },
@@ -154,13 +161,13 @@ export const SERENITE_PILIERS = [
 ];
 
 export const SERENITE_SUPPORT = {
-  title: "Comment fonctionne le support *illimité* de Sérénité Complète ?",
+  title: "L'assistance de Complète, en *clair*",
   intro:
     "Un ordinateur qui ralentit, une application métier qui refuse de démarrer, un accès Outlook qui ne répond plus : les collaborateurs couverts sollicitent le support pour les incidents prévus au contrat, du lundi au vendredi de 8 h 30 à 19 h.",
   items: [
     {
       label: "Une assistance pour le quotidien",
-      desc: "Téléphone, e-mail ou prise en main à distance : nous diagnostiquons, intervenons à distance ou organisons l'action complémentaire nécessaire.",
+      desc: "Les demandes de vos collaborateurs couverts par le contrat, sans plafond de nombre, par téléphone, e-mail et prise en main à distance.",
     },
     {
       label: "Des demandes suivies",
@@ -170,8 +177,12 @@ export const SERENITE_SUPPORT = {
       label: "Microsoft 365 et logiciels métier",
       desc: "Accompagnement courant sur Outlook, Teams et OneDrive, et coordination avec l'éditeur quand le problème vient de son logiciel. Les licences et les migrations restent hors abonnement.",
     },
+    {
+      label: "Sécurité des comptes et réponse à incident",
+      desc: "Mise en place de la double authentification, sensibilisation de vos équipes à l'hameçonnage et réponse à incident cyber sur les postes et comptes couverts par le contrat.",
+    },
   ],
-  note: "Illimité porte sur le nombre de demandes éligibles. Ce n'est ni une garantie de résolution immédiate, ni une disponibilité permanente.",
+  note: "La supervision est automatisée et fonctionne en continu. Dans les deux formules, les alertes sont traitées par un technicien aux horaires du support. Pour un incident critique signalé pendant les heures d'ouverture, notre objectif est une prise en charge sous 30 minutes : il s'agit du début du traitement, pas d'un délai de résolution. Les délais de prise en charge suivent nos niveaux de service.",
   link: { label: "Découvrir le support informatique TRINEXTA", href: "/support-informatique" },
 } as const;
 
@@ -189,16 +200,16 @@ export const SERENITE_RAPPORTS = [
 ] as const;
 
 export const SERENITE_POUR_QUI = {
-  essentiel: "Indépendant avec un ordinateur professionnel ? Sérénité Essentiel pose un premier niveau de protection.",
-  complete: "Cabinet comptable, entreprise du bâtiment, agence ou PME de services ? Sérénité Complète simplifie la gestion des demandes du quotidien.",
+  essentiel: "Essentiel convient à un indépendant ou à une petite équipe qui veut des postes protégés, supervisés et à jour. Plusieurs sites, serveurs ou applications spécifiques : nous étudions l'environnement et établissons une proposition sur mesure.",
+  complete: "Complète convient à un cabinet, une agence, une entreprise du bâtiment ou une PME de services qui veut que ses collaborateurs appellent un support, et non un collègue, quand quelque chose bloque.",
 } as const;
 
 export const SERENITE_LOCAL =
-  "TRINEXTA est installée au 7 rue Montespan, 91000 Évry-Courcouronnes. Nous accompagnons les entreprises du Grand Paris Sud, de l'Essonne et d'Île-de-France. La supervision et l'assistance à distance suivent vos postes où qu'ils soient, sous réserve de compatibilité et d'autorisation.";
+  "TRINEXTA est installée au 7 rue Montespan, 91000 Évry-Courcouronnes. Nos formules n'ont pas de minimum de postes : de 1 à 20 postes et au-delà, pour les entreprises du Grand Paris Sud, de l'Essonne et d'Île-de-France. La supervision et l'assistance à distance suivent vos postes où qu'ils soient, sous réserve de compatibilité et d'autorisation.";
 
 export const SERENITE_ETAPES = [
-  { title: "Échange sur vos besoins", desc: "Nombre de postes, environnement technique, prestations recherchées." },
-  { title: "Validation de la formule", desc: "Une proposition précise le nombre de postes, le prix, les options et les conditions." },
+  { title: "Échange et état des lieux, offert", desc: "Nombre de postes, environnement technique, prestations recherchées." },
+  { title: "Proposition écrite", desc: "Postes, prix, options et conditions." },
   { title: "Installation des outils", desc: "Après accord, nous déployons les agents de supervision et de sécurité sur les postes compatibles." },
   { title: "Démarrage", desc: "Les outils remontent leurs informations. Pour Complète, vos utilisateurs reçoivent les canaux de support." },
   { title: "Rapports et suivi", desc: "Annuel pour Essentiel, trimestriel pour Complète." },
@@ -208,7 +219,7 @@ export const SERENITE_OPTIONS = [
   {
     title: "Sauvegarde des données",
     price: "Sur étude",
-    desc: "Les offres standard n'incluent pas la sauvegarde. Nous proposons une solution de protection et de restauration adaptée à votre environnement.",
+    desc: "Les formules standard n'incluent pas la sauvegarde. Nous la proposons en option, après étude de vos données et de votre activité ; les données sauvegardées sont hébergées en France.",
   },
   {
     title: "Serveurs, NAS et réseau",
@@ -216,96 +227,87 @@ export const SERENITE_OPTIONS = [
     desc: "Les formules par poste ne couvrent pas l'administration complète de l'infrastructure. Nous la chiffrons à part.",
   },
   {
-    title: "Projets informatiques",
+    title: "Projets, licences et matériel",
     price: "Sur devis",
-    desc: "Migration Microsoft 365, renouvellement du parc, nouveaux équipements ou application métier : un devis distinct.",
+    desc: "Migration Microsoft 365, renouvellement du parc, nouveaux équipements : devis distinct. Licences Microsoft 365 et logiciels non incluses ; leur gestion courante l'est dans Complète.",
   },
 ];
 
 export const SERENITE_CTA = {
-  line1: "Votre informatique",
-  line2: "mérite une protection",
-  line3: "professionnelle.",
+  line1: "Recevez une",
+  line2: "proposition pour",
+  line3: "votre parc",
   description:
-    "Protégez vos postes dès 39,99 € HT par mois ou confiez votre informatique quotidienne à TRINEXTA pour 79 € HT par poste et par mois. Sans frais standard de mise en service.",
-  ctaLabel: "Demander mon devis Sérénité",
+    "Indiquez votre nombre de postes et la formule qui vous intéresse : nous revenons vers vous avec une proposition écrite. Téléphone : 09 78 25 07 46, du lundi au vendredi, de 8 h 30 à 19 h.",
+  ctaLabel: "Demander une proposition",
   ctaHref: SERENITE_DEVIS_HREF,
 } as const;
 
 export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
-    question: "Quel est le prix de TRINEXTA Sérénité ?",
+    question: "Combien coûte TRINEXTA Sérénité ?",
     answer:
-      "Sérénité Essentiel coûte 39,99 € HT par poste et par mois, avec un engagement minimum de 12 mois. Sérénité Complète coûte 79 € HT par poste et par mois, sans engagement de durée. Aucun frais standard de mise en service. Les options et prestations hors périmètre font l'objet d'un devis.",
+      "Sérénité Essentiel coûte 39,99 € HT par poste et par mois, avec un engagement de 12 mois. Sérénité Complète coûte 79 € HT par poste et par mois, sans durée minimale, avec un préavis de 2 mois. Aucun frais de mise en service. Licences, sauvegarde, serveurs, NAS, réseau, projets et matériel sont chiffrés à part.",
   },
   {
-    question: "Quelle est la différence entre Sérénité Essentiel et Complète ?",
+    question: "Quelle différence entre Essentiel et Complète ?",
     answer:
-      "Essentiel couvre la protection EDR, la supervision et la maintenance préventive automatisée, avec un rapport annuel. Les interventions humaines de support sont facturées à part.\n\nComplète ajoute le support illimité pour les demandes couvertes, l'assistance à distance, le dépannage logiciel courant, une maintenance renforcée et un rapport trimestriel.",
+      "Essentiel couvre la protection EDR, la supervision, les mises à jour de sécurité, la maintenance préventive automatisée et l'inventaire. Complète ajoute l'assistance de vos collaborateurs pour les demandes couvertes par le contrat, le Microsoft 365 courant, les arrivées et départs, la coordination avec vos éditeurs, la double authentification, la sensibilisation à l'hameçonnage, la réponse à incident cyber et un rapport trimestriel.",
   },
   {
-    question: "Pourquoi parler du prix d'un café ?",
+    question: "L'assistance aux utilisateurs est-elle incluse dans Essentiel ?",
     answer:
-      "Sérénité Essentiel coûte 39,99 € HT par poste et par mois. Rapporté à une journée, c'est l'ordre de grandeur d'un café. La facturation reste mensuelle.",
+      "Non. Essentiel couvre la supervision, la protection et les opérations automatisées ; les alertes sont traitées par un technicien. L'assistance aux utilisateurs et le dépannage font l'objet d'un devis.",
   },
   {
-    question: "Pourquoi Essentiel demande-t-il un engagement de 12 mois ?",
+    question: "Pourquoi 12 mois d'engagement pour Essentiel ?",
     answer:
-      "Essentiel est une protection accessible qui prend son sens dans la durée. Les conditions de renouvellement et de résiliation sont précisées dans le contrat.",
+      "Essentiel repose sur la mise en place d'outils de protection et de supervision sur chaque poste, pensée pour durer. Les modalités de renouvellement et de résiliation figurent au contrat.",
   },
   {
-    question: "Sérénité Complète est-il vraiment sans engagement ?",
+    question: "Sérénité Complète est-elle sans engagement ?",
     answer:
-      "Oui, aucune durée minimale. La résiliation suit les modalités et le préavis définis au contrat.",
+      "Complète n'a pas de durée minimale. Vous pouvez y mettre fin avec un préavis de 2 mois, selon les conditions contractuelles.",
   },
   {
-    question: "Le support informatique est-il inclus dans Essentiel ?",
+    question: "Que veut dire « assistance illimitée » ?",
     answer:
-      "Non. Essentiel comprend la supervision, les protections et les opérations automatisées. Assistance utilisateur, dépannage manuel et interventions spécifiques sont proposés sur devis.",
+      "Le nombre de demandes couvertes par le contrat n'est pas plafonné, aux horaires du support (lundi au vendredi, 8 h 30 à 19 h). Les projets, licences, interventions matérielles et prestations non prévues sont facturés en complément. Les délais de prise en charge suivent nos niveaux de service.",
   },
   {
-    question: "Que signifie support informatique illimité dans Complète ?",
+    question: "EDR, RMM, MDR : que couvre Sérénité ?",
     answer:
-      "Les utilisateurs couverts soumettent autant de demandes éligibles que nécessaire, du lundi au vendredi de 8 h 30 à 19 h. Projets, interventions matérielles, prestations spécialisées et services exclus du périmètre n'en font pas partie.",
-  },
-  {
-    question: "Quelle est la différence entre EDR, RMM et MDR ?",
-    answer:
-      "L'EDR détecte et traite certaines menaces sur les équipements. Le RMM sert à superviser, administrer et entretenir les appareils à distance. Le MDR est un service managé de détection et de réponse avec une surveillance humaine dédiée.\n\nSérénité comprend l'EDR et la supervision RMM. Un service MDR humain permanent n'est pas inclus.",
-  },
-  {
-    question: "Les rapports sont-ils inclus dans les deux formules ?",
-    answer: "Oui : un rapport annuel avec Essentiel, un rapport trimestriel avec Complète.",
+      "L'EDR (SentinelOne) analyse les comportements suspects sur chaque poste et peut bloquer ou isoler un poste selon sa configuration. Le RMM (NinjaOne) supervise et entretient les postes à distance. Le MDR désigne une surveillance humaine dédiée en continu : il n'est pas inclus dans Sérénité.",
   },
   {
     question: "Les licences Microsoft 365 sont-elles incluses ?",
     answer:
-      "Non. Complète inclut l'assistance et la gestion courante de Microsoft 365 dans le périmètre du contrat. Les licences restent facturées à part, sauf mention contraire sur le devis.",
+      "Non. Les licences sont facturées à part. La gestion courante de Microsoft 365 (comptes, messagerie, Teams, OneDrive) est incluse dans Complète.",
   },
   {
-    question: "La sauvegarde des fichiers est-elle incluse ?",
+    question: "Mes fichiers sont-ils sauvegardés ?",
     answer:
-      "Pas dans les offres standard. Nous proposons une solution complémentaire après étude de votre environnement.",
+      "La sauvegarde n'est pas incluse dans les formules standard. Nous la proposons en option, après étude de vos données et de votre activité. Les données sauvegardées sont hébergées en France.",
   },
   {
-    question: "Intervenez-vous sur site dans l'Essonne ?",
+    question: "Intervenez-vous sur site ?",
     answer:
-      "Oui, à Évry-Courcouronnes, Corbeil-Essonnes et plus largement en Île-de-France. Les interventions sont planifiées et facturées selon l'offre souscrite.",
+      "Oui, dans toute l'Île-de-France. Pas de frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry ; au-delà, le déplacement est facturé selon le devis. La main-d'œuvre sur site reste facturée selon le contrat. Avec Essentiel, les interventions sont sur devis.",
   },
   {
-    question: "Quels types d'entreprises peuvent souscrire ?",
+    question: "Quelles entreprises peuvent souscrire ?",
     answer:
-      "Indépendants, TPE, cabinets, commerces et PME qui veulent protéger ou externaliser la gestion de leurs postes. Nous vérifions la compatibilité technique avant le déploiement.",
+      "Indépendants, TPE, cabinets, commerces et PME, de 1 à 20 postes et au-delà : nos formules n'ont pas de minimum de postes. Les PC Windows et les Mac sont pris en charge ; nous vérifions avant le déploiement que vos postes sont compatibles avec nos outils.",
   },
   {
-    question: "Puis-je passer d'Essentiel à Complète ?",
+    question: "Peut-on passer d'Essentiel à Complète ?",
     answer:
-      "Oui, à tout moment. Les modalités de changement de formule et la fin de l'engagement Essentiel sont précisées dans le contrat.",
+      "Demandez une proposition de changement de formule. Elle précisera la date de bascule et le traitement de l'engagement en cours.",
   },
   {
-    question: "Comment obtenir un devis ?",
+    question: "Comment obtenir une proposition ?",
     answer:
-      "Appelez-nous au 09 78 25 07 46 ou écrivez à contact@trinexta.fr. Nous étudions le nombre de postes, la compatibilité technique et le niveau de service adapté.",
+      "Appelez le 09 78 25 07 46 ou remplissez le formulaire de contact. Nous étudions le nombre de postes, leur compatibilité et le niveau de service attendu, puis vous envoyons une proposition écrite.",
   },
 ];
 
@@ -317,5 +319,5 @@ export const SERENITE_CALCULATEUR = {
   min: 1,
   max: 100,
   defaut: 10,
-  note: "Estimation HT hors options, licences et interventions hors périmètre. Le devis précise le tarif définitif selon votre parc.",
+  note: "Estimation hors licences, sauvegarde, options et interventions hors forfait. Le montant définitif figure dans la proposition écrite.",
 } as const;

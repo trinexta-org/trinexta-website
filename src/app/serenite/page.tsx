@@ -23,15 +23,16 @@ import { FinalCTA } from "@/components/FinalCTA";
 import {
   SERENITE_CTA,
   SERENITE_DEVIS_HREF,
+  SERENITE_EN_BREF,
   SERENITE_FAQ,
   SERENITE_HERO,
   SERENITE_LOCAL,
   SERENITE_OFFRES,
 } from "@/data/serenite";
 
-const TITLE = "Maintenance informatique PME dès 39,99 € | TRINEXTA Sérénité";
+const TITLE = "Infogérance PME : 39,99 € ou 79 € HT par poste | TRINEXTA";
 const DESCRIPTION =
-  "TRINEXTA Sérénité : protection EDR, supervision et maintenance informatique dès 39,99 € HT/poste/mois. Deux offres pour les TPE et PME en Essonne.";
+  "Essentiel à 39,99 € HT par poste et par mois (protection, supervision, sans assistance) ou Complète à 79 € HT (assistance incluse, sans durée minimale).";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -71,11 +72,11 @@ const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "TRINEXTA Sérénité",
-  serviceType: "Maintenance, cybersécurité et support informatique pour PME",
+  serviceType: "Infogérance informatique",
   description: SERENITE_HERO.description,
   url: "https://trinexta.fr/serenite",
-  provider: { "@type": "LocalBusiness", "@id": "https://trinexta.fr", name: "Trinexta" },
-  areaServed: ["Évry-Courcouronnes", "Essonne", "Île-de-France"],
+  provider: { "@type": "LocalBusiness", "@id": "https://trinexta.fr", name: "TRINEXTA" },
+  areaServed: ["Essonne", "Île-de-France"],
   offers: SERENITE_OFFRES.map((offre) => ({
     "@type": "Offer",
     name: offre.nom,
@@ -143,6 +144,9 @@ export default function SerenitePage() {
           <Section container={false} className="py-0 md:py-0 lg:py-0">
             <Container className="max-w-[1400px]">
               <SereniteIntro />
+              <Text className="max-w-4xl text-white/80 text-base md:text-lg leading-relaxed">
+                <strong className="text-white">En bref.</strong> {SERENITE_EN_BREF}
+              </Text>
             </Container>
           </Section>
         </div>
@@ -160,7 +164,7 @@ export default function SerenitePage() {
               <SereniteComparatif />
               <div className="flex justify-center">
                 <Button asChild variant="secondary" size="lg" className="text-white">
-                  <Link href={SERENITE_DEVIS_HREF}>Demander mon devis Sérénité</Link>
+                  <Link href={SERENITE_DEVIS_HREF}>Demander une proposition</Link>
                 </Button>
               </div>
             </Container>
@@ -178,20 +182,28 @@ export default function SerenitePage() {
             <SereniteRapports />
           </Bloc>
 
-          <Bloc surtitle="Pour qui" title="Une offre pensée pour les TPE et PME en *Essonne*" intro={SERENITE_LOCAL}>
+          <Bloc surtitle="Pour qui" title="Quelle formule *choisir* ?" intro={SERENITE_LOCAL}>
             <SereniteTargets />
           </Bloc>
 
           <Bloc surtitle="Mise en place" title="Comment démarrer avec *Sérénité* ?">
             <SereniteEtapes />
+            <Text className="mt-10 text-center text-primary/75 text-base md:text-lg leading-relaxed">
+              Nos conditions sont écrites : horaires, périmètre, objectifs de délai et conditions de résiliation sont publiés avant toute signature.{" "}
+              <Link href="/niveau-de-service" className="text-primary font-bold underline decoration-secondary underline-offset-4">Nos niveaux de service</Link>
+              {" · "}
+              <Link href="/cgv" className="text-primary font-bold underline decoration-secondary underline-offset-4">Conditions générales de vente</Link>
+              {" · "}
+              <Link href="/cas-clients/modernisation-it-pme-essonne" className="text-primary font-bold underline decoration-secondary underline-offset-4">Modernisation du parc d&apos;une PME en Essonne</Link>
+            </Text>
           </Bloc>
 
-          <Bloc surtitle="Options" title="Options pour les besoins *spécifiques*">
+          <Bloc surtitle="Hors forfait" title="Ce qui n'est pas dans le *forfait*">
             <div className="space-y-10">
               <SereniteOptions />
               <div className="flex justify-center">
                 <Button asChild variant="outline" size="lg">
-                  <Link href={SERENITE_DEVIS_HREF}>Demander mon devis Sérénité</Link>
+                  <Link href={SERENITE_DEVIS_HREF}>Demander une proposition</Link>
                 </Button>
               </div>
             </div>
