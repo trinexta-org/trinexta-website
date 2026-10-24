@@ -9,14 +9,12 @@ import { ApproachSection } from "@/components/ApproachSection"
 import { WhyChooseUs } from "@/components/WhyChooseUs"
 import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
-import { sanityClient } from "@/lib/sanity"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 import { CustomerReviews } from "@/components/CustomerReviews"
 import { Section } from "@/components/layout/Section"
 import { BannerCTA } from "@/components/layout/BannerCTA"
 import { CasClientFeatured } from "@/components/cas-clients/CasClientFeatured"
 import { homeCaseClient } from "@/data/cas-clients"
-import { isPartenaireValide } from "@/data/partenaires"
 import { ACCUEIL_CTA, ACCUEIL_FAQ, ACCUEIL_OFFRES, GOOGLE_NOTE, VIDEO_TRINEXTA, VIDEO_TRINEXTA_JSONLD } from "@/data/accueil"
 import { AccueilEnBref } from "@/components/accueil/AccueilEnBref"
 import { VideoPresentation } from "@/components/accueil/VideoPresentation"
@@ -51,24 +49,7 @@ export const metadata: Metadata = {
   },
 }
 
-async function PartnersData() {
-  const partnersQuery = `*[_type == "partenaire" && type == "editeur"] | order(ordre asc) {
-    "name": nom,
-    "logoSrc": logo.asset->url,
-    "isCircle": coalesce(isCircle, false),
-    "url": urlOfficiel
-  }`;
-  let partnersData: { name: string; logoSrc: string; isCircle: boolean; url: string }[] = [];
-  try {
-    partnersData = await sanityClient.fetch(partnersQuery);
-  } catch {
-    // Sanity inaccessible - section partenaires masquée
-  }
-
-  // Seuls les partenaires validés s'affichent ; sans logo disponible, la section est masquée.
-  const partners = partnersData.filter((partner) => isPartenaireValide(partner.name));
-  if (partners.length === 0) return null;
-
+function PartnersData() {
   return (
     <>
       <TransitionTitle
@@ -76,7 +57,7 @@ async function PartnersData() {
         line1="Nos partenaires"
         line2="technologiques"
       />
-      <PartnersSection partners={partners} />
+      <PartnersSection />
     </>
   );
 }

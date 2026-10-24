@@ -1,351 +1,426 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import Link from "next/link";
+import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
-import { contactFormSchema, ContactFormData, CONTACT_TYPES, SECTEURS, TAILLES, URGENCES } from "@/lib/validations/contact";
-import { pushGtmEvent, trackLeadConversion } from "@/lib/gtm";
+import { contactFormSchema, type ContactFormData, type ContactFormInput } from "@/lib/validations/contact";
+import {
+  BESOINS,
+  BESOIN_VALUES,
+  MOMENTS,
+  POSTES,
+  PROFILS,
+  RDV_FORMATS,
+  SUITES_CONTACT,
+  TRINEXTA_CONTACT,
+  TYPE_HERITE,
+  postesPourNombre,
+  type Besoin,
+} from "@/data/contact-trinexta";
 import { isOffreSlug, LIBELLES_OFFRES } from "@/data/offres";
+import { dernierJourRdv, formaterDateRdv, formaterSiret, formaterTelephone, premierJourRdv } from "@/lib/contact/rdv";
+import { pushGtmEvent, trackLeadConversion } from "@/lib/gtm";
 
-function taillePourPostes(postes: number): (typeof TAILLES)[number] {
-  if (postes < 10) return "1-9";
-  if (postes < 50) return "10-49";
-  if (postes < 250) return "50-249";
-  return "250+";
+const fieldClass =
+  "h-13 w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/30 aria-[invalid=true]:border-red-600";
+const labelClass = "mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary";
+const facultatif = (
+  <span className="font-normal normal-case tracking-normal text-muted-foreground"> (facultatif)</span>
+);
+
+function Erreur({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p id={id} className="mt-2 text-sm font-semibold text-red-600">
+      {message}
+    </p>
+  );
 }
 
+/** Groupe de boutons-radio en pastilles. */
+function Choix({
+  legende,
+  options,
+  registration,
+  erreur,
+  name,
+  colonnes = "grid-cols-1 sm:grid-cols-3",
+}: {
+  legende: ReactNode;
+  options: readonly { value: string; label: string }[];
+  registration: UseFormRegisterReturn;
+  erreur?: string;
+  name: string;
+  colonnes?: string;
+}) {
+  return (
+    <fieldset aria-describedby={erreur ? `err-${name}` : undefined}>
+      <legend className={labelClass}>{legende}</legend>
+      <div className={`grid gap-2 ${colonnes}`}>
+        {options.map((o) => (
+          <label key={o.value} className="group relative cursor-pointer">
+            <input type="radio" value={o.value} {...registration} className="peer sr-only" />
+            <span className="flex h-full min-h-12 items-center rounded-xl border border-border bg-background px-4 py-2.5 text-sm font-semibold text-primary transition-colors group-hover:border-secondary peer-checked:border-primary peer-checked:bg-primary peer-checked:text-primary-foreground peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-secondary">
+              {o.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      <Erreur id={`err-${name}`} message={erreur} />
+    </fieldset>
+  );
+}
+
+/**
+ * Formulaire de contact TRINEXTA (même principe que Studio) : court, adapté à la situation
+ * du visiteur. Par défaut, une demande de rappel. Liens entrants pris en charge :
+ * `?besoin=`, `?type=` (anciens liens), `?offre=` (Sérénité), `?postes=` (calculateur).
+ */
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     getValues,
+    watch,
     formState: { errors, isSubmitting },
-  } = useForm<ContactFormData>({ resolver: zodResolver(contactFormSchema) });
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get("type");
-    const auditUrl = params.get("audit_url");
-    const offre = params.get("offre");
-    if (type && (CONTACT_TYPES as readonly string[]).includes(type)) {
-      setValue("type", type as ContactFormData["type"]);
-    }
-    // Une offre promue est toujours une demande de devis, quel que soit `?type=`
-    if (isOffreSlug(offre)) {
-      setValue("offre", offre);
-      setValue("type", "devis");
-    }
-    // Calculateur Sérénité : nombre de postes transmis par `?postes=`
-    const postes = Number(params.get("postes"));
-    if (Number.isInteger(postes) && postes > 0 && postes < 10000) {
-      setValue("taille", taillePourPostes(postes));
-      if (!getValues("message")) {
-        const offreLibelle = isOffreSlug(offre) ? LIBELLES_OFFRES[offre] : "Sérénité";
-        setValue(
-          "message",
-          `Bonjour, je souhaite un devis ${offreLibelle} pour ${postes} poste${postes > 1 ? "s" : ""}.`
-        );
-      }
-    }
-    if (auditUrl) {
-      const auditScore = params.get("audit_score");
-      const score = auditScore ? ` (score ${auditScore}/100)` : "";
-      setValue(
-        "message",
-        `Bonjour, j'ai réalisé l'audit SEO gratuit de la page ${auditUrl}${score}. Je souhaite en discuter, notamment l'audit approfondi et les pistes pour améliorer ma visibilité.`
-      );
-    }
-  }, [setValue, getValues]);
+  } = useForm<ContactFormInput, unknown, ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    // Un champ masqué (SIRET d'un indépendant, créneau d'un simple message) sort des valeurs envoyées.
+    shouldUnregister: true,
+    defaultValues: { suite: "rappel" },
+  });
 
   const [serverMessage, setServerMessage] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [bornes, setBornes] = useState<{ min: string; max: string } | null>(null);
 
-  const type = watch("type");
+  const profil = watch("profil");
+  const suite = watch("suite");
+  const rdvDate = watch("rdvDate");
   const offre = watch("offre");
 
-  // Pré-remplit entreprise et ville via l'API publique recherche-entreprises (sans écraser la saisie)
-  const lookupController = useRef<AbortController | null>(null);
-  const lastLookup = useRef<string | null>(null);
-  const autofilled = useRef<{ entreprise?: string; ville?: string }>({});
-
-  const lookupSiret = async (siret: string) => {
-    lookupController.current?.abort();
-    if (!/^\d{14}$/.test(siret) || siret === lastLookup.current) return;
-    lastLookup.current = siret;
-    const controller = new AbortController();
-    lookupController.current = controller;
-    try {
-      const res = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siret}&per_page=1`, {
-        signal: controller.signal,
-      });
-      if (!res.ok) {
-        lastLookup.current = null;
-        return;
+  useEffect(() => {
+    // Bornes calculées côté navigateur : la page reste statique.
+    setBornes({ min: premierJourRdv(), max: dernierJourRdv() });
+    const params = new URLSearchParams(window.location.search);
+    const besoin = params.get("besoin") ?? TYPE_HERITE[params.get("type") ?? ""];
+    if (besoin && (BESOIN_VALUES as readonly string[]).includes(besoin)) setValue("besoin", besoin as Besoin);
+    const o = params.get("offre");
+    if (isOffreSlug(o)) {
+      setValue("offre", o);
+      setValue("besoin", "infogerance");
+    }
+    // Calculateur Sérénité : nombre de postes transmis par `?postes=`
+    const n = Number(params.get("postes"));
+    if (Number.isInteger(n) && n > 0 && n < 10000) {
+      setValue("postes", postesPourNombre(n));
+      if (!getValues("message")) {
+        const libelle = isOffreSlug(o) ? LIBELLES_OFFRES[o] : "Sérénité";
+        setValue("message", `Bonjour, je souhaite un devis ${libelle} pour ${n} poste${n > 1 ? "s" : ""}.`);
       }
+    }
+  }, [setValue, getValues]);
+
+  // Pré-remplit l'entreprise et la ville depuis le SIRET (API publique recherche-entreprises), sans écraser la saisie.
+  const derniereRecherche = useRef<string | null>(null);
+  const rechercherSiret = async (saisie: string) => {
+    const siret = saisie.replace(/\s/g, "");
+    if (!/^\d{14}$/.test(siret) || siret === derniereRecherche.current) return;
+    derniereRecherche.current = siret;
+    try {
+      const res = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siret}&per_page=1`);
+      if (!res.ok) return;
       const json = await res.json();
-      const result = json.results?.[0];
-      const etab = [result?.siege, ...(result?.matching_etablissements ?? [])].find((e) => e?.siret === siret);
-      if (!result || !etab) return;
-      // N'écrase que les champs vides ou issus d'un précédent pré-remplissage
-      const fill = (field: "entreprise" | "ville", value: string) => {
-        const current = getValues(field);
-        if (!current || current === autofilled.current[field]) {
-          setValue(field, value);
-          autofilled.current[field] = value;
-        }
-      };
-      fill("entreprise", result.nom_complet);
-      fill("ville", etab.libelle_commune ?? "");
+      const r = json.results?.[0];
+      const etab = [r?.siege, ...(r?.matching_etablissements ?? [])].find((e) => e?.siret === siret);
+      if (!r || !etab) return;
+      if (!getValues("entreprise")) setValue("entreprise", r.nom_complet);
+      if (!getValues("ville") && etab.libelle_commune) setValue("ville", etab.libelle_commune);
     } catch {
-      // saisie manuelle en repli (ou requête annulée)
-      if (lookupController.current === controller) lastLookup.current = null;
+      // Saisie manuelle en repli.
     }
   };
 
+  const telephone = register("telephone");
+  const siret = register("siret");
+
   const onSubmit = async (data: ContactFormData) => {
     setServerError(null);
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const json = await res.json();
-
-    if (res.ok) {
-      pushGtmEvent('form_submit', {
-        form_id: 'contact_principal',
-        offre: data.offre,
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setServerError(json.error ?? "L'envoi n'a pas abouti.");
+        return;
+      }
+      pushGtmEvent("form_submit", { form_id: "contact_principal", besoin: data.besoin, suite: data.suite, offre: data.offre });
       await trackLeadConversion(
-        { form_id: 'contact_principal' },
-        { email: data.email, telephone: data.telephone },
+        { form_id: "contact_principal", besoin: data.besoin, suite: data.suite },
+        { email: data.email, telephone: data.telephone }
       );
-
       setServerMessage(json.message);
-    } else {
-      setServerError(json.error ?? "Une erreur est survenue.");
+    } catch {
+      setServerError("L'envoi n'a pas abouti.");
     }
   };
 
   if (serverMessage) {
     return (
-      <div className="py-12 text-center space-y-4">
-        <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
-          <svg className="w-6 h-6 text-secondary-strong" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <p className="text-foreground font-semibold text-xl">{serverMessage}</p>
+      <div role="status" className="flex flex-col gap-4 py-6">
+        <p className="text-3xl font-bold text-primary md:text-4xl">Demande reçue.</p>
+        <p className="max-w-lg text-lg leading-relaxed text-primary">{serverMessage}</p>
+        <p className="max-w-lg text-muted-foreground">Un récapitulatif vient de partir sur votre boîte e-mail.</p>
+        <Link
+          href="/serenite"
+          className="w-fit border-b border-primary pb-1 font-bold text-primary hover:border-secondary-strong hover:text-secondary-strong"
+        >
+          En attendant, voir nos formules <span aria-hidden="true">→</span>
+        </Link>
       </div>
     );
   }
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
+  const libelleBouton =
+    suite === "message" ? "Envoyer mon message" : suite === "rdv" ? "Demander mon rendez-vous" : "Être rappelé";
 
-      {/* Offre promue transmise par un CTA (?offre=), valeur hors DOM via setValue */}
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-8 text-left">
       {offre && (
-        <div className="flex items-center justify-between gap-4 rounded-lg border border-secondary bg-secondary/10 px-4 py-3">
-          <p className="text-foreground text-base">
-            Votre demande concerne l&apos;offre{" "}
-            <strong className="text-secondary-strong">{LIBELLES_OFFRES[offre]}</strong>
+        <div className="flex items-center justify-between gap-4 rounded-xl border border-secondary bg-secondary/10 px-4 py-3">
+          <p className="text-base text-foreground">
+            Votre demande concerne l&apos;offre <strong className="text-secondary-strong">{LIBELLES_OFFRES[offre]}</strong>
           </p>
           <button
             type="button"
             onClick={() => setValue("offre", undefined)}
-            className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground transition-colors"
+            className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground"
           >
             Retirer
           </button>
         </div>
       )}
 
-      {/* Prénom / Nom */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label htmlFor="prenom" className="text-sm font-bold uppercase tracking-widest text-foreground block">
-            Prénom
-          </label>
-          <Input
-            id="prenom"
-            {...register("prenom")}
-            placeholder="Jean"
-            className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 rounded-lg"
-          />
-          {errors.prenom && <p className="text-red-600 text-sm">{errors.prenom.message}</p>}
-        </div>
-        <div className="space-y-2">
-          <label htmlFor="nom" className="text-sm font-bold uppercase tracking-widest text-foreground block">
-            Nom
-          </label>
-          <Input
-            id="nom"
-            {...register("nom")}
-            placeholder="Dupont"
-            className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 rounded-lg"
-          />
-          {errors.nom && <p className="text-red-600 text-sm">{errors.nom.message}</p>}
-        </div>
-      </div>
+      <Choix legende="Vous êtes" name="profil" options={PROFILS} registration={register("profil")} erreur={errors.profil?.message} />
 
-      {/* Email */}
-      <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-bold uppercase tracking-widest text-foreground block">
-          Email professionnel
-        </label>
-        <Input
-          id="email"
-          type="email"
-          {...register("email")}
-          placeholder="j.dupont@entreprise.fr"
-          className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg"
-        />
-        {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
-      </div>
+      <Choix
+        legende="Votre demande"
+        name="besoin"
+        options={BESOINS}
+        registration={register("besoin")}
+        erreur={errors.besoin?.message}
+        colonnes="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+      />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label htmlFor="telephone" className="text-sm font-bold uppercase tracking-widest text-foreground block">
-            Téléphone
-          </label>
-          <Input
+      <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2">
+        <div>
+          <label htmlFor="prenom" className={labelClass}>Prénom</label>
+          <input id="prenom" autoComplete="given-name" {...register("prenom")} aria-invalid={!!errors.prenom} aria-describedby="err-prenom" className={fieldClass} />
+          <Erreur id="err-prenom" message={errors.prenom?.message} />
+        </div>
+        <div>
+          <label htmlFor="nom" className={labelClass}>Nom</label>
+          <input id="nom" autoComplete="family-name" {...register("nom")} aria-invalid={!!errors.nom} aria-describedby="err-nom" className={fieldClass} />
+          <Erreur id="err-nom" message={errors.nom?.message} />
+        </div>
+        <div>
+          <label htmlFor="telephone" className={labelClass}>Téléphone</label>
+          <input
             id="telephone"
             type="tel"
-            {...register("telephone")}
-            placeholder="06 00 00 00 00"
-            className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="06 12 34 56 78"
+            {...telephone}
+            onChange={(e) => {
+              e.target.value = formaterTelephone(e.target.value);
+              void telephone.onChange(e);
+            }}
+            aria-invalid={!!errors.telephone}
+            aria-describedby="err-telephone"
+            className={fieldClass}
           />
+          <Erreur id="err-telephone" message={errors.telephone?.message} />
+        </div>
+        <div>
+          <label htmlFor="email" className={labelClass}>E-mail</label>
+          <input id="email" type="email" autoComplete="email" {...register("email")} aria-invalid={!!errors.email} aria-describedby="err-email" className={fieldClass} />
+          <Erreur id="err-email" message={errors.email?.message} />
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="type" className="text-sm font-bold uppercase tracking-widest text-foreground block">
-            Motif de contact
-          </label>
-          <div className="relative">
-            <select
-              id="type"
-              {...register("type")}
-              className="w-full h-14 px-4 pr-10 rounded-lg bg-background border border-border text-foreground text-base appearance-none cursor-pointer focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
-            >
-              <option value="" disabled className="bg-background text-muted-foreground">Sélectionnez...</option>
-              {CONTACT_TYPES.map((t) => (
-                <option key={t} value={t} className="bg-background text-foreground">
-                  {{ devis: "Demande de devis", support: "Support technique", autre: "Autre" }[t]}
-                </option>
-              ))}
-            </select>
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
+        {profil === "entreprise" && (
+          <>
+            <div>
+              <label htmlFor="entreprise" className={labelClass}>Entreprise</label>
+              <input id="entreprise" autoComplete="organization" {...register("entreprise")} aria-invalid={!!errors.entreprise} aria-describedby="err-entreprise" className={fieldClass} />
+              <Erreur id="err-entreprise" message={errors.entreprise?.message} />
             </div>
+            <div>
+              <label htmlFor="siret" className={labelClass}>SIRET{facultatif}</label>
+              <input
+                id="siret"
+                inputMode="numeric"
+                placeholder="123 456 789 00012"
+                {...siret}
+                onChange={(e) => {
+                  e.target.value = formaterSiret(e.target.value);
+                  void siret.onChange(e);
+                  void rechercherSiret(e.target.value);
+                }}
+                aria-invalid={!!errors.siret}
+                aria-describedby="err-siret"
+                className={fieldClass}
+              />
+              <Erreur id="err-siret" message={errors.siret?.message} />
+            </div>
+            <input type="hidden" {...register("ville")} />
+          </>
+        )}
+
+        {profil && profil !== "entreprise" && (
+          <div className="sm:col-span-2">
+            <label htmlFor="entreprise" className={labelClass}>
+              {profil === "creation" ? "Nom du projet" : "Nom de l'activité"}
+              {facultatif}
+            </label>
+            <input id="entreprise" autoComplete="organization" {...register("entreprise")} className={fieldClass} />
           </div>
-          {errors.type && <p className="text-red-600 text-sm">{errors.type.message}</p>}
-        </div>
+        )}
       </div>
 
-      {/* Champs conditionnels — devis */}
-      {type === "devis" && (
-        <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label htmlFor="entreprise" className="text-sm font-bold uppercase tracking-widest text-foreground block">Entreprise</label>
-              <Input id="entreprise" {...register("entreprise")} placeholder="Nom de votre société" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
-              {errors.entreprise && <p className="text-red-600 text-sm">{errors.entreprise.message}</p>}
-            </div>
+      <Choix
+        legende={<>Nombre de postes{facultatif}</>}
+        name="postes"
+        options={POSTES}
+        registration={register("postes")}
+        colonnes="grid-cols-2 sm:grid-cols-4"
+      />
 
-            <div className="space-y-2">
-              <label htmlFor="siret" className="text-sm font-bold uppercase tracking-widest text-foreground block">Numéro SIRET</label>
-              <Input id="siret" inputMode="numeric" maxLength={14} {...register("siret", { onChange: (e) => lookupSiret(e.target.value.trim()) })} placeholder="12345678901234" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
-              {errors.siret && <p className="text-red-600 text-sm">{errors.siret.message}</p>}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label htmlFor="ville" className="text-sm font-bold uppercase tracking-widest text-foreground block">Ville</label>
-              <Input id="ville" {...register("ville")} placeholder="Évry-Courcouronnes" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
-              {errors.ville && <p className="text-red-600 text-sm">{errors.ville.message}</p>}
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="siteWeb" className="text-sm font-bold uppercase tracking-widest text-foreground block">Site internet <span className="font-normal normal-case tracking-normal text-muted-foreground">(facultatif)</span></label>
-              <Input id="siteWeb" type="text" inputMode="url" {...register("siteWeb")} placeholder="https://www.entreprise.fr" className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary h-14 w-full rounded-lg" />
-              {errors.siteWeb && <p className="text-red-600 text-sm">{errors.siteWeb.message}</p>}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label htmlFor="secteur" className="text-sm font-bold uppercase tracking-widest text-foreground block">Secteur d&apos;activité</label>
-              <select id="secteur" {...register("secteur")} className="w-full h-14 px-4 rounded-lg bg-background border border-border text-foreground text-base focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-                <option value="" className="bg-background text-muted-foreground">Sélectionnez...</option>
-                {SECTEURS.map((s) => <option key={s} value={s} className="bg-background text-foreground">{s}</option>)}
-              </select>
-              {errors.secteur && <p className="text-red-600 text-sm">{errors.secteur.message}</p>}
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="taille" className="text-sm font-bold uppercase tracking-widest text-foreground block">Taille de l&apos;entreprise</label>
-              <select id="taille" {...register("taille")} className="w-full h-14 px-4 rounded-lg bg-background border border-border text-foreground text-base focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-                <option value="" className="bg-background text-muted-foreground">Sélectionnez...</option>
-                {TAILLES.map((t) => <option key={t} value={t} className="bg-background text-foreground">{t} salariés</option>)}
-              </select>
-              {errors.taille && <p className="text-red-600 text-sm">{errors.taille.message}</p>}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Champ conditionnel — support */}
-      {type === "support" && (
-        <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
-          <label htmlFor="urgence" className="text-sm font-bold uppercase tracking-widest text-foreground block">Niveau d&apos;urgence</label>
-          <select id="urgence" {...register("urgence")} className="w-full h-14 px-4 rounded-lg bg-background border border-border text-foreground text-base focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
-            <option value="" className="bg-background text-muted-foreground">Sélectionnez...</option>
-            {URGENCES.map((u) => <option key={u} value={u} className="bg-background text-foreground">{u}</option>)}
-          </select>
-          {errors.urgence && <p className="text-red-600 text-sm">{errors.urgence.message}</p>}
-        </div>
-      )}
-
-      {/* Message */}
-      <div className="space-y-2">
-        <label htmlFor="message" className="text-sm font-bold uppercase tracking-widest text-foreground block">
-          Votre message
+      <div>
+        <label htmlFor="message" className={labelClass}>
+          Votre besoin en quelques mots{suite === "message" ? "" : <>{facultatif}</>}
         </label>
-        <Textarea
+        <textarea
           id="message"
+          rows={3}
+          placeholder="Ce qui vous gêne aujourd'hui, ce que vous voulez confier, votre échéance."
           {...register("message")}
-          placeholder={type === "support" ? "Décrivez votre incident technique..." : "Comment pouvons-nous vous aider ?"}
-          rows={4}
-          className="bg-background border-border text-foreground text-base placeholder:text-muted-foreground focus:border-secondary focus:ring-secondary w-full rounded-lg"
+          aria-invalid={!!errors.message}
+          aria-describedby="err-message"
+          className={`${fieldClass} h-auto resize-y`}
         />
-        {errors.message && <p className="text-red-600 text-sm">{errors.message.message}</p>}
+        <Erreur id="err-message" message={errors.message?.message} />
       </div>
 
-      {serverError && <p className="text-red-600 text-sm text-center">{serverError}</p>}
+      <div className="flex flex-col gap-5 rounded-2xl bg-background p-5 md:p-7">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <p className="text-xl font-extrabold text-primary">Et ensuite ?</p>
+          <p className="text-sm font-semibold text-secondary-strong">État des lieux offert</p>
+        </div>
+        <Choix
+          legende="Je souhaite"
+          name="suite"
+          options={SUITES_CONTACT}
+          registration={register("suite")}
+          erreur={errors.suite?.message}
+        />
 
-      <Button
-        variant="secondary"
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full py-4 text-base font-bold uppercase tracking-wider rounded-xl shadow-xl transition-all mt-4"
-      >
-        {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
-      </Button>
+        {suite === "rappel" && (
+          <Choix
+            legende={<>De préférence{facultatif}</>}
+            name="moment"
+            options={MOMENTS}
+            registration={register("moment")}
+            colonnes="grid-cols-2"
+          />
+        )}
 
-      <p className="text-center text-muted-foreground text-sm mt-4 block">
-        En soumettant ce formulaire, vous acceptez notre{" "}
-        <a href="/confidentialite" className="text-secondary-strong underline hover:text-foreground transition-colors">
-          politique de confidentialité
-        </a>.
-      </p>
+        {suite === "rdv" && (
+          <>
+            <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2">
+              <div>
+                <label htmlFor="rdvDate" className={labelClass}>Date souhaitée</label>
+                <input
+                  id="rdvDate"
+                  type="date"
+                  min={bornes?.min}
+                  max={bornes?.max}
+                  {...register("rdvDate")}
+                  aria-invalid={!!errors.rdvDate}
+                  aria-describedby="err-rdvDate rdvDate-aide"
+                  className={fieldClass}
+                />
+                <p id="rdvDate-aide" className="mt-2 text-sm text-muted-foreground">
+                  {rdvDate && !errors.rdvDate
+                    ? `${formaterDateRdv(rdvDate)}, sous réserve de confirmation.`
+                    : "Du lundi au vendredi, sous réserve de confirmation."}
+                </p>
+                <Erreur id="err-rdvDate" message={errors.rdvDate?.message} />
+              </div>
+              <Choix
+                legende="Moment"
+                name="moment"
+                options={MOMENTS}
+                registration={register("moment")}
+                erreur={errors.moment?.message}
+                colonnes="grid-cols-2"
+              />
+            </div>
+            <Choix
+              legende="Format"
+              name="rdvFormat"
+              options={RDV_FORMATS}
+              registration={register("rdvFormat")}
+              erreur={errors.rdvFormat?.message}
+            />
+          </>
+        )}
+
+        {suite === "rappel" && (
+          <p className="text-sm text-muted-foreground">
+            Nous vous rappelons {TRINEXTA_CONTACT.horaires}. Urgent ? Appelez le{" "}
+            <a href={TRINEXTA_CONTACT.telephoneHref} className="font-bold text-primary underline">
+              {TRINEXTA_CONTACT.telephone}
+            </a>
+            .
+          </p>
+        )}
+      </div>
+
+      {serverError && (
+        <p role="alert" className="border-l-2 border-red-600 pl-4 text-red-600">
+          {serverError} Appelez le{" "}
+          <a href={TRINEXTA_CONTACT.telephoneHref} className="font-bold underline">
+            {TRINEXTA_CONTACT.telephone}
+          </a>{" "}
+          ou écrivez à{" "}
+          <a href={`mailto:${TRINEXTA_CONTACT.email}`} className="font-bold underline">
+            {TRINEXTA_CONTACT.email}
+          </a>
+          .
+        </p>
+      )}
+
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="inline-flex min-h-14 items-center justify-center rounded-xl bg-primary px-8 font-bold text-primary-foreground shadow-lg transition-colors hover:bg-primary/90 disabled:opacity-60"
+        >
+          {isSubmitting ? "Envoi en cours…" : libelleBouton}
+        </button>
+        <p className="max-w-xs text-xs leading-relaxed text-muted-foreground">
+          Vos coordonnées servent uniquement à répondre à votre demande.{" "}
+          <Link href="/confidentialite" className="underline hover:text-primary">
+            Confidentialité
+          </Link>
+        </p>
+      </div>
     </form>
   );
 }
