@@ -11,19 +11,31 @@ import { ContactMap } from "@/components/contact/ContactMap";
 import { FinalCTA } from "@/components/FinalCTA";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { contactFaqs } from "@/components/contact/contactFaqData";
-import { JsonLd } from "@/components/seo/JsonLd";
+import Link from "next/link";
+import { JsonLd, trinextaLocalBusiness } from "@/components/seo/JsonLd";
+import { Text } from "@/components/ui/Typography";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
+const DESCRIPTION =
+  "Parlez de votre informatique avec TRINEXTA : formulaire, téléphone 09 78 25 07 46 ou bureau à Évry-Courcouronnes. Lundi au vendredi, 8 h 30 à 19 h.";
+
+const contactPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  url: "https://trinexta.fr/contact",
+  about: { "@id": trinextaLocalBusiness["@id"] },
+  mainEntity: trinextaLocalBusiness,
+};
+
 export const metadata: Metadata = {
-  title: "Contact · Infogérance & Support informatique",
-  description:
-    "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+  title: "Contact et demande de devis informatique à Évry",
+  description: DESCRIPTION,
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact - Trinexta · Infogérance & Support informatique",
-    description: "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+    title: "Contact et demande de devis informatique à Évry | TRINEXTA",
+    description: DESCRIPTION,
     url: "/contact",
     type: "website",
     images: [
@@ -36,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact - Trinexta · Infogérance & Support informatique",
-    description: "Discutons de votre projet. Demande de devis ou de support technique, l'équipe Trinexta vous répond sous 24h ouvrées.",
+    title: "Contact et demande de devis informatique à Évry | TRINEXTA",
+    description: DESCRIPTION,
     images: ["/images/og-default.png"],
   },
 };
@@ -60,6 +72,7 @@ export default function ContactPage() {
     <main className="bg-primary min-h-screen relative">
       {/* SEO */}
       <JsonLd data={jsonLd} />
+      <JsonLd data={contactPageJsonLd} />
 
       <BreadcrumbJsonLd
         items={[
@@ -90,9 +103,9 @@ export default function ContactPage() {
 
       {/* FORMULAIRE */}
       <TransitionTitle
-        surtitle="Un projet en tête ?"
-        line1="Laissez-nous"
-        line2="Un message"
+        surtitle="Votre demande"
+        line1="Décrivez"
+        line2="votre besoin"
       />
 
       <ContactFormSection />
@@ -101,21 +114,21 @@ export default function ContactPage() {
 
       {/* CARTE */}
       <TransitionTitle
-        surtitle="Rencontrons-nous"
-        line1="Où nous"
-        line2="Trouver ?"
+        surtitle="Nous joindre"
+        line1="7 rue Montespan"
+        line2="Évry-Courcouronnes"
       />
 
       <ContactMap />
 
       {/* CTA FINAL */}
       <FinalCTA
-        line1="Vous aider à"
-        line2="surmonter vos"
-        line3="défis technologiques"
-        description="Trinexta by Trustech IT Support simplifie et sécurise votre informatique. Un accompagnement fiable, souple et adapté à votre performance."
-        ctaLabel="En savoir plus"
-        ctaHref="/nos-offres"
+        line1="Nos formules"
+        line2="et leurs"
+        line3="prix"
+        description="Sérénité Essentiel et Sérénité Complète, facturées par poste et par mois : comparez ce qu'elles couvrent. Téléphone : 09 78 25 07 46, du lundi au vendredi, de 8 h 30 à 19 h."
+        ctaLabel="Voir l'offre Sérénité"
+        ctaHref="/serenite"
       />
        {/* FAQ */}
       <Section
@@ -126,6 +139,15 @@ export default function ContactPage() {
 
         <Container className="relative z-10">
           <ContactFaq />
+          <Text className="mt-10 text-center text-white/70 text-sm md:text-base">
+            <Link href="/charte-assistance" className="text-secondary-soft font-bold hover:underline">Ordinateur ou compte piraté</Link>
+            {" · "}
+            <a href="https://www.cybermalveillance.gouv.fr/" target="_blank" rel="noopener noreferrer" className="text-secondary-soft font-bold hover:underline">cybermalveillance.gouv.fr</a>
+            {" · "}
+            <Link href="/nous-rejoindre" className="text-secondary-soft font-bold hover:underline">Nous rejoindre</Link>
+            {" · "}
+            <Link href="/serenite" className="text-secondary-soft font-bold hover:underline">Nos formules et leurs prix</Link>
+          </Text>
         </Container>
       </Section>
     </main>

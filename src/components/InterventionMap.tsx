@@ -14,6 +14,7 @@ const DEPARTMENTS = [
     { id: "93", name: "Seine-Saint-Denis", angle: 25, radius: 0.47 },
     { id: "94", name: "Val-de-Marne", angle: 145, radius: 0.44 },
     { id: "95", name: "Val-d'Oise", angle: 310, radius: 0.52 },
+    { id: "78", name: "Yvelines", angle: 262, radius: 0.56 },
     { id: "77", name: "Seine-et-Marne", angle: 110, radius: 0.62 },
     { id: "91", name: "Essonne", angle: 185, radius: 0.43 },
 ]
@@ -22,23 +23,23 @@ const STEPS = [
     {
         id: "CMD_HQ",
         label: "01",
-        title: "Centre de commandement",
+        title: "Basés à Évry-Courcouronnes, présents en Essonne",
         subtitle: "Essonne - 91",
-        text: "Notre QG est ancré en Essonne, au carrefour des axes stratégiques d'Île-de-France. Chaque mission part d'ici.",
+        text: "Notre bureau est au 7 rue Montespan, à Évry-Courcouronnes. Nous accompagnons les entreprises de l'agglomération Grand Paris Sud, de l'Essonne et de toute l'Île-de-France.",
     },
     {
         id: "DEP_IDF",
         label: "02",
-        title: "Déploiement régional",
-        subtitle: "7 départements couverts",
-        text: "Le signal se déploie vers Paris, les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne, le Val-d'Oise, la Seine-et-Marne et l'Essonne. Intervention sur site en moins de 4h.",
+        title: "Sur site dans toute l'Île-de-France",
+        subtitle: "Sans frais à 15 km d'Évry",
+        text: "Déplacement sans frais pour les interventions programmées dans un rayon de 15 km autour d'Évry ; au-delà, déplacement facturé selon le devis. Le temps passé sur site reste facturé selon votre contrat.",
     },
     {
         id: "EXP_NAT",
         label: "03",
-        title: "Portée nationale",
-        subtitle: "France entière",
-        text: "L'onde de service s'étend au-delà de la région capitale pour couvrir vos infrastructures critiques sur l'ensemble du territoire.",
+        title: "À distance d'abord",
+        subtitle: "Puis sur place si besoin",
+        text: "La plupart des demandes se règlent à distance ; pour le reste, votre technicien titulaire vient sur place.",
     },
 ]
 
@@ -173,11 +174,11 @@ export function InterventionMap() {
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary opacity-80" />
                     </span>
                     <span className="text-[10px] font-mono text-secondary-soft/90 font-bold uppercase tracking-[0.28em]">
-                        Système opérationnel
+                        Zone d&apos;intervention
                     </span>
                     <div className="h-px flex-1 bg-secondary/20" />
                     <span className="hidden md:block text-[10px] font-mono text-secondary-soft font-bold uppercase tracking-[0.12em]">
-                        ILE-DE-FRANCE / NATIONAL
+                        ÉVRY / ÎLE-DE-FRANCE
                     </span>
                 </div>
 
@@ -256,10 +257,10 @@ export function InterventionMap() {
                                 <div className="flex items-center justify-between px-4 py-2"
                                     style={{ borderBottom: "1px solid color-mix(in srgb, var(--secondary) 15%, transparent)" }}>
                                     <span className="text-sm font-mono text-secondary-soft font-bold uppercase tracking-[0.22em]">
-                                        Cibles actives
+                                        Départements desservis
                                     </span>
                                     <span className="text-sm font-mono text-secondary-soft/80 font-bold">
-                                        {DEPARTMENTS.length}&thinsp;/&thinsp;7
+                                        {DEPARTMENTS.length}&thinsp;/&thinsp;8
                                     </span>
                                 </div>
                                 <div className="flex flex-wrap gap-1.5 p-3">

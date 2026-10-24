@@ -17,26 +17,33 @@ export interface MenuItem {
 }
 
 export const menuItems: MenuItem[] = [
-  { label: "Accueil", href: "/" },
   { label: "Offre Sérénité", href: "/serenite" },
   {
     label: "Nos services",
     href: "/infogerance",
     subMenu: [
       { label: "Infogérance", href: "/infogerance" },
+      { label: "Support informatique", href: "/support-informatique" },
       { label: "Cybersécurité", href: "/cybersecurite" },
-      { label: "Cloud & Sauvegarde", href: "/cloud-sauvegarde" },
+      { label: "Sauvegarde", href: "/cloud-sauvegarde" },
       { label: "Microsoft 365", href: "/microsoft-365" },
-      { label: "Support Informatique", href: "/support-informatique" },
-      { label: "Solutions Métier", href: "/solutions-metier" },
-      { label: "Technicien sous régie", href: "/technicien-sous-regie" },
-      { label: "Services Annexes", href: "/services-annexes" },
+      { label: "Téléphonie et réseau", href: "/solutions-metier" },
+      { label: "Interventions sur devis", href: "/services-annexes" },
+      { label: "Technicien en régie", href: "/technicien-sous-regie" },
     ]
   },
-  { label: "Trinexta Studio", href: "/trinexta-studio" },
   { label: "Cas clients", href: "/cas-clients" },
+  {
+    label: "Ressources",
+    href: "/blog",
+    subMenu: [
+      { label: "Blog", href: "/blog" },
+      { label: "Ordinateur ou compte piraté", href: "/charte-assistance" },
+      { label: "Niveaux de service", href: "/niveau-de-service" },
+      { label: "Plan de réponse aux incidents", href: "/plan-reponse-incidents-securite" },
+    ]
+  },
   { label: "À propos", href: "/a-propos" },
-  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ]
 

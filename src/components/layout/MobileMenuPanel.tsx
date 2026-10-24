@@ -7,6 +7,7 @@ import { FocusTrap } from "focus-trap-react"
 import { menuItems } from "./Nav"
 import { cn } from "@/lib/utils"
 import { usePresence } from "@/hooks/usePresence"
+import { HEADER_CTA } from "@/data/header-cta"
 
 interface MobileMenuPanelProps {
   isOpen: boolean
@@ -115,12 +116,16 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
             })}
 
             <Link
-              href="/estimation"
+              href={HEADER_CTA.href}
               onClick={onClose}
               className="mt-4 inline-flex items-center justify-center rounded-xl bg-secondary px-4 py-3 text-sm font-bold text-secondary-strong-foreground shadow-md transition-all hover:bg-secondary/90 active:scale-95"
             >
-              Estimer mon projet
+              {HEADER_CTA.label}
             </Link>
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              Support du lundi au vendredi, 8 h 30-19 h
+            </p>
           </div>
         </aside>
       </FocusTrap>
