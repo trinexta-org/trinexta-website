@@ -23,7 +23,7 @@ export const ACCUEIL_ADRESSE = {
   email: "contact@trinexta.fr",
 } as const
 
-/** Vidéo de présentation (fin corrigée le 24/10/2026 : baseline à la place de la mention Trustech). */
+/** Vidéo de présentation (fin refaite le 24/10/2026 : baseline, bouton et contacts mis en forme, comme la vidéo Studio). */
 export const VIDEO_TRINEXTA = {
   src: "/videos/trinexta-presentation.mp4",
   poster: "/videos/trinexta-presentation-affiche.webp",
