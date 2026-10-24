@@ -5,7 +5,7 @@ import { SERENITE_DEVIS_HREF, SERENITE_POUR_QUI } from "@/data/serenite"
 const targets = [
     {
         role: "Indépendants & TPE",
-        spec: "Dès 1 poste",
+        spec: "De 1 à 20 postes et au-delà",
         image: "/images/nos-offres/targets/target-tpe.jpg"
     },
     {
@@ -60,7 +60,7 @@ export function SereniteTargets() {
                         href={SERENITE_DEVIS_HREF}
                         className="text-primary font-bold underline decoration-secondary underline-offset-4 hover:decoration-primary transition-colors"
                     >
-                        Demander mon devis Sérénité
+                        Demander une proposition
                     </Link>
                 </p>
             </div>

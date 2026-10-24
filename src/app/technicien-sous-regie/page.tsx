@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { OfferHero } from "@/components/shared/OfferHero";
 import { FaqSection } from "@/components/shared/FaqSection";
-import { officialFaqs } from "@/components/shared/faqData";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { TransitionTitle } from "@/components/TransitionTitle";
@@ -15,22 +14,19 @@ import { TechnicienProfiles } from "@/components/technicien-sous-regie/Technicie
 import { TechnicienPricing } from "@/components/technicien-sous-regie/TechnicienPricing";
 import { TechnicienAssurances } from "@/components/technicien-sous-regie/TechnicienAssurances";
 import { FinalCTA } from "@/components/FinalCTA";
+import { REGIE_ALTERNATIVES, REGIE_FAQ, REGIE_HERO, TALENTERO_URL } from "@/data/technicien-sous-regie";
 
 export const metadata: Metadata = {
   title: "Technicien informatique en régie en Île-de-France",
   description:
-    "Un technicien support ou réseau en régie pour renforcer votre équipe IT en Île-de-France, absorber un pic d'activité ou couvrir une absence, sans recruter en CDI.",
+    "Un technicien support ou réseau en régie pour renforcer votre équipe IT, absorber un pic d'activité ou couvrir une absence, sans recruter en CDI. Île-de-France.",
   alternates: {
     canonical: "/technicien-sous-regie",
   },
 };
 
 export default function TechnicienSousRegiePage() {
-  const filteredFaqs = officialFaqs.filter(
-    (faq) =>
-      faq.tags?.includes("technicien-sous-regie") ||
-      faq.tags?.includes("general"),
-  );
+  const filteredFaqs = REGIE_FAQ;
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -52,13 +48,11 @@ export default function TechnicienSousRegiePage() {
           ========================================================= */}
       <section className="relative bg-primary">
         <OfferHero
-          part1="Technicien informatique"
-          part2="en régie"
-          subtitles={[
-            "Votre technicien support sur mesure. Une solution souple et ciblée pour renforcer vos équipes et absorber vos pics d'activité.",
-            "Pas de frais cachés, pas de lourdeur inutile. La collaboration démarre simplement et s'adapte à votre budget réel.",
-            "Une réponse rapide et concrète en Île-de-France : des profils qualifiés présentés dans les meilleurs délais.",
-          ]}
+          part1={REGIE_HERO.part1}
+          part2={REGIE_HERO.part2}
+          subtitles={REGIE_HERO.subtitles}
+          cta={REGIE_HERO.cta}
+          announcement={{ label: "Découvrir Talentero", href: TALENTERO_URL }}
           imageSrc="/images/nos-offres/hero-impulsion.jpg"
         />
 
@@ -89,8 +83,8 @@ export default function TechnicienSousRegiePage() {
           <div className="space-y-12">
             <TransitionTitle
               surtitle="Périmètre d'intervention"
-              line1="Des experts du support"
-              line2="à votre service"
+              line1="Ce que fait"
+              line2="votre technicien"
             />
             <Section container={false} className="py-0">
               <Container className="max-w-[1400px]">
@@ -124,9 +118,9 @@ export default function TechnicienSousRegiePage() {
 
           <div className="space-y-12">
             <TransitionTitle
-              surtitle="Profils mobilisés"
-              line1="Les experts que"
-              line2="nous envoyons"
+              surtitle="Profils"
+              line1="Les profils que"
+              line2="nous proposons"
             />
             <Section container={false} className="py-0">
               <Container className="max-w-[1400px]">
@@ -141,9 +135,9 @@ export default function TechnicienSousRegiePage() {
 
           <div className="space-y-12">
             <TransitionTitle
-              surtitle="Nos engagements"
-              line1="Simple, souple"
-              line2="sans surprises"
+              surtitle={REGIE_ALTERNATIVES.surtitre}
+              line1={REGIE_ALTERNATIVES.ligne1}
+              line2={REGIE_ALTERNATIVES.ligne2}
             />
             <Section container={false} className="py-0">
               <Container className="max-w-[1400px]">
@@ -159,12 +153,12 @@ export default function TechnicienSousRegiePage() {
           CTA FINAL
           ========================================================= */}
       <FinalCTA
-        line1="Prêt à trouver"
-        line2="le technicien qui"
-        line3="fera la différence ?"
-        description="Donnez une nouvelle impulsion à votre support IT. Nous vous aidons à surmonter vos défis technologiques avec des profils adaptés à vos besoins réels."
-        ctaLabel="Trouver mon technicien"
-        ctaHref="/contact"
+        line1="Besoin d'un technicien"
+        line2="pour renforcer"
+        line3="votre équipe ?"
+        description="Dites-nous le profil, la durée et le lieu de la mission : nous revenons vers vous avec une proposition écrite. Du lundi au vendredi, de 8 h 30 à 19 h, au 09 78 25 07 46."
+        ctaLabel="Décrire mon besoin"
+        ctaHref="/contact#formulaire"
       />
 
       {/* =========================================================

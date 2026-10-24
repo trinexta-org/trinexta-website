@@ -28,9 +28,9 @@ function Valeur({ value }: { value: string }) {
 export function SereniteComparatif() {
   return (
     <Reveal>
-      <div className="space-y-6">
+      <div id="comparatif" className="space-y-6 scroll-mt-32">
         <Heading as="h3" emphasis={false} className="text-center text-primary">
-          Ce qui change entre les deux formules
+          Essentiel ou Complète : le comparatif
         </Heading>
 
         <div className="rounded-2xl border border-secondary/20 bg-surface-strong p-5 md:p-6">

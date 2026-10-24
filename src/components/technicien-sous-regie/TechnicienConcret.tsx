@@ -2,29 +2,10 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { REGIE_SITUATIONS } from "@/data/technicien-sous-regie"
 
-const situations = [
-  { 
-    label: "Pic d'activité", 
-    desc: "Un surcroît de travail temporaire ? Nous intégrons un renfort opérationnel pour absorber la charge et maintenir vos délais sans surcharger vos équipes." 
-  },
-  { 
-    label: "Besoin ponctuel", 
-    desc: "Une mission courte ou un dépannage immédiat. Vous disposez de la compétence requise, juste le temps nécessaire." 
-  },
-  { 
-    label: "Absence à compenser", 
-    desc: "Un collaborateur absent ou en transition ? Nous assurons la continuité de service avec un profil déjà opérationnel et immédiatement disponible." 
-  },
-  { 
-    label: "Projet de déploiement", 
-    desc: "Migration, installation massive, upgrade réseau. Nous apportons la main-d'œuvre et le savoir-faire pour réussir votre déploiement." 
-  },
-  { 
-    label: "Besoin durable IT", 
-    desc: "Un besoin de support régulier mais sans le poids d'un recrutement. Une souplesse totale pour accompagner votre croissance." 
-  }
-]
+const situations = REGIE_SITUATIONS.items
+
 
 export function TechnicienConcret() {
   const [activeIndex, setActiveIndex] = useState<number | null>(0)
@@ -42,7 +23,7 @@ export function TechnicienConcret() {
           <div className="md:hidden absolute inset-0 z-0">
              <Image 
                 src="/images/nos-offres/max-scaling.jpg" 
-                alt="Concrètement Mobile"
+                alt=""
                 fill
                 className="object-cover object-center"
               />
@@ -51,7 +32,7 @@ export function TechnicienConcret() {
 
           <Image 
             src="/images/nos-offres/impulsion_concret.jpg" 
-            alt="Concrètement Desktop"
+            alt=""
             fill
             className="hidden md:block object-cover object-right"
           />
@@ -64,15 +45,12 @@ export function TechnicienConcret() {
             
             <div className="space-y-6 mb-12">
               <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                Ce que l&apos;on fait <br/> <span className="text-secondary-strong">concrètement</span>
+                {REGIE_SITUATIONS.titreDebut} <br/> <span className="text-secondary-strong">{REGIE_SITUATIONS.titreAccent}</span>
               </h2>
               <div className="space-y-4 text-base md:text-lg text-white/80 leading-relaxed">
-                <p>
-                  La prestation Technicien sous régie est notre service de mise à disposition de personnel dédié exclusivement au support informatique. Ici, pas de dispositif complexe ni de formule figée : notre mission est simple. Vous apporter un renfort humain qualifié pour soutenir vos équipes, fluidifier le quotidien de vos utilisateurs et sécuriser le bon fonctionnement de votre environnement informatique.
-                </p>
-                <p>
-                  C&apos;est une solution pertinente si vous faites face à un pic d&apos;activité, à un besoin ponctuel, à une absence à compenser, à un projet de déploiement ou à un besoin plus durable en support IT.
-                </p>
+                {REGIE_SITUATIONS.paragraphes.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
               </div>
             </div>
 

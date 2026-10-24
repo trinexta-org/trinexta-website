@@ -12,11 +12,12 @@ const CONTACT_CARDS = [
     id: "bureau",
     title: "Bureau d'activité",
     image: "/images/contact/bureau.webp",
-    alt: "Le Magelan Grand Paris Sud, bureau d'activité de trinexta",
+    alt: "Le Magellan Grand Paris Sud, bureau d'activité de TRINEXTA à Évry-Courcouronnes",
     content: (
       <Text variant="small" className="text-white/80 leading-relaxed mt-4 drop-shadow-md font-medium">
-        7 Rue Montespan<br />
-        91000 Évry-Courcouronnes
+        7 rue Montespan<br />
+        91000 Évry-Courcouronnes<br />
+        <span className="text-white/60">Siège social : 74 B boulevard Henri Dunant, 91100 Corbeil-Essonnes</span>
       </Text>
     )
   },
@@ -29,12 +30,15 @@ const CONTACT_CARDS = [
         <a href="tel:+33978250746" className="text-secondary-strong font-black hover:underline block text-2xl drop-shadow-lg">
           09 78 25 07 46
         </a>
+        <Text variant="small" className="text-white/80 mt-2 drop-shadow-md font-medium">
+          Du lundi au vendredi, de 8 h 30 à 19 h
+        </Text>
       </div>
     )
   },
   {
     id: "email",
-    title: "Email",
+    title: "E-mail",
     image: "/images/contact/email.png",
     content: (
       <div className="mt-4">
@@ -102,6 +106,9 @@ export function ContactCards() {
             </div>
           ))}
         </GridCards>
+        <Text className="mt-10 md:mt-12 max-w-4xl mx-auto text-center text-white/80 text-base md:text-lg leading-relaxed">
+          <strong className="text-white">En bref.</strong> TRINEXTA est joignable du lundi au vendredi, de 8 h 30 à 19 h, au 09 78 25 07 46 ou à contact@trinexta.fr. Bureau : 7 rue Montespan, 91000 Évry-Courcouronnes. Le formulaire sert aux nouvelles demandes ; les clients sous contrat utilisent les canaux de support prévus à leur contrat.
+        </Text>
       </div>
     </Section>
   )

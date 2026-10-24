@@ -1,12 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { OfferTag } from "./faqData"
 
 export interface FaqItem {
   question: string;
   answer: string;
-  tags?: OfferTag[];
 }
 
 interface FaqSectionProps {

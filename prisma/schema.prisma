@@ -28,6 +28,13 @@ model ContactForm {
   urgence    String?
   message    String
   offre      String?
+  /// Formulaire de contact du 24/10/2026 : situation, suite souhaitée et créneau.
+  profil     String?
+  postes     String?
+  suite      String?
+  moment     String?
+  rdvDate    DateTime? @db.Date
+  rdvFormat  String?
   createdAt  DateTime @default(now())
 }
 

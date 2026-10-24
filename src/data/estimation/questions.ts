@@ -52,7 +52,7 @@ export const ESTIMATION_QUESTIONS: EstimationQuestion[] = [
       {
         id: "projet",
         label: "Nous avons un projet à réaliser",
-        description: "Site web, application, outil métier, automatisation",
+        description: "Outil métier, automatisation de tâches",
       },
       {
         id: "renfort",
@@ -102,16 +102,6 @@ export const ESTIMATION_QUESTIONS: EstimationQuestion[] = [
     id: "projet-type",
     title: "Quel type de projet avez-vous en tête ?",
     options: [
-      {
-        id: "site",
-        label: "Un site web",
-        description: "Site vitrine, refonte, e-commerce",
-      },
-      {
-        id: "app",
-        label: "Une application",
-        description: "Application web ou mobile pour vos clients ou vos équipes",
-      },
       {
         id: "outil",
         label: "Un outil métier",

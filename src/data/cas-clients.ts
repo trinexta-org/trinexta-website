@@ -121,7 +121,7 @@ export const caseClients: CaseClient[] = [
     cardResult:
       "16 Go, Microsoft 365, écrans Dell 27\". Même budget, autre confort, et moins de risques sur les données.",
     title:
-      "5 postes qui souffraient en silence, modernisés sans tout remplacer",
+      "Moderniser cinq postes sans remplacer tout le parc",
     context: [
       "Cette société de services disposait de 5 PC sous Windows Famille avec seulement 8 Go de RAM, saturant à 80% au repos. Le quotidien était freiné par les ralentissements et les blocages logiciels.",
       "Le travail sur Office 2007 et les sauvegardes sur clés USB ou disques durs externes créaient aussi un risque critique de perte de données.",
@@ -272,7 +272,7 @@ export const caseClients: CaseClient[] = [
       },
       {
         label: "Sites web",
-        href: "/trinexta-studio",
+        href: "/cybersecurite",
         content:
           "Opérations initiales menées en maintenant les principaux sites accessibles, et préparation des vérifications nécessaires à une remédiation complète.",
       },
@@ -300,4 +300,16 @@ export const caseClientsOrdered = featuredCaseClient
 
 export function getCaseClientBySlug(slug: string) {
   return caseClients.find((item) => item.slug === slug)
+}
+
+// Cas mis en avant sur l'accueil (infogérance d'une PME), distinct du cas en vedette de /cas-clients.
+const homeCase = caseClients.find((item) => item.slug === "modernisation-it-pme-essonne")
+
+export const homeCaseClient: CaseClient | undefined = homeCase && {
+  ...homeCase,
+  featured: {
+    badge: "Moderniser cinq postes sans remplacer tout le parc",
+    teaser:
+      "Cinq postes sous Office 2007, 8 Go de RAM saturés et des sauvegardes sur clé USB : le parc a été modernisé sans tout remplacer, avec Microsoft 365, 16 Go de mémoire et des écrans Dell 27 pouces.",
+  },
 }

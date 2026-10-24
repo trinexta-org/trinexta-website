@@ -1,28 +1,9 @@
 import { FadeIn } from "@/components/ui/FadeIn"
 import { SectionBackground } from "@/components/ui/SectionBackground"
+import { REGIE_ETAPES, REGIE_ETAPES_NOTE } from "@/data/technicien-sous-regie"
 
-const steps = [
-    {
-        num: "01",
-        title: "Vous décrivez votre besoin",
-        desc: "Par téléphone ou par mail. Quel profil, quelle mission, quelle durée estimée. Pas de formulaire à rallonge, on parle entre pros.",
-    },
-    {
-        num: "02",
-        title: "On cale l'ordre de mission",
-        desc: "Profil validé, budget défini, conditions posées noir sur blanc. Tout est aligné avant qu'on cherche qui que ce soit.",
-    },
-    {
-        num: "03",
-        title: "Vous recevez 2 à 3 profils sous 72h",
-        desc: "Des candidats qualifiés, disponibles, briefés sur votre mission. Vous choisissez celui qui vous convient.",
-    },
-    {
-        num: "04",
-        title: "Le technicien démarre",
-        desc: "Opérationnel dès J+1. Sur votre site, en hybride, ou hébergé chez TRINEXTA. Il s'intègre à votre équipe et avance.",
-    },
-]
+const steps = REGIE_ETAPES
+
 
 export function TechnicienSteps() {
     return (
@@ -40,11 +21,11 @@ export function TechnicienSteps() {
 
                             <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-tight">
                                 Comment ça se passe, <br />
-                                <em className="not-italic text-secondary-soft">du premier appel au premier jour ?</em>
+                                <em className="not-italic text-secondary-soft">du besoin au démarrage</em>
                             </h2>
 
                             <p className="mt-8 text-white/70 text-base md:text-lg max-w-md leading-relaxed">
-                                Quatre étapes. Aucune surprise. Un cadre clair pour démarrer votre collaboration sans friction.
+                                {REGIE_ETAPES_NOTE}
                             </p>
                         </div>
                     </div>

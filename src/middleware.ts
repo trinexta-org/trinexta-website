@@ -4,7 +4,7 @@ const TAB_MAP: Record<string, string> = {
   serenite: "/serenite",
   impulsion: "/technicien-sous-regie",
   "services-annexes": "/services-annexes",
-  studio: "/trinexta-studio",
+  studio: "https://trinexta-studio.fr",
 };
 
 export function middleware(request: NextRequest) {

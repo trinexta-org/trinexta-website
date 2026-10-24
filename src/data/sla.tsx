@@ -48,7 +48,7 @@ export const slaData: LegalData = {
     {
       title: "Article 3 - Horaires de support standard",
       paragraphs: [
-        "Sauf contrat spécifique, le support à distance est assuré du lundi au vendredi, de 08h00 à 19h00, hors jours fériés. Les demandes peuvent être effectuées par téléphone, e-mail, portail client ou ticket d'assistance.",
+        "Sauf contrat spécifique, le support à distance est assuré du lundi au vendredi, de 8 h 30 à 19 h, hors jours fériés. Les demandes peuvent être effectuées par téléphone, e-mail, portail client ou ticket d'assistance.",
       ],
     },
     {

@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { Heading, Text } from "@/components/ui/Typography"
+import { SA_INTRO } from "@/data/services-annexes"
 
 export function ServicesIntro() {
   const [visible, setVisible] = useState(false)
@@ -26,8 +27,8 @@ export function ServicesIntro() {
     return () => clearInterval(interval)
   }, [visible])
 
-  const img1 = "/images/nos-offres/services-annexes.jpg"
-  const img2 = "/images/nos-offres/services-projets.jpg"
+  const img1 = "/images/services-annexes/interventions-postes-prepares.webp"
+  const img2 = "/images/services-annexes/interventions-preparation-portables.webp"
 
   return (
     <div ref={ref} className="relative py-10 lg:py-16 overflow-visible">
@@ -44,19 +45,19 @@ export function ServicesIntro() {
           `}
           style={{ transitionDelay: "100ms" }}
         >
-          <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">SERVICES ANNEXES</span>
+          <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">{SA_INTRO.surtitre}</span>
           <Heading as="h2" className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            Un accompagnement IT sur mesure, au-delà du <em className="not-italic text-secondary-strong">support</em>
+            {SA_INTRO.titreDebut}<em className="not-italic text-secondary-strong">{SA_INTRO.titreAccent}</em>
           </Heading>
 
           <div className="w-10 h-px bg-secondary/50" />
 
           <Text className="text-lg text-white/80 leading-relaxed">
-            Changement de messagerie, ajout de nouveaux postes, évolution de votre environnement Microsoft 365, amélioration de votre réseau ou sécurisation de vos données... Nous intervenons sur les projets informatiques du quotidien comme sur les sujets plus structurants.
+            {SA_INTRO.texte}
           </Text>
 
           <p className="py-6 px-6 italic text-white/90 text-sm md:text-base leading-relaxed bg-white/[0.05] rounded-2xl">
-            Chaque entreprise a ses contraintes. C&apos;est pour cela que ces services sont proposés sur devis : nous analysons votre besoin, nous vous recommandons une solution adaptée et nous vous annonçons un prix fixe avant toute intervention.
+            {SA_INTRO.enBref}
           </p>
         </div>
 
@@ -83,8 +84,8 @@ export function ServicesIntro() {
               animation: "floatBack 5s ease-in-out infinite",
             }}
           >
-            <Image src={img2} alt="Projets IT" fill className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`} />
-            <Image src={img1} alt="Projets IT" fill className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`} />
+            <Image src={img2} alt="" fill className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`} />
+            <Image src={img1} alt="" fill className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`} />
           </div>
 
           <div
@@ -100,8 +101,8 @@ export function ServicesIntro() {
               animation: "floatFront 6s ease-in-out infinite",
             }}
           >
-            <Image src={img1} alt="Services Annexes" fill sizes="(max-width: 1024px) 100vw, 45vw" className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`} />
-            <Image src={img2} alt="Services Annexes" fill className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`} />
+            <Image src={img1} alt="" fill sizes="(max-width: 1024px) 100vw, 45vw" className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`} />
+            <Image src={img2} alt="" fill className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`} />
             <div className="absolute inset-0 hidden lg:block z-10" style={{ background: "linear-gradient(to right, var(--color-primary) 0%, rgba(10,35,62,0.85) 20%, rgba(10,35,62,0.3) 45%, transparent 70%)" }} />
           </div>
         </div>

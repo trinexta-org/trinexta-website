@@ -1,14 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
+import { REGIE_PROFILS } from "@/data/technicien-sous-regie"
 
-const profiles = [
-    { role: "Support utilisateur", spec: "Helpdesk N1/N2", image: "/images/nos-offres/profiles/profile-support-v2.jpg" },
-    { role: "Gestion de parc", spec: "De proximité", image: "/images/nos-offres/profiles/profile-parc-v2.jpg" },
-    { role: "Systèmes et réseaux", spec: "Architecture & maintenance", image: "/images/nos-offres/profiles/profile-reseau.jpg" },
-    { role: "Microsoft 365", spec: "Azure · Intune", image: "/images/nos-offres/profiles/profile-m365-v2.jpg" },
-    { role: "Déploiement", spec: "Postes, logiciels, matériel", image: "/images/nos-offres/profiles/profile-deploiement-v2.jpg" },
-    { role: "Cybersécurité", spec: "Sensibilisation, audit, remédiation", image: "/images/nos-offres/profiles/profile-cyber-v2.jpg" },
-]
+const profiles = REGIE_PROFILS
+
 
 export function TechnicienProfiles() {
     return (
@@ -28,7 +23,7 @@ export function TechnicienProfiles() {
                 <p className="text-muted-foreground text-lg">
                     Vous ne savez pas exactement quel profil il vous faut ?{" "}
                     <Link
-                        href="/contact"
+                        href="/contact#formulaire"
                         className="text-secondary-strong font-bold hover:underline transition-all"
                     >
                         Décrivez votre situation, on vous oriente.
@@ -51,7 +46,7 @@ function ChainLink({ role, spec, image }: { role: string; spec: string; image: s
                 />
             </div>
             <div className="p-6">
-                <h4 className="font-bold text-foreground text-lg mb-1">{role}</h4>
+                <h3 className="font-bold text-foreground text-lg mb-1">{role}</h3>
                 <p className="text-secondary-strong text-sm font-medium">{spec}</p>
             </div>
         </div>

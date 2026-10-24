@@ -1,29 +1,9 @@
 import { Heading } from "@/components/ui/Typography"
 import { FadeIn } from "@/components/ui/FadeIn"
 import { SectionBackground } from "@/components/ui/SectionBackground"
+import { SA_ETAPES, SA_ETAPES_NOTE } from "@/data/services-annexes"
 
-const steps = [
-  {
-    num: "01",
-    title: "Vous nous expliquez votre besoin",
-    desc: "Par téléphone, par e-mail ou en visio, vous nous présentez votre besoin simplement, avec vos mots.",
-  },
-  {
-    num: "02",
-    title: "Analyse & Proposition sur mesure",
-    desc: "Nous étudions votre situation, votre matériel existant et vos besoins réels. Puis nous vous transmettons un devis clair, avec un prix fixe.",
-  },
-  {
-    num: "03",
-    title: "Réalisation de la prestation",
-    desc: "Nous planifions l'intervention au moment le plus adapté. La prestation est réalisée, testée, puis validée avec vous.",
-  },
-  {
-    num: "04",
-    title: "Nous restons disponibles",
-    desc: "Une fois terminée, nous restons joignables si vous avez besoin d'un ajustement, d'une précision ou pour guider vos équipes.",
-  },
-]
+const steps = SA_ETAPES
 
 export function ServicesProcess() {
   return (
@@ -39,10 +19,10 @@ export function ServicesProcess() {
               </span>
               <Heading as="h2" className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-tight">
                 Comment ça se passe, <br />
-                <em className="not-italic text-secondary-soft">du premier appel au résultat ?</em>
+                <em className="not-italic text-secondary-soft">de la demande au compte rendu</em>
               </Heading>
               <p className="mt-8 text-white/70 text-base md:text-lg max-w-md leading-relaxed">
-                Quatre étapes. Aucune surprise. Un cadre clair pour démarrer votre collaboration sans friction.
+                Quatre étapes et un devis écrit avant toute intervention. {SA_ETAPES_NOTE}
               </p>
             </div>
           </div>
