@@ -4,140 +4,9 @@ import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Heading } from "@/components/ui/Typography"
 import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react"
+import { SA_INTERVENTIONS } from "@/data/services-annexes"
 
-const structuralServices = [
-    {
-        title: "Migration de messagerie vers Microsoft 365",
-        desc: "Vous utilisez encore une messagerie hébergée chez OVH, Orange, Free ou un autre prestataire ? Nous prenons en charge votre migration vers Microsoft 365 pour vous faire gagner en fiabilité, en confort d'usage et en professionnalisme. Une migration bien préparée, sans coupure de service ni perte de données, pour repartir sur des bases saines et professionnelles.",
-        meta: "Sur devis - Généralement réalisé en 1 journée",
-        image: "/images/services-annexes/migration-messagerie-365.webp",
-        points: [
-            "Création de votre environnement Microsoft 365",
-            "Transfert de vos e-mails, contacts et calendriers",
-            "Configuration sur vos ordinateurs, téléphones et tablettes",
-            "Mise en place de la double authentification (MFA)",
-            "Vérification des enregistrements DNS et paramétrage anti-spam",
-            "Création de boîtes mail partagées",
-            "Accompagnement de vos équipes pour la prise en main d'Outlook",
-        ],
-    },
-    {
-        title: "Création et configuration d'un environnement Microsoft 365",
-        desc: "Vous souhaitez structurer votre entreprise avec des outils professionnels comme Outlook, Teams, OneDrive ou SharePoint ? Nous créons et configurons votre environnement Microsoft 365 de A à Z. Un socle solide et évolutif, pensé pour accompagner la croissance de votre activité sans repartir de zéro plus tard.",
-        meta: "Sur devis - Partenaire Microsoft certifié",
-        image: "/images/services-annexes/environnement-365.webp",
-        points: [
-            "Création du tenant Microsoft 365 au nom de votre entreprise",
-            "Création des comptes utilisateurs et attribution des licences",
-            "Configuration de votre messagerie professionnelle",
-            "Mise en place de OneDrive et SharePoint pour le partage des fichiers",
-            "Activation de Teams pour la communication interne",
-            "Sécurisation de l'ensemble avec MFA et règles de sécurité adaptées",
-        ],
-    },
-    {
-        title: "Conseil et accompagnement à l'achat de matériel",
-        desc: "Besoin d'un nouvel ordinateur, d'un écran ou d'une imprimante ? Nous vous accompagnons pour choisir un équipement réellement adapté à votre activité, sans surdimensionnement inutile. Vous investissez juste, ni trop ni trop peu, dans du matériel qui tiendra dans la durée.",
-        meta: "Sur devis - On optimise avant de remplacer",
-        image: "/images/services-annexes/conseil-materiel.webp",
-        points: [
-            "Audit de votre matériel actuel",
-            "Recommandation sur mesure selon vos usages et votre budget",
-            "Commande et livraison via nos partenaires (Dell, Lenovo, Microsoft)",
-            "Préparation complète du poste avant livraison",
-            "Installation et configuration dans votre environnement",
-        ],
-    },
-    {
-        title: "Mise à niveau Windows Famille vers Windows Professionnel",
-        desc: "Votre ordinateur fonctionne sous Windows Family ? Pour un usage professionnel, certaines fonctions importantes peuvent vous manquer. Nous réalisons la mise à niveau vers Windows Professionnel, en toute simplicité et sans interrompre votre activité.",
-        meta: "Sur devis - Intervention en 2 à 3 heures",
-        image: "/images/services-annexes/windows-pro.webp",
-        points: [
-            "Licence officielle Windows 11 Professionnel",
-            "Mise à niveau sur place sans perte de données",
-            "Activation des fonctions utiles en entreprise",
-            "Optimisation et sécurisation du poste",
-            "Connexion à votre environnement Microsoft 365",
-        ],
-    },
-    {
-        title: "Optimisation et remise à niveau de poste existant",
-        desc: "Votre ordinateur est lent ? Avant d'envisager un achat neuf, nous pouvons souvent améliorer sensiblement ses performances pour un budget bien plus raisonnable. Un diagnostic précis avant toute intervention, pour ne payer que ce qui est réellement utile.",
-        meta: "Sur devis - Souvent plus économique qu'un neuf",
-        image: "/images/services-annexes/optimisation-poste.webp",
-        points: [
-            "Diagnostic complet du poste",
-            "Ajout de mémoire RAM si nécessaire",
-            "Remplacement du disque dur par un SSD",
-            "Réinstallation propre de Windows si besoin",
-            "Nettoyage logiciel et suppression des programmes inutiles",
-            "Vérification de la sécurité et mise à jour complète",
-        ],
-    },
-    {
-        title: "Installation et configuration réseau",
-        desc: "Vous avez besoin d'un WiFi plus fiable, d'un partage de fichiers entre vos postes ou d'un accès à distance sécurisé ? Nous concevons et configurons un réseau adapté à la taille et aux usages réels de votre entreprise, sans complexité superflue.",
-        meta: "Sur devis - Adapté à la taille de votre entreprise",
-        image: "/images/services-annexes/reseau-entreprise.webp",
-        points: [
-            "Installation et configuration de votre box ou routeur professionnel",
-            "Mise en place d'un WiFi sécurisé (séparation Invités / Entreprise)",
-            "Partage de fichiers et d'imprimantes entre les postes",
-            "Configuration d'un NAS pour le stockage local",
-            "Mise en place d'un VPN pour l'accès à distance sécurisé",
-        ],
-    },
-    {
-        title: "Arrivée ou départ d'un collaborateur",
-        desc: "L'arrivée ou le départ d'un salarié demande une gestion informatique rigoureuse. Nous prenons en charge ces étapes pour que tout soit prêt, sécurisé et bien organisé, sans risque d'oubli ni de faille de sécurité au moment du changement.",
-        meta: "Sur devis - Pour que rien ne se perde",
-        image: "/images/services-annexes/arrivee-depart.webp",
-        points: [
-            "Arrivée : création du compte, configuration du poste, accès messagerie, logiciels",
-            "Départ : sauvegarde des données, transfert des e-mails, suppression sécurisée du compte",
-            "Gestion des licences Microsoft 365",
-            "Transfert d'une boîte mail vers un autre collaborateur si besoin",
-        ],
-    },
-    {
-        title: "Mise en place de sauvegarde professionnelle",
-        desc: "Vos données ne doivent pas dépendre du hasard. Une panne, un vol ou une erreur peuvent avoir des conséquences lourdes. Nous mettons en place une stratégie de sauvegarde fiable, automatisée et régulièrement vérifiée pour votre tranquillité d'esprit.",
-        meta: "Sur devis - Parce que vos données sont essentielles",
-        image: "/images/services-annexes/sauvegarde-pro.webp",
-        points: [
-            "Sauvegarde automatique dans le cloud",
-            "Sauvegarde locale sur NAS ou disque externe",
-            "Planification quotidienne ou hebdomadaire",
-            "Vérification régulière de l'intégrité des sauvegardes",
-            "Plan de restauration en cas d'incident (PRA)",
-        ],
-    },
-    {
-        title: "Sécurisation de la messagerie professionnelle",
-        desc: "La messagerie reste l'une des principales portes d'entrée des cyberattaques. Nous renforçons la sécurité de vos comptes e-mail pour réduire drastiquement le risque de phishing, d'usurpation et de fuite de données.",
-        meta: "Sur devis - La sécurité commence par les e-mails",
-        image: "/images/services-annexes/securisation-messagerie.webp",
-        points: [
-            "Activation de la double authentification sur tous les comptes",
-            "Configuration anti-spam et anti-phishing avancée",
-            "Mise en place des protections DNS : SPF, DKIM, DMARC",
-            "Sensibilisation de vos équipes aux bons réflexes",
-            "Audit de sécurité de votre messagerie existante",
-        ],
-    },
-    {
-        title: "Formation et accompagnement utilisateurs",
-        desc: "Des outils bien choisis ne suffisent pas toujours. Nous proposons des formations simples, concrètes et accessibles, pour que vos équipes gagnent en autonomie et en efficacité au quotidien sur leurs outils de travail.",
-        meta: "Sur devis - Adapté au niveau de chaque équipe",
-        image: "/images/services-annexes/formation-utilisateurs.webp",
-        points: [
-            "Prise en main de Microsoft 365 : Outlook, Teams, OneDrive, SharePoint",
-            "Bonnes pratiques de sécurité : mots de passe, phishing, sauvegardes",
-            "Utilisation plus efficace du poste de travail au quotidien",
-        ],
-    },
-]
+const structuralServices = SA_INTERVENTIONS
 
 export function ServicesGrid() {
     const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -214,7 +83,7 @@ export function ServicesGrid() {
                                     </div>
 
                                     <div className="mt-6 pt-4 border-t border-secondary/20 text-xs font-bold text-secondary-strong uppercase tracking-wider">
-                                        {service.meta}
+                                        Sur devis
                                     </div>
                                 </div>
 

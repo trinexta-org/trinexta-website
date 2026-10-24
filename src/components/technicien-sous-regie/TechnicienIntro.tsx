@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
+import { REGIE_INTRO } from "@/data/technicien-sous-regie"
 
 export function TechnicienIntro() {
   const [visible, setVisible] = useState(false)
@@ -46,27 +47,20 @@ export function TechnicienIntro() {
           style={{ transitionDelay: "100ms" }}
         >
           <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            Votre technicien
+            {REGIE_INTRO.titreDebut}
             <br />
-            <em className="not-italic text-secondary-strong">support</em> sous régie
+            <em className="not-italic text-secondary-strong">{REGIE_INTRO.titreAccent}</em>
           </h2>
 
           <div className="w-10 h-px bg-secondary/50" />
 
           <p className="text-lg text-white/80 leading-relaxed">
-            Renforcez votre support informatique avec la bonne personne, au bon moment,{" "}
-            <span className="text-white font-semibold">
-              sans les contraintes d&apos;un recrutement classique.
-            </span>{" "}
-            Nous vous aidons à intégrer un technicien support adapté à votre besoin, pour la durée
-            qui correspond réellement à votre activité.
+            <span className="text-white font-semibold">{REGIE_INTRO.accroche}</span>{" "}
+            {REGIE_INTRO.paragraphes[0]}
           </p>
 
           <p className="text-white/60 leading-relaxed">
-            La prestation Technicien sous régie, c&apos;est une solution souple et ciblée pour renforcer vos équipes,
-            absorber une hausse de charge, accompagner un projet ou sécuriser votre organisation
-            au quotidien. Vous gardez la maîtrise, tout en vous appuyant sur un professionnel
-            opérationnel et orienté terrain.
+            {REGIE_INTRO.paragraphes[1]}
           </p>
         </div>
 
@@ -99,13 +93,13 @@ export function TechnicienIntro() {
           >
             <Image
               src={img2}
-              alt="Vue secondaire technicien"
+              alt=""
               fill
               className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`}
             />
             <Image
               src={img1}
-              alt="Vue secondaire technicien"
+              alt=""
               fill
               className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`}
             />
@@ -130,14 +124,14 @@ export function TechnicienIntro() {
           >
             <Image
               src={img1}
-              alt="Technicien support sous régie"
+              alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
               className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-0" : "opacity-100"}`}
             />
             <Image
               src={img2}
-              alt="Technicien support sous régie"
+              alt=""
               fill
               className={`object-cover transition-opacity duration-1000 ease-in-out ${swapped ? "opacity-100" : "opacity-0"}`}
             />
