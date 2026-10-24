@@ -109,4 +109,14 @@ export const ARTICLES_REDIRIGES: { slug: string; destination: string }[] = [
     slug: "pme-dissy-les-moulineaux-linteret-dune-maintenance-reguliere-sur-site",
     destination: "/infogerance",
   },
+  // Décision Q-003 (22/10/2026) : l'intention « technicien sans CDI » est portée par
+  // la page régie (section « Régie, freelance, CDD ou intérim ? »).
+  {
+    slug: "poste-a-pourvoir-technicien-informatique-freelance-a-chevilly-larue",
+    destination: "/technicien-sous-regie",
+  },
+  {
+    slug: "recruter-un-technicien-support-informatique-a-villejuif-sans-passer-par-un-cdi",
+    destination: "/technicien-sous-regie",
+  },
 ];
