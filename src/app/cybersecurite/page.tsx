@@ -3,22 +3,22 @@ import { ServicePage } from "@/components/services/ServicePage";
 import { getServiceData } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "Cybersécurité PME en Essonne",
-  description: "Cybersécurité pour PME en Essonne : protection EDR, anti-ransomware, phishing, surveillance continue et réponse à incident avec Trinexta.",
+  title: "Cybersécurité et audit pour TPE et PME en Essonne",
+  description: "Entreprise de cybersécurité à Évry : audit de sécurité, EDR SentinelOne, protection des comptes Microsoft 365 et réponse à incident pour TPE et PME en Essonne.",
   alternates: {
     canonical: "/cybersecurite",
   },
   openGraph: {
-    title: "Cybersécurité PME en Essonne | Trinexta",
-    description: "Cybersécurité pour PME en Essonne : protection EDR, anti-ransomware, phishing, surveillance continue et réponse à incident avec Trinexta.",
+    title: "Cybersécurité et audit pour TPE et PME en Essonne | TRINEXTA",
+    description: "Entreprise de cybersécurité à Évry : audit de sécurité, EDR SentinelOne, protection des comptes Microsoft 365 et réponse à incident pour TPE et PME en Essonne.",
     url: "/cybersecurite",
     type: "website",
     images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cybersécurité PME en Essonne | Trinexta",
-    description: "Cybersécurité pour PME en Essonne : protection EDR, anti-ransomware, phishing, surveillance continue et réponse à incident avec Trinexta.",
+    title: "Cybersécurité et audit pour TPE et PME en Essonne | TRINEXTA",
+    description: "Entreprise de cybersécurité à Évry : audit de sécurité, EDR SentinelOne, protection des comptes Microsoft 365 et réponse à incident pour TPE et PME en Essonne.",
     images: ["/images/og-default.png"],
   },
 };

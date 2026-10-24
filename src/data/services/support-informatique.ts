@@ -1,5 +1,8 @@
 import type { ServicePageProps } from "@/components/services/ServicePage";
 
+// Page /support-informatique : textes de la fiche 04 du dossier final (23/10/2026).
+// Aucun prix ici : les montants vivent uniquement sur /serenite.
+
 export const supportInformatiqueData: ServicePageProps = {
   serviceSlug: "support-informatique",
   canonicalPath: "/support-informatique",
@@ -8,205 +11,228 @@ export const supportInformatiqueData: ServicePageProps = {
     titlePart1: "Support informatique",
     titlePart2: "pour TPE et PME à Évry-Courcouronnes",
     description:
-      "Ordinateur bloqué, messagerie inaccessible, logiciel qui ne répond plus : vos collaborateurs ont besoin d'une solution, pas d'un parcours du combattant.\n\nTRINEXTA accompagne les TPE et PME d'Évry-Courcouronnes, de l'Essonne et d'Île-de-France avec un support informatique humain et structuré, du premier appel au suivi de l'incident.",
-    ctaText: "Demander un accompagnement informatique",
-    ctaHref: "/contact",
+      "Ordinateur bloqué, messagerie inaccessible, logiciel métier figé : vos collaborateurs appellent notre équipe au lieu de chercher le collègue « qui s'y connaît ».\n\nUn support humain, du premier appel jusqu'à la clôture de la demande.",
+    ctaText: "Mettre en place un support pour mon équipe",
+    ctaHref: "/contact#formulaire",
     secondaryCta: {
-      text: "Découvrir nos offres Sérénité",
+      text: "Voir les formules",
       href: "/serenite",
     },
   },
 
   problem: {
-    subtitle: "Le quotidien des TPE et PME",
+    subtitle: "Le quotidien sans support",
     title: "Vos équipes doivent travailler, pas résoudre des pannes",
     transition: {
       line1: "Ce qui ralentit",
       line2: "vos équipes",
     },
     description:
-      "Dans beaucoup de PME, les incidents informatiques retombent sur un salarié qui s'y connaît un peu, mais dont ce n'est pas le métier. Ça tient pour les problèmes simples, beaucoup moins quand l'équipe grandit ou que les pannes se répètent.\n\nAvec un support externalisé, vos collaborateurs ont un point de contact pour signaler leurs difficultés. TRINEXTA traite les demandes du périmètre convenu, documente chaque intervention et explique simplement ce qui a été fait.\n\nVous cherchez une gestion complète de votre système (supervision, maintenance, sécurité du parc) ? C'est le rôle de notre [infogérance informatique](/infogerance).",
+      "Dans beaucoup de petites entreprises, l'incident retombe sur un salarié débrouillard. Ça tient tant que les pannes restent rares.\n\nUn support externalisé vous donne un point de contact unique, des demandes traitées dans un périmètre convenu et une documentation de chaque intervention. Vous voulez aussi la maintenance, la supervision et la sécurité du parc ? C'est le rôle de l'[infogérance](/infogerance).",
     painPoints: [
-      "Un collaborateur bloqué sans messagerie pendant une matinée.",
-      "Un logiciel métier qui plante sans qu'on sache pourquoi.",
-      "Des pannes qui reviennent faute d'historique.",
+      "La messagerie bloquée toute une matinée.",
+      "Le logiciel métier qui plante sans que personne sache qui appeler.",
+      "Les pannes qui reviennent sans trace de la solution précédente.",
       "Le salarié « qui s'y connaît » détourné de son vrai travail.",
     ],
   },
 
   offer: {
-    subtitle: "Les incidents que nous prenons en charge",
-    title: "Quels problèmes notre support informatique peut-il résoudre ?",
+    subtitle: "Ce que traite le support",
+    title: "Quels problèmes notre support informatique résout",
     transition: {
       line1: "Notre",
       line2: "assistance",
     },
     description:
-      "Pas besoin de recruter un technicien à temps plein pour quelques dizaines de collaborateurs. TRINEXTA intervient comme support externalisé ou en renfort de votre équipe informatique existante.",
+      "Pas besoin de recruter un technicien à temps plein : TRINEXTA intervient comme support externalisé ou en renfort de votre équipe informatique.",
     details: [
       {
-        title: "Dépannage des postes de travail",
+        title: "Postes de travail",
         intro:
-          "Un poste Windows qui ne démarre plus, un ralentissement inhabituel, une application qui se bloque : nos techniciens diagnostiquent l'incident et cherchent l'action adaptée.",
+          "Lenteurs et blocages sur PC Windows ou sur Mac, logiciels courants, périphériques : nous diagnostiquons et corrigeons avec l'utilisateur.",
         items: [
-          "Lenteurs et blocages Windows",
-          "Problèmes logiciels courants",
-          "Installation et configuration d'applications",
-          "Périphériques, imprimantes et scanners",
+          "Lenteurs et blocages, PC Windows et Mac",
+          "Logiciels courants",
+          "Installation et configuration",
+          "Imprimantes et périphériques",
           "Accès aux ressources de l'entreprise",
           "Préparation ou remplacement d'un poste",
         ],
-        note: "Défaillance matérielle suspectée ? Nous vous aidons à identifier les vérifications utiles et la prise en charge possible par le constructeur.",
+        note: "En cas de panne matérielle, nous orientons vers le constructeur ou chiffrons la réparation.",
       },
       {
         title: "Microsoft 365, Outlook et Teams",
         intro:
-          "La messagerie et les outils collaboratifs sont au centre du travail quotidien. Nous accompagnons vos utilisateurs quand leur environnement Microsoft 365 leur résiste.",
+          "Messagerie et outils collaboratifs sont au centre du travail quotidien : nous aidons vos utilisateurs quand leur environnement [Microsoft 365](/microsoft-365) leur résiste.",
         items: [
-          "Connexion à Outlook",
-          "Configuration de la messagerie professionnelle",
-          "Difficultés d'authentification",
-          "Accès à Microsoft Teams",
+          "Connexion à Outlook et messagerie",
+          "Authentification",
+          "Accès à Teams",
           "Synchronisation OneDrive",
-          "Autorisations SharePoint",
+          "Droits SharePoint",
         ],
-        note: "Les opérations d'administration avancée sont réalisées selon les droits accordés et le périmètre contractuel.",
+        note: "L'administration avancée dépend des droits et du périmètre convenus.",
         link: {
-          text: "Accompagnement Microsoft 365 pour entreprises",
+          text: "Microsoft 365 pour les entreprises",
           href: "/microsoft-365",
         },
       },
       {
         title: "Logiciels métier et éditeurs",
         intro:
-          "Comptabilité, ERP, facturation, gestion commerciale : quand l'outil dysfonctionne, la cause peut venir du poste, du réseau, de la configuration ou de l'application elle-même.",
+          "Comptabilité, facturation, gestion commerciale : nous vérifions le poste, les accès et la configuration.",
         items: [
-          "Analyse de l'origine probable de l'incident",
           "Vérification du poste, des accès et de la configuration",
-          "Coordination technique avec l'éditeur selon votre contrat",
-          "Suivi des échanges jusqu'à la clôture",
+          "Contact avec l'éditeur selon le contrat",
+          "Suivi de la demande jusqu'à sa clôture",
         ],
-        note: "Vous gardez un seul interlocuteur entre vos utilisateurs, votre infrastructure et vos prestataires logiciels.",
+        note: "Si le problème vient de l'éditeur, nous le contactons et suivons la demande : vous n'avez qu'un interlocuteur.",
       },
       {
         title: "Réseau et ressources partagées",
         intro:
-          "Connexion instable, dossier partagé inaccessible, imprimante réseau muette : ces incidents touchent souvent plusieurs collaborateurs à la fois.",
+          "Connexion instable, dossier partagé inaccessible : premiers diagnostics et coordination avec votre fournisseur d'accès ou votre opérateur.",
         items: [
-          "Premiers diagnostics réseau",
-          "Dépannage des connexions locales",
-          "Analyse des accès aux dossiers partagés",
-          "Coordination avec les intervenants de l'infrastructure",
+          "Premiers diagnostics",
+          "Connexions locales",
+          "Accès aux dossiers partagés",
+          "Coordination avec le fournisseur d'accès ou l'opérateur",
         ],
-        note: "Le périmètre d'intervention réseau dépend de la formule souscrite.",
+        note: "Le périmètre dépend de la formule.",
+        link: {
+          text: "Téléphonie et réseau",
+          href: "/solutions-metier",
+        },
       },
     ],
   },
 
+  keyFacts: [
+    {
+      label: "Canaux",
+      value: "Téléphone, e-mail et prise en main à distance, du lundi au vendredi de 8 h 30 à 19 h.",
+    },
+    {
+      label: "Qui répond",
+      value: "Notre équipe support interne, qui dispose de la documentation de votre environnement ; votre technicien titulaire intervient sur site quand c'est nécessaire.",
+    },
+    {
+      label: "Volume",
+      value: "Avec Sérénité Complète, le nombre de demandes couvertes par le contrat n'est pas plafonné.",
+    },
+    {
+      label: "Sans contrat",
+      value: "Une intervention ponctuelle est possible, sur devis.",
+    },
+  ],
+
   process: {
-    subtitle: "Comment nous contacter",
-    title: "Un traitement structuré de chaque incident",
+    subtitle: "Comment une demande est traitée",
+    title: "Un traitement structuré de chaque demande",
     description:
-      "Selon votre contrat, vos collaborateurs nous joignent par téléphone, par e-mail ou via notre système de ticketing. Notre standard répond au 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h.",
+      "Vos collaborateurs nous joignent par téléphone ou par e-mail, au 09 78 25 07 46 du lundi au vendredi de 8 h 30 à 19 h. Pour un incident critique signalé pendant ces horaires, notre objectif est une prise en charge sous 30 minutes : c'est le début du traitement, pas un délai de résolution.",
     steps: [
       {
         title: "Réception et qualification",
-        desc: "Nous enregistrons la demande et les informations utiles au diagnostic.",
+        desc: "Qui, quel poste, quel problème.",
       },
       {
-        title: "Analyse de l'urgence",
-        desc: "Nous évaluons l'impact sur votre activité pour prioriser.",
+        title: "Évaluation de l'urgence",
+        desc: "Impact sur votre activité et priorité de traitement.",
       },
       {
-        title: "Diagnostic technique",
-        desc: "Nous identifions l'origine probable du problème.",
+        title: "Diagnostic",
+        desc: "À distance, avec l'utilisateur.",
       },
       {
         title: "Intervention",
-        desc: "À distance, ou organisation d'une action complémentaire si nécessaire.",
+        desc: "Résolution à distance, ou passage sur site si nécessaire.",
       },
       {
-        title: "Suivi jusqu'à la clôture",
-        desc: "Le dossier reste ouvert jusqu'à sa résolution ou sa transmission au bon intervenant.",
+        title: "Suivi",
+        desc: "Jusqu'à la clôture, ou transmission au bon intervenant (éditeur, opérateur, constructeur).",
       },
       {
         title: "Documentation",
-        desc: "Nous conservons les informations utiles pour les prochains incidents.",
+        desc: "La solution est notée pour les demandes suivantes.",
       },
     ],
     cta: {
-      text: "Échanger sur les besoins de mon entreprise",
-      href: "/contact",
+      text: "Voir nos niveaux de service",
+      href: "/niveau-de-service",
     },
   },
 
   formulas: {
-    subtitle: "Récurrent ou ponctuel",
-    title: "Support illimité ou assistance ponctuelle : quelle solution choisir ?",
+    subtitle: "Régulier ou ponctuel",
+    title: "Support compris dans un contrat ou intervention ponctuelle ?",
     items: [
       {
         badge: "Sérénité Complète",
-        title: "Support récurrent",
-        desc: "Un accompagnement régulier de vos collaborateurs, avec un périmètre défini au contrat.",
+        title: "Support permanent",
+        desc: "Pour les entreprises qui veulent un support permanent pour leurs collaborateurs.",
         points: [
-          "Support utilisateurs illimité pour les demandes couvertes",
-          "Assistance par téléphone, e-mail et prise en main à distance",
-          "Suivi des demandes et rapport trimestriel",
-          "79 € HT par poste et par mois, sans engagement de durée",
+          "Demandes couvertes par le contrat, sans plafond de nombre",
+          "Téléphone, e-mail et prise en main à distance",
+          "Historique des demandes et rapport trimestriel",
+          "Sans durée minimale, préavis de 2 mois",
+          "Prix par poste et par mois, détaillé sur la page Sérénité",
         ],
         cta: {
-          text: "Découvrir les offres TRINEXTA Sérénité",
-          href: "/serenite",
+          text: "Comparer les formules",
+          href: "/serenite#comparatif",
         },
         highlighted: true,
       },
       {
-        badge: "Sur demande",
+        badge: "Sans abonnement",
         title: "Intervention ponctuelle",
-        desc: "Un besoin technique précis, sans externaliser toute votre informatique.",
+        desc: "Pour un besoin isolé, sans externaliser toute votre informatique.",
         points: [
-          "Étude de la demande et de sa faisabilité",
-          "Périmètre et conditions précisés dans un devis",
-          "Intervention à distance ou sur site selon le besoin",
+          "Périmètre fixé dans le devis",
+          "À distance ou sur site",
+          "Compte rendu d'intervention",
+          "Aucune durée d'engagement",
         ],
         cta: {
-          text: "Demander un devis d'intervention informatique",
-          href: "/contact",
+          text: "Demander une intervention",
+          href: "/services-annexes",
         },
       },
     ],
-    note: "Le caractère illimité concerne les demandes couvertes par la formule souscrite. Exclusions, horaires et modalités sont précisés au contrat.",
+    note: "Sérénité Essentiel ne comprend pas l'assistance aux utilisateurs : elle est chiffrée sur devis. Projets, licences, interventions matérielles et prestations non prévues au contrat sont facturés en complément.",
   },
 
   localSeo: {
-    subtitle: "Ancrage local",
-    title: "Votre prestataire de support informatique en Essonne",
+    subtitle: "Helpdesk de proximité",
+    title: "À distance d'abord, sur site quand il le faut",
     description:
-      "TRINEXTA dispose d'un bureau au 7 rue Montespan, 91000 Évry-Courcouronnes. La plupart des incidents se traitent à distance avec des outils sécurisés, y compris pour vos collaborateurs en télétravail.\n\nQuand une présence physique est nécessaire, nous organisons une intervention dans vos locaux. Délai, déplacement et facturation éventuelle dépendent de votre offre.",
+      "La plupart des demandes se règlent à distance, y compris pour vos collaborateurs en télétravail, quand les postes sont compatibles avec nos outils et que les accès sont en place. Certaines pannes demandent pourtant quelqu'un sur place : un poste qui ne démarre plus, un équipement à vérifier, l'arrivée d'un nouveau collaborateur.\n\nLes appels sont traités par l'équipe support interne et chaque entreprise a un technicien titulaire pour le terrain, qui connaît vos locaux. Pourquoi c'est important : [un helpdesk local change tout pour vos équipes](/blog/pourquoi-un-helpdesk-local-change-tout-pour-vos-equipes).",
     items: [
       {
-        title: "Zone d'intervention",
-        desc: "Évry-Courcouronnes, Corbeil-Essonnes, Ris-Orangis, Lisses, Bondoufle et communes voisines. Le reste de l'Île-de-France à distance.",
+        title: "Notre bureau",
+        desc: "7 rue Montespan, 91000 Évry-Courcouronnes.",
       },
       {
-        title: "Dépannage à distance",
-        desc: "Diagnostic avec l'utilisateur, opérations autorisées et vérification du résultat, sans déplacement.",
+        title: "Zone d'intervention sur site",
+        desc: "Évry-Courcouronnes, Corbeil-Essonnes, Ris-Orangis, Lisses, Bondoufle et communes voisines, en Essonne et dans toute l'Île-de-France.",
       },
       {
-        title: "Intervention sur site",
-        desc: "Remplacement ou vérification d'un équipement, incident matériel, problème impossible à traiter à distance.",
+        title: "Déplacement",
+        desc: "Sans frais pour les interventions programmées dans un rayon de 15 km autour d'Évry ; au-delà, selon le devis. Le temps passé sur site est facturé selon le contrat.",
       },
       {
-        title: "Secteurs accompagnés",
-        desc: "PME de services, cabinets comptables, BTP et bureaux d'études, commerces, entreprises multi-sites.",
+        title: "Télétravail",
+        desc: "Prise en main à distance des postes de vos collaborateurs, où qu'ils travaillent.",
       },
     ],
-    ctaText: "Parler de mon entreprise",
-    ctaHref: "/contact",
+    ctaText: "Être rappelé",
+    ctaHref: "/contact#formulaire",
   },
 
   benefits: {
-    subtitle: "La différence TRINEXTA",
+    subtitle: "Ce qui change avec TRINEXTA",
     title: "Un support qui connaît votre environnement",
     transition: {
       line1: "Pourquoi",
@@ -214,80 +240,74 @@ export const supportInformatiqueData: ServicePageProps = {
     },
     items: [
       {
-        title: "L'historique de vos incidents",
-        desc: "Chaque demande est documentée. Nous retrouvons les actions passées, repérons les incidents récurrents et orientons mieux les prochains diagnostics.",
+        title: "L'historique de vos demandes",
+        desc: "Chaque demande est documentée ; les incidents qui reviennent sont repérés et traités à la source.",
       },
       {
         title: "Un coordinateur entre vos prestataires",
-        desc: "Fournisseur d'accès, éditeur, opérateur, constructeur : quand un incident implique plusieurs intervenants, nous aidons à trouver le bon interlocuteur et suivons les actions.",
+        desc: "Fournisseur d'accès, éditeur, opérateur, constructeur : nous faisons le lien.",
       },
       {
         title: "L'humain avant les tickets",
-        desc: "Un utilisateur n'est pas un numéro de ticket. Nous privilégions des explications compréhensibles et la connaissance de votre contexte.",
+        desc: "Des explications compréhensibles, par une équipe qui connaît votre contexte.",
       },
       {
-        title: "À distance et sur site",
-        desc: "La plupart des demandes se traitent à distance. Pour le reste, nous nous déplaçons en Essonne et en Île-de-France selon les modalités convenues.",
+        title: "Un technicien titulaire pour le terrain",
+        desc: "Le même interlocuteur dans vos locaux, d'une intervention à l'autre.",
       },
     ],
   },
 
   faq: [
     {
-      question: "Quelle est la différence entre support informatique et infogérance ?",
+      question: "Quelle différence entre support informatique et infogérance ?",
       answer:
-        "Le support accompagne vos utilisateurs et résout leurs incidents du quotidien. L'[infogérance](/infogerance) couvre une gestion plus large et continue : maintenance, supervision, sécurité et suivi du parc.",
+        "Le support traite les demandes et incidents du quotidien. L'[infogérance](/infogerance) couvre en plus la maintenance, la supervision, la sécurité et le suivi du parc, en continu.",
     },
     {
-      question: "Le support informatique TRINEXTA est-il illimité ?",
+      question: "Le support est-il illimité ?",
       answer:
-        "Certaines offres, comme [Sérénité Complète](/serenite), prévoient un support illimité pour les demandes couvertes par le contrat. Exclusions, horaires, équipements et modalités sont précisés dans la formule souscrite.",
+        "Avec [Sérénité Complète](/serenite), le nombre de demandes couvertes par le contrat n'est pas plafonné, aux horaires du support. Les exclusions, les équipements couverts et les modalités figurent au contrat.",
     },
     {
-      question: "Intervenez-vous sur les ordinateurs des télétravailleurs ?",
+      question: "Quels sont vos horaires ?",
       answer:
-        "Oui, s'ils font partie du périmètre couvert et que les conditions techniques d'accès sont réunies. De nombreux problèmes logiciels et de configuration se traitent à distance.",
+        "Du lundi au vendredi, de 8 h 30 à 19 h. La supervision des postes fonctionne en continu de façon automatisée ; les alertes reçues hors horaires sont traitées par un technicien à la reprise du support.",
     },
     {
-      question: "Pouvez-vous intervenir sur un logiciel de comptabilité ou de facturation ?",
-      answer:
-        "Nous analysons les problèmes liés au poste, aux accès, à la configuration et à l'environnement informatique. Si l'incident relève de l'éditeur, nous assurons la coordination selon les conditions prévues.",
+      question: "Prenez-vous en charge les Mac ?",
+      answer: "Oui. Nous prenons en charge les Mac comme les PC Windows.",
     },
     {
-      question: "Peut-on vous solliciter sans contrat d'infogérance ?",
+      question: "Peut-on vous solliciter sans contrat ?",
       answer:
-        "Oui, une intervention ponctuelle peut être étudiée selon la demande et nos disponibilités. Elle fait l'objet d'un devis.",
+        "Oui. Une [intervention ponctuelle](/services-annexes) est étudiée et chiffrée sur devis.",
     },
     {
-      question: "Quels sont les horaires du support ?",
+      question: "Vous déplacez-vous dans nos locaux ?",
       answer:
-        "Les horaires et modalités de prise en charge sont précisés dans votre contrat. Pour une première demande, notre standard répond au 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h.",
+        "Oui, selon la nature de l'incident. Pas de frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry ; le temps sur site est facturé selon votre contrat.",
     },
     {
-      question: "Proposez-vous un support informatique sur site en Essonne ?",
+      question: "Comment démarrer ?",
       answer:
-        "Oui. Des interventions sur site peuvent être organisées en Essonne et en Île-de-France, selon la nature de l'incident et les modalités convenues.",
-    },
-    {
-      question: "Comment mettre en place le support TRINEXTA ?",
-      answer:
-        "Nous échangeons d'abord sur le nombre de collaborateurs, les équipements, les logiciels essentiels et les difficultés rencontrées. Nous vous orientons ensuite vers une [formule Sérénité](/serenite) ou une prestation adaptée.",
+        "Nous échangeons sur le nombre de collaborateurs, les équipements, les logiciels essentiels et les difficultés actuelles, puis nous vous orientons vers une [formule Sérénité](/serenite) ou une intervention adaptée.",
     },
   ],
 
   cta: {
     line1: "Vos collaborateurs",
     line2: "méritent un support",
-    line3: "fiable et humain",
+    line3: "qui les connaît",
     description:
-      "Vous cherchez un prestataire de support informatique à Évry-Courcouronnes, en Essonne ou en Île-de-France ? Parlons de vos besoins et trouvons ensemble l'accompagnement adapté.",
-    buttonText: "Contacter TRINEXTA",
-    buttonHref: "/contact",
+      "Appelez le 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h, ou laissez vos coordonnées : nous vous rappelons.",
+    buttonText: "Mettre en place un support pour mon équipe",
+    buttonHref: "/contact#formulaire",
   },
 
   schemaOverride: {
-    name: "Support informatique pour TPE et PME",
+    name: "Support informatique et hotline pour PME",
     serviceType: "Support informatique",
-    areaServed: ["Évry-Courcouronnes", "Corbeil-Essonnes", "Essonne", "Île-de-France"],
+    areaServed: ["Évry-Courcouronnes", "Essonne", "Île-de-France"],
   },
 };

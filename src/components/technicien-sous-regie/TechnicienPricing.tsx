@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { FadeIn } from "@/components/ui/FadeIn"
+import { REGIE_FACTURATION } from "@/data/technicien-sous-regie"
 
 export function TechnicienPricing() {
   return (
@@ -9,11 +10,11 @@ export function TechnicienPricing() {
           
           <FadeIn direction="right" className="w-full lg:w-1/2">
             <h2 className="text-[42px] md:text-[52px] text-foreground mb-6 leading-tight font-black">
-              Notre modèle : la transparence <br />
-              <em className="italic font-light font-serif text-secondary-strong">absolue</em>
+              {REGIE_FACTURATION.titreDebut} <br />
+              <em className="italic font-light font-serif text-secondary-strong">{REGIE_FACTURATION.titreAccent}</em>
             </h2>
              <p className="text-muted-foreground text-[19px] leading-[1.8] max-w-lg">
-              Pas de grille tarifaire à 47 lignes. Deux options claires, adaptées à la durée de votre mission. Dans les deux cas : zéro frais de dossier, zéro frais de mise en place, zéro frais d&apos;intégration.
+              {REGIE_FACTURATION.texte}
             </p>
           </FadeIn>
 
@@ -50,7 +51,7 @@ export function TechnicienPricing() {
                 <div className="py-4 px-6 bg-white flex items-center justify-between z-30 shrink-0">
                   <Image 
                     src="/images/trinexta-logo.png" 
-                    alt="Trinexta" 
+                    alt="TRINEXTA" 
                     width={120} 
                     height={32} 
                     className="object-contain" 
@@ -65,24 +66,24 @@ export function TechnicienPricing() {
                 <div className="p-6 flex flex-col gap-6 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                   
                   <div className="text-center mt-2 mb-2">
-                    <h3 className="text-white text-[28px] font-black font-serif leading-none">Nos Tarifs</h3>
-                    <p className="text-secondary-strong text-[26px] font-serif italic font-light mt-1">Transparence</p>
+                    <h3 className="text-white text-[28px] font-black font-serif leading-none">Facturation</h3>
+                    <p className="text-secondary-strong text-[26px] font-serif italic font-light mt-1">Deux modes</p>
                     <div className="w-12 h-1 bg-secondary mx-auto mt-5 rounded-full" />
                   </div>
 
                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10 relative shadow-lg">
-                    <h4 className="text-white font-bold text-xl mb-1">TJM</h4>
-                    <p className="text-secondary-strong text-xs mb-3 font-medium">Taux Journalier Moyen</p>
+                    <h4 className="text-white font-bold text-xl mb-1">{REGIE_FACTURATION.modes[0].titre}</h4>
+                    <p className="text-secondary-strong text-xs mb-3 font-medium">{REGIE_FACTURATION.modes[0].sousTitre}</p>
                     <p className="text-white/70 text-sm leading-relaxed">
-                      Missions courtes ou ponctuelles. Vous payez uniquement les jours travaillés. Idéal pour les remplacements.
+                      {REGIE_FACTURATION.modes[0].texte}
                     </p>
                   </div>
 
                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10 relative shadow-lg">
-                    <h4 className="text-white font-bold text-xl mb-1">Forfait</h4>
-                    <p className="text-secondary-strong text-xs mb-3 font-medium">Mensuel fixe</p>
+                    <h4 className="text-white font-bold text-xl mb-1">{REGIE_FACTURATION.modes[1].titre}</h4>
+                    <p className="text-secondary-strong text-xs mb-3 font-medium">{REGIE_FACTURATION.modes[1].sousTitre}</p>
                     <p className="text-white/70 text-sm leading-relaxed">
-                      Missions longue durée. Budget lissé et prévisible. Simplicité administrative.
+                      {REGIE_FACTURATION.modes[1].texte}
                     </p>
                   </div>
 
