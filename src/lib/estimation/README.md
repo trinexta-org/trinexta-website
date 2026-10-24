@@ -46,7 +46,7 @@ Pas de socle fixe. Si aucun palier ne couvre le volume (ex. 55 postes, dernier p
 
 ### `one-shot` : palier de complexité
 
-Ex. Trinexta Studio : la réponse `projet-envergure` sélectionne un palier `{min, max}`, les modificateurs s'appliquent en multiplicatif. Pas d'élargissement sans IA pour ce kind.
+Ex. Solutions métier : la réponse `projet-envergure` sélectionne un palier `{min, max}`, les modificateurs s'appliquent en multiplicatif. Pas d'élargissement sans IA pour ce kind.
 
 ### `one-shot-formula` : calcul exact
 
@@ -74,7 +74,7 @@ Ex. Cloud & PRA. Aucun calcul : la grille porte la ligne explicative (`pricing.l
 - `collaboration` -> M365 gestion ; + mise en place sauf si M365 déjà en place (question tronquée = mise en place prévue, hypothèse prudente)
 - `renfort` -> une des 4 régies selon `renfort-categorie` (fallback Support & Infra si tronquée)
 - `depannage` sans `lenteurs` -> support à la carte
-- `projet` -> Studio ou Solutions métier selon `projet-type`
+- `projet` -> Solutions métier (sites et applications : trinexta-studio.fr, hors estimateur)
 
 Le plafond de 7 questions tronque les questions de suivi les moins prioritaires : chaque grille porte des `fallbackUnits` / `fallbackTierOptionId` pour rester calculable avec des réponses manquantes.
 

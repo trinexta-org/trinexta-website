@@ -11,7 +11,6 @@ import { regieDeveloppementGrid } from "./grids/regie-developpement";
 import { regieCybersecuriteGrid } from "./grids/regie-cybersecurite";
 import { regiePilotageGrid } from "./grids/regie-pilotage";
 import { solutionsMetierGrid } from "./grids/solutions-metier";
-import { trinextaStudioGrid } from "./grids/trinexta-studio";
 
 export * from "./types";
 export {
@@ -34,5 +33,4 @@ export const ESTIMATION_GRIDS: Record<EstimationServiceId, ServiceGrid> = {
   "regie-cybersecurite": regieCybersecuriteGrid,
   "regie-pilotage": regiePilotageGrid,
   "solutions-metier": solutionsMetierGrid,
-  "trinexta-studio": trinextaStudioGrid,
 };
