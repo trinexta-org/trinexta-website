@@ -1,6 +1,8 @@
 "use client";
 
 import Script from "next/script";
+import { isIndexable } from "@/lib/site";
+import { GA_COOKIE_EXPIRES, GA_MEASUREMENT_ID } from "@/data/mesure-audience";
 
 export function CookieBanner() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
@@ -8,7 +10,10 @@ export function CookieBanner() {
   const enhancedConversions =
     process.env.NEXT_PUBLIC_ADS_ENHANCED_CONVERSIONS === "true";
 
-  if (process.env.NODE_ENV !== "production" || (!gtmId && !adsId)) {
+  // Google Analytics : production uniquement, pour ne pas mêler les visites de staging.
+  const gaId = isIndexable ? GA_MEASUREMENT_ID : undefined;
+
+  if (process.env.NODE_ENV !== "production" || (!gtmId && !adsId && !gaId)) {
     return null;
   }
 
@@ -53,6 +58,21 @@ export function CookieBanner() {
           if (gtmId) {
             window.tarteaucitron.user.googletagmanagerId = gtmId;
             window.tarteaucitron.job.push('googletagmanager');
+          }
+
+          if (gaId) {
+            // Service "gtag" de tarteaucitron = Google Analytics (type "analytic") :
+            // chargé seulement après accord, cookies limités à 13 mois, sans signaux
+            // Google ni personnalisation publicitaire.
+            window.tarteaucitron.user.gtagUa = gaId;
+            window.tarteaucitron.user.gtagMore = () => {
+              window.gtag?.("config", gaId, {
+                cookie_expires: GA_COOKIE_EXPIRES,
+                allow_google_signals: false,
+                allow_ad_personalization_signals: false,
+              });
+            };
+            window.tarteaucitron.job.push("gtag");
           }
 
           if (adsId) {

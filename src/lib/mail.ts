@@ -107,6 +107,11 @@ export async function sendMail({
   return true;
 }
 
+/** « le matin » / « l'après-midi ». */
+function moment(value?: string): string {
+  return value === "apres-midi" ? "l'après-midi" : "le matin";
+}
+
 /** Créneau lisible : « mardi 3 novembre 2026, matin ». */
 function creneau(data: ContactFormData): string {
   if (!data.rdvDate) return "";
@@ -144,7 +149,7 @@ export async function sendNotificationEmail(data: ContactFormData) {
     data.suite === "rdv"
       ? ` : ${escapeHtml(creneau(data))}, ${escapeHtml(libelleFormat(data.rdvFormat).toLowerCase())} (date à confirmer au prospect)`
       : data.suite === "rappel" && data.moment
-        ? ` : de préférence le ${escapeHtml(libelleMoment(data.moment).toLowerCase())}`
+        ? ` : de préférence ${escapeHtml(moment(data.moment))}`
         : ""
   }</p>
   <table style="border-collapse:collapse;font-size:14px">
@@ -185,7 +190,7 @@ export async function sendContactAccuseReception(data: ContactFormData) {
     <p>Nous vous confirmons l'heure par e-mail ou par téléphone, ou nous vous proposons un autre créneau.</p>`
       : data.suite === "rappel"
         ? `<p>Nous vous rappelons au <strong>${escapeHtml(data.telephone)}</strong>${
-            data.moment ? `, de préférence le ${escapeHtml(libelleMoment(data.moment).toLowerCase())}` : ""
+            data.moment ? `, de préférence ${escapeHtml(moment(data.moment))}` : ""
           }, ${TRINEXTA_CONTACT.horaires}.</p>`
         : `<p>Nous lisons votre message et revenons vers vous par e-mail ou par téléphone.</p>`;
 
