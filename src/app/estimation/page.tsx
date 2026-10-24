@@ -11,10 +11,12 @@ import { WaveDivider } from "@/components/ui/WaveDivider";
 export const metadata: Metadata = {
   title: "Estimation en ligne · Chiffrez votre projet informatique",
   description:
-    "Répondez à quelques questions et obtenez immédiatement une fourchette de prix pour votre infogérance, votre cybersécurité ou votre projet de création de site web. Gratuit, sans engagement.",
+    "Répondez à quelques questions et obtenez un premier ordre d'idée pour votre infogérance, votre cybersécurité ou votre renfort technique.",
   alternates: {
     canonical: "/estimation",
   },
+  // Hors index tant que l'estimateur affiche des fourchettes de prix (fiche 16 : version sans montant à venir).
+  robots: { index: false, follow: true },
   openGraph: {
     title: "Estimation en ligne · Trinexta",
     description:
