@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { contactFormSchema } from "@/lib/validations/contact";
-import { sendNotificationEmail } from "@/lib/mail";
+import { sendContactAccuseReception, sendNotificationEmail } from "@/lib/mail";
 
 export async function POST(request: Request) {
   try {
@@ -22,7 +22,9 @@ export async function POST(request: Request) {
 
     const savedContact = await prisma.contactForm.create({
       data: {
-        type: data.type,
+        // `type` porte désormais le besoin (infogérance, support, cyber...).
+        type: data.besoin,
+        profil: data.profil,
         prenom: data.prenom,
         nom: data.nom,
         email: data.email,
@@ -30,12 +32,13 @@ export async function POST(request: Request) {
         entreprise: data.entreprise,
         siret: data.siret,
         ville: data.ville,
-        siteWeb: data.siteWeb,
-        secteur: data.secteur,
-        taille: data.taille,
-        urgence: data.urgence,
-        message: data.message,
+        postes: data.postes,
+        message: data.message ?? "",
         offre: data.offre,
+        suite: data.suite,
+        moment: data.moment,
+        rdvDate: data.rdvDate ? new Date(`${data.rdvDate}T00:00:00Z`) : null,
+        rdvFormat: data.rdvFormat,
       },
     });
 
@@ -54,10 +57,24 @@ export async function POST(request: Request) {
       );
     }
 
+    // Accusé de réception au prospect : non bloquant, la demande est déjà enregistrée et transmise.
+    try {
+      await sendContactAccuseReception(data);
+    } catch (error) {
+      console.error("Erreur envoi accusé de réception contact:", error);
+    }
+
+    const message =
+      data.suite === "rappel"
+        ? `Nous vous rappelons au ${data.telephone}, du lundi au vendredi de 8 h 30 à 19 h.`
+        : data.suite === "rdv"
+          ? "Nous vous confirmons le rendez-vous, ou nous vous proposons un autre créneau."
+          : "Nous lisons votre message et revenons vers vous par e-mail ou par téléphone.";
+
     return NextResponse.json(
       {
         success: true,
-        message: "Merci, votre demande est bien arrivée. Si elle est urgente, appelez le 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h.",
+        message,
         id: savedContact.id,
       },
       { status: 200 }

@@ -1,80 +1,56 @@
-"use client"
-
 import Image from "next/image"
 import { Section } from "@/components/layout/Section"
-import { SectionBackground } from "@/components/ui/SectionBackground"
+import { sanityClient } from "@/lib/sanity"
+import { cleFournisseur, PARTENAIRES_GROUPES, PARTENAIRES_INTRO } from "@/data/partenaires"
 
-
-export interface Partner {
-  name: string;
-  logoSrc: string;
-  isCircle: boolean;
-  url?: string;
+interface LogoSanity {
+  name: string | null
+  logoSrc: string | null
 }
 
-export function PartnersSection({ partners }: { partners: Partner[] }) {
-  const carouselPartners = [...partners, ...partners, ...partners]
-  const itemsCount = partners.length || 11;
+/**
+ * Partenaires validés (23/10/2026), regroupés par domaine, chacun une seule fois, sans défilement.
+ * Logo local s'il existe, sinon logo Sanity, sinon nom en toutes lettres.
+ */
+export async function PartnersSection() {
+  let logos: LogoSanity[] = []
+  try {
+    logos = await sanityClient.fetch(`*[_type == "partenaire"]{ "name": nom, "logoSrc": logo.asset->url }`)
+  } catch {
+    // Sanity inaccessible : logos locaux ou noms en toutes lettres.
+  }
+  const sanityParNom = new Map(logos.map((l) => [cleFournisseur(l.name ?? ""), l.logoSrc]))
 
   return (
-    <Section container={false} className="relative bg-surface pt-8 pb-16 md:pb-32 overflow-hidden">
-      <SectionBackground tone="light" />
-
-      <style>{`
-        @keyframes scroll-partners {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-184px * ${itemsCount})); }
-        }
-        @media (min-width: 768px) {
-          @keyframes scroll-partners {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-240px * ${itemsCount})); }
-          }
-        }
-        .animate-scroll {
-          animation: scroll-partners 40s linear infinite;
-          width: max-content;
-          will-change: transform;
-        }
-        .pause-on-hover:hover .animate-scroll {
-          animation-play-state: paused;
-        }
-      `}</style>
-
-      <div className="relative w-full flex overflow-hidden pause-on-hover mt-4">
-        <div className="flex animate-scroll gap-6 md:gap-8">
-          {carouselPartners.map((partner, index) => (
-            <PartnerCard 
-              key={`${partner.name}-${index}`} 
-              partner={partner}
-              ariaHidden={index >= partners.length} 
-            />
-          ))}
-        </div>
+    <Section className="bg-surface pt-0 pb-16 md:pb-24">
+      <p className="mx-auto mb-10 max-w-2xl text-center text-lg text-primary/80">{PARTENAIRES_INTRO}</p>
+      <div className="grid gap-4 md:grid-cols-3">
+        {PARTENAIRES_GROUPES.map((groupe) => (
+          <div key={groupe.domaine} className="flex flex-col gap-4 rounded-2xl border border-border bg-background p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-secondary-strong">{groupe.domaine}</p>
+            <ul className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-5">
+              {groupe.partenaires.map((p) => {
+                const logo = p.logo ?? sanityParNom.get(cleFournisseur(p.nom)) ?? null
+                return (
+                  <li key={p.nom} className="flex h-12 items-center">
+                    {logo ? (
+                      <Image
+                        src={logo}
+                        alt={p.nom}
+                        width={160}
+                        height={48}
+                        className="h-9 w-auto max-w-[160px] object-contain"
+                      />
+                    ) : (
+                      <span className="text-xl font-black tracking-tight text-primary">{p.nom}</span>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        ))}
       </div>
     </Section>
-  )
-}
-
-function PartnerCard({ partner, ariaHidden }: { partner: Partner, ariaHidden?: boolean }) {
-  return (
-    <div 
-      aria-hidden={ariaHidden}
-      className="w-40 md:w-52 h-28 md:h-36 flex flex-col items-center justify-center gap-3 md:gap-5 shrink-0 cursor-pointer hover:-translate-y-1 transition-transform duration-300"
-    >
-      <div className={`relative flex items-center justify-center ${partner.isCircle ? 'h-10 w-10 md:h-14 md:w-14' : 'h-8 w-8 md:h-12 md:w-12'}`}>
-        <Image
-          src={partner.logoSrc}
-          alt={`Logo ${partner.name}`}
-          fill
-          sizes="(max-width: 768px) 40px, 56px"
-          className={`object-contain ${partner.isCircle ? 'rounded-full bg-white shadow-sm ring-1 ring-border' : 'rounded-md'}`}
-        />
-      </div>
-
-      <span className="text-primary/70 text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase">
-        {partner.name}
-      </span>
-    </div>
   )
 }

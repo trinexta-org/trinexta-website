@@ -40,32 +40,6 @@ export const metadata: Metadata = {
 };
 
 export default async function AProposPage() {
-  const partnersQuery = `
-    *[
-      _type == "partenaire" &&
-      type == "editeur"
-    ] | order(ordre asc) {
-      "name": nom,
-      "logoSrc": logo.asset->url,
-      "isCircle": coalesce(isCircle, false),
-      "url": urlOfficiel
-    }
-  `;
-
-  let partnersData: {
-    name: string;
-    logoSrc: string;
-    isCircle: boolean;
-    url: string;
-  }[] = [];
-
-  try {
-    partnersData = await sanityClient.fetch(partnersQuery);
-  } catch {
-    // Sanity inaccessible :
-    // on évite de faire crasher la page.
-  }
-
   return (
     <main className="bg-surface min-h-screen relative text-primary">
       <BreadcrumbJsonLd
@@ -108,7 +82,7 @@ export default async function AProposPage() {
 
       <OurNetwork /> 
 
-      <PartnersSection partners={partnersData} />
+      <PartnersSection />
     </main>
   );
 }

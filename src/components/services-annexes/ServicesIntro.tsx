@@ -27,8 +27,8 @@ export function ServicesIntro() {
     return () => clearInterval(interval)
   }, [visible])
 
-  const img1 = "/images/nos-offres/services-annexes.jpg"
-  const img2 = "/images/nos-offres/services-projets.jpg"
+  const img1 = "/images/services-annexes/interventions-postes-prepares.webp"
+  const img2 = "/images/services-annexes/interventions-preparation-portables.webp"
 
   return (
     <div ref={ref} className="relative py-10 lg:py-16 overflow-visible">

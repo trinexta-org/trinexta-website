@@ -1,86 +1,90 @@
 import { z } from "zod";
+import {
+  BESOIN_VALUES,
+  MOMENT_VALUES,
+  POSTES_VALUES,
+  PROFIL_VALUES,
+  RDV_FORMAT_VALUES,
+  SUITE_VALUES,
+} from "@/data/contact-trinexta";
 import { OFFRE_SLUGS } from "@/data/offres";
+import { estDateRdvValide } from "@/lib/contact/rdv";
 
-export const CONTACT_TYPES = ["devis", "support", "autre"] as const
-export const SECTEURS = ["Commerce", "Sante", "BTP", "Finance", "IT", "Industrie", "Autre"] as const
-export const TAILLES = ["1-9", "10-49", "50-249", "250+"] as const
-export const URGENCES = ["Faible", "Normale", "Haute", "Critique"] as const
-
-const optionalTrimmedText = z
-  .string()
-  .trim()
-  .transform((value) => value || undefined)
-  .optional();
-
-function isValidWebsite(value: string) {
-  if (/^[a-z][a-z0-9+.-]*:/i.test(value) && !/^https?:\/\//i.test(value)) return false;
-  try {
-    const url = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
-    return (
-      ["http:", "https:"].includes(url.protocol) &&
-      !url.username &&
-      !url.password &&
-      /^([a-z0-9-]+\.)+[a-z]{2,}$/i.test(url.hostname) &&
-      !/\s/.test(value)
-    );
-  } catch {
-    return false;
-  }
-}
-
-export const contactFormSchema = z.object({
-  type: z.enum(["devis", "support", "autre"]),
-  prenom: z.string().trim().min(1, "Le prénom est requis"),
-  nom: z.string().trim().min(1, "Le nom est requis"),
-  email: z.string().trim().email("Le format de l'email est invalide"),
-  telephone: z.string().trim().optional(),
-  entreprise: z.string().trim().optional(),
-  secteur: z.string().trim().optional(),
-  taille: z.string().trim().optional(),
-  urgence: z.string().trim().optional(),
-  message: z.string().trim().min(1, "Le message est requis"),
-  siret: z.string().trim().optional(),
-  ville: z.string().trim().optional(),
-  siteWeb: z
+const texteFacultatif = (max: number) =>
+  z
     .string()
     .trim()
+    .max(max)
     .optional()
-    .refine((v) => !v || isValidWebsite(v), "L'adresse du site est invalide")
-    .transform((v) => (v && !/^https?:\/\//i.test(v) ? `https://${v}` : v))
-    .optional(),
-  offre: z.enum(OFFRE_SLUGS).optional(),
-}).superRefine((data, ctx) => {
+    .transform((v) => v || undefined);
 
-  if (data.type === "devis") {
-    if (!data.entreprise || data.entreprise.trim() === "") {
-      ctx.addIssue({ code: "custom", message: "Le nom de l'entreprise est requis", path: ["entreprise"] });
-    }
-    if (!data.secteur || data.secteur === "") {
-      ctx.addIssue({ code: "custom", message: "Le secteur est requis", path: ["secteur"] });
-    }
-    if (!data.taille || data.taille === "") {
-      ctx.addIssue({ code: "custom", message: "La taille est requise", path: ["taille"] });
-    }
+/**
+ * Formulaire de contact TRINEXTA (même principe que Studio).
+ * Toujours obligatoires : profil, besoin, prénom, nom, e-mail, téléphone (10 chiffres), suite.
+ * Entreprise obligatoire seulement pour une entreprise existante ; SIRET et taille du parc facultatifs.
+ * Message obligatoire seulement pour un simple message ; créneau exigé pour un rendez-vous.
+ */
+export const contactFormSchema = z
+  .object({
+    profil: z.enum(PROFIL_VALUES, { message: "Indiquez qui vous êtes" }),
+    besoin: z.enum(BESOIN_VALUES, { message: "Choisissez l'objet de votre demande" }),
+    prenom: z.string({ error: "Le prénom est requis" }).trim().min(1, "Le prénom est requis").max(100),
+    nom: z.string({ error: "Le nom est requis" }).trim().min(1, "Le nom est requis").max(100),
+    email: z
+      .string({ error: "L'e-mail est requis" })
+      .trim()
+      .min(1, "L'e-mail est requis")
+      .email("Le format de l'e-mail est invalide")
+      .max(200),
+    telephone: z
+      .string({ error: "Le téléphone est requis" })
+      .transform((v) => v.replace(/[\s.-]/g, ""))
+      .pipe(z.string().regex(/^0[1-9]\d{8}$/, "Le numéro doit compter 10 chiffres, par exemple 06 12 34 56 78"))
+      .transform((v) => v.replace(/(\d{2})(?=\d)/g, "$1 ")),
+    entreprise: texteFacultatif(200),
+    siret: z
+      .string()
+      .optional()
+      .transform((v) => v?.replace(/\s/g, "") || undefined)
+      .refine((v) => !v || /^\d{14}$/.test(v), "Le SIRET compte 14 chiffres"),
+    ville: texteFacultatif(120),
+    postes: z.enum(POSTES_VALUES).optional(),
+    offre: z.enum(OFFRE_SLUGS).optional(),
+    message: texteFacultatif(5000),
+    suite: z.enum(SUITE_VALUES, { message: "Rappel, rendez-vous ou message ?" }),
+    moment: z.enum(MOMENT_VALUES).optional(),
+    rdvDate: z.string().optional(),
+    rdvFormat: z.enum(RDV_FORMAT_VALUES).optional(),
+  })
+  // `when` : ces vérifications tournent même si d'autres champs sont en erreur,
+  // pour afficher toutes les erreurs du formulaire d'un coup.
+  .superRefine(
+    (data, ctx) => {
+      if (data.suite === "message" && !data.message) {
+        ctx.addIssue({ code: "custom", message: "Décrivez votre demande en quelques mots", path: ["message"] });
+      }
+      if (data.suite !== "rdv") return;
+      if (!data.rdvDate || !estDateRdvValide(data.rdvDate)) {
+        ctx.addIssue({ code: "custom", message: "Choisissez un jour ouvré, à partir de demain", path: ["rdvDate"] });
+      }
+      if (!data.moment) ctx.addIssue({ code: "custom", message: "Matin ou après-midi ?", path: ["moment"] });
+      if (!data.rdvFormat) ctx.addIssue({ code: "custom", message: "Visio, dans vos locaux ou au Magellan ?", path: ["rdvFormat"] });
+    },
+    { when: () => true }
+  )
+  .refine((data) => data.profil !== "entreprise" || !!data.entreprise, {
+    message: "Le nom de l'entreprise est requis",
+    path: ["entreprise"],
+    when: (payload) => (payload.value as { profil?: unknown })?.profil === "entreprise",
+  })
+  .transform((data) => ({
+    ...data,
+    siret: data.profil === "entreprise" ? data.siret : undefined,
+    ville: data.profil === "entreprise" ? data.ville : undefined,
+    moment: data.suite === "message" ? undefined : data.moment,
+    rdvDate: data.suite === "rdv" ? data.rdvDate : undefined,
+    rdvFormat: data.suite === "rdv" ? data.rdvFormat : undefined,
+  }));
 
-    if (!data.ville || data.ville === "") {
-      ctx.addIssue({ code: "custom", message: "La ville est requise", path: ["ville"] });
-    }
-
-    const siretRegex = /^\d{14}$/;
-    if (!data.siret || !siretRegex.test(data.siret)) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Le numéro SIRET doit contenir 14 chiffres",
-        path: ["siret"]
-      });
-    }
-  }
-
-  if (data.type === "support") {
-    if (!data.urgence || data.urgence === "") {
-      ctx.addIssue({ code: "custom", message: "Le niveau d'urgence est requis", path: ["urgence"] });
-    }
-  }
-});
-
-export type ContactFormData = z.infer<typeof contactFormSchema>;
+export type ContactFormInput = z.input<typeof contactFormSchema>;
+export type ContactFormData = z.output<typeof contactFormSchema>;
