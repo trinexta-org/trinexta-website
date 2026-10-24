@@ -40,7 +40,7 @@ const values: ValueItem[] = [
     },
     {
         title: "Réactivité",
-        desc: "Chaque minute compte. Notre helpdesk est disponible du lundi au vendredi, de 8h30 à 18h, pour répondre rapidement à vos demandes et vous aider à résoudre les incidents du quotidien. Vous bénéficiez d’un point d’entrée clair, avec une prise en charge sérieuse et réactive pour limiter au maximum l'impact sur votre activité.",
+        desc: "Chaque minute compte. Notre helpdesk est disponible du lundi au vendredi, de 8 h 30 à 19 h, pour répondre rapidement à vos demandes et vous aider à résoudre les incidents du quotidien. Vous bénéficiez d’un point d’entrée clair, avec une prise en charge sérieuse et réactive pour limiter au maximum l'impact sur votre activité.",
         image: "/images/a-propos/engagements/reactivite.jpg",
         alt: "Une horloge à clapet affichant le temps qui s'écoule, représentant la réactivité immédiate de notre support technique face aux urgences IT."
     },

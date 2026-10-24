@@ -7,7 +7,7 @@ import { HeroCarousel } from "@/components/ui/HeroCarousel";
 import { Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { homeHeroH1, homeHeroSlides } from "@/data/heroes";
-import { ACCUEIL_CHAPEAU, ACCUEIL_CTA } from "@/data/accueil";
+import { ACCUEIL_CTA } from "@/data/accueil";
 import { CoffeeShield } from "@/components/serenite/CoffeeShield";
 
 export function HeroSection() {
@@ -128,21 +128,18 @@ export function HeroSection() {
               </Button>
             </Link>
 
-            <Link href="/serenite" className="w-full sm:w-auto">
+            <Link href="/serenite#comparatif" className="w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="lg"
                 className="w-full text-center text-white border-white hover:bg-white/10 cursor-pointer"
               >
-                Voir les offres et les prix
+                Comparer les formules
               </Button>
             </Link>
           </div>
 
-          <div className="mt-10 md:mt-12 pt-6">
-            <Text className="text-sm md:text-base text-white/80 font-medium leading-relaxed max-w-3xl drop-shadow-md text-balance">
-              {ACCUEIL_CHAPEAU}
-            </Text>
+          <div className="mt-8 md:mt-10">
 
             <div className="mt-4 flex w-fit max-w-full items-center gap-2 glass-panel rounded-lg px-3 py-2">
               <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />

@@ -94,12 +94,8 @@ export function detectServices(answers: EstimationAnswers): EstimationServiceId[
   }
 
   if (besoins.includes("projet")) {
-    const projetType = answers["projet-type"];
-    if (projetType === "outil" || projetType === "automatisation") {
-      services.push("solutions-metier");
-    } else {
-      services.push("trinexta-studio");
-    }
+    // Sites et applications : TRINEXTA Studio (trinexta-studio.fr), hors estimateur.
+    services.push("solutions-metier");
   }
 
   if (besoins.includes("renfort")) {

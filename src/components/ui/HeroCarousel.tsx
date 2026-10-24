@@ -32,13 +32,17 @@ export function HeroCarousel<T>({
 }: HeroCarouselProps<T>) {
   const [current, setCurrent] = useState(0)
 
+  // Une seule slide : message fixe, ni défilement ni pastilles.
+  const defile = slides.length > 1
+
   useEffect(() => {
+    if (!defile) return
     const timer = setInterval(
       () => setCurrent((p) => (p + 1) % slides.length),
       interval
     )
     return () => clearInterval(timer)
-  }, [slides.length, interval])
+  }, [slides.length, interval, defile])
 
   return (
     <ViewportHero>
@@ -83,6 +87,7 @@ export function HeroCarousel<T>({
             })}
           </div>
 
+          {defile && (
           <div className="mt-6 flex items-center gap-3">
             {slides.map((_, i) => (
               <button
@@ -97,6 +102,7 @@ export function HeroCarousel<T>({
               />
             ))}
           </div>
+          )}
 
           {footer}
         </div>

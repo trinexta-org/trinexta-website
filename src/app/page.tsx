@@ -6,7 +6,6 @@ import { HeroSection } from "@/components/HeroSection"
 import { TransitionTitle } from "@/components/TransitionTitle"
 import { ServicesSection } from "@/components/ServicesSection"
 import { ApproachSection } from "@/components/ApproachSection"
-import { InterventionMap } from "@/components/InterventionMap"
 import { WhyChooseUs } from "@/components/WhyChooseUs"
 import { PartnersSection } from "@/components/PartnersSection"
 import { FinalCTA } from "@/components/FinalCTA"
@@ -18,9 +17,13 @@ import { BannerCTA } from "@/components/layout/BannerCTA"
 import { CasClientFeatured } from "@/components/cas-clients/CasClientFeatured"
 import { homeCaseClient } from "@/data/cas-clients"
 import { isPartenaireValide } from "@/data/partenaires"
-import { ACCUEIL_CTA, ACCUEIL_EN_BREF, ACCUEIL_FAQ, ACCUEIL_OFFRES, GOOGLE_NOTE } from "@/data/accueil"
+import { ACCUEIL_CTA, ACCUEIL_FAQ, ACCUEIL_OFFRES, GOOGLE_NOTE, VIDEO_TRINEXTA, VIDEO_TRINEXTA_JSONLD } from "@/data/accueil"
+import { AccueilEnBref } from "@/components/accueil/AccueilEnBref"
+import { VideoPresentation } from "@/components/accueil/VideoPresentation"
+import { Container } from "@/components/layout/Container"
+import { FadeIn } from "@/components/ui/FadeIn"
 import { FaqSection } from "@/components/shared/FaqSection"
-import { Heading, Text } from "@/components/ui/Typography"
+import { Heading } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { WaveDivider } from "@/components/ui/WaveDivider"
 
@@ -88,25 +91,26 @@ const faqJsonLd = {
   })),
 };
 
+/*
+ * Accueil (24/10/2026), sur le modèle de l'accueil Studio : une porte d'entrée courte,
+ * structurée SEO et GEO. Promesse fixe, « En bref » (qui nous sommes, adresse de
+ * référence), services, vidéo, preuve (cas client), formules, démarrage, avis, FAQ.
+ * Le détail vit sur les pages dédiées. Retirés de l'accueil : carte d'intervention
+ * (zone reprise dans « En bref »), chapeau répété sous le hero.
+ */
 export default function Home() {
   return (
     <main className="min-h-screen bg-surface relative">
       <JsonLd data={trinextaLocalBusiness} />
       <JsonLd data={faqJsonLd} />
-      <BreadcrumbJsonLd
-        items={[
-          { name: "Accueil", url: "/" }
-        ]} 
-      />
+      <JsonLd data={VIDEO_TRINEXTA_JSONLD} />
+      <BreadcrumbJsonLd items={[{ name: "Accueil", url: "/" }]} />
+
       <HeroSection />
 
       <WaveDivider from="primary" to="surface" amplitude="ample" />
 
-      <Section className="pt-12 md:pt-16 pb-0 md:pb-0 lg:pb-0">
-        <Text className="max-w-4xl mx-auto text-primary/80 text-base md:text-lg leading-relaxed">
-          <strong className="text-primary">TRINEXTA en bref.</strong> {ACCUEIL_EN_BREF}
-        </Text>
-      </Section>
+      <AccueilEnBref />
 
       <TransitionTitle
         surtitle="Nos services"
@@ -115,6 +119,14 @@ export default function Home() {
       />
 
       <ServicesSection />
+
+      <Section container={false} className="relative bg-surface pt-12 md:pt-16 pb-0 md:pb-0 lg:pb-0">
+        <Container className="max-w-[1100px]">
+          <FadeIn>
+            <VideoPresentation {...VIDEO_TRINEXTA} />
+          </FadeIn>
+        </Container>
+      </Section>
 
       {homeCaseClient && (
         <Section className="pt-12 md:pt-16 pb-0 md:pb-0 lg:pb-0">
@@ -135,14 +147,11 @@ export default function Home() {
         />
       </Section>
 
-      {/* Entrée du bloc sombre central : le circuit passe de la marge gauche
-          à la droite. Les raccords traversants se numérotent ensuite de 1 en 1
-          dans l'ordre de la page, et le courant alterne à chacun. */}
+      {/* Bloc sombre central : le circuit passe d'une marge à l'autre à chaque raccord. */}
       <WaveDivider from="surface" to="primary" amplitude="ample" crossing={1} />
 
       <ApproachSection />
 
-      {/* Sortie du bloc sombre : le courant repart vers la marge gauche. */}
       <WaveDivider from="primary" to="surface" amplitude="ample" crossing={2} />
 
       <TransitionTitle
@@ -151,12 +160,6 @@ export default function Home() {
         line2="les tickets"
       />
       <WhyChooseUs />
-
-      <WaveDivider from="surface" to="primary" amplitude="low" crossing={3} />
-
-      <InterventionMap />
-
-      <WaveDivider from="primary" to="surface" amplitude="low" crossing={4} />
 
       <Suspense fallback={null}>
         <PartnersData />
@@ -167,15 +170,9 @@ export default function Home() {
         line1="Ce qu'en disent"
         line2="nos clients"
       />
-      <CustomerReviews/>
-      <FinalCTA
-        line1={ACCUEIL_CTA.line1}
-        line2={ACCUEIL_CTA.line2}
-        line3={ACCUEIL_CTA.line3}
-        description={ACCUEIL_CTA.description}
-        ctaLabel={ACCUEIL_CTA.ctaLabel}
-        ctaHref={ACCUEIL_CTA.ctaHref}
-      />
+      <CustomerReviews />
+
+      <WaveDivider from="surface" to="primary" amplitude="low" crossing={3} />
 
       <div className="bg-primary pt-12 pb-24 text-center px-6">
         <Heading as="h2" className="text-white">
@@ -184,6 +181,14 @@ export default function Home() {
       </div>
       <FaqSection faqs={ACCUEIL_FAQ} />
 
+      <FinalCTA
+        line1={ACCUEIL_CTA.line1}
+        line2={ACCUEIL_CTA.line2}
+        line3={ACCUEIL_CTA.line3}
+        description={ACCUEIL_CTA.description}
+        ctaLabel={ACCUEIL_CTA.ctaLabel}
+        ctaHref={ACCUEIL_CTA.ctaHref}
+      />
     </main>
   )
 }

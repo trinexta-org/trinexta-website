@@ -3,21 +3,10 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Heading } from "@/components/ui/Typography"
+import { SA_SUJETS } from "@/data/services-annexes"
 
-const approachItems = [
-  { 
-    label: "Conseiller avant de vendre", 
-    desc: "Chez TRINEXTA, nous cherchons d'abord la solution la plus utile et économique pour votre entreprise. Avant de recommander un achat de matériel, nous commençons par évaluer ce que vous avez déjà." 
-  },
-  { 
-    label: "Priorité à l'optimisation", 
-    desc: "Si un poste peut encore répondre à vos besoins grâce à une mise à niveau ou un ajustement technique, c'est cette option budgétaire et responsable que nous privilégions. Nous ne poussons pas à la dépense inutile." 
-  },
-  { 
-    label: "Vision durable et responsable", 
-    desc: "Nous vous aidons à faire les bons choix, au bon moment, en tenant compte de votre activité, de votre budget et de la durée de vie réelle de vos équipements, pour votre entreprise et pour l'environnement." 
-  }
-]
+const approachItems = SA_SUJETS.items
+
 
 export function ServicesApproach() {
   const [activeIndex, setActiveIndex] = useState<number | null>(0)
@@ -33,7 +22,7 @@ export function ServicesApproach() {
           <div className="md:hidden absolute inset-0 z-0">
             <Image 
               src="/images/nos-offres/max-scaling.jpg" 
-              alt="Approche conseil Trinexta"
+              alt=""
               fill
               className="object-cover object-center"
             />
@@ -42,7 +31,7 @@ export function ServicesApproach() {
 
           <Image 
             src="/images/nos-offres/impulsion_concret.jpg" 
-            alt="Approche conseil Trinexta"
+            alt=""
             fill
             className="hidden md:block object-cover object-right"
           />
@@ -53,12 +42,10 @@ export function ServicesApproach() {
           <div className="relative z-10 w-full lg:w-[55%] p-10 lg:p-20 h-full flex flex-col justify-center">
             <div className="space-y-6 mb-12">
               <Heading as="h3" className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                Notre approche : <br/> <span className="text-secondary-strong">conseiller avant de vendre</span>
+                {SA_SUJETS.titreDebut} <br/> <span className="text-secondary-strong">{SA_SUJETS.titreAccent}</span>
               </Heading>
               <div className="text-base md:text-lg text-white/80 leading-relaxed">
-                <p>
-                  Nous ne sommes pas là pour pousser à la dépense, mais pour garantir la pérennité de votre outil de travail. Découvrez comment nous transformons vos contraintes en solutions responsables.
-                </p>
+                <p>{SA_SUJETS.intro}</p>
               </div>
             </div>
 
@@ -88,7 +75,7 @@ export function ServicesApproach() {
                     </button>
 
                     <div 
-                      className={`overflow-hidden transition-all duration-500 ease-in-out ${isActive ? "max-h-40 opacity-100 pb-4" : "max-h-0 opacity-0"}`}
+                      className={`overflow-hidden transition-all duration-500 ease-in-out ${isActive ? "max-h-96 opacity-100 pb-4" : "max-h-0 opacity-0"}`}
                     >
                       <p className="text-white/70 text-base leading-relaxed pr-8">
                         {item.desc}

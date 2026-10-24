@@ -14,8 +14,7 @@ export type EstimationServiceId =
   | "regie-developpement"
   | "regie-cybersecurite"
   | "regie-pilotage"
-  | "solutions-metier"
-  | "trinexta-studio";
+  | "solutions-metier";
 
 export type EstimationAnswers = Record<string, string | string[]>;
 

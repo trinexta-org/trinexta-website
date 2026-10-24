@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { OfferHero } from "@/components/shared/OfferHero";
 import { FaqSection } from "@/components/shared/FaqSection";
-import { officialFaqs } from "@/components/shared/faqData";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { TransitionTitle } from "@/components/TransitionTitle";
@@ -13,21 +12,19 @@ import { ServicesGrid } from "@/components/services-annexes/ServicesGrid";
 import { ServicesProcess } from "@/components/services-annexes/ServicesProcess";
 import { ServicesPartners } from "@/components/services-annexes/ServicesPartners";
 import { FinalCTA } from "@/components/FinalCTA";
+import { SA_FAQ, SA_HERO } from "@/data/services-annexes";
 
 export const metadata: Metadata = {
-  title: "Services Annexes IT & Cybersécurité",
+  title: "Dépannage et interventions informatiques à Évry",
   description:
-    "Prestations IT sur mesure et à la demande. Conseils, matériel, réseaux et sauvegardes professionnelles.",
+    "Dépannage, installation de postes, Windows 11, déménagement : interventions informatiques sur devis pour entreprises à Évry et en Essonne.",
   alternates: {
     canonical: "/services-annexes",
   },
 };
 
 export default function ServicesAnnexesPage() {
-  const filteredFaqs = officialFaqs.filter(
-    (faq) =>
-      faq.tags?.includes("services-annexes") || faq.tags?.includes("general"),
-  );
+  const filteredFaqs = SA_FAQ;
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -45,13 +42,10 @@ export default function ServicesAnnexesPage() {
 
       <section className="relative bg-primary">
         <OfferHero
-          part1="Services"
-          part2="Annexes"
-          subtitles={[
-            "Prestations IT sur mesure et à la demande. Conseils, matériel, réseaux et sauvegardes professionnelles.",
-            "Des interventions ponctuelles ou projets spécifiques, pilotés de bout en bout par nos experts.",
-            "Une approche « Fondations » : nous sécurisons et stabilisons vos infrastructures avec des solutions fiables et évolutives.",
-          ]}
+          part1={SA_HERO.part1}
+          part2={SA_HERO.part2}
+          subtitles={SA_HERO.subtitles}
+          cta={SA_HERO.cta}
           imageSrc="/images/nos-offres/hero-services.webp"
         />
 
@@ -79,7 +73,7 @@ export default function ServicesAnnexesPage() {
           <div className="space-y-12">
             <TransitionTitle
               surtitle="Prestations à la carte"
-              line1="Nos services"
+              line1="Nos interventions"
               line2="sur devis"
             />
             <Section container={false} className="py-0">
@@ -101,9 +95,9 @@ export default function ServicesAnnexesPage() {
         <div className="space-y-24 py-12">
           <div className="space-y-12">
             <TransitionTitle
-              surtitle="Écosystème"
-              line1="Nos"
-              line2="partenaires"
+              surtitle="Matériel"
+              line1="Nos partenaires"
+              line2="matériel"
             />
             <Section container={false} className="py-0">
               <Container className="max-w-[1400px]">
@@ -115,12 +109,12 @@ export default function ServicesAnnexesPage() {
       </section>
 
       <FinalCTA
-        line1="Besoin d'un coup de main ?"
-        line2="Intervenons vite."
-        line3="Sans engagement."
-        description="Projet réseau, achat matériel ou audit ponctuel. Nous réglons vos blocages techniques pour vous remettre au travail."
-        ctaLabel="Contacter un expert"
-        ctaHref="/contact"
+        line1="Une panne,"
+        line2="un projet,"
+        line3="un déménagement ?"
+        description="Décrivez votre besoin : nous revenons vers vous avec une proposition et une date d'intervention. Du lundi au vendredi, de 8 h 30 à 19 h, au 09 78 25 07 46."
+        ctaLabel="Demander un devis"
+        ctaHref="/contact#formulaire"
       />
 
       <FaqSection faqs={filteredFaqs} />

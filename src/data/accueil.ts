@@ -1,11 +1,47 @@
 // Contenus textuels de la page d'accueil (/). Aucun prix ici : les montants
 // restent sur /serenite uniquement.
 
-export const ACCUEIL_EN_BREF =
-  "TRINEXTA est un prestataire d'infogérance et de support informatique pour TPE et PME, basé au 7 rue Montespan à Évry-Courcouronnes (Essonne). Deux formules facturées par poste et par mois : Sérénité Essentiel (protection EDR, supervision, maintenance préventive automatisée) et Sérénité Complète (Essentiel plus l'assistance aux utilisateurs pour les demandes couvertes par le contrat). Support humain du lundi au vendredi, de 8 h 30 à 19 h ; supervision automatisée en continu. Formules sans minimum de postes, pour les entreprises de 1 à 20 postes et au-delà. Interventions sur site dans toute l'Île-de-France, sans frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry."
+/** « En bref » : les faits qu'un moteur ou une IA doit pouvoir retenir sans interpréter. */
+export const ACCUEIL_IDENTITE =
+  "TRINEXTA est un prestataire d'infogérance et de support informatique pour les TPE et PME, basé à Évry-Courcouronnes (Essonne), qui intervient à distance et sur site dans toute l'Île-de-France."
 
-export const ACCUEIL_CHAPEAU =
-  "TRINEXTA prend en charge l'informatique des entreprises qui n'ont pas de service informatique interne : assistance à vos collaborateurs, maintenance de vos postes, protection contre les cyberattaques. Depuis notre bureau d'Évry-Courcouronnes, avec un technicien titulaire qui connaît votre entreprise."
+export const ACCUEIL_FAITS: { label: string; valeur: string }[] = [
+  { label: "Ce que nous faisons", valeur: "Assistance aux collaborateurs, maintenance et supervision des postes, cybersécurité, Microsoft 365, sauvegarde" },
+  { label: "Pour qui", valeur: "Entreprises sans service informatique interne, de 1 à 20 postes et au-delà, sans minimum" },
+  { label: "Formules", valeur: "Sérénité Essentiel et Sérénité Complète, facturées par poste et par mois" },
+  { label: "Horaires", valeur: "Support humain du lundi au vendredi, de 8 h 30 à 19 h ; supervision automatisée en continu" },
+  { label: "Zone", valeur: "Toute l'Île-de-France ; déplacement sans frais pour les interventions programmées à moins de 15 km d'Évry" },
+]
+
+export const ACCUEIL_ADRESSE = {
+  lieu: "Le Magellan",
+  rue: "7 rue Montespan",
+  ville: "91000 Évry-Courcouronnes",
+  mapsHref: "https://www.google.com/maps/search/?api=1&query=7+rue+Montespan+91000+%C3%89vry-Courcouronnes",
+  telephone: "09 78 25 07 46",
+  telephoneHref: "tel:+33978250746",
+  email: "contact@trinexta.fr",
+} as const
+
+/** Vidéo de présentation (fin corrigée le 24/10/2026 : baseline à la place de la mention Trustech). */
+export const VIDEO_TRINEXTA = {
+  src: "/videos/trinexta-presentation.mp4",
+  poster: "/videos/trinexta-presentation-affiche.webp",
+  titre: "TRINEXTA en 44 secondes",
+  duree: "0:44",
+}
+
+export const VIDEO_TRINEXTA_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: "TRINEXTA : infogérance et support informatique des TPE et PME",
+  description:
+    "Présentation de TRINEXTA, prestataire d'infogérance, de support et de cybersécurité pour les TPE et PME, à Évry-Courcouronnes et en Île-de-France.",
+  thumbnailUrl: "https://trinexta.fr/videos/trinexta-presentation-affiche.webp",
+  contentUrl: "https://trinexta.fr/videos/trinexta-presentation.mp4",
+  uploadDate: "2026-10-24",
+  duration: "PT44S",
+}
 
 export const ACCUEIL_OFFRES = {
   title: "Deux formules selon ce que vous voulez déléguer",

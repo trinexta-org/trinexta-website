@@ -13,9 +13,11 @@ interface OfferHeroProps {
   imageSrc: string
   // Lien d'annonce sous les slides (ex. offre d'entrée plus bas dans la page)
   announcement?: { label: string; href: string }
+  /** Bouton principal du hero ; « Nous contacter » vers /contact par défaut. */
+  cta?: { label: string; href: string }
 }
 
-export function OfferHero({ part1, part2, subtitles, imageSrc, announcement }: OfferHeroProps) {
+export function OfferHero({ part1, part2, subtitles, imageSrc, announcement, cta = { label: "Nous contacter", href: "/contact" } }: OfferHeroProps) {
   const slides = subtitles.map((subtitle) => ({ subtitle }))
 
   return (
@@ -55,6 +57,7 @@ export function OfferHero({ part1, part2, subtitles, imageSrc, announcement }: O
         {announcement && (
           <Link
             href={announcement.href}
+            {...(announcement.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-bold text-primary transition-colors hover:bg-white"
           >
             {announcement.label}
@@ -62,9 +65,9 @@ export function OfferHero({ part1, part2, subtitles, imageSrc, announcement }: O
           </Link>
         )}
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <Link href="/contact" className="w-full sm:w-auto">
+          <Link href={cta.href} className="w-full sm:w-auto">
             <Button variant="secondary" size="lg" className="w-full text-white">
-              Nous contacter
+              {cta.label}
             </Button>
           </Link>
         </div>

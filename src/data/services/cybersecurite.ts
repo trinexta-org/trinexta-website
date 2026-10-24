@@ -1,110 +1,282 @@
 import type { ServicePageProps } from "@/components/services/ServicePage";
 
+// Page /cybersecurite : textes de la fiche 06 du dossier final (23/10/2026).
+// Aucun prix ici : les montants vivent uniquement sur /serenite.
+// Retirés : « 24/7 », « temps réel » au sens de veille humaine, « infaillible »,
+// certifications non détenues, éditeurs non utilisés (Sophos, Bitdefender).
+
 export const cybersecuriteData: ServicePageProps = {
   serviceSlug: "cybersecurite",
   canonicalPath: "/cybersecurite",
 
   hero: {
-    titlePart1: "Cybersécurité PME",
+    titlePart1: "Cybersécurité pour TPE et PME",
     titlePart2: "en Essonne",
-    description: "Les menaces ne visent plus seulement les grands groupes. Trinexta protège les TPE et PME en Essonne avec une cybersécurité concrète : EDR, anti-ransomware, protection contre le phishing, surveillance et réponse à incident, sans jargon inutile ni charge technique pour vos équipes.",
-    ctaText: "Contactez-nous pour protéger votre entreprise",
-    ctaHref: "/contact",
+    description:
+      "Un e-mail piégé, un mot de passe réutilisé, un poste sans mises à jour : la plupart des attaques contre les petites entreprises passent par là.\n\nNous fermons ces portes, surveillons vos postes et vous accompagnons quand une alerte survient, depuis notre bureau d'Évry-Courcouronnes.",
+    ctaText: "Faire le point sur ma sécurité",
+    ctaHref: "/contact#formulaire",
+    secondaryCta: {
+      text: "Je pense avoir été piraté",
+      href: "/charte-assistance",
+    },
   },
 
   problem: {
-    subtitle: "Une menace bien réelle et évolutive",
-    title: "Les cyberattaques ne concernent plus seulement les grandes entreprises.",
-    description: "Il est temps de déconstruire le mythe selon lequel les petites structures sont 'trop petites pour être ciblées'. Au contraire, les TPE et PME sont devenues les cibles privilégiées des cybercriminels, précisément parce qu'elles disposent souvent de moins de ressources de protection. Une seule attaque, un seul ransomware, peut suffire à paralyser votre activité, détruire des années de travail et mettre en péril la pérennité financière de votre société. Les menaces actuelles (ransomwares, phishing sophistiqué, vol d'identités) évoluent à une vitesse fulgurante. Les antivirus classiques, basés sur des signatures connues, sont désormais dépassés. Si vous n'êtes pas préparés, vous n'êtes pas protégés.",
+    subtitle: "Ce qui arrive vraiment",
+    title: "Les attaques qui touchent vraiment les TPE et PME",
+    description:
+      "Les petites entreprises ne sont pas trop petites pour être visées : elles ont souvent moins de protections. Les attaques les plus courantes ne demandent aucune technique avancée, seulement une porte restée ouverte. Le jour de l'incident, la différence se fait entre une entreprise qui sait qui appeler et quoi couper, et une entreprise qui improvise.",
     painPoints: [
-      "Ransomwares capables de chiffrer l'intégralité de vos fichiers et de bloquer votre production en quelques minutes.",
-      "Campagnes de phishing ultra-réalistes qui piègent vos collaborateurs les plus vigilants.",
-      "Logiciels malveillants 'Zero-Day' (inconnus) capables de se propager d'un poste à l'autre sans alerter les systèmes traditionnels.",
-      "Conséquences lourdes : pertes de données, amendes RGPD, arrêt forcé de l'activité et dégradation irrémédiable de votre réputation.",
+      "L'hameçonnage : un faux message Microsoft, une fausse facture ; un clic suffit pour livrer un mot de passe.",
+      "Le compte Microsoft 365 compromis : une règle de transfert discrète, puis de fausses demandes de virement envoyées à vos clients.",
+      "Le rançongiciel : les fichiers sont chiffrés, l'activité s'arrête.",
+      "Le poste oublié : une faille connue reste ouverte des semaines faute de mise à jour.",
+      "L'absence de procédure : personne ne sait qui appeler ni quoi couper.",
     ],
+  },
+
+  banner: {
+    title: "Un incident en cours ?",
+    description:
+      "Débranchez le poste du réseau sans l'éteindre, ne supprimez rien, et suivez les gestes par situation. Pendant nos horaires, appelez le 09 78 25 07 46.",
+    ctaText: "Je pense avoir été piraté",
+    ctaHref: "/charte-assistance",
   },
 
   offer: {
-    subtitle: "EDR + Intelligence Artificielle : Le bouclier moderne",
-    title: "Une protection automatisée et surveillée en continu",
-    description: "Notre solution ne se contente pas de 'chercher des virus'. Nous déployons une solution d'EDR (Endpoint Detection & Response) enrichie par l'Intelligence Artificielle. Contrairement à un antivirus classique qui attend qu'une menace soit identifiée pour agir, notre système surveille en permanence le comportement réel de vos machines pour détecter les anomalies en temps réel, même s'il s'agit d'une attaque totalement inédite.",
+    subtitle: "Ce que nous mettons en place",
+    title: "Des protections simples, tenues dans la durée",
+    description:
+      "Chaque mesure ferme une porte précise. Ensemble, elles couvrent les attaques les plus fréquentes contre les petites entreprises.",
     features: [
       {
-        title: "Surveillance comportementale en continu",
-        desc: "L'activité de chaque poste de travail est analysée en continu, sans interruption. Notre plateforme de surveillance identifie les moindres écarts dans le fonctionnement normal de vos ordinateurs : processus suspects, connexions réseau anormales ou tentatives d'exécution de fichiers illégitimes. L'EDR remonte les signaux faibles dès leur détection, pour une prise en charge selon le périmètre de votre contrat.",
+        title: "EDR SentinelOne sur chaque poste",
+        desc: "L'EDR analyse le comportement des programmes : un logiciel qui chiffre des fichiers en série peut être bloqué même s'il est inconnu, et le poste peut être isolé du réseau selon la configuration retenue avec vous. Inclus dans les deux formules Sérénité.",
       },
       {
-        title: "Détection comportementale par IA",
-        desc: "La force de notre système réside dans l'analyse comportementale. Plutôt que de chercher des 'signatures' connues (ce qui est inutile face aux nouvelles menaces), notre intelligence artificielle apprend ce qu'est un comportement sain pour vos machines. Dès qu'une action dévie de cette norme, le système la qualifie de suspecte et peut l'interrompre instantanément, stoppant ainsi les menaces les plus furtives.",
+        title: "Mises à jour et inventaire du parc",
+        desc: "Les correctifs de sécurité sont suivis par notre supervision, et la liste de vos postes et de leurs protections reste à jour. Un poste oublié est repéré avant d'être exploité. Inclus dans les deux formules Sérénité.",
       },
       {
-        title: "Réponse automatique et isolation",
-        desc: "En cas de menace avérée, le temps est votre allié le plus précieux. Notre solution ne se contente pas de vous envoyer une alerte ; elle peut réagir de manière autonome. Elle peut isoler instantanément un poste infecté du reste de votre réseau, bloquer l'exécution d'un processus dangereux et stopper net la propagation de l'attaque avant qu'elle n'atteigne vos serveurs ou données critiques.",
+        title: "Double authentification",
+        desc: "Sur Microsoft 365 et les comptes administrateurs : un mot de passe volé ne suffit plus pour se connecter. C'est la mesure qui bloque la plupart des prises de contrôle de messagerie. Incluse dans Sérénité Complète.",
       },
       {
-        title: "Bouclier anti-ransomware actif",
-        desc: "Le ransomware est l'ennemi numéro un des TPE/PME. Notre bouclier détecte en temps réel les schémas de chiffrement de fichiers caractéristiques des attaques par ransomware. Non seulement le système bloque l'attaque, mais dans de nombreux cas, il permet d'engager une restauration automatique des fichiers touchés, réduisant ainsi drastiquement l'impact sur votre continuité de service.",
+        title: "Sensibilisation à l'hameçonnage",
+        desc: "Les bons réflexes expliqués à vos équipes : reconnaître un faux message, vérifier une demande de changement de RIB, savoir qui prévenir. Incluse dans Sérénité Complète.",
       },
       {
-        title: "Défense robuste contre le phishing",
-        desc: "L'humain reste le maillon le plus vulnérable de la chaîne de sécurité. Nos outils renforcent la détection des e-mails frauduleux, des liens piégés et des sites de phishing sophistiqués qui imitent les services légitimes (Microsoft 365, banques, etc.). Nous protégeons ainsi vos accès, vos mots de passe et vos données sensibles contre l'ingénierie sociale.",
+        title: "Réponse à incident cyber",
+        desc: "Si une attaque survient, nous suivons un plan en 8 étapes, de la détection au retour d'expérience. Incluse dans Sérénité Complète. La sauvegarde, qui prépare la reprise des données hébergées en France, est une option sur étude.",
       },
     ],
+  },
+
+  keyFacts: [
+    {
+      label: "Protection",
+      value: "EDR SentinelOne sur les postes, en complément des mises à jour, de la double authentification et de la sauvegarde.",
+    },
+    {
+      label: "Surveillance",
+      value: "Détection automatisée et continue ; analyse des alertes par nos techniciens du lundi au vendredi, de 8 h 30 à 19 h.",
+    },
+    {
+      label: "Dans les formules",
+      value: "L'EDR est inclus dans les deux formules Sérénité ; double authentification, sensibilisation et réponse à incident dans Sérénité Complète.",
+    },
+    {
+      label: "Zone",
+      value: "Interventions en Essonne et en Île-de-France, depuis Évry-Courcouronnes.",
+    },
+  ],
+
+  formulas: {
+    subtitle: "Dans les formules Sérénité",
+    title: "Ce que comprend chaque formule",
+    items: [
+      {
+        badge: "Sérénité Essentiel",
+        title: "Protéger et surveiller",
+        desc: "Surveillance et sécurité des postes, sans assistance aux utilisateurs.",
+        points: [
+          "EDR SentinelOne",
+          "Mises à jour de sécurité suivies",
+          "Inventaire du parc",
+          "Alertes traitées par un technicien",
+        ],
+        cta: {
+          text: "Voir le détail et les prix",
+          href: "/serenite#comparatif",
+        },
+      },
+      {
+        badge: "Sérénité Complète",
+        title: "Protéger, accompagner, réagir",
+        desc: "Tout Essentiel, plus les mesures qui protègent les comptes et préparent l'incident.",
+        points: [
+          "Tout ce qui est dans Essentiel",
+          "Double authentification",
+          "Sensibilisation à l'hameçonnage",
+          "Réponse à incident cyber",
+          "Assistance de vos utilisateurs",
+        ],
+        cta: {
+          text: "Comparer les formules",
+          href: "/serenite#comparatif",
+        },
+        highlighted: true,
+      },
+    ],
+    note: "La sauvegarde est une option hors forfait, sur étude, avec des données hébergées en France. Les prix des formules sont sur la page Sérénité.",
+  },
+
+  process: {
+    subtitle: "Compte Microsoft 365 piraté",
+    title: "Les signes et les premiers gestes",
+    description:
+      "C'est souvent un client qui donne l'alerte, en s'étonnant d'un changement de RIB. Les signes : des e-mails envoyés que personne n'a écrits, une règle de transfert inconnue, des alertes de connexion depuis un pays inhabituel.",
+    steps: [
+      {
+        title: "Changer le mot de passe",
+        desc: "Depuis un appareil sain.",
+      },
+      {
+        title: "Fermer les accès",
+        desc: "Révoquer les sessions ouvertes et activer la double authentification.",
+      },
+      {
+        title: "Vérifier la messagerie",
+        desc: "Règles de transfert et applications autorisées.",
+      },
+      {
+        title: "Prévenir vos contacts",
+        desc: "Si de faux messages sont partis en votre nom.",
+      },
+      {
+        title: "Nous appeler",
+        desc: "Au 09 78 25 07 46, du lundi au vendredi de 8 h 30 à 19 h.",
+      },
+    ],
+    cta: {
+      text: "Les gestes par situation",
+      href: "/charte-assistance",
+    },
   },
 
   localSeo: {
-    subtitle: "Protection locale",
-    title: "Cybersécurité pour PME en Essonne",
-    description: "Nous aidons les entreprises locales à réduire les risques les plus concrets : ransomware, compte Microsoft 365 compromis, phishing crédible, postes non protégés et sauvegardes insuffisantes. Notre [assistance informatique](/support-informatique) prend en charge le reste de votre quotidien technique, au-delà de la sécurité.",
+    subtitle: "Audit de cybersécurité",
+    title: "Faire le point avant l'incident",
+    description:
+      "Le point de sécurité que nous menons dans les entreprises de l'Essonne et d'Île-de-France répond à des questions simples. Il est offert : vous recevez une liste de corrections classées par priorité, en distinguant ce qui relève de [Sérénité](/serenite) et ce qui demande un devis.",
     items: [
       {
-        title: "Zone couverte",
-        desc: "Évry-Courcouronnes, Corbeil-Essonnes, le centre Essonne et les entreprises franciliennes suivies à distance.",
+        title: "Postes",
+        desc: "Tous les postes ont-ils une protection active et des mises à jour récentes ?",
       },
       {
-        title: "Entreprises concernées",
-        desc: "PME, cabinets, commerces et structures avec données clients, postes partagés ou outils métier critiques.",
+        title: "Comptes",
+        desc: "Les comptes Microsoft 365 et administrateurs ont-ils la double authentification ? Les anciens collaborateurs ont-ils encore des accès ?",
       },
       {
-        title: "Risques prioritaires",
-        desc: "Ransomware, vol d'identifiants, phishing, postes isolés, comptes sans MFA et absence de procédure en cas d'incident.",
+        title: "Sauvegarde",
+        desc: "Existe-t-il une sauvegarde hors du réseau, déjà restaurée au moins une fois ?",
       },
       {
-        title: "Action rapide",
-        desc: "On vérifie les protections en place, les accès sensibles et la capacité de reprise avant de durcir ce qui expose vraiment l'activité.",
+        title: "Réflexes",
+        desc: "Vos équipes savent-elles qui prévenir face à un e-mail douteux ?",
       },
     ],
-    ctaText: "Faire le point sécurité",
-    ctaHref: "/contact",
+    ctaText: "Faire le point sur ma sécurité",
+    ctaHref: "/contact#formulaire",
   },
 
   benefits: {
-    subtitle: "La différence Trinexta",
-    title: "Une sécurité pensée pour votre sérénité d'esprit",
+    subtitle: "Détection automatique, traitement humain",
+    title: "Un logiciel qui réagit, une équipe qui prend le relais",
     items: [
       {
-        title: "Protection continue et totale",
-        desc: "Vos postes ne sont pas protégés seulement lors des analyses planifiées. L'agent EDR analyse leur comportement en continu. Nous allons bien au-delà de la simple analyse de fichiers statiques pour monitorer l'activité réelle de votre infrastructure.",
+        title: "Une détection continue",
+        desc: "L'EDR surveille vos postes en continu. Face à un comportement suspect, il peut bloquer le programme ou isoler le poste, selon la configuration retenue avec vous. C'est un logiciel qui réagit, pas une équipe qui veille la nuit.",
       },
       {
-        title: "Réactivité immédiate et automatisée",
-        desc: "L'automatisation intelligente permet de neutraliser les menaces à une vitesse qu'aucune équipe humaine, aussi compétente soit-elle, ne pourrait égaler. La propagation de l'incident est stoppée net, limitant les dégâts à leur plus simple expression.",
+        title: "Des techniciens qui analysent",
+        desc: "Du lundi au vendredi, de 8 h 30 à 19 h : analyse de l'alerte, levée de doute, appel à la personne concernée, remise en état. Hors horaires, l'alerte est traitée à la reprise du support, selon nos niveaux de service.",
       },
       {
-        title: "Simplicité de gestion radicale",
-        desc: "La cybersécurité est souvent perçue comme une 'usine à gaz'. Chez Trinexta, nous supprimons cette complexité. Pas de jargon technique, pas de configurations complexes à gérer pour vous. Tout est géré en arrière-plan, vous laissant vous concentrer sur votre cœur de métier.",
+        title: "Aucune console à surveiller",
+        desc: "Vous n'avez rien à paramétrer ni à suivre : nous gérons les protections et vous expliquons simplement ce qui a été fait.",
       },
       {
-        title: "Intégration totale et transparente",
-        desc: "La protection EDR est incluse directement dans nos offres de maintenance. Il n'y a pas d'option cachée, pas de surcoût surprise. Vous bénéficiez d'une cybersécurité cohérente, robuste et pleinement intégrée à votre accompagnement informatique global.",
+        title: "Vos logiciels métier préservés",
+        desc: "Si l'EDR bloque à tort un logiciel de comptabilité ou de caisse, nous ajoutons une exclusion après vérification, en lien avec l'éditeur si besoin.",
       },
+    ],
+  },
+
+  incidentResponse: {
+    surtitle: "En cas d'incident",
+    title: "Notre plan en 8 étapes",
+    intro:
+      "Quand une attaque survient, chaque étape compte et l'ordre aussi. En cas de violation de données personnelles, une notification à la CNIL peut être nécessaire dans les 72 heures : nous rassemblons avec vous les éléments techniques.",
+    items: [
+      {
+        title: "Détection",
+        desc: "EDR, supervision, alerte Microsoft 365 ou signalement d'un utilisateur.",
+      },
+      {
+        title: "Qualification",
+        desc: "Nature de l'incident, systèmes et données touchés, criticité.",
+      },
+      {
+        title: "Contention",
+        desc: "Isolement des postes, blocage des comptes compromis.",
+      },
+      {
+        title: "Préservation des preuves",
+        desc: "Copie avant toute manipulation, journal horodaté.",
+      },
+      {
+        title: "Investigation",
+        desc: "Origine, méthode et étendue de l'attaque.",
+      },
+      {
+        title: "Éradication",
+        desc: "Nettoyage ou réinstallation, correctifs, nouveaux mots de passe.",
+      },
+      {
+        title: "Restauration",
+        desc: "Vérification des sauvegardes, retour progressif à la normale.",
+      },
+      {
+        title: "Retour d'expérience",
+        desc: "Causes de l'incident et mesures de renforcement.",
+      },
+    ],
+    ctaLabel: "Je pense avoir été piraté",
+    ctaHref: "/charte-assistance",
+    planHref: "/plan-reponse-incidents-securite",
+  },
+
+  expertise: {
+    surtitle: "NIS2, RGPD, assurance cyber",
+    title: "Où en êtes-vous ?",
+    intro:
+      "Nous faisons le point sur votre situation technique et documentons les mesures en place ; le volet juridique reste du ressort de votre conseil.",
+    items: [
+      "NIS2 vise des entités de secteurs déterminés, selon leur taille et leur activité : le service officiel messervices.cyber.gouv.fr/nis2 indique si vous êtes concerné. Un client ou un donneur d'ordre concerné peut aussi vous demander des mesures de sécurité ;",
+      "le RGPD impose à toute entreprise de protéger les données personnelles qu'elle traite, donc ses postes et ses accès ;",
+      "les assureurs demandent de plus en plus souvent la double authentification, un EDR ou une sauvegarde testée ;",
+      "notre veille s'appuie sur le CERT-FR, l'ANSSI, Cybermalveillance.gouv.fr et les avis de SentinelOne et Microsoft.",
     ],
   },
 
   caseStudy: {
     surtitle: "Cas client",
     title: "Intervention après le piratage de plusieurs sites web",
-    context: "Une entreprise francilienne confrontée à une compromission de son infrastructure web.\n\nAprès des dysfonctionnements affectant plusieurs sites internet, dont une boutique e-commerce, TRINEXTA a été sollicitée pour rechercher l'origine de l'incident et engager les premières mesures de sécurisation. L'investigation a permis d'identifier des activités malveillantes remontant à plusieurs semaines, des portes dérobées et des mécanismes de manipulation du référencement naturel.",
+    context:
+      "Une entreprise francilienne confrontée à une compromission de son infrastructure web.\n\nAprès des dysfonctionnements affectant plusieurs sites internet, dont une boutique e-commerce, TRINEXTA a été sollicitée pour rechercher l'origine de l'incident et engager les premières mesures de sécurisation. L'investigation a permis d'identifier des activités malveillantes remontant à plusieurs semaines, des portes dérobées et des mécanismes de manipulation du référencement naturel.",
     stats: [
       { value: "63", label: "fichiers malveillants isolés et conservés pour l'investigation" },
     ],
@@ -115,9 +287,10 @@ export const cybersecuriteData: ServicePageProps = {
       "Renforcement des accès administratifs et renouvellement d'identifiants sensibles.",
       "Maintien de l'accessibilité des principaux sites lors des opérations initiales.",
     ],
-    conclusion: "L'intervention a permis d'engager la sécurisation de l'environnement tout en préparant les vérifications nécessaires à une remédiation complète.",
+    conclusion:
+      "L'intervention a permis d'engager la sécurisation de l'environnement tout en préparant les vérifications nécessaires à une remédiation complète.",
     cta: {
-      text: "Découvrir cette intervention de cybersécurité",
+      text: "Lire le cas client",
       href: "/cas-clients/piratage-sites-wordpress-ecommerce",
     },
     note: "Cas client anonymisé. Résultats intermédiaires au 14 octobre 2026.",
@@ -125,92 +298,45 @@ export const cybersecuriteData: ServicePageProps = {
 
   faq: [
     {
-      question: "Quelle est la différence fondamentale avec un antivirus classique ?",
-      answer: "Un antivirus traditionnel agit comme un filtre : il compare vos fichiers à une base de données de menaces connues. Si une attaque est nouvelle (Zero-Day), il ne la verra pas. Notre solution EDR (Endpoint Detection & Response) agit comme un gardien : elle analyse ce que les programmes 'font' en temps réel. Si un logiciel se comporte anormalement, il est bloqué, qu'il soit connu ou non.",
+      question: "Quelle différence entre un antivirus et un EDR ?",
+      answer:
+        "Un antivirus compare les fichiers à une liste de menaces connues. Un EDR observe aussi le comportement des programmes : un logiciel qui chiffre des fichiers en série peut être bloqué même s'il est inconnu. Il complète la double authentification et la [sauvegarde](/cloud-sauvegarde), il ne les remplace pas.",
     },
     {
-      question: "Est-ce que cette protection ralentit mes ordinateurs ?",
-      answer: "Pas du tout. Notre technologie a été sélectionnée pour être extrêmement légère. Elle fonctionne en arrière-plan avec une empreinte processeur minimale. Vous ne remarquerez absolument aucune différence de fluidité dans votre travail quotidien, même sur des machines plus anciennes.",
+      question: "Nos logiciels métier restent-ils utilisables ?",
+      answer:
+        "Oui. Si l'EDR bloque à tort un logiciel de comptabilité ou de caisse, nous ajoutons une exclusion après vérification, en lien avec l'éditeur si besoin.",
     },
     {
-      question: "Que se passe-t-il concrètement si un ransomware attaque ?",
-      answer: "Si un ransomware tente de chiffrer vos données, notre système détecte immédiatement l'anomalie. Il bloque instantanément le processus malveillant. Si des fichiers ont été touchés avant le blocage, la solution permet, selon le scénario, une restauration automatique ou assistée pour remettre vos documents dans leur état initial avant l'attaque.",
+      question: "Que faire si je pense avoir été piraté ?",
+      answer:
+        "Débranchez le poste du réseau sans l'éteindre, ne supprimez rien et appelez-nous au 09 78 25 07 46 (du lundi au vendredi, 8 h 30 à 19 h). Les gestes par situation sont sur notre page [Assistance cybersécurité](/charte-assistance).",
     },
     {
-      question: "Cette protection est-elle incluse dans l'offre TRINEXTA ?",
-      answer: "Absolument. Chez Trinexta, nous considérons la sécurité comme un pilier de la maintenance. La protection EDR enrichie par l'IA est directement intégrée dans nos offres de services. Vous n'avez pas besoin d'ajouter des couches complexes de sécurité externes.",
+      question: "Ma PME est-elle concernée par NIS2 ?",
+      answer:
+        "Cela dépend de votre secteur et de votre taille : le test officiel est sur messervices.cyber.gouv.fr/nis2. Nous préparons avec vous les éléments techniques demandés.",
     },
     {
-      question: "Est-ce que cela protège aussi contre les erreurs humaines ?",
-      answer: "La cybersécurité est un tout. Bien que notre solution technique bloque l'exécution de menaces (phishing, malwares), nous intégrons des bonnes pratiques au sein de nos services pour vous aider à réduire le risque lié à l'erreur humaine. Notre solution EDR aide à limiter les conséquences catastrophiques d'un clic malheureux.",
-    },
-    {
-      question: "La solution est-elle conforme aux réglementations comme le RGPD ?",
-      answer: "Oui, utiliser une solution de cybersécurité moderne comme la nôtre est un excellent moyen de répondre à vos obligations de protection des données imposées par le RGPD. Vous renforcez ainsi la protection des données personnelles que vous manipulez, un point de contrôle majeur lors d'audits.",
-    },
-    {
-      question: "Comment gérez-vous les alertes ? Dois-je faire quelque chose ?",
-      answer: "C'est là toute la puissance de notre accompagnement. En cas d'alerte critique, nos équipes techniques sont immédiatement notifiées. Nous analysons la situation, levons le doute, et intervenons si nécessaire. Vous n'avez aucune alerte technique à gérer : nous nous occupons de tout pour vous laisser l'esprit libre.",
-    },
-    {
-      question: "Est-ce compatible avec tous mes logiciels métier ?",
-      answer: "Oui, notre solution est conçue pour être transparente avec les applications métier courantes (Sage, EBP, outils de caisse, CRM, etc.). Elle surveille les comportements malveillants sans interférer avec le fonctionnement légitime de vos outils professionnels.",
+      question: "La double authentification est-elle comprise dans Sérénité ?",
+      answer:
+        "Oui, dans [Sérénité Complète](/serenite), avec la sensibilisation de vos équipes à l'hameçonnage et la réponse à incident cyber. Elle n'est pas comprise dans Sérénité Essentiel, qui couvre la protection EDR, la supervision et la maintenance préventive automatisée.",
     },
   ],
 
-  incidentResponse: {
-    surtitle: "Quand l'attaque a déjà eu lieu",
-    title: "Réponse à incident & remédiation",
-    intro: "Une cyberattaque ne s'arrête pas à la prévention. Lorsqu'un incident survient (ransomware, intrusion, compte compromis, site piraté), notre équipe intervient pour reprendre le contrôle, par une intervention sur site ou à distance selon l'urgence. TRINEXTA pilote l'ensemble des opérations de remédiation et reste votre interlocuteur unique jusqu'au retour à la normale.",
-    items: [
-      {
-        title: "Intervention d'urgence sur site",
-        desc: "Déplacement dans toute l'Île-de-France pour prendre en charge un incident en cours ou avéré.",
-      },
-      {
-        title: "Confinement & isolation",
-        desc: "Isolation des postes touchés, blocage des comptes compromis, coupure des accès pour stopper la propagation.",
-      },
-      {
-        title: "Investigation",
-        desc: "Analyse de l'origine, de la méthode d'attaque et de l'étendue de la compromission, dans le respect de l'intégrité des preuves.",
-      },
-      {
-        title: "Éradication de la menace",
-        desc: "Suppression du code malveillant, réinstallation, application des correctifs, réinitialisation des accès et des identités.",
-      },
-      {
-        title: "Restauration & reprise d'activité",
-        desc: "Vérification et restauration des sauvegardes, validation des services, contrôles de sécurité avant remise en production.",
-      },
-      {
-        title: "Durcissement post-incident",
-        desc: "Renforcement des protections et recommandations pour éviter la récidive.",
-      },
-    ],
-    ctaLabel: "Signaler un incident",
-    ctaHref: "/charte-assistance",
-    planHref: "/plan-reponse-incidents-securite",
-  },
-
-  expertise: {
-    surtitle: "Veille permanente",
-    title: "Une expertise à jour",
-    intro: "La menace évolue chaque jour ; notre expertise aussi. Nos équipes maintiennent une veille active en sécurité numérique au travers de :",
-    items: [
-      "les bulletins et alertes du CERT-FR et de l'ANSSI, ainsi que les publications de Cybermalveillance.gouv.fr ;",
-      "les avis de sécurité de nos éditeurs partenaires (SentinelOne, Sophos, Bitdefender, Microsoft) ;",
-      "la formation continue et les certifications de nos techniciens (CompTIA Security+, etc.) ;",
-      "le suivi de médias spécialisés et de communautés professionnelles en cybersécurité.",
-    ],
-  },
-
   cta: {
-    line1: "Prêt à",
-    line2: "blinder",
-    line3: "vos systèmes ?",
-    description: "La cybersécurité n'est pas un luxe, c'est une nécessité stratégique. Ne laissez pas une faille informatique mettre en péril vos années de travail et votre activité. Nos experts sont prêts à auditer votre niveau de protection actuel et à mettre en place le bouclier dont vous avez besoin.",
-    buttonText: "Sécuriser mon entreprise",
-    buttonHref: "/contact",
+    line1: "Où en est",
+    line2: "la sécurité",
+    line3: "de votre entreprise ?",
+    description:
+      "Un échange avec un technicien suffit pour repérer les urgences : postes sans protection, comptes sans double authentification, sauvegarde jamais testée. Ou appelez le 09 78 25 07 46.",
+    buttonText: "Faire le point sur ma sécurité",
+    buttonHref: "/contact#formulaire",
+  },
+
+  schemaOverride: {
+    name: "Cybersécurité pour TPE et PME",
+    serviceType: "Cybersécurité des postes et des comptes",
+    areaServed: ["Essonne", "Île-de-France"],
   },
 };

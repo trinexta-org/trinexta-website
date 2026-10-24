@@ -1,27 +1,10 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { REGIE_PILIERS } from "@/data/technicien-sous-regie"
 
-const pillars = [
-  {
-    title: "Support utilisateur",
-    subtitle: "Helpdesk (N1/N2)",
-    desc: "Prise en charge des demandes et incidents du quotidien rencontrés par vos collaborateurs : problèmes logiciels, difficultés de connexion, comptes utilisateurs, mots de passe, matériel ou lenteurs de poste.",
-    detail: "L'objectif : apporter des réponses rapides, claires et efficaces pour éviter que l'activité ne ralentisse.",
-  },
-  {
-    title: "Gestion de parc",
-    subtitle: "De proximité",
-    desc: "Préparation, installation, renouvellement et maintenance des postes de travail, ordinateurs portables, imprimantes et périphériques.",
-    detail: "Un accompagnement concret pour garder un parc informatique propre, fonctionnel et bien suivi.",
-  },
-  {
-    title: "Accompagnement de projets",
-    subtitle: "Support & Déploiement",
-    desc: "Renfort opérationnel pour vos projets de migration, de déploiement ou d'organisation du support : passage à Windows 11, migration Microsoft 365, installation de nouveaux équipements ou amélioration de votre outil de ticketing.",
-    detail: "Vous bénéficiez d'un appui fiable pour avancer plus vite et plus sereinement.",
-  },
-]
+const pillars = REGIE_PILIERS
+
 
 export function TechnicienPillars() {
   const [visible, setVisible] = useState(false)
@@ -51,9 +34,9 @@ export function TechnicienPillars() {
             style={{ transitionDelay: `${100 + i * 150}ms` }}
           >
             <div className="mb-6">
-              <h4 className="font-bold text-3xl text-foreground mb-2 group-hover:text-secondary-strong transition-colors">
+              <h3 className="font-bold text-3xl text-foreground mb-2 group-hover:text-secondary-strong transition-colors">
                 {pillar.title}
-              </h4>
+              </h3>
               <span className="text-secondary-strong text-base font-medium uppercase tracking-wider">
                 {pillar.subtitle}
               </span>
