@@ -3,49 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-
-export interface SubMenuItem {
-  label: string
-  href: string
-  disabled?: boolean
-}
-
-export interface MenuItem {
-  label: string
-  href: string
-  subMenu?: SubMenuItem[]
-}
-
-export const menuItems: MenuItem[] = [
-  { label: "Offre Sérénité", href: "/serenite" },
-  {
-    label: "Nos services",
-    href: "/infogerance",
-    subMenu: [
-      { label: "Infogérance", href: "/infogerance" },
-      { label: "Support informatique", href: "/support-informatique" },
-      { label: "Cybersécurité", href: "/cybersecurite" },
-      { label: "Sauvegarde", href: "/cloud-sauvegarde" },
-      { label: "Microsoft 365", href: "/microsoft-365" },
-      { label: "Téléphonie et réseau", href: "/solutions-metier" },
-      { label: "Interventions sur devis", href: "/services-annexes" },
-      { label: "Technicien en régie", href: "/technicien-sous-regie" },
-    ]
-  },
-  { label: "Cas clients", href: "/cas-clients" },
-  {
-    label: "Ressources",
-    href: "/blog",
-    subMenu: [
-      { label: "Blog", href: "/blog" },
-      { label: "Ordinateur ou compte piraté", href: "/charte-assistance" },
-      { label: "Niveaux de service", href: "/niveau-de-service" },
-      { label: "Plan de réponse aux incidents", href: "/plan-reponse-incidents-securite" },
-    ]
-  },
-  { label: "À propos", href: "/a-propos" },
-  { label: "Contact", href: "/contact" },
-]
+import { menuItems } from "@/data/navigation"
 
 export function Nav() {
   const pathname = usePathname()

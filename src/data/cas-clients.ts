@@ -272,7 +272,7 @@ export const caseClients: CaseClient[] = [
       },
       {
         label: "Sites web",
-        href: "/trinexta-studio",
+        href: "/cybersecurite",
         content:
           "Opérations initiales menées en maintenant les principaux sites accessibles, et préparation des vérifications nécessaires à une remédiation complète.",
       },

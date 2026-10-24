@@ -13,8 +13,8 @@ const NAVIGATION = [
   { name: "À propos", href: "/a-propos" },
   { name: "Nous rejoindre", href: "/nous-rejoindre" },
   { name: "Contact", href: "/contact" },
-  // Seul lien Studio du site IT, tant que trinexta-studio.fr n'est pas en ligne.
-  { name: "Création de sites : TRINEXTA Studio", href: "/trinexta-studio" },
+  // Seul lien Studio du site IT : la création de sites vit sur trinexta-studio.fr.
+  { name: "TRINEXTA Studio", href: "https://trinexta-studio.fr" },
 ];
 
 const SERVICES = [

@@ -15,6 +15,9 @@ const GOOGLE_ADS_ORIGINS = [
   "www.google.com",
 ] as const;
 
+/** Site de TRINEXTA Studio : création de sites, applications et audit SEO. */
+const STUDIO_URL = "https://trinexta-studio.fr";
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
@@ -65,23 +68,6 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        source: "/demos/(.*)",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: [
-              "default-src 'self'",
-              "img-src 'self' images.unsplash.com picsum.photos data:",
-              "script-src 'self' 'unsafe-inline'",
-              "style-src 'self' 'unsafe-inline' fonts.googleapis.com cdn.jsdelivr.net",
-              "font-src 'self' fonts.gstatic.com",
-              "connect-src 'self'",
-            ].join("; "),
-          },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
-        ],
-      },
     ];
   },
   async redirects() {
@@ -130,6 +116,15 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       { source: "/nos-clients", destination: "/cas-clients", statusCode: 301 },
+      // --- TRINEXTA Studio : création de sites et audit SEO, sur trinexta-studio.fr ---
+      { source: "/trinexta-studio", destination: STUDIO_URL, statusCode: 301 },
+      { source: "/audit-seo", destination: `${STUDIO_URL}/audit-seo`, statusCode: 301 },
+      { source: "/audit-seo/expert", destination: `${STUDIO_URL}/audit-seo`, statusCode: 301 },
+      { source: "/audit-seo/expert/succes", destination: `${STUDIO_URL}/audit-seo`, statusCode: 301 },
+      { source: "/audit-seo/expert/annulation", destination: `${STUDIO_URL}/audit-seo`, statusCode: 301 },
+      { source: "/cgv-audit-expert", destination: `${STUDIO_URL}/cgv-audit-expert`, statusCode: 301 },
+      // Démos métier : mêmes fichiers servis par trinexta-studio.fr (public/demos).
+      { source: "/demos/:fichier", destination: `${STUDIO_URL}/demos/:fichier`, statusCode: 301 },
       // --- Typo ---
       { source: "/contac", destination: "/contact", statusCode: 301 },
       // --- Articles de blog retirés -> page service ---
