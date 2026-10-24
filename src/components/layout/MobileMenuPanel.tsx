@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { X, ChevronDown } from "lucide-react"
 import { FocusTrap } from "focus-trap-react"
-import { menuItems } from "@/data/navigation"
+import { liensDe, menuItems } from "@/data/navigation"
 import { cn } from "@/lib/utils"
 import { usePresence } from "@/hooks/usePresence"
 import { HEADER_CTA } from "@/data/header-cta"
@@ -58,59 +58,68 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
 
           <div className="flex flex-col px-6 py-6 gap-2 overflow-y-auto">
             {menuItems.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href))
+              const isActive = liensDe(link).some(
+                (href) => pathname === href || (href !== "/" && pathname?.startsWith(href))
+              )
               const isSubOpen = openSubMenu === link.label
+
+              if (!link.groups) {
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href ?? "/"}
+                    onClick={onClose}
+                    className={cn(
+                      "py-3 text-base font-bold w-fit transition-all",
+                      isActive ? "text-secondary-strong border-b-2 border-secondary" : "text-primary"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              }
 
               return (
                 <div key={link.label} className="flex flex-col">
-                  <div className="flex items-center justify-between py-3 w-full">
-                    <Link
-                      href={link.href}
-                      onClick={onClose}
-                      className={cn(
-                        "text-base font-bold w-fit transition-all",
-                        isActive ? "text-secondary-strong border-b-2 border-secondary" : "text-primary"
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-
-                    {link.subMenu && (
-                      <button
-                        onClick={() => onToggleSubMenu(link.label)}
-                        className="p-2 -mr-2 text-primary hover:text-secondary-strong"
-                        aria-label="Déplier le sous-menu"
-                      >
-                        <ChevronDown className={cn("w-5 h-5 transition-transform", isSubOpen && "rotate-180")} />
-                      </button>
+                  <button
+                    type="button"
+                    onClick={() => onToggleSubMenu(link.label)}
+                    aria-expanded={isSubOpen}
+                    className={cn(
+                      "flex items-center justify-between py-3 w-full text-left text-base font-bold transition-colors",
+                      isActive ? "text-secondary-strong" : "text-primary"
                     )}
-                  </div>
+                  >
+                    {link.label}
+                    <ChevronDown className={cn("w-5 h-5 transition-transform", isSubOpen && "rotate-180")} aria-hidden="true" />
+                  </button>
 
-                  {link.subMenu && (
-                    <div
-                      className="grid transition-[grid-template-rows] duration-300 ease-in-out"
-                      style={{ gridTemplateRows: isSubOpen ? "1fr" : "0fr" }}
-                    >
-                      <div className={cn("overflow-hidden transition-opacity duration-300", isSubOpen ? "opacity-100" : "opacity-0")}>
-                        <div className="flex flex-col gap-3 pl-4 py-2 border-l-2 border-border mb-2">
-                          {link.subMenu.map((sub) => (
-                            sub.disabled ? (
-                              <span key={sub.label} className="text-sm font-medium text-muted-foreground">{sub.label}</span>
-                            ) : (
+                  <div
+                    className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                    style={{ gridTemplateRows: isSubOpen ? "1fr" : "0fr" }}
+                  >
+                    <div className={cn("overflow-hidden transition-opacity duration-300", isSubOpen ? "opacity-100" : "opacity-0")}>
+                      <div className="flex flex-col gap-4 pl-4 py-2 border-l-2 border-border mb-2">
+                        {link.groups.map((groupe) => (
+                          <div key={groupe.titre} className="flex flex-col gap-3">
+                            <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/80">
+                              {groupe.titre}
+                            </p>
+                            {groupe.items.map((sub) => (
                               <Link
-                                key={sub.label}
+                                key={sub.href}
                                 href={sub.href}
                                 onClick={onClose}
                                 className="text-sm font-semibold text-muted-foreground hover:text-secondary-strong transition-colors"
                               >
                                 {sub.label}
                               </Link>
-                            )
-                          ))}
-                        </div>
+                            ))}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               )
             })}

@@ -383,9 +383,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    inlineCss: true,
-  },
+  // inlineCss retiré (24/10/2026) : la feuille Tailwind fait ~170 Ko, inlinée deux fois
+  // par page (balise <style> + charge RSC) et renvoyée à chaque préchargement de lien.
+  // Une feuille externe est mise en cache une fois pour tout le site.
 };
 
 export default nextConfig;

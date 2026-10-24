@@ -14,21 +14,14 @@ export type HomeHeroSlide = {
 // Les titres des slides tournent et ne sont que des accroches.
 export const homeHeroH1 = "Prestataire informatique pour TPE et PME à Évry-Courcouronnes"
 
-// Les sous-titres reprennent les trois repères de l'accueil. Aucun prix ici :
-// les montants restent sur /serenite.
+// Message fixe (recommandation de la revue du 23/10) : une promesse, pas de défilement.
+// Aucun prix ici : les montants restent sur /serenite.
 export const homeHeroSlides: HomeHeroSlide[] = [
   {
-    title: "*Simplifiez* votre informatique au quotidien",
-    subtitle: "Un technicien titulaire pour votre entreprise, qui connaît vos locaux, vos postes et vos collaborateurs."
+    title: "Votre informatique *suivie.* Une équipe qui connaît votre entreprise.",
+    subtitle:
+      "Assistance aux collaborateurs, maintenance des postes et protection informatique : TRINEXTA accompagne les TPE et PME depuis Évry-Courcouronnes, à distance et sur site en Île-de-France.",
   },
-  {
-    title: "Une équipe *joignable* au quotidien",
-    subtitle: "Notre équipe support répond du lundi au vendredi, de 8 h 30 à 19 h, par téléphone, e-mail et prise en main à distance."
-  },
-  {
-    title: "*Gardez* une informatique fiable et bien suivie",
-    subtitle: "À distance ou dans vos locaux, selon le besoin : supervision, maintenance préventive et protection de vos postes."
-  }
 ]
 
 export const aproposHeroSlides = [
