@@ -13,32 +13,27 @@ const BASE_URL =
 // qu'une ancienne entree ne soit resservie apres mise en prod.
 export const revalidate = 3600;
 
+// Pages qui vendent ou qui aident uniquement. Pages juridiques, plan du site et
+// estimation (noindex tant qu'elle affiche des fourchettes de prix) restent en ligne,
+// accessibles par le pied de page, mais hors sitemap.
 const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}`, changeFrequency: "monthly", priority: 1 },
   { url: `${BASE_URL}/serenite`, changeFrequency: "monthly", priority: 0.9 },
-  { url: `${BASE_URL}/technicien-sous-regie`, changeFrequency: "monthly", priority: 0.9 },
-  { url: `${BASE_URL}/services-annexes`, changeFrequency: "monthly", priority: 0.9 },
-  { url: `${BASE_URL}/infogerance`, changeFrequency: "monthly", priority: 0.8 },
+  { url: `${BASE_URL}/technicien-sous-regie`, changeFrequency: "monthly", priority: 0.6 },
+  { url: `${BASE_URL}/services-annexes`, changeFrequency: "monthly", priority: 0.7 },
+  { url: `${BASE_URL}/infogerance`, changeFrequency: "monthly", priority: 0.9 },
   { url: `${BASE_URL}/cybersecurite`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/cloud-sauvegarde`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/support-informatique`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/microsoft-365`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/solutions-metier`, changeFrequency: "monthly", priority: 0.8 },
-  { url: `${BASE_URL}/estimation`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/cas-clients`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${BASE_URL}/a-propos`, changeFrequency: "monthly", priority: 0.6 },
   { url: `${BASE_URL}/nous-rejoindre`, changeFrequency: "monthly", priority: 0.5 },
   { url: `${BASE_URL}/contact`, changeFrequency: "yearly", priority: 0.6 },
   { url: `${BASE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
-  { url: `${BASE_URL}/plan-du-site`, changeFrequency: "yearly", priority: 0.3 },
-  { url: `${BASE_URL}/informations-juridiques`, changeFrequency: "yearly", priority: 0.3 },
-  { url: `${BASE_URL}/mentions-legales`, changeFrequency: "yearly", priority: 0.2 },
-  { url: `${BASE_URL}/cgv`, changeFrequency: "yearly", priority: 0.2 },
-  { url: `${BASE_URL}/confidentialite`, changeFrequency: "yearly", priority: 0.2 },
-  { url: `${BASE_URL}/cookies`, changeFrequency: "yearly", priority: 0.2 },
-  { url: `${BASE_URL}/accord-traitement-donnees`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${BASE_URL}/niveau-de-service`, changeFrequency: "yearly", priority: 0.3 },
-  { url: `${BASE_URL}/charte-assistance`, changeFrequency: "yearly", priority: 0.3 },
+  { url: `${BASE_URL}/charte-assistance`, changeFrequency: "yearly", priority: 0.5 },
   { url: `${BASE_URL}/plan-reponse-incidents-securite`, changeFrequency: "yearly", priority: 0.3 },
 ];
 
