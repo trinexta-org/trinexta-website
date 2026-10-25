@@ -29,6 +29,8 @@ interface Resultat {
 
 interface Reponse {
   diagnosticId: string | null
+  /** Jeton à présenter pour demander le rapport (une seule fois). */
+  jeton: string | null
   domaine: string
   resultats: Resultat[]
   compteurs: Record<StatutDiagnostic, number>
@@ -71,8 +73,7 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
   const champ = useRef<HTMLInputElement>(null)
 
   const [email, setEmail] = useState("")
-  const [consentement, setConsentement] = useState(false)
-  const [envoi, setEnvoi] = useState<"repos" | "envoi" | "envoye" | "non-envoye">("repos")
+  const [envoi, setEnvoi] = useState<"repos" | "envoi" | "envoye">("repos")
   const [erreurRapport, setErreurRapport] = useState<string | null>(null)
   const piegeRapport = useRef<HTMLInputElement>(null)
 
@@ -124,7 +125,7 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
   const envoyerRapport = async (e: FormEvent) => {
     e.preventDefault()
     setErreurRapport(null)
-    if (!reponse?.diagnosticId) return
+    if (!reponse?.diagnosticId || !reponse.jeton) return
     setEnvoi("envoi")
     try {
       const res = await fetch("/api/diagnostic/rapport", {
@@ -133,14 +134,14 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
         body: JSON.stringify({
           diagnosticId: reponse.diagnosticId,
           email: email.trim(),
-          recontact: consentement,
+          jeton: reponse.jeton,
           [CHAMP_PIEGE]: piegeRapport.current?.value ?? "",
         }),
       })
       const json = await res.json().catch(() => null)
       if (!res.ok) throw new Error(json?.error ?? "L'envoi a échoué. Réessayez.")
       await trackLeadConversion({ form_id: "diagnostic_securite" }, { email: email.trim() })
-      setEnvoi(json?.emailEnvoye === false ? "non-envoye" : "envoye")
+      setEnvoi("envoye")
     } catch (err) {
       setErreurRapport(
         err instanceof Error && err.message !== "Failed to fetch" ? err.message : "L'envoi a échoué. Réessayez."
@@ -296,14 +297,14 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
                 <p className="text-base leading-relaxed text-white/80">{T.rapportTexte}</p>
               </div>
 
-              {envoi === "envoye" || envoi === "non-envoye" ? (
+              {envoi === "envoye" ? (
                 <p role="status" className="flex-[1_1_380px] text-base font-semibold text-secondary-soft">
-                  {envoi === "envoye" ? T.rapportEnvoye : T.rapportNonEnvoye}
+                  {T.rapportEnvoye}
                 </p>
               ) : (
                 <form onSubmit={envoyerRapport} className="flex min-w-0 flex-[1_1_380px] flex-col gap-3">
                   <ChampPiege ref={piegeRapport} />
-                  {reponse.diagnosticId ? (
+                  {reponse.diagnosticId && reponse.jeton ? (
                     <>
                       <label htmlFor="diagnostic-email" className="text-sm font-semibold">
                         {T.rapportEmail}
@@ -318,25 +319,17 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
                         onChange={(e) => setEmail(e.target.value)}
                         className={cn(CHAMP, "flex-none border-background")}
                       />
-                      <label className="flex items-start gap-3 text-sm leading-relaxed text-white/85">
-                        <input
-                          type="checkbox"
-                          checked={consentement}
-                          onChange={(e) => setConsentement(e.target.checked)}
-                          className="mt-0.5 h-5 w-5 shrink-0 accent-secondary"
-                        />
-                        <span>
-                          {T.rapportConsentement}{" "}
-                          <a
-                            href="/confidentialite"
-                            target="_blank"
-                            rel="noopener"
-                            className="text-secondary-soft underline hover:text-white"
-                          >
-                            Données personnelles
-                          </a>
-                        </span>
-                      </label>
+                      <p className="text-sm leading-relaxed text-white/85">
+                        {T.rapportPrecision}{" "}
+                        <a
+                          href="/confidentialite"
+                          target="_blank"
+                          rel="noopener"
+                          className="text-secondary-soft underline hover:text-white"
+                        >
+                          Données personnelles
+                        </a>
+                      </p>
                     </>
                   ) : (
                     <p className="text-sm text-white/80">
@@ -345,7 +338,7 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
                     </p>
                   )}
                   <div className="flex flex-wrap gap-3">
-                    {reponse.diagnosticId && (
+                    {reponse.diagnosticId && reponse.jeton && (
                       <button
                         type="submit"
                         disabled={envoi === "envoi"}

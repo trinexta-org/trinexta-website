@@ -50,11 +50,12 @@ describe("schémas zod", () => {
     expect(diagnosticRequeteSchema.safeParse({}).success).toBe(false);
   });
 
-  it("envoie le rapport sans exiger l'accord au recontact, qui reste facultatif", () => {
-    const base = { diagnosticId: "clx123", email: " Jean@Exemple.fr " };
-    expect(rapportRequeteSchema.parse(base)).toMatchObject({ email: "jean@exemple.fr", recontact: false });
-    expect(rapportRequeteSchema.parse({ ...base, recontact: true }).recontact).toBe(true);
-    expect(rapportRequeteSchema.safeParse({ ...base, recontact: "true" }).success).toBe(false);
+  it("exige le jeton du résultat pour le rapport, sans case de consentement", () => {
+    const jeton = "A".repeat(43);
+    const base = { diagnosticId: "clx123", jeton, email: " Jean@Exemple.fr " };
+    expect(rapportRequeteSchema.parse(base)).toEqual({ diagnosticId: "clx123", jeton, email: "jean@exemple.fr" });
+    expect(rapportRequeteSchema.safeParse({ ...base, jeton: undefined }).success).toBe(false);
+    expect(rapportRequeteSchema.safeParse({ ...base, jeton: "court" }).success).toBe(false);
     expect(rapportRequeteSchema.safeParse({ ...base, email: "pas-un-email" }).success).toBe(false);
   });
 });

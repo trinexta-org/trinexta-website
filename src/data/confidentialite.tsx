@@ -39,13 +39,18 @@ const TRAITEMENTS: { finalite: string; base: string; duree: string }[] = [
     duree: "3 ans après le dernier contact",
   },
   {
-    finalite: "Diagnostic de sécurité gratuit d'un site (analyse passive et affichage du résultat)",
+    finalite: "Diagnostic de sécurité gratuit d'un site (analyse non intrusive et affichage du résultat)",
     base: "Mesures précontractuelles prises à votre demande ; intérêt légitime pour la protection de l'outil contre les abus",
     duree: "12 mois, puis suppression automatique",
   },
   {
-    finalite: "Envoi du rapport de diagnostic par e-mail ; recontact à son sujet si vous l'avez accepté",
-    base: "Mesures précontractuelles pour l'envoi du rapport ; consentement pour le recontact",
+    finalite: "Envoi du rapport de diagnostic par e-mail, à votre demande",
+    base: "Mesures précontractuelles prises à votre demande",
+    duree: "Adresse e-mail effacée 30 jours après l'envoi, sauf demande de rappel",
+  },
+  {
+    finalite: "Rappel par un technicien au sujet du diagnostic, si vous le demandez depuis le rapport",
+    base: "Consentement",
     duree: "3 ans après le dernier contact",
   },
   {
@@ -207,7 +212,7 @@ export const confidentialiteData: LegalData = {
               ["Facturation", "10 ans conformément aux obligations comptables et fiscales."],
               ["Données techniques", "12 mois maximum, sauf obligation légale contraire."],
               ["Estimations en ligne anonymes", "12 mois maximum, puis suppression automatique."],
-              ["Diagnostics de sécurité sans adresse e-mail", "12 mois maximum, puis suppression automatique."],
+              ["Diagnostics de sécurité", "12 mois maximum, puis suppression automatique ; adresse e-mail effacée 30 jours après l'envoi du rapport, sauf demande de rappel."],
               ["Cookies", "13 mois maximum ; votre choix sur les cookies est conservé 6 mois."],
             ].map(([label, desc], i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
@@ -275,9 +280,10 @@ export const confidentialiteData: LegalData = {
     {
       title: "Article 14 - Diagnostic de sécurité de site",
       paragraphs: [
-        "La page /diagnostic-securite analyse gratuitement un site internet à votre demande. L'analyse est passive : elle consulte uniquement ce que n'importe quel visiteur peut voir (page d'accueil et ses en-têtes, certificat, enregistrements DNS publics du domaine, présence de quelques fichiers sensibles), sans intrusion ni test d'attaque. Le contenu des fichiers éventuellement exposés n'est jamais conservé.",
-        "Sans demande de rapport, seuls l'adresse du site analysé et le résultat sont enregistrés, sans aucune donnée vous identifiant, pour 12 mois au plus avant suppression automatique (base légale : mesures précontractuelles prises à votre demande). Votre adresse IP n'est jamais conservée : elle est transformée de façon irréversible, en mémoire et temporairement, pour limiter le nombre d'analyses et prévenir les abus (base légale : intérêt légitime).",
-        "Si vous demandez le rapport par e-mail, votre adresse est enregistrée pour vous l'envoyer (base légale : mesures précontractuelles prises à votre demande). Vous pouvez en plus accepter, par une case facultative, d'être recontacté au sujet du diagnostic : cet accord est horodaté (base légale : consentement) et n'est pas nécessaire pour recevoir le rapport. L'e-mail est envoyé par Microsoft 365. Ces données sont conservées 3 ans après le dernier contact. Vous pouvez retirer votre accord à tout moment en écrivant à contact@trinexta.fr.",
+        "La page /diagnostic-securite analyse gratuitement un site internet à votre demande. L'analyse est non intrusive : elle consulte uniquement ce que n'importe quel visiteur peut voir (page d'accueil et ses en-têtes, certificat, enregistrements DNS publics du domaine) et vérifie la présence de quelques fichiers sensibles connus, sans en lire le contenu (seuls quelques octets du fichier d'historique de code, qui ne contient pas de secret, sont lus pour en confirmer le format). Aucune intrusion ni test d'attaque.",
+        "Sans demande de rapport, seuls l'adresse du site analysé et le résultat sont enregistrés, pour 12 mois au plus avant suppression automatique (base légale : mesures précontractuelles prises à votre demande). L'adresse d'un site peut vous identifier si vous êtes entrepreneur individuel. Votre adresse IP n'est jamais conservée : elle est transformée de façon irréversible, en mémoire et temporairement, pour limiter le nombre d'analyses et prévenir les abus (base légale : intérêt légitime).",
+        "Si vous demandez le rapport par e-mail, votre adresse est utilisée pour vous l'envoyer (base légale : mesures précontractuelles prises à votre demande), puis effacée 30 jours après l'envoi. L'e-mail est envoyé par Microsoft 365. Nous ne vous recontactons pas de nous-mêmes.",
+        "Le rapport contient un bouton « Être rappelé par un technicien ». Si vous l'utilisez, votre accord est horodaté (base légale : consentement), l'équipe TRINEXTA est prévenue, et votre adresse est conservée 3 ans après le dernier contact. Vous pouvez retirer votre accord à tout moment en écrivant à contact@trinexta.fr.",
       ],
     },
     {

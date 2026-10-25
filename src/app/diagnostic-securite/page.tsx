@@ -8,7 +8,7 @@ import { DIAGNOSTIC_PERIMETRE, DIAGNOSTIC_TEXTES, VERIFICATIONS } from "@/data/d
 
 const TITRE = "Diagnostic sécurité gratuit de votre site web"
 const DESCRIPTION =
-  "Testez gratuitement la sécurité de votre site : HTTPS, messagerie (SPF, DKIM, DMARC), en-têtes, cookies et fichiers exposés. Analyse passive en 30 secondes."
+  "Testez gratuitement la sécurité de votre site : HTTPS, messagerie (SPF, DKIM, DMARC), en-têtes, cookies et fichiers exposés. Analyse non intrusive en 30 s."
 
 export const metadata: Metadata = {
   title: TITRE,

@@ -79,8 +79,7 @@ export const diagnosticRequeteSchema = z.object({
 
 export const rapportRequeteSchema = z.object({
   diagnosticId: z.string().min(1).max(40),
+  /** Jeton remis avec le résultat : seul le navigateur qui a lancé l'analyse peut demander le rapport. */
+  jeton: z.string().regex(/^[A-Za-z0-9_-]{43}$/),
   email: z.string().trim().toLowerCase().max(254).pipe(z.email("Adresse e-mail invalide")),
-  // Facultatif : le rapport est envoyé dès qu'on donne son e-mail ; la case
-  // ne vaut qu'accord pour être recontacté (consentement libre, CNIL).
-  recontact: z.boolean().optional().default(false),
 });

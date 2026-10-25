@@ -4,13 +4,15 @@ import { DIAGNOSTIC_LIMITES } from "@/data/diagnostic";
 import { estRobot, limiteParIp, lireCorpsJson } from "@/lib/security/anti-abus";
 import { assertPublicUrl } from "@/lib/diagnostic/assert-public-url";
 import { compter, trierResultats } from "@/lib/diagnostic/analyses";
-import { diagnosticRequeteSchema, MESSAGE_DOMAINE_INVALIDE } from "@/lib/diagnostic/domaine";
+import { diagnosticRequeteSchema, domaineMessagerie, MESSAGE_DOMAINE_INVALIDE } from "@/lib/diagnostic/domaine";
+import { creerJeton } from "@/lib/diagnostic/jeton";
 import { lancerDiagnostic } from "@/lib/diagnostic/verifications";
 
-// Diagnostic sécurité gratuit : analyse passive d'un domaine public.
+// Diagnostic sécurité gratuit : analyse non intrusive d'un domaine public.
 // Protections : JSON strict, piège à robots, validation zod, adresse publique
 // vérifiée (et revérifiée à chaque connexion), 3 analyses par IP et par 24 h,
-// 10 analyses d'un même domaine par 24 h, erreurs génériques.
+// 10 analyses d'un même domaine (avec ou sans www.) par 24 h, comptées en base
+// dès le début de l'analyse, erreurs génériques.
 
 const TROP = "Vous avez atteint la limite de trois analyses par jour. Réessayez demain, ou appelez-nous.";
 const TROP_DOMAINE = "Ce site a déjà été analysé plusieurs fois aujourd'hui. Réessayez demain.";
@@ -24,7 +26,7 @@ export async function POST(request: Request) {
     }
     // Robot : réponse vide de forme valide, sans analyse ni enregistrement.
     if (estRobot(body)) {
-      return NextResponse.json({ diagnosticId: null, resultats: [], compteurs: null }, { status: 200 });
+      return NextResponse.json({ diagnosticId: null, jeton: null, resultats: [], compteurs: null }, { status: 200 });
     }
     // Garde large sur les tentatives (saisies invalides comprises), avant tout accès réseau.
     if (!limiteParIp(request, "diagnostic-essai", 20)) {
@@ -45,9 +47,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: INTROUVABLE }, { status: 422 });
     }
 
+    // Limite par domaine : x.fr et www.x.fr comptent ensemble, analyses en
+    // cours comprises (l'enregistrement est créé avant l'analyse).
+    const base = domaineMessagerie(domaine);
     const depuis = new Date(Date.now() - DIAGNOSTIC_LIMITES.fenetreMs);
     const dejaAnalyse = await prisma.diagnosticSecurite.count({
-      where: { domaine, createdAt: { gte: depuis } },
+      where: { domaine: { in: [base, `www.${base}`] }, createdAt: { gte: depuis } },
     });
     if (dejaAnalyse >= DIAGNOSTIC_LIMITES.parDomaine) {
       return NextResponse.json({ error: TROP_DOMAINE }, { status: 429 });
@@ -56,23 +61,37 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: TROP }, { status: 429 });
     }
 
-    const resultats = trierResultats(await lancerDiagnostic(domaine));
+    const { jeton, hash } = creerJeton();
+    const enregistre = await prisma.diagnosticSecurite.create({
+      data: { domaine, statut: "en-cours", resultats: [], jetonHash: hash },
+      select: { id: true },
+    });
+
+    let resultats;
+    try {
+      resultats = trierResultats(await lancerDiagnostic(domaine));
+    } catch (error) {
+      await prisma.diagnosticSecurite
+        .update({ where: { id: enregistre.id }, data: { statut: "erreur" } })
+        .catch(() => {});
+      throw error;
+    }
     const compteurs = compter(resultats);
 
-    // L'analyse reste affichée même si l'enregistrement échoue ; seul l'envoi
-    // du rapport par e-mail devient indisponible.
-    let diagnosticId: string | null = null;
+    // L'analyse reste affichée même si l'enregistrement du résultat échoue ;
+    // seul l'envoi du rapport devient indisponible.
+    let diagnosticId: string | null = enregistre.id;
     try {
-      const enregistre = await prisma.diagnosticSecurite.create({
-        data: { domaine, resultats: JSON.parse(JSON.stringify(resultats)) },
-        select: { id: true },
+      await prisma.diagnosticSecurite.update({
+        where: { id: enregistre.id },
+        data: { statut: "termine", resultats: JSON.parse(JSON.stringify(resultats)) },
       });
-      diagnosticId = enregistre.id;
     } catch (error) {
       console.error("[api/diagnostic] enregistrement", error);
+      diagnosticId = null;
     }
 
-    return NextResponse.json({ diagnosticId, domaine, resultats, compteurs });
+    return NextResponse.json({ diagnosticId, jeton: diagnosticId ? jeton : null, domaine, resultats, compteurs });
   } catch (error) {
     console.error("[api/diagnostic]", error);
     return NextResponse.json({ error: "Une erreur interne est survenue." }, { status: 500 });

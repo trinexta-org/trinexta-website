@@ -41,7 +41,7 @@ export const VERIFICATIONS = [
     id: "fichiers",
     titre: "Fichiers sensibles exposés",
     resume:
-      "Quelques fichiers qui ne devraient jamais être publics : historique de code, configuration, sauvegardes.",
+      "La présence de quelques fichiers sensibles connus, sans en lire le contenu : historique de code, configuration, sauvegardes.",
   },
   {
     id: "versions",
@@ -61,7 +61,7 @@ export const TITRES_VERIFICATION = Object.fromEntries(
 export const DIAGNOSTIC_LIEN = {
   name: "Diagnostic sécurité gratuit",
   href: "/diagnostic-securite",
-  desc: "Analyse passive d'un site : HTTPS, messagerie (SPF, DKIM, DMARC), en-têtes, cookies, fichiers exposés, versions affichées",
+  desc: "Analyse non intrusive d'un site : HTTPS, messagerie (SPF, DKIM, DMARC), en-têtes, cookies, fichiers exposés, versions affichées",
 } as const
 
 /** Limites d'usage (affichées sur la page et appliquées par l'API). */
@@ -86,7 +86,7 @@ export const DIAGNOSTIC_TEXTES = {
   placeholder: "votre-site.fr",
   bouton: "Analyser mon site",
   mention:
-    "Analyse passive, limitée à trois sites par jour et par visiteur. Le résultat s'affiche ici, sans inscription.",
+    "Analyse non intrusive, limitée à trois sites par jour et par visiteur. Le résultat s'affiche ici, sans inscription.",
   enCours: "Analyse en cours",
   ceQueCaVeutDire: "Ce que ça veut dire",
   ceQuIlFautFaire: "Ce qu'il faut faire",
@@ -95,14 +95,14 @@ export const DIAGNOSTIC_TEXTES = {
   rapportTexte:
     "Recevez le rapport détaillé par e-mail, ou soyez rappelé du lundi au vendredi, de 8 h 30 à 19 h. Nous vous disons ce qui est urgent, ce qui peut attendre, et ce que vous pouvez corriger vous-même.",
   rapportEmail: "Votre e-mail professionnel",
-  rapportConsentement: "J'accepte d'être recontacté par TRINEXTA au sujet de ce diagnostic.",
+  rapportPrecision:
+    "Nous ne vous recontactons pas de nous-mêmes : le rapport contient un bouton « Être rappelé par un technicien », à utiliser si vous le souhaitez.",
   rapportBouton: "Recevoir le rapport",
   rappelBouton: "Être rappelé",
+  boutonRappelEmail: "Être rappelé par un technicien",
   rapportEnvoye: "C'est envoyé : le rapport arrive dans votre boîte d'ici quelques minutes.",
-  rapportNonEnvoye:
-    "Votre demande est enregistrée, mais l'e-mail n'a pas pu partir. Nous vous recontactons avec le rapport.",
   conservation:
-    "Seuls l'adresse analysée et le résultat sont conservés. Votre e-mail ne l'est que si vous demandez le rapport.",
+    "Seuls l'adresse analysée et le résultat sont conservés. Votre e-mail ne l'est que si vous demandez le rapport : 30 jours, ou 3 ans si vous demandez à être rappelé.",
 } as const
 
 /** Ce que l'outil fait et ne fait pas (section explicative sous l'outil). */
@@ -111,7 +111,7 @@ export const DIAGNOSTIC_PERIMETRE = {
     "Lire la page d'accueil et ses en-têtes, comme un navigateur",
     "Interroger les enregistrements DNS publics de votre domaine",
     "Vérifier le certificat présenté par le serveur",
-    "Demander cinq adresses de fichiers sensibles, sans en conserver le contenu",
+    "Vérifier la présence de quelques fichiers sensibles connus, sans en lire le contenu",
   ],
   neFaitPas: [
     "Aucun test d'intrusion, aucune tentative de connexion",

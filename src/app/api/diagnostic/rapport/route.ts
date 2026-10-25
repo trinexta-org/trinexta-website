@@ -1,39 +1,27 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { DIAGNOSTIC_LIMITES, STATUTS, VERIFICATIONS } from "@/data/diagnostic";
+import { DIAGNOSTIC_LIMITES } from "@/data/diagnostic";
 import { TRINEXTA_CONTACT } from "@/data/contact-trinexta";
 import { sendMail } from "@/lib/mail";
 import { PRODUCTION_URL } from "@/lib/site";
 import { estRobot, limiteParEmail, limiteParIp, lireCorpsJson } from "@/lib/security/anti-abus";
 import { compter, trierResultats } from "@/lib/diagnostic/analyses";
 import { rapportRequeteSchema } from "@/lib/diagnostic/domaine";
-import { notificationEquipeHtml, rapportProspectHtml } from "@/lib/diagnostic/emails";
-import type { ResultatVerification } from "@/lib/diagnostic/types";
+import { rapportProspectHtml } from "@/lib/diagnostic/emails";
+import { creerJeton, jetonValide } from "@/lib/diagnostic/jeton";
+import { lireResultats } from "@/lib/diagnostic/resultats";
 
-// Envoi du rapport de diagnostic par e-mail. L'accord pour être recontacté est
-// facultatif et ne conditionne pas l'envoi du rapport.
+// Envoi du rapport de diagnostic par e-mail, à la demande du visiteur.
+// - Jeton exigé : seul le navigateur qui a lancé l'analyse peut demander le rapport.
+// - Un seul envoi par diagnostic (réservation atomique de rapportEnvoyeAt).
+// - Aucun accord au recontact ici : le rapport contient un bouton « Être rappelé »
+//   qui, seul, horodate consentAt et prévient l'équipe (/api/diagnostic/rappel).
 // Protections : JSON strict, piège à robots, validation zod, 5 demandes par IP
 // et 3 envois vers une même adresse par 24 h, erreurs génériques.
 
 const TROP = "Trop de demandes, réessayez demain.";
-const ID_VALIDES = new Set<string>(VERIFICATIONS.map((v) => v.id));
-const STATUTS_VALIDES = new Set<string>(STATUTS);
-
-/** Relit les résultats stockés en ne gardant que des entrées bien formées. */
-function lireResultats(valeur: unknown): ResultatVerification[] {
-  if (!Array.isArray(valeur)) return [];
-  return valeur.filter((r): r is ResultatVerification => {
-    if (!r || typeof r !== "object") return false;
-    const o = r as Record<string, unknown>;
-    return (
-      typeof o.id === "string" &&
-      ID_VALIDES.has(o.id) &&
-      typeof o.statut === "string" &&
-      STATUTS_VALIDES.has(o.statut) &&
-      ["titre", "constat", "risque", "action"].every((k) => typeof o[k] === "string")
-    );
-  });
-}
+const INTROUVABLE = "Analyse introuvable. Relancez l'analyse de votre site.";
+const DEJA_ENVOYE = "Le rapport de cette analyse a déjà été envoyé.";
 
 export async function POST(request: Request) {
   try {
@@ -42,7 +30,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
     }
     if (estRobot(body)) {
-      return NextResponse.json({ success: true, emailEnvoye: true }, { status: 200 });
+      return NextResponse.json({ success: true }, { status: 200 });
     }
     if (!limiteParIp(request, "diagnostic-rapport", DIAGNOSTIC_LIMITES.rapportParIp, DIAGNOSTIC_LIMITES.fenetreMs)) {
       return NextResponse.json({ error: TROP }, { status: 429 });
@@ -50,30 +38,40 @@ export async function POST(request: Request) {
 
     const valide = rapportRequeteSchema.safeParse(body);
     if (!valide.success) {
-      return NextResponse.json({ error: "Vérifiez votre adresse e-mail." }, { status: 400 });
+      const jetonEnCause = valide.error.issues.some((i) => i.path[0] !== "email");
+      return NextResponse.json(
+        { error: jetonEnCause ? INTROUVABLE : "Vérifiez votre adresse e-mail." },
+        { status: jetonEnCause ? 404 : 400 }
+      );
     }
-    const { diagnosticId, email, recontact } = valide.data;
+    const { diagnosticId, jeton, email } = valide.data;
 
     if (!limiteParEmail(email, "diagnostic-rapport", DIAGNOSTIC_LIMITES.rapportParEmail, DIAGNOSTIC_LIMITES.fenetreMs)) {
       return NextResponse.json({ error: TROP }, { status: 429 });
     }
 
     const diagnostic = await prisma.diagnosticSecurite.findUnique({ where: { id: diagnosticId } });
-    if (!diagnostic) {
-      return NextResponse.json({ error: "Analyse introuvable. Relancez l'analyse de votre site." }, { status: 404 });
+    // Même réponse pour un identifiant inconnu et un jeton faux : rien à deviner.
+    if (!diagnostic || diagnostic.statut !== "termine" || !jetonValide(jeton, diagnostic.jetonHash)) {
+      if (diagnostic?.rapportEnvoyeAt) {
+        return NextResponse.json({ error: DEJA_ENVOYE }, { status: 409 });
+      }
+      return NextResponse.json({ error: INTROUVABLE }, { status: 404 });
     }
 
-    // consentAt : horodatage de l'accord au recontact, seulement s'il a été donné.
-    await prisma.diagnosticSecurite.update({
-      where: { id: diagnosticId },
-      data: { email, consentAt: recontact ? new Date() : null },
+    // Réservation atomique : deux demandes simultanées ne peuvent pas envoyer deux rapports.
+    const rappel = creerJeton();
+    const reserve = await prisma.diagnosticSecurite.updateMany({
+      where: { id: diagnosticId, rapportEnvoyeAt: null },
+      data: { rapportEnvoyeAt: new Date(), email, jetonRappelHash: rappel.hash, jetonHash: null },
     });
+    if (reserve.count === 0) {
+      return NextResponse.json({ error: DEJA_ENVOYE }, { status: 409 });
+    }
 
     const resultats = trierResultats(lireResultats(diagnostic.resultats));
-    const compteurs = compter(resultats);
     const base = (process.env.NEXT_PUBLIC_SITE_URL ?? PRODUCTION_URL).replace(/\/+$/, "");
 
-    let emailEnvoye = true;
     try {
       await sendMail({
         to: email,
@@ -83,41 +81,26 @@ export async function POST(request: Request) {
           domaine: diagnostic.domaine,
           date: diagnostic.createdAt,
           resultats,
-          compteurs,
-          urlContact: `${base}/contact`,
+          compteurs: compter(resultats),
+          urlRappel: `${base}/diagnostic-securite/rappel?jeton=${rappel.jeton}`,
         }),
-      });
-      await prisma.diagnosticSecurite.update({
-        where: { id: diagnosticId },
-        data: { rapportEnvoyeAt: new Date() },
       });
     } catch (error) {
       console.error("[api/diagnostic/rapport] envoi au prospect", error);
-      emailEnvoye = false;
+      // Envoi échoué : on libère la réservation pour permettre un nouvel essai.
+      await prisma.diagnosticSecurite
+        .update({
+          where: { id: diagnosticId },
+          data: { rapportEnvoyeAt: null, email: null, jetonRappelHash: null, jetonHash: diagnostic.jetonHash },
+        })
+        .catch((e) => console.error("[api/diagnostic/rapport] libération", e));
+      return NextResponse.json(
+        { error: "L'envoi du rapport a échoué. Réessayez dans quelques minutes, ou appelez-nous." },
+        { status: 502 }
+      );
     }
 
-    // Notification interne, même destinataire que les demandes de contact :
-    // envoyée même si le rapport n'est pas parti, l'équipe doit recontacter.
-    try {
-      await sendMail({
-        to: process.env.CONTACT_TO_EMAIL || TRINEXTA_CONTACT.email,
-        replyTo: email,
-        subject: `Diagnostic sécurité · ${diagnostic.domaine} · ${compteurs["a-corriger"]} à corriger`,
-        html: notificationEquipeHtml({
-          domaine: diagnostic.domaine,
-          email,
-          diagnosticId,
-          compteurs,
-          resultats,
-          rapportEnvoye: emailEnvoye,
-          recontact,
-        }),
-      });
-    } catch (error) {
-      console.error("[api/diagnostic/rapport] notification équipe", error);
-    }
-
-    return NextResponse.json({ success: true, emailEnvoye });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[api/diagnostic/rapport]", error);
     return NextResponse.json({ error: "Une erreur interne est survenue." }, { status: 500 });

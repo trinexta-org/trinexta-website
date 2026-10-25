@@ -143,18 +143,26 @@ model AuditOrder {
   @@index([createdAt])
 }
 
-// Diagnostic sécurité gratuit lancé depuis /diagnostic-securite : analyse passive
-// d'un domaine. Anonyme par défaut (domaine et résultat seulement) ; email et
-// consentement horodaté uniquement si le visiteur demande le rapport.
-// Purge : scripts/purge-estimates.mjs (12 mois sans email, 3 ans après le dernier contact sinon).
+// Diagnostic sécurité gratuit lancé depuis /diagnostic-securite : analyse non
+// intrusive d'un domaine. Domaine et résultat seulement par défaut ; email si le
+// visiteur demande le rapport (effacé 30 jours après l'envoi), consentAt
+// seulement quand il clique « Être rappelé » dans le rapport.
+// Purge : scripts/purge-estimates.mjs.
 model DiagnosticSecurite {
   id              String    @id @default(cuid())
   domaine         String
+  /// "en-cours" pendant l'analyse (compte dans la limite par domaine), puis "termine" ou "erreur".
+  statut          String    @default("termine")
   resultats       Json
+  /// SHA-256 du jeton remis au navigateur avec le résultat ; exigé pour demander le rapport.
+  jetonHash       String?
+  /// SHA-256 du jeton du bouton « Être rappelé » de l'e-mail de rapport.
+  jetonRappelHash String?   @unique
   /// Prévu pour une limite durable par visiteur ; non renseigné tant que le sel
   /// du hachage change à chaque redémarrage (il ne servirait à rien).
   ipHash          String?
   email           String?
+  /// Accord au recontact : horodaté au clic sur « Être rappelé », jamais avant.
   consentAt       DateTime?
   rapportEnvoyeAt DateTime?
   createdAt       DateTime  @default(now())
