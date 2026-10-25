@@ -29,12 +29,12 @@ export async function lireCorpsJson(request: Request): Promise<unknown | null> {
   }
 }
 
-/** Limite d'envois par IP pour une route donnée. */
-export function limiteParIp(request: Request, route: string, max: number): boolean {
-  return checkRateLimit(`${route}:ip:${hashIp(getClientIp(request))}`, max);
+/** Limite d'envois par IP pour une route donnée (fenêtre de 10 minutes par défaut). */
+export function limiteParIp(request: Request, route: string, max: number, fenetreMs?: number): boolean {
+  return checkRateLimit(`${route}:ip:${hashIp(getClientIp(request))}`, max, fenetreMs);
 }
 
 /** Limite d'envois par adresse e-mail destinataire (empêche de bombarder une même boîte). */
-export function limiteParEmail(email: string, route: string, max: number): boolean {
-  return checkRateLimit(`${route}:email:${hashIp(email.trim().toLowerCase())}`, max);
+export function limiteParEmail(email: string, route: string, max: number, fenetreMs?: number): boolean {
+  return checkRateLimit(`${route}:email:${hashIp(email.trim().toLowerCase())}`, max, fenetreMs);
 }

@@ -121,7 +121,7 @@ Se connecter au Studio avec son compte Google ou GitHub sur [sanity.io](https://
 
 ## Purge des estimations (RGPD)
 
-Le tunnel `/estimation` stocke les parcours en base (tables `Estimate` / `EstimateEvent`). Les estimations anonymes (sans email) et les evenements orphelins de plus de 12 mois doivent etre purges automatiquement :
+Le tunnel `/estimation` stocke les parcours en base (tables `Estimate` / `EstimateEvent`). Les estimations anonymes (sans email) et les evenements orphelins de plus de 12 mois doivent etre purges automatiquement. Le meme script purge la table `DiagnosticSecurite` (diagnostic securite gratuit) : 12 mois sans email, 3 ans apres le dernier contact sinon :
 
 ```bash
 npm run purge:estimates

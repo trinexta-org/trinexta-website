@@ -142,3 +142,23 @@ model AuditOrder {
   @@index([status])
   @@index([createdAt])
 }
+
+// Diagnostic sécurité gratuit lancé depuis /diagnostic-securite : analyse passive
+// d'un domaine. Anonyme par défaut (domaine et résultat seulement) ; email et
+// consentement horodaté uniquement si le visiteur demande le rapport.
+// Purge : scripts/purge-estimates.mjs (12 mois sans email, 3 ans après le dernier contact sinon).
+model DiagnosticSecurite {
+  id              String    @id @default(cuid())
+  domaine         String
+  resultats       Json
+  /// Prévu pour une limite durable par visiteur ; non renseigné tant que le sel
+  /// du hachage change à chaque redémarrage (il ne servirait à rien).
+  ipHash          String?
+  email           String?
+  consentAt       DateTime?
+  rapportEnvoyeAt DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@index([createdAt])
+  @@index([domaine, createdAt])
+}

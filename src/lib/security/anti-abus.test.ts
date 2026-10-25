@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { getClientIp } from "@/lib/estimation/rate-limit"
+import { afterEach, describe, expect, it, vi } from "vitest"
+import { checkRateLimit, getClientIp } from "@/lib/estimation/rate-limit"
 import { estRobot, limiteParEmail, lireCorpsJson } from "@/lib/security/anti-abus"
 
 const requete = (headers: Record<string, string>, body?: string) =>
@@ -50,5 +50,29 @@ describe("limiteParEmail", () => {
     expect(limiteParEmail("Test@Exemple.fr", "test-quota", 2)).toBe(true)
     expect(limiteParEmail("test@exemple.fr", "test-quota", 2)).toBe(true)
     expect(limiteParEmail("TEST@exemple.fr", "test-quota", 2)).toBe(false)
+  })
+})
+
+describe("checkRateLimit : fenêtre propre à chaque clé", () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it("garde un quota sur 24 h au-delà des 10 minutes par défaut", () => {
+    vi.useFakeTimers()
+    const jour = 24 * 60 * 60 * 1000
+    expect(checkRateLimit("test-fenetre:a", 1, jour)).toBe(true)
+    vi.advanceTimersByTime(60 * 60 * 1000)
+    expect(checkRateLimit("test-fenetre:a", 1, jour)).toBe(false)
+    vi.advanceTimersByTime(jour)
+    expect(checkRateLimit("test-fenetre:a", 1, jour)).toBe(true)
+  })
+
+  it("conserve la fenêtre de 10 minutes par défaut", () => {
+    vi.useFakeTimers()
+    expect(checkRateLimit("test-fenetre:b", 1)).toBe(true)
+    expect(checkRateLimit("test-fenetre:b", 1)).toBe(false)
+    vi.advanceTimersByTime(11 * 60 * 1000)
+    expect(checkRateLimit("test-fenetre:b", 1)).toBe(true)
   })
 })
