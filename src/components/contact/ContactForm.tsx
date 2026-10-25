@@ -419,7 +419,7 @@ export default function ContactForm() {
           {isSubmitting ? "Envoi en cours…" : libelleBouton}
         </button>
         <p className="max-w-xs text-xs leading-relaxed text-muted-foreground">
-          Vos coordonnées servent uniquement à répondre à votre demande.{" "}
+          Vos coordonnées servent à répondre à votre demande et à en assurer le suivi dans notre outil de relation client.{" "}
           <Link href="/confidentialite" className="underline hover:text-primary">
             Confidentialité
           </Link>

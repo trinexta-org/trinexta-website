@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { ChampPiege } from "@/components/shared/ChampPiege";
 import { CHAMP_PIEGE } from "@/data/anti-abus";
+import Link from "next/link";
+import { NEWSLETTER_LIEN_DONNEES, NEWSLETTER_MENTION } from "@/data/newsletter";
 import { X, Send, Loader2, CheckCircle2 } from "lucide-react";
 import { usePresence } from "@/hooks/usePresence";
 
@@ -118,6 +120,12 @@ export function NewsletterModal() {
                   </>
                 )}
               </button>
+              <p className="text-xs text-primary/60 leading-relaxed">
+                {NEWSLETTER_MENTION}{" "}
+                <Link href={NEWSLETTER_LIEN_DONNEES.href} className="underline hover:text-primary">
+                  {NEWSLETTER_LIEN_DONNEES.label}
+                </Link>
+              </p>
             </form>
           )}
         </div>

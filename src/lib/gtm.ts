@@ -11,12 +11,16 @@ interface Tarteaucitron {
     gtagMore?: () => void;
   };
   job?: string[];
+  /** Services déclarés par tarteaucitron.services.js (chargé par init). */
+  services?: Record<string, { fallback?: () => void }>;
 }
 
 declare global {
   interface Window {
     dataLayer?: Array<{ event: string } & GtmEventData>;
     tarteaucitron?: Tarteaucitron;
+    /** Durée de conservation du choix, en jours (lue par tarteaucitron à chaque enregistrement). */
+    tarteaucitronForceExpire?: number;
     gtag?: (...args: unknown[]) => void;
   }
 }

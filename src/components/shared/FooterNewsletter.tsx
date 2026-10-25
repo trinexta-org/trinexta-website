@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { ChampPiege } from "@/components/shared/ChampPiege";
 import { CHAMP_PIEGE } from "@/data/anti-abus";
+import Link from "next/link";
+import { NEWSLETTER_LIEN_DONNEES, NEWSLETTER_MENTION } from "@/data/newsletter";
 import { ArrowRight, Mail, Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -111,6 +113,13 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
           {message}
         </p>
       )}
+
+      <p className={cn("mt-2 leading-snug text-white/55", compact ? "text-[10px]" : "text-xs")}>
+        {NEWSLETTER_MENTION}{" "}
+        <Link href={NEWSLETTER_LIEN_DONNEES.href} className="underline hover:text-white">
+          {NEWSLETTER_LIEN_DONNEES.label}
+        </Link>
+      </p>
     </div>
   );
 }

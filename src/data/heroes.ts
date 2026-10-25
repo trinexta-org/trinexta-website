@@ -76,6 +76,6 @@ export const blogHeroSlides = [
   },
   {
     title: "La technologie au service de *l'Humain*",
-    subtitle: "Retrouvez nos retours d'expérience, études de cas et conseils pour garantir une adoption technologique fluide par vos équipes."
+    subtitle: "Retrouvez nos retours d'expérience, études de cas et conseils pour faciliter l'adoption des outils par vos équipes."
   }
 ]

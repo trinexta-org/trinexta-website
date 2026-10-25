@@ -152,7 +152,7 @@ export const slaData: LegalData = {
     {
       title: "Article 5 - Interventions sur site",
       paragraphs: [
-        "Lorsque nécessaire, TRINEXTA peut intervenir sur site. Demi-journée : selon devis. Journée complète : à partir de 300 € HT. Toute intervention urgente peut faire l'objet d'une majoration spécifique. Les frais de déplacement peuvent être facturés séparément.",
+        "Lorsque nécessaire, TRINEXTA peut intervenir sur site. Demi-journée : selon devis. Journée complète : selon devis. Toute intervention urgente peut faire l'objet d'une majoration spécifique. Les frais de déplacement peuvent être facturés séparément.",
       ],
     },
     {
@@ -248,14 +248,6 @@ export const slaData: LegalData = {
       title: "Article 15 - Contact support",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
-        <span key="support">
-          <a
-            href="mailto:support@trinexta.fr"
-            className="text-secondary-strong hover:underline transition-colors"
-          >
-            support@trinexta.fr
-          </a>
-        </span>,
         <span key="contact">
           <a
             href="mailto:contact@trinexta.fr"
