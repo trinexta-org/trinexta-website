@@ -47,7 +47,7 @@ export function TechnicienPillars() {
             </p>
 
             <div className="pt-6 border-t border-border">
-              <p className="text-muted-foreground/70 text-sm leading-relaxed italic">
+              <p className="text-muted-foreground text-sm leading-relaxed italic">
                 {pillar.detail}
               </p>
             </div>

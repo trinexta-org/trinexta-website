@@ -29,17 +29,7 @@ export const planReponseIncidentsData: LegalData = {
           </p>
 
           <p>
-            <span className="text-primary font-semibold">Support :</span>{" "}
-            <a
-              href="mailto:support@trinexta.fr"
-              className="text-secondary-strong hover:underline transition-colors"
-            >
-              support@trinexta.fr
-            </a>
-          </p>
-
-          <p>
-            <span className="text-primary font-semibold">Contact :</span>{" "}
+            <span className="text-primary font-semibold">E-mail :</span>{" "}
             <a
               href="mailto:contact@trinexta.fr"
               className="text-secondary-strong hover:underline transition-colors"
@@ -120,8 +110,8 @@ export const planReponseIncidentsData: LegalData = {
         <div className="space-y-3 text-sm text-primary/70">
           <p>
             Avant toute manipulation d&apos;un disque ou d&apos;une machine
-            virtuelle, TRINEXTA garantit l&apos;intégrité et la recevabilité
-            des preuves :
+            virtuelle, TRINEXTA conserve les éléments de preuve et en assure la
+            traçabilité selon la méthode suivante :
           </p>
 
           <ul className="space-y-2">

@@ -12,16 +12,16 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export const metadata: Metadata = {
-  title: "Cas clients",
+  title: "Cas clients : infogérance et cybersécurité en PME",
   description:
-    "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers des cas clients concrets : cybersécurité, modernisation, cloud et réponse à incident.",
+    "Cas clients concrets de TRINEXTA : cybersécurité, modernisation du parc, migration cloud et réponse à incident pour des TPE et PME d'Île-de-France.",
   alternates: {
     canonical: "/cas-clients",
   },
   openGraph: {
-    title: "Cas clients | TRINEXTA",
+    title: "Cas clients : infogérance et cybersécurité en PME | TRINEXTA",
     description:
-      "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers des cas clients concrets : cybersécurité, modernisation, cloud et réponse à incident.",
+      "Cas clients concrets de TRINEXTA : cybersécurité, modernisation du parc, migration cloud et réponse à incident pour des TPE et PME d'Île-de-France.",
     url: "/cas-clients",
     type: "website",
     images: [
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cas clients | TRINEXTA",
+    title: "Cas clients : infogérance et cybersécurité en PME | TRINEXTA",
     description:
-      "Découvrez comment TRINEXTA sécurise, modernise et structure l'informatique des TPE et PME à travers des cas clients concrets : cybersécurité, modernisation, cloud et réponse à incident.",
+      "Cas clients concrets de TRINEXTA : cybersécurité, modernisation du parc, migration cloud et réponse à incident pour des TPE et PME d'Île-de-France.",
     images: ["/images/og-default.png"],
   },
 };

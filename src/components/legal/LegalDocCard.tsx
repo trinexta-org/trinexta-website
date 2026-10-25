@@ -17,7 +17,7 @@ export function LegalDocCard({ title, description, href }: LegalDocCardProps) {
         <h3 className="text-sm font-bold text-primary leading-snug">{title}</h3>
         <ArrowRight className="w-4 h-4 text-secondary-strong shrink-0 mt-0.5 transition-transform duration-300 group-hover:translate-x-1" />
       </div>
-      <p className="text-sm text-primary/60 leading-relaxed">{description}</p>
+      <p className="text-sm text-primary/80 leading-relaxed">{description}</p>
     </Link>
   )
 }

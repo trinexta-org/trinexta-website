@@ -24,7 +24,7 @@ export function Header() {
               <Mail className="h-3.5 w-3.5 stroke-[1.5]" />
               <span>contact@trinexta.fr</span>
             </a>
-            <Link href="/charte-assistance" className="flex items-center gap-1.5 rounded-full bg-secondary text-secondary-strong-foreground pl-2.5 pr-3 py-1 text-xs font-bold hover:bg-secondary/90 transition-colors">
+            <Link href="/charte-assistance" className="flex items-center gap-1.5 rounded-full bg-secondary-strong text-secondary-strong-foreground pl-2.5 pr-3 py-1 text-xs font-bold hover:bg-secondary-strong/90 transition-colors">
               <ShieldAlert className="h-3.5 w-3.5 stroke-[1.5]" />
               <span>Urgence cyber</span>
             </Link>

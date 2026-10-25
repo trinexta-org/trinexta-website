@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { ChampPiege } from "@/components/shared/ChampPiege";
 import { CHAMP_PIEGE } from "@/data/anti-abus";
+import Link from "next/link";
+import { NEWSLETTER_LIEN_DONNEES, NEWSLETTER_MENTION } from "@/data/newsletter";
 import { Container } from "@/components/layout/Container";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
@@ -79,7 +81,7 @@ export function NewsletterCTA() {
                 <button
                   type="submit"
                   disabled={status === "loading" || status === "success" || !email}
-                  className="absolute right-2 top-2 bottom-2 aspect-square bg-secondary text-white rounded-xl flex items-center justify-center hover:bg-secondary/90 transition-colors disabled:opacity-50 disabled:hover:bg-secondary"
+                  className="absolute right-2 top-2 bottom-2 aspect-square bg-secondary-strong text-white rounded-xl flex items-center justify-center hover:bg-secondary-strong/90 transition-colors disabled:opacity-50 disabled:hover:bg-secondary-strong"
                   aria-label="S'inscrire"
                 >
                   {status === "loading" ? (
@@ -104,7 +106,11 @@ export function NewsletterCTA() {
                 </div>
               )}
             </form>
-            <p className="text-white/70 text-xs mt-4 text-center lg:text-left leading-relaxed">              En renseignant votre adresse e-mail, vous acceptez de recevoir nos communications. Vous pourrez vous désabonner à tout moment.
+            <p className="text-white/70 text-xs mt-4 text-center lg:text-left leading-relaxed">
+              {NEWSLETTER_MENTION}{" "}
+              <Link href={NEWSLETTER_LIEN_DONNEES.href} className="underline hover:text-white">
+                {NEWSLETTER_LIEN_DONNEES.label}
+              </Link>
             </p>
           </div>
 

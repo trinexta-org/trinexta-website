@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Entrance } from "@/components/ui/Entrance";
@@ -34,14 +33,6 @@ export function ResultScreen({
   return (
     <Entrance direction="up">
       <div className="text-center">
-        <Image
-          src="/images/nexi/nexi3-avatar.png"
-          alt="Nexi, la mascotte Trinexta, pouces levés"
-          width={80}
-          height={80}
-          className="mx-auto mb-4 h-16 w-16 rounded-full border-2 border-secondary/40 object-cover md:h-20 md:w-20"
-        />
-
         <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
           Votre estimation
         </p>

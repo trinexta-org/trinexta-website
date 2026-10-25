@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Briefcase, TrendingUp, ShieldCheck } from "lucide-react";
+import { ArrowRight, Briefcase, Clock, ShieldCheck } from "lucide-react";
 import { Container } from "../layout/Container";
 
 export function BlogCasClientPromo() {
@@ -33,7 +33,7 @@ export function BlogCasClientPromo() {
 
             <Link 
               href="/cas-clients" 
-              className="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-secondary transition-all duration-300 shadow-lg hover:shadow-secondary/25"
+              className="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-secondary-strong transition-all duration-300 shadow-lg hover:shadow-secondary/25"
             >
               Explorer les Cas Clients <ArrowRight className="w-5 h-5" />
             </Link>
@@ -61,11 +61,11 @@ export function BlogCasClientPromo() {
 
             <div className="absolute -left-4 md:-left-12 top-10 bg-white/80 backdrop-blur-xl border border-secondary/20 p-4 rounded-2xl shadow-2xl flex items-center gap-4 animate-bounce hover:scale-105 transition-transform" style={{ animationDuration: '4s' }}>
               <div className="w-10 h-10 rounded-full bg-secondary/15 flex items-center justify-center shrink-0">
-                <TrendingUp className="w-5 h-5 text-secondary-strong" />
+                <Clock className="w-5 h-5 text-secondary-strong" />
               </div>
               <div>
-                <p className="text-primary/50 text-[10px] font-bold uppercase tracking-wider">Disponibilité</p>
-                <p className="text-primary font-black text-lg">99.9%</p>
+                <p className="text-primary/50 text-[10px] font-bold uppercase tracking-wider">Support</p>
+                <p className="text-primary font-black text-lg">Lun-ven, 8 h 30 à 19 h</p>
               </div>
             </div>
 
@@ -74,8 +74,8 @@ export function BlogCasClientPromo() {
                 <ShieldCheck className="w-5 h-5 text-green-600" />
               </div>
               <div>
-                <p className="text-primary/50 text-[10px] font-bold uppercase tracking-wider">Sécurité renforcée</p>
-                <p className="text-primary font-black text-lg">Zéro faille</p>
+                <p className="text-primary/50 text-[10px] font-bold uppercase tracking-wider">Sécurité</p>
+                <p className="text-primary font-black text-lg">Supervision des postes</p>
               </div>
             </div>
 

@@ -22,13 +22,14 @@ export const cgvData: LegalData = {
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
-        <span key="site"><a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.trinexta.fr</a></span>,
+        <span key="site"><a href="https://trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://trinexta.fr</a></span>,
       ],
     },
     {
       title: "Article 2 - Champ d'application",
       paragraphs: [
-        "Les présentes CGV s'appliquent à l'ensemble des prestations commercialisées par TRINEXTA auprès des professionnels et des particuliers, notamment : support informatique et assistance utilisateurs, infogérance, maintenance informatique, administration systèmes et réseaux, cybersécurité, services Microsoft 365 et services cloud, création et maintenance de sites internet, développement web et applications métier, hébergement web, applicatif et SaaS, référencement naturel (SEO) et référencement conversationnel (GEO), vente de matériel informatique et de licences logicielles, délégation de personnel informatique.",
+        "Les présentes CGV s'appliquent à l'ensemble des prestations commercialisées par TRINEXTA auprès de ses clients, notamment : support informatique et assistance utilisateurs, infogérance, maintenance informatique, administration systèmes et réseaux, cybersécurité, services Microsoft 365 et services cloud, création et maintenance de sites internet, développement web et applications métier, hébergement web, applicatif et SaaS, référencement naturel (SEO) et référencement conversationnel (GEO), vente de matériel informatique et de licences logicielles, délégation de personnel informatique.",
+        "TRINEXTA travaille principalement avec des entreprises et les présentes sont rédigées pour les clients professionnels. La demande d'un particulier peut être acceptée : elle fait l'objet d'un devis dédié, et les dispositions impératives du Code de la consommation s'appliquent et prévalent sur toute clause contraire des présentes.",
       ],
     },
     {
@@ -59,7 +60,7 @@ export const cgvData: LegalData = {
     {
       title: "Article 7 - Retard de paiement",
       paragraphs: [
-        "Tout retard de paiement entraîne automatiquement des pénalités de retard calculées selon la réglementation en vigueur, une indemnité forfaitaire de recouvrement de 40 €, la suspension des prestations et l'exigibilité immédiate des sommes restant dues.",
+        "Tout retard de paiement entraîne automatiquement des pénalités de retard au taux de refinancement de la Banque centrale européenne majoré de 10 points, une indemnité forfaitaire pour frais de recouvrement de 40 € (article L.441-10 du Code de commerce), la suspension des prestations et l'exigibilité immédiate des sommes restant dues.",
       ],
     },
     {

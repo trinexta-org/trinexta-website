@@ -9,12 +9,11 @@ import { OptionCard } from "./OptionCard";
 interface QuestionStepProps {
   question: EstimationQuestion;
   value: string | string[] | undefined;
-  avatar: string;
   onSelect: (optionId: string) => void;
   onContinue: () => void;
 }
 
-export function QuestionStep({ question, value, avatar, onSelect, onContinue }: QuestionStepProps) {
+export function QuestionStep({ question, value, onSelect, onContinue }: QuestionStepProps) {
   const selectedIds = Array.isArray(value) ? value : value ? [value] : [];
 
   return (
@@ -22,7 +21,7 @@ export function QuestionStep({ question, value, avatar, onSelect, onContinue }: 
       <fieldset className="border-0 p-0">
         <legend className="sr-only">{question.title}</legend>
 
-        <ChatBubble side="trinexta" avatar={avatar}>
+        <ChatBubble side="trinexta">
           <p className="font-serif text-lg font-bold text-primary md:text-xl">{question.title}</p>
           {question.subtitle && <p className="mt-1 text-sm text-muted-foreground">{question.subtitle}</p>}
         </ChatBubble>

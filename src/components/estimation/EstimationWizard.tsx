@@ -15,12 +15,6 @@ type WizardPhase = "questions" | "freetext" | "analyzing" | "result";
 
 const FIRST_QUESTION_ID = "effectif";
 
-/** Nexi accueille au début, varie ses poses pendant la conversation. */
-function nexiAvatar(index: number): string {
-  if (index <= 0) return "/images/nexi/nexi1-avatar.png";
-  return index % 2 === 1 ? "/images/nexi/nexi2-avatar.png" : "/images/nexi/nexi4-avatar.png";
-}
-
 /** Petite phrase d'accompagnement, à la place d'un pourcentage froid. */
 function stepMood(step: number, total: number): string {
   if (step >= total) return "La dernière ligne droite";
@@ -245,12 +239,12 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
       {/* Historique de la conversation */}
       {answeredIds.length > 0 && (
         <div className="mb-6 space-y-5">
-          {answeredIds.map((questionId, index) => {
+          {answeredIds.map((questionId) => {
             const label = answerLabel(questionId);
             if (!label) return null;
             return (
               <div key={questionId} className="space-y-2">
-                <ChatBubble side="trinexta" avatar={nexiAvatar(index)}>
+                <ChatBubble side="trinexta">
                   <p className="font-serif font-bold text-primary">
                     {ESTIMATION_QUESTIONS_BY_ID[questionId].title}
                   </p>
@@ -279,7 +273,6 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
           <QuestionStep
             question={ESTIMATION_QUESTIONS_BY_ID[currentId]}
             value={answers[currentId]}
-            avatar={nexiAvatar(currentIndex)}
             onSelect={handleSelect}
             onContinue={handleContinue}
           />
@@ -288,7 +281,6 @@ export function EstimationWizard({ bookingsUrl }: { bookingsUrl?: string }) {
         {(phase === "freetext" || phase === "analyzing") && (
           <FreeTextStep
             analyzing={phase === "analyzing"}
-            avatar={nexiAvatar(sequence.length)}
             onSubmit={handleFreeTextSubmit}
             onSkip={handleSkip}
           />

@@ -46,7 +46,7 @@ export default function InformationsJuridiquesPage() {
         line3="défis technologiques"
         description="Trinexta by Trustech IT Support simplifie et sécurise votre informatique. Un accompagnement fiable, souple et adapté à votre performance."
         ctaLabel="En savoir plus"
-        ctaHref="/nos-offres"
+        ctaHref="/serenite"
       />
     </main>
   )
