@@ -1,4 +1,5 @@
 import type { ServicePageProps } from "@/components/services/ServicePage";
+import { DIAGNOSTIC_LIEN } from "@/data/diagnostic";
 
 // Page /cybersecurite : textes de la fiche 06 du dossier final (23/10/2026).
 // Aucun prix ici : les montants vivent uniquement sur /serenite.
@@ -19,6 +20,10 @@ export const cybersecuriteData: ServicePageProps = {
     secondaryCta: {
       text: "Je pense avoir été piraté",
       href: "/charte-assistance",
+    },
+    tertiaryLink: {
+      text: "Tester gratuitement la sécurité de votre site web",
+      href: DIAGNOSTIC_LIEN.href,
     },
   },
 

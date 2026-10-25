@@ -107,6 +107,8 @@ export interface ServicePageProps {
     ctaText: string;
     ctaHref: string;
     secondaryCta?: CtaLink;
+    /** Lien discret sous les boutons (ex. outil gratuit). */
+    tertiaryLink?: CtaLink;
   };
 
   problem: {
@@ -821,6 +823,17 @@ export function ServicePage({
                 </Button>
               )}
             </div>
+
+            {hero.tertiaryLink && (
+              <p className="mt-5 text-sm md:text-base">
+                <Link
+                  href={hero.tertiaryLink.href}
+                  className="text-white/80 underline underline-offset-4 hover:text-white"
+                >
+                  {hero.tertiaryLink.text}
+                </Link>
+              </p>
+            )}
           </div>
         </Container>
       </ViewportHero>

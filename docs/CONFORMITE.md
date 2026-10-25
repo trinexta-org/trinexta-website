@@ -26,7 +26,7 @@
 | Texte | URL | Fichier source | Dernière mise à jour | Conforme |
 |---|---|---|---|---|
 | Mentions légales | /mentions-legales | `src/data/mentions-legales.tsx` | 25/10/2026 (#356) | Oui : directeur de la publication nommé, « RCS Évry 942 020 082 », hébergeur, disponibilité en moyens raisonnables |
-| Politique de confidentialité | /confidentialite | `src/data/confidentialite.tsx` | 25/10/2026 (#356) | Oui : tableau finalité / base / durée, sous-traitants nommés avec pays, transferts, mesure d'audience |
+| Politique de confidentialité | /confidentialite | `src/data/confidentialite.tsx` | 25/10/2026 (#356, puis diagnostic sécurité : article 14) | Oui : tableau finalité / base / durée, sous-traitants nommés avec pays, transferts, mesure d'audience |
 | Politique cookies | /cookies | `src/data/cookies.tsx` | 25/10/2026 (#356) | Oui : liste des traceurs réels, outils non utilisés retirés |
 | CGV | /cgv | `src/data/cgv.tsx` | 25/10/2026 | Oui pour les professionnels : pénalités taux BCE + 10 points, indemnité 40 €. Particuliers : acceptés sur devis dédié, Code de la consommation prévalant (relecture juriste à prévoir, écart E4) |
 | Engagements de service, plan de réponse aux incidents, accord de traitement des données | /niveau-de-service, /plan-reponse-incidents-securite, /accord-traitement-donnees | `src/data/sla.tsx`, `plan-reponse-incidents.tsx`, `dpa.tsx` | 25/10/2026 (#356) | Oui : plus de tarif public, plus d'adresse support@, plus de « garantir » |
@@ -39,6 +39,8 @@
 | Newsletter (pied de page, blog, fenêtre du blog) | E-mail | Envoi de la newsletter | Consentement, double opt-in | Jusqu'à la désinscription | Désinscription par lien ; adresses désinscrites conservées sans durée (E2) | Microsoft 365 (envoi) | `POST /api/newsletter`, `POST /api/newsletter/confirm`, `GET /api/newsletter/unsubscribe`, table `Subscriber` |
 | Simulateur d'estimation (anonyme) | Réponses au questionnaire, description libre | Estimation, statistiques | Intérêt légitime | 12 mois puis suppression | Script `scripts/purge-estimates.mjs` existant, **planification non vérifiée** (E3) | Anthropic (analyse IA de la description) | `POST /api/estimation`, `/events`, `/analyze`, table `Estimate` |
 | Demande de rappel après estimation | Prénom, nom, e-mail, téléphone, entreprise, consentement horodaté | Recontacter le prospect, envoyer l'estimation détaillée | Consentement (case à cocher) | 3 ans après le dernier contact | **Non appliquée** (E1) | Équipe TRINEXTA, Microsoft 365 | `POST /api/estimation/lead`, table `Estimate` |
+| Diagnostic sécurité gratuit (anonyme) | Domaine analysé, résultat des 6 vérifications (aucune donnée identifiante ; contenu des fichiers sondés jamais conservé) | Afficher le résultat, permettre l'envoi du rapport | Mesures précontractuelles ; intérêt légitime pour la limite d'usage (IP hachée en mémoire, jamais stockée) | 12 mois puis suppression | Script `scripts/purge-estimates.mjs` étendu, **planification non vérifiée** (E3) | Aucun | `POST /api/diagnostic`, table `DiagnosticSecurite` |
+| Rapport de diagnostic par e-mail | E-mail, consentement horodaté, date d'envoi du rapport | Envoyer le rapport, recontacter à son sujet | Consentement (case non cochée, obligatoire pour l'envoi) | 3 ans après le dernier contact (envoi du rapport ou consentement) | Même script, **planification non vérifiée** (E3) | Équipe TRINEXTA (notification vers `CONTACT_TO_EMAIL`), Microsoft 365 ; LeadSynch si le widget capture ce formulaire (non vérifié, E12) | `POST /api/diagnostic/rapport`, table `DiagnosticSecurite` |
 | Widget LeadSynch (chat et capture des formulaires) | Messages du chat, champs des formulaires soumis | Gestion de la relation client | Mesures précontractuelles | 3 ans après le dernier contact | Gérée dans LeadSynch, non vérifiée | LeadSynch (Vercel, Render, base sur notre VPS OVH) | Script `leadsynch-api.onrender.com/.../chat.js` dans `src/app/layout.tsx` |
 
 ## 4. Traceurs
@@ -95,6 +97,21 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 | `POST /api/estimation/events` | Non | Oui | Sans objet | Non | Non | zod |
 | `POST /api/estimation/analyze` | Non | Oui | Sans objet | Non | Non | zod, sortie IA bornée |
 | `POST /api/estimation/lead` | Oui (estimation détaillée) | 5 | 3 | Oui | Oui | zod, estimation existante requise |
+| `POST /api/diagnostic` | Non | 3 analyses par 24 h (et 20 tentatives par 10 min, saisies invalides comprises) ; 10 analyses d'un même domaine par 24 h, comptées en base | Sans objet | Oui | Oui | zod (nom de domaine public, ni IP, ni port, ni chemin), domaine résolu vers une IP publique |
+| `POST /api/diagnostic/rapport` | Oui (rapport au prospect + notification équipe) | 5 par 24 h | 3 par 24 h | Oui | Oui | zod, consentement `true` exigé, diagnostic existant requis, résultats relus en liste blanche |
+
+### Appels sortants vers une adresse saisie (diagnostic sécurité)
+
+Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/audit-seo/`).
+
+| Contrôle | Mise en œuvre |
+|---|---|
+| Adresse publique avant la requête | `assertPublicUrl` : http(s) uniquement, ports 80 et 443, toutes les IP résolues publiques (v4 et v6, IPv4 embarquée comprise) |
+| Adresse publique à la connexion (rebinding DNS) | agent undici `dispatcherPublic` qui refait le contrôle sur les adresses réellement utilisées |
+| Redirections | 3 au plus, chacune re-vérifiée ; aucune pour les sondes de fichiers |
+| Certificat TLS | résolution, contrôle des IP, puis `tls.connect` vers l'IP vérifiée avec `servername` |
+| Volume et durée | page d'accueil lue sur 2 Mo au plus, sondes sur 512 octets, 8 s par requête, 20 s pour l'ensemble |
+| Méthodes | GET et HEAD uniquement, user-agent `TrinextaDiagnostic/1.0` ; aucune exécution de JavaScript, aucun envoi de formulaire |
 
 ### Dépendances et secrets
 
@@ -124,7 +141,7 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 | T1 | Lint | Auto (CI) | `npm run lint` | Chaque PR | 0 erreur, 14 avertissements anciens | 25/10/2026 |
 | T2 | Typage | Auto (CI) | `npm run typecheck` | Chaque PR | OK | 25/10/2026 |
 | T3 | Règles de revue | Auto (CI) | `npm run check:review-rules` | Chaque PR | OK (règle `WHITE_ON_SECONDARY` ajoutée) | 25/10/2026 |
-| T4 | Tests unitaires | Auto | `npx vitest run` | Chaque PR | 51 tests OK ; **pas lancés par la CI** (E9) | 25/10/2026 |
+| T4 | Tests unitaires | Auto | `npx vitest run` | Chaque PR | 161 tests OK, dont ceux du diagnostic (`src/lib/diagnostic/*.test.ts`) ; **pas lancés par la CI** (E9) | 25/10/2026 |
 | T5 | Build | Auto (CI) | `npm run build` | Chaque PR | OK en CI | 25/10/2026 |
 | T6 | Vulnérabilités | Manuel | `npm audit --omit=dev` | Chaque PR (à automatiser, E9) | voir section 6 | 25/10/2026 |
 | T7 | En-têtes de sécurité | Manuel | `curl -sI https://trinexta.fr/` | Trimestriel | OK sur staging | 25/10/2026 |
@@ -137,6 +154,8 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 | T14 | Clavier et menu mobile | Manuel + Playwright | Tab, Échap, 375 px | Trimestriel | OK (Échap ferme, focus rendu au burger, sous-menus repliés hors tabulation) | 25/10/2026 |
 | T15 | Données structurées | Manuel | test des résultats enrichis | Trimestriel | JSON-LD valides, FAQ visibles (82 questions) | 25/10/2026 |
 | T16 | Règles internes | Manuel | section 7 | Trimestriel | voir section 7 | 25/10/2026 |
+| T17 | Diagnostic sécurité : garde-fous et faux positifs | Tests | `src/lib/diagnostic/*.test.ts` : IP internes et ports refusés, redirection vers une IP interne refusée, site qui répond 200 partout sans faux positif, délai global, vérification en erreur isolée, consentement exigé | Chaque changement du diagnostic | OK | 25/10/2026 |
+| T18 | Diagnostic sécurité de bout en bout | Manuel | `/diagnostic-securite` sur staging : analyse d'un domaine réel, 4e analyse le même jour → 429, envoi du rapport et notification reçus | Après mise en production | **À faire** (réseau sortant indisponible en local) | |
 
 ## 9. Écarts connus
 
@@ -144,7 +163,7 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 |---|---|---|---|---|---|
 | E1 | Aucune purge des demandes de contact et de rappel alors que 3 ans sont annoncés | Important | Claude (script), Valoux (planification sur le VPS) | Novembre 2026 | Ouvert |
 | E2 | Adresses désinscrites de la newsletter conservées sans durée | Mineur | Claude | Avec E1 | Ouvert |
-| E3 | Purge des estimations : script présent, planification sur le VPS non vérifiée | Important | Valoux | Novembre 2026 | Ouvert |
+| E3 | Purge des estimations et des diagnostics sécurité : script présent (`npm run purge:estimates`), planification sur le VPS non vérifiée | Important | Valoux | Novembre 2026 | Ouvert |
 | E4 | CGV : particuliers acceptés sur devis sans section consommateurs détaillée | Important | Valoux (juriste) | Avant toute vente à un particulier | Ouvert |
 | E5 | Bandeau cookies servi par jsDelivr (IP des visiteurs transmise, CSP élargie) | Mineur | Claude | Décembre 2026 | Ouvert |
 | E6 | `'unsafe-inline'` dans la CSP des scripts | Mineur | Hyosua (`@trinexta/core`, nonces) | Avec le socle | Ouvert |
@@ -152,6 +171,8 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 | E8 | Article « Pourquoi externaliser votre support IT » (24/7, montants, cas fictif) encore publié ; redirection 301 dans la PR #354 | Bloquant (règle interne) | Valoux (dépublier dans Sanity, merger #354) | Dès que possible | Ouvert |
 | E9 | La CI ne lance ni les tests, ni `npm audit`, ni Lighthouse, axe, en-têtes ; déploiement possible CI rouge, pas de retour arrière en production | Important | Claude (workflow commun), Hyosua | Novembre 2026 | Ouvert |
 | E10 | Nginx : transmission de `X-Real-IP` à confirmer sur le VPS | Important | Valoux | 26/10/2026 | Ouvert |
+| E11 | Limites par IP du diagnostic en mémoire : remises à zéro à chaque redémarrage de PM2 (la limite par domaine, comptée en base, tient) | Mineur | Claude (avec `@trinexta/core`) | Décembre 2026 | Ouvert |
+| E12 | Capture du formulaire de rapport du diagnostic par le widget LeadSynch non vérifiée (la politique de confidentialité la mentionne par prudence) | Mineur | Valoux | Avec T18 | Ouvert |
 
 ## 10. Historique
 
@@ -162,3 +183,4 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 | 25/10/2026 | Conformité RGPD, cookies, mentions légales | PR #356, mise en production par #359 |
 | 25/10/2026 | SEO, accessibilité, charte | PR #357, mise en production par #359 |
 | 25/10/2026 | Forme sociale SASU, ligne particuliers des CGV, création de ce dossier | PR #359 et suivante |
+| 25/10/2026 | Diagnostic sécurité gratuit : nouvelle collecte, deux routes publiques, appels sortants bridés, politique de confidentialité (article 14) | PR feat/diagnostic-securite |

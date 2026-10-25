@@ -39,6 +39,16 @@ const TRAITEMENTS: { finalite: string; base: string; duree: string }[] = [
     duree: "3 ans après le dernier contact",
   },
   {
+    finalite: "Diagnostic de sécurité gratuit d'un site (analyse passive et affichage du résultat)",
+    base: "Mesures précontractuelles prises à votre demande ; intérêt légitime pour la protection de l'outil contre les abus",
+    duree: "12 mois, puis suppression automatique",
+  },
+  {
+    finalite: "Envoi du rapport de diagnostic par e-mail et recontact à son sujet",
+    base: "Consentement",
+    duree: "3 ans après le dernier contact",
+  },
+  {
     finalite: "Sécurité du site et prévention des abus",
     base: "Intérêt légitime",
     duree: "12 mois maximum",
@@ -98,7 +108,7 @@ export const confidentialiteData: LegalData = {
             { cat: "Données d'identification", items: ["Nom, prénom, fonction", "Société, numéro SIRET, numéro de TVA intracommunautaire"] },
             { cat: "Données de contact", items: ["Adresse e-mail, numéro de téléphone, adresse postale"] },
             { cat: "Données contractuelles", items: ["Contrats, devis, factures, bons d'intervention, historique des prestations"] },
-            { cat: "Données techniques", items: ["Adresse IP, journaux de connexion, type de navigateur, système d'exploitation, données de sécurité"] },
+            { cat: "Données techniques", items: ["Adresse IP, journaux de connexion, type de navigateur, système d'exploitation, données de sécurité", "Adresse du site soumis au diagnostic de sécurité et résultat de l'analyse"] },
             { cat: "Données de navigation", items: ["Pages consultées, durée de visite, sources de trafic, interactions avec le site"] },
           ].map(({ cat, items }) => (
             <div key={cat}>
@@ -146,8 +156,8 @@ export const confidentialiteData: LegalData = {
       title: "Article 4 - Destinataires des données",
       paragraphs: [
         "Les données sont accessibles aux collaborateurs habilités de TRINEXTA et aux sous-traitants listés à l'article 5, chacun pour ce qui le concerne, ainsi qu'aux autorités administratives ou judiciaires lorsque la loi l'impose.",
-        "Les informations saisies dans les formulaires du site et dans le chat sont transmises à LeadSynch, notre outil de gestion de la relation client, pour le suivi de votre demande (voir l'article 16).",
-        "Google reçoit des données uniquement si vous l'acceptez dans le bandeau cookies, pour la mesure d'audience (article 14) et la mesure des campagnes publicitaires (article 15). TRINEXTA ne vend jamais les données personnelles à des tiers.",
+        "Les informations saisies dans les formulaires du site et dans le chat sont transmises à LeadSynch, notre outil de gestion de la relation client, pour le suivi de votre demande (voir l'article 17).",
+        "Google reçoit des données uniquement si vous l'acceptez dans le bandeau cookies, pour la mesure d'audience (article 15) et la mesure des campagnes publicitaires (article 16). TRINEXTA ne vend jamais les données personnelles à des tiers.",
       ],
     },
     {
@@ -197,6 +207,7 @@ export const confidentialiteData: LegalData = {
               ["Facturation", "10 ans conformément aux obligations comptables et fiscales."],
               ["Données techniques", "12 mois maximum, sauf obligation légale contraire."],
               ["Estimations en ligne anonymes", "12 mois maximum, puis suppression automatique."],
+              ["Diagnostics de sécurité sans adresse e-mail", "12 mois maximum, puis suppression automatique."],
               ["Cookies", "13 mois maximum ; votre choix sur les cookies est conservé 6 mois."],
             ].map(([label, desc], i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-primary/70">
@@ -262,7 +273,15 @@ export const confidentialiteData: LegalData = {
       ],
     },
     {
-      title: "Article 14 - Mesure d'audience",
+      title: "Article 14 - Diagnostic de sécurité de site",
+      paragraphs: [
+        "La page /diagnostic-securite analyse gratuitement un site internet à votre demande. L'analyse est passive : elle consulte uniquement ce que n'importe quel visiteur peut voir (page d'accueil et ses en-têtes, certificat, enregistrements DNS publics du domaine, présence de quelques fichiers sensibles), sans intrusion ni test d'attaque. Le contenu des fichiers éventuellement exposés n'est jamais conservé.",
+        "Sans demande de rapport, seuls l'adresse du site analysé et le résultat sont enregistrés, sans aucune donnée vous identifiant, pour 12 mois au plus avant suppression automatique (base légale : mesures précontractuelles prises à votre demande). Votre adresse IP n'est jamais conservée : elle est transformée de façon irréversible, en mémoire et temporairement, pour limiter le nombre d'analyses et prévenir les abus (base légale : intérêt légitime).",
+        "Si vous demandez le rapport par e-mail, votre adresse est enregistrée avec votre consentement horodaté, pour vous envoyer le rapport et vous recontacter à son sujet (base légale : consentement). L'e-mail est envoyé par Microsoft 365. Ces données sont conservées 3 ans après le dernier contact. Vous pouvez retirer votre consentement à tout moment en écrivant à contact@trinexta.fr.",
+      ],
+    },
+    {
+      title: "Article 15 - Mesure d'audience",
       paragraphs: [
         "Avec votre accord (service « Google Analytics » du bandeau cookies), le site utilise Google Analytics 4, fourni par Google Ireland Ltd, pour savoir quelles pages sont consultées et comment le site est parcouru. Les données sont statistiques : pages vues, durée, source de la visite, type d'appareil. Google Analytics 4 ne conserve pas votre adresse IP. Les signaux Google et la personnalisation publicitaire sont désactivés.",
         "Ce traitement repose sur votre consentement. Les cookies Google Analytics durent 13 mois au plus. Les données peuvent être transférées à Google LLC aux États-Unis, transfert encadré par le cadre de protection des données UE - États-Unis (Data Privacy Framework).",
@@ -270,7 +289,7 @@ export const confidentialiteData: LegalData = {
       ],
     },
     {
-      title: "Article 15 - Mesure des campagnes publicitaires",
+      title: "Article 16 - Mesure des campagnes publicitaires",
       paragraphs: [
         "TRINEXTA diffuse des campagnes publicitaires via Google Ads. Pour savoir quelles annonces génèrent réellement des demandes, un identifiant de clic publicitaire fourni par Google est associé, si vous y avez consenti, à la validation d'un de nos formulaires. Ce traitement repose exclusivement sur votre consentement, recueilli via le bandeau de gestion des cookies, et peut être retiré à tout moment sans affecter la licéité du traitement déjà effectué.",
         "Tant que vous n'avez pas fait de choix, et si vous refusez, aucune balise Google n'est chargée : aucun cookie publicitaire n'est déposé, aucun identifiant de clic n'est associé à votre demande et aucune information n'est transmise à Google. Ce fonctionnement, appelé mode consentement de base, est décrit dans notre Politique de Cookies.",
@@ -279,21 +298,21 @@ export const confidentialiteData: LegalData = {
       ],
     },
     {
-      title: "Article 16 - Formulaires, chat et outil de gestion de la relation client",
+      title: "Article 17 - Formulaires, chat et outil de gestion de la relation client",
       paragraphs: [
-        "Les informations saisies dans les formulaires du site (contact, devis, estimation, newsletter) et les messages échangés dans le chat sont enregistrés dans LeadSynch, notre outil de gestion de la relation client, pour suivre votre demande et vous recontacter à son sujet. Sont concernés, selon le formulaire : nom, prénom, entreprise, adresse e-mail, numéro de téléphone et message.",
+        "Les informations saisies dans les formulaires du site (contact, devis, estimation, diagnostic de sécurité, newsletter) et les messages échangés dans le chat sont enregistrés dans LeadSynch, notre outil de gestion de la relation client, pour suivre votre demande et vous recontacter à son sujet. Sont concernés, selon le formulaire : nom, prénom, entreprise, adresse e-mail, numéro de téléphone et message.",
         "L'application LeadSynch est hébergée par Vercel Inc. et Render Services Inc. (États-Unis) ; sa base de données est hébergée sur notre serveur OVH en France. Le transfert hors Union européenne est encadré par les clauses contractuelles types de la Commission européenne prévues par les accords de traitement des données de ces hébergeurs.",
         "Ces données sont conservées 3 ans après le dernier contact. Le chat utilise un stockage de session du navigateur, effacé à la fermeture de l'onglet, décrit dans notre Politique de cookies.",
       ],
     },
     {
-      title: "Article 17 - Modification de la politique",
+      title: "Article 18 - Modification de la politique",
       paragraphs: [
         "TRINEXTA peut modifier la présente Politique de Confidentialité à tout moment afin de tenir compte des évolutions légales, réglementaires, techniques ou des nouveaux services proposés. Toute nouvelle version sera publiée sur le site.",
       ],
     },
     {
-      title: "Article 18 - Contact",
+      title: "Article 19 - Contact",
       paragraphs: [
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
