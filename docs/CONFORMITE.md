@@ -40,7 +40,7 @@
 | Simulateur d'estimation (anonyme) | Réponses au questionnaire, description libre | Estimation, statistiques | Intérêt légitime | 12 mois puis suppression | Script `scripts/purge-estimates.mjs` existant, **planification non vérifiée** (E3) | Anthropic (analyse IA de la description) | `POST /api/estimation`, `/events`, `/analyze`, table `Estimate` |
 | Demande de rappel après estimation | Prénom, nom, e-mail, téléphone, entreprise, consentement horodaté | Recontacter le prospect, envoyer l'estimation détaillée | Consentement (case à cocher) | 3 ans après le dernier contact | **Non appliquée** (E1) | Équipe TRINEXTA, Microsoft 365 | `POST /api/estimation/lead`, table `Estimate` |
 | Diagnostic sécurité gratuit (anonyme) | Domaine analysé, résultat des 6 vérifications (aucune donnée identifiante ; contenu des fichiers sondés jamais conservé) | Afficher le résultat, permettre l'envoi du rapport | Mesures précontractuelles ; intérêt légitime pour la limite d'usage (IP hachée en mémoire, jamais stockée) | 12 mois puis suppression | Script `scripts/purge-estimates.mjs` étendu, **planification non vérifiée** (E3) | Aucun | `POST /api/diagnostic`, table `DiagnosticSecurite` |
-| Rapport de diagnostic par e-mail | E-mail, consentement horodaté, date d'envoi du rapport | Envoyer le rapport, recontacter à son sujet | Consentement (case non cochée, obligatoire pour l'envoi) | 3 ans après le dernier contact (envoi du rapport ou consentement) | Même script, **planification non vérifiée** (E3) | Équipe TRINEXTA (notification vers `CONTACT_TO_EMAIL`), Microsoft 365 ; LeadSynch si le widget capture ce formulaire (non vérifié, E12) | `POST /api/diagnostic/rapport`, table `DiagnosticSecurite` |
+| Rapport de diagnostic par e-mail | E-mail, accord au recontact horodaté s'il est donné, date d'envoi du rapport | Envoyer le rapport ; recontacter seulement si accepté | Mesures précontractuelles pour l'envoi ; consentement (case facultative, non cochée) pour le recontact | 3 ans après le dernier contact (envoi du rapport ou consentement) | Même script, **planification non vérifiée** (E3) | Équipe TRINEXTA (notification vers `CONTACT_TO_EMAIL`), Microsoft 365 ; LeadSynch si le widget capture ce formulaire (non vérifié, E12) | `POST /api/diagnostic/rapport`, table `DiagnosticSecurite` |
 | Widget LeadSynch (chat et capture des formulaires) | Messages du chat, champs des formulaires soumis | Gestion de la relation client | Mesures précontractuelles | 3 ans après le dernier contact | Gérée dans LeadSynch, non vérifiée | LeadSynch (Vercel, Render, base sur notre VPS OVH) | Script `leadsynch-api.onrender.com/.../chat.js` dans `src/app/layout.tsx` |
 
 ## 4. Traceurs
@@ -98,7 +98,7 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 | `POST /api/estimation/analyze` | Non | Oui | Sans objet | Non | Non | zod, sortie IA bornée |
 | `POST /api/estimation/lead` | Oui (estimation détaillée) | 5 | 3 | Oui | Oui | zod, estimation existante requise |
 | `POST /api/diagnostic` | Non | 3 analyses par 24 h (et 20 tentatives par 10 min, saisies invalides comprises) ; 10 analyses d'un même domaine par 24 h, comptées en base | Sans objet | Oui | Oui | zod (nom de domaine public, ni IP, ni port, ni chemin), domaine résolu vers une IP publique |
-| `POST /api/diagnostic/rapport` | Oui (rapport au prospect + notification équipe) | 5 par 24 h | 3 par 24 h | Oui | Oui | zod, consentement `true` exigé, diagnostic existant requis, résultats relus en liste blanche |
+| `POST /api/diagnostic/rapport` | Oui (rapport au prospect + notification équipe) | 5 par 24 h | 3 par 24 h | Oui | Oui | zod, accord au recontact facultatif (`recontact`), diagnostic existant requis, résultats relus en liste blanche |
 
 ### Appels sortants vers une adresse saisie (diagnostic sécurité)
 
@@ -154,7 +154,7 @@ Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/aud
 | T14 | Clavier et menu mobile | Manuel + Playwright | Tab, Échap, 375 px | Trimestriel | OK (Échap ferme, focus rendu au burger, sous-menus repliés hors tabulation) | 25/10/2026 |
 | T15 | Données structurées | Manuel | test des résultats enrichis | Trimestriel | JSON-LD valides, FAQ visibles (82 questions) | 25/10/2026 |
 | T16 | Règles internes | Manuel | section 7 | Trimestriel | voir section 7 | 25/10/2026 |
-| T17 | Diagnostic sécurité : garde-fous et faux positifs | Tests | `src/lib/diagnostic/*.test.ts` : IP internes et ports refusés, redirection vers une IP interne refusée, site qui répond 200 partout sans faux positif, délai global, vérification en erreur isolée, consentement exigé | Chaque changement du diagnostic | OK | 25/10/2026 |
+| T17 | Diagnostic sécurité : garde-fous et faux positifs | Tests | `src/lib/diagnostic/*.test.ts` : IP internes et ports refusés, redirection vers une IP interne refusée, site qui répond 200 partout sans faux positif, délai global, vérification en erreur isolée, rapport envoyé sans exiger l'accord au recontact | Chaque changement du diagnostic | OK | 25/10/2026 |
 | T18 | Diagnostic sécurité de bout en bout | Manuel | `/diagnostic-securite` sur staging : analyse d'un domaine réel, 4e analyse le même jour → 429, envoi du rapport et notification reçus | Après mise en production | **À faire** (réseau sortant indisponible en local) | |
 
 ## 9. Écarts connus

@@ -125,10 +125,6 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
     e.preventDefault()
     setErreurRapport(null)
     if (!reponse?.diagnosticId) return
-    if (!consentement) {
-      setErreurRapport("Cochez la case pour recevoir le rapport.")
-      return
-    }
     setEnvoi("envoi")
     try {
       const res = await fetch("/api/diagnostic/rapport", {
@@ -137,7 +133,7 @@ export function DiagnosticOutil({ entete }: { entete: ReactNode }) {
         body: JSON.stringify({
           diagnosticId: reponse.diagnosticId,
           email: email.trim(),
-          consentement,
+          recontact: consentement,
           [CHAMP_PIEGE]: piegeRapport.current?.value ?? "",
         }),
       })

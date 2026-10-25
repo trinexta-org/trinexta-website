@@ -94,8 +94,9 @@ export function notificationEquipeHtml(params: {
   compteurs: Compteurs;
   resultats: ResultatVerification[];
   rapportEnvoye: boolean;
+  recontact: boolean;
 }): string {
-  const { domaine, email, diagnosticId, compteurs, resultats, rapportEnvoye } = params;
+  const { domaine, email, diagnosticId, compteurs, resultats, rapportEnvoye, recontact } = params;
   const lignes = resultats
     .map(
       (r) =>
@@ -108,7 +109,9 @@ export function notificationEquipeHtml(params: {
 <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;color:#0A233E">
   <h2 style="margin:0 0 12px">Diagnostic sécurité : demande de rapport</h2>
   <p style="margin:0 0 6px"><strong>Site analysé :</strong> ${escapeHtml(domaine)}</p>
-  <p style="margin:0 0 6px"><strong>E-mail :</strong> ${escapeHtml(email)} (accepte d'être recontacté)</p>
+  <p style="margin:0 0 6px"><strong>E-mail :</strong> ${escapeHtml(email)} (${
+    recontact ? "accepte d'être recontacté" : "n'a pas demandé à être recontacté : ne pas relancer"
+  })</p>
   <p style="margin:0 0 6px"><strong>Résultat :</strong> ${escapeHtml(ligneCompteurs(compteurs))}</p>
   <p style="margin:0 0 16px"><strong>Rapport :</strong> ${
     rapportEnvoye ? "envoyé au prospect" : "ÉCHEC de l'envoi, à transmettre à la main"

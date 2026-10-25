@@ -44,8 +44,8 @@ const TRAITEMENTS: { finalite: string; base: string; duree: string }[] = [
     duree: "12 mois, puis suppression automatique",
   },
   {
-    finalite: "Envoi du rapport de diagnostic par e-mail et recontact à son sujet",
-    base: "Consentement",
+    finalite: "Envoi du rapport de diagnostic par e-mail ; recontact à son sujet si vous l'avez accepté",
+    base: "Mesures précontractuelles pour l'envoi du rapport ; consentement pour le recontact",
     duree: "3 ans après le dernier contact",
   },
   {
@@ -277,7 +277,7 @@ export const confidentialiteData: LegalData = {
       paragraphs: [
         "La page /diagnostic-securite analyse gratuitement un site internet à votre demande. L'analyse est passive : elle consulte uniquement ce que n'importe quel visiteur peut voir (page d'accueil et ses en-têtes, certificat, enregistrements DNS publics du domaine, présence de quelques fichiers sensibles), sans intrusion ni test d'attaque. Le contenu des fichiers éventuellement exposés n'est jamais conservé.",
         "Sans demande de rapport, seuls l'adresse du site analysé et le résultat sont enregistrés, sans aucune donnée vous identifiant, pour 12 mois au plus avant suppression automatique (base légale : mesures précontractuelles prises à votre demande). Votre adresse IP n'est jamais conservée : elle est transformée de façon irréversible, en mémoire et temporairement, pour limiter le nombre d'analyses et prévenir les abus (base légale : intérêt légitime).",
-        "Si vous demandez le rapport par e-mail, votre adresse est enregistrée avec votre consentement horodaté, pour vous envoyer le rapport et vous recontacter à son sujet (base légale : consentement). L'e-mail est envoyé par Microsoft 365. Ces données sont conservées 3 ans après le dernier contact. Vous pouvez retirer votre consentement à tout moment en écrivant à contact@trinexta.fr.",
+        "Si vous demandez le rapport par e-mail, votre adresse est enregistrée pour vous l'envoyer (base légale : mesures précontractuelles prises à votre demande). Vous pouvez en plus accepter, par une case facultative, d'être recontacté au sujet du diagnostic : cet accord est horodaté (base légale : consentement) et n'est pas nécessaire pour recevoir le rapport. L'e-mail est envoyé par Microsoft 365. Ces données sont conservées 3 ans après le dernier contact. Vous pouvez retirer votre accord à tout moment en écrivant à contact@trinexta.fr.",
       ],
     },
     {

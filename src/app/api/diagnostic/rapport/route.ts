@@ -10,7 +10,8 @@ import { rapportRequeteSchema } from "@/lib/diagnostic/domaine";
 import { notificationEquipeHtml, rapportProspectHtml } from "@/lib/diagnostic/emails";
 import type { ResultatVerification } from "@/lib/diagnostic/types";
 
-// Envoi du rapport de diagnostic par e-mail, avec consentement au recontact.
+// Envoi du rapport de diagnostic par e-mail. L'accord pour être recontacté est
+// facultatif et ne conditionne pas l'envoi du rapport.
 // Protections : JSON strict, piège à robots, validation zod, 5 demandes par IP
 // et 3 envois vers une même adresse par 24 h, erreurs génériques.
 
@@ -49,17 +50,9 @@ export async function POST(request: Request) {
 
     const valide = rapportRequeteSchema.safeParse(body);
     if (!valide.success) {
-      const consentementManquant = valide.error.issues.some((i) => i.path[0] === "consentement");
-      return NextResponse.json(
-        {
-          error: consentementManquant
-            ? "Cochez la case pour recevoir le rapport."
-            : "Vérifiez votre adresse e-mail.",
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Vérifiez votre adresse e-mail." }, { status: 400 });
     }
-    const { diagnosticId, email } = valide.data;
+    const { diagnosticId, email, recontact } = valide.data;
 
     if (!limiteParEmail(email, "diagnostic-rapport", DIAGNOSTIC_LIMITES.rapportParEmail, DIAGNOSTIC_LIMITES.fenetreMs)) {
       return NextResponse.json({ error: TROP }, { status: 429 });
@@ -70,10 +63,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Analyse introuvable. Relancez l'analyse de votre site." }, { status: 404 });
     }
 
-    const consentAt = new Date();
+    // consentAt : horodatage de l'accord au recontact, seulement s'il a été donné.
     await prisma.diagnosticSecurite.update({
       where: { id: diagnosticId },
-      data: { email, consentAt },
+      data: { email, consentAt: recontact ? new Date() : null },
     });
 
     const resultats = trierResultats(lireResultats(diagnostic.resultats));
@@ -117,6 +110,7 @@ export async function POST(request: Request) {
           compteurs,
           resultats,
           rapportEnvoye: emailEnvoye,
+          recontact,
         }),
       });
     } catch (error) {
