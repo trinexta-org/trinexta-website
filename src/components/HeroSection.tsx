@@ -118,25 +118,23 @@ export function HeroSection() {
       footer={
         <>
           <div className="mt-6 md:mt-10 glass-panel rounded-xl p-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:w-fit">
-            <Link href={ACCUEIL_CTA.ctaHref} className="w-full sm:w-auto">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="w-full text-center text-white cursor-pointer shadow-lg hover:shadow-xl transition-all bg-secondary hover:bg-secondary/90"
-              >
-                Être rappelé
-              </Button>
-            </Link>
+            <Button
+              asChild
+              variant="secondary"
+              size="lg"
+              className="w-full sm:w-auto text-center shadow-lg hover:shadow-xl transition-all"
+            >
+              <Link href={ACCUEIL_CTA.ctaHref}>Être rappelé</Link>
+            </Button>
 
-            <Link href="/serenite#comparatif" className="w-full sm:w-auto">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full text-center text-white border-white hover:bg-white/10 cursor-pointer"
-              >
-                Comparer les formules
-              </Button>
-            </Link>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto text-center text-white border-white hover:bg-white/10"
+            >
+              <Link href="/serenite#comparatif">Comparer les formules</Link>
+            </Button>
           </div>
 
           <div className="mt-8 md:mt-10">

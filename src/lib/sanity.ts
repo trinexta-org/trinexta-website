@@ -1,6 +1,7 @@
 import { createImageUrlBuilder } from '@sanity/image-url';
 import { createClient, type PortableTextBlock } from "next-sanity";
 import { type CategorieArticle, LIBELLES_CATEGORIES } from "@/data/categories";
+import { ARTICLES_REDIRIGES } from "@/data/articles-rediriges";
 export type { CategorieArticle };
 export { LIBELLES_CATEGORIES };
 
@@ -68,6 +69,11 @@ export function urlForImage(source: ImageArticle) {
   return imageBuilder.image(source);
 }
 
+// Un article redirigé (301) ne doit jamais être lié depuis le site : la liste du
+// blog et les articles connexes l'excluent, comme le sitemap.
+const SLUGS_REDIRIGES = ARTICLES_REDIRIGES.map((a) => a.slug);
+const HORS_REDIRIGES = `!(slug.current in $slugsRediriges)`;
+
 export function formatDatePublication(date: string): string {
   return new Intl.DateTimeFormat("fr-FR", {
     day: "numeric",
@@ -81,6 +87,7 @@ export async function getArticles(options?: OptionsRecherchesArticles): Promise<
   const { debut = 0, limite, categorie, query: searchString, inclureFuturs = false } = options || {};
   const filtre = [
     `_type == "article"`,
+    HORS_REDIRIGES,
     categorie ? `categorie == $categorie` : null,
     !inclureFuturs ? `datePublication <= now()` : null
   ].filter(Boolean).join(" && ");
@@ -109,6 +116,7 @@ export async function getArticles(options?: OptionsRecherchesArticles): Promise<
 
   
   const data = await sanityClient.fetch(query, { 
+    slugsRediriges: SLUGS_REDIRIGES,
     categorie, 
     debut: !searchString ? debut : 0, 
     fin: !searchString ? fin : 10000 
@@ -159,7 +167,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
       seoTitre,
       seoDescription,
       contenu,
-      "related": *[_type == "article" && categorie == ^.categorie && slug.current != $slug && datePublication <= now()] | order(datePublication desc)[0...3] {
+      "related": *[_type == "article" && ${HORS_REDIRIGES} && categorie == ^.categorie && slug.current != $slug && datePublication <= now()] | order(datePublication desc)[0...3] {
         _id,
         titre,
         slug,
@@ -172,7 +180,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleComplet | n
         tempsLecture
       }
     }`,
-    { slug }
+    { slug, slugsRediriges: SLUGS_REDIRIGES }
   );
 }
 
@@ -188,6 +196,7 @@ export async function getArticlesConnexes(
 ): Promise<ResumeArticle[]> {
   const query = `*[
     _type == "article" && 
+    ${HORS_REDIRIGES} &&
     categorie == $categorie && 
     slug.current != $slug &&
     datePublication <= now()
@@ -202,7 +211,8 @@ export async function getArticlesConnexes(
     tempsLecture
   }`;
 
-  const params: Record<string, string | number> = { 
+  const params: Record<string, string | number | string[]> = { 
+    slugsRediriges: SLUGS_REDIRIGES,
     slug, 
     categorie, 
     limite 
@@ -212,7 +222,7 @@ export async function getArticlesConnexes(
 }
 
 export async function getArticlesPopulaires(limite: number = 3): Promise<ResumeArticle[]> {
-  const query = `*[_type == "article" && datePublication <= now()] | order(datePublication desc)[0...($limite)] {
+  const query = `*[_type == "article" && ${HORS_REDIRIGES} && datePublication <= now()] | order(datePublication desc)[0...($limite)] {
     _id,
     titre,
     slug,
@@ -224,5 +234,5 @@ export async function getArticlesPopulaires(limite: number = 3): Promise<ResumeA
     tempsLecture
   }`;
 
-  return sanityClient.fetch<ResumeArticle[]>(query, { limite });
+  return sanityClient.fetch<ResumeArticle[]>(query, { limite, slugsRediriges: SLUGS_REDIRIGES });
 }

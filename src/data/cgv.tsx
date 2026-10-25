@@ -22,7 +22,7 @@ export const cgvData: LegalData = {
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
-        <span key="site"><a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.trinexta.fr</a></span>,
+        <span key="site"><a href="https://trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://trinexta.fr</a></span>,
       ],
     },
     {

@@ -33,7 +33,7 @@ export function BlogCasClientPromo() {
 
             <Link 
               href="/cas-clients" 
-              className="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-secondary transition-all duration-300 shadow-lg hover:shadow-secondary/25"
+              className="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-secondary-strong transition-all duration-300 shadow-lg hover:shadow-secondary/25"
             >
               Explorer les Cas Clients <ArrowRight className="w-5 h-5" />
             </Link>

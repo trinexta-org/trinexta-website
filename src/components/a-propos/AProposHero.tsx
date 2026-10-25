@@ -3,9 +3,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import { HeroCarousel } from "@/components/ui/HeroCarousel"
-import { Heading, Text } from "@/components/ui/Typography"
+import { Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
-import { aproposHeroSlides } from "@/data/heroes"
+import { aproposHeroH1, aproposHeroSlides } from "@/data/heroes"
 import React from "react"
 
 const targetKeywords = ["simple,", "humaine", "utile", "humain", "centre", "simplifier", "soutenir"]
@@ -28,11 +28,15 @@ export function AProposHero() {
         />
       }
       overlays={<div className="absolute inset-0 bg-primary/70 lg:bg-primary/80" />}
-      
-      renderSlide={(slide, index, isActive) => (
+      label="Nos engagements"
+      header={
+        <h1 className="mb-4 text-sm md:text-base font-bold uppercase tracking-widest text-secondary-soft drop-shadow-md text-balance">
+          {aproposHeroH1}
+        </h1>
+      }
+      renderSlide={(slide) => (
         <div>
-          <Heading
-            as={isActive ? "h1" : "h2"}
+          <p
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-normal drop-shadow-xl text-white text-balance"
           >
             {slide.title.split(" ").map((word, i) => {
@@ -46,7 +50,7 @@ export function AProposHero() {
                   <span
                     className={
                       isHighlighted
-                        ? "text-secondary-strong inline-block mr-2 sm:mr-3"
+                        ? "text-secondary-soft inline-block mr-2 sm:mr-3"
                         : "text-white inline-block mr-2 sm:mr-3"
                     }
                   >
@@ -56,7 +60,7 @@ export function AProposHero() {
                 </React.Fragment>
               )
             })}
-          </Heading>
+          </p>
           <Text className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-md text-white/90 text-balance">
             {slide.subtitle}
           </Text>

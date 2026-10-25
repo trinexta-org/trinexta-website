@@ -35,7 +35,7 @@ export const mentionsLegalesData: LegalData = {
         "TVA intracommunautaire : FR81 942 020 082",
         "Téléphone : 09 78 25 07 46",
         <span key="email">E-mail : <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
-        <span key="site">Site internet : <a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.trinexta.fr</a></span>,
+        <span key="site">Site internet : <a href="https://trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://trinexta.fr</a></span>,
         "TRINEXTA accompagne les entreprises, collectivités, associations et professionnels dans leur informatique au quotidien. La société intervient principalement en Île-de-France dans les domaines du support informatique, de l'infogérance, de la maintenance, de la cybersécurité, des infrastructures systèmes et réseaux, des solutions cloud, de Microsoft 365, du développement web, de l'hébergement web et applicatif, des solutions SaaS, du conseil numérique, ainsi que de l'accompagnement au référencement naturel (SEO) et à la visibilité sur les moteurs conversationnels (GEO).",
       ],
     },

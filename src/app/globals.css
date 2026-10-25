@@ -13,7 +13,8 @@
   --phone-camera: #111111;
   --primary-foreground: #ffffff;
   --secondary: #5c92b8;
-  --secondary-strong: #3d6f96;
+  /* AA (>= 4,5:1) sur --surface-strong et avec le blanc ; #3d6f96 tombait a 4,28:1 sur les fonds bleutes */
+  --secondary-strong: #36678c;
   /* Accent sur fond sombre : --secondary tombe sous AA une fois le mesh pose */
   --secondary-soft: #8fbcda;
   --secondary-strong-foreground: #ffffff;
@@ -21,7 +22,8 @@
   --accent: #f0f5f9;
   --accent-foreground: #0a233e;
   --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  /* AA (>= 4,5:1) jusque sur --surface-strong ; #71717a tombait a 3,9:1 sur les fonds bleutes */
+  --muted-foreground: #5a5f69;
   --border: #e4e4e7;
   --input: #e4e4e7;
   --ring: #5c92b8;
