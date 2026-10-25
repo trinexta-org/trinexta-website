@@ -14,10 +14,18 @@ export function hashIp(ip: string): string {
 }
 
 export function getClientIp(request: Request): string {
-  // Derrière Nginx : la première IP de X-Forwarded-For est celle du client.
+  // Derrière Nginx. X-Real-IP vaut $remote_addr : posé par Nginx, le client ne
+  // peut pas le forger. Dans X-Forwarded-For, seule la dernière entrée est
+  // ajoutée par Nginx ($proxy_add_x_forwarded_for) ; les premières viennent du
+  // client et permettraient de changer d'IP apparente à chaque requête.
+  const realIp = request.headers.get("x-real-ip")?.trim();
+  if (realIp) return realIp;
   const forwarded = request.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0].trim();
-  return request.headers.get("x-real-ip") ?? "unknown";
+  if (forwarded) {
+    const derniere = forwarded.split(",").at(-1)?.trim();
+    if (derniere) return derniere;
+  }
+  return "unknown";
 }
 
 /**

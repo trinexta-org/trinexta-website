@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ChampPiege } from "@/components/shared/ChampPiege";
+import { CHAMP_PIEGE } from "@/data/anti-abus";
 import { ArrowRight, Mail, Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +15,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const piegeRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +28,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
       const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, [CHAMP_PIEGE]: piegeRef.current?.value ?? "" }),
       });
 
       const data = await response.json();
@@ -69,6 +72,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
       </p>
 
       <form onSubmit={handleSubmit} className="mt-2.5 flex min-w-0 gap-2">
+        <ChampPiege ref={piegeRef} />
         <label htmlFor={compact ? "footer-newsletter-mobile" : "footer-newsletter"} className="sr-only">
           Adresse e-mail
         </label>

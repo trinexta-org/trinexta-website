@@ -119,4 +119,10 @@ export const ARTICLES_REDIRIGES: { slug: string; destination: string }[] = [
     slug: "recruter-un-technicien-support-informatique-a-villejuif-sans-passer-par-un-cdi",
     destination: "/technicien-sous-regie",
   },
+  // Fusion du cluster « externalisation » (dossier final B08, octobre 2026) : le contenu
+  // utile est repris dans l'article « Externaliser son informatique ».
+  {
+    slug: "pourquoi-externaliser-votre-support-it-peut-transformer-votre-entreprise",
+    destination: "/blog/externaliser-son-informatique-le-calcul-gagnant-pour-la-rentabilite-de-votre-pme",
+  },
 ];

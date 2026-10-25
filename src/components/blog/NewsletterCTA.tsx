@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ChampPiege } from "@/components/shared/ChampPiege";
+import { CHAMP_PIEGE } from "@/data/anti-abus";
 import { Container } from "@/components/layout/Container";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
@@ -8,6 +10,7 @@ export function NewsletterCTA() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const piegeRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ export function NewsletterCTA() {
       const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, [CHAMP_PIEGE]: piegeRef.current?.value ?? "" }),
       });
 
       const data = await response.json();
@@ -59,6 +62,7 @@ export function NewsletterCTA() {
 
           <div className="w-full lg:w-1/2 max-w-md lg:max-w-none lg:flex-1">
             <form onSubmit={handleSubmit} className="relative flex flex-col gap-4">
+        <ChampPiege ref={piegeRef} />
               <div className="relative">
                 <input
                   type="email"
