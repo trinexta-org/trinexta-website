@@ -1,5 +1,53 @@
 import React from "react"
 import type { LegalData } from "./mentions-legales"
+import { CONSENT_COOKIE } from "./mesure-audience"
+
+interface TraceurSite {
+  nom: string
+  categorie: "Nécessaire" | "Mesure d'audience" | "Publicité"
+  emetteur: string
+  finalite: string
+  duree: string
+}
+
+/** Traceurs réellement déposés ou lus par trinexta.fr. À tenir à jour à chaque nouveau service. */
+const TRACEURS_SITE: TraceurSite[] = [
+  {
+    nom: CONSENT_COOKIE,
+    categorie: "Nécessaire",
+    emetteur: "TRINEXTA",
+    finalite: "Mémoriser vos choix sur les cookies",
+    duree: "6 mois",
+  },
+  {
+    nom: "Chat du site (stockage de session)",
+    categorie: "Nécessaire",
+    emetteur: "LeadSynch, notre outil de gestion de la relation client",
+    finalite: "Garder la conversation ouverte pendant votre visite ; aucun cookie",
+    duree: "Fermeture de l'onglet",
+  },
+  {
+    nom: "trinexta_newsletter_seen (stockage local)",
+    categorie: "Nécessaire",
+    emetteur: "TRINEXTA",
+    finalite: "Ne pas réafficher la fenêtre d'inscription à la newsletter une fois fermée",
+    duree: "Jusqu'à effacement des données du navigateur",
+  },
+  {
+    nom: "_ga, _ga_*",
+    categorie: "Mesure d'audience",
+    emetteur: "Google Analytics (Google Ireland Ltd)",
+    finalite: "Distinguer les visiteurs et mesurer la fréquentation des pages",
+    duree: "13 mois au plus",
+  },
+  {
+    nom: "_gcl_au",
+    categorie: "Publicité",
+    emetteur: "Google Ads (Google Ireland Ltd)",
+    finalite: "Rattacher une demande de contact à l'annonce cliquée (mesure des conversions)",
+    duree: "13 mois au plus",
+  },
+]
 
 export const cookiesData: LegalData = {
   hero: {
@@ -27,7 +75,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 2 - Définition d'un cookie",
       paragraphs: [
-        "Un cookie est un petit fichier texte enregistré sur votre appareil (ordinateur, smartphone, tablette) lors de votre consultation d'un site internet. Les cookies permettent notamment d'assurer le fonctionnement du site, de mémoriser certaines informations, d'améliorer l'expérience utilisateur, de mesurer l'audience, de renforcer la sécurité et de personnaliser certains contenus.",
+        "Un cookie est un petit fichier texte enregistré sur votre appareil (ordinateur, smartphone, tablette) lors de la consultation d'un site internet. La présente politique couvre aussi les technologies similaires, comme le stockage local ou de session du navigateur.",
       ],
     },
     {
@@ -36,24 +84,16 @@ export const cookiesData: LegalData = {
         <div className="space-y-5 text-sm text-primary/70">
           {[
             {
-              cat: "3.1 Cookies strictement nécessaires",
-              desc: "Indispensables au fonctionnement du site, ils permettent notamment l'accès sécurisé aux espaces protégés, la gestion des sessions utilisateurs, la protection contre les attaques informatiques, la gestion des formulaires et l'équilibrage de charge des serveurs. Ces cookies ne nécessitent pas de consentement préalable.",
+              cat: "3.1 Cookies nécessaires",
+              desc: "Ils mémorisent votre choix sur les cookies et font fonctionner le chat et les fenêtres du site. Ils ne demandent pas votre accord.",
             },
             {
-              cat: "3.2 Cookies de sécurité",
-              desc: "Ils permettent la détection des comportements frauduleux, la protection contre les robots, la prévention des attaques et le fonctionnement de Google reCAPTCHA. Leur utilisation repose sur l'intérêt légitime de sécurité.",
+              cat: "3.2 Mesure d'audience",
+              desc: "Google Analytics nous indique quelles pages sont lues et comment le site est parcouru, pour l'améliorer. Ces cookies ne sont déposés qu'avec votre accord.",
             },
             {
-              cat: "3.3 Cookies de mesure d'audience",
-              desc: "Ils permettent d'analyser le nombre de visiteurs, les pages consultées, le temps passé sur le site, les parcours utilisateurs et les performances techniques. Les outils utilisés peuvent inclure Google Analytics, Google Search Console, Microsoft Clarity, Matomo ou des outils statistiques équivalents. Ces cookies nécessitent votre consentement lorsqu'ils ne sont pas strictement anonymisés.",
-            },
-            {
-              cat: "3.4 Cookies de personnalisation",
-              desc: "Ils permettent de mémoriser vos préférences, d'adapter l'affichage et d'améliorer votre expérience utilisateur. Ils peuvent être déposés uniquement avec votre accord lorsque cela est requis par la réglementation.",
-            },
-            {
-              cat: "3.5 Cookies marketing",
-              desc: "Ils permettent la diffusion de publicités, le suivi des campagnes marketing, la mesure des conversions et le remarketing. Les partenaires concernés peuvent notamment inclure Google Ads, Microsoft Advertising, LinkedIn Ads, Meta Ads ou d'autres plateformes publicitaires. Aucun cookie marketing n'est déposé sans votre consentement préalable. Le fonctionnement précis de la mesure Google Ads, y compris en cas de refus, est détaillé à l'article 4.",
+              cat: "3.3 Publicité",
+              desc: "Google Ads mesure quelles annonces amènent des demandes de contact. Ces cookies ne sont déposés qu'avec votre accord.",
             },
           ].map(({ cat, desc }) => (
             <div key={cat}>
@@ -61,72 +101,95 @@ export const cookiesData: LegalData = {
               <p>{desc}</p>
             </div>
           ))}
+          <p>Le site n&apos;utilise aucun autre outil de mesure, de publicité, de vidéo intégrée ou de réseau social déposant des cookies.</p>
         </div>
       ),
     },
     {
-      title: "Article 4 - Mode consentement Google et mesure des conversions",
+      title: "Article 4 - Liste des cookies et traceurs",
+      content: (
+        <div className="space-y-3">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[36rem] border-collapse text-left text-sm text-primary/80">
+              <thead>
+                <tr className="border-b border-primary text-xs uppercase tracking-wider text-primary">
+                  <th scope="col" className="py-2 pr-4">Nom</th>
+                  <th scope="col" className="py-2 pr-4">Catégorie</th>
+                  <th scope="col" className="py-2 pr-4">Émetteur</th>
+                  <th scope="col" className="py-2 pr-4">Finalité</th>
+                  <th scope="col" className="py-2">Durée</th>
+                </tr>
+              </thead>
+              <tbody>
+                {TRACEURS_SITE.map((t) => (
+                  <tr key={t.nom} className="border-b border-primary/15 align-top">
+                    <td className="py-2 pr-4 font-bold text-primary">{t.nom}</td>
+                    <td className="py-2 pr-4">{t.categorie}</td>
+                    <td className="py-2 pr-4">{t.emetteur}</td>
+                    <td className="py-2 pr-4">{t.finalite}</td>
+                    <td className="py-2">{t.duree}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-primary/70">
+            Lorsqu&apos;il est utilisé, le gestionnaire de balises Google Tag Manager
+            ne se charge lui aussi qu&apos;après votre accord.
+          </p>
+        </div>
+      ),
+    },
+    {
+      title: "Article 5 - Mode consentement Google et mesure des conversions",
       content: (
         <div className="space-y-3 text-sm text-primary/70">
           <p>
-            Le site utilise le mécanisme de gestion du consentement de Google
-            (Consent Mode), dans sa version dite avancée. Ce fonctionnement
-            mérite d&apos;être décrit précisément, car il diffère d&apos;un simple
-            blocage.
+            Le site applique le mode consentement de Google (Consent Mode v2) dans
+            sa version de base : par défaut, la mesure d&apos;audience et la
+            publicité sont refusées, et aucune balise Google n&apos;est chargée.
           </p>
           <p>
             <span className="text-primary font-semibold">Si vous acceptez</span>{" "}
-            les cookies publicitaires : un cookie Google Ads est déposé sur votre
-            terminal et permet de rattacher votre éventuelle demande de contact à
-            l&apos;annonce sur laquelle vous avez cliqué. Cette mesure est
-            strictement destinée à évaluer l&apos;efficacité de nos campagnes.
+            la mesure d&apos;audience, Google Analytics est chargé ; ses cookies
+            sont limités à 13 mois, les signaux Google et la personnalisation
+            publicitaire sont désactivés. Si vous acceptez la publicité, un cookie
+            Google Ads permet de rattacher votre éventuelle demande de contact à
+            l&apos;annonce sur laquelle vous avez cliqué, pour évaluer
+            l&apos;efficacité de nos campagnes.
           </p>
           <p>
-            <span className="text-primary font-semibold">Si vous refusez</span> :
-            aucun cookie publicitaire n&apos;est déposé et aucune information n&apos;est
-            lue sur votre terminal. Le script de mesure de Google reste toutefois
-            chargé et transmet à Google des informations techniques limitées,
-            sans cookie ni identifiant : horodatage, type de navigateur, page de
-            référence et état de votre choix de consentement. Votre adresse IP
-            est traitée par Google pour cet acheminement. Ces éléments servent
-            uniquement à produire des estimations statistiques agrégées et ne
-            permettent pas de vous identifier individuellement.
+            <span className="text-primary font-semibold">Si vous refusez</span>{" "}
+            ou tant que vous n&apos;avez pas fait de choix : aucun script Google
+            n&apos;est chargé, aucun cookie Google n&apos;est déposé, et Google ne
+            lit ni ne reçoit aucune information depuis votre terminal.
           </p>
           <p>
             <span className="text-primary font-semibold">Conversions
             améliorées</span> : lorsque cette fonctionnalité est activée et que
-            vous avez consenti, l&apos;adresse email et le numéro de téléphone que
+            vous avez consenti, l&apos;adresse e-mail et le numéro de téléphone que
             vous avez saisis dans un formulaire sont transformés dans votre
             navigateur en une empreinte irréversible (SHA-256) avant transmission
-            à Google. Google ne reçoit jamais ces données en clair. Cette
-            empreinte permet de rattacher une demande à une annonce lorsqu&apos;un
-            même internaute a consulté le site depuis plusieurs appareils.
+            à Google. Google ne reçoit jamais ces données en clair.
           </p>
           <p>
             Ces traitements impliquent un transfert de données vers Google LLC
             aux États-Unis, encadré par la décision d&apos;adéquation du 10 juillet
             2023 relative au cadre de protection des données UE - États-Unis
-            (Data Privacy Framework), auquel Google LLC est certifié. Vous pouvez
-            modifier votre choix à tout moment depuis le bandeau de gestion des
-            cookies.
+            (Data Privacy Framework).
           </p>
         </div>
       ),
     },
     {
-      title: "Article 5 - Durée de conservation",
+      title: "Article 6 - Consentement et durée de conservation de votre choix",
       paragraphs: [
-        "Les cookies sont conservés pour une durée maximale de treize (13) mois, conformément aux recommandations de la CNIL. À l'expiration de cette période, votre consentement sera de nouveau sollicité.",
+        "Lors de votre première visite, un bandeau vous permet d'accepter tous les cookies, de les refuser tous ou de choisir service par service. Refuser est aussi simple qu'accepter.",
+        "Votre choix est conservé 6 mois, puis vous est de nouveau demandé. Vous pouvez le modifier à tout moment depuis l'icône de gestion des cookies affichée en bas à gauche de chaque page. Les cookies Google Analytics durent 13 mois au plus.",
       ],
     },
     {
-      title: "Article 6 - Consentement",
-      paragraphs: [
-        "Lors de votre première visite, un bandeau de gestion des cookies vous permet d'accepter tous les cookies, de refuser les cookies non essentiels ou de personnaliser vos préférences. Votre choix est conservé pendant la durée légale autorisée et peut être modifié à tout moment.",
-      ],
-    },
-    {
-      title: "Article 7 - Gestion des cookies",
+      title: "Article 7 - Paramétrer votre navigateur",
       content: (
         <div className="space-y-3 text-sm text-primary/70">
           <p>Vous pouvez à tout moment supprimer les cookies, bloquer certains cookies ou modifier vos préférences. Ces paramètres peuvent être configurés directement depuis votre navigateur :</p>
@@ -149,7 +212,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 8 - Cookies de tiers",
       paragraphs: [
-        "Le site peut intégrer des services fournis par des tiers, notamment Google, Microsoft, LinkedIn, YouTube, Vimeo, Calendly, Stripe et divers partenaires techniques. Ces services peuvent déposer leurs propres cookies. TRINEXTA ne contrôle pas directement les cookies déposés par ces tiers ; nous vous invitons à consulter leurs politiques respectives.",
+        "Les cookies Google listés à l'article 4 sont déposés par Google Ireland Ltd, qui en détermine aussi l'usage pour ses propres services. Nous vous invitons à consulter la politique de confidentialité de Google : policies.google.com/privacy.",
       ],
     },
     {
@@ -161,7 +224,7 @@ export const cookiesData: LegalData = {
     {
       title: "Article 10 - Modification de la politique",
       paragraphs: [
-        "TRINEXTA se réserve le droit de modifier la présente Politique de Cookies à tout moment afin de tenir compte des évolutions légales, des recommandations de la CNIL, des évolutions techniques ou des nouveaux services proposés. Toute nouvelle version sera publiée sur le site.",
+        "TRINEXTA peut modifier la présente Politique de Cookies à tout moment afin de tenir compte des évolutions légales, des recommandations de la CNIL, des évolutions techniques ou des nouveaux services proposés. Toute nouvelle version sera publiée sur le site.",
       ],
     },
     {

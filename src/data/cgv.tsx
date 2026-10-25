@@ -59,7 +59,7 @@ export const cgvData: LegalData = {
     {
       title: "Article 7 - Retard de paiement",
       paragraphs: [
-        "Tout retard de paiement entraîne automatiquement des pénalités de retard calculées selon la réglementation en vigueur, une indemnité forfaitaire de recouvrement de 40 €, la suspension des prestations et l'exigibilité immédiate des sommes restant dues.",
+        "Tout retard de paiement entraîne automatiquement des pénalités de retard au taux de refinancement de la Banque centrale européenne majoré de 10 points, une indemnité forfaitaire pour frais de recouvrement de 40 € (article L.441-10 du Code de commerce), la suspension des prestations et l'exigibilité immédiate des sommes restant dues.",
       ],
     },
     {

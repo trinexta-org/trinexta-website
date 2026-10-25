@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { ChampPiege } from "@/components/shared/ChampPiege";
 import { CHAMP_PIEGE } from "@/data/anti-abus";
+import Link from "next/link";
+import { NEWSLETTER_LIEN_DONNEES, NEWSLETTER_MENTION } from "@/data/newsletter";
 import { Container } from "@/components/layout/Container";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
@@ -104,7 +106,11 @@ export function NewsletterCTA() {
                 </div>
               )}
             </form>
-            <p className="text-white/70 text-xs mt-4 text-center lg:text-left leading-relaxed">              En renseignant votre adresse e-mail, vous acceptez de recevoir nos communications. Vous pourrez vous désabonner à tout moment.
+            <p className="text-white/70 text-xs mt-4 text-center lg:text-left leading-relaxed">
+              {NEWSLETTER_MENTION}{" "}
+              <Link href={NEWSLETTER_LIEN_DONNEES.href} className="underline hover:text-white">
+                {NEWSLETTER_LIEN_DONNEES.label}
+              </Link>
             </p>
           </div>
 
