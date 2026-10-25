@@ -14,9 +14,9 @@ export const cloudData: ServicePageProps = {
   problem: {
     subtitle: "Ne jouez pas avec votre survie numérique",
     title: "La perte de données est le risque numéro un des TPE et PME.",
-    description: "Une suppression accidentelle, une défaillance matérielle imprévue ou une cyberattaque ciblée… sans stratégie de sauvegarde solide, l'incident devient une catastrophe. De nombreuses entreprises pensent être protégées par une simple copie de fichier, mais découvrent trop tard qu'elles ne peuvent pas restaurer leur activité. Le problème n'est pas seulement de stocker, mais de garantir que vos données restent accessibles et intègrent le cœur de votre stratégie de survie.",
+    description: "Une suppression accidentelle, une défaillance matérielle imprévue ou une cyberattaque ciblée… sans stratégie de sauvegarde solide, l'incident devient une catastrophe. De nombreuses entreprises pensent être protégées par une simple copie de fichier, mais découvrent trop tard qu'elles ne peuvent pas restaurer leur activité. Le problème n'est pas seulement de stocker, mais de faire en sorte que vos données restent accessibles et intègrent le cœur de votre stratégie de survie.",
     painPoints: [
-      "Absence de stratégie de sauvegarde garantissant une restauration rapide en cas de sinistre.",
+      "Absence de stratégie de sauvegarde permettant une restauration rapide en cas de sinistre.",
       "Risque d'interruption totale d'activité lors d'une panne serveur ou d'un incident réseau.",
       "Difficultés à accéder à vos fichiers de travail en situation de télétravail ou de mobilité.",
       "Complexité à gérer des infrastructures de stockage locales coûteuses et souvent obsolètes.",
@@ -26,11 +26,11 @@ export const cloudData: ServicePageProps = {
   offer: {
     subtitle: "Infrastructure résiliente et collaborative",
     title: "Ce que l'on fait concrètement",
-    description: "Nous ne nous contentons pas de louer du stockage. Nous concevons une infrastructure hybride intelligente qui combine la performance du stockage local avec la sécurité et la flexibilité du cloud. Chaque solution est pensée pour respecter la souveraineté de vos données et garantir votre agilité. Cette infrastructure s'inscrit dans notre [assistance informatique de proximité](/support-informatique) au quotidien.",
+    description: "Nous ne nous contentons pas de louer du stockage. Nous concevons une infrastructure hybride intelligente qui combine la performance du stockage local avec la sécurité et la flexibilité du cloud. Chaque solution est pensée pour respecter la souveraineté de vos données et préserver votre agilité. Cette infrastructure s'inscrit dans notre [assistance informatique de proximité](/support-informatique) au quotidien.",
     features: [
       {
         title: "Stratégie de sauvegarde 3-2-1",
-        desc: "La règle d'or pour ne jamais perdre vos données : nous mettons en place 3 copies, sur 2 supports différents, dont 1 hors-site (cloud sécurisé). Cela garantit que même en cas d'incendie, de vol ou de crypto-virus, vos données sont saines et restaurables rapidement.",
+        desc: "La règle d'or pour ne jamais perdre vos données : nous mettons en place 3 copies, sur 2 supports différents, dont 1 hors-site (cloud sécurisé). Cette règle vise à ce qu'en cas d'incendie, de vol ou de crypto-virus, une copie saine de vos données reste disponible pour la restauration.",
       },
       {
         title: "Stockage NAS et serveurs locaux",
@@ -81,7 +81,7 @@ export const cloudData: ServicePageProps = {
     },
     {
       question: "Où sont stockées mes données ?",
-      answer: "Nous privilégions des solutions de stockage géographiquement sécurisées. En fonction de vos besoins en souveraineté, nous choisissons des centres de données offrant les garanties de confidentialité et de sécurité les plus strictes.",
+      answer: "Nous privilégions des solutions de stockage géographiquement sécurisées. En fonction de vos besoins en souveraineté, nous choisissons des centres de données dont les exigences de confidentialité et de sécurité correspondent à vos contraintes.",
     },
     {
       question: "Le cloud, est-ce vraiment sécurisé ?",
@@ -89,7 +89,7 @@ export const cloudData: ServicePageProps = {
     },
     {
       question: "Combien de temps faut-il pour restaurer mes données ?",
-      answer: "Cela dépend du volume de données et de la méthode de restauration. Dans le cadre de votre Plan de Reprise d'Activité (PRA), nous définissons des objectifs de temps (RTO) pour garantir que vous puissiez redémarrer votre activité le plus rapidement possible.",
+      answer: "Cela dépend du volume de données et de la méthode de restauration. Dans le cadre de votre Plan de Reprise d'Activité (PRA), nous définissons des objectifs de temps (RTO) pour que vous puissiez redémarrer votre activité le plus rapidement possible.",
     },
     {
       question: "Puis-je accéder à mes fichiers sans connexion internet ?",
@@ -97,7 +97,7 @@ export const cloudData: ServicePageProps = {
     },
     {
       question: "Quelle est la différence avec Office 365 OneDrive/SharePoint ?",
-      answer: "OneDrive et SharePoint sont des outils de collaboration formidables, mais ils ne remplacent pas une stratégie de sauvegarde externalisée. Nous utilisons ces outils pour le quotidien, tout en les complétant avec des solutions de sauvegarde professionnelles garantissant une restauration à long terme.",
+      answer: "OneDrive et SharePoint sont des outils de collaboration formidables, mais ils ne remplacent pas une stratégie de sauvegarde externalisée. Nous utilisons ces outils pour le quotidien, tout en les complétant avec des solutions de sauvegarde professionnelles conçues pour la restauration à long terme.",
     },
   ],
 

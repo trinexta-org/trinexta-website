@@ -70,6 +70,14 @@ const REGLES = [
     message: "Couleur HEX en dur dans une classe Tailwind. Utiliser un token (text-primary, bg-secondary...).",
   },
   {
+    // Blanc sur #5c92b8 = 3,35:1, sous AA. Un texte blanc va sur bg-secondary-strong.
+    // Decidable sur la ligne : un fond secondary plein (ou /90) et un texte blanc dans
+    // la meme chaine de classes. Les fonds teintes (/10, /15...) ne sont pas vises.
+    nom: "WHITE_ON_SECONDARY",
+    motif: /^(?=.*(?:^|[\s"'`:])bg-secondary(?:\/9\d)?(?=[\s"'`]|$))(?=.*\btext-(?:white|secondary-strong-foreground|primary-foreground)(?=[\s"'`]|$))/,
+    message: "Texte blanc sur bg-secondary (3,35:1, sous AA). Utiliser bg-secondary-strong.",
+  },
+  {
     nom: "MANUAL_LAYOUT",
     exempt: (f) => f === "src/components/layout/Container.tsx",
     motif: /\bmax-w-7xl\b/,

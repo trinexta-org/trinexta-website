@@ -24,6 +24,12 @@ export const homeHeroSlides: HomeHeroSlide[] = [
   },
 ]
 
+// h1 fixes des pages à carrousel : les titres de slides tournent et ne sont que des accroches.
+export const aproposHeroH1 = "À propos de TRINEXTA, prestataire informatique à Évry-Courcouronnes"
+export const contactHeroH1 = "Contacter TRINEXTA, prestataire informatique en Essonne"
+export const blogHeroH1 = "Conseils informatiques pour TPE et PME"
+export const casClientsHeroH1 = "Cas clients : infogérance et cybersécurité de TPE et PME"
+
 export const aproposHeroSlides = [
   {
     title: "Une *informatique* plus simple, humaine et utile",
@@ -42,7 +48,6 @@ export const aproposHeroSlides = [
   }
 ]
 
-// Le h1 de /contact est le titre de la slide active (1re au chargement).
 export const contactHeroSlides = [
   {
     part1: "Parlons de",
@@ -63,7 +68,7 @@ export const contactHeroSlides = [
 
 export const blogHeroSlides = [
   {
-    title: "Insights, *Ideas* & Innovation",
+    title: "Des conseils *pratiques* pour votre informatique",
     subtitle: "Explorez nos articles d'experts, les tendances technologiques et nos conseils pratiques pour garder votre entreprise toujours en avance."
   },
   {
@@ -76,6 +81,6 @@ export const blogHeroSlides = [
   },
   {
     title: "La technologie au service de *l'Humain*",
-    subtitle: "Retrouvez nos retours d'expérience, études de cas et conseils pour garantir une adoption technologique fluide par vos équipes."
+    subtitle: "Retrouvez nos retours d'expérience, études de cas et conseils pour faciliter l'adoption des outils par vos équipes."
   }
 ]

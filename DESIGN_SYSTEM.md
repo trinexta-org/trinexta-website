@@ -323,6 +323,8 @@ AA (4,5:1) sans exception. Deux regles issues de la refonte des fonds :
 
 - `text-muted-foreground` est illisible sur les fonds sombres : utiliser `text-white/70`.
 - `text-secondary` et `text-secondary-strong` tombent sous AA une fois le mesh sombre pose. L'accent sur fond sombre est `text-secondary-soft`.
+- Texte blanc sur fond bleu : toujours `bg-secondary-strong` (6:1). Blanc sur `bg-secondary` = 3,35:1, refuse par `check:review-rules` (WHITE_ON_SECONDARY). Sur `bg-secondary`, le texte est navy (`text-secondary-foreground`).
+- Pas d'opacite sous 70 % sur un texte (`text-primary/40`, `text-muted-foreground/70`) : elle fait tomber le contraste sous AA sur les fonds bleutes.
 
 ---
 
@@ -335,9 +337,12 @@ import { HeroCarousel } from "@/components/ui/HeroCarousel"
   slides={data}
   interval={6000}
   renderBackground={(slide, idx) => <div className="absolute inset-0 bg-primary" />}
-  renderSlide={(slide, idx) => <Heading as="h1">{slide.title}</Heading>}
+  header={<h1 className="...">Titre de page fixe</h1>}
+  renderSlide={(slide, idx) => <p className="...">{slide.title}</p>}
 />
 ```
+
+Le h1 de la page passe par `header` et ne tourne jamais avec les slides : les titres de slides sont des `p` (ou des `h2`). Le carrousel fournit le bouton pause/lecture (WCAG 2.2.2), ne defile pas sous `prefers-reduced-motion`, et rend les slides masquees `inert`.
 
 ---
 

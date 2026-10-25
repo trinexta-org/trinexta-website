@@ -1,13 +1,25 @@
 "use client"
 
-import { useSyncExternalStore, type CSSProperties } from "react"
+import { type CSSProperties, type ReactNode } from "react"
 import Image from "next/image"
+import { Mail, Phone, type LucideIcon } from "lucide-react"
 import { useInView } from "@/hooks/useInView"
+import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { Section } from "@/components/layout/Section"
 import { GridCards } from "@/components/layout/GridCards"
 import { Heading, Text } from "@/components/ui/Typography"
 
-const CONTACT_CARDS = [
+// Téléphone et e-mail : texte sur fond uni (AA), sans illustration derrière les coordonnées.
+type CarteContact = {
+  id: string
+  title: string
+  content: ReactNode
+  image?: string
+  alt?: string
+  icon?: LucideIcon
+}
+
+const CONTACT_CARDS: CarteContact[] = [
   {
     id: "bureau",
     title: "Bureau d'activité",
@@ -24,13 +36,13 @@ const CONTACT_CARDS = [
   {
     id: "telephone",
     title: "Téléphone",
-    image: "/images/contact/telephone.png",
+    icon: Phone,
     content: (
       <div className="mt-4">
-        <a href="tel:+33978250746" className="text-secondary-strong font-black hover:underline block text-2xl drop-shadow-lg">
+        <a href="tel:+33978250746" className="text-white font-black underline-offset-4 hover:underline block text-2xl">
           09 78 25 07 46
         </a>
-        <Text variant="small" className="text-white/80 mt-2 drop-shadow-md font-medium">
+        <Text variant="small" className="text-white/80 mt-2 font-medium">
           Du lundi au vendredi, de 8 h 30 à 19 h
         </Text>
       </div>
@@ -39,10 +51,10 @@ const CONTACT_CARDS = [
   {
     id: "email",
     title: "E-mail",
-    image: "/images/contact/email.png",
+    icon: Mail,
     content: (
       <div className="mt-4">
-        <a href="mailto:contact@trinexta.fr" className="text-secondary-strong font-black hover:underline block text-xl drop-shadow-lg">
+        <a href="mailto:contact@trinexta.fr" className="text-white font-black underline-offset-4 hover:underline block text-xl break-all">
           contact@trinexta.fr
         </a>
       </div>
@@ -64,15 +76,7 @@ function getCardStyle(index: number, visible: boolean, reducedMotion: boolean): 
 
 export function ContactCards() {
   const [containerRef, isInView] = useInView<HTMLDivElement>({ once: true, rootMargin: "-100px" })
-  const reducedMotion = useSyncExternalStore(
-    (callback) => {
-      const mql = window.matchMedia("(prefers-reduced-motion: reduce)")
-      mql.addEventListener("change", callback)
-      return () => mql.removeEventListener("change", callback)
-    },
-    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    () => false
-  )
+  const reducedMotion = useReducedMotion()
 
   const visible = isInView || reducedMotion
 
@@ -85,19 +89,27 @@ export function ContactCards() {
             <div
               key={card.id}
               style={getCardStyle(index, visible, reducedMotion)}
-              className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02] min-h-[350px] shadow-2xl"
+              className={`relative overflow-hidden rounded-[2rem] border border-white/10 min-h-[350px] shadow-2xl ${card.image ? "bg-white/[0.02]" : "bg-primary-elevated"}`}
             >
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover"
-              />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/30 backdrop-blur-[2px]" />
+              {card.image && (
+                <>
+                  <Image
+                    src={card.image}
+                    alt={card.alt ?? card.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/30 backdrop-blur-[2px]" />
+                </>
+              )}
 
               <div className="relative z-10 flex flex-col items-center justify-center h-full p-8 text-center">
+                {card.icon && (
+                  <span className="mb-5 flex size-14 items-center justify-center rounded-full border border-secondary-soft/40 text-secondary-soft">
+                    <card.icon aria-hidden="true" className="size-6" />
+                  </span>
+                )}
                 <Heading as="h3" className="text-white text-2xl md:text-3xl font-black mb-2 drop-shadow-md">
                   {card.title}
                 </Heading>

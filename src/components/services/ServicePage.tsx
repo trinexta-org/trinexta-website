@@ -361,7 +361,7 @@ function ServiceTabs({
               <span
                 className={`
                   shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold
-                  ${isActive ? "bg-secondary text-white" : "bg-secondary/15 text-secondary-strong"}
+                  ${isActive ? "bg-secondary-strong text-white" : "bg-secondary/15 text-secondary-strong"}
                 `}
               >
                 {String(idx + 1).padStart(2, "0")}
@@ -1228,7 +1228,7 @@ export function ServicePage({
                     <span
                       className={`
                         self-start text-xs font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full
-                        ${item.highlighted ? "bg-secondary text-white" : "bg-secondary/15 text-secondary-strong"}
+                        ${item.highlighted ? "bg-secondary-strong text-white" : "bg-secondary/15 text-secondary-strong"}
                       `}
                     >
                       {item.badge}
@@ -1506,7 +1506,7 @@ export function ServicePage({
                 >
                   <div className="backdrop-blur-xl bg-primary/40 md:bg-white/10 border border-white/20 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-2xl max-w-2xl">
                     <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
-                      <span className="flex items-center justify-center w-6 h-6 md:w-12 md:h-12 rounded-full bg-secondary text-white font-bold text-xs md:text-xl shrink-0">
+                      <span className="flex items-center justify-center w-6 h-6 md:w-12 md:h-12 rounded-full bg-secondary-strong text-white font-bold text-xs md:text-xl shrink-0">
                         0{index + 1}
                       </span>
 

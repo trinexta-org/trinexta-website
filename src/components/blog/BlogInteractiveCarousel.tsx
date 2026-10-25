@@ -152,7 +152,7 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
                 <div className={`absolute inset-0 p-6 md:p-8 flex flex-col justify-end transition-opacity duration-500 z-10 ${isCenter ? "opacity-100" : "opacity-0"}`}>
                   <div className={`relative z-20 transition-all duration-500 ${isCenter && isHovered ? "w-full md:w-[55%]" : "w-full"}`}>
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="px-3 py-1 bg-secondary text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
+                      <span className="px-3 py-1 bg-secondary-strong text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
                         {categoryLabel(article.categorie)}
                       </span>
                       {article.tempsLecture && (
@@ -240,7 +240,7 @@ export function BlogInteractiveCarousel({ articles, categoryLabel }: Props) {
         </button>
         <button
           onClick={handleNext}
-          className="w-12 h-12 rounded-full bg-surface-strong border border-secondary/20 flex items-center justify-center text-secondary-strong hover:bg-secondary hover:text-white transition-all active:scale-95"
+          className="w-12 h-12 rounded-full bg-surface-strong border border-secondary/20 flex items-center justify-center text-secondary-strong hover:bg-secondary-strong hover:text-white transition-all active:scale-95"
           aria-label="Article suivant"
         >
           <ChevronRight className="w-5 h-5" />

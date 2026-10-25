@@ -47,7 +47,7 @@ export function BlogPaginatedGrid({
               onClick={() => onCategoryChange(cat.id)}
               className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
                 activeCategory === cat.id
-                  ? "bg-secondary text-white"
+                  ? "bg-secondary-strong text-white"
                   : "bg-surface-strong text-primary/60 hover:bg-secondary/10 hover:text-primary"
               }`}
             >

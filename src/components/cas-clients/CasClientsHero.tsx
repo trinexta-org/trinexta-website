@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge"
 import { Heading, Text } from "@/components/ui/Typography"
 import { Button } from "@/components/ui/Button"
 import { caseClientsOrdered } from "@/data/cas-clients"
+import { casClientsHeroH1 } from "@/data/heroes"
 
 const highlightedWords = ["bases", "pro", "transformés", "silence", "modernisés", "vitesse", "supérieure"]
 
@@ -33,7 +34,13 @@ export function CasClientsHero() {
           <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/65 to-transparent" />
         </>
       }
-      renderSlide={(slide, index, isActive) => (
+      label="Cas clients à la une"
+      header={
+        <h1 className="mb-4 text-sm md:text-base font-bold uppercase tracking-widest text-secondary-soft drop-shadow-md text-balance">
+          {casClientsHeroH1}
+        </h1>
+      }
+      renderSlide={(slide) => (
         <div className="space-y-4 md:space-y-5">
           <div className="flex flex-wrap items-center gap-3">
             {[
@@ -52,7 +59,7 @@ export function CasClientsHero() {
           </div>
 
           <Heading
-            as={isActive ? "h1" : "h2"}
+            as="h2"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-xl text-white"
           >
             {slide.title.split(" ").map((word, i) => {
@@ -62,7 +69,7 @@ export function CasClientsHero() {
               return (
                 <React.Fragment key={i}>
                   <span
-                    className={`inline-block mr-2 sm:mr-3 ${highlightedWords.includes(clean) ? "text-secondary-strong" : "text-white"}`}
+                    className={`inline-block mr-2 sm:mr-3 ${highlightedWords.includes(clean) ? "text-secondary-soft" : "text-white"}`}
                   >
                     {isItalic ? <em>{rawWord}</em> : rawWord}
                   </span>

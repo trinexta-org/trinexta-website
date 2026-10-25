@@ -24,7 +24,7 @@ export function BannerCTA({
   
   const variantStyles: Record<BannerVariant, string> = {
     primary: "bg-primary text-white",
-    secondary: "bg-secondary text-white",
+    secondary: "bg-secondary-strong text-white",
     accent: "bg-muted text-primary border border-border",
     surface: "bg-primary text-white border border-white/10"
   

@@ -60,7 +60,7 @@ const values: ValueItem[] = [
         title: "Engagement",
         desc: "Votre satisfaction est notre ligne directrice. Nous nous engageons à fournir un accompagnement sérieux, avec des interventions de qualité, des délais respectés et une attention constante portée à l’efficacité des actions menées. Notre objectif n’est pas seulement d’intervenir, mais de construire une relation utile dans la durée.",
         image: "/images/a-propos/engagements/engagement.jpg",
-       alt: "Une poignée de main entre deux professionnels au-dessus d'un document, garantissant notre engagement à fournir un accompagnement informatique sérieux et de qualité."
+       alt: "Une poignée de main entre deux professionnels au-dessus d'un document, symbole de notre engagement à fournir un accompagnement informatique sérieux et de qualité."
     },
     {
         title: "Agilité",

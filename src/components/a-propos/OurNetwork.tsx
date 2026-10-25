@@ -7,7 +7,7 @@ import { FadeIn } from "@/components/ui/FadeIn"
 const networkFeatures = [
     {
         title: "Techniciens qualifiés",
-        desc: "Des professionnels opérationnels avec plus de 2 ans d'expérience. Nous ne laissons rien au hasard dans la sélection des intervenants. Chaque technicien est évalué sur ses compétences techniques réelles, sa capacité à résoudre des problèmes complexes et son aisance relationnelle. Ils sont capables d'intervenir concrètement sur vos enjeux et de s'intégrer naturellement à votre environnement de travail, garantissant ainsi une continuité de service irréprochable et une communication fluide avec vos équipes."
+        desc: "Des professionnels opérationnels avec plus de 2 ans d'expérience. Nous ne laissons rien au hasard dans la sélection des intervenants. Chaque technicien est évalué sur ses compétences techniques réelles, sa capacité à résoudre des problèmes complexes et son aisance relationnelle. Ils sont capables d'intervenir concrètement sur vos enjeux et de s'intégrer naturellement à votre environnement de travail, pour assurer la continuité de service et une communication fluide avec vos équipes."
     },
     {
         title: "Planning flexible",
@@ -54,7 +54,7 @@ export function OurNetwork() {
                         </Heading>
 
                         <Text className="text-primary/80 text-base md:text-xl leading-relaxed font-light">
-                            Pour vous garantir une réactivité maximale et une expertise adaptée à chaque situation, nous avons fait le choix d&apos;un modèle agile.
+                            Pour être réactifs et mobiliser l&apos;expertise adaptée à chaque situation, nous avons fait le choix d&apos;un modèle agile.
                         </Text>
 
                         <Text className="text-primary/70 text-sm md:text-lg leading-relaxed">
@@ -71,9 +71,12 @@ export function OurNetwork() {
                             delay={idx * 0.1}
                             className="relative overflow-hidden flex flex-col gap-4 p-6 md:p-8 rounded-2xl bg-surface-strong border border-secondary/20 hover:border-secondary/40 transition-all duration-500 group shadow-lg"
                         >
-                            <span className="absolute -right-4 -top-6 text-[100px] md:text-[140px] font-black text-primary/[0.05] group-hover:text-secondary-strong/[0.10] transition-colors duration-500 pointer-events-none select-none">
-                                0{idx + 1}
-                            </span>
+                            {/* Numéro décoratif en pseudo-élément : pas un texte à contraster ni à lire */}
+                            <span
+                                aria-hidden="true"
+                                data-numero={`0${idx + 1}`}
+                                className="absolute -right-4 -top-6 text-[100px] md:text-[140px] font-black text-primary/[0.05] group-hover:text-secondary-strong/[0.10] transition-colors duration-500 pointer-events-none select-none before:content-[attr(data-numero)]"
+                            />
 
                             <Heading as="h4" className="text-primary text-lg md:text-2xl font-bold tracking-normal relative z-10 flex items-center gap-3">
                                 <span className="w-4 md:w-6 h-1 bg-secondary rounded-full transition-all duration-300 group-hover:w-8 md:group-hover:w-10"></span>
