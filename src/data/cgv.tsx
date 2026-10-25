@@ -22,7 +22,7 @@ export const cgvData: LegalData = {
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes",
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
-        <span key="site"><a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.trinexta.fr</a></span>,
+        <span key="site"><a href="https://trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://trinexta.fr</a></span>,
       ],
     },
     {
@@ -59,7 +59,7 @@ export const cgvData: LegalData = {
     {
       title: "Article 7 - Retard de paiement",
       paragraphs: [
-        "Tout retard de paiement entraîne automatiquement des pénalités de retard calculées selon la réglementation en vigueur, une indemnité forfaitaire de recouvrement de 40 €, la suspension des prestations et l'exigibilité immédiate des sommes restant dues.",
+        "Tout retard de paiement entraîne automatiquement des pénalités de retard au taux de refinancement de la Banque centrale européenne majoré de 10 points, une indemnité forfaitaire pour frais de recouvrement de 40 € (article L.441-10 du Code de commerce), la suspension des prestations et l'exigibilité immédiate des sommes restant dues.",
       ],
     },
     {

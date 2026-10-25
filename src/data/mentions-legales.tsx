@@ -30,19 +30,19 @@ export const mentionsLegalesData: LegalData = {
         "Capital social : 15 000 € entièrement souscrit et libéré",
         "Siège social : 74 B Boulevard Henri Dunant, 91100 Corbeil-Essonnes, France",
         "Bureau d'activité : 7 rue Montespan, 91000 Évry-Courcouronnes, France",
-        "SIREN : 942 020 082 - SIRET : 942 020 082 00015",
+        "RCS Évry 942 020 082",
+        "SIRET : 942 020 082 00015",
         "TVA intracommunautaire : FR81 942 020 082",
-        "Immatriculation : Registre du Commerce et des Sociétés d'Évry",
         "Téléphone : 09 78 25 07 46",
         <span key="email">E-mail : <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
-        <span key="site">Site internet : <a href="https://www.trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://www.trinexta.fr</a></span>,
+        <span key="site">Site internet : <a href="https://trinexta.fr" target="_blank" rel="noopener noreferrer" className="text-secondary-strong hover:underline transition-colors">https://trinexta.fr</a></span>,
         "TRINEXTA accompagne les entreprises, collectivités, associations et professionnels dans leur informatique au quotidien. La société intervient principalement en Île-de-France dans les domaines du support informatique, de l'infogérance, de la maintenance, de la cybersécurité, des infrastructures systèmes et réseaux, des solutions cloud, de Microsoft 365, du développement web, de l'hébergement web et applicatif, des solutions SaaS, du conseil numérique, ainsi que de l'accompagnement au référencement naturel (SEO) et à la visibilité sur les moteurs conversationnels (GEO).",
       ],
     },
     {
       title: "Directeur de la publication",
       paragraphs: [
-        "Le directeur de la publication est le représentant légal de TRUSTECH IT SUPPORT en exercice.",
+        "Directeur de la publication : Valoux Prince, Président de TRUSTECH IT SUPPORT.",
         <span key="contact-dir">Pour toute question relative au contenu du site : <a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
     },
@@ -99,7 +99,7 @@ export const mentionsLegalesData: LegalData = {
     {
       title: "Disponibilité du site",
       paragraphs: [
-        "TRINEXTA met en oeuvre tous les moyens raisonnables afin d'assurer l'accessibilité du site 24 heures sur 24 et 7 jours sur 7. L'accès peut toutefois être temporairement suspendu ou limité, notamment en cas d'opérations de maintenance, de mises à jour techniques, d'incidents techniques, d'opérations de sécurité, de force majeure ou d'événements indépendants de la volonté de TRINEXTA. Aucune indemnisation ne pourra être réclamée à ce titre.",
+        "TRINEXTA met en oeuvre les moyens raisonnables pour que le site reste accessible. L'accès peut toutefois être temporairement suspendu ou limité, notamment en cas d'opérations de maintenance, de mises à jour techniques, d'incidents techniques, d'opérations de sécurité, de force majeure ou d'événements indépendants de la volonté de TRINEXTA. Aucune indemnisation ne pourra être réclamée à ce titre.",
       ],
     },
     {

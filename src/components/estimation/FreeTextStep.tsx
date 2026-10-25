@@ -9,12 +9,11 @@ import { ChatBubble } from "./ChatBubble";
 
 interface FreeTextStepProps {
   analyzing: boolean;
-  avatar: string;
   onSubmit: (text: string) => void;
   onSkip: () => void;
 }
 
-export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextStepProps) {
+export function FreeTextStep({ analyzing, onSubmit, onSkip }: FreeTextStepProps) {
   const [text, setText] = useState("");
 
   if (analyzing) {
@@ -26,7 +25,7 @@ export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextSt
           </ChatBubble>
         )}
         <Entrance direction="none">
-          <ChatBubble side="trinexta" avatar={avatar}>
+          <ChatBubble side="trinexta">
             <span className="flex items-center gap-1.5" role="status" aria-label="Analyse en cours">
               {[0, 1, 2].map((i) => (
                 <span
@@ -49,7 +48,7 @@ export function FreeTextStep({ analyzing, avatar, onSubmit, onSkip }: FreeTextSt
 
   return (
     <Entrance key="freetext" direction="up" duration={0.5}>
-      <ChatBubble side="trinexta" avatar={avatar}>
+      <ChatBubble side="trinexta">
         <p className="font-serif text-lg font-bold text-primary md:text-xl">
           Dernière chose : dites-le avec vos mots
         </p>

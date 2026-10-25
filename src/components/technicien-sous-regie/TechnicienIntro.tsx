@@ -49,7 +49,7 @@ export function TechnicienIntro() {
           <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
             {REGIE_INTRO.titreDebut}
             <br />
-            <em className="not-italic text-secondary-strong">{REGIE_INTRO.titreAccent}</em>
+            <em className="not-italic text-secondary-soft">{REGIE_INTRO.titreAccent}</em>
           </h2>
 
           <div className="w-10 h-px bg-secondary/50" />

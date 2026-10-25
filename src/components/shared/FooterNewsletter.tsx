@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { ChampPiege } from "@/components/shared/ChampPiege";
 import { CHAMP_PIEGE } from "@/data/anti-abus";
+import Link from "next/link";
+import { NEWSLETTER_LIEN_DONNEES, NEWSLETTER_MENTION } from "@/data/newsletter";
 import { ArrowRight, Mail, Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -95,7 +97,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
           disabled={status === "loading"}
           aria-label="S'inscrire à la newsletter"
           className={cn(
-            "inline-flex shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-strong-foreground transition-colors hover:bg-secondary/90 disabled:opacity-60",
+            "inline-flex shrink-0 items-center justify-center rounded-lg bg-secondary-strong text-secondary-strong-foreground transition-colors hover:bg-secondary-strong/90 disabled:opacity-60",
             compact ? "h-9 w-9" : "h-10 w-10"
           )}
         >
@@ -111,6 +113,13 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
           {message}
         </p>
       )}
+
+      <p className={cn("mt-2 leading-snug text-white/55", compact ? "text-[10px]" : "text-xs")}>
+        {NEWSLETTER_MENTION}{" "}
+        <Link href={NEWSLETTER_LIEN_DONNEES.href} className="underline hover:text-white">
+          {NEWSLETTER_LIEN_DONNEES.label}
+        </Link>
+      </p>
     </div>
   );
 }

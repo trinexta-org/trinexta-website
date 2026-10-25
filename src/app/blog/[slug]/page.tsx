@@ -28,6 +28,7 @@ import {
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA";
 import { SommaireMobile } from "@/components/blog/SommaireMobile";
+import { titreArticle } from "@/lib/seo/titre-article";
 
 type ArticlePageProps = {
   params: Promise<{
@@ -49,7 +50,7 @@ export async function generateMetadata({
     };
   }
 
-  const title = article.seoTitre ?? article.titre;
+  const title = titreArticle(article.seoTitre ?? article.titre);
   const description = article.seoDescription ?? article.extrait;
   const ogImage = article.imageUne?.asset?._ref
     ? [
@@ -68,7 +69,7 @@ export async function generateMetadata({
     : undefined;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: `/blog/${article.slug.current}`,
@@ -123,7 +124,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     author: {
       "@type": article.auteur ? "Person" : "Organization",
       name: article.auteur || "TRINEXTA",
-      url: "https://www.trinexta.fr",
+      url: "https://trinexta.fr",
     },
     publisher: publisherNode,
   };
@@ -161,7 +162,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           <Container className="relative max-w-4xl z-10">
             <div className="flex items-center gap-3 mb-6">
-              <span className="bg-secondary text-white px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest shadow-lg">
+              <span className="bg-secondary-strong text-white px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest shadow-lg">
                 {LIBELLES_CATEGORIES[article.categorie] || article.categorie}
               </span>
             </div>

@@ -2,22 +2,22 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME",
-  description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+  title: "Solutions métier et téléphonie VoIP pour PME",
+  description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
   alternates: {
     canonical: "/solutions-metier",
   },
   openGraph: {
-    title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
-    description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+    title: "Solutions métier et téléphonie VoIP pour PME | TRINEXTA",
+    description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
     url: "/solutions-metier",
     type: "website",
     images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
-    description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+    title: "Solutions métier et téléphonie VoIP pour PME | TRINEXTA",
+    description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
     images: ["/images/og-default.png"],
   },
 }
@@ -57,7 +57,7 @@ const solutionsData = {
       },
       {
         title: "Architecture réseaux multisites sécurisée et unifiée",
-        desc: "L'agrandissement de votre entreprise ne doit pas diviser votre IT. Nous interconnectons vos différents bureaux via des tunnels VPN (Virtual Private Network) de haute sécurité. Vos ressources partagées, vos fichiers serveurs et vos applications métier deviennent accessibles partout, avec la même sécurité, la même fluidité et la même vitesse que si vous étiez tous réunis dans la même pièce. Nous garantissons l'étanchéité des flux et la performance des échanges inter-sites grâce à des routeurs professionnels administrés par nos soins."
+        desc: "L'agrandissement de votre entreprise ne doit pas diviser votre IT. Nous interconnectons vos différents bureaux via des tunnels VPN (Virtual Private Network) de haute sécurité. Vos ressources partagées, vos fichiers serveurs et vos applications métier deviennent accessibles partout, avec la même sécurité, la même fluidité et la même vitesse que si vous étiez tous réunis dans la même pièce. Des routeurs professionnels administrés par nos soins chiffrent les flux et préservent la performance des échanges inter-sites."
       },
       {
         title: "Intégration et interopérabilité logicielle sur mesure",
@@ -65,7 +65,7 @@ const solutionsData = {
       },
       {
         title: "Gestion des accès et connectivité haute disponibilité",
-        desc: "L'accès à vos données est le nerf de la guerre. Nous sécurisons les accès à vos applications métier et optimisons votre infrastructure de stockage (NAS/Serveurs locaux ou distants). Nous configurons des règles d'accès strictes pour que chaque collaborateur n'accède qu'aux données nécessaires à ses fonctions, tout en assurant une vitesse d'accès optimale depuis tous vos sites, garantissant ainsi que votre travail ne soit jamais ralenti par l'infrastructure."
+        desc: "L'accès à vos données est le nerf de la guerre. Nous sécurisons les accès à vos applications métier et optimisons votre infrastructure de stockage (NAS/Serveurs locaux ou distants). Nous configurons des règles d'accès strictes pour que chaque collaborateur n'accède qu'aux données nécessaires à ses fonctions, tout en optimisant la vitesse d'accès depuis tous vos sites, pour que l'infrastructure ne ralentisse pas votre travail."
       },
       {
         title: "Audit de processus métier et conseil stratégique",
@@ -87,12 +87,12 @@ const solutionsData = {
         desc: "Chaque tâche automatisée est une erreur de moins et une minute gagnée pour vos collaborateurs. Nous supprimons la ressaisie manuelle pour transformer vos processus en flux automatisés, fluides et exempts d'erreurs humaines."
       },
       {
-        title: "Évolutivité garantie sans douleur",
+        title: "Une infrastructure qui grandit avec vous",
         desc: "Nos solutions sont conçues pour croître avec vous. Ajoutez un site, un nouvel outil ou plus d'utilisateurs sans remettre en cause toute votre structure. Votre IT devient une fondation solide, pas un assemblage fragile."
       },
       {
         title: "Expertise technique transverse (Vision 360)",
-        desc: "Nous maîtrisons autant le réseau que le logiciel. Cette double compétence est indispensable pour garantir que vos outils métier fonctionnent sans jamais faiblir, offrant une stabilité totale à votre organisation."
+        desc: "Nous maîtrisons autant le réseau que le logiciel. Cette double compétence nous permet de traiter un incident de bout en bout, du câble à l'application, pour que vos outils métier restent stables."
       }
     ]
   },
@@ -120,7 +120,7 @@ const solutionsData = {
     },
     {
       question: "Proposez-vous un support après l'installation des solutions métier ?",
-      answer: "Bien sûr. Nous ne vous abandonnons pas une fois le projet déployé. Nous proposons des contrats de maintenance incluant un support technique réactif pour garantir que vos processus métier restent fluides en permanence. Nous surveillons vos équipements pour intervenir préventivement avant qu'une anomalie ne bloque votre activité."
+      answer: "Bien sûr. Nous ne vous abandonnons pas une fois le projet déployé. Nous proposons des contrats de maintenance incluant un support technique réactif, du lundi au vendredi de 8 h 30 à 19 h, pour que vos processus métier restent fluides. Nous surveillons vos équipements pour intervenir préventivement avant qu'une anomalie ne bloque votre activité."
     },
     {
       question: "Comment gérez-vous la formation des équipes après l'installation ?",

@@ -51,6 +51,9 @@ export function ServicesGrid() {
         <div className="relative px-0 md:px-20">
             <div
                 ref={scrollContainerRef}
+                tabIndex={0}
+                role="region"
+                aria-label="Liste des interventions"
                 className="relative overflow-x-scroll overflow-y-hidden snap-x snap-mandatory scroll-smooth flex no-scrollbar"
                 style={{
                     scrollSnapType: "x mandatory",

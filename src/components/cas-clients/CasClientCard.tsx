@@ -18,7 +18,7 @@ export function CasClientCard({ item }: { item: CaseClient }) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/40 to-primary/95" />
 
-        <span className="absolute right-3 top-3 rounded-full bg-secondary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-secondary/30">
+        <span className="absolute right-3 top-3 rounded-full bg-secondary-strong px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-secondary/30">
           {item.label}
         </span>
 
