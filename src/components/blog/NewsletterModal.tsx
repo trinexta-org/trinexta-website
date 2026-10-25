@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { ChampPiege } from "@/components/shared/ChampPiege";
+import { CHAMP_PIEGE } from "@/data/anti-abus";
 import { X, Send, Loader2, CheckCircle2 } from "lucide-react";
 import { usePresence } from "@/hooks/usePresence";
 
@@ -8,6 +10,7 @@ export function NewsletterModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const piegeRef = useRef<HTMLInputElement>(null);
   const { shouldRender, isVisible } = usePresence(isOpen, 300);
 
   useEffect(() => {
@@ -38,7 +41,7 @@ export function NewsletterModal() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, [CHAMP_PIEGE]: piegeRef.current?.value ?? "" }),
       });
 
       if (!response.ok) {
@@ -88,10 +91,11 @@ export function NewsletterModal() {
           {status === "success" ? (
             <div className="animate-fade-in-up bg-green-500/10 border border-green-500/20 text-green-600 p-6 rounded-2xl flex flex-col items-center gap-3">
               <CheckCircle2 className="w-8 h-8" />
-              <p className="font-medium">Inscription confirmée !</p>
+              <p className="font-medium">Vérifiez votre boîte de réception pour confirmer votre inscription.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <ChampPiege ref={piegeRef} />
               <input
                 type="email"
                 value={email}

@@ -8,6 +8,7 @@ import {
 import { sendMail } from "@/lib/mail";
 import { checkRateLimit, getClientIp, hashIp } from "@/lib/estimation/rate-limit";
 import { estimationLeadSchema } from "@/lib/validations/estimation";
+import { estRobot, limiteParEmail, lireCorpsJson } from "@/lib/security/anti-abus";
 import type { EstimationAnswers } from "@/data/estimation";
 
 const LEAD_MAX_REQUESTS_PER_WINDOW = 5;
@@ -18,7 +19,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Trop de requêtes, réessayez plus tard." }, { status: 429 });
     }
 
-    const body = await request.json();
+    const body = await lireCorpsJson(request);
+    if (body === null) {
+      return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
+    }
+    // Robot : réponse de succès sans rien enregistrer ni envoyer.
+    if (estRobot(body)) {
+      return NextResponse.json({ success: true, emailSent: true }, { status: 200 });
+    }
     const validated = estimationLeadSchema.safeParse(body);
 
     if (!validated.success) {
@@ -29,6 +37,11 @@ export async function POST(request: Request) {
     }
 
     const { estimateId, prenom, nom, email, telephone, entreprise } = validated.data;
+
+    // L'estimation détaillée part vers l'adresse saisie : au plus 3 envois par boîte et par fenêtre.
+    if (!limiteParEmail(email, "lead", 3)) {
+      return NextResponse.json({ error: "Trop de requêtes, réessayez plus tard." }, { status: 429 });
+    }
 
     const estimate = await prisma.estimate.findUnique({ where: { id: estimateId } });
     if (!estimate) {

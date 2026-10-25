@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ChampPiege } from "@/components/shared/ChampPiege";
+import { CHAMP_PIEGE } from "@/data/anti-abus";
 import Link from "next/link";
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -125,6 +127,7 @@ export default function ContactForm() {
 
   // Pré-remplit l'entreprise et la ville depuis le SIRET (API publique recherche-entreprises), sans écraser la saisie.
   const derniereRecherche = useRef<string | null>(null);
+  const piegeRef = useRef<HTMLInputElement>(null);
   const rechercherSiret = async (saisie: string) => {
     const siret = saisie.replace(/\s/g, "");
     if (!/^\d{14}$/.test(siret) || siret === derniereRecherche.current) return;
@@ -152,7 +155,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, [CHAMP_PIEGE]: piegeRef.current?.value ?? "" }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -191,6 +194,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-8 text-left">
+        <ChampPiege ref={piegeRef} />
       {offre && (
         <div className="flex items-center justify-between gap-4 rounded-xl border border-secondary bg-secondary/10 px-4 py-3">
           <p className="text-base text-foreground">

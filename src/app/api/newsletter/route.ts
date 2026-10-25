@@ -1,127 +1,96 @@
 import { prisma } from "@/lib/db"
-import { NextResponse } from "next/server";
-import { z } from "zod";
+import { NextResponse } from "next/server"
+import { z } from "zod"
+import { escapeHtml, sendMail } from "@/lib/mail"
+import { PRODUCTION_URL } from "@/lib/site"
+import { estRobot, limiteParEmail, limiteParIp, lireCorpsJson } from "@/lib/security/anti-abus"
 
 const newsletterSchema = z.object({
-  email: z.string().email("Le format de l'adresse e-mail est invalide."),
-});
+  email: z.string().trim().toLowerCase().email("Le format de l'adresse e-mail est invalide.").max(254),
+})
 
+const MAX_PAR_IP = 3
+const MAX_PAR_EMAIL = 2
+
+// Réponse identique que l'adresse soit nouvelle, en attente ou déjà inscrite :
+// le formulaire ne révèle pas qui est abonné.
+const REPONSE = {
+  message: "Vérifiez votre boîte de réception : un e-mail vous permet de confirmer votre inscription.",
+}
+
+/**
+ * Inscription en double opt-in : l'abonné est créé inactif et ne devient actif
+ * qu'après avoir cliqué sur le lien de confirmation. L'e-mail envoyé ne contient
+ * que ce lien : il n'a aucun intérêt comme relais de spam.
+ */
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { email } = newsletterSchema.parse(body);
-
-    // ==========================================
-    // ÉTAPE 1 : SAUVEGARDE DANS LA BASE DE DONNÉES (PRISMA)
-    // ==========================================
-    
-    let subscriberToken: string;
-
-    const existingSubscriber = await prisma.subscriber.findUnique({
-      where: { email: email }
-    });
-
-    if (existingSubscriber) {
-      if (!existingSubscriber.isActive) {
-        const updated = await prisma.subscriber.update({
-          where: { email: email },
-          data: { isActive: true }
-        });
-        subscriberToken = updated.token;
-      } else {
-        return NextResponse.json({ message: "Vous êtes déjà inscrit à notre newsletter !" }, { status: 200 });
-      }
-    } else {
-      const created = await prisma.subscriber.create({
-        data: { email: email }
-      });
-      subscriberToken = created.token;
+    const body = await lireCorpsJson(request)
+    if (body === null) {
+      return NextResponse.json({ error: "Requête invalide." }, { status: 400 })
+    }
+    if (estRobot(body)) {
+      return NextResponse.json(REPONSE, { status: 200 })
+    }
+    if (!limiteParIp(request, "newsletter", MAX_PAR_IP)) {
+      return NextResponse.json({ error: "Trop de demandes, réessayez dans quelques minutes." }, { status: 429 })
     }
 
-    // ==========================================
-    // ÉTAPE 2 : ENVOYER L'E-MAIL DE BIENVENUE (AZURE)
-    // ==========================================
-    const tenantId = process.env.AZURE_TENANT_ID;
-    const clientId = process.env.AZURE_CLIENT_ID;
-    const clientSecret = process.env.AZURE_CLIENT_SECRET;
-    const senderEmail = process.env.NEWSLETTER_FROM_EMAIL;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://trinexta.fr";
+    const parsed = newsletterSchema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 })
+    }
+    const { email } = parsed.data
 
-    if (!tenantId || !clientId || !clientSecret || !senderEmail) {
-      console.error("Identifiants Azure manquants");
-      return NextResponse.json({ error: "Erreur serveur." }, { status: 500 });
+    if (!limiteParEmail(email, "newsletter", MAX_PAR_EMAIL)) {
+      return NextResponse.json(REPONSE, { status: 200 })
     }
 
-    const tokenParams = new URLSearchParams();
-    tokenParams.append("client_id", clientId);
-    tokenParams.append("scope", "https://graph.microsoft.com/.default");
-    tokenParams.append("client_secret", clientSecret);
-    tokenParams.append("grant_type", "client_credentials");
-
-    const tokenResponse = await fetch(`https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: tokenParams.toString(),
-    });
-
-    const tokenData = await tokenResponse.json();
-    const accessToken = tokenData.access_token;
-
-    const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?token=${subscriberToken}`;
-
-    const emailHtmlContent = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0F172A; color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #1E293B;">
-        <div style="padding: 40px; text-align: center; border-bottom: 1px solid #1E293B;">
-          <h1 style="margin: 0; font-size: 24px; font-weight: 900; letter-spacing: -0.5px;">
-            <span style="color: #ffffff;">TRIN</span><span style="color: #3B82F6;">EXTA</span>
-          </h1>
-        </div>
-        <div style="padding: 40px;">
-          <h2 style="font-size: 20px; margin-top: 0; color: #ffffff;">Inscription confirmée !</h2>
-          <p style="color: #94A3B8; line-height: 1.6; font-size: 15px;">Bonjour,</p>
-          <p style="color: #94A3B8; line-height: 1.6; font-size: 15px;">Merci de l'intérêt que vous portez à l'expertise Trinexta. Nous vous confirmons que votre adresse e-mail a bien été ajoutée à notre liste d'envoi exclusive.</p>
-          <p style="color: #94A3B8; line-height: 1.6; font-size: 15px;">Vous recevrez prochainement nos meilleures analyses sur la cybersécurité, l'infogérance et les stratégies Cloud pour les entreprises.</p>
-        </div>
-        <div style="padding: 20px 40px; border-top: 1px solid #1E293B; text-align: center;">
-          <p style="font-size: 11px; color: #475569; margin: 0;">
-            Pour ne plus recevoir nos emails : <a href="${unsubscribeUrl}" style="color: #475569;">Se désabonner</a>
-          </p>
-        </div>
-      </div>
-    `;
-
-    const emailData = {
-      message: {
-        subject: "Bienvenue dans la newsletter Trinexta ",
-        body: { contentType: "HTML", content: emailHtmlContent },
-        toRecipients: [{ emailAddress: { address: email } }]
-      },
-      saveToSentItems: "false"
-    };
-
-    const sendMailResponse = await fetch(`https://graph.microsoft.com/v1.0/users/${senderEmail}/sendMail`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(emailData)
-    });
-
-    if (!sendMailResponse.ok) {
-      const errorText = await sendMailResponse.text();
-      console.error("Erreur Microsoft Graph :", errorText);
-      throw new Error(`Échec de l'envoi de l'e-mail de bienvenue (Statut: ${sendMailResponse.status})`);
+    const existant = await prisma.subscriber.findUnique({ where: { email } })
+    if (existant?.isActive) {
+      return NextResponse.json(REPONSE, { status: 200 })
     }
 
-    return NextResponse.json({ message: "Inscription réussie !" }, { status: 200 });
+    const abonne = existant ?? (await prisma.subscriber.create({ data: { email, isActive: false } }))
 
+    const sender = process.env.NEWSLETTER_FROM_EMAIL
+    if (!sender) {
+      console.error("[newsletter] NEWSLETTER_FROM_EMAIL manquant")
+      return NextResponse.json({ error: "Une erreur est survenue." }, { status: 500 })
+    }
+
+    const base = (process.env.NEXT_PUBLIC_SITE_URL ?? PRODUCTION_URL).replace(/\/+$/, "")
+    const lien = `${base}/newsletter/confirmation?token=${encodeURIComponent(abonne.token)}`
+
+    await sendMail({
+      from: sender,
+      to: email,
+      subject: "Confirmez votre inscription à la newsletter TRINEXTA",
+      html: emailConfirmation(lien),
+    })
+
+    return NextResponse.json(REPONSE, { status: 200 })
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.issues[0].message }, { status: 400 });
-    }
-
-    console.error("Erreur Inscription:", error);
-    return NextResponse.json({ error: "Une erreur est survenue." }, { status: 500 });
+    console.error("[newsletter]", error)
+    return NextResponse.json({ error: "Une erreur est survenue." }, { status: 500 })
   }
+}
+
+function emailConfirmation(lien: string): string {
+  const url = escapeHtml(lien)
+  return `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #FFFFFF; color: #0A233E; border: 1px solid #5C92B8; border-radius: 12px; overflow: hidden;">
+      <div style="padding: 28px 32px; background-color: #0A233E;">
+        <p style="margin: 0; font-size: 20px; font-weight: 700; color: #FFFFFF;">TRINEXTA</p>
+      </div>
+      <div style="padding: 32px;">
+        <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6;">Bonjour,</p>
+        <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6;">Une demande d'inscription à la newsletter TRINEXTA a été faite avec cette adresse. Pour la confirmer, cliquez sur le bouton ci-dessous.</p>
+        <p style="margin: 24px 0;">
+          <a href="${url}" style="display: inline-block; padding: 12px 24px; background-color: #0A233E; color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 600;">Confirmer mon inscription</a>
+        </p>
+        <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #0A233E;">Si vous n'êtes pas à l'origine de cette demande, ignorez ce message : sans confirmation, votre adresse ne recevra rien.</p>
+      </div>
+    </div>
+  `
 }

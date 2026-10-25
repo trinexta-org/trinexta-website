@@ -63,6 +63,7 @@ export async function sendMail({
   html,
   replyTo,
   cc,
+  from,
 }: {
   to: string;
   subject: string;
@@ -70,8 +71,10 @@ export async function sendMail({
   /** Adresse de réponse : le prospect pour les notifications, contact@ pour l'accusé de réception. */
   replyTo?: string;
   cc?: string;
+  /** Boîte d'envoi, AZURE_FROM_EMAIL par défaut (la newsletter a la sienne). */
+  from?: string;
 }) {
-  const fromEmail = process.env.AZURE_FROM_EMAIL;
+  const fromEmail = from ?? process.env.AZURE_FROM_EMAIL;
   if (!fromEmail) {
     throw new Error("Configuration de messagerie incomplète");
   }

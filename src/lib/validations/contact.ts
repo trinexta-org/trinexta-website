@@ -53,7 +53,7 @@ export const contactFormSchema = z
     message: texteFacultatif(5000),
     suite: z.enum(SUITE_VALUES, { message: "Rappel, rendez-vous ou message ?" }),
     moment: z.enum(MOMENT_VALUES).optional(),
-    rdvDate: z.string().optional(),
+    rdvDate: z.string().max(10).optional(),
     rdvFormat: z.enum(RDV_FORMAT_VALUES).optional(),
   })
   // `when` : ces vérifications tournent même si d'autres champs sont en erreur,

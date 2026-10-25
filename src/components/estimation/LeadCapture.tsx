@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ChampPiege } from "@/components/shared/ChampPiege";
+import { CHAMP_PIEGE } from "@/data/anti-abus";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { trackLeadConversion } from "@/lib/gtm";
@@ -16,6 +18,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
   const [telephone, setTelephone] = useState("");
   const [entreprise, setEntreprise] = useState("");
   const [consent, setConsent] = useState(false);
+  const piegeRef = useRef<HTMLInputElement>(null);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [emailSent, setEmailSent] = useState(true);
@@ -42,6 +45,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          [CHAMP_PIEGE]: piegeRef.current?.value ?? "",
           estimateId,
           prenom: prenom.trim(),
           nom: nom.trim(),
@@ -88,6 +92,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+        <ChampPiege ref={piegeRef} />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="estimation-prenom" className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-primary">
