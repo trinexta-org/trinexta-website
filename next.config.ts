@@ -19,6 +19,8 @@ const GOOGLE_ADS_ORIGINS = [
 const STUDIO_URL = "https://trinexta-studio.fr";
 
 const nextConfig: NextConfig = {
+  // Ne pas annoncer la pile technique dans les réponses (X-Powered-By).
+  poweredByHeader: false,
   async headers() {
     return [
       {
@@ -28,6 +30,9 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "object-src 'none'",
               // Google Ads envoie la conversion sur trois canaux selon le
               // navigateur : fetch vers googleadservices.com et
               // www.google.com, et un pixel de repli sur googleadservices.com.

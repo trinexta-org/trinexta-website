@@ -2,10 +2,29 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { contactFormSchema } from "@/lib/validations/contact";
 import { sendContactAccuseReception, sendNotificationEmail } from "@/lib/mail";
+import { estRobot, limiteParEmail, limiteParIp, lireCorpsJson } from "@/lib/security/anti-abus";
+
+const MAX_PAR_IP = 5;
+const MAX_PAR_EMAIL = 3;
+const REPONSE_ROBOT = {
+  success: true,
+  message: "Nous lisons votre message et revenons vers vous par e-mail ou par téléphone.",
+};
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body = await lireCorpsJson(request);
+    if (body === null) {
+      return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
+    }
+    // Robot : réponse identique à un succès, sans rien enregistrer ni envoyer.
+    if (estRobot(body)) {
+      return NextResponse.json(REPONSE_ROBOT, { status: 200 });
+    }
+    if (!limiteParIp(request, "contact", MAX_PAR_IP)) {
+      return NextResponse.json({ error: "Trop de demandes, réessayez dans quelques minutes." }, { status: 429 });
+    }
+
     const validatedData = contactFormSchema.safeParse(body);
 
     if (!validatedData.success) {
@@ -19,6 +38,12 @@ export async function POST(request: Request) {
     }
 
     const data = validatedData.data;
+
+    // L'accusé de réception part vers l'adresse saisie : on borne le nombre
+    // d'envois vers une même boîte pour que le formulaire ne serve pas de relais.
+    if (!limiteParEmail(data.email, "contact", MAX_PAR_EMAIL)) {
+      return NextResponse.json({ error: "Trop de demandes, réessayez dans quelques minutes." }, { status: 429 });
+    }
 
     const savedContact = await prisma.contactForm.create({
       data: {
