@@ -174,8 +174,9 @@ const nextConfig: NextConfig = {
       {
         source:
           "/pourquoi-externaliser-votre-support-it-peut-transformer-votre-entreprise",
+        // Article fusionné dans « Externaliser son informatique » (B08 -> B07) : un seul saut
         destination:
-          "/blog/pourquoi-externaliser-votre-support-it-peut-transformer-votre-entreprise",
+          "/blog/externaliser-son-informatique-le-calcul-gagnant-pour-la-rentabilite-de-votre-pme",
         statusCode: 301,
       },
       // --- Pages orphelines -> infogerance ---

@@ -9,9 +9,9 @@ export function CtaAudit() {
     <div className="mt-20 p-10 bg-surface-strong border border-secondary/20 rounded-3xl text-center relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-transparent pointer-events-none" />
       
-      <h3 className="text-2xl font-bold mb-4 relative z-10 text-primary">Besoin d&apos;un audit de sécurité ou d&apos;infogérance ?</h3>
+      <h3 className="text-2xl font-bold mb-4 relative z-10 text-primary">Parlons de votre informatique</h3>
       <p className="text-primary/60 mb-8 max-w-lg mx-auto relative z-10">
-        Nos experts analysent votre infrastructure pour identifier les points de blocage et renforcer votre protection.
+        Nous faisons le point avec vous sur vos postes, votre sécurité et vos priorités. L&apos;état des lieux de votre parc est offert.
       </p>
       
       <div className="relative z-10 pt-4">
@@ -19,7 +19,7 @@ export function CtaAudit() {
           href="/contact"
           onClick={() => {
             pushGtmEvent('cta_click', {
-              cta_name: "Demander mon audit gratuit",
+              cta_name: "Être rappelé",
               cta_url: "/contact"
             });
           }}
@@ -28,7 +28,7 @@ export function CtaAudit() {
           <div className="absolute inset-0 bg-primary translate-y-[102%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
 
           <span className="relative z-10 text-primary group-hover:text-white font-black text-xs md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] transition-colors duration-500">
-            Demander mon audit gratuit
+            Être rappelé
           </span>
           
           <div className="relative z-10 text-secondary-strong group-hover:text-white transition-colors duration-500">
