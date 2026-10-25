@@ -93,6 +93,10 @@ Le protocole de revue (deux passes, budget, porte de falsifiabilité) est dans
 `.claude/skills/review-pr-trinexta/SKILL.md`, et la revue automatique de CI l'applique
 via `.github/scripts/ai-review.py`.
 
+## Dossier de conformité
+
+`docs/CONFORMITE.md` décrit l'état réel du site (traitements, traceurs, sous-traitants, protections des routes, tests et écarts), selon l'ADR 0002 de `trinexta-fondations`. Toute PR qui ajoute ou modifie un formulaire, une route API, un script tiers, un traceur, un sous-traitant ou un texte juridique le met à jour dans la même PR.
+
 ## Interdictions
 
 - Ne pas modifier `src/generated/prisma/` manuellement
