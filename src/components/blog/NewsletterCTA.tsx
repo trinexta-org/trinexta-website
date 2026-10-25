@@ -81,7 +81,7 @@ export function NewsletterCTA() {
                 <button
                   type="submit"
                   disabled={status === "loading" || status === "success" || !email}
-                  className="absolute right-2 top-2 bottom-2 aspect-square bg-secondary text-white rounded-xl flex items-center justify-center hover:bg-secondary/90 transition-colors disabled:opacity-50 disabled:hover:bg-secondary"
+                  className="absolute right-2 top-2 bottom-2 aspect-square bg-secondary-strong text-white rounded-xl flex items-center justify-center hover:bg-secondary-strong/90 transition-colors disabled:opacity-50 disabled:hover:bg-secondary-strong"
                   aria-label="S'inscrire"
                 >
                   {status === "loading" ? (

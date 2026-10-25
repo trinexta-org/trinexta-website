@@ -45,9 +45,9 @@ export function ServicesIntro() {
           `}
           style={{ transitionDelay: "100ms" }}
         >
-          <span className="text-secondary-strong font-mono text-xs tracking-widest uppercase">{SA_INTRO.surtitre}</span>
+          <span className="text-secondary-soft font-mono text-xs tracking-widest uppercase">{SA_INTRO.surtitre}</span>
           <Heading as="h2" className="text-4xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            {SA_INTRO.titreDebut}<em className="not-italic text-secondary-strong">{SA_INTRO.titreAccent}</em>
+            {SA_INTRO.titreDebut}<em className="not-italic text-secondary-soft">{SA_INTRO.titreAccent}</em>
           </Heading>
 
           <div className="w-10 h-px bg-secondary/50" />

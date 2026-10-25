@@ -29,7 +29,7 @@ function ReviewCard({ review }: { review: Review }) {
       <div className="bg-white border border-border hover:border-secondary/40 hover:shadow-md transition-all duration-300 rounded-2xl flex flex-col gap-4 p-6 h-full shadow-sm relative">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold shrink-0">
+            <div className="w-10 h-10 rounded-full bg-secondary-strong text-white flex items-center justify-center font-bold shrink-0">
               {initial}
             </div>
             <div>
@@ -128,7 +128,7 @@ export function CustomerReviews() {
             <button onClick={handlePrev} className="w-12 h-12 rounded-full bg-white border border-border flex items-center justify-center text-primary hover:bg-accent hover:border-secondary/30 transition-all active:scale-95" aria-label="Avis précédent">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={handleNext} className="w-12 h-12 rounded-full bg-white border border-border flex items-center justify-center text-secondary-strong hover:bg-secondary hover:text-white hover:border-secondary transition-all active:scale-95" aria-label="Avis suivant">
+            <button onClick={handleNext} className="w-12 h-12 rounded-full bg-white border border-border flex items-center justify-center text-secondary-strong hover:bg-secondary-strong hover:text-white hover:border-secondary-strong transition-all active:scale-95" aria-label="Avis suivant">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>

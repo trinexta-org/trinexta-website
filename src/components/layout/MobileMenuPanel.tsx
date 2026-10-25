@@ -1,5 +1,6 @@
 "use client"
 
+import type { RefObject } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { X, ChevronDown } from "lucide-react"
@@ -10,14 +11,17 @@ import { usePresence } from "@/hooks/usePresence"
 import { HEADER_CTA } from "@/data/header-cta"
 
 interface MobileMenuPanelProps {
+  id: string
   isOpen: boolean
+  /** Bouton qui a ouvert le menu : il reprend le focus à la fermeture. */
+  returnFocusRef: RefObject<HTMLButtonElement | null>
   onClose: () => void
   pathname: string | null
   openSubMenu: string | null
   onToggleSubMenu: (label: string) => void
 }
 
-export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu, onToggleSubMenu }: MobileMenuPanelProps) {
+export default function MobileMenuPanel({ id, isOpen, returnFocusRef, onClose, pathname, openSubMenu, onToggleSubMenu }: MobileMenuPanelProps) {
   const { shouldRender, isVisible } = usePresence(isOpen, 300)
 
   if (!shouldRender) return null
@@ -26,14 +30,33 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
     <>
       <div
         onClick={onClose}
+        aria-hidden="true"
         className={cn(
           "fixed inset-0 bg-primary/40 backdrop-blur-sm z-50 transition-opacity duration-300",
           isVisible ? "opacity-100" : "opacity-0"
         )}
       />
 
-      <FocusTrap focusTrapOptions={{ allowOutsideClick: true }}>
+      {/* Échap ferme le menu ; à la désactivation, le focus revient au burger */}
+      <FocusTrap
+        active={isOpen}
+        focusTrapOptions={{
+          allowOutsideClick: true,
+          // Échap ferme via l'état (le piège se désactive avec active=false) : pas
+          // d'onDeactivate, que le double montage de StrictMode déclencherait.
+          escapeDeactivates: () => {
+            onClose()
+            return false
+          },
+          returnFocusOnDeactivate: true,
+          setReturnFocus: () => returnFocusRef.current ?? false,
+        }}
+      >
         <aside
+          id={id}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu principal"
           className={cn(
             "fixed top-0 left-0 h-full w-[280px] bg-background shadow-2xl z-[60] flex flex-col transition-transform duration-300 ease-in-out",
             isVisible ? "translate-x-0" : "-translate-x-full"
@@ -52,7 +75,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
               className="p-2 -mr-2 text-muted-foreground hover:text-secondary-strong transition-colors"
               aria-label="Fermer le menu"
             >
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
 
@@ -62,6 +85,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
                 (href) => pathname === href || (href !== "/" && pathname?.startsWith(href))
               )
               const isSubOpen = openSubMenu === link.label
+              const sousMenuId = `${id}-${link.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
 
               if (!link.groups) {
                 return (
@@ -85,6 +109,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
                     type="button"
                     onClick={() => onToggleSubMenu(link.label)}
                     aria-expanded={isSubOpen}
+                    aria-controls={sousMenuId}
                     className={cn(
                       "flex items-center justify-between py-3 w-full text-left text-base font-bold transition-colors",
                       isActive ? "text-secondary-strong" : "text-primary"
@@ -94,7 +119,10 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
                     <ChevronDown className={cn("w-5 h-5 transition-transform", isSubOpen && "rotate-180")} aria-hidden="true" />
                   </button>
 
+                  {/* inert : un sous-menu replié ne reçoit ni le focus clavier ni la lecture */}
                   <div
+                    id={sousMenuId}
+                    inert={!isSubOpen}
                     className="grid transition-[grid-template-rows] duration-300 ease-in-out"
                     style={{ gridTemplateRows: isSubOpen ? "1fr" : "0fr" }}
                   >
@@ -102,7 +130,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
                       <div className="flex flex-col gap-4 pl-4 py-2 border-l-2 border-border mb-2">
                         {link.groups.map((groupe) => (
                           <div key={groupe.titre} className="flex flex-col gap-3">
-                            <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/80">
+                            <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
                               {groupe.titre}
                             </p>
                             {groupe.items.map((sub) => (
@@ -127,7 +155,7 @@ export default function MobileMenuPanel({ isOpen, onClose, pathname, openSubMenu
             <Link
               href={HEADER_CTA.href}
               onClick={onClose}
-              className="mt-4 inline-flex items-center justify-center rounded-xl bg-secondary px-4 py-3 text-sm font-bold text-secondary-strong-foreground shadow-md transition-all hover:bg-secondary/90 active:scale-95"
+              className="mt-4 inline-flex items-center justify-center rounded-xl bg-secondary-strong px-4 py-3 text-sm font-bold text-secondary-strong-foreground shadow-md transition-all hover:bg-secondary-strong/90 active:scale-95"
             >
               {HEADER_CTA.label}
             </Link>

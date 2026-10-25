@@ -120,7 +120,7 @@ export const confidentialiteData: LegalData = {
     {
       title: "Article 3 - Finalités, bases légales et durées de conservation",
       content: (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tableau : Finalités, bases légales et durées de conservation">
           <table className="w-full min-w-[36rem] border-collapse text-left text-sm text-primary/80">
             <thead>
               <tr className="border-b border-primary text-xs uppercase tracking-wider text-primary">
@@ -154,7 +154,7 @@ export const confidentialiteData: LegalData = {
       title: "Article 5 - Sous-traitants",
       content: (
         <div className="space-y-3">
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tableau : Sous-traitants">
             <table className="w-full min-w-[36rem] border-collapse text-left text-sm text-primary/80">
               <thead>
                 <tr className="border-b border-primary text-xs uppercase tracking-wider text-primary">

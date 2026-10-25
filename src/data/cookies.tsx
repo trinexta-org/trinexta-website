@@ -109,7 +109,7 @@ export const cookiesData: LegalData = {
       title: "Article 4 - Liste des cookies et traceurs",
       content: (
         <div className="space-y-3">
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tableau : Liste des cookies et traceurs">
             <table className="w-full min-w-[36rem] border-collapse text-left text-sm text-primary/80">
               <thead>
                 <tr className="border-b border-primary text-xs uppercase tracking-wider text-primary">

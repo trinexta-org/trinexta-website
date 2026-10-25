@@ -97,7 +97,7 @@ export function FooterNewsletter({ compact = false, className }: FooterNewslette
           disabled={status === "loading"}
           aria-label="S'inscrire à la newsletter"
           className={cn(
-            "inline-flex shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-strong-foreground transition-colors hover:bg-secondary/90 disabled:opacity-60",
+            "inline-flex shrink-0 items-center justify-center rounded-lg bg-secondary-strong text-secondary-strong-foreground transition-colors hover:bg-secondary-strong/90 disabled:opacity-60",
             compact ? "h-9 w-9" : "h-10 w-10"
           )}
         >

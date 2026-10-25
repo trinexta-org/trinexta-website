@@ -2,22 +2,22 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME",
-  description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+  title: "Solutions métier et téléphonie VoIP pour PME",
+  description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
   alternates: {
     canonical: "/solutions-metier",
   },
   openGraph: {
-    title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
-    description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+    title: "Solutions métier et téléphonie VoIP pour PME | TRINEXTA",
+    description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
     url: "/solutions-metier",
     type: "website",
     images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solutions Métier & Téléphonie VoIP : Intégration Stratégique pour TPE/PME | Trinexta",
-    description: "Transformez vos processus métiers avec l'expertise Trinexta. Téléphonie VoIP avancée, interconnexion de sites, intégration logicielle et audit de performance IT : pilotez votre entreprise avec des outils parfaitement alignés sur vos objectifs de croissance.",
+    title: "Solutions métier et téléphonie VoIP pour PME | TRINEXTA",
+    description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
     images: ["/images/og-default.png"],
   },
 }
