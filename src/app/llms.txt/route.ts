@@ -15,7 +15,7 @@ export function GET() {
     "",
     `> ${ACCUEIL_IDENTITE}`,
     "",
-    "TRINEXTA est une marque de TrusTech IT Support SAS. Baseline : « L'humain avant les tickets. »",
+    "TRINEXTA est une marque de TrusTech IT Support SASU. Baseline : « L'humain avant les tickets. »",
     "",
     ...ACCUEIL_FAITS.map((f) => `- ${f.label} : ${f.valeur}`),
     `- Adresse : ${ACCUEIL_ADRESSE.lieu}, ${ACCUEIL_ADRESSE.rue}, ${ACCUEIL_ADRESSE.ville}, France`,

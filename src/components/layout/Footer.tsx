@@ -138,7 +138,7 @@ export function Footer() {
           </div>
         </div>
         <p className="pb-6 text-[12px] text-white/50">
-          © {currentYear} TRINEXTA, marque de TrusTech IT Support SAS · Siège social : {PIED_CONTACT.siege}
+          © {currentYear} TRINEXTA, marque de TrusTech IT Support SASU · Siège social : {PIED_CONTACT.siege}
         </p>
       </Container>
     </footer>
