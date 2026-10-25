@@ -97,8 +97,8 @@ function parseIpv6Groups(ip: string): number[] | null {
   return [...head, ...new Array<number>(fill).fill(0), ...tail];
 }
 
-function embeddedIpv4IsPrivate(g: number[]): boolean {
-  return isPrivateIpv4Int((((g[6] << 16) | g[7]) >>> 0));
+function embeddedIpv4IsPrivate(g: number[], hi = 6): boolean {
+  return isPrivateIpv4Int((((g[hi] << 16) | g[hi + 1]) >>> 0));
 }
 
 function isPrivateIpv6(g: number[]): boolean {
@@ -111,12 +111,24 @@ function isPrivateIpv6(g: number[]): boolean {
   if (firstSixZero && g[5] === 0xffff) return embeddedIpv4IsPrivate(g);
   // ::x.x.x.x (IPv4-compatible, dépréciée) → idem
   if (firstSixZero && g[5] === 0) return embeddedIpv4IsPrivate(g);
+  // ::ffff:0:x.x.x.x (SIIT, ::ffff:0:0/96) → idem
+  if (g[0] === 0 && g[1] === 0 && g[2] === 0 && g[3] === 0 && g[4] === 0xffff && g[5] === 0) {
+    return embeddedIpv4IsPrivate(g);
+  }
   // 64:ff9b::/96 (NAT64) → idem
   if (g[0] === 0x64 && g[1] === 0xff9b && g[2] === 0 && g[3] === 0 && g[4] === 0 && g[5] === 0) {
     return embeddedIpv4IsPrivate(g);
   }
+  // 64:ff9b:1::/48 (NAT64 local) : IPv4 dans les 32 derniers bits
+  if (g[0] === 0x64 && g[1] === 0xff9b && g[2] === 1) return embeddedIpv4IsPrivate(g);
+  // 2002::/16 (6to4) : IPv4 dans les bits 16 à 47
+  if (g[0] === 0x2002) return embeddedIpv4IsPrivate(g, 1);
+  // 100::/64 (discard), 2001:db8::/32 (documentation)
+  if (g[0] === 0x0100 && g[1] === 0 && g[2] === 0 && g[3] === 0) return true;
+  if (g[0] === 0x2001 && g[1] === 0x0db8) return true;
   if ((g[0] & 0xfe00) === 0xfc00) return true; // fc00::/7 ULA
   if ((g[0] & 0xffc0) === 0xfe80) return true; // fe80::/10 link-local
+  if ((g[0] & 0xffc0) === 0xfec0) return true; // fec0::/10 site-local (dépréciée)
   if ((g[0] & 0xff00) === 0xff00) return true; // ff00::/8 multicast
   return false;
 }
@@ -140,10 +152,24 @@ export interface AssertPublicUrlOptions {
   resolve?: (hostname: string) => Promise<string[]>;
 }
 
-async function systemResolve(hostname: string): Promise<string[]> {
-  const results = await lookup(hostname, { all: true });
+const DELAI_DNS_MS = 3000;
+
+/** Exécute une promesse avec un délai maximal (le DNS système n'en a pas). */
+export function avecDelai<T>(promesse: Promise<T>, delaiMs: number, message = "Délai dépassé"): Promise<T> {
+  let minuteur: ReturnType<typeof setTimeout> | undefined;
+  const delai = new Promise<never>((_, reject) => {
+    minuteur = setTimeout(() => reject(new Error(message)), delaiMs);
+  });
+  return Promise.race([promesse, delai]).finally(() => clearTimeout(minuteur));
+}
+
+/** Résolution système (getaddrinfo), bornée dans le temps. */
+export async function resoudreHote(hostname: string): Promise<string[]> {
+  const results = await avecDelai(lookup(hostname, { all: true }), DELAI_DNS_MS);
   return results.map((r) => r.address);
 }
+
+const systemResolve = resoudreHote;
 
 /**
  * Valide une URL cible : schéma http(s), hôte public. Résout le domaine et

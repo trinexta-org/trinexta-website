@@ -1,6 +1,6 @@
-import { lookup, Resolver } from "node:dns/promises";
+import { Resolver } from "node:dns/promises";
 import { connect } from "node:tls";
-import { isPrivateIp, UrlRefuseeError } from "./assert-public-url";
+import { avecDelai, isPrivateIp, resoudreHote, UrlRefuseeError } from "./assert-public-url";
 
 // Accès réseau hors HTTP : certificat TLS et enregistrements DNS.
 // Mêmes garde-fous que les requêtes HTTP : IP publique vérifiée avant la connexion.
@@ -23,11 +23,13 @@ export interface InfoCertificat {
  * `servername` : aucune seconde résolution ne peut viser une adresse interne.
  */
 export async function lireCertificat(hote: string, signal?: AbortSignal): Promise<InfoCertificat> {
-  const adresses = await lookup(hote, { all: true });
-  if (adresses.length === 0 || adresses.some((a) => isPrivateIp(a.address))) {
+  if (signal?.aborted) throw new Error("Délai dépassé");
+  const adresses = await resoudreHote(hote);
+  if (adresses.length === 0 || adresses.some((a) => isPrivateIp(a))) {
     throw new UrlRefuseeError("Adresse non autorisée");
   }
-  const ip = adresses[0].address;
+  if (signal?.aborted) throw new Error("Délai dépassé");
+  const ip = adresses[0];
 
   return new Promise<InfoCertificat>((resolve, reject) => {
     const socket = connect({
@@ -38,13 +40,21 @@ export async function lireCertificat(hote: string, signal?: AbortSignal): Promis
       rejectUnauthorized: false,
       timeout: DELAI_TLS_MS,
     });
-    const fin = (erreur?: Error, info?: InfoCertificat) => {
+    // Minuteur absolu : l'option `timeout` ne compte que l'inactivité.
+    const minuteur = setTimeout(() => fin(new Error("Délai dépassé")), DELAI_TLS_MS);
+    let termine = false;
+    function fin(erreur?: Error, info?: InfoCertificat) {
+      if (termine) return;
+      termine = true;
+      clearTimeout(minuteur);
       signal?.removeEventListener("abort", surAnnulation);
       socket.destroy();
       if (erreur) reject(erreur);
       else resolve(info!);
-    };
-    const surAnnulation = () => fin(new Error("Délai dépassé"));
+    }
+    function surAnnulation() {
+      fin(new Error("Délai dépassé"));
+    }
     signal?.addEventListener("abort", surAnnulation, { once: true });
 
     socket.once("secureConnect", () => {
@@ -70,7 +80,8 @@ const CODES_ABSENCE = new Set(["ENODATA", "ENOTFOUND", "NXDOMAIN"]);
 export async function lireTxt(nom: string): Promise<ResultatTxt> {
   const resolveur = new Resolver({ timeout: DELAI_DNS_MS, tries: 2 });
   try {
-    const enregistrements = await resolveur.resolveTxt(nom);
+    // Le résolveur borne chaque essai ; la course borne l'ensemble.
+    const enregistrements = await avecDelai(resolveur.resolveTxt(nom), DELAI_DNS_MS * 2 + 500);
     if (enregistrements.length === 0) return { etat: "absent" };
     return { etat: "trouve", enregistrements: enregistrements.map((morceaux) => morceaux.join("")) };
   } catch (error) {

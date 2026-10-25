@@ -53,6 +53,7 @@ export const SEUIL_EXPIRATION_JOURS = 30;
 
 export type EtatCertificat =
   | { etat: "valide"; jours: number }
+  | { etat: "chaine-incomplete"; jours: number }
   | { etat: "expire"; depuis: Date | null }
   | { etat: "invalide"; motif: string };
 
@@ -60,8 +61,7 @@ const MOTIFS_CERTIFICAT: Record<string, string> = {
   ERR_TLS_CERT_ALTNAME_INVALID: "il ne correspond pas à l'adresse du site",
   DEPTH_ZERO_SELF_SIGNED_CERT: "il est auto-signé",
   SELF_SIGNED_CERT_IN_CHAIN: "il est auto-signé",
-  UNABLE_TO_VERIFY_LEAF_SIGNATURE: "la chaîne de certification est incomplète",
-  UNABLE_TO_GET_ISSUER_CERT_LOCALLY: "la chaîne de certification est incomplète",
+  UNABLE_TO_GET_ISSUER_CERT_LOCALLY: "l'autorité qui l'a émis n'est pas reconnue",
   CERT_NOT_YET_VALID: "sa période de validité n'a pas commencé",
   CERT_REVOKED: "il a été révoqué",
 };
@@ -69,6 +69,14 @@ const MOTIFS_CERTIFICAT: Record<string, string> = {
 export function evaluerCertificat(info: InfoCertificat, maintenant: Date): EtatCertificat {
   if (info.erreur === "CERT_HAS_EXPIRED" || (info.expireLe && info.expireLe.getTime() <= maintenant.getTime())) {
     return { etat: "expire", depuis: info.expireLe };
+  }
+  if (!info.autorise && info.erreur === "UNABLE_TO_VERIFY_LEAF_SIGNATURE" && info.expireLe) {
+    // Chaîne intermédiaire non envoyée par le serveur : les navigateurs la
+    // complètent souvent, d'autres outils (messageries, API) non.
+    return {
+      etat: "chaine-incomplete",
+      jours: Math.floor((info.expireLe.getTime() - maintenant.getTime()) / JOUR_MS),
+    };
   }
   if (!info.autorise) {
     return {
@@ -126,6 +134,13 @@ export function evaluerConnexion(e: EntreeConnexion): ResultatVerification {
       constats.push(`Le certificat n'est pas valide : ${cert.motif}.`);
       risques.push("Le navigateur affiche une alerte de sécurité : la plupart des visiteurs repartent, et ceux qui continuent ne peuvent plus vérifier qu'ils sont bien sur votre site.");
       actions.push("Faire émettre un certificat valide pour cette adresse, chaîne de certification complète comprise.");
+    } else if (cert.etat === "chaine-incomplete") {
+      statuts.push("a-surveiller");
+      constats.push(
+        "Le serveur n'envoie pas la chaîne de certification complète. Certains navigateurs la complètent d'eux-mêmes, d'autres outils non."
+      );
+      risques.push("Selon le navigateur ou l'outil utilisé, une alerte de sécurité peut s'afficher ou la connexion être refusée.");
+      actions.push("Configurer le serveur pour qu'il envoie aussi le certificat intermédiaire de l'autorité.");
     } else if (cert.jours < SEUIL_EXPIRATION_JOURS) {
       statuts.push("a-surveiller");
       constats.push(`Le certificat expire dans ${cert.jours} ${pluriel(cert.jours, "jour", "jours")}.`);
@@ -178,7 +193,7 @@ export function evaluerConnexion(e: EntreeConnexion): ResultatVerification {
 
 export const SELECTEURS_DKIM = ["selector1", "selector2", "google", "default", "k1", "s1", "mail"] as const;
 
-export type EtatSpf = "ok" | "absent" | "multiple" | "permissif" | "neutre" | "erreur";
+export type EtatSpf = "ok" | "absent" | "multiple" | "permissif" | "neutre" | "sans-fin" | "erreur";
 
 export function analyserSpf(txt: ResultatTxt): EtatSpf {
   if (txt.etat === "erreur") return "erreur";
@@ -190,7 +205,10 @@ export function analyserSpf(txt: ResultatTxt): EtatSpf {
   // « all » sans qualificatif vaut « +all » : tout serveur est autorisé.
   if (termes.includes("+all") || termes.includes("all")) return "permissif";
   if (termes.includes("?all")) return "neutre";
-  return "ok";
+  if (termes.some((t) => /^[-~]all$/.test(t))) return "ok";
+  // Sans « all » ni « redirect= », le SPF ne dit rien des serveurs non listés.
+  if (termes.some((t) => t.startsWith("redirect="))) return "ok";
+  return "sans-fin";
 }
 
 export type EtatDmarc = "ok" | "observation" | "absent" | "invalide" | "erreur";
@@ -216,6 +234,8 @@ export function estCleDkim(txt: ResultatTxt): boolean | null {
 
 export interface EntreeMessagerie {
   domaine: string;
+  /** Domaine dont la politique DMARC a été lue (parent pour un sous-domaine). */
+  domaineDmarc?: string;
   spf: ResultatTxt;
   dmarc: ResultatTxt;
   /** Résultat par sélecteur testé. */
@@ -254,6 +274,11 @@ export function evaluerMessagerie(e: EntreeMessagerie): ResultatVerification {
       statuts.push("a-corriger");
       constats.push("L'enregistrement SPF se termine par +all : il autorise n'importe quel serveur à envoyer en votre nom.");
       actions.push("Remplacer +all par ~all ou -all dans l'enregistrement SPF.");
+      break;
+    case "sans-fin":
+      statuts.push("a-surveiller");
+      constats.push("L'enregistrement SPF ne se termine ni par « all » ni par une redirection : il ne dit rien des serveurs non autorisés.");
+      actions.push("Terminer l'enregistrement SPF par ~all ou -all.");
       break;
     case "neutre":
       statuts.push("a-surveiller");
@@ -302,6 +327,10 @@ export function evaluerMessagerie(e: EntreeMessagerie): ResultatVerification {
       statuts.push("indetermine");
       constats.push("DMARC n'a pas pu être vérifié (DNS sans réponse).");
       break;
+  }
+
+  if (e.domaineDmarc && e.domaineDmarc !== e.domaine && (dmarc === "ok" || dmarc === "observation")) {
+    constats.push(`La politique DMARC appliquée est celle du domaine parent ${e.domaineDmarc}.`);
   }
 
   const statut = pire(statuts);
@@ -353,13 +382,15 @@ export type CleEntete = (typeof ENTETES_SECURITE)[number]["cle"];
 export function analyserEntetes(entetes: Headers): Record<CleEntete, boolean> {
   const csp = entetes.get("content-security-policy")?.trim() ?? "";
   const hsts = entetes.get("strict-transport-security") ?? "";
-  const maxAge = Number(/max-age\s*=\s*"?(\d+)/i.exec(hsts)?.[1] ?? "0");
-  const xfo = (entetes.get("x-frame-options") ?? "").trim().toLowerCase();
+  const maxAge = Number(/max-age\s{0,10}=\s{0,10}"?(\d{1,12})/i.exec(hsts.slice(0, 500))?.[1] ?? "0");
+  // En-têtes dupliqués (« nosniff, nosniff ») : on juge la première valeur.
+  const premiere = (nom: string) => (entetes.get(nom) ?? "").split(",")[0].trim().toLowerCase();
+  const xfo = premiere("x-frame-options");
   return {
     csp: csp !== "",
     hsts: maxAge > 0,
-    cadre: xfo === "deny" || xfo === "sameorigin" || /(^|;)\s*frame-ancestors\s/i.test(csp),
-    nosniff: (entetes.get("x-content-type-options") ?? "").trim().toLowerCase() === "nosniff",
+    cadre: xfo === "deny" || xfo === "sameorigin" || /(?:^|;)\s{0,20}frame-ancestors\s/i.test(csp),
+    nosniff: premiere("x-content-type-options") === "nosniff",
     referrer: (entetes.get("referrer-policy")?.trim() ?? "") !== "",
     permissions: (entetes.get("permissions-policy")?.trim() ?? "") !== "",
   };
@@ -395,23 +426,32 @@ export function evaluerEntetes(presence: Record<CleEntete, boolean>): ResultatVe
 // 4. Cookies et traceurs
 // ---------------------------------------------------------------------------
 
-const TRACEURS: { nom: string; motif: RegExp }[] = [
-  { nom: "Google Tag Manager", motif: /googletagmanager\.com\/gtm\.js|['"]GTM-[A-Z0-9]{4,}['"]/ },
+// Toutes les expressions de ce fichier s'appliquent à du contenu fourni par le
+// site analysé : quantificateurs bornés, jamais de classe ouverte qui puisse
+// courir jusqu'à la fin du document (sinon temps quadratique, boucle bloquée).
+export const TRACEURS: { nom: string; motif: RegExp }[] = [
+  { nom: "Google Tag Manager", motif: /googletagmanager\.com\/gtm\.js|['"]GTM-[A-Z0-9]{4,12}['"]/ },
   {
     nom: "Google Analytics",
-    motif: /googletagmanager\.com\/gtag\/js\?id=(?:G|UA)-|google-analytics\.com\/(?:analytics|ga)\.js|gtag\(\s*['"]config['"]\s*,\s*['"](?:G|UA)-/,
+    motif: /googletagmanager\.com\/gtag\/js\?id=(?:G|UA)-|google-analytics\.com\/(?:analytics|ga)\.js|gtag\(\s{0,10}['"]config['"]\s{0,10},\s{0,10}['"](?:G|UA)-/,
   },
   {
     nom: "Google Ads",
-    motif: /googletagmanager\.com\/gtag\/js\?id=AW-|gtag\(\s*['"]config['"]\s*,\s*['"]AW-|googleadservices\.com|googlesyndication\.com|doubleclick\.net/,
+    motif: /googletagmanager\.com\/gtag\/js\?id=AW-|gtag\(\s{0,10}['"]config['"]\s{0,10},\s{0,10}['"]AW-|googleadservices\.com|googlesyndication\.com|doubleclick\.net/,
   },
-  { nom: "Meta Pixel", motif: /connect\.facebook\.net\/[^"']*fbevents\.js|fbq\(\s*['"]init['"]/ },
+  {
+    nom: "Meta Pixel",
+    motif: /connect\.facebook\.net\/[^"'<>\s]{0,200}fbevents\.js|fbq\(\s{0,10}['"]init['"]/,
+  },
   { nom: "LinkedIn Insight", motif: /snap\.licdn\.com\/li\.lms-analytics|_linkedin_partner_id/ },
   { nom: "Hotjar", motif: /static\.hotjar\.com|_hjSettings/ },
-  { nom: "Microsoft Clarity", motif: /clarity\.ms\/tag|\(\s*window\s*,\s*document\s*,\s*["']clarity["']/ },
+  {
+    nom: "Microsoft Clarity",
+    motif: /clarity\.ms\/tag|\(\s{0,10}window\s{0,10},\s{0,10}document\s{0,10},\s{0,10}["']clarity["']/,
+  },
 ];
 
-const OUTILS_CONSENTEMENT: { nom: string; motif: RegExp }[] = [
+export const OUTILS_CONSENTEMENT: { nom: string; motif: RegExp }[] = [
   { nom: "tarteaucitron", motif: /tarteaucitron/i },
   { nom: "Axeptio", motif: /axept\.io|axeptioSettings/i },
   { nom: "Didomi", motif: /privacy-center\.org|didomiConfig|didomi/i },
@@ -421,8 +461,13 @@ const OUTILS_CONSENTEMENT: { nom: string; motif: RegExp }[] = [
   { nom: "Complianz", motif: /complianz|cmplz/i },
 ];
 
-/** Cookies connus de mesure ou de publicité (préfixes). */
-const COOKIES_TRACEURS = /^(?:_ga|_gid|_gat|_gcl_|_fbp|_fbc|_hj|_clck|_clsk|li_|lidc|bcookie|IDE|test_cookie)/;
+/** Cookies connus de mesure ou de publicité (préfixes, ou nom exact pour IDE). */
+const COOKIES_TRACEURS = /^(?:IDE$|_ga|_gid|_gat|_gcl_|_fbp|_fbc|_hj|_clck|_clsk|li_|lidc|bcookie|test_cookie)/;
+
+/** Nom de cookie affichable tel quel ; tout le reste est remplacé. */
+const NOM_COOKIE = /^[A-Za-z0-9_.-]{1,40}$/;
+export const COOKIE_NON_STANDARD = "cookie au nom non standard";
+const MAX_COOKIES = 50;
 
 export function detecterTraceurs(html: string): string[] {
   return TRACEURS.filter((t) => t.motif.test(html)).map((t) => t.nom);
@@ -432,16 +477,24 @@ export function detecterConsentement(html: string): string[] {
   return OUTILS_CONSENTEMENT.filter((o) => o.motif.test(html)).map((o) => o.nom);
 }
 
-/** Noms des cookies déposés par la réponse elle-même (en-têtes Set-Cookie). */
+/**
+ * Noms des cookies déposés par la réponse elle-même (en-têtes Set-Cookie).
+ * Aucun texte libre du site analysé ne ressort : un nom hors liste blanche
+ * devient « cookie au nom non standard ».
+ */
 export function cookiesDeposes(entetes: Headers): string[] {
-  const valeurs = typeof entetes.getSetCookie === "function" ? entetes.getSetCookie() : [];
-  return [...new Set(valeurs.map((v) => v.split("=")[0]?.trim()).filter((n): n is string => Boolean(n)))];
+  const valeurs = typeof entetes.getSetCookie === "function" ? entetes.getSetCookie().slice(0, MAX_COOKIES) : [];
+  const noms = valeurs.map((v) => {
+    const nom = v.slice(0, 200).split("=")[0]?.trim() ?? "";
+    return NOM_COOKIE.test(nom) ? nom : COOKIE_NON_STANDARD;
+  });
+  return [...new Set(noms)];
 }
 
 export function evaluerTraceurs(html: string, cookies: string[]): ResultatVerification {
   const traceurs = detecterTraceurs(html);
   const consentement = detecterConsentement(html);
-  const cookiesTraceurs = cookies.filter((c) => COOKIES_TRACEURS.test(c));
+  const cookiesTraceurs = cookies.filter((c) => c !== COOKIE_NON_STANDARD && COOKIES_TRACEURS.test(c));
 
   const phraseCookies =
     cookies.length === 0
@@ -499,50 +552,68 @@ export function evaluerTraceurs(html: string, cookies: string[]): ResultatVerifi
 
 const decodeur = new TextDecoder("utf-8", { fatal: false });
 const debut = (octets: Uint8Array) => decodeur.decode(octets.subarray(0, 512));
-const commencePar = (octets: Uint8Array, signature: number[], decalage = 0) =>
-  signature.every((b, i) => octets[decalage + i] === b);
-const ressembleHtml = (texte: string) => /^\s*(?:<!doctype|<html|<head|<body)/i.test(texte);
 
-/** Fichiers testés et signature attendue de leur contenu réel. */
-export const FICHIERS_SENSIBLES: { chemin: string; libelle: string; signature: (octets: Uint8Array) => boolean }[] = [
+/**
+ * Fichiers testés. `contenu` : quelques octets lus pour confirmer le format
+ * (seulement /.git/HEAD, dont le contenu n'est pas secret). `entete` : requête
+ * HEAD uniquement, jamais de lecture ; jugement sur le type et la taille.
+ */
+export type FichierSensible =
+  | { chemin: string; libelle: string; mode: "contenu"; signature: (octets: Uint8Array) => boolean }
+  | { chemin: string; libelle: string; mode: "entete"; types: string[] };
+
+export const FICHIERS_SENSIBLES: FichierSensible[] = [
   {
     chemin: "/.git/HEAD",
     libelle: "l'historique du code (/.git/)",
-    signature: (o) => /^(?:ref:\s*refs\/|[0-9a-f]{40}\s*$)/.test(debut(o)),
+    mode: "contenu",
+    signature: (o) => /^(?:ref:[ \t]{0,5}refs\/|[0-9a-f]{40}\s{0,4}$)/.test(debut(o)),
   },
   {
     chemin: "/.env",
     libelle: "le fichier de configuration /.env",
-    signature: (o) => {
-      const t = debut(o);
-      return !ressembleHtml(t) && /^\s*(?:export\s+)?[A-Z][A-Z0-9_]*\s*=/m.test(t);
-    },
+    mode: "entete",
+    types: ["text/plain", "application/octet-stream"],
   },
   {
     chemin: "/wp-config.php.bak",
     libelle: "une copie de la configuration WordPress (/wp-config.php.bak)",
-    signature: (o) => {
-      const t = debut(o);
-      return !ressembleHtml(t) && /<\?php|DB_NAME|DB_PASSWORD|define\s*\(/.test(t);
-    },
+    mode: "entete",
+    types: ["text/plain", "application/octet-stream"],
   },
   {
     chemin: "/.DS_Store",
     libelle: "un fichier d'index macOS (/.DS_Store), qui liste le contenu des dossiers",
-    // En-tête « \0\0\0\1Bud1 ».
-    signature: (o) => commencePar(o, [0, 0, 0, 1, 0x42, 0x75, 0x64, 0x31]),
+    mode: "entete",
+    types: ["application/octet-stream"],
   },
   {
     chemin: "/backup.zip",
     libelle: "une archive de sauvegarde (/backup.zip)",
-    signature: (o) => commencePar(o, [0x50, 0x4b, 0x03, 0x04]),
+    mode: "entete",
+    types: ["application/zip", "application/x-zip-compressed", "application/octet-stream"],
   },
 ];
 
 export interface ReponseSonde {
   statut: number;
-  /** 512 premiers octets au plus, jamais conservés. */
+  /** 512 premiers octets au plus (mode contenu), jamais conservés. */
   debut: Uint8Array;
+}
+
+export interface ReponseEntete {
+  statut: number;
+  /** Type MIME sans paramètres, en minuscules. */
+  type: string;
+  /** Content-Length, null s'il est absent ou illisible. */
+  taille: number | null;
+}
+
+export function lireEntete(statut: number, entetes: Headers): ReponseEntete {
+  const type = (entetes.get("content-type") ?? "").split(";")[0].trim().toLowerCase();
+  const brut = (entetes.get("content-length") ?? "").trim();
+  const taille = /^\d{1,15}$/.test(brut) ? Number(brut) : null;
+  return { statut, type, taille };
 }
 
 function memesOctets(a: Uint8Array, b: Uint8Array): boolean {
@@ -550,9 +621,8 @@ function memesOctets(a: Uint8Array, b: Uint8Array): boolean {
 }
 
 /**
- * true si le fichier est réellement exposé : réponse 200, contenu conforme à la
- * signature attendue, et différent de ce que renvoie une adresse inexistante
- * (les sites qui répondent 200 partout ne sont pas des faux positifs).
+ * Mode contenu : réponse 200, contenu conforme à la signature, et différent de
+ * ce que renvoie une adresse inexistante (sites qui répondent 200 partout).
  */
 export function estExpose(
   signature: (octets: Uint8Array) => boolean,
@@ -565,18 +635,48 @@ export function estExpose(
   return true;
 }
 
-export function evaluerFichiers(sondes: { chemin: string; expose: boolean | null }[]): ResultatVerification {
-  const exposes = FICHIERS_SENSIBLES.filter((f) => sondes.some((s) => s.chemin === f.chemin && s.expose === true));
-  const echecs = sondes.filter((s) => s.expose === null).length;
-  if (exposes.length > 0) {
+/**
+ * Mode en-tête (sans lecture) : « semble exposé » si 200, type attendu, taille
+ * non nulle, et réponse différente de celle d'une adresse inexistante.
+ */
+export function sembleExpose(types: string[], reponse: ReponseEntete, temoin: ReponseEntete | null): boolean {
+  if (reponse.statut !== 200) return false;
+  if (!types.includes(reponse.type)) return false;
+  if (reponse.taille === null || reponse.taille <= 0) return false;
+  if (temoin && temoin.statut === 200 && temoin.type === reponse.type && temoin.taille === reponse.taille) return false;
+  return true;
+}
+
+export type EtatSonde = "expose" | "probable" | "non" | null;
+
+export function evaluerFichiers(sondes: { chemin: string; etat: EtatSonde }[]): ResultatVerification {
+  const libelles = (etat: EtatSonde) =>
+    FICHIERS_SENSIBLES.filter((f) => sondes.some((s) => s.chemin === f.chemin && s.etat === etat)).map((f) => f.libelle);
+  const exposes = libelles("expose");
+  const probables = libelles("probable");
+  const echecs = sondes.filter((s) => s.etat === null).length;
+
+  if (exposes.length > 0 || probables.length > 0) {
+    const constats: string[] = [];
+    if (exposes.length > 0) {
+      constats.push(`Accessible publiquement : ${listeFr(exposes)}.`);
+    }
+    if (probables.length > 0) {
+      constats.push(
+        `${pluriel(probables.length, "Semble accessible", "Semblent accessibles")} publiquement : ${listeFr(
+          probables
+        )}. Le serveur répond avec un fichier non vide du type attendu ; nous n'en avons pas lu le contenu.`
+      );
+    }
+    constats.push("Rien n'a été conservé.");
     return resultat(
       "fichiers",
-      "a-corriger",
-      `${exposes.length === 1 ? "Un fichier sensible est" : `${exposes.length} fichiers sensibles sont`} accessible${
-        exposes.length > 1 ? "s" : ""
-      } publiquement : ${listeFr(exposes.map((f) => f.libelle))}. Nous n'en avons conservé aucun contenu.`,
+      exposes.length > 0 ? "a-corriger" : "a-surveiller",
+      constats.join(" "),
       "Ces fichiers peuvent contenir des mots de passe, des clés d'accès ou le code complet du site : les robots les recherchent en permanence.",
-      "Bloquer l'accès à ces fichiers sur le serveur dès aujourd'hui, puis changer les mots de passe et clés qu'ils contiennent : ils doivent être considérés comme connus."
+      exposes.length > 0
+        ? "Bloquer l'accès à ces fichiers sur le serveur dès aujourd'hui, puis changer les mots de passe et clés qu'ils contiennent : ils doivent être considérés comme connus."
+        : "Vérifier sans attendre en ouvrant ces adresses. Si le fichier s'affiche ou se télécharge, bloquer son accès sur le serveur et changer les mots de passe et clés qu'il contient."
     );
   }
   if (echecs === sondes.length) {
@@ -607,31 +707,43 @@ export function evaluerFichiers(sondes: { chemin: string; expose: boolean | null
 
 export interface LogicielAffiche {
   source: "Server" | "X-Powered-By" | "generator";
+  /** Valeur affichable (liste blanche de caractères), sinon VALEUR_NON_AFFICHEE. */
   valeur: string;
   version: boolean;
 }
 
-const VERSION = /\d+\.\d+|\/\s*\d/;
+export const VALEUR_NON_AFFICHEE = "valeur non affichée";
+const VALEUR_AFFICHABLE = /^[A-Za-z0-9 ._/()-]{1,40}$/;
+const VERSION = /\d{1,6}\.\d{1,6}|\/\s{0,3}\d/;
+const MAX_GENERATEURS = 5;
 
-function metaGenerator(html: string): string | null {
-  for (const balise of html.match(/<meta\b[^>]*>/gi) ?? []) {
-    if (!/\bname\s*=\s*["']?generator["'\s>]/i.test(balise)) continue;
-    const contenu = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(balise);
+/** Contenu de toutes les balises <meta name="generator">. */
+export function metaGenerators(html: string): string[] {
+  const valeurs: string[] = [];
+  for (const balise of html.match(/<meta\b[^<>]{0,2000}>/gi) ?? []) {
+    if (!/\bname\s{0,10}=\s{0,10}["']?generator["'\s>/]/i.test(balise)) continue;
+    const contenu = /\bcontent\s{0,10}=\s{0,10}(?:"([^"<>]{0,500})"|'([^'<>]{0,500})')/i.exec(balise);
     const valeur = (contenu?.[1] ?? contenu?.[2] ?? "").trim();
-    if (valeur) return valeur;
+    if (valeur) valeurs.push(valeur);
+    if (valeurs.length >= MAX_GENERATEURS) break;
   }
-  return null;
+  return valeurs;
 }
 
 export function detecterLogiciels(entetes: Headers, html: string): LogicielAffiche[] {
   const sorties: LogicielAffiche[] = [];
-  const ajouter = (source: LogicielAffiche["source"], valeur: string | null) => {
-    const v = valeur?.trim().slice(0, 80);
-    if (v) sorties.push({ source, valeur: v, version: VERSION.test(v) });
+  const ajouter = (source: LogicielAffiche["source"], brut: string | null) => {
+    const v = brut?.trim().slice(0, 200);
+    if (!v) return;
+    sorties.push({
+      source,
+      valeur: VALEUR_AFFICHABLE.test(v) ? v : VALEUR_NON_AFFICHEE,
+      version: VERSION.test(v),
+    });
   };
   ajouter("Server", entetes.get("server"));
   ajouter("X-Powered-By", entetes.get("x-powered-by"));
-  ajouter("generator", metaGenerator(html));
+  for (const g of metaGenerators(html)) ajouter("generator", g);
   return sorties;
 }
 
@@ -641,6 +753,8 @@ const SOURCE_FR: Record<LogicielAffiche["source"], string> = {
   generator: "la balise generator de la page",
 };
 
+const citer = (l: LogicielAffiche) => (l.valeur === VALEUR_NON_AFFICHEE ? `une ${VALEUR_NON_AFFICHEE}` : `« ${l.valeur} »`);
+
 export function evaluerVersions(logiciels: LogicielAffiche[]): ResultatVerification {
   const avecVersion = logiciels.filter((l) => l.version);
   if (avecVersion.length > 0) {
@@ -648,7 +762,7 @@ export function evaluerVersions(logiciels: LogicielAffiche[]): ResultatVerificat
       "versions",
       "a-corriger",
       `Le site affiche publiquement des numéros de version : ${listeFr(
-        avecVersion.map((l) => `« ${l.valeur} » dans ${SOURCE_FR[l.source]}`)
+        avecVersion.map((l) => `${citer(l)} dans ${SOURCE_FR[l.source]}`)
       )}.`,
       "Les robots recherchent en permanence les versions qui ont des failles connues : un numéro affiché leur indique directement quoi tenter.",
       "Masquer les numéros de version dans la configuration du serveur et du site, et vérifier que ces logiciels sont à jour."
@@ -658,7 +772,7 @@ export function evaluerVersions(logiciels: LogicielAffiche[]): ResultatVerificat
     return resultat(
       "versions",
       "conforme",
-      `Le site indique ${listeFr(logiciels.map((l) => `« ${l.valeur} »`))}, sans numéro de version.`,
+      `Le site indique ${listeFr(logiciels.map(citer))}, sans numéro de version.`,
       "Le nom seul donne peu d'informations exploitables.",
       "Aucune action nécessaire. Gardez ces logiciels à jour."
     );

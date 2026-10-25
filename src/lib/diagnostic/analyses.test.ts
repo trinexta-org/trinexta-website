@@ -18,7 +18,14 @@ import {
   evaluerTraceurs,
   evaluerVersions,
   FICHIERS_SENSIBLES,
+  lireEntete,
+  sembleExpose,
   trierResultats,
+  COOKIE_NON_STANDARD,
+  OUTILS_CONSENTEMENT,
+  TRACEURS,
+  VALEUR_NON_AFFICHEE,
+  type EtatSonde,
 } from "./analyses";
 import type { ResultatTxt } from "./reseau";
 
@@ -26,7 +33,16 @@ const txt = (...enregistrements: string[]): ResultatTxt => ({ etat: "trouve", en
 const ABSENT: ResultatTxt = { etat: "absent" };
 const ERREUR: ResultatTxt = { etat: "erreur" };
 const octets = (texte: string) => new TextEncoder().encode(texte);
-const signature = (chemin: string) => FICHIERS_SENSIBLES.find((f) => f.chemin === chemin)!.signature;
+const signatureGit = (() => {
+  const f = FICHIERS_SENSIBLES.find((x) => x.chemin === "/.git/HEAD");
+  if (!f || f.mode !== "contenu") throw new Error("/.git/HEAD doit être lu en mode contenu");
+  return f.signature;
+})();
+const typesDe = (chemin: string) => {
+  const f = FICHIERS_SENSIBLES.find((x) => x.chemin === chemin);
+  if (!f || f.mode !== "entete") throw new Error(`${chemin} doit être sondé en HEAD seulement`);
+  return f.types;
+};
 
 describe("analyserSpf", () => {
   it("reconnaît un SPF correct", () => {
@@ -308,48 +324,60 @@ describe("traceurs et consentement", () => {
 describe("fichiers sensibles : pas de faux positif", () => {
   const PAGE_HTML = octets("<!doctype html><html><head><title>Accueil</title></head><body>Bienvenue</body></html>");
 
+  it("seul /.git/HEAD est lu ; .env, wp-config, .DS_Store et backup.zip sont sondés en HEAD", () => {
+    expect(FICHIERS_SENSIBLES.filter((f) => f.mode === "contenu").map((f) => f.chemin)).toEqual(["/.git/HEAD"]);
+  });
+
   it("reconnaît un vrai .git/HEAD", () => {
-    expect(estExpose(signature("/.git/HEAD"), { statut: 200, debut: octets("ref: refs/heads/main\n") }, null)).toBe(true);
+    expect(estExpose(signatureGit, { statut: 200, debut: octets("ref: refs/heads/main\n") }, null)).toBe(true);
   });
 
-  it("un site qui répond 200 partout avec sa page d'accueil n'expose rien", () => {
-    const temoin = { statut: 200, debut: PAGE_HTML };
-    for (const f of FICHIERS_SENSIBLES) {
-      expect(estExpose(f.signature, { statut: 200, debut: PAGE_HTML }, temoin)).toBe(false);
-    }
+  it("un site qui répond 200 partout avec sa page d'accueil n'expose pas .git", () => {
+    expect(estExpose(signatureGit, { statut: 200, debut: PAGE_HTML }, { statut: 200, debut: PAGE_HTML })).toBe(false);
   });
 
-  it("une page HTML contenant « DB_NAME » n'est pas un wp-config", () => {
-    const page = octets("<html><body>Erreur : DB_NAME manquant</body></html>");
-    expect(estExpose(signature("/wp-config.php.bak"), { statut: 200, debut: page }, null)).toBe(false);
-  });
-
-  it("une réponse identique au témoin n'est pas comptée, même si elle ressemble à la signature", () => {
-    const envFactice = octets("APP_ENV=production\n");
-    expect(estExpose(signature("/.env"), { statut: 200, debut: envFactice }, { statut: 200, debut: envFactice })).toBe(false);
-  });
-
-  it("reconnaît .env, .DS_Store et une archive zip par leur contenu", () => {
-    expect(estExpose(signature("/.env"), { statut: 200, debut: octets("DB_PASSWORD=secret\n") }, null)).toBe(true);
-    const dsStore = new Uint8Array([0, 0, 0, 1, 0x42, 0x75, 0x64, 0x31, 0, 0]);
-    expect(estExpose(signature("/.DS_Store"), { statut: 200, debut: dsStore }, null)).toBe(true);
-    const zip = new Uint8Array([0x50, 0x4b, 0x03, 0x04, 0x14, 0]);
-    expect(estExpose(signature("/backup.zip"), { statut: 200, debut: zip }, null)).toBe(true);
+  it("une réponse identique au témoin n'est pas comptée", () => {
+    const ref = octets("ref: refs/heads/main\n");
+    expect(estExpose(signatureGit, { statut: 200, debut: ref }, { statut: 200, debut: ref })).toBe(false);
   });
 
   it("un 403 ou un 404 n'expose rien", () => {
-    expect(estExpose(signature("/.git/HEAD"), { statut: 403, debut: octets("ref: refs/heads/main") }, null)).toBe(false);
-    expect(estExpose(signature("/.env"), { statut: 404, debut: octets("A=1") }, null)).toBe(false);
+    expect(estExpose(signatureGit, { statut: 403, debut: octets("ref: refs/heads/main") }, null)).toBe(false);
+    expect(sembleExpose(typesDe("/.env"), { statut: 404, type: "text/plain", taille: 20 }, null)).toBe(false);
   });
 
-  it("synthèse : exposé, conforme, indéterminé", () => {
-    const tous = (expose: boolean | null) => FICHIERS_SENSIBLES.map((f) => ({ chemin: f.chemin, expose }));
-    expect(evaluerFichiers(tous(false)).statut).toBe("conforme");
+  it(".env : semble exposé seulement si 200, type attendu, taille non nulle et différent du témoin", () => {
+    const types = typesDe("/.env");
+    expect(sembleExpose(types, { statut: 200, type: "text/plain", taille: 120 }, null)).toBe(true);
+    expect(sembleExpose(types, { statut: 200, type: "application/octet-stream", taille: 120 }, null)).toBe(true);
+    // Page HTML de repli, taille absente ou nulle : non.
+    expect(sembleExpose(types, { statut: 200, type: "text/html", taille: 120 }, null)).toBe(false);
+    expect(sembleExpose(types, { statut: 200, type: "text/plain", taille: null }, null)).toBe(false);
+    expect(sembleExpose(types, { statut: 200, type: "text/plain", taille: 0 }, null)).toBe(false);
+    // Le site renvoie la même réponse pour une adresse inexistante : non.
+    const temoin = { statut: 200, type: "text/plain", taille: 120 };
+    expect(sembleExpose(types, { statut: 200, type: "text/plain", taille: 120 }, temoin)).toBe(false);
+  });
+
+  it("lit le type et la taille dans les en-têtes", () => {
+    expect(lireEntete(200, new Headers({ "content-type": "Text/Plain; charset=utf-8", "content-length": "42" }))).toEqual({
+      statut: 200,
+      type: "text/plain",
+      taille: 42,
+    });
+    expect(lireEntete(200, new Headers({ "content-length": "abc" })).taille).toBeNull();
+  });
+
+  it("synthèse : exposé (à corriger), probable (à surveiller), conforme, indéterminé", () => {
+    const tous = (etat: EtatSonde) => FICHIERS_SENSIBLES.map((f) => ({ chemin: f.chemin, etat }));
+    expect(evaluerFichiers(tous("non")).statut).toBe("conforme");
     expect(evaluerFichiers(tous(null)).statut).toBe("indetermine");
-    const unExpose = tous(false).map((s) => (s.chemin === "/.env" ? { ...s, expose: true } : s));
-    const r = evaluerFichiers(unExpose);
-    expect(r.statut).toBe("a-corriger");
-    expect(r.constat).toContain("/.env");
+    const git = evaluerFichiers(tous("non").map((x) => (x.chemin === "/.git/HEAD" ? { ...x, etat: "expose" as const } : x)));
+    expect(git.statut).toBe("a-corriger");
+    const env = evaluerFichiers(tous("non").map((x) => (x.chemin === "/.env" ? { ...x, etat: "probable" as const } : x)));
+    expect(env.statut).toBe("a-surveiller");
+    expect(env.constat).toContain("Semble accessible publiquement");
+    expect(env.constat).toContain("nous n'en avons pas lu le contenu");
   });
 });
 
@@ -389,5 +417,141 @@ describe("tri et compteurs", () => {
     ]);
     expect(resultats.map((r) => r.statut)).toEqual(["a-corriger", "a-surveiller", "indetermine", "conforme"]);
     expect(compter(resultats)).toEqual({ "a-corriger": 1, "a-surveiller": 1, indetermine: 1, conforme: 1 });
+  });
+});
+
+describe("aucun texte libre du site analysé dans le résultat", () => {
+  it("Server et generator au texte long ou piégé : valeur non affichée, version tout de même signalée", () => {
+    const html = `<meta name="generator" content="Visitez http://arnaque.example pour gagner 1.0">`;
+    const logiciels = detecterLogiciels(
+      new Headers({ server: "Apache/2.4.1 ".repeat(30), "x-powered-by": "<script>alert(1)</script>" }),
+      html
+    );
+    expect(logiciels.map((l) => l.valeur)).toEqual([VALEUR_NON_AFFICHEE, VALEUR_NON_AFFICHEE, VALEUR_NON_AFFICHEE]);
+    expect(logiciels[0].version).toBe(true);
+    const r = evaluerVersions(logiciels);
+    expect(r.constat).not.toContain("arnaque");
+    expect(r.constat).not.toContain("<script>");
+  });
+
+  it("lit toutes les balises generator", () => {
+    const html = `<meta name="generator" content="WordPress 6.4"><meta name="generator" content="WooCommerce 8.1">`;
+    expect(detecterLogiciels(new Headers(), html).map((l) => l.valeur)).toEqual(["WordPress 6.4", "WooCommerce 8.1"]);
+  });
+
+  it("Set-Cookie au nom long ou piégé : remplacé, jamais recopié", () => {
+    const entetes = new Headers();
+    entetes.append("set-cookie", `${"x".repeat(5000)}=1`);
+    entetes.append("set-cookie", "<img src=x>=1");
+    entetes.append("set-cookie", "session_id=abc");
+    const cookies = cookiesDeposes(entetes);
+    expect(cookies).toEqual([COOKIE_NON_STANDARD, "session_id"]);
+    const r = evaluerTraceurs("<html></html>", cookies);
+    expect(r.constat).not.toContain("<img");
+    expect(r.constat).not.toContain("xxxxxxxxxx");
+  });
+
+  it("IDE : nom exact seulement", () => {
+    const avec = (nom: string) => {
+      const e = new Headers();
+      e.append("set-cookie", `${nom}=1`);
+      return evaluerTraceurs("<html></html>", cookiesDeposes(e)).statut;
+    };
+    expect(avec("IDE")).toBe("a-corriger");
+    expect(avec("IDENTITE")).toBe("conforme");
+  });
+});
+
+describe("correctifs mineurs de la relecture", () => {
+  it("SPF sans all ni redirect : à surveiller ; redirect= accepté", () => {
+    expect(analyserSpf(txt("v=spf1 include:_spf.google.com"))).toBe("sans-fin");
+    expect(analyserSpf(txt("v=spf1 redirect=_spf.exemple.fr"))).toBe("ok");
+    const r = evaluerMessagerie({
+      domaine: "exemple.fr",
+      spf: txt("v=spf1 mx"),
+      dmarc: txt("v=DMARC1; p=reject"),
+      dkim: [{ selecteur: "selector1", trouve: true }],
+    });
+    expect(r.statut).toBe("a-surveiller");
+  });
+
+  it("DMARC hérité du domaine parent : mentionné", () => {
+    const r = evaluerMessagerie({
+      domaine: "boutique.exemple.fr",
+      domaineDmarc: "exemple.fr",
+      spf: txt("v=spf1 -all"),
+      dmarc: txt("v=DMARC1; p=reject"),
+      dkim: [{ selecteur: "selector1", trouve: true }],
+    });
+    expect(r.statut).toBe("conforme");
+    expect(r.constat).toContain("domaine parent exemple.fr");
+  });
+
+  it("chaîne de certification incomplète : à surveiller, pas à corriger", () => {
+    const maintenant = new Date("2026-10-25T12:00:00Z");
+    const r = evaluerConnexion({
+      certificat: { autorise: false, erreur: "UNABLE_TO_VERIFY_LEAF_SIGNATURE", expireLe: new Date("2027-03-01T00:00:00Z") },
+      httpsRepond: true,
+      http: "redirige-https",
+      maintenant,
+    });
+    expect(r.statut).toBe("a-surveiller");
+    expect(r.constat).toContain("Certains navigateurs");
+  });
+
+  it("en-têtes dupliqués : la première valeur compte", () => {
+    const presence = analyserEntetes(
+      new Headers({ "x-content-type-options": "nosniff, nosniff", "x-frame-options": "SAMEORIGIN, SAMEORIGIN" })
+    );
+    expect(presence.nosniff).toBe(true);
+    expect(presence.cadre).toBe(true);
+  });
+});
+
+describe("expressions régulières : pas de temps quadratique (ReDoS)", () => {
+  const DEUX_MO = 2 * 1024 * 1024;
+  const hostile = (motif: string) => motif.repeat(Math.ceil(DEUX_MO / motif.length)).slice(0, DEUX_MO);
+  const ENTREES = [
+    "<meta ",
+    "<meta name=generator content=\"",
+    "<meta name=\"generator\" content='",
+    "connect.facebook.net/",
+    "gtag(",
+    "gtag( 'config' , ",
+    "(window, document, ",
+    "( ",
+    "'GTM-",
+    "'GTM-AAAA",
+    "googletagmanager.com/gtag/js?id=",
+    "fbq( ",
+    " ",
+    "a",
+  ].map(hostile);
+
+  const chrono = (f: () => unknown) => {
+    const debut = performance.now();
+    f();
+    return performance.now() - debut;
+  };
+
+  it.each([...TRACEURS, ...OUTILS_CONSENTEMENT].map((t) => [t.nom, t.motif] as const))(
+    "motif %s : moins de 200 ms sur 2 Mo hostiles",
+    (_nom, motif) => {
+      for (const entree of ENTREES) {
+        expect(chrono(() => motif.test(entree))).toBeLessThan(200);
+      }
+    }
+  );
+
+  it("balises generator : moins de 200 ms sur 2 Mo hostiles", () => {
+    for (const entree of ENTREES) {
+      expect(chrono(() => detecterLogiciels(new Headers(), entree))).toBeLessThan(200);
+    }
+  });
+
+  it("en-têtes : moins de 200 ms sur une valeur hostile", () => {
+    const valeur = hostile("; frame-ancestors").slice(0, 64 * 1024);
+    const entetes = new Headers({ "content-security-policy": valeur, "strict-transport-security": hostile("max-age=").slice(0, 64 * 1024) });
+    expect(chrono(() => analyserEntetes(entetes))).toBeLessThan(200);
   });
 });

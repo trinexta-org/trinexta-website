@@ -125,3 +125,22 @@ describe("assertPublicUrl : ports", () => {
     await expect(assertPublicUrl("http://exemple.fr:80/", { resolve: resolvePublic })).resolves.toBeInstanceOf(URL);
   });
 });
+
+describe("isPrivateIp : préfixes IPv6 particuliers", () => {
+  it.each([
+    "fec0::1", // site-local
+    "100::1", // discard
+    "2001:db8::1", // documentation
+    "2002:7f00:0001::1", // 6to4 vers 127.0.0.1
+    "2002:c0a8:0101::1", // 6to4 vers 192.168.1.1
+    "::ffff:0:7f00:1", // SIIT vers 127.0.0.1
+    "::ffff:0:a00:1", // SIIT vers 10.0.0.1
+    "64:ff9b:1::a00:1", // NAT64 local vers 10.0.0.1
+  ])("rejette %s", (ip) => {
+    expect(isPrivateIp(ip)).toBe(true);
+  });
+
+  it.each(["2002:0808:0808::1", "::ffff:0:808:808", "64:ff9b:1::808:808"])("accepte %s (IPv4 publique embarquée)", (ip) => {
+    expect(isPrivateIp(ip)).toBe(false);
+  });
+});

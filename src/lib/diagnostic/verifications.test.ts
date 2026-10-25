@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { ResultatTxt } from "./reseau";
 import type { OptionsRequete, ReponseBridee } from "./requete";
-import { lancerDiagnostic, type Dependances } from "./verifications";
+import { domainesDmarc, lancerDiagnostic, memeSite, type Dependances } from "./verifications";
 
 // Site simulé, sans réseau : chaque adresse renvoie une réponse prédéfinie.
 
@@ -105,5 +105,79 @@ describe("lancerDiagnostic", () => {
     const entetes = resultats.find((r) => r.id === "entetes");
     expect(entetes?.statut).toBe("indetermine");
     expect(entetes?.constat).toContain("403");
+  });
+
+  it("accueil redirigé vers un autre domaine : aucune sonde de fichier envoyée à l'autre hôte", async () => {
+    const appels: string[] = [];
+    const resultats = await lancerDiagnostic(
+      "exemple.fr",
+      deps({
+        requete: async (url, options = {}) => {
+          appels.push(`${options.methode ?? "GET"} ${url}`);
+          if (url === "https://exemple.fr/") {
+            return reponse("https://autre-site.example.com/", 200, "<html></html>", { "content-type": "text/html" });
+          }
+          return reponse(url, 200, "");
+        },
+      })
+    );
+    const fichiers = resultats.find((r) => r.id === "fichiers");
+    expect(fichiers?.statut).toBe("indetermine");
+    expect(fichiers?.constat).toContain("redirige vers un autre domaine");
+    expect(appels.some((a) => a.includes("/.git/HEAD") || a.includes("/.env") || a.includes("trinexta-diagnostic-"))).toBe(false);
+  });
+
+  it(".env n'est jamais lu : HEAD seulement", async () => {
+    const appels: string[] = [];
+    await lancerDiagnostic(
+      "exemple.fr",
+      deps({
+        requete: async (url, options = {}) => {
+          appels.push(`${options.methode ?? "GET"} ${new URL(url).pathname}`);
+          return reponse(url, 404, "", { "content-type": "text/html" });
+        },
+      })
+    );
+    for (const chemin of ["/.env", "/wp-config.php.bak", "/.DS_Store", "/backup.zip"]) {
+      expect(appels).toContain(`HEAD ${chemin}`);
+      expect(appels).not.toContain(`GET ${chemin}`);
+    }
+  });
+
+  it("accueil en 3xx final (trop de redirections) : non exploitable", async () => {
+    const resultats = await lancerDiagnostic(
+      "exemple.fr",
+      deps({ requete: async (url) => reponse(url, 301, "", { location: "https://exemple.fr/boucle" }) })
+    );
+    for (const id of ["entetes", "traceurs", "versions"]) {
+      expect(resultats.find((r) => r.id === id)?.statut).toBe("indetermine");
+    }
+  });
+
+  it("DMARC d'un sous-domaine : interroge les parents tant qu'il reste deux labels", async () => {
+    expect(domainesDmarc("a.b.exemple.fr")).toEqual(["a.b.exemple.fr", "b.exemple.fr", "exemple.fr"]);
+    const noms: string[] = [];
+    const resultats = await lancerDiagnostic(
+      "boutique.exemple.fr",
+      deps({
+        lireTxt: async (nom) => {
+          noms.push(nom);
+          if (nom === "_dmarc.exemple.fr") return { etat: "trouve", enregistrements: ["v=DMARC1; p=reject"] };
+          if (nom === "boutique.exemple.fr") return { etat: "trouve", enregistrements: ["v=spf1 -all"] };
+          return { etat: "absent" };
+        },
+      })
+    );
+    expect(noms).toContain("_dmarc.boutique.exemple.fr");
+    expect(noms).toContain("_dmarc.exemple.fr");
+    expect(noms).not.toContain("_dmarc.fr");
+    expect(resultats.find((r) => r.id === "messagerie")?.constat).toContain("domaine parent exemple.fr");
+  });
+
+  it("memeSite : domaine saisi avec ou sans www. seulement", () => {
+    expect(memeSite("exemple.fr", "https://www.exemple.fr/")).toBe(true);
+    expect(memeSite("www.exemple.fr", "https://exemple.fr/")).toBe(true);
+    expect(memeSite("exemple.fr", "https://exemple.fr.attaquant.example/")).toBe(false);
+    expect(memeSite("exemple.fr", "https://shop.exemple.fr/")).toBe(false);
   });
 });
