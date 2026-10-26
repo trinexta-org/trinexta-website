@@ -1,6 +1,10 @@
 // Purge RGPD du tunnel d'estimation : supprime les estimations anonymes
 // (sans email) de plus de 12 mois et leurs événements (cascade FK), ainsi que
 // les événements orphelins (parcours abandonnés) de plus de 12 mois.
+// Purge aussi les diagnostics sécurité (/diagnostic-securite) :
+// - e-mail (et jeton de rappel) effacés 30 jours après l'envoi du rapport sans demande de rappel ;
+// - diagnostic supprimé 12 mois après l'analyse sans demande de rappel ;
+// - avec demande de rappel (consentAt) : supprimé 3 ans après ce dernier contact.
 //
 // Usage : npm run purge:estimates
 // Cron VPS : voir README, section "Purge des estimations".
@@ -39,10 +43,26 @@ try {
        AND "createdAt" < NOW() - INTERVAL '12 months'`
   );
 
+  const emailsEffaces = await client.query(
+    `UPDATE "DiagnosticSecurite"
+     SET "email" = NULL, "jetonRappelHash" = NULL
+     WHERE "consentAt" IS NULL
+       AND "email" IS NOT NULL
+       AND "rapportEnvoyeAt" < NOW() - INTERVAL '30 days'`
+  );
+
+  const diagnostics = await client.query(
+    `DELETE FROM "DiagnosticSecurite"
+     WHERE ("consentAt" IS NULL AND "createdAt" < NOW() - INTERVAL '12 months')
+        OR ("consentAt" IS NOT NULL AND "consentAt" < NOW() - INTERVAL '3 years')`
+  );
+
   console.log(
     `[purge-estimates] ${new Date().toISOString()} : ` +
       `${estimates.rowCount} estimation(s) anonyme(s) supprimée(s) (événements liés en cascade), ` +
-      `${orphanEvents.rowCount} événement(s) orphelin(s) supprimé(s).`
+      `${orphanEvents.rowCount} événement(s) orphelin(s) supprimé(s), ` +
+      `${diagnostics.rowCount} diagnostic(s) sécurité supprimé(s), ` +
+      `${emailsEffaces.rowCount} e-mail(s) de rapport effacé(s).`
   );
 } finally {
   await client.end();

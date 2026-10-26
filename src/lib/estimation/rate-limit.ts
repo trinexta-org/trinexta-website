@@ -7,7 +7,9 @@ const SALT = randomBytes(16).toString("hex");
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 8;
 
-const requestLog = new Map<string, number[]>();
+// Chaque clé garde sa fenêtre : une route peut compter sur 24 h sans que le
+// nettoyage, réglé sur 10 min pour les autres, n'efface ses horodatages.
+const requestLog = new Map<string, { fenetreMs: number; horodatages: number[] }>();
 
 export function hashIp(ip: string): string {
   return createHash("sha256").update(SALT + ip).digest("hex");
@@ -32,24 +34,29 @@ export function getClientIp(request: Request): string {
  * true si la requête est autorisée, false si la limite est atteinte.
  * `key` doit être préfixé par endpoint (ex. `email:${hashIp(ip)}`) pour que
  * chaque route ait son propre quota au lieu de partager un compteur global.
+ * `fenetreMs` : durée de la fenêtre glissante, 10 minutes par défaut.
  */
-export function checkRateLimit(key: string, maxRequests: number = MAX_REQUESTS_PER_WINDOW): boolean {
+export function checkRateLimit(
+  key: string,
+  maxRequests: number = MAX_REQUESTS_PER_WINDOW,
+  fenetreMs: number = WINDOW_MS
+): boolean {
   const now = Date.now();
 
-  // Nettoyage opportuniste des entrées expirées.
+  // Nettoyage opportuniste des entrées expirées, chacune selon sa propre fenêtre.
   if (requestLog.size > 1000) {
-    for (const [k, timestamps] of requestLog) {
-      if (timestamps.every((t) => now - t > WINDOW_MS)) requestLog.delete(k);
+    for (const [k, entree] of requestLog) {
+      if (entree.horodatages.every((t) => now - t > entree.fenetreMs)) requestLog.delete(k);
     }
   }
 
-  const timestamps = (requestLog.get(key) ?? []).filter((t) => now - t <= WINDOW_MS);
-  if (timestamps.length >= maxRequests) {
-    requestLog.set(key, timestamps);
+  const horodatages = (requestLog.get(key)?.horodatages ?? []).filter((t) => now - t <= fenetreMs);
+  if (horodatages.length >= maxRequests) {
+    requestLog.set(key, { fenetreMs, horodatages });
     return false;
   }
 
-  timestamps.push(now);
-  requestLog.set(key, timestamps);
+  horodatages.push(now);
+  requestLog.set(key, { fenetreMs, horodatages });
   return true;
 }
