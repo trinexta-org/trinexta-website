@@ -95,7 +95,7 @@ export async function POST(request: Request) {
         })
         .catch((e) => console.error("[api/diagnostic/rapport] libération", e));
       return NextResponse.json(
-        { error: "L'envoi du rapport a échoué. Réessayez dans quelques minutes, ou appelez-nous." },
+        { error: `L'envoi du rapport a échoué. Réessayez dans quelques minutes, ou appelez-nous au ${TRINEXTA_CONTACT.telephone}.` },
         { status: 502 }
       );
     }

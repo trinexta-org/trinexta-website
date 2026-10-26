@@ -24,6 +24,8 @@ jobs:
   app:
     name: App Checks
     runs-on: ubuntu-latest
+    # Duree observee : 1 a 2 min. Marge pour un cache npm froid.
+    timeout-minutes: 15
     env:
       DATABASE_URL: postgresql://trinexta:ci_password@localhost:5432/trinexta
       NEXT_PUBLIC_SANITY_PROJECT_ID: 93ztl6y7
@@ -61,6 +63,85 @@ jobs:
 
       - name: Typecheck
         run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  # Detecte si le Sanity Studio a change, pour ne lancer le job Studio qu'au besoin.
+  # Filtre maison en git, sans action tierce, comme notify-deps.yml.
+  studio-changes:
+    name: Studio Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      studio: ${{ steps.diff.outputs.studio }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect studio changes
+        id: diff
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # PR : diff avec la branche de base. Push : diff avec le commit precedent,
+          # ou avec dev pour une nouvelle branche. En cas de doute, on lance le job.
+          if [ "$EVENT" = "pull_request" ]; then
+            git fetch --quiet origin "$BASE_REF"
+            range="origin/$BASE_REF...HEAD"
+          elif [ -n "$BEFORE" ] && ! echo "$BEFORE" | grep -qE '^0+$' && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            range="$BEFORE...HEAD"
+          else
+            git fetch --quiet origin dev
+            range="origin/dev...HEAD"
+          fi
+          if ! files=$(git diff --name-only "$range"); then
+            echo "studio=true" >> "$GITHUB_OUTPUT"
+          elif echo "$files" | grep -q '^studio/'; then
+            echo "studio=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "studio=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  studio:
+    name: Studio Checks
+    needs: studio-changes
+    if: needs.studio-changes.outputs.studio == 'true'
+    runs-on: ubuntu-latest
+    # Build local : environ 30 s. Marge pour l'installation a froid.
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: studio
+    # Aucun secret : le build ne lit que le project ID et le dataset, publics.
+    env:
+      SANITY_STUDIO_DATASET: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: studio/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build
         run: npm run build
