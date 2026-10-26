@@ -1,6 +1,7 @@
 import { PRODUCTION_URL } from "@/lib/site"
 import { ACCUEIL_ADRESSE, ACCUEIL_FAITS, ACCUEIL_FAQ, ACCUEIL_IDENTITE } from "@/data/accueil"
 import { PIED_MARQUES, PIED_RESSOURCES, PIED_SERVICES } from "@/data/footer"
+import { DIAGNOSTIC_LIEN } from "@/data/diagnostic"
 
 // llms.txt : résumé du site pour les assistants IA (format proposé sur llmstxt.org),
 // généré depuis les mêmes données que les pages pour rester cohérent.
@@ -25,6 +26,10 @@ export function GET() {
     "## Offres et services",
     "",
     ...PIED_SERVICES.map(lien),
+    "",
+    "## Outils gratuits",
+    "",
+    lien(DIAGNOSTIC_LIEN),
     "",
     "## Ressources",
     "",

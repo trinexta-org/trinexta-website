@@ -23,6 +23,7 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/services-annexes`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${BASE_URL}/infogerance`, changeFrequency: "monthly", priority: 0.9 },
   { url: `${BASE_URL}/cybersecurite`, changeFrequency: "monthly", priority: 0.8 },
+  { url: `${BASE_URL}/diagnostic-securite`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${BASE_URL}/cloud-sauvegarde`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/support-informatique`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${BASE_URL}/microsoft-365`, changeFrequency: "monthly", priority: 0.8 },
