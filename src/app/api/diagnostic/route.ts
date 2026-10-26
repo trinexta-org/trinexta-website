@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { DIAGNOSTIC_LIMITES } from "@/data/diagnostic";
+import { TRINEXTA_CONTACT } from "@/data/contact-trinexta";
 import { estRobot, limiteParIp, lireCorpsJson } from "@/lib/security/anti-abus";
 import { assertPublicUrl } from "@/lib/diagnostic/assert-public-url";
 import { compter, trierResultats } from "@/lib/diagnostic/analyses";
@@ -14,7 +15,7 @@ import { lancerDiagnostic } from "@/lib/diagnostic/verifications";
 // 10 analyses d'un même domaine (avec ou sans www.) par 24 h, comptées en base
 // dès le début de l'analyse, erreurs génériques.
 
-const TROP = "Vous avez atteint la limite de trois analyses par jour. Réessayez demain, ou appelez-nous.";
+const TROP = `Vous avez atteint la limite de trois analyses par jour. Réessayez demain, ou appelez-nous au ${TRINEXTA_CONTACT.telephone}.`;
 const TROP_DOMAINE = "Ce site a déjà été analysé plusieurs fois aujourd'hui. Réessayez demain.";
 const INTROUVABLE = "Ce site est introuvable. Vérifiez l'adresse saisie.";
 
