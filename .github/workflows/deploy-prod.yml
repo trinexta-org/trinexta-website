@@ -5,6 +5,13 @@ on:
     branches:
       - main
 
+# Un seul déploiement à la fois : deux fusions rapprochées lançaient deux
+# npm ci et deux builds dans le même dossier du serveur, et les deux échouaient
+# (26/10/2026). Le second attend la fin du premier, sans être annulé.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
