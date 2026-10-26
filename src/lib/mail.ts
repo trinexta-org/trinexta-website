@@ -218,7 +218,7 @@ export async function sendContactAccuseReception(data: ContactFormData) {
     ${bloc}
     <p>Un problème urgent d'ici là : appelez le <strong>${TRINEXTA_CONTACT.telephone}</strong>, ${TRINEXTA_CONTACT.horaires}. Pour nous écrire : <a href="mailto:${TRINEXTA_CONTACT.email}" style="color:#0A233E;font-weight:bold">${TRINEXTA_CONTACT.email}</a>.</p>
     <p style="margin-top:24px">L'équipe TRINEXTA<br /><span style="color:#5C92B8">L'humain avant les tickets.</span></p>
-    <p style="margin-top:24px;font-size:12px;color:#5C92B8">Cet e-mail est envoyé automatiquement depuis une adresse qui ne reçoit pas de réponse. Pour nous écrire : ${TRINEXTA_CONTACT.email}.</p>
+    <p style="margin-top:24px;font-size:12px;color:#5C92B8">Cet e-mail est envoyé automatiquement. Pour nous écrire, répondez simplement à cet e-mail ou écrivez à ${TRINEXTA_CONTACT.email}.</p>
   </div>
 </div>`,
   });

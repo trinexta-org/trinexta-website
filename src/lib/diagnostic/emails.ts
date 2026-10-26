@@ -56,40 +56,56 @@ export function rapportProspectHtml(params: {
   urlRappel: string;
 }): string {
   const { domaine, date, resultats, compteurs, urlRappel } = params;
+  // Mise en page en tableaux : Outlook (moteur Word) ignore le padding des <div>
+  // et des liens. Bouton « bulletproof » : la couleur et la marge sont sur la cellule.
   return `
-<div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;border:1px solid #5C92B8;color:#0A233E">
-  <div style="background:#0A233E;padding:24px">
-    <p style="margin:0 0 8px;color:#5C92B8;font-size:12px;letter-spacing:2px;font-weight:bold">TRINEXTA · DIAGNOSTIC SÉCURITÉ</p>
-    <p style="margin:0;color:#FFFFFF;font-size:22px;font-weight:bold">Résultat pour ${escapeHtml(domaine)}</p>
-    <p style="margin:8px 0 0;color:#FFFFFF;font-size:14px">${escapeHtml(dateFr(date))} · ${escapeHtml(ligneCompteurs(compteurs))}</p>
-  </div>
-  <div style="padding:24px;font-size:15px;line-height:1.6">
-    <p style="margin:0 0 16px">Bonjour,</p>
-    <p style="margin:0 0 20px">Voici le détail de l'analyse non intrusive de ${escapeHtml(
-      domaine
-    )} : ce que le site montre publiquement, comme le verrait n'importe quel visiteur. Les points sont classés du plus urgent au moins urgent.</p>
-    ${resultats.map(carte).join("")}
-    <div style="background:#EEF3F9;border-radius:12px;padding:18px;margin:20px 0 0">
-      <p style="margin:0 0 8px;font-weight:bold">Un technicien vous explique le résultat</p>
-      <p style="margin:0 0 14px">Nous vous disons ce qui est urgent, ce qui peut attendre, et ce que vous pouvez corriger vous-même. Nous ne vous recontactons que si vous le demandez.</p>
-      <a href="${escapeHtml(
-        urlRappel
-      )}" style="display:inline-block;background:#0A233E;color:#FFFFFF;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:10px">${escapeHtml(
-        DIAGNOSTIC_TEXTES.boutonRappelEmail
-      )}</a>
-      <p style="margin:14px 0 0;font-size:13px">Ou appelez le <strong>${TRINEXTA_CONTACT.telephone}</strong>, ${
-        TRINEXTA_CONTACT.horaires
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" align="center" style="width:100%;max-width:640px;margin:0 auto;border:1px solid #5C92B8;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0A233E">
+  <tr>
+    <td bgcolor="#0A233E" style="background:#0A233E;padding:24px">
+      <p style="margin:0 0 8px;color:#5C92B8;font-size:12px;letter-spacing:2px;font-weight:bold">TRINEXTA · DIAGNOSTIC SÉCURITÉ</p>
+      <p style="margin:0;color:#FFFFFF;font-size:22px;font-weight:bold">Résultat pour ${escapeHtml(domaine)}</p>
+      <p style="margin:8px 0 0;color:#FFFFFF;font-size:14px">${escapeHtml(dateFr(date))} · ${escapeHtml(ligneCompteurs(compteurs))}</p>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:24px;font-size:15px;line-height:1.6">
+      <p style="margin:0 0 16px">Bonjour,</p>
+      <p style="margin:0 0 20px">Voici le détail de l'analyse non intrusive de ${escapeHtml(
+        domaine
+      )} : ce que le site montre publiquement, comme le verrait n'importe quel visiteur. Les points sont classés du plus urgent au moins urgent.</p>
+      ${resultats.map(carte).join("")}
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:20px 0 0">
+        <tr>
+          <td bgcolor="#EEF3F9" style="background:#EEF3F9;border-radius:12px;padding:18px">
+            <p style="margin:0 0 8px;font-weight:bold">Un technicien vous explique le résultat</p>
+            <p style="margin:0 0 14px">Nous vous disons ce qui est urgent, ce qui peut attendre, et ce que vous pouvez corriger vous-même. Nous ne vous recontactons que si vous le demandez.</p>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate">
+              <tr>
+                <td bgcolor="#0A233E" style="background:#0A233E;border-radius:10px;padding:12px 20px">
+                  <a href="${escapeHtml(
+                    urlRappel
+                  )}" style="color:#FFFFFF;text-decoration:none;font-weight:bold;font-size:15px">${escapeHtml(
+                    DIAGNOSTIC_TEXTES.boutonRappelEmail
+                  )}</a>
+                </td>
+              </tr>
+            </table>
+            <p style="margin:14px 0 0;font-size:13px">Ou appelez le <strong>${TRINEXTA_CONTACT.telephone}</strong>, ${
+              TRINEXTA_CONTACT.horaires
+            }.</p>
+          </td>
+        </tr>
+      </table>
+      <p style="margin:20px 0 0;font-size:12px;color:#36678C">Analyse non intrusive : aucune intrusion ni test d'attaque. Ce rapport décrit l'état observé le ${escapeHtml(
+        dateFr(date)
+      )} ; il ne remplace pas un audit complet.</p>
+      <p style="margin:24px 0 0">L'équipe TRINEXTA<br /><span style="color:#5C92B8">L'humain avant les tickets.</span></p>
+      <p style="margin:24px 0 0;font-size:12px;color:#36678C">Vous recevez cet e-mail parce que vous l'avez demandé sur trinexta.fr. Sans demande de rappel de votre part, votre adresse est effacée 30 jours après cet envoi. Pour nous écrire, répondez simplement à cet e-mail ou écrivez à ${
+        TRINEXTA_CONTACT.email
       }.</p>
-    </div>
-    <p style="margin:20px 0 0;font-size:12px;color:#36678C">Analyse non intrusive : aucune intrusion ni test d'attaque. Ce rapport décrit l'état observé le ${escapeHtml(
-      dateFr(date)
-    )} ; il ne remplace pas un audit complet.</p>
-    <p style="margin-top:24px">L'équipe TRINEXTA<br /><span style="color:#5C92B8">L'humain avant les tickets.</span></p>
-    <p style="margin-top:24px;font-size:12px;color:#36678C">Vous recevez cet e-mail parce que vous l'avez demandé sur trinexta.fr. Sans demande de rappel de votre part, votre adresse est effacée 30 jours après cet envoi. Cet e-mail est envoyé depuis une adresse qui ne reçoit pas de réponse. Pour nous écrire : ${
-      TRINEXTA_CONTACT.email
-    }.</p>
-  </div>
-</div>`;
+    </td>
+  </tr>
+</table>`;
 }
 
 /** Notification à l'équipe, envoyée au clic du prospect sur « Être rappelé ». */
