@@ -57,7 +57,7 @@ export const TITRES_VERIFICATION = Object.fromEntries(
   VERIFICATIONS.map((v) => [v.id, v.titre])
 ) as Record<IdVerification, string>
 
-/** Lien vers l'outil (llms.txt, page /cybersecurite). */
+/** Lien vers l'outil (menu Ressources, pied de page, plan du site, llms.txt, page /cybersecurite). */
 export const DIAGNOSTIC_LIEN = {
   name: "Diagnostic sécurité gratuit",
   href: "/diagnostic-securite",
