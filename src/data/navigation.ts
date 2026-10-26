@@ -3,6 +3,8 @@
 // Une entrée avec sous-menu n'est pas un lien : elle ouvre le sous-menu (desktop et mobile).
 // La création de sites n'y figure pas : elle vit sur trinexta-studio.fr (pied de page).
 
+import { DIAGNOSTIC_LIEN } from "@/data/diagnostic"
+
 export interface SubMenuItem {
   label: string
   href: string
@@ -62,7 +64,10 @@ export const menuItems: MenuItem[] = [
       },
       {
         titre: "S'informer",
-        items: [{ label: "Blog", href: "/blog", desc: "Conseils pour les TPE et PME" }],
+        items: [
+          { label: DIAGNOSTIC_LIEN.name, href: DIAGNOSTIC_LIEN.href, desc: "Votre site analysé en 30 secondes" },
+          { label: "Blog", href: "/blog", desc: "Conseils pour les TPE et PME" },
+        ],
       },
     ],
   },
