@@ -6,11 +6,11 @@ import { getOffreContactHref } from "@/data/offres";
 export const SERENITE_DEVIS_HREF = "/contact?type=devis";
 
 export const SERENITE_HERO = {
-  titlePart1: "TRINEXTA Sérénité\u00a0:",
-  titlePart2: "deux formules d'infogérance par poste, prix affichés",
-  accroche: "Vous choisissez ce que vous déléguez.",
+  titlePart1: "Vos équipes travaillent,",
+  titlePart2: "nous gérons votre informatique.",
+  accroche: "Infogérance par poste : un technicien qui répond, des postes protégés, un prix fixe.",
   description:
-    "Sérénité Essentiel protège et entretient vos postes. Sérénité Complète y ajoute l'assistance de vos collaborateurs au quotidien. Les prix sont fixes, hors taxes, par poste et par mois, sans frais de mise en service.",
+    "Sérénité Essentiel protège et entretient vos postes. Sérénité Complète y ajoute l'assistance de vos collaborateurs dès la signature. Prix fixes, hors taxes, par poste et par mois, sans frais de mise en service. Les 3 premiers mois, vous arrêtez quand vous voulez.",
   baseline: "L'humain avant les tickets.",
   ctaPrimary: { label: "Comparer les deux formules", href: "#comparatif" },
   ctaSecondary: { label: "Demander une proposition", href: SERENITE_DEVIS_HREF },
@@ -18,7 +18,7 @@ export const SERENITE_HERO = {
 
 // Bloc « En bref » : réponse directe, reprise telle quelle par les moteurs et assistants IA.
 export const SERENITE_EN_BREF =
-  "TRINEXTA Sérénité regroupe deux formules facturées par poste et par mois. Essentiel (39,99 € HT) : protection EDR SentinelOne, supervision NinjaOne, mises à jour de sécurité, maintenance préventive automatisée, inventaire et rapport annuel ; assistance aux utilisateurs non incluse ; engagement de 12 mois. Complète (79 € HT) : le socle Essentiel, plus l'assistance aux utilisateurs pour les demandes couvertes par le contrat, du lundi au vendredi de 8 h 30 à 19 h, la double authentification, la sensibilisation à l'hameçonnage et la réponse à incident cyber ; sans durée minimale, préavis de 2 mois. Frais de mise en service : 0 €. État des lieux du parc offert. Licences, sauvegarde (option, données hébergées en France), serveurs, NAS, réseau, projets et matériel sont hors forfait.";
+  "TRINEXTA Sérénité regroupe deux formules facturées par poste et par mois. Essentiel (39,99 € HT) : protection EDR SentinelOne, supervision NinjaOne, mises à jour de sécurité, maintenance préventive automatisée, inventaire et rapport trimestriel ; assistance aux utilisateurs non incluse ; engagement de 12 mois. Complète (79 € HT) : le socle Essentiel, plus l'assistance aux utilisateurs pour les demandes couvertes par le contrat, du lundi au vendredi de 8 h 30 à 19 h, la double authentification, la sensibilisation à l'hameçonnage, la réponse à incident cyber et un rapport mensuel ; assistance active dès la signature ; sans durée minimale, préavis de 2 mois. Les 3 premiers mois, les deux formules s'arrêtent sans préavis. Frais de mise en service : 0 €. État des lieux du parc offert. Licences, sauvegarde (option, données hébergées en France), serveurs, NAS, réseau, projets et matériel sont hors forfait.";
 
 export interface SereniteOffre {
   id: "essentiel" | "complete";
@@ -51,10 +51,10 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
       "Suivi des mises à jour de sécurité Windows",
       "Maintenance préventive automatisée",
       "Inventaire des postes couverts",
-      "Rapport annuel d'activité et de sécurité",
+      "Rapport trimestriel d'activité et de sécurité",
     ],
     conditions: [
-      "Engagement minimum de 12 mois",
+      "Engagement de 12 mois, arrêt sans préavis possible les 3 premiers mois",
       "0 € de mise en service",
       "Assistance aux utilisateurs sur devis",
     ],
@@ -78,10 +78,11 @@ export const SERENITE_OFFRES: SereniteOffre[] = [
       "Coordination avec les éditeurs de vos logiciels",
       "Double authentification (MFA) sur les comptes et sensibilisation de vos équipes à l'hameçonnage",
       "Réponse à incident cyber sur les postes et comptes couverts par le contrat",
-      "Rapport trimestriel d'activité et de sécurité",
+      "Rapport mensuel d'activité et de sécurité",
     ],
     conditions: [
-      "Sans durée minimale, préavis de 2 mois",
+      "Assistance active dès la signature",
+      "Sans durée minimale, préavis de 2 mois (aucun préavis les 3 premiers mois)",
       "0 € de mise en service",
       "Interventions sur site selon le contrat",
     ],
@@ -107,6 +108,7 @@ export const SERENITE_SOCLE = [
 export const SERENITE_COMPARATIF: { critere: string; detail?: string; essentiel: string; complete: string }[] = [
   { critere: "Prix par poste et par mois", essentiel: "39,99 € HT", complete: "79 € HT" },
   { critere: "Durée d'engagement", essentiel: "12 mois minimum", complete: "Aucune durée minimale, préavis de 2 mois" },
+  { critere: "Les 3 premiers mois", essentiel: "Arrêt sans préavis", complete: "Arrêt sans préavis" },
   { critere: "Maintenance préventive", essentiel: "Automatisée", complete: "Socle automatisé et assistance couverte" },
   { critere: "Correctifs", essentiel: "Sécurité Windows", complete: "Mises à jour de sécurité ; périmètre logiciel défini au contrat" },
   {
@@ -121,7 +123,7 @@ export const SERENITE_COMPARATIF: { critere: string; detail?: string; essentiel:
   { critere: "Sensibilisation à l'hameçonnage", essentiel: "Non incluse", complete: "inclus" },
   { critere: "Réponse à incident cyber", essentiel: "Non incluse", complete: "inclus" },
   { critere: "Conseils sur le parc", essentiel: "Sur demande", complete: "inclus" },
-  { critere: "Rapport d'activité et de sécurité", essentiel: "Annuel", complete: "Trimestriel" },
+  { critere: "Rapport d'activité et de sécurité", essentiel: "Trimestriel", complete: "Mensuel" },
   { critere: "Intervention sur site", essentiel: "sur-devis", complete: "Selon le contrat" },
 ];
 
@@ -189,13 +191,13 @@ export const SERENITE_SUPPORT = {
 export const SERENITE_RAPPORTS = [
   {
     formule: "Sérénité Essentiel",
-    frequence: "Rapport annuel",
-    desc: "Une fois par an, une synthèse de l'état du parc supervisé, des alertes significatives, des mises à jour suivies et des recommandations prioritaires.",
+    frequence: "Rapport trimestriel",
+    desc: "Tous les trois mois, une synthèse de l'état du parc supervisé, des alertes significatives, des mises à jour suivies et des recommandations prioritaires.",
   },
   {
     formule: "Sérénité Complète",
-    frequence: "Rapport trimestriel",
-    desc: "Tous les trois mois, les indicateurs de supervision, les incidents traités, les interventions réalisées et les recommandations. Un support clair pour vos décisions.",
+    frequence: "Rapport mensuel",
+    desc: "Chaque mois, les indicateurs de supervision, les demandes traitées, les interventions réalisées et les recommandations. Un support clair pour vos décisions.",
   },
 ] as const;
 
@@ -204,15 +206,80 @@ export const SERENITE_POUR_QUI = {
   complete: "Complète convient à un cabinet, une agence, une entreprise du bâtiment ou une PME de services qui veut que ses collaborateurs appellent un support, et non un collègue, quand quelque chose bloque.",
 } as const;
 
+// Preuves : interventions réelles, anonymisées (secteur et taille seulement, aucun nom
+// de client ni chiffre non vérifié). Le bandeau de logos attend l'accord écrit d'au moins
+// deux clients de plus de 20 postes (décision de la direction, 27/10/2026).
+export const SERENITE_PREUVES = {
+  lienEtudes: { label: "Lire nos études de cas détaillées", href: "/cas-clients" },
+  experience:
+    "Nos techniciens ont assuré le support de proximité de parcs de plus de 800 utilisateurs. Aujourd'hui, nous mettons cette exigence au service des TPE et PME.",
+  cas: [
+    {
+      secteur: "Entreprise du bâtiment, 6 postes",
+      titre: "Le constructeur concluait à une impasse",
+      texte:
+        "Un poste restait lent malgré une réparation par le constructeur, qui refusait d'aller plus loin. Notre diagnostic à distance a trouvé la cause : une mémoire virtuelle sous-dimensionnée. Corrigée sans déplacement.",
+    },
+    {
+      secteur: "Entreprise du bâtiment, 6 postes",
+      titre: "Un fichier malveillant arrêté par l'EDR",
+      texte:
+        "Un fichier malveillant caché dans un logiciel téléchargé sur un poste a été détecté et mis en quarantaine automatiquement par la protection SentinelOne, puis analysé par un technicien.",
+    },
+    {
+      secteur: "Entreprise du bâtiment, 6 postes",
+      titre: "Windows 11 sans racheter de licence",
+      texte:
+        "Une tour sous Windows 10 a été passée à Windows 11 Pro sur place, après activation des fonctions de sécurité nécessaires, sans perte de données ni nouvelle licence.",
+    },
+    {
+      secteur: "Cabinet d'expertise comptable, Essonne",
+      titre: "Des mises à jour bloquées depuis des semaines",
+      texte:
+        "Les correctifs de sécurité ne s'installaient plus. Nous avons réparé le système, installé le correctif en retard et réglé la supervision pour que la panne ne revienne pas.",
+    },
+    {
+      secteur: "Cabinet d'expertise comptable, Essonne",
+      titre: "Une installation complète, puis le quotidien",
+      texte:
+        "Création de l'environnement Microsoft 365 (comptes, messagerie), fourniture et installation du matériel, puis infogérance au quotidien.",
+    },
+  ],
+  // Situations types : ce que nous faisons quand cela arrive. Présentées comme telles,
+  // jamais comme des témoignages.
+  situations: [
+    {
+      probleme: "Un collaborateur a saisi son mot de passe sur un faux mail.",
+      reponse:
+        "Nous bloquons le compte, changeons le mot de passe, fermons les sessions ouvertes, vérifions les règles de transfert cachées et activons la double authentification.",
+    },
+    {
+      probleme: "Un nouveau salarié arrive lundi et rien n'est prêt.",
+      reponse:
+        "Compte, messagerie, licences et poste sont préparés avant son arrivée. Le jour J, il se connecte et travaille.",
+    },
+    {
+      probleme: "Votre ancien prestataire ne répond plus et personne n'a les accès administrateur.",
+      reponse:
+        "Nous faisons l'état des lieux, récupérons les accès administrateur au nom de votre entreprise et documentons votre parc. Vous n'en dépendez plus.",
+    },
+    {
+      probleme: "Un poste refuse de démarrer un matin.",
+      reponse:
+        "Prise en main à distance quand c'est possible, sinon intervention planifiée. Avec la supervision, nous voyons souvent les signes avant la panne.",
+    },
+  ],
+} as const
+
 export const SERENITE_LOCAL =
   "TRINEXTA est installée au 7 rue Montespan, 91000 Évry-Courcouronnes. Nos formules n'ont pas de minimum de postes : de 1 à 20 postes et au-delà, pour les entreprises du Grand Paris Sud, de l'Essonne et d'Île-de-France. La supervision et l'assistance à distance suivent vos postes où qu'ils soient, sous réserve de compatibilité et d'autorisation.";
 
 export const SERENITE_ETAPES = [
   { title: "Échange et état des lieux, offert", desc: "Nombre de postes, environnement technique, prestations recherchées." },
   { title: "Proposition écrite", desc: "Postes, prix, options et conditions." },
-  { title: "Installation des outils", desc: "Après accord, nous déployons les agents de supervision et de sécurité sur les postes compatibles." },
-  { title: "Démarrage", desc: "Les outils remontent leurs informations. Pour Complète, vos utilisateurs reçoivent les canaux de support." },
-  { title: "Rapports et suivi", desc: "Annuel pour Essentiel, trimestriel pour Complète." },
+  { title: "Signature : l'assistance démarre", desc: "Avec Complète, vos collaborateurs peuvent nous appeler dès la signature : téléphone, e-mail et prise en main à distance." },
+  { title: "Installation des outils", desc: "Nous déployons la protection et la supervision sur les postes compatibles, à des créneaux choisis avec vous pour ne pas gêner le travail." },
+  { title: "Rapports et suivi", desc: "Trimestriel pour Essentiel, mensuel pour Complète." },
 ];
 
 export const SERENITE_OPTIONS = [
@@ -252,7 +319,7 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
     question: "Quelle différence entre Essentiel et Complète ?",
     answer:
-      "Essentiel couvre la protection EDR, la supervision, les mises à jour de sécurité, la maintenance préventive automatisée et l'inventaire. Complète ajoute l'assistance de vos collaborateurs pour les demandes couvertes par le contrat, le Microsoft 365 courant, les arrivées et départs, la coordination avec vos éditeurs, la double authentification, la sensibilisation à l'hameçonnage, la réponse à incident cyber et un rapport trimestriel.",
+      "Essentiel couvre la protection EDR, la supervision, les mises à jour de sécurité, la maintenance préventive automatisée, l'inventaire et un rapport trimestriel. Complète ajoute l'assistance de vos collaborateurs pour les demandes couvertes par le contrat, le Microsoft 365 courant, les arrivées et départs, la coordination avec vos éditeurs, la double authentification, la sensibilisation à l'hameçonnage, la réponse à incident cyber et un rapport mensuel.",
   },
   {
     question: "L'assistance aux utilisateurs est-elle incluse dans Essentiel ?",
@@ -262,12 +329,22 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
     question: "Pourquoi 12 mois d'engagement pour Essentiel ?",
     answer:
-      "Essentiel repose sur la mise en place d'outils de protection et de supervision sur chaque poste, pensée pour durer. Les modalités de renouvellement et de résiliation figurent au contrat.",
+      "Essentiel repose sur la mise en place d'outils de protection et de supervision sur chaque poste, pensée pour durer. Pendant les 3 premiers mois, vous pouvez toutefois arrêter sans préavis. Les modalités de renouvellement et de résiliation figurent au contrat.",
+  },
+  {
+    question: "Et si je ne suis pas satisfait ?",
+    answer:
+      "Les 3 premiers mois suivant la signature, vous pouvez arrêter Essentiel comme Complète sans préavis ni durée minimale à respecter. Les prestations déjà réalisées et les éventuels achats de matériel ou de licences restent dus.",
+  },
+  {
+    question: "Quand l'assistance commence-t-elle ?",
+    answer:
+      "Avec Sérénité Complète, vos collaborateurs peuvent joindre le support dès la signature. L'installation des outils de protection et de supervision se fait ensuite sur les postes compatibles, à des créneaux convenus avec vous.",
   },
   {
     question: "Sérénité Complète est-elle sans engagement ?",
     answer:
-      "Complète n'a pas de durée minimale. Vous pouvez y mettre fin avec un préavis de 2 mois, selon les conditions contractuelles.",
+      "Complète n'a pas de durée minimale. Vous pouvez y mettre fin avec un préavis de 2 mois, et sans préavis pendant les 3 premiers mois, selon les conditions contractuelles.",
   },
   {
     question: "Que veut dire « assistance illimitée » ?",

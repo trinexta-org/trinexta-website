@@ -1,6 +1,8 @@
 // Pied de page de trinexta.fr : source unique des colonnes et des coordonnées.
 // Les autres activités et produits de TRINEXTA y sont regroupés (« Les marques TRINEXTA »).
 
+import { DIAGNOSTIC_LIEN } from "@/data/diagnostic"
+
 export interface LienPied {
   name: string
   href: string
@@ -20,6 +22,7 @@ export const PIED_SERVICES: LienPied[] = [
 ]
 
 export const PIED_RESSOURCES: LienPied[] = [
+  { name: DIAGNOSTIC_LIEN.name, href: DIAGNOSTIC_LIEN.href },
   { name: "Ordinateur ou compte piraté", href: "/charte-assistance" },
   { name: "Plan de réponse aux incidents", href: "/plan-reponse-incidents-securite" },
   { name: "Niveaux de service", href: "/niveau-de-service" },

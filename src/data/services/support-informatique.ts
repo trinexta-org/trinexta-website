@@ -175,7 +175,7 @@ export const supportInformatiqueData: ServicePageProps = {
         points: [
           "Demandes couvertes par le contrat, sans plafond de nombre",
           "Téléphone, e-mail et prise en main à distance",
-          "Historique des demandes et rapport trimestriel",
+          "Historique des demandes et rapport mensuel",
           "Sans durée minimale, préavis de 2 mois",
           "Prix par poste et par mois, détaillé sur la page Sérénité",
         ],

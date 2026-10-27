@@ -28,7 +28,7 @@
 | Mentions légales | /mentions-legales | `src/data/mentions-legales.tsx` | 25/10/2026 (#356) | Oui : directeur de la publication nommé, « RCS Évry 942 020 082 », hébergeur, disponibilité en moyens raisonnables |
 | Politique de confidentialité | /confidentialite | `src/data/confidentialite.tsx` | 25/10/2026 (#356, puis diagnostic sécurité : article 14) | Oui : tableau finalité / base / durée, sous-traitants nommés avec pays, transferts, mesure d'audience |
 | Politique cookies | /cookies | `src/data/cookies.tsx` | 25/10/2026 (#356) | Oui : liste des traceurs réels, outils non utilisés retirés |
-| CGV | /cgv | `src/data/cgv.tsx` | 25/10/2026 | Oui pour les professionnels : pénalités taux BCE + 10 points, indemnité 40 €. Particuliers : acceptés sur devis dédié, Code de la consommation prévalant (relecture juriste à prévoir, écart E4) |
+| CGV | /cgv | `src/data/cgv.tsx` | 27/10/2026 | Oui pour les professionnels : pénalités taux BCE + 10 points, indemnité 40 €. Particuliers : acceptés sur devis dédié, Code de la consommation prévalant (relecture juriste à prévoir, écart E4) |
 | Engagements de service, plan de réponse aux incidents, accord de traitement des données | /niveau-de-service, /plan-reponse-incidents-securite, /accord-traitement-donnees | `src/data/sla.tsx`, `plan-reponse-incidents.tsx`, `dpa.tsx` | 25/10/2026 (#356) | Oui : plus de tarif public, plus d'adresse support@, plus de « garantir » |
 
 ## 3. Registre des traitements
@@ -188,4 +188,5 @@ Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/aud
 | 25/10/2026 | Conformité RGPD, cookies, mentions légales | PR #356, mise en production par #359 |
 | 25/10/2026 | SEO, accessibilité, charte | PR #357, mise en production par #359 |
 | 25/10/2026 | Forme sociale SASU, ligne particuliers des CGV, création de ce dossier | PR #359 et suivante |
+| 27/10/2026 | CGV Sérénité : période d'essai de 3 mois (résiliation sans préavis, durée minimale d'Essentiel non opposable), rapports trimestriel (Essentiel) et mensuel (Complète). Page /serenite : cas clients réels anonymisés (secteur et taille, aucun nom), situations types présentées comme telles | PR feat/serenite-offre-hormozi |
 | 25/10/2026 | Diagnostic sécurité gratuit : nouvelle collecte, trois routes publiques, appels sortants bridés, politique de confidentialité (article 14), puis correctifs de la relecture de sécurité (ReDoS, jeton du rapport, rappel par bouton, sondes HEAD) | PR #362 |
