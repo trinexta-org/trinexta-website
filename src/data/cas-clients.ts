@@ -1,4 +1,4 @@
-export type CaseClientSector = "cabinet" | "commerce" | "industrie" | "service" | "association"
+export type CaseClientSector = "cabinet" | "commerce" | "industrie" | "service" | "association" | "batiment" | "immobilier"
 
 export interface CaseClientMetric {
   indicator: string
@@ -43,6 +43,8 @@ export const caseClientSectors = [
   { value: "industrie", label: "Industrie" },
   { value: "service", label: "Service" },
   { value: "association", label: "Association" },
+  { value: "batiment", label: "Bâtiment" },
+  { value: "immobilier", label: "Immobilier" },
 ] as const
 
 export const caseClients: CaseClient[] = [
@@ -287,6 +289,317 @@ export const caseClients: CaseClient[] = [
       { indicator: "Fichiers malveillants", before: "63 identifiés", after: "En quarantaine" },
       { indicator: "Accès administratifs", before: "À sécuriser", after: "Renforcés" },
       { indicator: "Principaux sites", before: "Dysfonctionnements", after: "Accessibles" },
+    ],
+  },
+  // Cas n°5 à n°10 : interventions réelles décrites par la direction (27/10/2026),
+  // anonymisées (secteur et ville seulement). Aucun chiffre non vérifié : les
+  // indicateurs sont qualitatifs.
+  {
+    slug: "departs-collaborateurs-comptes-licences-cabinet-comptable-essonne",
+    label: "Cas n°5",
+    clientName: "Cabinet d'expertise comptable",
+    sector: "cabinet",
+    sectorLabel: "Cabinet comptable",
+    size: "Essonne",
+    heroImage: "/images/services/microsoft-365/hero.avif",
+    cardImage: "/images/services/microsoft-365/problem-1.jpg",
+    seoTitle: "Départs de salariés : comptes, licences et accès repris en main dans un cabinet comptable en Essonne",
+    metaDescription:
+      "Cabinet d'expertise comptable en Essonne : comptes d'anciens salariés fermés, licences inutiles arrêtées, messagerie sécurisée et sauvegardes vérifiées par TRINEXTA.",
+    cardChallenge:
+      "Les collaborateurs partaient, leurs comptes et leurs licences restaient. Les accès aux dossiers clients n'étaient jamais retirés.",
+    cardResult:
+      "Comptes et licences repris en main, accès inutiles fermés, sauvegardes vérifiées et procédure d'arrivée et de départ en place.",
+    title: "Les collaborateurs partaient. Leurs comptes et les factures restaient.",
+    context: [
+      "Dans ce cabinet d'expertise comptable de l'Essonne, chaque recrutement se traduisait par l'achat d'un ordinateur et la création d'une adresse e-mail. Un proche du cabinet s'occupait de l'informatique quand il le pouvait.",
+      "Au fil des départs, personne ne faisait le ménage : des comptes restaient actifs plusieurs mois après le départ, des licences continuaient d'être payées et les accès aux dossiers clients n'étaient jamais retirés.",
+      "Les sauvegardes reposaient sur des disques durs, sans contrôle régulier de leur restauration. Pour un cabinet qui détient des données confidentielles, le risque était réel.",
+    ],
+    challenges: [
+      "Comptes d'anciens collaborateurs toujours actifs plusieurs mois après leur départ.",
+      "Licences payées pour des personnes qui ne travaillaient plus au cabinet.",
+      "Accès aux dossiers clients jamais retirés.",
+      "Sauvegardes sur disques durs, sans test de restauration.",
+      "Dépendance à la disponibilité d'un proche pour toute question informatique.",
+    ],
+    solutions: [
+      {
+        label: "Microsoft 365",
+        href: "/microsoft-365",
+        content:
+          "Reprise des comptes et des licences, fermeture des accès devenus inutiles et sécurisation de la messagerie.",
+      },
+      {
+        label: "Sauvegarde",
+        href: "/cloud-sauvegarde",
+        content: "Mise en place de sauvegardes organisées, dont la restauration est vérifiée.",
+      },
+      {
+        label: "Infogérance",
+        href: "/serenite",
+        content:
+          "Procédure d'arrivée et de départ des collaborateurs pour garder la maîtrise du parc dans la durée.",
+      },
+    ],
+    benefits: [
+      "Dépenses inutiles arrêtées : plus de licences payées pour d'anciens collaborateurs.",
+      "Dossiers confidentiels protégés : seuls les collaborateurs présents y ont accès.",
+      "Autonomie : le cabinet ne dépend plus de la disponibilité d'un proche pour travailler.",
+    ],
+    metrics: [
+      { indicator: "Comptes d'anciens salariés", before: "Toujours actifs", after: "Fermés" },
+      { indicator: "Licences inutiles", before: "Payées", after: "Arrêtées" },
+      { indicator: "Sauvegardes", before: "Non vérifiées", after: "Restauration contrôlée" },
+    ],
+  },
+  {
+    slug: "pc-en-panne-devis-recuperes-entreprise-batiment-evry",
+    label: "Cas n°6",
+    clientName: "Entreprise du bâtiment",
+    sector: "batiment",
+    sectorLabel: "Bâtiment",
+    size: "Évry-Courcouronnes",
+    heroImage: "/images/services/cloud-sauvegarde/hero.avif",
+    cardImage: "/images/services/microsoft-365/benefit-4.jpg",
+    seoTitle: "PC en panne, devis bloqués : récupération des documents et sauvegarde pour une entreprise du bâtiment à Évry",
+    metaDescription:
+      "Entreprise du bâtiment à Évry-Courcouronnes : le seul PC qui contenait devis et plans ne démarrait plus. TRINEXTA a récupéré les documents et organisé un stockage partagé sauvegardé.",
+    cardChallenge:
+      "Devis, plans de chantier et coordonnées clients sur un seul PC. Un matin, il ne démarre plus.",
+    cardResult:
+      "Documents récupérés et remis à disposition, puis stockage partagé avec des sauvegardes contrôlées.",
+    title: "Les devis sont sur un seul PC. Et ce matin, il ne démarre plus.",
+    context: [
+      "Dans cette entreprise du bâtiment d'Évry-Courcouronnes, les devis en cours, les plans de chantier et les coordonnées des clients étaient enregistrés sur l'ordinateur de l'assistante.",
+      "Le jour où il est tombé en panne, le dirigeant a découvert que ces documents n'étaient sauvegardés nulle part ailleurs. Les équipes attendaient leurs plans et les devis ne partaient plus.",
+    ],
+    challenges: [
+      "Documents de travail stockés sur un seul ordinateur.",
+      "Aucune sauvegarde des devis, plans et fichiers clients.",
+      "Activité bloquée : plans indisponibles pour les équipes, devis en attente.",
+    ],
+    solutions: [
+      {
+        label: "Dépannage",
+        href: "/services-annexes",
+        content:
+          "Diagnostic du poste, recherche des possibilités de récupération et remise des documents à disposition de l'équipe.",
+      },
+      {
+        label: "Sauvegarde",
+        href: "/cloud-sauvegarde",
+        content: "Organisation d'un stockage partagé avec des sauvegardes contrôlées.",
+      },
+    ],
+    benefits: [
+      "Documents retrouvés et remis à disposition de l'équipe.",
+      "Fin de la dépendance à un seul ordinateur : les dossiers sont partagés et sauvegardés.",
+    ],
+    metrics: [
+      { indicator: "Stockage des devis et plans", before: "Un seul PC", after: "Stockage partagé" },
+      { indicator: "Sauvegardes", before: "Aucune", after: "Contrôlées" },
+    ],
+  },
+  {
+    slug: "messagerie-partagee-securisee-agence-immobiliere-corbeil-essonnes",
+    label: "Cas n°7",
+    clientName: "Agence immobilière",
+    sector: "immobilier",
+    sectorLabel: "Immobilier",
+    size: "Corbeil-Essonnes",
+    heroImage: "/images/services/cybersecurite/hero.avif",
+    cardImage: "/images/services/microsoft-365/problem-2.jpg",
+    seoTitle: "Mot de passe partagé et messages suspects : messagerie sécurisée pour une agence immobilière à Corbeil-Essonnes",
+    metaDescription:
+      "Agence immobilière à Corbeil-Essonnes : un mot de passe de messagerie partagé, connu d'anciens salariés, et des messages envoyés sans auteur connu. TRINEXTA a sécurisé les accès avec la double authentification.",
+    cardChallenge:
+      "Toute l'agence utilisait la même boîte mail avec le même mot de passe, connu même d'anciens salariés.",
+    cardResult:
+      "Comptes sécurisés, anciennes sessions fermées, accès individuels à la messagerie partagée avec double authentification.",
+    title: "Le mot de passe de la messagerie est connu de toute l'agence. Même des anciens salariés.",
+    context: [
+      "Pour répondre vite aux clients, toute l'agence utilisait la même boîte e-mail avec le même mot de passe. Il était enregistré sur des téléphones personnels et n'avait pas changé malgré plusieurs départs.",
+      "Un jour, des messages ont été envoyés au nom de l'agence sans que personne ne sache qui les avait expédiés.",
+    ],
+    challenges: [
+      "Un mot de passe unique partagé par toute l'équipe.",
+      "Mot de passe jamais changé après le départ de salariés.",
+      "Accès depuis des téléphones personnels non maîtrisés.",
+      "Messages envoyés au nom de l'agence sans auteur identifiable.",
+    ],
+    solutions: [
+      {
+        label: "Cybersécurité",
+        href: "/cybersecurite",
+        content: "Sécurisation des comptes et fermeture des anciennes sessions ouvertes.",
+      },
+      {
+        label: "Microsoft 365",
+        href: "/microsoft-365",
+        content:
+          "Accès individuels à la messagerie partagée, avec double authentification pour chaque collaborateur.",
+      },
+    ],
+    benefits: [
+      "L'équipe continue de travailler ensemble sur la même boîte.",
+      "L'agence sait qui peut consulter les échanges avec ses clients.",
+      "Les anciens salariés n'ont plus accès à la messagerie.",
+    ],
+    metrics: [
+      { indicator: "Accès à la messagerie", before: "Un mot de passe pour tous", after: "Un accès par personne" },
+      { indicator: "Double authentification", before: "Non", after: "Oui" },
+      { indicator: "Anciennes sessions", before: "Ouvertes", after: "Fermées" },
+    ],
+  },
+  {
+    slug: "arrivee-nouveau-salarie-poste-pret-cabinet-conseil-paris",
+    label: "Cas n°8",
+    clientName: "Cabinet de conseil",
+    sector: "cabinet",
+    sectorLabel: "Conseil",
+    size: "Paris 15e",
+    heroImage: "/images/services/microsoft-365/hero.avif",
+    cardImage: "/images/services/support-informatique/benefit-4.jpg",
+    seoTitle: "Arrivée d'un nouveau salarié : poste et Microsoft 365 prêts le premier jour, cabinet de conseil à Paris",
+    metaDescription:
+      "Cabinet de conseil à Paris 15e : les nouveaux salariés attendaient leur informatique toute une semaine. TRINEXTA prépare le poste et Microsoft 365 avant leur arrivée.",
+    cardChallenge:
+      "À chaque arrivée, le poste n'était pas prêt et un collègue laissait son travail pour aider le nouveau venu.",
+    cardResult:
+      "Poste préparé avant l'arrivée, Microsoft 365 configuré, logiciels et accès vérifiés. Opérationnel dès le premier jour.",
+    title: "Un nouveau salarié arrive lundi. Son informatique sera prête… dans la semaine.",
+    context: [
+      "Dans ce cabinet de conseil parisien, l'ordinateur d'un nouveau collaborateur venait d'être acheté, mais les logiciels manquaient. La messagerie fonctionnait dans le navigateur et pas dans Outlook.",
+      "Les dossiers partagés étaient inaccessibles et personne ne retrouvait les identifiants administrateur. Le nouveau collaborateur attendait, pendant qu'un collègue laissait son propre travail pour l'aider.",
+    ],
+    challenges: [
+      "Poste livré sans les logiciels du métier.",
+      "Messagerie non configurée dans Outlook.",
+      "Dossiers partagés inaccessibles.",
+      "Identifiants administrateur introuvables.",
+    ],
+    solutions: [
+      {
+        label: "Microsoft 365",
+        href: "/microsoft-365",
+        content: "Configuration de Microsoft 365 : messagerie dans Outlook, dossiers partagés et accès.",
+      },
+      {
+        label: "Support informatique",
+        href: "/support-informatique",
+        content:
+          "Préparation du poste avant l'arrivée, installation des logiciels et vérification des accès nécessaires au métier.",
+      },
+    ],
+    benefits: [
+      "Un collaborateur opérationnel dès son arrivée.",
+      "Plus de collègue détourné de son travail pour dépanner.",
+      "Un interlocuteur identifié pour l'assistance informatique.",
+    ],
+    metrics: [
+      { indicator: "Poste du nouvel arrivant", before: "Prêt dans la semaine", after: "Prêt le premier jour" },
+      { indicator: "Logiciels du métier", before: "Manquants", after: "Installés avant l'arrivée" },
+    ],
+  },
+  {
+    slug: "pannes-reseau-repetees-pme-services-carre-senart",
+    label: "Cas n°9",
+    clientName: "PME de services",
+    sector: "service",
+    sectorLabel: "Service",
+    size: "Carré Sénart",
+    heroImage: "/images/services/solutions-metier/hero.avif",
+    cardImage: "/images/services/solutions-metier/benefit-4.jpg",
+    seoTitle: "Coupures réseau répétées : cause trouvée et corrigée pour une PME de services au Carré Sénart",
+    metaDescription:
+      "PME de services au Carré Sénart : déconnexions du logiciel de gestion, dossiers partagés et imprimante introuvables chaque semaine. TRINEXTA a trouvé l'origine des coupures et corrigé le réseau.",
+    cardChallenge:
+      "Chaque semaine, le logiciel de gestion se déconnectait et les dossiers partagés disparaissaient. Les factures attendaient.",
+    cardResult:
+      "Origine des coupures recherchée, réseau et équipements vérifiés, défauts corrigés, puis suivi pour repérer toute récidive.",
+    title: "La même panne revient chaque semaine. Et toute l'équipe s'adapte autour.",
+    context: [
+      "Dans cette PME de services du Carré Sénart, le logiciel de gestion se déconnectait, les dossiers partagés disparaissaient et l'imprimante devenait introuvable, semaine après semaine.",
+      "Les collaborateurs redémarraient leurs postes jusqu'à ce que cela fonctionne. Pendant ce temps, les factures attendaient et le dirigeant rappelait la personne qui avait installé le réseau.",
+    ],
+    challenges: [
+      "Déconnexions répétées du logiciel de gestion.",
+      "Dossiers partagés et imprimante régulièrement introuvables.",
+      "Facturation ralentie par les interruptions.",
+      "Aucun suivi de l'origine des pannes.",
+    ],
+    solutions: [
+      {
+        label: "Téléphonie et réseau",
+        href: "/solutions-metier",
+        content:
+          "Recherche de l'origine des coupures, vérification du réseau et des équipements, correction des défauts identifiés.",
+      },
+      {
+        label: "Infogérance",
+        href: "/serenite",
+        content: "Suivi informatique pour repérer les signes de récidive.",
+      },
+    ],
+    benefits: [
+      "Moins d'interruptions répétées qui ralentissaient la facturation.",
+      "Les équipes ne perdent plus leur temps à redémarrer leurs postes.",
+      "Les signes de récidive sont repérés par le suivi.",
+    ],
+    metrics: [
+      { indicator: "Origine des coupures", before: "Inconnue", after: "Identifiée et corrigée" },
+      { indicator: "Suivi du réseau", before: "Aucun", after: "En place" },
+    ],
+  },
+  {
+    slug: "sauvegardes-verifiees-entreprise-maintenance-sainte-genevieve-des-bois",
+    label: "Cas n°10",
+    clientName: "Entreprise de maintenance",
+    sector: "industrie",
+    sectorLabel: "Maintenance",
+    size: "Sainte-Geneviève-des-Bois",
+    heroImage: "/images/services/cloud-sauvegarde/hero.avif",
+    cardImage: "/images/services/infogerance/problem-1.jpg",
+    seoTitle: "Sauvegardes vieilles de plusieurs mois : copies vérifiées pour une entreprise de maintenance à Sainte-Geneviève-des-Bois",
+    metaDescription:
+      "Entreprise de maintenance à Sainte-Geneviève-des-Bois : le disque de sauvegarde ne copiait plus rien depuis des mois. TRINEXTA a mis en place des copies automatiques avec test de restauration et alertes.",
+    cardChallenge:
+      "Un disque de sauvegarde branché chaque soir. Mais les dernières copies dataient de plusieurs mois.",
+    cardResult:
+      "Sauvegardes automatiques adaptées, restauration testée et alertes en cas d'échec.",
+    title: "Le disque de sauvegarde est branché. Mais les dernières copies datent de plusieurs mois.",
+    context: [
+      "Chaque soir, un disque dur était censé sauvegarder les dossiers de cette entreprise de maintenance. Personne ne regardait les messages d'erreur : tout le monde pensait que cela fonctionnait.",
+      "Lorsqu'un dossier client a été supprimé, la seule copie retrouvée ne contenait ni les derniers devis ni les interventions récentes.",
+    ],
+    challenges: [
+      "Sauvegardes en échec depuis plusieurs mois sans que personne ne le sache.",
+      "Messages d'erreur jamais consultés.",
+      "Derniers devis et interventions perdus après la suppression d'un dossier.",
+    ],
+    solutions: [
+      {
+        label: "Sauvegarde",
+        href: "/cloud-sauvegarde",
+        content:
+          "Vérification de ce qui était réellement sauvegardé, mise en place de copies automatiques adaptées et test de restauration des fichiers.",
+      },
+      {
+        label: "Supervision",
+        href: "/serenite",
+        content: "Alertes en cas d'échec d'une sauvegarde, pour ne plus le découvrir le jour où l'on en a besoin.",
+      },
+    ],
+    benefits: [
+      "Des sauvegardes vérifiées, dont la restauration a été testée.",
+      "Un échec de sauvegarde est signalé tout de suite.",
+      "Plus besoin de reconstituer des semaines de travail.",
+    ],
+    metrics: [
+      { indicator: "Dernière copie exploitable", before: "Plusieurs mois", after: "Automatique et récente" },
+      { indicator: "Test de restauration", before: "Jamais", after: "Effectué" },
+      { indicator: "Alerte en cas d'échec", before: "Aucune", after: "En place" },
     ],
   },
 ]
