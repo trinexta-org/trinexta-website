@@ -46,7 +46,7 @@ export const VIDEO_TRINEXTA_JSONLD = {
 export const ACCUEIL_OFFRES = {
   title: "Deux formules selon ce que vous voulez déléguer",
   description:
-    "Sérénité Essentiel protège et entretient vos postes : EDR SentinelOne, supervision NinjaOne, maintenance préventive automatisée, rapport annuel, engagement de 12 mois. Sérénité Complète y ajoute l'assistance de vos collaborateurs, Microsoft 365 au quotidien et un rapport trimestriel, sans durée minimale avec un préavis de 2 mois. Licences, sauvegarde, serveurs, NAS, réseau, projets et matériel sont chiffrés à part.",
+    "Sérénité Essentiel protège et entretient vos postes : EDR SentinelOne, supervision NinjaOne, maintenance préventive automatisée, rapport trimestriel, engagement de 12 mois. Sérénité Complète y ajoute l'assistance de vos collaborateurs, Microsoft 365 au quotidien et un rapport mensuel, sans durée minimale avec un préavis de 2 mois. Licences, sauvegarde, serveurs, NAS, réseau, projets et matériel sont chiffrés à part.",
   ctaLabel: "Voir les prix et comparer les formules",
   ctaHref: "/serenite",
 } as const

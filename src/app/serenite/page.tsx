@@ -18,6 +18,7 @@ import { SereniteRapports } from "@/components/serenite/SereniteRapports";
 import { SereniteTargets } from "@/components/serenite/SereniteTargets";
 import { SereniteEtapes } from "@/components/serenite/SereniteEtapes";
 import { SereniteOptions } from "@/components/serenite/SereniteOptions";
+import { SerenitePreuves } from "@/components/serenite/SerenitePreuves";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { FinalCTA } from "@/components/FinalCTA";
 import {
@@ -172,6 +173,10 @@ export default function SerenitePage() {
         </div>
 
         <div className="space-y-16 md:space-y-24 pb-16 md:pb-24">
+          <Bloc surtitle="Sur le terrain" title="Ce que nous avons *réglé* pour nos clients">
+            <SerenitePreuves />
+          </Bloc>
+
           <Bloc surtitle="Pourquoi Sérénité" title="Pourquoi choisir TRINEXTA *Sérénité* ?">
             <SerenitePillars />
           </Bloc>
