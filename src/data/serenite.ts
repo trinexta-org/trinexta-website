@@ -210,10 +210,20 @@ export const SERENITE_POUR_QUI = {
 // de client ni chiffre non vérifié). Le bandeau de logos attend l'accord écrit d'au moins
 // deux clients de plus de 20 postes (décision de la direction, 27/10/2026).
 export const SERENITE_PREUVES = {
-  lienEtudes: { label: "Lire nos études de cas détaillées", href: "/cas-clients" },
+  lienEtudes: { label: "Voir tous nos cas clients", href: "/cas-clients" },
   experience:
     "Nos techniciens ont assuré le support de proximité de parcs de plus de 800 utilisateurs. Aujourd'hui, nous mettons cette exigence au service des TPE et PME.",
-  cas: [
+  // Cas détaillés de /cas-clients mis en avant sur cette page (slugs de src/data/cas-clients.ts).
+  casEnAvant: [
+    "departs-collaborateurs-comptes-licences-cabinet-comptable-essonne",
+    "messagerie-partagee-securisee-agence-immobiliere-corbeil-essonnes",
+    "sauvegardes-verifiees-entreprise-maintenance-sainte-genevieve-des-bois",
+    "pc-en-panne-devis-recuperes-entreprise-batiment-evry",
+    "arrivee-nouveau-salarie-poste-pret-cabinet-conseil-paris",
+    "pannes-reseau-repetees-pme-services-carre-senart",
+  ],
+  // Autres interventions réelles récentes, en bref.
+  recentes: [
     {
       secteur: "Entreprise du bâtiment, 6 postes",
       titre: "Le constructeur concluait à une impasse",
@@ -243,30 +253,6 @@ export const SERENITE_PREUVES = {
       titre: "Une installation complète, puis le quotidien",
       texte:
         "Création de l'environnement Microsoft 365 (comptes, messagerie), fourniture et installation du matériel, puis infogérance au quotidien.",
-    },
-  ],
-  // Situations types : ce que nous faisons quand cela arrive. Présentées comme telles,
-  // jamais comme des témoignages.
-  situations: [
-    {
-      probleme: "Un collaborateur a saisi son mot de passe sur un faux mail.",
-      reponse:
-        "Nous bloquons le compte, changeons le mot de passe, fermons les sessions ouvertes, vérifions les règles de transfert cachées et activons la double authentification.",
-    },
-    {
-      probleme: "Un nouveau salarié arrive lundi et rien n'est prêt.",
-      reponse:
-        "Compte, messagerie, licences et poste sont préparés avant son arrivée. Le jour J, il se connecte et travaille.",
-    },
-    {
-      probleme: "Votre ancien prestataire ne répond plus et personne n'a les accès administrateur.",
-      reponse:
-        "Nous faisons l'état des lieux, récupérons les accès administrateur au nom de votre entreprise et documentons votre parc. Vous n'en dépendez plus.",
-    },
-    {
-      probleme: "Un poste refuse de démarrer un matin.",
-      reponse:
-        "Prise en main à distance quand c'est possible, sinon intervention planifiée. Avec la supervision, nous voyons souvent les signes avant la panne.",
     },
   ],
 } as const

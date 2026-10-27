@@ -1,7 +1,9 @@
 // Page /services-annexes (« Dépannage et interventions ») : textes de la fiche 10
 // du dossier final (23/10/2026). Interventions ponctuelles, sur devis.
 // Règles : aucun tarif d'intervention (horaire, journée, déplacement) ; aucun
-// délai chiffré ; partenaires matériel affichables : MCA Technology et TD Synnex.
+// délai chiffré. Partenaires affichables : Microsoft, Dell et Lenovo (partenariats confirmés
+// par la direction le 27/10/2026 : devis constructeur, licences et tenants Microsoft 365
+// pour les clients), MCA Technology et TD Synnex (distributeurs).
 
 import type { FaqItem } from "@/components/shared/FaqSection"
 
@@ -202,9 +204,12 @@ export const SA_ETAPES_NOTE =
   "Pas de frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry ; le temps passé sur site est facturé selon le devis. Au-delà, les conditions sont précisées dans le devis."
 
 /** Partenaires matériel validés le 23/10/2026. Logos absents : affichage par nom. */
-export const SA_PARTENAIRES = [
-  { name: "MCA Technology", role: "Fourniture de matériel." },
-  { name: "TD Synnex", role: "Fourniture de matériel." },
+export const SA_PARTENAIRES: { name: string; role: string; logo?: string }[] = [
+  { name: "Microsoft", role: "Licences et environnements Microsoft 365 de nos clients.", logo: "/images/partners/microsoft.png" },
+  { name: "Dell", role: "Postes et écrans professionnels, devis constructeur.", logo: "/images/partners/Dell.png" },
+  { name: "Lenovo", role: "Postes professionnels, devis constructeur.", logo: "/images/partners/Lenovo.jpg" },
+  { name: "MCA Technology", role: "Distribution de matériel." },
+  { name: "TD Synnex", role: "Distribution de matériel." },
 ]
 
 export const SA_SUIVI = {
