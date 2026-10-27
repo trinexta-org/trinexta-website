@@ -210,50 +210,15 @@ export const SERENITE_POUR_QUI = {
 // de client ni chiffre non vérifié). Le bandeau de logos attend l'accord écrit d'au moins
 // deux clients de plus de 20 postes (décision de la direction, 27/10/2026).
 export const SERENITE_PREUVES = {
-  lienEtudes: { label: "Voir tous nos cas clients", href: "/cas-clients" },
+  lienEtudes: { label: "Voir nos 10 cas clients", href: "/cas-clients" },
   experience:
     "Nos techniciens ont assuré le support de proximité de parcs de plus de 800 utilisateurs. Aujourd'hui, nous mettons cette exigence au service des TPE et PME.",
-  // Cas détaillés de /cas-clients mis en avant sur cette page (slugs de src/data/cas-clients.ts).
+  // Trois cas détaillés de /cas-clients mis en avant (slugs de src/data/cas-clients.ts) ;
+  // les autres restent sur /cas-clients pour garder la page légère.
   casEnAvant: [
     "departs-collaborateurs-comptes-licences-cabinet-comptable-essonne",
     "messagerie-partagee-securisee-agence-immobiliere-corbeil-essonnes",
     "sauvegardes-verifiees-entreprise-maintenance-sainte-genevieve-des-bois",
-    "pc-en-panne-devis-recuperes-entreprise-batiment-evry",
-    "arrivee-nouveau-salarie-poste-pret-cabinet-conseil-paris",
-    "pannes-reseau-repetees-pme-services-carre-senart",
-  ],
-  // Autres interventions réelles récentes, en bref.
-  recentes: [
-    {
-      secteur: "Entreprise du bâtiment, 6 postes",
-      titre: "Le constructeur concluait à une impasse",
-      texte:
-        "Un poste restait lent malgré une réparation par le constructeur, qui refusait d'aller plus loin. Notre diagnostic à distance a trouvé la cause : une mémoire virtuelle sous-dimensionnée. Corrigée sans déplacement.",
-    },
-    {
-      secteur: "Entreprise du bâtiment, 6 postes",
-      titre: "Un fichier malveillant arrêté par l'EDR",
-      texte:
-        "Un fichier malveillant caché dans un logiciel téléchargé sur un poste a été détecté et mis en quarantaine automatiquement par la protection SentinelOne, puis analysé par un technicien.",
-    },
-    {
-      secteur: "Entreprise du bâtiment, 6 postes",
-      titre: "Windows 11 sans racheter de licence",
-      texte:
-        "Une tour sous Windows 10 a été passée à Windows 11 Pro sur place, après activation des fonctions de sécurité nécessaires, sans perte de données ni nouvelle licence.",
-    },
-    {
-      secteur: "Cabinet d'expertise comptable, Essonne",
-      titre: "Des mises à jour bloquées depuis des semaines",
-      texte:
-        "Les correctifs de sécurité ne s'installaient plus. Nous avons réparé le système, installé le correctif en retard et réglé la supervision pour que la panne ne revienne pas.",
-    },
-    {
-      secteur: "Cabinet d'expertise comptable, Essonne",
-      titre: "Une installation complète, puis le quotidien",
-      texte:
-        "Création de l'environnement Microsoft 365 (comptes, messagerie), fourniture et installation du matériel, puis infogérance au quotidien.",
-    },
   ],
 } as const
 

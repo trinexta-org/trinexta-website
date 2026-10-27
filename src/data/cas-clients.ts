@@ -611,6 +611,9 @@ export const caseClientsOrdered = featuredCaseClient
   ? [featuredCaseClient, ...caseClients.filter((item) => item !== featuredCaseClient)]
   : caseClients
 
+// Carrousel du haut de /cas-clients : quatre cas au plus, la grille montre les autres.
+export const caseClientsHeroSlides = caseClientsOrdered.slice(0, 4)
+
 export function getCaseClientBySlug(slug: string) {
   return caseClients.find((item) => item.slug === slug)
 }
