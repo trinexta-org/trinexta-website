@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Heading, Text } from "@/components/ui/Typography"
 import { SERENITE_PREUVES as preuves } from "@/data/serenite"
 
@@ -20,6 +21,15 @@ export function SerenitePreuves() {
           </li>
         ))}
       </ul>
+
+      <p className="text-center">
+        <Link
+          href={preuves.lienEtudes.href}
+          className="text-primary font-bold underline decoration-secondary underline-offset-4"
+        >
+          {preuves.lienEtudes.label}
+        </Link>
+      </p>
 
       <div className="rounded-[2rem] bg-primary p-7 md:p-10">
         <Heading as="h3" emphasis={false} className="text-2xl md:text-3xl text-white">

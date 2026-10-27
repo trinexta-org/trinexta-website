@@ -210,6 +210,7 @@ export const SERENITE_POUR_QUI = {
 // de client ni chiffre non vérifié). Le bandeau de logos attend l'accord écrit d'au moins
 // deux clients de plus de 20 postes (décision de la direction, 27/10/2026).
 export const SERENITE_PREUVES = {
+  lienEtudes: { label: "Lire nos études de cas détaillées", href: "/cas-clients" },
   experience:
     "Nos techniciens ont assuré le support de proximité de parcs de plus de 800 utilisateurs. Aujourd'hui, nous mettons cette exigence au service des TPE et PME.",
   cas: [
