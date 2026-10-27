@@ -175,8 +175,8 @@ export const infogeranceData: ServicePageProps = {
         title: "TRINEXTA Sérénité",
         desc: "Supervision, maintenance préventive, protection des postes et, selon la formule, assistance aux utilisateurs. Deux formules facturées par poste et par mois.",
         points: [
-          "Sérénité Essentiel : engagement de 12 mois, rapport annuel",
-          "Sérénité Complète : sans durée minimale, préavis de 2 mois, rapport trimestriel",
+          "Sérénité Essentiel : engagement de 12 mois, rapport trimestriel",
+          "Sérénité Complète : sans durée minimale, préavis de 2 mois, rapport mensuel",
           "Aucun frais de mise en service",
         ],
         cta: {
@@ -270,7 +270,7 @@ export const infogeranceData: ServicePageProps = {
     items: [
       {
         title: "Facturation et durée",
-        desc: "Par poste et par mois, prix détaillés sur la page Sérénité, sans frais de mise en service. Sérénité Complète sans durée minimale, préavis de 2 mois ; Sérénité Essentiel, engagement de 12 mois. Rapport annuel (Essentiel) ou trimestriel (Complète).",
+        desc: "Par poste et par mois, prix détaillés sur la page Sérénité, sans frais de mise en service. Sérénité Complète sans durée minimale, préavis de 2 mois ; Sérénité Essentiel, engagement de 12 mois. Rapport trimestriel (Essentiel) ou mensuel (Complète). Arrêt sans préavis possible les 3 premiers mois.",
       },
       {
         title: "Horaires et délais",

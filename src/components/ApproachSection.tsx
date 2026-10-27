@@ -28,7 +28,7 @@ const steps = [
   {
     num: "05",
     title: "Suivi",
-    description: "Demandes traitées au quotidien selon votre formule, rapport d'activité annuel ou trimestriel.",
+    description: "Demandes traitées au quotidien selon votre formule, rapport d'activité trimestriel ou mensuel.",
   },
 ]
 
