@@ -4,7 +4,7 @@ import { Heading, Text } from "@/components/ui/Typography"
 import { getCaseClientBySlug } from "@/data/cas-clients"
 import { SERENITE_PREUVES as preuves } from "@/data/serenite"
 
-// Cas clients détaillés (source : src/data/cas-clients.ts), puis interventions récentes en bref.
+// Trois cas clients détaillés (source : src/data/cas-clients.ts) et lien vers tous les cas.
 export function SerenitePreuves() {
   const cas = preuves.casEnAvant.map((slug) => getCaseClientBySlug(slug)).filter((c) => c !== undefined)
 
@@ -40,21 +40,6 @@ export function SerenitePreuves() {
           </li>
         ))}
       </ul>
-
-      <div className="rounded-[2rem] bg-primary p-7 md:p-10">
-        <Heading as="h3" emphasis={false} className="text-2xl md:text-3xl text-white">
-          Et ces dernières semaines
-        </Heading>
-        <dl className="mt-8 grid gap-6 md:grid-cols-2">
-          {preuves.recentes.map((r) => (
-            <div key={r.titre} className="border-l-2 border-secondary-soft/60 pl-5">
-              <dt className="font-bold text-white text-lg">{r.titre}</dt>
-              <dd className="mt-1 text-sm uppercase tracking-widest text-secondary-soft">{r.secteur}</dd>
-              <dd className="mt-2 text-white/80 leading-relaxed">{r.texte}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
 
       <p className="text-center">
         <Link
