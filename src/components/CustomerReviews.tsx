@@ -12,9 +12,20 @@ import { SectionBackground } from "@/components/ui/SectionBackground"
 
 
 
-const reviews = allReviews.filter((review) => !AVIS_EXCLUS.includes(review.id));
+const affiches = allReviews.filter((review) => !AVIS_EXCLUS.includes(review.id));
 
-function ReviewCard({ review }: { review: Review }) {
+// Les avis qui ne citent que l'ancien nom (TrusTech IT Support) passent après ceux qui citent TRINEXTA.
+const ancienNom = (review: Review) => /trustech/i.test(review.text) && !/trinexta/i.test(review.text);
+const avisMarque = affiches.filter((review) => !ancienNom(review));
+const avisAncienNom = affiches.filter(ancienNom);
+const reviews = [...avisMarque, ...avisAncienNom];
+
+/**
+ * `principal` : seule la liste mobile porte les titres (h4) des auteurs. Les colonnes animées
+ * du bureau répètent les mêmes avis : leurs auteurs sont en simple texte, et les copies qui
+ * bouclent l'animation sont masquées aux lecteurs d'écran et au clavier.
+ */
+function ReviewCard({ review, principal = false, copie = false }: { review: Review; principal?: boolean; copie?: boolean }) {
   const author = formatAuteurAvis(review.authorName);
   const initial = author.charAt(0).toUpperCase();
 
@@ -25,6 +36,7 @@ function ReviewCard({ review }: { review: Review }) {
       rel="noopener noreferrer"
       className="block w-full h-full focus:outline-none group"
       aria-label={`Lire l'avis de ${author} sur Google`}
+      tabIndex={copie ? -1 : undefined}
     >
       <div className="bg-white border border-border hover:border-secondary/40 hover:shadow-md transition-all duration-300 rounded-2xl flex flex-col gap-4 p-6 h-full shadow-sm relative">
         <div className="flex items-start justify-between">
@@ -33,9 +45,13 @@ function ReviewCard({ review }: { review: Review }) {
               {initial}
             </div>
             <div>
-              <Heading as="h4" className="text-primary text-base leading-tight">
-                {author}
-              </Heading>
+              {principal ? (
+                <Heading as="h4" className="text-primary text-base leading-tight">
+                  {author}
+                </Heading>
+              ) : (
+                <p className="font-bold text-primary text-base leading-tight">{author}</p>
+              )}
               <Text variant="small" className="text-muted-foreground">
                 Avis Google
               </Text>
@@ -70,12 +86,14 @@ function ReviewCard({ review }: { review: Review }) {
 }
 
 export function CustomerReviews() {
-  const half = Math.ceil(reviews.length / 2);
-  const col1Data = [...reviews.slice(0, half), ...reviews.slice(0, half)];
-  let col2Data = [...reviews.slice(half), ...reviews.slice(half)];
-
-  if (col2Data.length === 0 && reviews.length > 0) {
-    col2Data = [...reviews, ...reviews];
+  // Colonne 1 (défile vers le haut) : son dernier avis apparaît en dernier, d'où les avis à
+  // l'ancien nom en fin de colonne 1. La colonne 2 (défile vers le bas) montre vite sa fin.
+  const half = Math.ceil(avisMarque.length / 2);
+  let col1 = [...avisMarque.slice(0, half), ...avisAncienNom];
+  let col2 = avisMarque.slice(half);
+  if (col2.length === 0) {
+    col1 = reviews;
+    col2 = reviews;
   }
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -119,7 +137,7 @@ export function CustomerReviews() {
           >
             {reviews.map((review) => (
               <div key={review.id} className="snap-center shrink-0 w-[85vw] md:w-87.5 h-auto">
-                <ReviewCard review={review} />
+                <ReviewCard review={review} principal />
               </div>
             ))}
           </div>
@@ -134,23 +152,36 @@ export function CustomerReviews() {
           </div>
         </div>
 
-        <div className="hidden lg:grid grid-cols-2 gap-8 h-150 overflow-hidden relative group max-w-4xl mx-auto">
+        {/* data-nosnippet : Google ne reprend pas en extrait ces avis, déjà présents dans la liste ci-dessus. */}
+        <div data-nosnippet className="hidden lg:grid grid-cols-2 gap-8 h-150 overflow-hidden relative group max-w-4xl mx-auto">
 
           <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-surface to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-surface to-transparent z-10 pointer-events-none" />
 
           <div className="flex flex-col gap-8 animate-slide-up group-hover:[animation-play-state:paused]">
-            {col1Data.map((review, index) => (
-              <div key={`col1-${review.id}-${index}`}>
+            {col1.map((review) => (
+              <div key={`col1-${review.id}`}>
                 <ReviewCard review={review} />
+              </div>
+            ))}
+            {/* Copie pour la boucle de l'animation (translateY -50 %) : décorative. */}
+            {col1.map((review) => (
+              <div key={`col1-copie-${review.id}`} aria-hidden="true" inert>
+                <ReviewCard review={review} copie />
               </div>
             ))}
           </div>
 
           <div className="flex flex-col gap-8 animate-slide-down group-hover:[animation-play-state:paused]">
-            {col2Data.map((review, index) => (
-              <div key={`col2-${review.id}-${index}`}>
+            {col2.map((review) => (
+              <div key={`col2-${review.id}`}>
                 <ReviewCard review={review} />
+              </div>
+            ))}
+            {/* Copie pour la boucle de l'animation (translateY -50 %) : décorative. */}
+            {col2.map((review) => (
+              <div key={`col2-copie-${review.id}`} aria-hidden="true" inert>
+                <ReviewCard review={review} copie />
               </div>
             ))}
           </div>
