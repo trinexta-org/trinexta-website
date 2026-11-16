@@ -114,6 +114,16 @@ export default function ContactForm() {
       setValue("offre", o);
       setValue("besoin", "infogerance");
     }
+    // Boutique : « Commander » transmet le produit (`?produit=`, `?nom=`, `?variante=`, `?kit=1`) tant que le
+    // tunnel de paiement n'existe pas. Le message est prérempli, jamais envoyé sans le visiteur.
+    const produit = params.get("produit")
+    if (produit && /^[a-z0-9-]{1,200}$/.test(produit) && !getValues("message")) {
+      const nom = (params.get("nom") ?? produit).slice(0, 200)
+      const variante = params.get("variante")
+      const ref = `réf. boutique ${produit}${variante && /^[a-z0-9-]{1,30}$/.test(variante) ? `, configuration ${variante}` : ""}`
+      setValue("besoin", "materiel")
+      setValue("message", `Bonjour, je souhaite commander ${params.get("kit") === "1" ? "le kit" : "l'article"} « ${nom} » (${ref}). Quantité : `)
+    }
     // Calculateur Sérénité : nombre de postes transmis par `?postes=`
     const n = Number(params.get("postes"));
     if (Number.isInteger(n) && n > 0 && n < 10000) {

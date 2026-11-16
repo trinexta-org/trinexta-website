@@ -42,6 +42,7 @@
 | Diagnostic sécurité gratuit | Domaine analysé (peut identifier un entrepreneur individuel), résultat des 6 vérifications ; contenu des fichiers jamais lu (sauf quelques octets de `/.git/HEAD`) ni conservé | Afficher le résultat, permettre l'envoi du rapport | Mesures précontractuelles ; intérêt légitime pour la limite d'usage (IP hachée en mémoire, jamais stockée) | 12 mois puis suppression | Script `scripts/purge-estimates.mjs` étendu, **planification non vérifiée** (E3) | Aucun | `POST /api/diagnostic`, table `DiagnosticSecurite` |
 | Rapport de diagnostic par e-mail | E-mail, date d'envoi, hash du jeton du bouton de rappel | Envoyer le rapport demandé | Mesures précontractuelles | E-mail effacé 30 jours après l'envoi sans demande de rappel | Même script (cron quotidien requis), **planification non vérifiée** (E3) | Microsoft 365 ; LeadSynch si le widget capture ce formulaire (non vérifié, E12) | `POST /api/diagnostic/rapport`, table `DiagnosticSecurite` |
 | Demande de rappel après diagnostic | E-mail déjà connu, accord horodaté (`consentAt`) | Rappel par un technicien | Consentement, donné par le bouton POST de `/diagnostic-securite/rappel` (lien du rapport) ; aucune case à cocher | 3 ans après l'accord | Même script, **planification non vérifiée** (E3) | Équipe TRINEXTA (notification vers `CONTACT_TO_EMAIL`), Microsoft 365 | `POST /api/diagnostic/rappel`, table `DiagnosticSecurite` |
+| Commande depuis la boutique (en attendant le tunnel de paiement, lot 4C) | Mêmes champs que le formulaire de contact ; besoin « Commander du matériel », message prérempli avec le produit choisi | Répondre à la demande d'achat | Mesures précontractuelles | 3 ans après le dernier contact | **Non appliquée** (E1) | Équipe TRINEXTA (e-mail Microsoft 365) | `POST /api/contact`, table `ContactForm` (même traitement que le formulaire de contact) |
 | Widget LeadSynch (chat et capture des formulaires) | Messages du chat, champs des formulaires soumis | Gestion de la relation client | Mesures précontractuelles | 3 ans après le dernier contact | Gérée dans LeadSynch, non vérifiée | LeadSynch (Vercel, Render, base sur notre VPS OVH) | Script `leadsynch-api.onrender.com/.../chat.js` dans `src/app/layout.tsx` |
 
 ## 4. Traceurs
@@ -117,6 +118,21 @@ Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/aud
 | Contenu du site analysé | Expressions régulières bornées (pas de temps quadratique), HTML analysé limité aux 512 premiers Ko ; aucun texte libre du site ne ressort (noms de cookies et valeurs Server, X-Powered-By, generator en liste blanche de caractères, sinon remplacés) |
 | DNS | Résolutions bornées dans le temps (3 s, résolveur TXT à essais limités) ; socket TLS fermée par un minuteur absolu |
 
+### Appels sortants vers l'espace client (boutique)
+
+Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans l'API publique en lecture seule de l'espace client (ADR EC-0007 du dépôt `espace-client`, contrat `docs/api-boutique.md`).
+
+| Contrôle | Mise en œuvre |
+|---|---|
+| Destination | Une seule base, `ESPACE_CLIENT_API_URL` (défaut `https://espace-client.trinexta.fr`), chemin `/api/public/boutique/` ; jamais une adresse saisie par un visiteur |
+| Côté serveur uniquement | Appels depuis les Server Components et le sitemap ; aucun appel du navigateur vers l'API. Photos servies par `/_next/image`, hôte et chemin limités dans `next.config.ts` (`?l=160`, `480` ou `960` exactement) |
+| Données envoyées | Aucune donnée personnelle : critères de catalogue (catégorie, marque, prix, recherche bornée à 80 caractères, tri, page) et adresses lisibles validées (`^[a-z0-9-]+$`) avant l'appel |
+| Données reçues | Catalogue public : produits, prix de vente HT et TTC, disponibilité en texte, photos. Ni prix d'achat, ni marge, ni stock chiffré (exclus par le contrat de l’API, testé côté espace client) |
+| Volume et durée | Cache serveur de 300 s (`fetch` `revalidate`), 8 s par requête ; la limite de l'API (300 requêtes par minute et par IP) est partagée par toutes les pages du serveur |
+| Panne | Page de repli sans erreur technique, lien vers le contact ; sitemap réduit aux pages fixes |
+| Données fictives | `BOUTIQUE_SIMULATION=1` sert un catalogue fictif, annoncé par un bandeau sur chaque page ; ignoré quand le site est la production (`isIndexable`) |
+| Stockage | Aucun : ni table, ni copie dans Sanity ; aucun traceur ni script tiers ajouté |
+
 ### Dépendances et secrets
 
 | Contrôle | Résultat | Date |
@@ -131,7 +147,7 @@ Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/aud
 | Règle | Contrôle | Résultat |
 |---|---|---|
 | Aucun « garanti », « zéro panne », « moins cher », « 24h/24 » | grep sur `src/` | Conforme dans le code (#356). Blog Sanity : un article non conforme reste publié (E8) |
-| Aucun tarif hors /serenite | grep « € » | Conforme, sauf le simulateur /estimation (fourchettes conservées par décision de la direction) |
+| Aucun tarif hors /serenite | grep « € » | Conforme, sauf le simulateur /estimation (fourchettes conservées par décision de la direction) et la boutique `/boutique` (prix publics du matériel, décision de la direction du 13/11/2026 ; montants lus dans l'API, jamais saisis dans le site) |
 | Références clients autorisées seulement | relecture | Conforme |
 | Charte navy #0A233E, bleu #5C92B8, blanc, jamais d'orange | grep couleurs + revue | Conforme depuis #357 (renard orange retiré) |
 | Adresse support@trinexta.fr jamais publiée | grep | Conforme (#356) ; reste en variable interne de routage `SUPPORT_EMAIL` |
@@ -159,6 +175,7 @@ Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/aud
 | T15 | Données structurées | Manuel | test des résultats enrichis | Trimestriel | JSON-LD valides, FAQ visibles (82 questions) | 25/10/2026 |
 | T16 | Règles internes | Manuel | section 7 | Trimestriel | voir section 7 | 25/10/2026 |
 | T17 | Diagnostic sécurité : garde-fous et faux positifs | Tests | `src/lib/diagnostic/*.test.ts` : IP internes, préfixes IPv6 particuliers et ports refusés, agent qui refuse localhost à la connexion, redirection vers une IP interne refusée, site qui répond 200 partout sans faux positif, aucune sonde vers un autre domaine, HEAD seul pour `.env`, accueil en 3xx, regex sur 2 Mo hostiles < 200 ms, textes du site jamais recopiés, délai global, jeton ; `rapport.integration.test.ts` sur base réelle (`TEST_DATABASE_URL`) : jeton absent, faux, réutilisé, envoi unique, rappel | Chaque changement du diagnostic | OK (intégration lancée en local, pas en CI) | 25/10/2026 |
+| T19 | Boutique : client de l'API, données structurées, sitemap | Tests | `src/lib/boutique/*.test.ts` : réponse lue avec cache de 300 s, 404 → introuvable, 429 et délai dépassé → repli, adresse mal formée jamais transmise, paramètres d'URL filtrés, canonique sans tri ni filtre, JSON-LD Product (prix TTC, BackOrder ou InStock, EAN validé), AggregateOffer des kits, ItemList, sitemap avec et sans API, réponses simulées jamais en production | Chaque changement de la boutique | 20 tests OK | 16/11/2026 |
 | T18 | Diagnostic sécurité de bout en bout | Manuel | `/diagnostic-securite` sur staging : analyse d'un domaine réel, 4e analyse le même jour refusée, rapport reçu une fois, bouton « Être rappelé » → notification équipe, e-mail effacé à J+30 sans rappel | Après mise en production | OK sur staging (analyses de trinexta-studio.fr, trinexta.fr, trinexta.com ; 4e refusée avec message clair ; rapport reçu depuis contact@trinexta.fr ; confirmation par bouton POST puis notification reçue sur contact@). Défauts trouvés et corrigés : numéro absent du message de limite (#366), rapport mal rendu dans Outlook bureau et mention « adresse sans réponse » fausse (#367). Reste : effacement à J+30, après planification du cron (E3) | 26/10/2026 |
 
 ## 9. Écarts connus
@@ -178,6 +195,7 @@ Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/aud
 | E11 | Limites par IP du diagnostic en mémoire : remises à zéro à chaque redémarrage de PM2 (la limite par domaine, comptée en base, tient) | Mineur | Claude (avec `@trinexta/core`) | Décembre 2026 | Ouvert |
 | E12 | Capture du formulaire de rapport du diagnostic par le widget LeadSynch non vérifiée ; si le widget capture l'e-mail, il le conserve au-delà des 30 jours annoncés | Important | Valoux | Avec T18 | Ouvert |
 | E13 | Test d'intégration du rapport (base réelle) non lancé par la CI | Mineur | Claude (avec E9) | Novembre 2026 | Ouvert |
+| E14 | Boutique : vente aux particuliers sans CGV boutique ni information précontractuelle en ligne (rétractation, garanties légales, médiateur). Aucune vente en ligne tant que le tunnel n'existe pas : le bouton « Commander » ouvre une demande au formulaire de contact, confirmée par devis | Important | Valoux (CGV, médiateur), Claude (lot 4C) | Avant l'ouverture du paiement en ligne | Ouvert |
 
 ## 10. Historique
 
@@ -189,4 +207,5 @@ Code : `src/lib/diagnostic/` (garde-fous repris de trinexta-studio, `src/lib/aud
 | 25/10/2026 | SEO, accessibilité, charte | PR #357, mise en production par #359 |
 | 25/10/2026 | Forme sociale SASU, ligne particuliers des CGV, création de ce dossier | PR #359 et suivante |
 | 27/10/2026 | CGV Sérénité : période d'essai de 3 mois (résiliation sans préavis, durée minimale d'Essentiel non opposable), rapports trimestriel (Essentiel) et mensuel (Complète). Page /serenite : cas clients réels anonymisés (secteur et taille, aucun nom), situations types présentées comme telles | PR feat/serenite-offre-hormozi |
+| 16/11/2026 | Boutique de matériel (lot 4B) : pages `/boutique` en lecture de l'API de l'espace client, aucune donnée stockée, besoin « Commander du matériel » au formulaire de contact | PR feat/boutique-catalogue |
 | 25/10/2026 | Diagnostic sécurité gratuit : nouvelle collecte, trois routes publiques, appels sortants bridés, politique de confidentialité (article 14), puis correctifs de la relecture de sécurité (ReDoS, jeton du rapport, rappel par bouton, sondes HEAD) | PR #362 |
