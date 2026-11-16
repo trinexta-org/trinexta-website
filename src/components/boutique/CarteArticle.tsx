@@ -22,6 +22,9 @@ export function CarteArticle({ article, priorite = false }: { article: ArticleRe
           <span className="text-xs font-bold uppercase tracking-[0.14em] text-secondary-strong">{article.marque.libelle}</span>
         )}
         <h3 className="line-clamp-2 text-base font-bold leading-snug text-primary group-hover:underline">{article.nom}</h3>
+        {article.designation && article.designation !== article.nom && (
+          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{article.designation}</p>
+        )}
         <Disponibilite valeur={article.disponibilite} />
       </div>
       <BlocPrix prix={article.prix} />

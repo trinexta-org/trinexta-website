@@ -15,7 +15,7 @@ export const PANIER_TEXTES = {
   indicatif:
     "Prix indicatifs, calculés avec les tarifs du catalogue au moment de l'affichage. Le prix, la disponibilité et la livraison sont recalculés et confirmés à la commande.",
   continuer: "Continuer mes achats",
-  commander: "Commander",
+  commander: "Passer commande",
   indisponible: "Ce produit n'est plus proposé : retirez-le pour commander.",
   horsLigne: "Les prix ne peuvent pas être affichés pour le moment. Vous pouvez tout de même commander : ils seront calculés à l'étape suivante.",
 }

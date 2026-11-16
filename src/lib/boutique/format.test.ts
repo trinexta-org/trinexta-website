@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { canonicalListe, euros, lienListe, lireCriteres, montantSchema, urlImage } from "./format"
+import { canonicalListe, dernierJourPromotion, euros, lienListe, lireCriteres, montantSchema, urlImage } from "./format"
 
 describe("format de la boutique", () => {
   it("affiche les centimes en euros, sans recalcul", () => {
@@ -29,5 +29,15 @@ describe("format de la boutique", () => {
     const c = lireCriteres({ marque: "dell", page: "3" }, "ecran")
     expect(lienListe("/boutique/ecran", c, { tri: "prix" })).toBe("/boutique/ecran?marque=dell&tri=prix")
     expect(lienListe("/boutique/ecran", c, { page: "4" })).toBe("/boutique/ecran?marque=dell&page=4")
+  })
+})
+
+describe("dernierJourPromotion", () => {
+  it("affiche le jour qui précède la fin exclue, heure de Paris", () => {
+    // 2026-11-30T23:00Z = 1er décembre 0 h à Paris : la promotion court jusqu'au 30 novembre inclus.
+    expect(dernierJourPromotion("2026-11-30T23:00:00.000Z")).toBe("30 novembre")
+    expect(dernierJourPromotion("2026-07-31T22:00:00.000Z")).toBe("31 juillet")
+    expect(dernierJourPromotion(null)).toBeNull()
+    expect(dernierJourPromotion("pas une date")).toBeNull()
   })
 })

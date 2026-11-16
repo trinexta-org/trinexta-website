@@ -27,6 +27,8 @@ export function produitJsonLd(a: Article, url: string, images: string[]): Objet 
       availability: disponibiliteSchema(a.disponibilite),
       itemCondition: "https://schema.org/NewCondition",
       seller: VENDEUR,
+      // Fin de promotion EXCLUE dans l'API : la date du dernier jour valable, sans recalcul de prix.
+      ...(a.prix.finPromotion && a.prix.barreTtc !== null ? { priceValidUntil: a.prix.finPromotion.slice(0, 10) } : {}),
     },
   }
   if (a.marque) produit.brand = { "@type": "Brand", name: a.marque.libelle }
@@ -36,7 +38,7 @@ export function produitJsonLd(a: Article, url: string, images: string[]): Objet 
   }
   if (a.ean && /^\d{13}$/.test(a.ean)) produit.gtin13 = a.ean
   if (images.length) produit.image = images
-  const texte = a.description ?? a.presentation
+  const texte = a.description ?? a.presentation ?? a.designation
   if (texte) produit.description = texte.slice(0, 5000)
   return produit
 }

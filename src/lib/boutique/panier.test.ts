@@ -11,6 +11,7 @@ import {
   nombreArticles,
   QUANTITE_MAX,
   retirer,
+  texteCommande,
   totaux,
   urlCommande,
   type LigneDetaillee,
@@ -64,15 +65,33 @@ describe("panier de la boutique", () => {
     expect(brut).not.toMatch(/prix|@/)
   })
 
-  it("encode le panier pour la commande dans une seule fonction", () => {
-    expect(encoderPanier([A, K])).toBe("a:dell-ecran-p2425h:1,k:poste-essentiel:16go-1ecran:2")
-    expect(urlCommande("https://boutique.trinexta.fr/commande", [A])).toBe(
-      "https://boutique.trinexta.fr/commande?panier=a%3Adell-ecran-p2425h%3A1",
+  it("encode le panier au format du contrat de la boutique (exemple de docs/boutique-panier.md)", () => {
+    const lignes: LignePanier[] = [
+      { type: "article", slug: "lenovo-thinkpad-e14-gen-6-21m7001afr", quantite: 2 },
+      { type: "kit", slug: "kit-poste-bureautique", variante: "16go-1ecran", quantite: 1 },
+    ]
+    expect(texteCommande(lignes)).toBe("a:lenovo-thinkpad-e14-gen-6-21m7001afr:2,k:kit-poste-bureautique:16go-1ecran:1")
+    expect(encoderPanier(lignes)).toBe(
+      "YTpsZW5vdm8tdGhpbmtwYWQtZTE0LWdlbi02LTIxbTcwMDFhZnI6MixrOmtpdC1wb3N0ZS1idXJlYXV0aXF1ZToxNmdvLTFlY3Jhbjox",
+    )
+    expect(urlCommande("https://boutique.trinexta.fr/commande", lignes)).toBe(
+      "https://boutique.trinexta.fr/commande?panier=YTpsZW5vdm8tdGhpbmtwYWQtZTE0LWdlbi02LTIxbTcwMDFhZnI6MixrOmtpdC1wb3N0ZS1idXJlYXV0aXF1ZToxNmdvLTFlY3Jhbjox",
     )
   })
 
+  it("reste en base64url sans remplissage et sous 6 000 caractères au maximum du panier", () => {
+    const plein: LignePanier[] = Array.from({ length: LIGNES_MAX }, (_, i) => ({
+      type: "article",
+      slug: `marque-modele-reference-assez-longue-pour-le-test-${String(i).padStart(4, "0")}`.slice(0, 60),
+      quantite: QUANTITE_MAX,
+    }))
+    const encode = encoderPanier(plein)
+    expect(encode).toMatch(/^[A-Za-z0-9_-]+$/)
+    expect(encode.length).toBeLessThanOrEqual(6000)
+  })
+
   it("calcule des totaux indicatifs sans les lignes sans prix", () => {
-    const prix = { devise: "EUR" as const, tauxTva: 20, ht: 10000, ttc: 12000, barreHt: null, barreTtc: null, promotion: null, ecoParticipationHt: 50, ecoParticipationTtc: 60 }
+    const prix = { devise: "EUR" as const, tauxTva: 20, ht: 10000, ttc: 12000, barreHt: null, barreTtc: null, promotion: null, pourcentage: null, finPromotion: null, operation: null, avantages: [], ecoParticipationHt: 50, ecoParticipationTtc: 60 }
     const d = (ligne: LignePanier, statut: LigneDetaillee["statut"]): LigneDetaillee => ({
       cle: ligne.slug, ligne, statut, nom: "", variante: null, href: "", image: null, categorie: "autre", prix: statut === "ok" ? prix : null, disponibilite: null,
     })

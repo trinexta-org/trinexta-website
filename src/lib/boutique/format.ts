@@ -12,6 +12,17 @@ export function euros(centimes: number): string {
 }
 
 /** Centimes vers « 1296.00 », pour les données structurées (point décimal, sans séparateur). */
+/**
+ * Dernier jour de la promotion, heure de Paris. `finPromotion` est EXCLUE (contrat de l'API) :
+ * « jusqu'au » s'affiche le jour qui précède cet instant. Null si la date est absente ou illisible.
+ */
+export function dernierJourPromotion(finPromotion: string | null): string | null {
+  if (!finPromotion) return null
+  const fin = Date.parse(finPromotion)
+  if (Number.isNaN(fin)) return null
+  return new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", timeZone: "Europe/Paris" }).format(new Date(fin - 1))
+}
+
 export function montantSchema(centimes: number): string {
   return (centimes / 100).toFixed(2)
 }

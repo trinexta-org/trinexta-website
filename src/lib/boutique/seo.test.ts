@@ -2,11 +2,12 @@ import { describe, expect, it } from "vitest"
 import { kitJsonLd, listeJsonLd, produitJsonLd } from "./seo"
 import type { Article, Kit } from "./types"
 
-const prix = { devise: "EUR" as const, tauxTva: 20, ht: 108000, ttc: 129600, barreHt: null, barreTtc: null, promotion: null, ecoParticipationHt: 50, ecoParticipationTtc: 60 }
+const prix = { devise: "EUR" as const, tauxTva: 20, ht: 108000, ttc: 129600, barreHt: null, barreTtc: null, promotion: null, pourcentage: null, finPromotion: null, operation: null, avantages: [], ecoParticipationHt: 50, ecoParticipationTtc: 60 }
 
 const article: Article = {
   slug: "lenovo-thinkpad-e14-gen-6-21m7001afr",
-  nom: "ThinkPad E14 Gen 6",
+  nom: "Lenovo ThinkPad E14 Gen 6",
+  designation: "Portable 14\" Intel Core i5 16 Go 512 Go SSD",
   marque: { code: "lenovo", libelle: "Lenovo" },
   categorie: { code: "portable", libelle: "Ordinateur portable" },
   prix,
