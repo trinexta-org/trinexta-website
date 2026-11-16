@@ -19,6 +19,7 @@ export const PIED_SERVICES: LienPied[] = [
   { name: "Téléphonie et réseau", href: "/solutions-metier" },
   { name: "Interventions sur devis", href: "/services-annexes" },
   { name: "Technicien en régie", href: "/technicien-sous-regie" },
+  { name: "Boutique de matériel", href: "/boutique" },
 ]
 
 export const PIED_RESSOURCES: LienPied[] = [
