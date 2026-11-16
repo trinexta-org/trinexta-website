@@ -4,7 +4,23 @@ import type { CodeCategorie, CodeVariante } from "@/lib/boutique/types"
 // viennent de l'API de l'espace client ; ce fichier ne porte que les textes du site.
 // Règles : TONE.md, aucun délai ni prix inventé, aucune promesse (« garanti », « 24h/24 »...).
 
-/** Commander : tant que le tunnel de paiement (lot 4C) n'existe pas, le bouton mène au formulaire de contact. */
+/** Commande et paiement : servis par l'espace client sur un hôte dédié (lot 4C). Le panier y est transmis. */
+export const BOUTIQUE_COMMANDE_URL = "https://boutique.trinexta.fr/commande"
+
+export const MENTION_PROFESSIONNELS = "Boutique réservée aux professionnels"
+
+export const PANIER_TEXTES = {
+  titre: "Votre panier",
+  vide: "Votre panier est vide.",
+  indicatif:
+    "Prix indicatifs, calculés avec les tarifs du catalogue au moment de l'affichage. Le prix, la disponibilité et la livraison sont recalculés et confirmés à la commande.",
+  continuer: "Continuer mes achats",
+  commander: "Commander",
+  indisponible: "Ce produit n'est plus proposé : retirez-le pour commander.",
+  horsLigne: "Les prix ne peuvent pas être affichés pour le moment. Vous pouvez tout de même commander : ils seront calculés à l'étape suivante.",
+}
+
+/** Demande de devis par le formulaire de contact (question sur un produit, besoin particulier). */
 export const COMMANDE_BASE = "/contact"
 
 export function lienCommande(p: { slug: string; nom: string; variante?: CodeVariante; kit?: boolean }): string {

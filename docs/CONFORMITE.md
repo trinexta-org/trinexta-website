@@ -53,6 +53,7 @@ Source : `src/data/cookies.tsx` et `src/components/seo/CookieBanner.tsx` (tartea
 |---|---|---|---|---|---|
 | `trinexta_cookie_consent` | TRINEXTA | Mémoriser le choix cookies | 6 mois | Non (exempté) | Oui, normal |
 | Stockage de session du chat | LeadSynch | Garder la conversation ouverte | Fermeture de l'onglet | Non (fonctionnel) | Oui, normal |
+| `trinexta_boutique_panier` (stockage local) | TRINEXTA | Panier de la boutique : slugs, codes de variante, quantités ; aucune donnée personnelle ni prix | 30 jours sans modification (effacé à la lecture), ou effacement du navigateur | Non (nécessaire au service demandé) | Oui, normal (écrit seulement au premier ajout) |
 | `trinexta_newsletter_seen` (stockage local) | TRINEXTA | Ne pas réafficher la fenêtre newsletter | Jusqu'à effacement | Non (fonctionnel) | Oui, normal |
 | `_ga`, `_ga_*` | Google Analytics 4 | Mesure d'audience | 13 mois au plus | Oui | **Non** depuis #356 (Consent Mode de base) ; contrôle navigateur T11 à faire |
 | `_gcl_au` | Google Ads | Mesure des conversions | 13 mois au plus | Oui | **Non** depuis #356 ; contrôle T11 à faire |
@@ -131,7 +132,8 @@ Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans
 | Volume et durée | Cache serveur de 300 s (`fetch` `revalidate`), 8 s par requête ; la limite de l'API (300 requêtes par minute et par IP) est partagée par toutes les pages du serveur |
 | Panne | Page de repli sans erreur technique, lien vers le contact ; sitemap réduit aux pages fixes |
 | Données fictives | `BOUTIQUE_SIMULATION=1` sert un catalogue fictif, annoncé par un bandeau sur chaque page ; ignoré quand le site est la production (`isIndexable`) |
-| Stockage | Aucun : ni table, ni copie dans Sanity ; aucun traceur ni script tiers ajouté |
+| Stockage | Aucun côté serveur : ni table, ni copie dans Sanity ; aucun script tiers ajouté. Panier dans le navigateur seulement (section 4) |
+| Panier | Action serveur `chargerPanier` (`src/app/boutique/panier/actions.ts`) : relit dans l'API le nom, la photo et le prix des lignes du panier ; lignes revalidées (adresse, variante, quantité 1 à 99, 50 lignes au plus) ; aucune écriture. « Commander » envoie vers `https://boutique.trinexta.fr/commande?panier=` (espace client, lot 4C) avec les seuls slugs, variantes et quantités |
 
 ### Dépendances et secrets
 
@@ -175,7 +177,7 @@ Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans
 | T15 | Données structurées | Manuel | test des résultats enrichis | Trimestriel | JSON-LD valides, FAQ visibles (82 questions) | 25/10/2026 |
 | T16 | Règles internes | Manuel | section 7 | Trimestriel | voir section 7 | 25/10/2026 |
 | T17 | Diagnostic sécurité : garde-fous et faux positifs | Tests | `src/lib/diagnostic/*.test.ts` : IP internes, préfixes IPv6 particuliers et ports refusés, agent qui refuse localhost à la connexion, redirection vers une IP interne refusée, site qui répond 200 partout sans faux positif, aucune sonde vers un autre domaine, HEAD seul pour `.env`, accueil en 3xx, regex sur 2 Mo hostiles < 200 ms, textes du site jamais recopiés, délai global, jeton ; `rapport.integration.test.ts` sur base réelle (`TEST_DATABASE_URL`) : jeton absent, faux, réutilisé, envoi unique, rappel | Chaque changement du diagnostic | OK (intégration lancée en local, pas en CI) | 25/10/2026 |
-| T19 | Boutique : client de l'API, données structurées, sitemap | Tests | `src/lib/boutique/*.test.ts` : réponse lue avec cache de 300 s, 404 → introuvable, 429 et délai dépassé → repli, adresse mal formée jamais transmise, paramètres d'URL filtrés, canonique sans tri ni filtre, JSON-LD Product (prix TTC, BackOrder ou InStock, EAN validé), AggregateOffer des kits, ItemList, sitemap avec et sans API, réponses simulées jamais en production | Chaque changement de la boutique | 20 tests OK | 16/11/2026 |
+| T19 | Boutique : client de l'API, données structurées, sitemap, panier | Tests | `src/lib/boutique/*.test.ts` : panier (lignes du navigateur revalidées, champ inconnu ignoré, regroupement, bornes, expiration à 30 jours, encodage de la commande, totaux indicatifs) ; réponse lue avec cache de 300 s, 404 → introuvable, 429 et délai dépassé → repli, adresse mal formée jamais transmise, paramètres d'URL filtrés, canonique sans tri ni filtre, JSON-LD Product (prix TTC, BackOrder ou InStock, EAN validé), AggregateOffer des kits, ItemList, sitemap avec et sans API, réponses simulées jamais en production | Chaque changement de la boutique | 27 tests OK | 16/11/2026 |
 | T18 | Diagnostic sécurité de bout en bout | Manuel | `/diagnostic-securite` sur staging : analyse d'un domaine réel, 4e analyse le même jour refusée, rapport reçu une fois, bouton « Être rappelé » → notification équipe, e-mail effacé à J+30 sans rappel | Après mise en production | OK sur staging (analyses de trinexta-studio.fr, trinexta.fr, trinexta.com ; 4e refusée avec message clair ; rapport reçu depuis contact@trinexta.fr ; confirmation par bouton POST puis notification reçue sur contact@). Défauts trouvés et corrigés : numéro absent du message de limite (#366), rapport mal rendu dans Outlook bureau et mention « adresse sans réponse » fausse (#367). Reste : effacement à J+30, après planification du cron (E3) | 26/10/2026 |
 
 ## 9. Écarts connus
@@ -207,5 +209,6 @@ Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans
 | 25/10/2026 | SEO, accessibilité, charte | PR #357, mise en production par #359 |
 | 25/10/2026 | Forme sociale SASU, ligne particuliers des CGV, création de ce dossier | PR #359 et suivante |
 | 27/10/2026 | CGV Sérénité : période d'essai de 3 mois (résiliation sans préavis, durée minimale d'Essentiel non opposable), rapports trimestriel (Essentiel) et mensuel (Complète). Page /serenite : cas clients réels anonymisés (secteur et taille, aucun nom), situations types présentées comme telles | PR feat/serenite-offre-hormozi |
+| 16/11/2026 | Boutique : panier dans le navigateur (`trinexta_boutique_panier`, ajouté à la politique cookies), page `/boutique/panier` non indexée, commande transmise à boutique.trinexta.fr | PR feat/boutique-panier |
 | 16/11/2026 | Boutique de matériel (lot 4B) : pages `/boutique` en lecture de l'API de l'espace client, aucune donnée stockée, besoin « Commander du matériel » au formulaire de contact | PR feat/boutique-catalogue |
 | 25/10/2026 | Diagnostic sécurité gratuit : nouvelle collecte, trois routes publiques, appels sortants bridés, politique de confidentialité (article 14), puis correctifs de la relecture de sécurité (ReDoS, jeton du rapport, rappel par bouton, sondes HEAD) | PR #362 |

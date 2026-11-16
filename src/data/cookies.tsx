@@ -34,6 +34,14 @@ const TRACEURS_SITE: TraceurSite[] = [
     duree: "Jusqu'à effacement des données du navigateur",
   },
   {
+    nom: "trinexta_boutique_panier (stockage local)",
+    categorie: "Nécessaire",
+    emetteur: "TRINEXTA",
+    finalite:
+      "Garder le contenu de votre panier de la boutique : références des produits, configurations et quantités, aucune donnée personnelle",
+    duree: "30 jours sans modification du panier, ou jusqu'à effacement des données du navigateur",
+  },
+  {
     nom: "_ga, _ga_*",
     categorie: "Mesure d'audience",
     emetteur: "Google Analytics (Google Ireland Ltd)",

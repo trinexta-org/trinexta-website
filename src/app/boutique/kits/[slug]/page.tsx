@@ -2,12 +2,12 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Section } from "@/components/layout/Section"
-import { Button } from "@/components/ui/Button"
 import { FilAriane } from "@/components/boutique/FilAriane"
 import { BlocPrix } from "@/components/boutique/BlocPrix"
 import { Disponibilite } from "@/components/boutique/Disponibilite"
 import { ImageProduit } from "@/components/boutique/ImageProduit"
 import { Repli } from "@/components/boutique/Repli"
+import { BoutonAjouterPanier } from "@/components/boutique/BoutonAjouterPanier"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { AIDE_KIT_PAR_DEFAUT, KITS_CONTENU, lienCommande } from "@/data/boutique"
 import { boutique } from "@/lib/boutique/api"
@@ -132,12 +132,20 @@ export default async function KitPage({ params, searchParams }: Props) {
                     {variante.remisePourcent} %.
                   </p>
                 )}
-                <Button asChild variant="secondary" size="lg" className="w-full">
-                  <Link href={lienCommande({ slug: k.slug, nom: variante.nom, variante: variante.code, kit: true })}>Commander ce kit</Link>
-                </Button>
+                <BoutonAjouterPanier
+                  key={variante.code}
+                  cible={{ type: "kit", slug: k.slug, variante: variante.code }}
+                  libelle="Ajouter le kit au panier"
+                />
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  Nous vous confirmons le prix, la disponibilité et la livraison avant toute commande. Installation possible
-                  par TRINEXTA.
+                  Prix indicatif : le prix, la disponibilité et la livraison sont confirmés à la commande. Installation
+                  possible par TRINEXTA.{" "}
+                  <Link
+                    href={lienCommande({ slug: k.slug, nom: variante.nom, variante: variante.code, kit: true })}
+                    className="font-semibold text-secondary-strong underline underline-offset-4"
+                  >
+                    Une question sur ce kit ?
+                  </Link>
                 </p>
               </div>
 
