@@ -48,12 +48,6 @@ export const menuItems: MenuItem[] = [
           { label: "Technicien en régie", href: "/technicien-sous-regie", desc: "Un renfort dans votre équipe, avec Talentero" },
         ],
       },
-      {
-        titre: "Matériel",
-        items: [
-          { label: "Boutique", href: "/boutique", desc: "Portables, écrans, accessoires et kits, prix affichés" },
-        ],
-      },
     ],
   },
   { label: "Cas clients", href: "/cas-clients" },
@@ -89,6 +83,7 @@ export const menuItems: MenuItem[] = [
       },
     ],
   },
+  { label: "Boutique", href: "/boutique" },
   { label: "Contact", href: "/contact" },
 ]
 
