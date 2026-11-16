@@ -39,7 +39,7 @@ export const VIDEO_TRINEXTA_JSONLD = {
     "Présentation de TRINEXTA, prestataire d'infogérance, de support et de cybersécurité pour les TPE et PME, à Évry-Courcouronnes et en Île-de-France.",
   thumbnailUrl: "https://trinexta.fr/videos/trinexta-presentation-affiche.webp",
   contentUrl: "https://trinexta.fr/videos/trinexta-presentation.mp4",
-  uploadDate: "2026-10-24",
+  uploadDate: "2026-10-24T00:00:00+02:00",
   duration: "PT44S",
 }
 
