@@ -3,7 +3,6 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { Button } from "@/components/ui/Button"
 import { FilAriane } from "@/components/boutique/FilAriane"
 import { BlocPrix } from "@/components/boutique/BlocPrix"
 import { Disponibilite } from "@/components/boutique/Disponibilite"
@@ -11,6 +10,7 @@ import { Galerie } from "@/components/boutique/Galerie"
 import { ImageProduit } from "@/components/boutique/ImageProduit"
 import { CarteArticle } from "@/components/boutique/CarteArticle"
 import { Repli } from "@/components/boutique/Repli"
+import { BoutonAjouterPanier } from "@/components/boutique/BoutonAjouterPanier"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { CONTENU_CATEGORIES, lienCommande } from "@/data/boutique"
 import { boutique } from "@/lib/boutique/api"
@@ -129,12 +129,13 @@ export default async function ProduitPage({ params }: Props) {
               <Disponibilite valeur={a.disponibilite} />
               <BlocPrix prix={a.prix} taille="fiche" />
               <div className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-5">
-                <Button asChild variant="secondary" size="lg" className="w-full">
-                  <Link href={lienCommande({ slug: a.slug, nom: a.nom })}>Commander</Link>
-                </Button>
+                <BoutonAjouterPanier cible={{ type: "article", slug: a.slug }} />
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  Votre demande arrive directement à notre équipe : nous vous confirmons le prix, la disponibilité et la
-                  livraison avant toute commande. Installation possible par TRINEXTA.
+                  Prix indicatif : le prix, la disponibilité et la livraison sont confirmés à la commande. Installation
+                  possible par TRINEXTA.{" "}
+                  <Link href={lienCommande({ slug: a.slug, nom: a.nom })} className="font-semibold text-secondary-strong underline underline-offset-4">
+                    Une question sur ce produit ?
+                  </Link>
                 </p>
               </div>
               {texte && <p className="leading-relaxed text-muted-foreground">{resume(texte, 400)}</p>}
