@@ -8,7 +8,8 @@ import type { CodeCategorie, CodeVariante, Disponibilite, Prix } from "./types"
 export const CLE_PANIER = "trinexta_boutique_panier"
 /** Un panier oublié s'efface au bout de 30 jours. */
 export const DUREE_PANIER_MS = 30 * 24 * 60 * 60 * 1000
-export const QUANTITE_MAX = 99
+/** Bornes du contrat `docs/boutique-panier.md` (espace client) : 1 à 500 par ligne, 50 lignes au plus. */
+export const QUANTITE_MAX = 500
 export const LIGNES_MAX = 50
 
 export const VARIANTES: readonly CodeVariante[] = ["16go-1ecran", "16go-2ecrans", "32go-1ecran", "32go-2ecrans", "unique"]
@@ -96,15 +97,20 @@ export function cleLigne(l: LignePanier): string {
 }
 
 /**
- * Valeur du paramètre `panier` de l'adresse de commande (boutique.trinexta.fr/commande).
- * FORMAT PROVISOIRE, seul endroit à modifier quand `docs/boutique-panier.md` (dépôt espace-client)
- * sera fourni : lignes séparées par des virgules, champs par deux-points,
- * `a:<slug>:<quantité>` pour un article, `k:<slug>:<variante>:<quantité>` pour un kit.
+ * Valeur du paramètre `panier` de https://boutique.trinexta.fr/commande, contrat `docs/boutique-panier.md`
+ * (dépôt espace-client) : `a:<slug>:<quantité>` pour un article, `k:<slug>:<variante>:<quantité>` pour une
+ * variante de kit, lignes séparées par des virgules, puis le tout en base64url sans `=` de remplissage.
+ * Ni prix, ni nom, ni disponibilité : la boutique relit tout côté serveur.
  */
-export function encoderPanier(lignes: LignePanier[]): string {
+export function texteCommande(lignes: LignePanier[]): string {
   return lignes
     .map((l) => (l.type === "kit" ? `k:${l.slug}:${l.variante}:${l.quantite}` : `a:${l.slug}:${l.quantite}`))
     .join(",")
+}
+
+export function encoderPanier(lignes: LignePanier[]): string {
+  // Texte en ASCII seul (slugs validés par SLUG, codes de variante, chiffres) : btoa suffit, côté serveur comme navigateur.
+  return btoa(texteCommande(lignes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "")
 }
 
 export function urlCommande(base: string, lignes: LignePanier[]): string {

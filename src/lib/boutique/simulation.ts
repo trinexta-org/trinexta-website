@@ -28,6 +28,10 @@ function prix(ht: number, eco = 0, barreHt: number | null = null, promotion: str
     barreHt,
     barreTtc: barreHt === null ? null : ttc(barreHt),
     promotion,
+    pourcentage: barreHt === null ? null : Math.floor(((barreHt - ht) / barreHt) * 100),
+    finPromotion: barreHt === null ? null : "2026-11-30T23:00:00.000Z",
+    operation: promotion,
+    avantages: promotion ? [{ type: "livraison_offerte", nom: promotion, valeurHt: null, valeurTtc: null }] : [],
     ecoParticipationHt: eco,
     ecoParticipationTtc: ttc(eco),
   }
@@ -52,7 +56,7 @@ type Brut = [slug: string, nom: string, marque: string | null, categorie: CodeCa
 
 const BRUTS: Brut[] = [
   ["lenovo-portable-demo-14-a1", "Portable 14 pouces (démonstration)", "Lenovo", "portable", prix(108000, 50), true],
-  ["dell-portable-demo-15-b2", "Portable 15 pouces (démonstration)", "Dell", "portable", prix(96000, 50, 104000, "Rentrée"), true],
+  ["dell-portable-demo-15-b2", "Portable 15 pouces (démonstration)", "Dell", "portable", prix(96000, 50, 104000, "Black Friday 2026"), true],
   ["hp-portable-demo-14-c3", "Portable 14 pouces léger (démonstration)", "HP", "portable", prix(124000, 50), false],
   ["asus-portable-demo-16-d4", "Portable 16 pouces (démonstration)", "ASUS", "portable", prix(135000, 50), false],
   ["dell-fixe-demo-e5", "Unité centrale compacte (démonstration)", "Dell", "poste", prix(78000, 100), true],
@@ -71,6 +75,7 @@ function marque(libelle: string | null) {
 const RESUMES: ArticleResume[] = BRUTS.map(([slug, nom, m, categorie, p, stock]) => ({
   slug,
   nom,
+  designation: `${nom} : désignation technique fictive du fournisseur`,
   marque: marque(m),
   categorie: { code: categorie, libelle: CAT[categorie] },
   prix: p,

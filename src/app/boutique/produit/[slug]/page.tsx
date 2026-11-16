@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const a = res.data
   const titre = a.marque && !a.nom.toLowerCase().startsWith(a.marque.libelle.toLowerCase()) ? `${a.marque.libelle} ${a.nom}` : a.nom
   const description =
-    resume(a.description ?? a.presentation) ??
+    resume(a.description ?? a.presentation ?? a.designation) ??
     `${titre} : ${CONTENU_CATEGORIES[a.categorie.code].titre.toLowerCase()} professionnel, prix HT et TTC, installation possible par TRINEXTA.`
   const image = urlImage(a.image?.grande, baseApi())
   const url = `/boutique/produit/${a.slug}`
@@ -111,6 +111,9 @@ export default async function ProduitPage({ params }: Props) {
                   <p className="text-sm font-bold uppercase tracking-[0.14em] text-secondary-strong">{a.marque.libelle}</p>
                 )}
                 <h1 className="text-3xl font-black leading-tight text-primary md:text-4xl">{a.nom}</h1>
+                {a.designation && a.designation !== a.nom && (
+                  <p className="text-base leading-relaxed text-muted-foreground">{a.designation}</p>
+                )}
                 <dl className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-muted-foreground">
                   {a.referenceFabricant && (
                     <div className="flex gap-1.5">

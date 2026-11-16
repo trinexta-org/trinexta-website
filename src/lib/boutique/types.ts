@@ -24,14 +24,36 @@ export function estCodeCategorie(v: string): v is CodeCategorie {
 
 export type Disponibilite = "en stock" | "sur commande"
 
+export type TypeAvantage = "installation_offerte" | "livraison_offerte"
+
+/** Avantage de service en cours : jamais une réduction de prix (aucun prix barré). */
+export interface Avantage {
+  type: TypeAvantage
+  nom: string
+  valeurHt: number | null
+  valeurTtc: number | null
+}
+
+/**
+ * Prix tout calculé par l'espace client. `barreHt`, `barreTtc`, `promotion`, `pourcentage`,
+ * `finPromotion` et `operation` sont tous null sans réduction réelle : le site affiche alors ht/ttc seuls.
+ */
 export interface Prix {
   devise: "EUR"
   tauxTva: number
   ht: number
   ttc: number
+  /** Prix de référence (plus bas prix des 30 jours avant la réduction). */
   barreHt: number | null
   barreTtc: number | null
   promotion: string | null
+  /** Réduction entière, déjà arrondie à l'inférieur. */
+  pourcentage: number | null
+  /** Fin de la promotion, ISO 8601 UTC, EXCLUE. */
+  finPromotion: string | null
+  /** Nom de l'opération commerciale (badge), null pour une promotion seule. */
+  operation: string | null
+  avantages: Avantage[]
   ecoParticipationHt: number
   ecoParticipationTtc: number
 }
@@ -54,7 +76,10 @@ export interface Marque {
 
 export interface ArticleResume {
   slug: string
+  /** Nom commercial (Open Icecat : marque, famille, produit), sinon la désignation. */
   nom: string
+  /** Désignation technique du fournisseur, coupée à 160 caractères : sous-titre. */
+  designation: string | null
   marque: Marque | null
   categorie: Categorie
   prix: Prix
