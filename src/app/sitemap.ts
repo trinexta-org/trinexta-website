@@ -3,6 +3,7 @@ import { sanityClient } from "@/lib/sanity";
 import { caseClients } from "@/data/cas-clients";
 import { isIndexable } from "@/lib/site";
 import { ARTICLES_REDIRIGES } from "@/data/articles-rediriges";
+import { routesBoutique } from "@/lib/boutique/sitemap";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
@@ -68,5 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...STATIC_ROUTES, ...articleRoutes, ...caseClientRoutes];
+  const boutiqueRoutes = await routesBoutique(BASE_URL);
+
+  return [...STATIC_ROUTES, ...articleRoutes, ...caseClientRoutes, ...boutiqueRoutes];
 }

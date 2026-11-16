@@ -1,0 +1,13 @@
+import { BandeauSimulation } from "@/components/boutique/BandeauSimulation"
+import { BarreBoutique } from "@/components/boutique/BarreBoutique"
+import { simulationActive } from "@/lib/boutique/api"
+
+export default function BoutiqueLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-surface">
+      <BarreBoutique />
+      {simulationActive() && <BandeauSimulation />}
+      {children}
+    </div>
+  )
+}

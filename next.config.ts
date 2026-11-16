@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { ARTICLES_REDIRIGES } from "./src/data/articles-rediriges";
+import { API_URL_PAR_DEFAUT, CHEMIN_IMAGES, LARGEURS_IMAGES } from "./src/lib/boutique/constantes";
 
 const sanityProjectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "93ztl6y7";
@@ -14,6 +15,19 @@ const GOOGLE_ADS_ORIGINS = [
   "pagead2.googlesyndication.com",
   "www.google.com",
 ] as const;
+
+/**
+ * Photos de la boutique : servies par l'API de l'espace client (ADR EC-0007), en trois largeurs.
+ * Seul le chemin des images est autorisé, avec ses trois valeurs exactes de `?l=`.
+ */
+const boutiqueApi = new URL(process.env.ESPACE_CLIENT_API_URL || API_URL_PAR_DEFAUT);
+const BOUTIQUE_IMAGES = LARGEURS_IMAGES.map((largeur) => ({
+  protocol: boutiqueApi.protocol === "http:" ? ("http" as const) : ("https" as const),
+  hostname: boutiqueApi.hostname,
+  port: boutiqueApi.port,
+  pathname: `${CHEMIN_IMAGES}**`,
+  search: `?l=${largeur}`,
+}));
 
 /** Site de TRINEXTA Studio : création de sites, applications et audit SEO. */
 const STUDIO_URL = "https://trinexta-studio.fr";
@@ -387,6 +401,7 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: `/images/${sanityProjectId}/production/**`,
       },
+      ...BOUTIQUE_IMAGES,
     ],
   },
   // inlineCss retiré (24/10/2026) : la feuille Tailwind fait ~170 Ko, inlinée deux fois

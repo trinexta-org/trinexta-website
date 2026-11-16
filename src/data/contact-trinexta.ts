@@ -29,6 +29,7 @@ export const BESOINS = [
   { value: "cyber", label: "Sécurité ou suspicion de piratage" },
   { value: "intervention", label: "Une intervention ponctuelle" },
   { value: "regie", label: "Un technicien en régie" },
+  { value: "materiel", label: "Commander du matériel (boutique)" },
   { value: "autre", label: "Autre demande" },
 ] as const
 export type Besoin = (typeof BESOINS)[number]["value"]
