@@ -6,6 +6,7 @@ import { Repli } from "@/components/boutique/Repli"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { KITS_CONTENU } from "@/data/boutique"
 import { boutique } from "@/lib/boutique/api"
+import { kitsAvecPhotos } from "@/lib/boutique/kits"
 import { listeJsonLd } from "@/lib/boutique/seo"
 import { ETAPE_ACCUEIL, ETAPE_BOUTIQUE, SITE_URL } from "@/lib/boutique/site"
 
@@ -25,7 +26,9 @@ export const metadata: Metadata = {
 }
 
 export default async function KitsPage() {
-  const res = await boutique().kits()
+  const api = boutique()
+  const res = await api.kits()
+  const kits = res.ok ? await kitsAvecPhotos(api, res.data.kits) : []
   return (
     <div>
       <EnteteBoutique
@@ -49,9 +52,9 @@ export default async function KitsPage() {
             <p className="text-muted-foreground">Aucun kit n&apos;est proposé pour le moment.</p>
           ) : (
             <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {res.data.kits.map((k) => (
+              {kits.map((k, i) => (
                 <li key={k.slug}>
-                  <CarteKit kit={k} />
+                  <CarteKit kit={k} photos={k.photos} priorite={i < 3} />
                 </li>
               ))}
             </ul>
