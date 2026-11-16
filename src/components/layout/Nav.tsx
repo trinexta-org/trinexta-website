@@ -37,11 +37,11 @@ export function Nav() {
   }
 
   return (
-    <nav ref={navRef} className="hidden lg:flex items-center gap-3 xl:gap-8" aria-label="Menu principal">
+    <nav ref={navRef} className="hidden lg:flex items-center gap-8" aria-label="Menu principal">
       {menuItems.map((item) => {
         const isActive = liensDe(item).some(estActif)
         const lienClasse = cn(
-          "text-sm font-bold whitespace-nowrap transition-colors relative py-6 flex items-center gap-1",
+          "text-sm font-bold transition-colors relative py-6 flex items-center gap-1",
           isActive ? "text-secondary-strong" : "text-primary hover:text-secondary-strong"
         )
         const soulignement = (
