@@ -48,15 +48,9 @@ export const menuItems: MenuItem[] = [
           { label: "Technicien en régie", href: "/technicien-sous-regie", desc: "Un renfort dans votre équipe, avec Talentero" },
         ],
       },
-      {
-        titre: "Matériel",
-        items: [
-          { label: "Boutique", href: "/boutique", desc: "Portables, écrans, accessoires et kits, prix affichés" },
-        ],
-      },
     ],
   },
-  { label: "Cas clients", href: "/cas-clients" },
+  { label: "Boutique", href: "/boutique" },
   {
     label: "Ressources",
     groups: [
@@ -72,6 +66,7 @@ export const menuItems: MenuItem[] = [
         titre: "S'informer",
         items: [
           { label: DIAGNOSTIC_LIEN.name, href: DIAGNOSTIC_LIEN.href, desc: "Votre site analysé en 30 secondes" },
+          { label: "Cas clients", href: "/cas-clients", desc: "Ce que nous avons fait pour d'autres entreprises" },
           { label: "Blog", href: "/blog", desc: "Conseils pour les TPE et PME" },
         ],
       },
