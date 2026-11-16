@@ -1,8 +1,9 @@
-// Partenaires validés le 23/10/2026 : seuls ceux-ci peuvent apparaître dans le bandeau
+// Partenaires validés le 23/10/2026 (Sophos ajouté le 16/11/2026) : seuls ceux-ci peuvent apparaître dans le bandeau
 // partenaires de l'accueil (logos gérés dans Sanity, type "editeur").
 // NinjaOne est un outil utilisé, pas un partenaire affiché. Aucun opérateur télécom.
 export const PARTENAIRES_VALIDES = [
   "SentinelOne",
+  "Sophos",
   "ESET",
   "Plenit",
   "MCA Technology",
@@ -20,7 +21,14 @@ export const PARTENAIRES_GROUPES: {
   domaine: string
   partenaires: { nom: (typeof PARTENAIRES_VALIDES)[number]; logo?: string }[]
 }[] = [
-  { domaine: "Cybersécurité", partenaires: [{ nom: "SentinelOne" }, { nom: "ESET", logo: "/images/partenaires/eset.png" }] },
+  {
+    domaine: "Cybersécurité",
+    partenaires: [
+      { nom: "SentinelOne" },
+      { nom: "Sophos", logo: "/images/partenaires/sophos.png" },
+      { nom: "ESET", logo: "/images/partenaires/eset.png" },
+    ],
+  },
   { domaine: "Sauvegarde", partenaires: [{ nom: "Plenit" }] },
   {
     domaine: "Matériel",
