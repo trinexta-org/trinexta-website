@@ -1,5 +1,6 @@
 import React from "react"
 import type { LegalData } from "./mentions-legales"
+import { ArticleConsommateurs } from "@/components/legal/ArticleConsommateurs"
 
 export const cgvData: LegalData = {
   hero: {
@@ -29,7 +30,7 @@ export const cgvData: LegalData = {
       title: "Article 2 - Champ d'application",
       paragraphs: [
         "Les présentes CGV s'appliquent à l'ensemble des prestations commercialisées par TRINEXTA auprès de ses clients, notamment : support informatique et assistance utilisateurs, infogérance, maintenance informatique, administration systèmes et réseaux, cybersécurité, services Microsoft 365 et services cloud, création et maintenance de sites internet, développement web et applications métier, hébergement web, applicatif et SaaS, référencement naturel (SEO) et référencement conversationnel (GEO), vente de matériel informatique et de licences logicielles, délégation de personnel informatique.",
-        "TRINEXTA travaille principalement avec des entreprises et les présentes sont rédigées pour les clients professionnels. La demande d'un particulier peut être acceptée : elle fait l'objet d'un devis dédié, et les dispositions impératives du Code de la consommation s'appliquent et prévalent sur toute clause contraire des présentes.",
+        "TRINEXTA travaille principalement avec des entreprises et les présentes sont rédigées pour les clients professionnels. Un particulier peut aussi acheter du matériel sur la boutique en ligne de TRINEXTA, ou obtenir une prestation sur devis dédié. L'article 23 s'applique alors, et les dispositions impératives du Code de la consommation prévalent sur toute clause contraire des présentes.",
       ],
     },
     {
@@ -110,7 +111,7 @@ export const cgvData: LegalData = {
     {
       title: "Article 14 - Vente de matériel et logiciels",
       paragraphs: [
-        "Les produits vendus restent la propriété de TRINEXTA jusqu'au paiement intégral. Les garanties applicables sont celles fournies par les constructeurs ou éditeurs. TRINEXTA agit en qualité de revendeur ou d'intégrateur.",
+        "Les produits vendus restent la propriété de TRINEXTA jusqu'au paiement intégral. TRINEXTA agit en qualité de revendeur ou d'intégrateur. Les produits bénéficient des garanties commerciales fournies par les constructeurs ou éditeurs. Lorsque l'acheteur est un consommateur, ces garanties s'ajoutent aux garanties légales de conformité et des vices cachés dues par TRINEXTA, qui ne peuvent être ni écartées ni limitées (article 23).",
       ],
     },
     {
@@ -162,6 +163,10 @@ export const cgvData: LegalData = {
         "Téléphone : 09 78 25 07 46",
         <span key="email"><a href="mailto:contact@trinexta.fr" className="text-secondary-strong hover:underline transition-colors">contact@trinexta.fr</a></span>,
       ],
+    },
+    {
+      title: "Article 23 - Boutique en ligne : acheteurs non professionnels",
+      content: <ArticleConsommateurs />,
     },
     {
       title: "Conditions Générales d'Utilisation (CGU)",

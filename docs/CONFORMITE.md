@@ -28,7 +28,7 @@
 | Mentions légales | /mentions-legales | `src/data/mentions-legales.tsx` | 25/10/2026 (#356) | Oui : directeur de la publication nommé, « RCS Évry 942 020 082 », hébergeur, disponibilité en moyens raisonnables |
 | Politique de confidentialité | /confidentialite | `src/data/confidentialite.tsx` | 25/10/2026 (#356, puis diagnostic sécurité : article 14) | Oui : tableau finalité / base / durée, sous-traitants nommés avec pays, transferts, mesure d'audience |
 | Politique cookies | /cookies | `src/data/cookies.tsx` | 25/10/2026 (#356) | Oui : liste des traceurs réels, outils non utilisés retirés |
-| CGV | /cgv | `src/data/cgv.tsx` | 27/10/2026 | Oui pour les professionnels : pénalités taux BCE + 10 points, indemnité 40 €. Particuliers : acceptés sur devis dédié, Code de la consommation prévalant (relecture juriste à prévoir, écart E4) |
+| CGV | /cgv | `src/data/cgv.tsx`, article 23 dans `src/data/cgv-consommateurs.ts` | 17/11/2026 | Oui pour les professionnels : pénalités taux BCE + 10 points, indemnité 40 €. Particuliers : article 23 (boutique en ligne : prix TTC, livraison sous 30 jours à défaut d'indication, transfert des risques, rétractation de 14 jours avec bouton en ligne, encadré D211-2 mot pour mot, réclamations et juridiction) ; médiateur non désigné, clause publiée dès qu'il l'est (relecture juriste à prévoir, écart E4) |
 | Engagements de service, plan de réponse aux incidents, accord de traitement des données | /niveau-de-service, /plan-reponse-incidents-securite, /accord-traitement-donnees | `src/data/sla.tsx`, `plan-reponse-incidents.tsx`, `dpa.tsx` | 25/10/2026 (#356) | Oui : plus de tarif public, plus d'adresse support@, plus de « garantir » |
 
 ## 3. Registre des traitements
@@ -187,7 +187,7 @@ Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans
 | E1 | Aucune purge des demandes de contact et de rappel alors que 3 ans sont annoncés | Important | Claude (script), Valoux (planification sur le VPS) | Novembre 2026 | Ouvert |
 | E2 | Adresses désinscrites de la newsletter conservées sans durée | Mineur | Claude | Avec E1 | Ouvert |
 | E3 | Purge des estimations et des diagnostics sécurité : script présent (`npm run purge:estimates`), planification sur le VPS non vérifiée | Important | Valoux | Novembre 2026 | Ouvert |
-| E4 | CGV : particuliers acceptés sur devis sans section consommateurs détaillée | Important | Valoux (juriste) | Avant toute vente à un particulier | Ouvert |
+| E4 | CGV : article 23 « acheteurs non professionnels » ajouté le 17/11/2026 (structure des CGV consommateurs de LDLC, alignée sur les textes de la boutique). Reste : relecture par un juriste ; **médiateur de la consommation à désigner** (`MEDIATEUR_CONSOMMATION`, obligatoire avant la première vente à un particulier) ; reprise gratuite des équipements usagés (un pour un) à trancher | Important | Valoux (juriste, médiateur) | Avant la première vente à un particulier | En cours |
 | E5 | Bandeau cookies servi par jsDelivr (IP des visiteurs transmise, CSP élargie) | Mineur | Claude | Décembre 2026 | Ouvert |
 | E6 | `'unsafe-inline'` dans la CSP des scripts | Mineur | Hyosua (`@trinexta/core`, nonces) | Avec le socle | Ouvert |
 | E7 | `next-sanity` installe l'outillage Sanity en production (vulnérabilités) | Important | Claude | Novembre 2026 | Ouvert |
@@ -209,6 +209,7 @@ Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans
 | 25/10/2026 | SEO, accessibilité, charte | PR #357, mise en production par #359 |
 | 25/10/2026 | Forme sociale SASU, ligne particuliers des CGV, création de ce dossier | PR #359 et suivante |
 | 27/10/2026 | CGV Sérénité : période d'essai de 3 mois (résiliation sans préavis, durée minimale d'Essentiel non opposable), rapports trimestriel (Essentiel) et mensuel (Complète). Page /serenite : cas clients réels anonymisés (secteur et taille, aucun nom), situations types présentées comme telles | PR feat/serenite-offre-hormozi |
+| 17/11/2026 | CGV : article 23 pour les acheteurs non professionnels de la boutique (rétractation, garanties légales, livraison, réclamations), articles 2 et 14 alignés | PR feat/cgv-particuliers |
 | 16/11/2026 | Boutique : panier dans le navigateur (`trinexta_boutique_panier`, ajouté à la politique cookies), page `/boutique/panier` non indexée, commande transmise à boutique.trinexta.fr | PR feat/boutique-panier |
 | 16/11/2026 | Boutique de matériel (lot 4B) : pages `/boutique` en lecture de l'API de l'espace client, aucune donnée stockée, besoin « Commander du matériel » au formulaire de contact | PR feat/boutique-catalogue |
 | 25/10/2026 | Diagnostic sécurité gratuit : nouvelle collecte, trois routes publiques, appels sortants bridés, politique de confidentialité (article 14), puis correctifs de la relecture de sécurité (ReDoS, jeton du rapport, rappel par bouton, sondes HEAD) | PR #362 |
