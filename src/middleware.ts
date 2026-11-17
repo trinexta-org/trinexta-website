@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { BOUTIQUE_OUVERTE } from "@/data/boutique/ouverture";
+import { boutiqueVisible } from "@/data/boutique/ouverture";
 
 const TAB_MAP: Record<string, string> = {
   serenite: "/serenite",
@@ -18,7 +18,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Boutique fermée : toutes les sous-pages renvoient vers la page « arrive bientôt ».
-  if (!BOUTIQUE_OUVERTE && pathname.startsWith("/boutique/")) {
+  if (!boutiqueVisible && pathname.startsWith("/boutique/")) {
     return NextResponse.redirect(new URL("/boutique", request.url), 307);
   }
 
