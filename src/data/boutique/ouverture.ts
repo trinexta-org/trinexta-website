@@ -5,7 +5,7 @@ import { isIndexable } from "@/lib/site"
  * `false` : en production, /boutique affiche « arrive bientôt », les sous-pages y redirigent, et la boutique
  * sort du sitemap, du menu, du pied de page et de llms.txt.
  */
-export const BOUTIQUE_OUVERTE = false
+export const BOUTIQUE_OUVERTE = true
 
 /** Staging et local gardent la boutique visible pour la recette ; la production attend `BOUTIQUE_OUVERTE`. */
 export const boutiqueVisible = BOUTIQUE_OUVERTE || !isIndexable
