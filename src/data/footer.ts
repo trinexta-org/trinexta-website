@@ -2,6 +2,7 @@
 // Les autres activités et produits de TRINEXTA y sont regroupés (« Les marques TRINEXTA »).
 
 import { DIAGNOSTIC_LIEN } from "@/data/diagnostic"
+import { boutiqueVisible } from "@/data/boutique/ouverture"
 
 export interface LienPied {
   name: string
@@ -19,7 +20,7 @@ export const PIED_SERVICES: LienPied[] = [
   { name: "Téléphonie et réseau", href: "/solutions-metier" },
   { name: "Interventions sur devis", href: "/services-annexes" },
   { name: "Technicien en régie", href: "/technicien-sous-regie" },
-  { name: "Boutique de matériel", href: "/boutique" },
+  ...(boutiqueVisible ? [{ name: "Boutique de matériel", href: "/boutique" }] : []),
 ]
 
 export const PIED_RESSOURCES: LienPied[] = [
