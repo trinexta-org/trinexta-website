@@ -4,6 +4,8 @@ import { notFound } from "next/navigation"
 import { Section } from "@/components/layout/Section"
 import { FilAriane } from "@/components/boutique/FilAriane"
 import { BlocPrix } from "@/components/boutique/BlocPrix"
+import { MosaiqueKit } from "@/components/boutique/MosaiqueKit"
+import { photosKit } from "@/lib/boutique/kits"
 import { Disponibilite } from "@/components/boutique/Disponibilite"
 import { ImageProduit } from "@/components/boutique/ImageProduit"
 import { Repli } from "@/components/boutique/Repli"
@@ -61,6 +63,13 @@ export default async function KitPage({ params, searchParams }: Props) {
           />
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14">
             <div className="flex flex-col gap-6">
+              <MosaiqueKit
+                photos={photosKit({ variantes: [variante] })}
+                alt={variante.nom}
+                priorite
+                sizes="(min-width: 1024px) 640px, 92vw"
+                className="rounded-2xl border border-border"
+              />
               <div className="flex flex-col gap-3">
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-secondary-strong">Kit poste de travail</p>
                 <h1 className="text-3xl font-black leading-tight text-primary md:text-4xl">{k.nom}</h1>

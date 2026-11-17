@@ -11,8 +11,11 @@ import { Repli } from "@/components/boutique/Repli"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { BOUTIQUE_HERO, BOUTIQUE_QUESTIONS, CATEGORIES_BOUTIQUE, CONTENU_CATEGORIES, KITS_CONTENU } from "@/data/boutique"
 import { boutique } from "@/lib/boutique/api"
+import { kitsAvecPhotos } from "@/lib/boutique/kits"
 import { elementsListe, listeJsonLd } from "@/lib/boutique/seo"
 import { ETAPE_ACCUEIL, ETAPE_BOUTIQUE, SITE_URL } from "@/lib/boutique/site"
+import { BoutiqueBientot } from "@/components/boutique/BoutiqueBientot"
+import { BOUTIQUE_OUVERTE } from "@/data/boutique/ouverture"
 
 const TITRE = "Boutique de matériel informatique professionnel"
 const DESCRIPTION =
@@ -21,7 +24,8 @@ const DESCRIPTION =
 export const revalidate = 300
 
 export const metadata: Metadata = {
-  title: TITRE,
+  title: BOUTIQUE_OUVERTE ? TITRE : "Boutique : bientôt disponible",
+  ...(BOUTIQUE_OUVERTE ? {} : { robots: { index: false, follow: true } }),
   description: DESCRIPTION,
   alternates: { canonical: "/boutique" },
   openGraph: {
@@ -34,8 +38,10 @@ export const metadata: Metadata = {
 }
 
 export default async function BoutiquePage() {
+  if (!BOUTIQUE_OUVERTE) return <BoutiqueBientot />
   const api = boutique()
   const [catalogue, kits] = await Promise.all([api.catalogue({ tri: "nouveautes", parPage: 8 }), api.kits()])
+  const kitsVitrine = kits.ok ? await kitsAvecPhotos(api, kits.data.kits.slice(0, 3)) : []
   const etapes = [ETAPE_ACCUEIL, ETAPE_BOUTIQUE]
 
   return (
@@ -93,9 +99,9 @@ export default async function BoutiquePage() {
                   <p className="max-w-3xl text-muted-foreground">{KITS_CONTENU.intro}</p>
                 </div>
                 <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {kits.data.kits.slice(0, 3).map((k) => (
+                  {kitsVitrine.map((k) => (
                     <li key={k.slug}>
-                      <CarteKit kit={k} />
+                      <CarteKit kit={k} photos={k.photos} />
                     </li>
                   ))}
                 </ul>

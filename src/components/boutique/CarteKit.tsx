@@ -1,15 +1,15 @@
 import Link from "next/link"
-import { Package } from "lucide-react"
+import { MosaiqueKit } from "./MosaiqueKit"
 import { euros } from "@/lib/boutique/format"
-import type { KitResume } from "@/lib/boutique/types"
+import type { ImageArticle, KitResume } from "@/lib/boutique/types"
 
-export function CarteKit({ kit }: { kit: KitResume }) {
+export function CarteKit({ kit, photos = [], priorite = false }: { kit: KitResume; photos?: ImageArticle[]; priorite?: boolean }) {
   return (
     <Link
       href={`/boutique/kits/${kit.slug}`}
       className="group flex h-full flex-col gap-4 rounded-2xl border border-border bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
     >
-      <Package aria-hidden="true" className="h-8 w-8 text-secondary-strong" strokeWidth={1.5} />
+      <MosaiqueKit photos={photos} alt={kit.nom} priorite={priorite} />
       <div className="flex flex-1 flex-col gap-2">
         <h3 className="text-lg font-bold text-primary group-hover:underline">{kit.nom}</h3>
         {kit.description && <p className="text-sm leading-relaxed text-muted-foreground">{kit.description}</p>}
