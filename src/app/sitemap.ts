@@ -4,6 +4,7 @@ import { caseClients } from "@/data/cas-clients";
 import { isIndexable } from "@/lib/site";
 import { ARTICLES_REDIRIGES } from "@/data/articles-rediriges";
 import { routesBoutique } from "@/lib/boutique/sitemap";
+import { boutiqueVisible } from "@/data/boutique/ouverture";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinexta.fr";
@@ -69,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const boutiqueRoutes = await routesBoutique(BASE_URL);
+  const boutiqueRoutes = boutiqueVisible ? await routesBoutique(BASE_URL) : [];
 
   return [...STATIC_ROUTES, ...articleRoutes, ...caseClientRoutes, ...boutiqueRoutes];
 }

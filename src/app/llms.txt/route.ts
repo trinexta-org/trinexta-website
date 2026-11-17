@@ -3,6 +3,7 @@ import { ACCUEIL_ADRESSE, ACCUEIL_FAITS, ACCUEIL_FAQ, ACCUEIL_IDENTITE } from "@
 import { PIED_MARQUES, PIED_RESSOURCES, PIED_SERVICES } from "@/data/footer"
 import { DIAGNOSTIC_LIEN } from "@/data/diagnostic"
 import { BOUTIQUE_LIEN } from "@/data/boutique"
+import { boutiqueVisible } from "@/data/boutique/ouverture"
 
 // llms.txt : résumé du site pour les assistants IA (format proposé sur llmstxt.org),
 // généré depuis les mêmes données que les pages pour rester cohérent.
@@ -28,10 +29,7 @@ export function GET() {
     "",
     ...PIED_SERVICES.map(lien),
     "",
-    "## Boutique de matériel professionnel",
-    "",
-    lien(BOUTIQUE_LIEN),
-    "",
+    ...(boutiqueVisible ? ["## Boutique de matériel professionnel", "", lien(BOUTIQUE_LIEN), ""] : []),
     "## Outils gratuits",
     "",
     lien(DIAGNOSTIC_LIEN),
