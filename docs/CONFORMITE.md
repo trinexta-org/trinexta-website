@@ -36,6 +36,7 @@
 | Collecte | Données | Finalité | Base légale | Durée annoncée | Suppression réelle | Destinataires | Route et table |
 |---|---|---|---|---|---|---|---|
 | Formulaire de contact | Profil, besoin, prénom, nom, e-mail, téléphone, entreprise, SIRET, ville, taille du parc, message, créneau | Répondre à la demande, suivi dans le CRM | Mesures précontractuelles | 3 ans après le dernier contact | **Non appliquée** (E1) | Équipe TRINEXTA (e-mail Microsoft 365), LeadSynch par capture du widget | `POST /api/contact`, table `ContactForm` |
+| Candidature TRINEXTA Partenaires (apporteurs d'affaires) | Prénom, nom, activité, entreprise, SIRET, ville, téléphone, e-mail, source (facultative) | Étudier la candidature, recontacter le candidat, préparer le contrat partenaire | Mesures précontractuelles | Rien n'est stocké sur le site ; boîte partenaire@ : 3 ans après le dernier contact | Sans objet sur le site (aucun stockage) | Équipe TRINEXTA (e-mail Microsoft 365) | `POST /api/partenaires`, e-mail vers partenaire@trinexta.fr |
 | Newsletter (pied de page, blog, fenêtre du blog) | E-mail | Envoi de la newsletter | Consentement, double opt-in | Jusqu'à la désinscription | Désinscription par lien ; adresses désinscrites conservées sans durée (E2) | Microsoft 365 (envoi) | `POST /api/newsletter`, `POST /api/newsletter/confirm`, `GET /api/newsletter/unsubscribe`, table `Subscriber` |
 | Simulateur d'estimation (anonyme) | Réponses au questionnaire, description libre | Estimation, statistiques | Intérêt légitime | 12 mois puis suppression | Script `scripts/purge-estimates.mjs` existant, **planification non vérifiée** (E3) | Anthropic (analyse IA de la description) | `POST /api/estimation`, `/events`, `/analyze`, table `Estimate` |
 | Demande de rappel après estimation | Prénom, nom, e-mail, téléphone, entreprise, consentement horodaté | Recontacter le prospect, envoyer l'estimation détaillée | Consentement (case à cocher) | 3 ans après le dernier contact | **Non appliquée** (E1) | Équipe TRINEXTA, Microsoft 365 | `POST /api/estimation/lead`, table `Estimate` |
@@ -93,6 +94,7 @@ IP lue sur `X-Real-IP` puis la dernière entrée de `X-Forwarded-For` (`src/lib/
 | Route | Envoie un e-mail | Limite par IP | Limite par e-mail | Piège à robots | JSON strict | Validation serveur |
 |---|---|---|---|---|---|---|
 | `POST /api/contact` | Oui (équipe + accusé au prospect) | 5 | 3 | Oui | Oui | zod, longueurs bornées |
+| `POST /api/partenaires` | Oui (partenaire@ + accusé au candidat) | 5 | 3 | Oui | Oui | zod, longueurs bornées, SIRET 14 chiffres |
 | `POST /api/newsletter` | Oui (confirmation) | 3 | 2 | Oui | Oui | zod |
 | `POST /api/newsletter/confirm` | Non | Non | Non | Sans objet | Formulaire | Jeton |
 | `GET /api/newsletter/unsubscribe` | Non | Non | Non | Sans objet | Sans objet | Jeton |
@@ -203,6 +205,7 @@ Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans
 
 | Date | Événement | Lien |
 |---|---|---|
+| 20/11/2026 | Page `/partenaires` (programme d'apporteurs d'affaires) : formulaire de candidature envoyé par e-mail à partenaire@trinexta.fr, aucun stockage sur le site, nouvelle route `POST /api/partenaires` | PR feat/page-partenaires |
 | 25/10/2026 | Audit complet en 5 axes (sécurité, SEO/GEO, ergonomie, conformité, qualité) | `trinexta-fondations/docs/audits/2026-10-25/` |
 | 25/10/2026 | Sécurité des formulaires, Next.js 16.4.3 | PR #355 |
 | 25/10/2026 | Conformité RGPD, cookies, mentions légales | PR #356, mise en production par #359 |
