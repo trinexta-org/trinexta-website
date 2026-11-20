@@ -129,17 +129,16 @@ export function libelleSource(value?: string): string {
 export const PARTENAIRES_MESSAGE_SUCCES =
   "Merci. Nous vous rappelons pour vous présenter le partenariat et vous envoyer le contrat."
 
-// Exemples chiffrés (demande de Valoux du 20/11/2026) : profils types désignés par leur métier, sans nom,
-// pour ne jamais les faire passer pour des témoignages de partenaires réels.
+// Exemples chiffrés (demande de Valoux du 20/11/2026) : personnages d'exemple avec un prénom et un métier.
+// Chaque carte reste titrée « Exemple » et la note précise qu'il s'agit d'exemples de parcours : ils ne doivent
+// jamais être présentés comme des témoignages de partenaires réels (pas de citation, de photo ni de nom complet).
 /** Prix public Sérénité Complète, en € HT par poste et par mois (voir src/data/serenite.ts). */
 export const PARTENAIRES_PRIX_POSTE = 79
 export const PARTENAIRES_TAUX = 0.15
 
 export interface ExemplePartenaire {
-  /** Profil type, avec article : « Un commercial multicarte ». */
-  profil: string
-  /** Sujet de la phrase de synthèse : « il » / « elle ». */
-  pronom: string
+  prenom: string
+  metier: string
   duree: string
   /** Mois d'arrivée de chaque entreprise signée et nombre de postes. */
   clients: { mois: number; entreprise: string; postes: number }[]
@@ -147,8 +146,8 @@ export interface ExemplePartenaire {
 
 export const PARTENAIRES_EXEMPLES: ExemplePartenaire[] = [
   {
-    profil: "Un commercial multicarte",
-    pronom: "il",
+    prenom: "Karim",
+    metier: "commercial multicarte",
     duree: "6 mois",
     clients: [
       { mois: 1, entreprise: "un cabinet comptable", postes: 5 },
@@ -158,8 +157,8 @@ export const PARTENAIRES_EXEMPLES: ExemplePartenaire[] = [
     ],
   },
   {
-    profil: "Une graphiste indépendante",
-    pronom: "elle",
+    prenom: "Sophie",
+    metier: "graphiste indépendante",
     duree: "4 mois",
     clients: [
       { mois: 1, entreprise: "un artisan électricien", postes: 3 },
@@ -191,7 +190,7 @@ export function formaterEuros(n: number): string {
 export const PARTENAIRES_EXEMPLES_TEMPS = "2 heures par semaine"
 
 export const PARTENAIRES_EXEMPLES_NOTE =
-  "Calculs réalisés sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."
+  "Exemples de parcours, calculés sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."
 
 export const PARTENAIRES_SIMULATEUR = {
   titre: "Calculez vos gains",
