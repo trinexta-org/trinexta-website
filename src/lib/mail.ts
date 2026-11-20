@@ -10,6 +10,8 @@ import {
   libelleSuite,
 } from "@/data/contact-trinexta";
 import { formaterDateRdv } from "@/lib/contact/rdv";
+import type { PartenaireFormData } from "@/lib/validations/partenaire";
+import { PARTENAIRES_EMAIL, PARTENAIRES_VERSEMENT, libelleSource } from "@/data/programme-partenaires";
 
 export function escapeHtml(value: string) {
   return value
@@ -219,6 +221,61 @@ export async function sendContactAccuseReception(data: ContactFormData) {
     <p>Un problème urgent d'ici là : appelez le <strong>${TRINEXTA_CONTACT.telephone}</strong>, ${TRINEXTA_CONTACT.horaires}. Pour nous écrire : <a href="mailto:${TRINEXTA_CONTACT.email}" style="color:#0A233E;font-weight:bold">${TRINEXTA_CONTACT.email}</a>.</p>
     <p style="margin-top:24px">L'équipe TRINEXTA<br /><span style="color:#5C92B8">L'humain avant les tickets.</span></p>
     <p style="margin-top:24px;font-size:12px;color:#5C92B8">Cet e-mail est envoyé automatiquement. Pour nous écrire, répondez simplement à cet e-mail ou écrivez à ${TRINEXTA_CONTACT.email}.</p>
+  </div>
+</div>`,
+  });
+}
+
+/** Candidature TRINEXTA Partenaires : vers partenaire@ (PARTENAIRE_TO_EMAIL), réponse directe au candidat. */
+export async function sendPartenaireNotification(data: PartenaireFormData) {
+  const to = process.env.PARTENAIRE_TO_EMAIL || PARTENAIRES_EMAIL;
+  const ligne = (label: string, value?: string) =>
+    `<tr><td style="padding:6px 12px 6px 0;color:#5C92B8;font-weight:bold;white-space:nowrap">${label}</td><td style="padding:6px 0">${formatField(value)}</td></tr>`;
+
+  return sendMail({
+    to,
+    replyTo: data.email,
+    subject: `Candidature partenaire · ${data.prenom} ${data.nom} · ${data.activite}`,
+    html: `
+<div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;color:#0A233E">
+  <h2 style="margin:0 0 12px">Nouvelle candidature TRINEXTA Partenaires</h2>
+  <p style="margin:0 0 16px;font-size:16px">À rappeler pour présenter le partenariat et envoyer le contrat.</p>
+  <table style="border-collapse:collapse;font-size:14px">
+    ${ligne("Nom", `${data.prenom} ${data.nom}`)}
+    ${ligne("Activité", data.activite)}
+    ${ligne("Entreprise", data.entreprise)}
+    ${ligne("SIRET", data.siret)}
+    ${ligne("Ville", data.ville)}
+    ${ligne("Téléphone", data.telephone)}
+    ${ligne("E-mail", data.email)}
+    ${ligne("Nous a connus par", libelleSource(data.source))}
+  </table>
+  <p style="margin-top:20px;font-size:12px;color:#5C92B8">Répondre à cet e-mail écrit directement au candidat.</p>
+</div>`,
+  });
+}
+
+/** Accusé de réception au candidat partenaire (réponses vers partenaire@). */
+export async function sendPartenaireAccuseReception(data: PartenaireFormData) {
+  const prenom = escapeHtml(data.prenom);
+  const boite = process.env.PARTENAIRE_TO_EMAIL || PARTENAIRES_EMAIL;
+  return sendMail({
+    to: data.email,
+    replyTo: boite,
+    subject: "Votre candidature TRINEXTA Partenaires",
+    html: `
+<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;border:1px solid #5C92B8;color:#0A233E">
+  <div style="background:#0A233E;padding:24px">
+    <p style="margin:0 0 8px;color:#5C92B8;font-size:12px;letter-spacing:2px;font-weight:bold">TRINEXTA PARTENAIRES</p>
+    <p style="margin:0;color:#FFFFFF;font-size:22px;font-weight:bold">Votre candidature est bien arrivée</p>
+  </div>
+  <div style="padding:24px;font-size:15px;line-height:1.6">
+    <p>Bonjour ${prenom},</p>
+    <p>Merci de votre intérêt pour TRINEXTA Partenaires.</p>
+    <p>Nous vous rappelons au <strong>${escapeHtml(data.telephone)}</strong> pour vous présenter le partenariat en quelques minutes, puis nous vous envoyons le contrat partenaire.</p>
+    <p>Pour rappel : 15 % du montant mensuel HT de l'infogérance des clients que vous nous présentez, pendant 12 mois. ${escapeHtml(PARTENAIRES_VERSEMENT)}</p>
+    <p style="margin-top:24px">L'équipe TRINEXTA<br /><span style="color:#5C92B8">L'humain avant les tickets.</span></p>
+    <p style="margin-top:24px;font-size:12px;color:#5C92B8">Cet e-mail est envoyé automatiquement. Pour nous écrire, répondez simplement à cet e-mail ou écrivez à ${escapeHtml(boite)}.</p>
   </div>
 </div>`,
   });
