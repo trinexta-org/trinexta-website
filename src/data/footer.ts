@@ -2,6 +2,7 @@
 // Les autres activités et produits de TRINEXTA y sont regroupés (« Les marques TRINEXTA »).
 
 import { DIAGNOSTIC_LIEN } from "@/data/diagnostic"
+import { PARTENAIRES_LIEN } from "@/data/programme-partenaires"
 
 export interface LienPied {
   name: string
@@ -31,6 +32,7 @@ export const PIED_RESSOURCES: LienPied[] = [
   { name: "Blog", href: "/blog" },
   { name: "Qui sommes-nous", href: "/a-propos" },
   { name: "Nous rejoindre", href: "/nous-rejoindre" },
+  { name: PARTENAIRES_LIEN.name, href: PARTENAIRES_LIEN.href },
   { name: "Contact", href: "/contact" },
 ]
 

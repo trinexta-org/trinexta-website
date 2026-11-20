@@ -33,6 +33,7 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/cas-clients`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${BASE_URL}/a-propos`, changeFrequency: "monthly", priority: 0.6 },
   { url: `${BASE_URL}/nous-rejoindre`, changeFrequency: "monthly", priority: 0.5 },
+  { url: `${BASE_URL}/partenaires`, changeFrequency: "monthly", priority: 0.5 },
   { url: `${BASE_URL}/contact`, changeFrequency: "yearly", priority: 0.6 },
   { url: `${BASE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${BASE_URL}/niveau-de-service`, changeFrequency: "yearly", priority: 0.3 },
