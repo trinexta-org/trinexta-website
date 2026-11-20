@@ -129,15 +129,17 @@ export function libelleSource(value?: string): string {
 export const PARTENAIRES_MESSAGE_SUCCES =
   "Merci. Nous vous rappelons pour vous présenter le partenariat et vous envoyer le contrat."
 
-// Exemples chiffrés (demande de Valoux du 20/11/2026) : parcours types présentés comme des simulations
-// (prénom et secteur seulement), jamais comme des témoignages de partenaires réels.
+// Exemples chiffrés (demande de Valoux du 20/11/2026) : profils types désignés par leur métier, sans nom,
+// pour ne jamais les faire passer pour des témoignages de partenaires réels.
 /** Prix public Sérénité Complète, en € HT par poste et par mois (voir src/data/serenite.ts). */
 export const PARTENAIRES_PRIX_POSTE = 79
 export const PARTENAIRES_TAUX = 0.15
 
 export interface ExemplePartenaire {
-  prenom: string
-  metier: string
+  /** Profil type, avec article : « Un commercial multicarte ». */
+  profil: string
+  /** Sujet de la phrase de synthèse : « il » / « elle ». */
+  pronom: string
   duree: string
   /** Mois d'arrivée de chaque entreprise signée et nombre de postes. */
   clients: { mois: number; entreprise: string; postes: number }[]
@@ -145,8 +147,8 @@ export interface ExemplePartenaire {
 
 export const PARTENAIRES_EXEMPLES: ExemplePartenaire[] = [
   {
-    prenom: "Karim",
-    metier: "commercial multicarte",
+    profil: "Un commercial multicarte",
+    pronom: "il",
     duree: "6 mois",
     clients: [
       { mois: 1, entreprise: "un cabinet comptable", postes: 5 },
@@ -156,8 +158,8 @@ export const PARTENAIRES_EXEMPLES: ExemplePartenaire[] = [
     ],
   },
   {
-    prenom: "Sophie",
-    metier: "graphiste indépendante",
+    profil: "Une graphiste indépendante",
+    pronom: "elle",
     duree: "4 mois",
     clients: [
       { mois: 1, entreprise: "un artisan électricien", postes: 3 },
@@ -189,4 +191,11 @@ export function formaterEuros(n: number): string {
 export const PARTENAIRES_EXEMPLES_TEMPS = "2 heures par semaine"
 
 export const PARTENAIRES_EXEMPLES_NOTE =
-  "Simulations calculées sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."
+  "Calculs réalisés sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."
+
+export const PARTENAIRES_SIMULATEUR = {
+  titre: "Calculez vos gains",
+  intro: "Combien d'entreprises pourriez-vous nous présenter, et de quelle taille ?",
+  entreprises: { min: 1, max: 20, defaut: 4 },
+  postes: { min: 2, max: 30, defaut: 8 },
+}
