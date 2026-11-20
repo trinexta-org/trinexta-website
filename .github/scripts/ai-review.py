@@ -205,6 +205,72 @@ def lire_agents_md() -> str:
         return ""
 
 
+# Tarifs en USD par million de tokens. Source : skill claude-api (Anthropic), tableau des
+# modeles et section prompt caching, releve le 2026-11-20. Sonnet 5.5 : input 2, output 10,
+# lecture de cache 0,10. Sonnet 5 : memes tarifs de base, lecture de cache a 0,1x l'input
+# (0,20). Ecriture de cache a 5 minutes = 1,25x l'input (TTL par defaut, utilise ici).
+# Modele absent de la table : tokens affiches, cout "inconnu" (aucune estimation).
+TARIFS_USD_PAR_MTOK = {
+    "claude-sonnet-5-5": {"input": 2.00, "cache_write": 2.50, "cache_read": 0.10, "output": 10.00},
+    "claude-sonnet-5": {"input": 2.00, "cache_write": 2.50, "cache_read": 0.20, "output": 10.00},
+}
+CHAMPS_USAGE = {
+    "input": "input_tokens",
+    "cache_write": "cache_creation_input_tokens",
+    "cache_read": "cache_read_input_tokens",
+    "output": "output_tokens",
+}
+CONSOMMATION: dict[str, dict[str, int]] = {}  # modele -> tokens cumules sur l'execution
+
+
+def enregistrer_consommation(modele: str, usage: dict) -> None:
+    """Cumule la consommation d'un appel, par modele (repli serveur compris)."""
+    global CONSOMMATION
+    avant = CONSOMMATION.get(modele, {})
+    CONSOMMATION = {
+        **CONSOMMATION,
+        modele: {k: avant.get(k, 0) + int(usage.get(champ) or 0) for k, champ in CHAMPS_USAGE.items()},
+    }
+
+
+def publier_cout_revue() -> None:
+    """Ligne AI_REVIEW_COST dans les logs et tableau dans $GITHUB_STEP_SUMMARY.
+    Appelee en fin d'execution, meme en echec : ne doit jamais lever."""
+    if not CONSOMMATION:
+        return
+    try:
+        depot = os.environ.get("GITHUB_REPOSITORY") or "inconnu"
+        morceaux = os.environ.get("GITHUB_REF", "").split("/")
+        pr = morceaux[2] if len(morceaux) > 2 and morceaux[1] == "pull" else "inconnu"
+        lignes = []
+        for modele, t in CONSOMMATION.items():
+            tarif = TARIFS_USD_PAR_MTOK.get(modele)
+            cout = None if tarif is None else sum(t[k] * tarif[k] for k in tarif) / 1_000_000
+            cout_txt = "inconnu" if cout is None else f"{cout:.4f}"
+            print(
+                f"AI_REVIEW_COST repo={depot} pr={pr} modele={modele} input={t['input']} "
+                f"cache_write={t['cache_write']} cache_read={t['cache_read']} "
+                f"output={t['output']} cout_usd={cout_txt}",
+                file=sys.stderr,
+            )
+            lignes.append(
+                f"| `{modele}` | {t['input']} | {t['cache_write']} | {t['cache_read']} "
+                f"| {t['output']} | {'coût inconnu' if cout is None else f'{cout:.4f}'} |"
+            )
+        chemin = os.environ.get("GITHUB_STEP_SUMMARY")
+        if chemin:
+            resume = (
+                "### Coût de la revue IA\n\n"
+                f"Dépôt : `{depot}` - PR : #{pr}\n\n"
+                "| Modèle | Input | Écriture cache | Lecture cache | Output | Coût estimé (USD) |\n"
+                "|---|---:|---:|---:|---:|---:|\n" + "\n".join(lignes) + "\n"
+            )
+            with open(chemin, "a", encoding="utf-8") as fichier:
+                fichier.write(resume)
+    except Exception as erreur:  # noqa: BLE001 - le suivi du cout ne doit jamais casser la revue
+        print(f"Suivi du cout indisponible : {erreur!r}", file=sys.stderr)
+
+
 def appeler_claude(systeme: str, contenu: str, schema: dict, effort: str) -> dict:
     """Un appel Messages API. Le prompt systeme est cache : il est identique d'une PR
     a l'autre, seul le contenu utilisateur varie."""
@@ -232,6 +298,8 @@ def appeler_claude(systeme: str, contenu: str, schema: dict, effort: str) -> dic
         donnees = envoyer(payload, entetes)
     except urllib.error.HTTPError as erreur:
         raise RuntimeError(f"{erreur.code} : {erreur.read().decode()}") from erreur
+
+    enregistrer_consommation(donnees.get("model") or payload["model"], donnees.get("usage") or {})
 
     if donnees.get("stop_reason") == "refusal":
         raise RuntimeError(f"Requete declinee : {donnees.get('stop_details')}")
@@ -384,7 +452,10 @@ def ecrire(commentaire: str) -> None:
 
 if __name__ == "__main__":
     try:
-        main()
-    except Exception as erreur:  # noqa: BLE001 - le job ne doit jamais casser la PR
-        print(f"Revue automatique en echec : {erreur!r}", file=sys.stderr)
-        ecrire("*Revue automatique indisponible - vérifier les logs du job.*")
+        try:
+            main()
+        except Exception as erreur:  # noqa: BLE001 - le job ne doit jamais casser la PR
+            print(f"Revue automatique en echec : {erreur!r}", file=sys.stderr)
+            ecrire("*Revue automatique indisponible - vérifier les logs du job.*")
+    finally:
+        publier_cout_revue()
