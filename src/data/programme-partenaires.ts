@@ -129,7 +129,8 @@ export function libelleSource(value?: string): string {
 export const PARTENAIRES_MESSAGE_SUCCES =
   "Merci. Nous vous rappelons pour vous présenter le partenariat et vous envoyer le contrat."
 
-// Exemples chiffrés (demande de Valoux du 20/11/2026) : partenaires fictifs, calculés sur Sérénité Complète.
+// Exemples chiffrés (demande de Valoux du 20/11/2026) : parcours types présentés comme des simulations
+// (prénom et secteur seulement), jamais comme des témoignages de partenaires réels.
 /** Prix public Sérénité Complète, en € HT par poste et par mois (voir src/data/serenite.ts). */
 export const PARTENAIRES_PRIX_POSTE = 79
 export const PARTENAIRES_TAUX = 0.15
@@ -188,4 +189,4 @@ export function formaterEuros(n: number): string {
 export const PARTENAIRES_EXEMPLES_TEMPS = "2 heures par semaine"
 
 export const PARTENAIRES_EXEMPLES_NOTE =
-  "Exemples fictifs, calculés sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."
+  "Simulations calculées sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."

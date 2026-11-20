@@ -133,7 +133,7 @@ export default function PartenairesPage() {
       <Section>
         <Heading as="h2" className="mb-4">Concrètement, combien ça rapporte ?</Heading>
         <Text className="mb-12 max-w-3xl">
-          Deux partenaires, deux rythmes, pour une activité moyenne de {PARTENAIRES_EXEMPLES_TEMPS}. Chaque entreprise signée s&apos;ajoute aux précédentes : le complément de revenu grandit chaque mois.
+          Deux parcours types, deux rythmes, pour une activité moyenne de {PARTENAIRES_EXEMPLES_TEMPS}. Chaque entreprise signée s&apos;ajoute aux précédentes : le complément de revenu grandit chaque mois.
         </Text>
         <div className="grid gap-8 lg:grid-cols-2">
           {PARTENAIRES_EXEMPLES.map((e) => {
@@ -141,7 +141,7 @@ export default function PartenairesPage() {
             const fin = etapes[etapes.length - 1]
             return (
               <article key={e.prenom} className="flex flex-col rounded-3xl border border-border bg-background p-5 sm:p-8">
-                <p className="font-mono text-xs uppercase tracking-widest text-secondary-strong">Exemple sur {e.duree}</p>
+                <p className="font-mono text-xs uppercase tracking-widest text-secondary-strong">Simulation sur {e.duree}</p>
                 <Heading as="h3" className="mt-3 mb-2">
                   {e.prenom}, {e.metier}
                 </Heading>
