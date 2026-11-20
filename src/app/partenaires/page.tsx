@@ -9,6 +9,11 @@ import { PartenaireForm } from "@/components/partenaires/PartenaireForm"
 import {
   PARTENAIRES_ARGUMENTS,
   PARTENAIRES_COMMISSIONS,
+  PARTENAIRES_EXEMPLES,
+  PARTENAIRES_EXEMPLES_NOTE,
+  PARTENAIRES_EXEMPLES_TEMPS,
+  formaterEuros,
+  progressionExemple,
   PARTENAIRES_CONDITION,
   PARTENAIRES_ETAPES,
   PARTENAIRES_FAQ,
@@ -123,6 +128,60 @@ export default function PartenairesPage() {
           <p className="mt-8 text-primary-foreground/70">{PARTENAIRES_VERSEMENT}</p>
         </Container>
       </section>
+
+      {/* Exemples chiffrés */}
+      <Section>
+        <Heading as="h2" className="mb-4">Concrètement, combien ça rapporte ?</Heading>
+        <Text className="mb-12 max-w-3xl">
+          Deux partenaires, deux rythmes, pour une activité moyenne de {PARTENAIRES_EXEMPLES_TEMPS}. Chaque entreprise signée s&apos;ajoute aux précédentes : le complément de revenu grandit chaque mois.
+        </Text>
+        <div className="grid gap-8 lg:grid-cols-2">
+          {PARTENAIRES_EXEMPLES.map((e) => {
+            const etapes = progressionExemple(e)
+            const fin = etapes[etapes.length - 1]
+            return (
+              <article key={e.prenom} className="flex flex-col rounded-3xl border border-border bg-background p-5 sm:p-8">
+                <p className="font-mono text-xs uppercase tracking-widest text-secondary-strong">Exemple sur {e.duree}</p>
+                <Heading as="h3" className="mt-3 mb-2">
+                  {e.prenom}, {e.metier}
+                </Heading>
+                <p className="mb-6 text-sm font-semibold text-secondary-strong">Temps consacré : {PARTENAIRES_EXEMPLES_TEMPS} en moyenne</p>
+                <table className="w-full text-left text-sm">
+                  <caption className="sr-only">Progression de la commission de {e.prenom}</caption>
+                  <thead>
+                    <tr className="border-b border-border text-xs uppercase tracking-wider text-muted-foreground">
+                      <th scope="col" className="py-2 pr-3 font-semibold">Mois</th>
+                      <th scope="col" className="py-2 pr-3 font-semibold">Entreprise signée</th>
+                      <th scope="col" className="py-2 pr-3 text-right font-semibold">Postes suivis</th>
+                      <th scope="col" className="py-2 text-right font-semibold">Par mois</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {etapes.map((x) => (
+                      <tr key={x.mois} className="border-b border-border/60 text-primary">
+                        <td className="py-3 pr-3 font-semibold">{x.mois}</td>
+                        <td className="py-3 pr-3">
+                          {x.entreprise}, {x.postes} postes
+                        </td>
+                        <td className="py-3 pr-3 text-right">{x.postesSuivis}</td>
+                        <td className="whitespace-nowrap py-3 text-right font-semibold">{formaterEuros(x.commission)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="mt-8 rounded-2xl bg-primary p-6 text-primary-foreground">
+                  <p className="text-sm text-primary-foreground/75">Au bout de {e.duree}, {e.prenom} touche chaque mois</p>
+                  <p className="mt-1 text-4xl font-extrabold text-secondary">{formaterEuros(fin.commission)}</p>
+                  <p className="mt-1 text-sm text-primary-foreground/75">
+                    de complément de revenu, pour {etapes.length} entreprises présentées.
+                  </p>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+        <p className="mt-8 text-sm text-muted-foreground">{PARTENAIRES_EXEMPLES_NOTE}</p>
+      </Section>
 
       {/* Pour qui + pourquoi */}
       <Section>
