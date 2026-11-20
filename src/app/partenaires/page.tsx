@@ -6,6 +6,7 @@ import { Heading, Text } from "@/components/ui/Typography"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { PartenaireForm } from "@/components/partenaires/PartenaireForm"
+import { SimulateurGains } from "@/components/partenaires/SimulateurGains"
 import {
   PARTENAIRES_ARGUMENTS,
   PARTENAIRES_COMMISSIONS,
@@ -133,21 +134,21 @@ export default function PartenairesPage() {
       <Section>
         <Heading as="h2" className="mb-4">Concrètement, combien ça rapporte ?</Heading>
         <Text className="mb-12 max-w-3xl">
-          Deux parcours types, deux rythmes, pour une activité moyenne de {PARTENAIRES_EXEMPLES_TEMPS}. Chaque entreprise signée s&apos;ajoute aux précédentes : le complément de revenu grandit chaque mois.
+          Deux profils, deux rythmes, pour une activité moyenne de {PARTENAIRES_EXEMPLES_TEMPS}. Chaque entreprise signée s&apos;ajoute aux précédentes : le complément de revenu grandit chaque mois.
         </Text>
         <div className="grid gap-8 lg:grid-cols-2">
           {PARTENAIRES_EXEMPLES.map((e) => {
             const etapes = progressionExemple(e)
             const fin = etapes[etapes.length - 1]
             return (
-              <article key={e.prenom} className="flex flex-col rounded-3xl border border-border bg-background p-5 sm:p-8">
-                <p className="font-mono text-xs uppercase tracking-widest text-secondary-strong">Simulation sur {e.duree}</p>
+              <article key={e.profil} className="flex flex-col rounded-3xl border border-border bg-background p-5 sm:p-8">
+                <p className="font-mono text-xs uppercase tracking-widest text-secondary-strong">Exemple sur {e.duree}</p>
                 <Heading as="h3" className="mt-3 mb-2">
-                  {e.prenom}, {e.metier}
+                  {e.profil}
                 </Heading>
                 <p className="mb-6 text-sm font-semibold text-secondary-strong">Temps consacré : {PARTENAIRES_EXEMPLES_TEMPS} en moyenne</p>
                 <table className="w-full text-left text-sm">
-                  <caption className="sr-only">Progression de la commission de {e.prenom}</caption>
+                  <caption className="sr-only">Progression de la commission : {e.profil.toLowerCase()}</caption>
                   <thead>
                     <tr className="border-b border-border text-xs uppercase tracking-wider text-muted-foreground">
                       <th scope="col" className="py-2 pr-3 font-semibold">Mois</th>
@@ -170,7 +171,7 @@ export default function PartenairesPage() {
                   </tbody>
                 </table>
                 <div className="mt-8 rounded-2xl bg-primary p-6 text-primary-foreground">
-                  <p className="text-sm text-primary-foreground/75">Au bout de {e.duree}, {e.prenom} touche chaque mois</p>
+                  <p className="text-sm text-primary-foreground/75">Au bout de {e.duree}, {e.pronom} touche chaque mois</p>
                   <p className="mt-1 text-4xl font-extrabold text-secondary">{formaterEuros(fin.commission)}</p>
                   <p className="mt-1 text-sm text-primary-foreground/75">
                     de complément de revenu, pour {etapes.length} entreprises présentées.
@@ -181,6 +182,7 @@ export default function PartenairesPage() {
           })}
         </div>
         <p className="mt-8 text-sm text-muted-foreground">{PARTENAIRES_EXEMPLES_NOTE}</p>
+        <SimulateurGains />
       </Section>
 
       {/* Pour qui + pourquoi */}
