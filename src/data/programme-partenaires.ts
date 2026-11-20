@@ -128,3 +128,64 @@ export function libelleSource(value?: string): string {
 
 export const PARTENAIRES_MESSAGE_SUCCES =
   "Merci. Nous vous rappelons pour vous présenter le partenariat et vous envoyer le contrat."
+
+// Exemples chiffrés (demande de Valoux du 20/11/2026) : partenaires fictifs, calculés sur Sérénité Complète.
+/** Prix public Sérénité Complète, en € HT par poste et par mois (voir src/data/serenite.ts). */
+export const PARTENAIRES_PRIX_POSTE = 79
+export const PARTENAIRES_TAUX = 0.15
+
+export interface ExemplePartenaire {
+  prenom: string
+  metier: string
+  duree: string
+  /** Mois d'arrivée de chaque entreprise signée et nombre de postes. */
+  clients: { mois: number; entreprise: string; postes: number }[]
+}
+
+export const PARTENAIRES_EXEMPLES: ExemplePartenaire[] = [
+  {
+    prenom: "Karim",
+    metier: "commercial multicarte",
+    duree: "6 mois",
+    clients: [
+      { mois: 1, entreprise: "un cabinet comptable", postes: 5 },
+      { mois: 2, entreprise: "une agence immobilière", postes: 8 },
+      { mois: 4, entreprise: "une PME de transport", postes: 10 },
+      { mois: 6, entreprise: "un groupe de pharmacies", postes: 12 },
+    ],
+  },
+  {
+    prenom: "Sophie",
+    metier: "graphiste indépendante",
+    duree: "4 mois",
+    clients: [
+      { mois: 1, entreprise: "un artisan électricien", postes: 3 },
+      { mois: 3, entreprise: "un institut de beauté", postes: 6 },
+      { mois: 4, entreprise: "une agence de communication", postes: 9 },
+    ],
+  },
+]
+
+/** Commission mensuelle pour un nombre de postes suivis. */
+export function commissionMensuelle(postes: number): number {
+  return Math.round(postes * PARTENAIRES_PRIX_POSTE * PARTENAIRES_TAUX * 100) / 100
+}
+
+/** Postes suivis et commission à la fin de chaque mois où une entreprise arrive. */
+export function progressionExemple(e: ExemplePartenaire) {
+  let postes = 0
+  return e.clients.map((c) => {
+    postes += c.postes
+    return { ...c, postesSuivis: postes, commission: commissionMensuelle(postes) }
+  })
+}
+
+export function formaterEuros(n: number): string {
+  return n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "\u00a0€"
+}
+
+/** Temps moyen consacré au partenariat dans les exemples (indiqué par Valoux le 20/11/2026). */
+export const PARTENAIRES_EXEMPLES_TEMPS = "2 heures par semaine"
+
+export const PARTENAIRES_EXEMPLES_NOTE =
+  "Exemples fictifs, calculés sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."
