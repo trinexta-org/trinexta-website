@@ -7,7 +7,7 @@ import type { CodeCategorie, CodeVariante } from "@/lib/boutique/types"
 /** Commande et paiement : servis par l'espace client sur un hôte dédié (lot 4C). Le panier y est transmis. */
 export const BOUTIQUE_COMMANDE_URL = "https://boutique.trinexta.fr/commande"
 
-export const MENTION_PROFESSIONNELS = "Boutique réservée aux professionnels"
+export const MENTION_PROFESSIONNELS = "Boutique pour les professionnels, ouverte aux particuliers"
 
 export const PANIER_TEXTES = {
   titre: "Votre panier",
