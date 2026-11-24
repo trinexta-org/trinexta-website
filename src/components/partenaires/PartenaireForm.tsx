@@ -89,7 +89,7 @@ export function PartenaireForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="relative flex flex-col gap-6">
+    <form onSubmit={onSubmit} noValidate data-leadsynch-ignore className="relative flex flex-col gap-6">
       <ChampPiege ref={null} />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {CHAMPS.map((c) => (
