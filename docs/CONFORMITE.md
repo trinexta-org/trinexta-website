@@ -205,6 +205,7 @@ Code : `src/lib/boutique/api.ts`. Les pages `/boutique` lisent le catalogue dans
 
 | Date | Événement | Lien |
 |---|---|---|
+| 24/11/2026 | Formulaire `/partenaires` exclu de la capture automatique du widget LeadSynch (`data-leadsynch-ignore`) : les candidatures (dont le SIRET) n'étaient pas censées partir dans le CRM et le candidat recevait deux e-mails | PR fix/partenaires-hors-leadsynch |
 | 20/11/2026 | Page `/partenaires` (programme d'apporteurs d'affaires) : formulaire de candidature envoyé par e-mail à partenaire@trinexta.fr, aucun stockage sur le site, nouvelle route `POST /api/partenaires` | PR feat/page-partenaires |
 | 25/10/2026 | Audit complet en 5 axes (sécurité, SEO/GEO, ergonomie, conformité, qualité) | `trinexta-fondations/docs/audits/2026-10-25/` |
 | 25/10/2026 | Sécurité des formulaires, Next.js 16.4.3 | PR #355 |
