@@ -104,7 +104,7 @@ export default function Home() {
       <Section id={VIDEO_ANCRE} container={false} className="relative scroll-mt-28 bg-surface pt-12 md:pt-16 pb-0 md:pb-0 lg:pb-0">
         <Container className="max-w-[1100px]">
           <FadeIn>
-            <VideoPresentation {...VIDEO_TRINEXTA} />
+            <VideoPresentation {...VIDEO_TRINEXTA} ancre={VIDEO_ANCRE} />
           </FadeIn>
         </Container>
       </Section>

@@ -25,7 +25,7 @@ export const ACCUEIL_ADRESSE = {
 
 /**
  * Vidéo de l'accueil : cybersécurité des TPE et PME (version 4, mise en ligne le 25/11/2026), à la place de la
- * présentation de 44 secondes. Ancre `#video` : lien des campagnes e-mail (VIDEO_LIEN_CAMPAGNE).
+ * présentation de 44 secondes. Ancre #video : lien des campagnes e-mail (VIDEO_LIEN_CAMPAGNE).
  * L'ancienne vidéo reste servie (/videos/trinexta-presentation.mp4) pour ne pas casser les liens déjà partagés.
  */
 export const VIDEO_TRINEXTA = {
@@ -37,7 +37,10 @@ export const VIDEO_TRINEXTA = {
 
 export const VIDEO_ANCRE = "video"
 
-/** Lien à mettre dans les e-mails : accueil, section vidéo, campagne repérable dans les statistiques. */
+/**
+ * Lien à mettre dans les e-mails : il ouvre l'accueil directement sur la vidéo (ancre #video), qui se lance seule si
+ * le navigateur l'autorise (sinon le bouton de lecture est déjà à l'écran). Campagne repérable dans les statistiques.
+ */
 export const VIDEO_LIEN_CAMPAGNE = `https://trinexta.fr/?utm_source=email&utm_medium=email&utm_campaign=video-cybersecurite#${VIDEO_ANCRE}`
 
 export const VIDEO_TRINEXTA_JSONLD = {
