@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 /**
  * Vidéo de présentation TRINEXTA : affiche, bouton de lecture, puis lecteur natif.
@@ -11,14 +11,39 @@ export function VideoPresentation({
   poster,
   titre,
   duree,
+  ancre,
 }: {
   src: string
   poster: string
   titre: string
   duree: string
+  /**
+   * Ancre de la section (lien des e-mails : trinexta.fr/#video). Arrivée par cette ancre : la vidéo est amenée à l'écran
+   * et lancée ; si le navigateur refuse la lecture automatique avec le son, le bouton de lecture reste affiché.
+   */
+  ancre?: string
 }) {
   const ref = useRef<HTMLVideoElement>(null)
   const [lancee, setLancee] = useState(false)
+  const [sansSon, setSansSon] = useState(false)
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v || !ancre || window.location.hash !== `#${ancre}`) return
+    v.scrollIntoView({ block: "center" })
+    // Avec le son d'abord ; les navigateurs le refusent souvent à la première visite : la vidéo part alors sans le son,
+    // avec un bouton « Activer le son » bien visible.
+    v.play()
+      .then(() => setLancee(true))
+      .catch(() => {
+        v.muted = true
+        return v.play().then(() => {
+          setLancee(true)
+          setSansSon(true)
+        })
+      })
+      .catch(() => {})
+  }, [ancre])
 
   return (
     <figure className="flex flex-col gap-3">
@@ -31,10 +56,33 @@ export function VideoPresentation({
           playsInline
           controls={lancee}
           onPlay={() => setLancee(true)}
+          onVolumeChange={(e) => {
+            if (!e.currentTarget.muted) setSansSon(false)
+          }}
           className="h-full w-full object-cover"
         >
           Votre navigateur ne lit pas la vidéo.
         </video>
+
+        {sansSon && (
+          <button
+            type="button"
+            onClick={() => {
+              const v = ref.current
+              if (!v) return
+              v.muted = false
+              v.currentTime = 0
+              void v.play()
+              setSansSon(false)
+            }}
+            className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-white px-4 py-2.5 text-sm font-extrabold md:gap-3 md:px-6 md:py-4 text-primary shadow-xl transition-transform hover:scale-105 md:text-lg"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
+              <path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-8.8v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" />
+            </svg>
+            Activer le son
+          </button>
+        )}
 
         {!lancee && (
           <button

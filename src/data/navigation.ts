@@ -4,6 +4,7 @@
 // La création de sites n'y figure pas : elle vit sur trinexta-studio.fr (pied de page).
 
 import { DIAGNOSTIC_LIEN } from "@/data/diagnostic"
+import { boutiqueVisible } from "@/data/boutique/ouverture"
 
 export interface SubMenuItem {
   label: string
@@ -50,7 +51,7 @@ export const menuItems: MenuItem[] = [
       },
     ],
   },
-  { label: "Boutique", href: "/boutique" },
+  ...(boutiqueVisible ? [{ label: "Boutique", href: "/boutique" }] : []),
   {
     label: "Ressources",
     groups: [

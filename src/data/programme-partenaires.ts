@@ -9,7 +9,7 @@ export const PARTENAIRES_LIEN = { name: "Devenir partenaire", href: "/partenaire
 export const PARTENAIRES_META = {
   title: "Devenir apporteur d'affaires informatique | TRINEXTA Partenaires",
   description:
-    "Recommandez TRINEXTA aux dirigeants de TPE et PME qui ont besoin d'un informaticien et touchez 15 % du montant mensuel de l'infogérance pendant 12 mois. Sans frais ni engagement.",
+    "Recommandez TRINEXTA aux dirigeants de TPE et PME : nous faisons le reste. 15 % sur l'infogérance pendant 12 mois, 10 % sur les sites et applications. Sans frais ni engagement.",
 }
 
 export const PARTENAIRES_HERO = {
@@ -20,37 +20,41 @@ export const PARTENAIRES_HERO = {
   cta: "Devenir partenaire",
 }
 
-// Rôle du partenaire (précisé par Valoux le 20/11/2026) : il repère l'entreprise et crée la proposition
-// depuis son accès partenaire à l'espace client ; TRINEXTA réalise l'audit, l'installation et le suivi.
+// Rôle du partenaire (parcours décidé par Valoux le 24/11/2026, contrat partenaire v2.0) : il identifie
+// l'entreprise et son besoin, présente TRINEXTA et recueille l'accord du dirigeant ; TRINEXTA fait tout le reste
+// (prise de contact, rendez-vous, proposition, contrat, réalisation). Même parcours que la plaquette Partenaires.
 export const PARTENAIRES_ETAPES: { titre: string; texte: string }[] = [
   {
-    titre: "Vous repérez une entreprise",
+    titre: "Vous identifiez",
     texte:
-      "Un dirigeant qui se plaint de sa messagerie, d'un PC qui rame ou d'un prestataire injoignable : vous nous le présentez, avec son accord.",
+      "Un dirigeant de votre réseau a un souci informatique ou un projet : messagerie, PC qui rame, prestataire injoignable, site à refaire. Vous lui présentez TRINEXTA et recueillez son accord.",
   },
   {
-    titre: "Nous réalisons l'audit",
-    texte: "Un technicien TRINEXTA fait le point sur son informatique : postes, sauvegardes, sécurité, Microsoft 365.",
+    titre: "Vous recommandez",
+    texte: "Depuis votre espace partenaire, vous renseignez l'entreprise, son besoin et les créneaux où le dirigeant peut être appelé.",
   },
   {
-    titre: "Vous créez la proposition",
-    texte:
-      "Depuis votre accès partenaire à l'espace client TRINEXTA, vous établissez la proposition à partir de l'audit et vous la présentez au client.",
+    titre: "Nous prenons le relais",
+    texte: "Prise de contact, rendez-vous, analyse du besoin, proposition, signature et réalisation : notre équipe s'occupe de tout et vous tient informé à chaque étape.",
   },
   {
-    titre: "Vous touchez votre commission",
-    texte: "Le client signe avec TRINEXTA, nous assurons l'installation et le suivi. Vous êtes payé chaque mois, pendant 12 mois.",
+    titre: "Vous touchez vos commissions",
+    texte: "Vous suivez vos recommandations dans votre espace et percevez vos commissions sur les prestations facturées et encaissées.",
   },
 ]
 
+// Barème du contrat d'apport d'affaires v2.0 (annexe 1), validé par Valoux le 24/11/2026.
 export const PARTENAIRES_COMMISSIONS: { chiffre: string; texte: string }[] = [
-  { chiffre: "15 %", texte: "du montant mensuel HT de l'infogérance, pendant 12 mois" },
-  { chiffre: "3 %", texte: "de parrainage quand un partenaire que vous avez fait entrer signe des clients" },
+  { chiffre: "15 %", texte: "de l'infogérance, pendant les 12 premiers mois du contrat" },
+  { chiffre: "10 %", texte: "des sites et applications, sur les factures HT du projet" },
+  { chiffre: "3 %", texte: "de la maintenance et de l'hébergement web, pendant 12 mois" },
+  { chiffre: "Jusqu'à 5 %", texte: "de la régie informatique, pendant 12 mois au plus" },
+  { chiffre: "3 %", texte: "de parrainage sur les affaires des partenaires que vous faites entrer" },
   { chiffre: "0 €", texte: "pas de frais d'entrée, pas d'engagement, pas d'objectif imposé" },
 ]
 
 export const PARTENAIRES_VERSEMENT =
-  "Commission versée sur les factures encaissées, sur simple facture de votre part."
+  "Commissions calculées sur le chiffre d'affaires HT encaissé, versées sur simple facture de votre part. En régie, le cumul des commissions est plafonné à 5 %, parrainage compris."
 
 export const PARTENAIRES_PROFILS: string[] = [
   "Freelances du web, graphistes et community managers",
@@ -80,14 +84,14 @@ export const PARTENAIRES_ARGUMENTS: { titre: string; texte: string }[] = [
 
 export const PARTENAIRES_FAQ: { question: string; reponse: string }[] = [
   {
-    question: "Comment préparer une proposition ?",
+    question: "Qu'est-ce qu'une bonne recommandation ?",
     reponse:
-      "Vous recevez un accès partenaire à l'espace client TRINEXTA. Vous y créez la proposition à partir de l'audit, avec nos offres et nos tarifs à jour.",
+      "Un besoin réel et décrit, une entreprise et un interlocuteur identifiés, un dirigeant qui sait qui est TRINEXTA et qui accepte d'être appelé. Vous le renseignez en quelques minutes depuis votre espace partenaire.",
   },
   {
     question: "Dois-je être informaticien ?",
     reponse:
-      "Non. L'audit technique est réalisé par TRINEXTA. Vous préparez la proposition à partir de cet audit, depuis votre accès partenaire.",
+      "Non. Vous créez la mise en relation, nous apportons la solution : rendez-vous, analyse du besoin, proposition, contrat et réalisation sont assurés par TRINEXTA.",
   },
   {
     question: "Et si le client connaît déjà TRINEXTA ?",
@@ -105,7 +109,7 @@ export const PARTENAIRES_FAQ: { question: string; reponse: string }[] = [
   },
   {
     question: "Y a-t-il un contrat ?",
-    reponse: "Oui, un contrat partenaire simple, sans exclusivité ni engagement de volume.",
+    reponse: "Oui, un contrat d'apport d'affaires signé en ligne, sans exclusivité ni engagement de volume. Une formation de 15 minutes vous présente ensuite le fonctionnement de votre espace.",
   },
 ]
 
