@@ -23,24 +23,33 @@ export const ACCUEIL_ADRESSE = {
   email: "contact@trinexta.fr",
 } as const
 
-/** Vidéo de présentation (fin refaite le 24/10/2026 : baseline, bouton et contacts mis en forme, comme la vidéo Studio). */
+/**
+ * Vidéo de l'accueil : cybersécurité des TPE et PME (version 4, mise en ligne le 25/11/2026), à la place de la
+ * présentation de 44 secondes. Ancre `#video` : lien des campagnes e-mail (VIDEO_LIEN_CAMPAGNE).
+ * L'ancienne vidéo reste servie (/videos/trinexta-presentation.mp4) pour ne pas casser les liens déjà partagés.
+ */
 export const VIDEO_TRINEXTA = {
-  src: "/videos/trinexta-presentation.mp4",
-  poster: "/videos/trinexta-presentation-affiche.webp",
-  titre: "TRINEXTA en 44 secondes",
-  duree: "0:44",
+  src: "/videos/trinexta-cybersecurite.mp4",
+  poster: "/videos/trinexta-cybersecurite-affiche.webp",
+  titre: "Votre entreprise est-elle protégée ?",
+  duree: "1:12",
 }
+
+export const VIDEO_ANCRE = "video"
+
+/** Lien à mettre dans les e-mails : accueil, section vidéo, campagne repérable dans les statistiques. */
+export const VIDEO_LIEN_CAMPAGNE = `https://trinexta.fr/?utm_source=email&utm_medium=email&utm_campaign=video-cybersecurite#${VIDEO_ANCRE}`
 
 export const VIDEO_TRINEXTA_JSONLD = {
   "@context": "https://schema.org",
   "@type": "VideoObject",
-  name: "TRINEXTA : infogérance et support informatique des TPE et PME",
+  name: "Cybersécurité des TPE et PME : la méthode TRINEXTA",
   description:
-    "Présentation de TRINEXTA, prestataire d'infogérance, de support et de cybersécurité pour les TPE et PME, à Évry-Courcouronnes et en Île-de-France.",
-  thumbnailUrl: "https://trinexta.fr/videos/trinexta-presentation-affiche.webp",
-  contentUrl: "https://trinexta.fr/videos/trinexta-presentation.mp4",
-  uploadDate: "2026-10-24T00:00:00+02:00",
-  duration: "PT44S",
+    "Rançongiciels, e-mails piégés, messagerie, réseau et sauvegardes : comment TRINEXTA protège les TPE et PME, de l'audit à l'offre Sérénité, à Évry-Courcouronnes et en Île-de-France.",
+  thumbnailUrl: "https://trinexta.fr/videos/trinexta-cybersecurite-affiche.webp",
+  contentUrl: "https://trinexta.fr/videos/trinexta-cybersecurite.mp4",
+  uploadDate: "2026-11-25T00:00:00+01:00",
+  duration: "PT1M12S",
 }
 
 export const ACCUEIL_OFFRES = {
