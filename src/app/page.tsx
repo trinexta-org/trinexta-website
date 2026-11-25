@@ -15,7 +15,7 @@ import { Section } from "@/components/layout/Section"
 import { BannerCTA } from "@/components/layout/BannerCTA"
 import { CasClientFeatured } from "@/components/cas-clients/CasClientFeatured"
 import { homeCaseClient } from "@/data/cas-clients"
-import { ACCUEIL_CTA, ACCUEIL_FAQ, ACCUEIL_OFFRES, GOOGLE_NOTE, VIDEO_TRINEXTA, VIDEO_TRINEXTA_JSONLD } from "@/data/accueil"
+import { ACCUEIL_CTA, ACCUEIL_FAQ, ACCUEIL_OFFRES, GOOGLE_NOTE, VIDEO_TRINEXTA, VIDEO_TRINEXTA_JSONLD, VIDEO_ANCRE } from "@/data/accueil"
 import { AccueilEnBref } from "@/components/accueil/AccueilEnBref"
 import { VideoPresentation } from "@/components/accueil/VideoPresentation"
 import { Container } from "@/components/layout/Container"
@@ -101,10 +101,10 @@ export default function Home() {
 
       <ServicesSection />
 
-      <Section container={false} className="relative bg-surface pt-12 md:pt-16 pb-0 md:pb-0 lg:pb-0">
+      <Section id={VIDEO_ANCRE} container={false} className="relative scroll-mt-28 bg-surface pt-12 md:pt-16 pb-0 md:pb-0 lg:pb-0">
         <Container className="max-w-[1100px]">
           <FadeIn>
-            <VideoPresentation {...VIDEO_TRINEXTA} />
+            <VideoPresentation {...VIDEO_TRINEXTA} ancre={VIDEO_ANCRE} />
           </FadeIn>
         </Container>
       </Section>
