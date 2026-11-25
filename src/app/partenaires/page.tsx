@@ -120,7 +120,7 @@ export default function PartenairesPage() {
           <Heading as="h2" className="mb-12 text-primary-foreground">Ce que vous touchez</Heading>
           <ul className="grid gap-6 md:grid-cols-3">
             {PARTENAIRES_COMMISSIONS.map((c) => (
-              <li key={c.chiffre} className="rounded-3xl border border-secondary/40 p-8">
+              <li key={c.texte} className="rounded-3xl border border-secondary/40 p-8">
                 <p className="text-5xl font-extrabold text-secondary">{c.chiffre}</p>
                 <p className="mt-4 text-lg leading-relaxed text-primary-foreground/85">{c.texte}</p>
               </li>
