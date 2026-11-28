@@ -115,10 +115,10 @@ export default function EstimationPage() {
           <Entrance direction="none" delay={0.4}>
             <div className="mt-16 border-l-2 border-secondary/50 pl-5">
               <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-                Ce simulateur applique la même grille tarifaire que nos devis.
                 Le résultat s&apos;affiche sans laisser d&apos;email : vous
-                arrivez au premier échange en connaissant déjà les ordres de
-                grandeur.
+                arrivez au premier échange avec un besoin déjà clarifié. Le
+                prix se fixe ensuite dans la proposition, selon votre parc et
+                vos usages.
               </p>
               <p className="mt-3 font-serif text-sm italic text-secondary-strong">
                 L&apos;équipe Trinexta
