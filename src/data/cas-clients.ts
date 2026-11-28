@@ -58,7 +58,8 @@ export const caseClients: CaseClient[] = [
     heroImage: "/images/cas-clients/cas-1.avif",
     cardImage: "/images/cas-clients/cas-1.avif",
     metaDescription:
-      "Découvrez comment TRINEXTA a sécurisé les données d'une TPE de conseil : migration Windows 11 Pro, chiffrement BitLocker et support IT illimité.",
+      "Des postes utilisés comme des ordinateurs personnels dans une TPE : découvrez la démarche décrite pour mieux organiser les comptes et la sécurité.",
+    seoTitle: "Sécuriser les postes d'une TPE en Essonne",
     cardChallenge:
       "Windows Famille, sans chiffrement, sans support. Chaque incident tombait directement sur les épaules des dirigeants.",
     cardResult:
@@ -117,7 +118,8 @@ export const caseClients: CaseClient[] = [
     heroImage: "/images/cas-clients/cas2-modernisation.avif",
     cardImage: "/images/cas-clients/cas2-modernisation.avif",
     metaDescription:
-      "Modernisation IT d'une société de services : passage d'Office 2007 à Microsoft 365, upgrade RAM 16Go et déploiement de stations de travail Dell 27\".",
+      "Avant de remplacer tout un parc, une PME de l'Essonne examine ses postes : découvrez la démarche de modernisation décrite dans ce cas anonymisé.",
+    seoTitle: "Moderniser les postes d'une PME en Essonne",
     cardChallenge:
       "Office 2007, 8 Go de RAM saturés au repos, sauvegardes sur clé USB. La machine tournait, mais à quel prix.",
     cardResult:
@@ -176,7 +178,8 @@ export const caseClients: CaseClient[] = [
     heroImage: "/images/cas-clients/cas-3.avif",
     cardImage: "/images/cas-clients/cas-3.avif",
     metaDescription:
-      "Étude de cas : migration réussie d'OVH vers Microsoft 365 pour une TPE. Optimisation des processus collaboratifs et sécurisation des postes de travail.",
+      "Une TPE de l'Essonne fait évoluer ses outils : ce cas présente la préparation d'une migration et les points d'attention pour les utilisateurs.",
+    seoTitle: "Migration cloud d'une TPE en Essonne",
     cardChallenge:
       "Messagerie OVH, postes Windows Famille, pas de MFA. Ça fonctionnait, mais sans filet de sécurité.",
     cardResult:
@@ -239,9 +242,9 @@ export const caseClients: CaseClient[] = [
     size: "Plusieurs sites web",
     heroImage: "/images/services/cybersecurite/hero.avif",
     cardImage: "/images/services/cybersecurite/bento-1.jpg",
-    seoTitle: "Site WordPress piraté : cas client cybersécurité",
+    seoTitle: "Piratage de sites WordPress : un cas",
     metaDescription:
-      "Découvrez comment TRINEXTA a analysé une compromission WordPress et e-commerce, isolé 63 fichiers malveillants et engagé la sécurisation des sites.",
+      "Ce cas anonymisé décrit une intervention après le piratage de sites WordPress et e-commerce, avec ses étapes et les limites du périmètre traité.",
     cardChallenge:
       "Plusieurs sites en dysfonctionnement, dont une boutique en ligne. Derrière les symptômes, une compromission installée depuis plusieurs semaines.",
     cardResult:
@@ -303,9 +306,9 @@ export const caseClients: CaseClient[] = [
     size: "Essonne",
     heroImage: "/images/services/microsoft-365/hero.avif",
     cardImage: "/images/services/microsoft-365/problem-1.jpg",
-    seoTitle: "Départs de salariés : comptes, licences et accès repris en main dans un cabinet comptable en Essonne",
+    seoTitle: "Départ d'un salarié : comptes et licences",
     metaDescription:
-      "Cabinet d'expertise comptable en Essonne : comptes d'anciens salariés fermés, licences inutiles arrêtées, messagerie sécurisée et sauvegardes vérifiées par TRINEXTA.",
+      "Des comptes restent actifs après des départs : ce cas anonymisé en Essonne décrit une démarche de revue des accès et des licences.",
     cardChallenge:
       "Les collaborateurs partaient, leurs comptes et leurs licences restaient. Les accès aux dossiers clients n'étaient jamais retirés.",
     cardResult:
@@ -362,9 +365,9 @@ export const caseClients: CaseClient[] = [
     size: "Évry-Courcouronnes",
     heroImage: "/images/services/cloud-sauvegarde/hero.avif",
     cardImage: "/images/services/microsoft-365/benefit-4.jpg",
-    seoTitle: "PC en panne, devis bloqués : récupération des documents et sauvegarde pour une entreprise du bâtiment à Évry",
+    seoTitle: "PC en panne et devis bloqués à Évry",
     metaDescription:
-      "Entreprise du bâtiment à Évry-Courcouronnes : le seul PC qui contenait devis et plans ne démarrait plus. TRINEXTA a récupéré les documents et organisé un stockage partagé sauvegardé.",
+      "Les devis d'une entreprise du bâtiment sont sur un PC qui ne démarre plus : découvrez la situation et les actions décrites dans ce cas à Évry.",
     cardChallenge:
       "Devis, plans de chantier et coordonnées clients sur un seul PC. Un matin, il ne démarre plus.",
     cardResult:
@@ -410,9 +413,9 @@ export const caseClients: CaseClient[] = [
     size: "Corbeil-Essonnes",
     heroImage: "/images/services/cybersecurite/hero.avif",
     cardImage: "/images/services/microsoft-365/problem-2.jpg",
-    seoTitle: "Mot de passe partagé et messages suspects : messagerie sécurisée pour une agence immobilière à Corbeil-Essonnes",
+    seoTitle: "Sécuriser une messagerie partagée à Corbeil",
     metaDescription:
-      "Agence immobilière à Corbeil-Essonnes : un mot de passe de messagerie partagé, connu d'anciens salariés, et des messages envoyés sans auteur connu. TRINEXTA a sécurisé les accès avec la double authentification.",
+      "Un mot de passe partagé dans une agence immobilière à Corbeil-Essonnes : ce cas présente les questions d'accès et d'organisation de la messagerie.",
     cardChallenge:
       "Toute l'agence utilisait la même boîte mail avec le même mot de passe, connu même d'anciens salariés.",
     cardResult:
@@ -461,9 +464,9 @@ export const caseClients: CaseClient[] = [
     size: "Paris 15e",
     heroImage: "/images/services/microsoft-365/hero.avif",
     cardImage: "/images/services/support-informatique/benefit-4.jpg",
-    seoTitle: "Arrivée d'un nouveau salarié : poste et Microsoft 365 prêts le premier jour, cabinet de conseil à Paris",
+    seoTitle: "Préparer le poste d'un nouveau salarié",
     metaDescription:
-      "Cabinet de conseil à Paris 15e : les nouveaux salariés attendaient leur informatique toute une semaine. TRINEXTA prépare le poste et Microsoft 365 avant leur arrivée.",
+      "Un nouveau salarié arrive : ce cas anonymisé décrit la préparation du poste, des comptes et des accès dans un cabinet de conseil à Paris.",
     cardChallenge:
       "À chaque arrivée, le poste n'était pas prêt et un collègue laissait son travail pour aider le nouveau venu.",
     cardResult:
@@ -511,9 +514,9 @@ export const caseClients: CaseClient[] = [
     size: "Carré Sénart",
     heroImage: "/images/services/solutions-metier/hero.avif",
     cardImage: "/images/services/solutions-metier/benefit-4.jpg",
-    seoTitle: "Coupures réseau répétées : cause trouvée et corrigée pour une PME de services au Carré Sénart",
+    seoTitle: "Pannes réseau répétées à Carré Sénart",
     metaDescription:
-      "PME de services au Carré Sénart : déconnexions du logiciel de gestion, dossiers partagés et imprimante introuvables chaque semaine. TRINEXTA a trouvé l'origine des coupures et corrigé le réseau.",
+      "Une panne réseau revient dans une PME de services à Carré Sénart : ce cas explique la recherche des causes et le suivi des actions.",
     cardChallenge:
       "Chaque semaine, le logiciel de gestion se déconnectait et les dossiers partagés disparaissaient. Les factures attendaient.",
     cardResult:
@@ -561,9 +564,9 @@ export const caseClients: CaseClient[] = [
     size: "Sainte-Geneviève-des-Bois",
     heroImage: "/images/services/cloud-sauvegarde/hero.avif",
     cardImage: "/images/services/infogerance/problem-1.jpg",
-    seoTitle: "Sauvegardes vieilles de plusieurs mois : copies vérifiées pour une entreprise de maintenance à Sainte-Geneviève-des-Bois",
+    seoTitle: "Vérifier ses sauvegardes en Essonne",
     metaDescription:
-      "Entreprise de maintenance à Sainte-Geneviève-des-Bois : le disque de sauvegarde ne copiait plus rien depuis des mois. TRINEXTA a mis en place des copies automatiques avec test de restauration et alertes.",
+      "Un disque est branché mais les copies sont anciennes : ce cas à Sainte-Geneviève-des-Bois montre les questions à poser sur le suivi des sauvegardes.",
     cardChallenge:
       "Un disque de sauvegarde branché chaque soir. Mais les dernières copies dataient de plusieurs mois.",
     cardResult:

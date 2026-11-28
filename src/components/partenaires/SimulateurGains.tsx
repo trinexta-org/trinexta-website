@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import {
-  PARTENAIRES_PRIX_POSTE,
   PARTENAIRES_SIMULATEUR as S,
   commissionMensuelle,
   formaterEuros,
@@ -50,7 +49,7 @@ function Curseur({
   )
 }
 
-/** Simulateur de commission : entreprises présentées × postes moyens × 79 € × 15 %. */
+/** Simulateur de commission : entreprises présentées × postes moyens × abonnement moyen de référence × 15 %. */
 export function SimulateurGains() {
   const [entreprises, setEntreprises] = useState(S.entreprises.defaut)
   const [postes, setPostes] = useState(S.postes.defaut)
@@ -88,7 +87,7 @@ export function SimulateurGains() {
           Soit {formaterEuros(parMois * 12)} sur 12 mois
         </p>
         <p className="mt-2 text-xs text-primary-foreground/60">
-          {entreprises * postes} postes × {PARTENAIRES_PRIX_POSTE} € HT × 15 %
+          {entreprises * postes} postes × abonnement moyen × 15 %
         </p>
       </div>
     </div>

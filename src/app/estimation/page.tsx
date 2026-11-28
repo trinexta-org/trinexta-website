@@ -9,34 +9,33 @@ import { SectionFade } from "@/components/ui/SectionFade";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export const metadata: Metadata = {
-  title: "Estimation en ligne · Chiffrez votre projet informatique",
+  title: "Décrire votre besoin informatique",
   description:
-    "Répondez à quelques questions et obtenez un premier ordre d'idée pour votre infogérance, votre cybersécurité ou votre renfort technique.",
+    "Répondez à quelques questions sur votre informatique : nous identifions les services adaptés et vous préparons une proposition écrite.",
   alternates: {
     canonical: "/estimation",
   },
-  // Hors index tant que l'estimateur affiche des fourchettes de prix (fiche 16 : version sans montant à venir).
+  // Hors index : outil de qualification (aucun montant affiché depuis le 28/11/2026).
   robots: { index: false, follow: true },
   openGraph: {
-    title: "Estimation en ligne · Trinexta",
+    title: "Décrire votre besoin informatique | TRINEXTA",
     description:
-      "Répondez à quelques questions et obtenez immédiatement une fourchette de prix pour votre projet informatique. Gratuit, sans engagement.",
+      "Répondez à quelques questions sur votre informatique : nous identifions les services adaptés et vous préparons une proposition écrite.",
     url: "/estimation",
     type: "website",
     images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Estimation en ligne · Trinexta",
+    title: "Décrire votre besoin informatique | TRINEXTA",
     description:
-      "Répondez à quelques questions et obtenez immédiatement une fourchette de prix pour votre projet informatique. Gratuit, sans engagement.",
+      "Répondez à quelques questions sur votre informatique : nous identifions les services adaptés et vous préparons une proposition écrite.",
     images: ["/images/og-default.png"],
   },
 };
 
 const REASSURANCES = [
   "Deux minutes chrono",
-  "Résultat immédiat, sans email",
   "Sans engagement",
 ];
 
@@ -65,16 +64,16 @@ export default function EstimationPage() {
         <Container className="relative z-10 max-w-3xl py-16 md:py-24">
           <Entrance direction="up">
             <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-strong">
-              Estimation gratuite
+              Votre besoin en deux minutes
             </p>
             <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">
-              Combien ça coûte, chez{" "}
-              <em className="text-secondary-strong">vous</em> ?
+              De quoi votre entreprise{" "}
+              <em className="text-secondary-strong">a besoin</em> ?
             </h1>
             <p className="mt-4 max-w-xl text-white/70">
-              Quelques questions sur votre quotidien, une fourchette de prix
-              immédiate. Les chiffres sortent de notre grille tarifaire, la même
-              que pour nos devis.
+              Quelques questions sur votre quotidien : nous identifions les
+              services adaptés à votre entreprise, puis nous vous préparons une
+              proposition écrite.
             </p>
             <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
               {REASSURANCES.map((item) => (
@@ -116,10 +115,10 @@ export default function EstimationPage() {
           <Entrance direction="none" delay={0.4}>
             <div className="mt-16 border-l-2 border-secondary/50 pl-5">
               <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-                Ce simulateur applique la même grille tarifaire que nos devis.
                 Le résultat s&apos;affiche sans laisser d&apos;email : vous
-                arrivez au premier échange en connaissant déjà les ordres de
-                grandeur.
+                arrivez au premier échange avec un besoin déjà clarifié. Le
+                prix se fixe ensuite dans la proposition, selon votre parc et
+                vos usages.
               </p>
               <p className="mt-3 font-serif text-sm italic text-secondary-strong">
                 L&apos;équipe Trinexta

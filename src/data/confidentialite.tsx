@@ -76,7 +76,7 @@ const SOUS_TRAITANTS: { nom: string; role: string; pays: string }[] = [
   { nom: "Microsoft (Microsoft 365)", role: "Envoi des e-mails et messagerie", pays: "Union européenne" },
   { nom: "Sanity", role: "Contenus et images du blog", pays: "Norvège et États-Unis" },
   { nom: "Google", role: "Mesure d'audience et publicité, uniquement avec votre accord", pays: "Irlande et États-Unis" },
-  { nom: "Anthropic", role: "Analyse par intelligence artificielle de la description saisie dans le simulateur d'estimation", pays: "États-Unis" },
+  { nom: "Anthropic", role: "Analyse par intelligence artificielle de la description saisie dans le questionnaire /estimation", pays: "États-Unis" },
   { nom: "Vercel et Render", role: "Hébergement de l'application LeadSynch, notre outil de gestion de la relation client", pays: "États-Unis" },
   { nom: "jsDelivr", role: "Diffusion du script du bandeau cookies", pays: "Réseau mondial de serveurs" },
 ]
@@ -196,7 +196,7 @@ export const confidentialiteData: LegalData = {
     {
       title: "Article 6 - Transferts hors Union Européenne",
       paragraphs: [
-        "Certains sous-traitants listés à l'article 5 sont établis aux États-Unis ou y traitent des données : Google (mesure d'audience et publicité, uniquement avec votre accord), Anthropic (analyse de la description saisie dans le simulateur d'estimation), Sanity (contenus et images du blog), Vercel et Render (hébergement de l'application LeadSynch).",
+        "Certains sous-traitants listés à l'article 5 sont établis aux États-Unis ou y traitent des données : Google (mesure d'audience et publicité, uniquement avec votre accord), Anthropic (analyse de la description saisie dans le questionnaire /estimation), Sanity (contenus et images du blog), Vercel et Render (hébergement de l'application LeadSynch).",
         "Ces transferts sont encadrés par les clauses contractuelles types de la Commission européenne ou par le cadre de protection des données UE - États-Unis (Data Privacy Framework), selon le prestataire. Pour LeadSynch, les clauses contractuelles types sont celles prévues par les accords de traitement des données de Vercel Inc. et de Render Services Inc. ; la base de données de LeadSynch est hébergée sur notre serveur OVH en France.",
       ],
     },
@@ -270,10 +270,10 @@ export const confidentialiteData: LegalData = {
       ],
     },
     {
-      title: "Article 13 - Simulateur d'estimation en ligne",
+      title: "Article 13 - Questionnaire de qualification du besoin",
       paragraphs: [
-        "Le site propose un simulateur d'estimation de prix accessible sur la page /estimation. Le parcours est anonyme par défaut : les réponses au questionnaire et un identifiant de session technique sont enregistrés à des fins statistiques et d'amélioration du service, sans aucune donnée identifiante. L'adresse IP n'est jamais conservée : elle est uniquement transformée de façon irréversible, en mémoire et temporairement, pour prévenir les abus.",
-        "La description libre éventuellement saisie est analysée automatiquement par Anthropic, notre prestataire d'intelligence artificielle (États-Unis), dans le seul but d'affiner l'estimation. Elle n'est pas conservée : nous vous invitons à ne pas y renseigner de données personnelles.",
+        "Le site propose un questionnaire de qualification du besoin accessible sur la page /estimation. Le parcours est anonyme par défaut : les réponses au questionnaire et un identifiant de session technique sont enregistrés à des fins statistiques et d'amélioration du service, sans aucune donnée identifiante. L'adresse IP n'est jamais conservée : elle est uniquement transformée de façon irréversible, en mémoire et temporairement, pour prévenir les abus.",
+        "La description libre éventuellement saisie est analysée automatiquement par Anthropic, notre prestataire d'intelligence artificielle (États-Unis), dans le seul but d'affiner la qualification du besoin. Elle n'est pas conservée : nous vous invitons à ne pas y renseigner de données personnelles.",
         "Si vous demandez l'envoi du détail par email, votre adresse est enregistrée avec votre consentement horodaté (base légale : consentement), aux fins d'envoi de l'estimation et de recontact commercial à son sujet. Vous pouvez retirer ce consentement à tout moment. Les estimations anonymes sont automatiquement supprimées après 12 mois ; les estimations associées à un email suivent la durée de conservation applicable aux prospects.",
       ],
     },

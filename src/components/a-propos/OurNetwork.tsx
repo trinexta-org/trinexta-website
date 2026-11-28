@@ -11,15 +11,15 @@ const networkFeatures = [
     },
     {
         title: "Planning flexible",
-        desc: "Mission ponctuelle, besoin récurrent, renfort temporaire ou accompagnement dans la durée : vous gardez la maîtrise totale du cadre d'intervention. Notre organisation nous permet de dimensionner notre accompagnement en fonction de vos pics d'activité ou de vos projets de transformation tels qu'une migration, un déménagement ou le déploiement de nouveau matériel. Vous ne payez que pour l'expertise dont vous avez réellement besoin, sans vous engager dans des contrats rigides."
+        desc: "Mission ponctuelle, besoin récurrent, renfort temporaire ou accompagnement dans la durée : vous gardez la maîtrise totale du cadre d'intervention. Notre organisation nous permet de dimensionner notre accompagnement en fonction de vos pics d'activité ou de vos projets de transformation tels qu'une migration, un déménagement ou le déploiement de nouveau matériel. Le cadre de chaque intervention est fixé avec vous dans la proposition."
     },
     {
-        title: "Couverture nationale",
-        desc: "Une assistance sur site disponible partout en France, y compris pour les organisations multi-sites, sans frais de déplacement cachés. Que votre siège soit à Paris, avec des agences à Lyon, Bordeaux ou Lille, vous bénéficiez d'un point de contact unique. Nous coordonnons les techniciens sur place pour vous assurer une qualité de service homogène sur l'ensemble de vos sites, simplifiant ainsi considérablement la gestion globale de votre parc informatique."
+        title: "Île-de-France d'abord",
+        desc: "Notre base est à Évry-Courcouronnes, et nous intervenons sur site dans toute l'Île-de-France. Pour une entreprise qui a aussi des sites ailleurs en France, nous étudions la demande et organisons l'intervention avec des techniciens de confiance, en restant votre interlocuteur unique. Les modalités de déplacement sont précisées dans votre proposition."
     },
     {
-        title: "Réponse rapide",
-        desc: "Une intervention planifiée sous 24 à 48h pour gérer vos urgences informatiques avec efficacité et limiter les temps d'arrêt. Nous savons qu'une panne matérielle ou réseau peut bloquer toute votre production. Notre maillage territorial et notre système de gestion des interventions nous permettent de dépêcher un expert rapidement sur place. Nous ne nous contentons pas de résoudre l'incident : nous mettons en place des actions préventives pour éviter qu'il ne se reproduise."
+        title: "Une prise en charge suivie",
+        desc: "Le support répond du lundi au vendredi, de 8 h 30 à 19 h. Notre objectif est de commencer à traiter un incident critique dans les 30 minutes pendant ces horaires ; la résolution dépend de la nature du problème. Une fois l'incident réglé, nous cherchons sa cause pour éviter qu'il ne se reproduise."
     }
 ]
 

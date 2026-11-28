@@ -12,16 +12,16 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export const metadata: Metadata = {
-  title: "Cas clients : infogérance et cybersécurité en PME",
+  title: "Cas clients informatiques en Essonne",
   description:
-    "Cas clients concrets de TRINEXTA : cybersécurité, modernisation du parc, migration cloud et réponse à incident pour des TPE et PME d'Île-de-France.",
+    "Poste en panne, messagerie partagée, réseau instable : découvrez des situations d'entreprises accompagnées par TRINEXTA, présentées sans nom de client.",
   alternates: {
     canonical: "/cas-clients",
   },
   openGraph: {
-    title: "Cas clients : infogérance et cybersécurité en PME | TRINEXTA",
+    title: "Cas clients informatiques en Essonne | TRINEXTA",
     description:
-      "Cas clients concrets de TRINEXTA : cybersécurité, modernisation du parc, migration cloud et réponse à incident pour des TPE et PME d'Île-de-France.",
+      "Poste en panne, messagerie partagée, réseau instable : découvrez des situations d'entreprises accompagnées par TRINEXTA, présentées sans nom de client.",
     url: "/cas-clients",
     type: "website",
     images: [
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cas clients : infogérance et cybersécurité en PME | TRINEXTA",
+    title: "Cas clients informatiques en Essonne | TRINEXTA",
     description:
-      "Cas clients concrets de TRINEXTA : cybersécurité, modernisation du parc, migration cloud et réponse à incident pour des TPE et PME d'Île-de-France.",
+      "Poste en panne, messagerie partagée, réseau instable : découvrez des situations d'entreprises accompagnées par TRINEXTA, présentées sans nom de client.",
     images: ["/images/og-default.png"],
   },
 };

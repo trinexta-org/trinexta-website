@@ -17,7 +17,7 @@ import { Text } from "@/components/ui/Typography";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 const DESCRIPTION =
-  "Parlez de votre informatique avec TRINEXTA : formulaire, téléphone 09 78 25 07 46 ou bureau à Évry-Courcouronnes. Lundi au vendredi, 8 h 30 à 19 h.";
+  "Décrivez le besoin informatique de votre entreprise en Essonne. TRINEXTA vous répond pendant les horaires du support et étudie votre demande.";
 
 const contactPageJsonLd = {
   "@context": "https://schema.org",
@@ -28,13 +28,13 @@ const contactPageJsonLd = {
 };
 
 export const metadata: Metadata = {
-  title: "Contact et demande de devis informatique à Évry",
+  title: { absolute: "Contacter TRINEXTA à Évry-Courcouronnes" },
   description: DESCRIPTION,
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact et demande de devis informatique à Évry | TRINEXTA",
+    title: "Contacter TRINEXTA à Évry-Courcouronnes",
     description: DESCRIPTION,
     url: "/contact",
     type: "website",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact et demande de devis informatique à Évry | TRINEXTA",
+    title: "Contacter TRINEXTA à Évry-Courcouronnes",
     description: DESCRIPTION,
     images: ["/images/og-default.png"],
   },

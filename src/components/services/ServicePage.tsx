@@ -729,12 +729,8 @@ export function ServicePage({
       ? stripRichText(hero.description)
       : hero.description,
     provider: schemaOverride
-      ? {
-          "@type": "LocalBusiness",
-          "@id": "https://trinexta.fr",
-          name: "Trinexta",
-        }
-      : { "@type": "LocalBusiness", name: "Trinexta" },
+      ? { "@id": "https://trinexta.fr/#organization" }
+      : { "@id": "https://trinexta.fr/#organization" },
   };
 
   if (schemaOverride?.serviceType) {

@@ -8,10 +8,10 @@ import { charteAssistanceData, FAQ_CHARTE_ASSISTANCE } from "@/data/charte-assis
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 const DESCRIPTION =
-  "Ordinateur piraté, compte Microsoft 365 compromis, rançongiciel, e-mail suspect : les premiers gestes à faire et comment joindre TRINEXTA."
+  "Un compte ou un poste semble piraté ? Retrouvez les premiers gestes, les informations à conserver et les modalités de contact de TRINEXTA."
 
 export const metadata: Metadata = {
-  title: charteAssistanceData.hero.title,
+  title: "Compte ou ordinateur piraté : que faire ?",
   description: DESCRIPTION,
   alternates: {
     canonical: "/charte-assistance",

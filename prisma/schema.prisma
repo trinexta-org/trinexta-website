@@ -46,6 +46,16 @@ model Subscriber {
   createdAt DateTime @default(now())
 }
 
+// Articles du blog déjà annoncés aux abonnés. Le webhook Sanity peut se
+// déclencher plusieurs fois pour un même article (republication, correction) :
+// cette table garantit un seul envoi par article.
+model NewsletterEnvoi {
+  slug          String   @id
+  titre         String
+  destinataires Int      @default(0)
+  envoyeLe      DateTime @default(now())
+}
+
 // Estimation réalisée via le tunnel /estimation.
 // Anonyme par défaut : email, téléphone, entreprise et consentement
 // uniquement si le visiteur demande à être recontacté. Aucune IP ni

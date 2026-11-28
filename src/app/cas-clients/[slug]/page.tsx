@@ -87,8 +87,8 @@ export default async function CaseClientDetailPage({
     description: item.metaDescription,
     image: `https://trinexta.fr${item.heroImage}`,
     mainEntityOfPage: `https://trinexta.fr/cas-clients/${item.slug}`,
-    author: { "@type": "Organization", "@id": "https://trinexta.fr", name: "TRINEXTA" },
-    publisher: { "@type": "Organization", "@id": "https://trinexta.fr", name: "TRINEXTA" },
+    author: { "@id": "https://trinexta.fr/#organization" },
+    publisher: { "@id": "https://trinexta.fr/#organization" },
   }
 
   return (
