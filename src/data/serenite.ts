@@ -223,7 +223,7 @@ export const SERENITE_PREUVES = {
 } as const
 
 export const SERENITE_LOCAL =
-  "TRINEXTA est installée au 7 rue Montespan, 91000 Évry-Courcouronnes. Nos formules n'ont pas de minimum de postes : de 1 à 20 postes et au-delà, pour les entreprises du Grand Paris Sud, de l'Essonne et d'Île-de-France. La supervision et l'assistance à distance suivent vos postes où qu'ils soient, sous réserve de compatibilité et d'autorisation.";
+  "TRINEXTA est installée au 7 rue Montespan, 91000 Évry-Courcouronnes. Nous accompagnons les entreprises à partir du premier poste, sans plafond, dans les entreprises du Grand Paris Sud, de l'Essonne et d'Île-de-France. La supervision et l'assistance à distance suivent vos postes où qu'ils soient, sous réserve de compatibilité et d'autorisation.";
 
 export const SERENITE_ETAPES = [
   { title: "Échange et état des lieux, offert", desc: "Nombre de postes, environnement technique, prestations recherchées." },
@@ -320,12 +320,12 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   {
     question: "Intervenez-vous sur site ?",
     answer:
-      "Oui, dans toute l'Île-de-France. Pas de frais de déplacement pour les interventions programmées dans un rayon de 15 km autour d'Évry ; au-delà, le déplacement est facturé selon le devis. La main-d'œuvre sur site reste facturée selon le contrat. Avec Essentiel, les interventions sont sur devis.",
+      "Oui, dans toute l'Île-de-France. Les interventions sur site sont planifiées avec vous, et leurs modalités sont précisées dans votre proposition. Avec Essentiel, les interventions sont sur devis.",
   },
   {
     question: "Quelles entreprises peuvent souscrire ?",
     answer:
-      "Indépendants, TPE, cabinets, commerces et PME, de 1 à 20 postes et au-delà : nos formules n'ont pas de minimum de postes. Les PC Windows et les Mac sont pris en charge ; nous vérifions avant le déploiement que vos postes sont compatibles avec nos outils.",
+      "Indépendants, TPE, cabinets, commerces et PME, à partir du premier poste et sans plafond. Les PC Windows et les Mac sont pris en charge ; nous vérifions avant le déploiement que vos postes sont compatibles avec nos outils.",
   },
   {
     question: "Peut-on passer d'Essentiel à Complète ?",
@@ -339,13 +339,3 @@ export const SERENITE_FAQ: { question: string; answer: string }[] = [
   },
 ];
 
-// Calculateur « nombre de postes » sous les cartes tarifaires.
-export const SERENITE_CALCULATEUR = {
-  surtitle: "Votre budget",
-  titre: "Combien de postes à équiper ?",
-  intro: "Indiquez le nombre d'ordinateurs de votre entreprise : le total mensuel s'affiche pour chaque formule.",
-  min: 1,
-  max: 100,
-  defaut: 10,
-  note: "Estimation hors licences, sauvegarde, options et interventions hors forfait. Le montant définitif figure dans la proposition écrite.",
-} as const;

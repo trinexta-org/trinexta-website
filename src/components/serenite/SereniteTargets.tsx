@@ -5,7 +5,7 @@ import { SERENITE_DEVIS_HREF, SERENITE_POUR_QUI } from "@/data/serenite"
 const targets = [
     {
         role: "Indépendants & TPE",
-        spec: "De 1 à 20 postes et au-delà",
+        spec: "À partir du premier poste, sans plafond",
         image: "/images/nos-offres/targets/target-tpe.jpg"
     },
     {
