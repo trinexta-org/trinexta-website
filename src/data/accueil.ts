@@ -7,7 +7,7 @@ export const ACCUEIL_IDENTITE =
 
 export const ACCUEIL_FAITS: { label: string; valeur: string }[] = [
   { label: "Ce que nous faisons", valeur: "Assistance aux collaborateurs, maintenance et supervision des postes, cybersécurité, Microsoft 365, sauvegarde" },
-  { label: "Pour qui", valeur: "Entreprises sans service informatique interne, de 1 à 20 postes et au-delà, sans minimum" },
+  { label: "Pour qui", valeur: "Entreprises sans service informatique interne, à partir du premier poste, sans plafond" },
   { label: "Formules", valeur: "Sérénité Essentiel et Sérénité Complète, facturées par poste et par mois" },
   { label: "Horaires", valeur: "Support humain du lundi au vendredi, de 8 h 30 à 19 h ; supervision automatisée en continu" },
   { label: "Zone", valeur: "Toute l'Île-de-France ; déplacement sans frais pour les interventions programmées à moins de 15 km d'Évry" },
