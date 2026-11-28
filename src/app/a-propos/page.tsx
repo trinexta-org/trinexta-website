@@ -10,16 +10,16 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export const metadata: Metadata = {
-  title: "À propos",
+  title: { absolute: "TRINEXTA, informatique à Évry-Courcouronnes" },
   description:
-    "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
+    "Découvrez TRINEXTA, marque de TrusTech IT Support SASU : accompagnement informatique des TPE et PME depuis Évry-Courcouronnes. L'humain avant les tickets.",
   alternates: {
     canonical: "/a-propos",
   },
   openGraph: {
-    title: "À propos | Trinexta",
+    title: "TRINEXTA, informatique à Évry-Courcouronnes",
     description:
-      "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
+      "Découvrez TRINEXTA, marque de TrusTech IT Support SASU : accompagnement informatique des TPE et PME depuis Évry-Courcouronnes. L'humain avant les tickets.",
     url: "/a-propos",
     type: "website",
     images: [
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "À propos | Trinexta",
+    title: "TRINEXTA, informatique à Évry-Courcouronnes",
     description:
-      "Découvrez l'histoire, l'équipe et les engagements de Trinexta. Une informatique plus simple, plus humaine et plus utile à votre entreprise.",
+      "Découvrez TRINEXTA, marque de TrusTech IT Support SASU : accompagnement informatique des TPE et PME depuis Évry-Courcouronnes. L'humain avant les tickets.",
     images: ["/images/og-default.png"],
   },
 };

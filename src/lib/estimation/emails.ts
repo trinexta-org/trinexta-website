@@ -58,7 +58,8 @@ function answersSummaryRows(answers: EstimationAnswers): string {
   return rows.join("");
 }
 
-function serviceBlocks(breakdown: BreakdownEntry[]): string {
+/** showPrice : false pour le prospect (aucun montant public), true pour la notification interne. */
+function serviceBlocks(breakdown: BreakdownEntry[], showPrice: boolean): string {
   return breakdown
     .map(
       (service) => `
@@ -67,8 +68,8 @@ function serviceBlocks(breakdown: BreakdownEntry[]): string {
           ${escapeHtml(service.label)}
           <span style="float:right;color:${COLOR_SECONDARY};">
             ${
-              service.kind === "sur-devis"
-                ? "Sur devis"
+              !showPrice || service.kind === "sur-devis"
+                ? "Sur proposition"
                 : `${eurosRange(service.min, service.max)}${service.kind === "recurring" ? " /mois" : ""}`
             }
           </span>
@@ -107,23 +108,20 @@ export function buildEstimateEmailHtml(data: EstimateEmailData, prenom: string, 
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#333;">
     <div style="background:${COLOR_PRIMARY};padding:24px;border-radius:8px 8px 0 0;">
-      <h1 style="color:#ffffff;margin:0;font-size:22px;">Votre estimation Trinexta</h1>
+      <h1 style="color:#ffffff;margin:0;font-size:22px;">Votre demande Trinexta</h1>
     </div>
     <div style="padding:24px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;">
       <p>Bonjour ${escapeHtml(prenom)},</p>
-      <p>Voici le détail de l'estimation réalisée sur trinexta.fr. Elle est indicative et non contractuelle : le devis final se construit avec vous, après un échange sur votre situation réelle.</p>
+      <p>Merci pour vos réponses sur trinexta.fr. Voici les services qui correspondent à votre besoin. Le prix dépend de votre parc et de vos options : il figure dans la proposition écrite que nous préparons avec vous.</p>
 
-      <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Votre fourchette</h2>
-      ${totalsBlock(data)}
-
-      <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Le détail par service</h2>
-      ${serviceBlocks(data.breakdown)}
+      <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Les services adaptés à votre besoin</h2>
+      ${serviceBlocks(data.breakdown, false)}
 
       <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Ce que vous nous avez dit</h2>
       <table style="font-size:14px;border-collapse:collapse;">${answersSummaryRows(data.answers)}</table>
 
       <h2 style="font-size:16px;color:${COLOR_PRIMARY};margin-top:24px;">Et maintenant ?</h2>
-      <p>Un de nos experts va vous appeler pour affiner ce chiffrage avec votre situation réelle. Si vous préférez avancer plus vite de votre côté, vous pouvez aussi prendre rendez-vous directement.</p>
+      <p>Nous vous appelons pour faire le point sur votre situation et préparer votre proposition. Si vous préférez avancer plus vite de votre côté, vous pouvez aussi prendre rendez-vous directement.</p>
       <p style="text-align:center;margin:24px 0;">
         <a href="${escapeHtml(rdvUrl)}" style="background:${COLOR_SECONDARY};color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
           Prendre rendez-vous
@@ -159,7 +157,7 @@ export function buildTeamNotificationHtml(
     <p><strong>Estimation :</strong> ${escapeHtml(estimateId)}</p>
     ${totalsBlock(data)}
     <h3 style="color:${COLOR_PRIMARY};">Services détectés</h3>
-    ${serviceBlocks(data.breakdown)}
+    ${serviceBlocks(data.breakdown, true)}
     <h3 style="color:${COLOR_PRIMARY};">Réponses du parcours</h3>
     <table style="font-size:14px;border-collapse:collapse;">${answersSummaryRows(data.answers)}</table>
   </div>`;

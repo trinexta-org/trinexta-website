@@ -17,9 +17,9 @@ import { FinalCTA } from "@/components/FinalCTA";
 import { REGIE_ALTERNATIVES, REGIE_FAQ, REGIE_HERO, TALENTERO_URL } from "@/data/technicien-sous-regie";
 
 export const metadata: Metadata = {
-  title: "Technicien informatique en régie en Île-de-France",
+  title: "Technicien informatique en régie",
   description:
-    "Un technicien support ou réseau en régie pour renforcer votre équipe IT, absorber un pic d'activité ou couvrir une absence, sans recruter en CDI. Île-de-France.",
+    "Besoin de renfort informatique dans votre organisation ? TRINEXTA étudie les missions en régie selon les compétences, le périmètre et les disponibilités.",
   alternates: {
     canonical: "/technicien-sous-regie",
   },

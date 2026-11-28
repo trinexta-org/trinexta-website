@@ -6,9 +6,10 @@ import { DiagnosticOutil } from "@/components/diagnostic/DiagnosticOutil"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 import { DIAGNOSTIC_PERIMETRE, DIAGNOSTIC_TEXTES, VERIFICATIONS } from "@/data/diagnostic"
 
-const TITRE = "Diagnostic sécurité gratuit de votre site web"
+const TITRE =
+  "Diagnostic public de votre site web"
 const DESCRIPTION =
-  "Testez gratuitement la sécurité de votre site : HTTPS, messagerie (SPF, DKIM, DMARC), en-têtes, cookies et fichiers exposés. Analyse non intrusive en 30 s."
+  "Examinez certains signaux publics de sécurité de votre site web. Ce diagnostic ne remplace pas un audit de votre parc, de vos comptes ou de vos usages."
 
 export const metadata: Metadata = {
   title: TITRE,

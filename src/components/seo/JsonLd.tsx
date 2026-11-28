@@ -12,14 +12,20 @@ export function JsonLd({ data }: { data: { [key: string]: JsonLdValue } }) {
 export const trinextaOrganization = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://trinexta.fr/#organization",
   "name": "TRINEXTA",
-  "legalName": "TrusTech IT Support",
+  "legalName": "TrusTech IT Support SASU",
+  "slogan": "L'humain avant les tickets.",
   "url": "https://trinexta.fr",
   "logo": "https://trinexta.fr/images/trinexta-logo.png",
   "image": "https://trinexta.fr/images/trinexta-logo.png",
   "telephone": "+33978250746",
   "email": "contact@trinexta.fr",
-  "taxID": "942 020 082 00015",
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "SIRET",
+    "value": "94202008200015"
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "74 B Boulevard Henri Dunant",
@@ -27,6 +33,7 @@ export const trinextaOrganization = {
     "postalCode": "91100",
     "addressCountry": "FR"
   },
+  "location": { "@id": "https://trinexta.fr/#bureau-evry" },
   "sameAs": [
     "https://www.linkedin.com/company/trinexta",
     "https://www.instagram.com/trinexta/",
@@ -35,16 +42,15 @@ export const trinextaOrganization = {
   ]
 };
 
-// Entité locale (bureau d'Évry). Pas d'aggregateRating ni de review : les avis
+// Bureau d'activité d'Évry, rattaché à l'Organization (siège social à Corbeil-Essonnes). Pas d'aggregateRating ni de review : les avis
 // auto-attribués ne sont pas éligibles aux extraits enrichis.
 export const trinextaLocalBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "https://trinexta.fr/#bureau-evry",
   "name": "TRINEXTA",
-  "legalName": "TrusTech IT Support",
-  "slogan": "L'humain avant les tickets.",
+  "parentOrganization": { "@id": "https://trinexta.fr/#organization" },
   "image": "https://trinexta.fr/images/og-default.png",
-  "@id": "https://trinexta.fr",
   "url": "https://trinexta.fr",
   "telephone": "+33978250746",
   "email": "contact@trinexta.fr",

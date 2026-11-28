@@ -21,7 +21,7 @@ function stepMood(step: number, total: number): string {
   if (step === total - 1) return "Dernière question";
   if (step === 1) return "On commence simple";
   if (step / total >= 0.5) return "Vous y êtes presque";
-  return "Chaque réponse affine le prix";
+  return "Chaque réponse précise votre besoin";
 }
 
 /** Envoi d'événement de parcours, jamais bloquant pour le visiteur. */

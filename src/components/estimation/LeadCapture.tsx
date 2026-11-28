@@ -34,7 +34,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
     }
     if (!estimateId) {
       setError(
-        "Votre estimation n'a pas pu être enregistrée, l'envoi est indisponible. Votre fourchette reste affichée ci-dessus."
+        "Votre estimation n'a pas pu être enregistrée, l'envoi est indisponible. Vous pouvez nous appeler au 09 78 25 07 46."
       );
       return;
     }
@@ -70,7 +70,7 @@ export function LeadCapture({ estimateId }: LeadCaptureProps) {
       setError(
         err instanceof Error && err.message !== "Failed to fetch"
           ? err.message
-          : "L'envoi a échoué. Votre estimation reste affichée ci-dessus, vous pouvez réessayer."
+          : "L'envoi a échoué. Vous pouvez réessayer ou nous appeler au 09 78 25 07 46."
       );
     } finally {
       setSending(false);

@@ -15,9 +15,9 @@ import { FinalCTA } from "@/components/FinalCTA";
 import { SA_FAQ, SA_HERO } from "@/data/services-annexes";
 
 export const metadata: Metadata = {
-  title: "Dépannage et interventions informatiques à Évry",
+  title: "Dépannage informatique professionnel",
   description:
-    "Dépannage, installation de postes, Windows 11, déménagement : interventions informatiques sur devis pour entreprises à Évry et en Essonne.",
+    "Un poste en panne ou une intervention à prévoir ? TRINEXTA étudie les demandes ponctuelles des entreprises en Essonne et établit une proposition.",
   alternates: {
     canonical: "/services-annexes",
   },
