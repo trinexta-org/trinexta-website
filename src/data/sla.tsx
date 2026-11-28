@@ -65,10 +65,10 @@ export const slaData: LegalData = {
                   Impact
                 </th>
                 <th className="text-left py-2 pr-4 text-primary font-bold text-xs uppercase tracking-wider whitespace-nowrap">
-                  Prise en charge
+                  Objectif de prise en charge
                 </th>
                 <th className="text-left py-2 text-primary font-bold text-xs uppercase tracking-wider whitespace-nowrap">
-                  Résolution
+                  Objectif de résolution
                 </th>
               </tr>
             </thead>

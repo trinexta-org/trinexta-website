@@ -6,8 +6,8 @@ import { slaData } from "@/data/sla"
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
-  title: `${slaData.hero.title}`,
-  description: "Accord de niveau de service (SLA) TRINEXTA - horaires de support, délais d'intervention, niveaux de priorité et engagements de disponibilité.",
+  title: "Horaires et niveaux de service",
+  description: "Horaires du support, qualification des incidents et objectifs de prise en charge : consultez les engagements applicables selon votre proposition.",
   alternates: {
     canonical: "/niveau-de-service",
   },

@@ -7,9 +7,9 @@ export const PARTENAIRES_EMAIL = "partenaire@trinexta.fr"
 export const PARTENAIRES_LIEN = { name: "Devenir partenaire", href: "/partenaires" } as const
 
 export const PARTENAIRES_META = {
-  title: "Devenir apporteur d'affaires informatique | TRINEXTA Partenaires",
+  title: "Devenir apporteur d'affaires informatique | TRINEXTA",
   description:
-    "Recommandez TRINEXTA aux dirigeants de TPE et PME : nous faisons le reste. 15 % sur l'infogérance pendant 12 mois, 10 % sur les sites et applications. Sans frais ni engagement.",
+    "Recommandez TRINEXTA aux dirigeants de TPE et PME : 15 % sur l'infogérance pendant 12 mois, 10 % sur les sites et applications. Sans frais d'entrée.",
 }
 
 export const PARTENAIRES_HERO = {
@@ -136,7 +136,7 @@ export const PARTENAIRES_MESSAGE_SUCCES =
 // Exemples chiffrés (demande de Valoux du 20/11/2026) : personnages d'exemple avec un prénom et un métier.
 // Chaque carte reste titrée « Exemple » et la note précise qu'il s'agit d'exemples de parcours : ils ne doivent
 // jamais être présentés comme des témoignages de partenaires réels (pas de citation, de photo ni de nom complet).
-/** Prix public Sérénité Complète, en € HT par poste et par mois (voir src/data/serenite.ts). */
+/** Abonnement moyen de référence par poste et par mois, utilisé seulement pour les exemples de commission. Jamais affiché comme un prix. */
 export const PARTENAIRES_PRIX_POSTE = 79
 export const PARTENAIRES_TAUX = 0.15
 
@@ -194,7 +194,7 @@ export function formaterEuros(n: number): string {
 export const PARTENAIRES_EXEMPLES_TEMPS = "2 heures par semaine"
 
 export const PARTENAIRES_EXEMPLES_NOTE =
-  "Exemples de parcours, calculés sur la formule Sérénité Complète à 79 € HT par poste et par mois. La commission de chaque entreprise est versée pendant les 12 mois qui suivent sa signature."
+  "Exemples de parcours, calculés sur un abonnement moyen de référence. La commission réelle dépend du prix de chaque contrat ; elle est versée pendant les 12 mois qui suivent la signature de l'entreprise."
 
 export const PARTENAIRES_SIMULATEUR = {
   titre: "Calculez vos gains",

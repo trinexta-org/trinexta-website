@@ -75,7 +75,7 @@ const serviceJsonLd = {
   serviceType: "Infogérance informatique",
   description: SERENITE_HERO.description,
   url: "https://trinexta.fr/serenite",
-  provider: { "@type": "LocalBusiness", "@id": "https://trinexta.fr", name: "TRINEXTA" },
+  provider: { "@id": "https://trinexta.fr/#organization" },
   areaServed: ["Essonne", "Île-de-France"],
   offers: SERENITE_OFFRES.map((offre) => ({
     "@type": "Offer",

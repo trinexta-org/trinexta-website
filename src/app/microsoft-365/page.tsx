@@ -2,9 +2,10 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 import { getServiceData } from "@/data/services"
 
-const TITLE = "Microsoft 365 pour PME : migration et sécurité"
+const TITLE =
+  "Assistance Microsoft 365 en Essonne"
 const DESCRIPTION =
-  "Migration vers Microsoft 365, double authentification, gestion des comptes et des licences pour TPE et PME en Essonne et Île-de-France."
+  "Outlook, Teams, comptes et fichiers partagés : TRINEXTA accompagne l'usage de Microsoft 365 dans votre TPE ou PME, en option sur proposition."
 
 export const metadata: Metadata = {
   title: TITLE,

@@ -37,8 +37,8 @@ export function FreeTextStep({ analyzing, onSubmit, onSkip }: FreeTextStepProps)
               ))}
             </span>
             <p className="mt-2 text-sm text-muted-foreground">
-              On lit ce que vous venez d&apos;écrire, le temps d&apos;ajuster la fourchette
-              à votre situation...
+              On lit ce que vous venez d&apos;écrire, le temps de comprendre
+              votre situation...
             </p>
           </ChatBubble>
         </Entrance>
@@ -54,7 +54,7 @@ export function FreeTextStep({ analyzing, onSubmit, onSkip }: FreeTextStepProps)
         </p>
         <p className="mt-1 text-sm text-muted-foreground">
           Facultatif. Votre activité, vos outils, ce qui coince au quotidien : deux ou
-          trois phrases suffisent à resserrer la fourchette.
+          trois phrases suffisent à préciser votre besoin.
         </p>
       </ChatBubble>
 

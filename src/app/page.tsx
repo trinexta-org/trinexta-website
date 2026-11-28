@@ -28,7 +28,7 @@ import { WaveDivider } from "@/components/ui/WaveDivider"
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = "Prestataire informatique à Évry pour TPE et PME | TRINEXTA";
 const description =
-  "Support, maintenance et sécurité informatique des TPE et PME d'Évry-Courcouronnes et de l'Essonne. Équipe joignable du lundi au vendredi, de 8 h 30 à 19 h.";
+  "Support, maintenance et sécurité informatique des TPE et PME d'Évry-Courcouronnes et de l'Essonne. Joignable du lundi au vendredi, de 8 h 30 à 19 h.";
 
 export const metadata: Metadata = {
   title: { absolute: title },

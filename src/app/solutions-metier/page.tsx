@@ -2,142 +2,130 @@ import type { Metadata } from "next"
 import { ServicePage } from "@/components/services/ServicePage"
 
 export const metadata: Metadata = {
-  title: "Solutions métier et téléphonie VoIP pour PME",
-  description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
+  title: "Logiciels métier et réseau en Essonne",
+  description: "Logiciel métier inaccessible, réseau instable, téléphonie à organiser : TRINEXTA étudie les besoins de votre entreprise et coordonne les intervenants.",
   alternates: {
     canonical: "/solutions-metier",
   },
   openGraph: {
-    title: "Solutions métier et téléphonie VoIP pour PME | TRINEXTA",
-    description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
+    title: "Logiciels métier et réseau en Essonne | TRINEXTA",
+    description: "Logiciel métier inaccessible, réseau instable, téléphonie à organiser : TRINEXTA étudie les besoins de votre entreprise et coordonne les intervenants.",
     url: "/solutions-metier",
     type: "website",
     images: [{ url: "/images/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solutions métier et téléphonie VoIP pour PME | TRINEXTA",
-    description: "Téléphonie VoIP, interconnexion de sites et intégration de vos logiciels métier : TRINEXTA relie les outils des TPE et PME d'Île-de-France, depuis Évry.",
+    title: "Logiciels métier et réseau en Essonne | TRINEXTA",
+    description: "Logiciel métier inaccessible, réseau instable, téléphonie à organiser : TRINEXTA étudie les besoins de votre entreprise et coordonne les intervenants.",
     images: ["/images/og-default.png"],
   },
 }
 
 const solutionsData = {
   serviceSlug: "solutions-metier",
-  
+
   hero: {
-    titlePart1: "Solutions",
-    titlePart2: "Métier", 
-    description: "Votre informatique ne doit plus être une contrainte. Chez Trinexta, nous concevons des architectures sur mesure qui épousent votre réalité : téléphonie VoIP, interconnexion de sites et intégration logicielle. Nous transformons la complexité technique en simplicité opérationnelle pour faire de vos outils le socle de votre croissance.",
-    ctaText: "Déployer mes solutions métier",
+    titlePart1: "Logiciels métier,",
+    titlePart2: "réseau et téléphonie",
+    description: "TRINEXTA aide les entreprises de l'Essonne et d'Île-de-France à comprendre ce qui bloque entre leurs logiciels métier, leur réseau et leur téléphonie, puis coordonne les intervenants concernés : éditeur, opérateur, fournisseur de matériel.",
+    ctaText: "Décrire mon environnement",
     ctaHref: "/contact"
   },
-  
+
   problem: {
-    subtitle: "Le diagnostic : quand votre IT devient un frein invisible",
-    title: "Le coût caché de l'hétérogénéité technologique et des silos.",
-    description: "La plupart des entreprises qui nous sollicitent souffrent du même mal insidieux : le 'cloisonnement technologique'. Vous disposez probablement d'excellents outils, mais ils fonctionnent en silos hermétiques. Votre logiciel de gestion commerciale ne communique pas avec votre comptabilité, votre standard téléphonique est déconnecté de votre CRM, et vos réseaux inter-sites sont instables ou mal sécurisés. Le résultat est une perte de productivité quotidienne colossale que peu de dirigeants mesurent réellement. Vos équipes passent un temps précieux à effectuer des doubles saisies manuelles, à jongler entre des interfaces incompatibles, ou à attendre après des connexions réseaux erratiques. Cette fragmentation technique n'est pas seulement frustrante, elle crée des failles de sécurité, des erreurs humaines coûteuses et une lenteur décisionnelle qui bride votre potentiel de développement. Votre infrastructure devrait être un tapis roulant fluide pour vos données, une autoroute pour l'information, et non un obstacle à franchir à chaque étape de votre journée. Nous sommes là pour briser ces silos et reconnecter votre entreprise.",
+    subtitle: "Les situations que nous rencontrons",
+    title: "Quand personne ne sait d'où vient le problème",
+    description: "Le logiciel de facturation ne s'ouvre plus le lundi matin. Le Wi-Fi coupe plusieurs fois par jour. La connexion au serveur du bureau est lente depuis la maison. L'éditeur dit que le problème vient du réseau, l'opérateur dit que tout fonctionne de son côté, et c'est le dirigeant qui passe ses journées au téléphone. Notre rôle : établir d'où vient la panne, puis faire intervenir la bonne personne.",
     painPoints: [
-      "Processus métier fragmentés : saisies manuelles redondantes entre logiciels non interfacés qui génèrent des erreurs coûteuses.",
-      "Téléphonie fixe rigide : incapacité à gérer la mobilité des collaborateurs ou le télétravail, impactant la satisfaction client.",
-      "Infrastructure réseau obsolète : lenteurs et instabilités bloquant l'accès aux applications critiques et empêchant la collaboration.",
-      "Silos de données : impossibilité d'avoir une vision globale, unifiée et en temps réel de votre activité commerciale.",
-      "Coûts opérationnels invisibles : temps perdu par vos équipes à corriger des problèmes de flux d'informations au lieu de créer de la valeur."
+      "Un logiciel métier qui ne s'ouvre plus ou devient très lent, sans explication claire.",
+      "Un réseau ou un Wi-Fi qui coupe à répétition et interrompt le travail des équipes.",
+      "Des accès à distance au serveur ou aux fichiers du bureau difficiles ou instables.",
+      "Une téléphonie mal organisée : appels perdus, renvois qui ne fonctionnent pas.",
+      "Plusieurs prestataires qui se renvoient la responsabilité, sans personne pour trancher."
     ]
   },
-  
+
   offer: {
-    subtitle: "Notre approche : l'ingénierie au service du métier",
-    title: "Nos piliers d'intervention pour votre performance globale",
-    description: "Notre méthode est radicalement différente : nous ne commençons jamais par la technique, nous commençons par votre métier. Nous analysons vos flux d'informations, vos habitudes de travail et vos points de blocage pour concevoir une architecture technique cohérente et évolutive. Voici comment nous intervenons.",
+    subtitle: "Ce que nous faisons",
+    title: "Qualifier, corriger ce qui relève de nous, coordonner le reste",
+    description: "Nous commençons par observer : quel poste, quel logiciel, quel moment de la journée, quels utilisateurs. Nous corrigeons ce qui relève du poste, du réseau ou des accès, et nous contactons l'éditeur ou l'opérateur avec un diagnostic précis lorsque la correction lui revient.",
     features: [
       {
-        title: "Téléphonie VoIP Professionnelle de Nouvelle Génération",
-        desc: "Nous remplaçons vos lignes analogiques obsolètes par une solution VoIP (Voix sur IP) taillée pour l'entreprise moderne et agile. Vous bénéficiez d'une mobilité totale : vos collaborateurs reçoivent les appels de l'entreprise sur leur mobile, leur PC ou leur poste fixe. Avec des fonctionnalités avancées comme le standard interactif (SVI) personnalisable, la messagerie vocale transmise par email, le transfert d'appels intelligent et des statistiques détaillées, vous améliorez drastiquement votre image professionnelle tout en réduisant vos coûts de communication. C'est la fin du téléphone fixe qui vous lie à votre bureau."
+        title: "Diagnostic poste, réseau ou logiciel",
+        desc: "Nous établissons si un blocage vient du poste, du réseau, du serveur ou du logiciel lui-même. C'est la première étape pour ne pas payer une intervention inutile ni remplacer du matériel qui fonctionne."
       },
       {
-        title: "Architecture réseaux multisites sécurisée et unifiée",
-        desc: "L'agrandissement de votre entreprise ne doit pas diviser votre IT. Nous interconnectons vos différents bureaux via des tunnels VPN (Virtual Private Network) de haute sécurité. Vos ressources partagées, vos fichiers serveurs et vos applications métier deviennent accessibles partout, avec la même sécurité, la même fluidité et la même vitesse que si vous étiez tous réunis dans la même pièce. Des routeurs professionnels administrés par nos soins chiffrent les flux et préservent la performance des échanges inter-sites."
+        title: "Réseau et Wi-Fi du bureau",
+        desc: "Nous vérifions la box, les commutateurs et les bornes Wi-Fi, séparons le réseau des visiteurs de celui de l'entreprise et organisons les accès à distance au bureau de façon sécurisée."
       },
       {
-        title: "Intégration et interopérabilité logicielle sur mesure",
-        desc: "L'information doit circuler sans couture. Nous travaillons à l'intégration de vos différents outils : automatisation des transferts de données, mise en place de connecteurs personnalisés, synchronisation de bases clients... Nous réduisons drastiquement les erreurs de saisie humaine et permettons à vos outils de travailler ensemble. C'est le passage d'une gestion manuelle à un écosystème automatisé où l'information voyage seule, permettant à vos équipes de se concentrer sur la valeur ajoutée client."
+        title: "Coordination avec l'éditeur de vos logiciels métier",
+        desc: "Comptabilité, facturation, gestion commerciale ou planning : nous préparons l'environnement technique du logiciel et nous traitons avec l'éditeur à votre place. Les corrections du logiciel lui-même restent de la responsabilité de l'éditeur. Cette coordination est une option de votre contrat."
       },
       {
-        title: "Gestion des accès et connectivité haute disponibilité",
-        desc: "L'accès à vos données est le nerf de la guerre. Nous sécurisons les accès à vos applications métier et optimisons votre infrastructure de stockage (NAS/Serveurs locaux ou distants). Nous configurons des règles d'accès strictes pour que chaque collaborateur n'accède qu'aux données nécessaires à ses fonctions, tout en optimisant la vitesse d'accès depuis tous vos sites, pour que l'infrastructure ne ralentisse pas votre travail."
+        title: "Téléphonie de l'entreprise",
+        desc: "Nous vous aidons à organiser la téléphonie : renvois d'appels, postes fixes ou logiciels, compatibilité avec votre réseau. Le choix de l'opérateur et l'abonnement restent les vôtres."
       },
       {
-        title: "Audit de processus métier et conseil stratégique",
-        desc: "La technologie n'est qu'un outil. Avant de déployer la moindre solution, nous réalisons un audit exhaustif de vos processus actuels pour identifier les goulots d'étranglement. Nous vous remettons une feuille de route technologique claire : quels outils garder, quels outils remplacer, et comment les faire interagir pour booster votre rentabilité globale. C'est un véritable travail de consultant IT pour aligner votre technologie sur vos objectifs financiers et commerciaux."
+        title: "Accès et droits des collaborateurs",
+        desc: "Chaque collaborateur accède aux fichiers et aux logiciels dont il a besoin, et ses accès sont retirés à son départ. Nous documentons ces droits pour que vous sachiez qui a accès à quoi."
       }
     ]
   },
-  
+
   benefits: {
-    subtitle: "Les bénéfices tangibles de notre accompagnement",
-    title: "Une transformation durable de votre efficacité opérationnelle",
+    subtitle: "Ce que vous y gagnez",
+    title: "Un seul interlocuteur quand vos outils ne fonctionnent pas",
     items: [
       {
-        title: "Agilité et mobilité totales",
-        desc: "Vos équipes ne sont plus liées à leur bureau physique. Une téléphonie mobile et des outils connectés permettent de maintenir le même niveau de service client, que vous soyez au bureau, chez un client ou en télétravail. Votre réactivité est démultipliée."
+        title: "Moins de temps perdu à chercher la cause",
+        desc: "Vous n'avez plus à arbitrer entre l'éditeur, l'opérateur et le vendeur de matériel : nous établissons le diagnostic et nous faisons intervenir la bonne personne."
       },
       {
-        title: "Gain de temps massif par l'automatisation",
-        desc: "Chaque tâche automatisée est une erreur de moins et une minute gagnée pour vos collaborateurs. Nous supprimons la ressaisie manuelle pour transformer vos processus en flux automatisés, fluides et exempts d'erreurs humaines."
+        title: "Un réseau qui tient la journée",
+        desc: "Un Wi-Fi et un réseau correctement configurés réduisent les coupures qui interrompent le travail et les accès aux logiciels."
       },
       {
-        title: "Une infrastructure qui grandit avec vous",
-        desc: "Nos solutions sont conçues pour croître avec vous. Ajoutez un site, un nouvel outil ou plus d'utilisateurs sans remettre en cause toute votre structure. Votre IT devient une fondation solide, pas un assemblage fragile."
+        title: "Des accès maîtrisés",
+        desc: "Vous savez qui accède à quoi, et un départ de collaborateur ne laisse pas d'accès ouvert."
       },
       {
-        title: "Expertise technique transverse (Vision 360)",
-        desc: "Nous maîtrisons autant le réseau que le logiciel. Cette double compétence nous permet de traiter un incident de bout en bout, du câble à l'application, pour que vos outils métier restent stables."
+        title: "Un environnement documenté",
+        desc: "Ce que nous mettons en place est noté : le jour où un nouvel intervenant arrive, il ne repart pas de zéro."
       }
     ]
   },
-  
+
   faq: [
     {
-      question: "Pouvez-vous reprendre une installation de téléphonie existante sans couper le service ?",
-      answer: "Absolument. Nous réalisons d'abord un audit complet de votre infrastructure télécom actuelle. Nous migrons vos services vers une solution VoIP moderne en conservant vos numéros habituels. La bascule est préparée en amont pour être transparente pour vos clients : il n'y a aucune interruption d'activité pendant la transition."
+      question: "Intervenez-vous avec l'éditeur de mon logiciel ?",
+      answer: "Oui, si cette coordination est prévue dans votre contrat. Nous préparons le poste et le réseau, nous décrivons le problème à l'éditeur et nous suivons sa résolution. Les corrections du logiciel lui-même restent de sa responsabilité."
     },
     {
-      question: "Quelle est la différence entre votre approche réseau et une installation classique ?",
-      answer: "Les installateurs classiques se concentrent sur la pose physique (câbles, bornes). Nous, nous concevons une architecture réseau intelligente. Nous segmentons vos flux pour la sécurité (isolant vos invités de votre réseau pro), nous priorisons les flux de voix (VoIP) pour une qualité sonore parfaite, et nous configurons le tout pour être totalement administrable et évolutif."
+      question: "Comment savoir si le problème vient du poste ou du réseau ?",
+      answer: "Nous regardons si le problème touche un seul poste ou tous, s'il apparaît à certaines heures, au bureau ou à distance. Ces observations suffisent souvent à orienter le diagnostic avant toute intervention."
     },
     {
-      question: "Accompagnez-vous les entreprises sur des logiciels très spécifiques (métiers verticaux) ?",
-      answer: "Oui, c'est notre spécialité. Nous intervenons sur une grande variété de logiciels métiers : comptabilité, gestion de production, planning médical, outils de caisse, CRM spécialisés. Nous apprenons leur fonctionnement technique pour mieux les intégrer à votre infrastructure, devenant ainsi l'interlocuteur technique idéal pour vos éditeurs."
+      question: "Le Wi-Fi de notre bureau coupe sans arrêt : que pouvez-vous faire ?",
+      answer: "Nous vérifions l'emplacement et le réglage des bornes, les interférences, la box et les commutateurs. Selon le résultat, nous corrigeons la configuration ou nous vous recommandons le matériel à remplacer, sans changer ce qui fonctionne."
     },
     {
-      question: "L'interconnexion multisite est-elle complexe à gérer pour nous ?",
-      answer: "C'est notre métier de rendre cette complexité invisible. Nous utilisons des technologies VPN robustes qui rendent l'accès distant aussi simple et fluide qu'une connexion locale. Vos collaborateurs n'ont besoin d'aucune compétence technique particulière pour accéder aux ressources distantes, tout se fait de manière transparente."
+      question: "Pouvez-vous reprendre une téléphonie existante ?",
+      answer: "Nous étudions d'abord votre installation et votre contrat d'opérateur. Nous vous indiquons ce qui peut être conservé et ce qui doit évoluer, puis nous préparons le changement avec vous pour limiter la gêne pendant la transition."
     },
     {
-      question: "Quels sont les gains financiers réels d'une telle modernisation ?",
-      answer: "Les gains sont triples : d'abord sur la réduction immédiate de vos factures télécoms, ensuite sur le gain de temps massif de vos collaborateurs (qui ne font plus de tâches manuelles et répétitives), et enfin sur la réduction des erreurs de gestion. La plupart de nos clients observent un retour sur investissement significatif en moins de 12 à 18 mois grâce à ces gains cumulés."
-    },
-    {
-      question: "Proposez-vous un support après l'installation des solutions métier ?",
-      answer: "Bien sûr. Nous ne vous abandonnons pas une fois le projet déployé. Nous proposons des contrats de maintenance incluant un support technique réactif, du lundi au vendredi de 8 h 30 à 19 h, pour que vos processus métier restent fluides. Nous surveillons vos équipements pour intervenir préventivement avant qu'une anomalie ne bloque votre activité."
-    },
-    {
-      question: "Comment gérez-vous la formation des équipes après l'installation ?",
-      answer: "La technologie n'est efficace que si elle est adoptée. Dans le cadre de nos déploiements de solutions métiers, nous incluons des phases d'accompagnement au changement. Nous formons vos équipes aux bonnes pratiques, leur montrons comment utiliser les nouveaux outils de manière optimale, et restons disponibles pour répondre à leurs questions lors du démarrage."
-    },
-    {
-      question: "Est-ce qu'une solution multisite nécessite un gros investissement matériel ?",
-      answer: "Pas nécessairement. Nous privilégions une approche optimisée. Nous auditons ce que vous avez déjà : souvent, nous pouvons réutiliser une partie de votre matériel existant et compléter uniquement par des équipements indispensables pour assurer la sécurité et la performance. Nous cherchons toujours le meilleur compromis entre investissement et efficacité."
+      question: "Ces prestations sont-elles incluses dans Sérénité ?",
+      answer: "L'offre Sérénité couvre la supervision, la maintenance et la protection des postes. La coordination avec les éditeurs, les interventions sur le réseau et la téléphonie sont des options définies dans votre proposition."
     }
   ],
 
   cta: {
-    line1: "Prêt à aligner",
-    line2: "vos outils avec",
-    line3: "votre ambition ?",
-    description: "Ne laissez plus vos outils techniques limiter votre potentiel de croissance. Trinexta conçoit les solutions métier qui soutiennent réellement vos objectifs de développement. Discutons de vos besoins, de vos processus et de vos objectifs lors d'un premier audit complet. Il est temps de passer à une informatique qui travaille pour vous.",
-    buttonText: "Échanger sur mon projet",
+    line1: "Un outil",
+    line2: "qui bloque",
+    line3: "votre journée ?",
+    description: "Décrivez-nous le logiciel, le réseau ou la téléphonie qui pose problème. Nous commençons par un état des lieux offert, puis nous vous proposons une intervention adaptée.",
+    buttonText: "Décrire mon environnement",
     buttonHref: "/contact"
   }
 }
